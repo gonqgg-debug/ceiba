@@ -237,6 +237,88 @@ button{font:inherit;color:inherit}
   .mn-sticky .mn-btn{flex:1;justify-content:center}
 }
 
+/* --- propuesta: WhatsApp, reseñas, asistente --- */
+.wa-ico{width:1.15em;height:1.15em;flex:none;color:#25D366}
+.mn-util{display:flex;align-items:center;gap:2em;padding:.55em 2.6em;background:#1E2B26;color:#E6ECE8;font-size:.85em}
+.mn-util span{display:inline-flex;align-items:center;gap:.45em}
+.mn-util-wa{margin-left:auto;font-weight:600}
+.mn-wa-btn{display:inline-grid;place-items:center;width:2.7em;height:2.7em;border-radius:50%;border:1px solid #C9C4B6;flex:none}
+.mn-wa-btn .wa-ico{width:1.35em;height:1.35em}
+.mn-ghost--wa{gap:.45em}
+.mn-rating{margin-top:1.5em;display:flex;align-items:center;gap:.5em;font-size:.95em;color:var(--c-muted)}
+.mn-rating b{color:var(--c-ink)}
+.mn-stars{color:#E2A21B;letter-spacing:.06em}
+.mn-photo-wrap{position:relative;min-width:0}
+.mn-slots{position:absolute;left:-1.8em;bottom:-1.6em;background:#fff;border-radius:.7em;padding:1em 1.1em;box-shadow:0 1em 2.4em -1em rgba(20,30,25,.38);display:grid;gap:.6em;max-width:calc(100% + 1em)}
+.mn-slots b{font-size:.9em}
+.mn-slots div{display:flex;gap:.4em;flex-wrap:wrap}
+.mn-slots span{border:1px solid var(--c-line);border-radius:.5em;padding:.35em .6em;font-size:.88em;font-weight:500;white-space:nowrap}
+.mn-slots span:first-child{background:var(--c-accent);color:#fff;border-color:var(--c-accent)}
+.mn-slots em{font-style:normal;color:var(--c-accent);font-weight:600;font-size:.88em}
+.mn-trust{list-style:none;margin:0;padding:1.7em 2.6em;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.4em;border-top:1px solid var(--c-line);background:var(--c-paper)}
+.mn-trust li{display:grid;gap:.15em;font-size:.92em;color:var(--c-muted);align-content:start}
+.mn-trust b{color:var(--c-ink);font-weight:600}
+.mn-reviews{padding:2.6em;background:var(--c-paper);border-top:1px solid var(--c-line)}
+.mn-rev-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.6em 2em;margin-bottom:1.4em}
+.mn-rev-head h4{font:400 2.1em/1.1 var(--f-clinic);color:var(--c-ink)}
+.mn-rev-head p{display:flex;gap:.5em;align-items:center;color:var(--c-muted)}
+.mn-rev-head b{color:var(--c-ink)}
+.mn-rev-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1em}
+.mn-rev{margin:0;background:#fff;border:1px solid var(--c-line);border-radius:.7em;padding:1.2em;display:grid;gap:.7em;align-content:start}
+.mn-rev blockquote{margin:0;font-size:1em;line-height:1.5;color:var(--c-ink)}
+.mn-rev figcaption{display:grid;gap:.1em;font-size:.88em}
+.mn-rev figcaption span{color:var(--c-muted)}
+.mn-rev-more{margin-top:1.2em;color:var(--c-accent);font-weight:600;display:flex;gap:.4em 1em;align-items:baseline;flex-wrap:wrap}
+.mn-rev-more small{font:400 .8em var(--f-mono);color:var(--c-muted)}
+.mn-float{position:sticky;bottom:1.4em;height:0;z-index:6;pointer-events:none}
+.mn-float > *{pointer-events:auto}
+.mn-ai-btn{position:absolute;bottom:0;right:1.6em;display:inline-flex;align-items:center;gap:.6em;background:#18231F;color:#fff;border:0;border-radius:999px;padding:.85em 1.25em;font:600 1em var(--f-body);cursor:pointer;box-shadow:0 .8em 2em -.6em rgba(0,0,0,.5);white-space:nowrap}
+.mn-ai-btn:hover{background:#24332D}
+.mn-float .mn-ai-btn[data-mark]{position:absolute}
+.mn-ai-dot{width:.6em;height:.6em;border-radius:50%;background:#3FD07A;box-shadow:0 0 0 .25em rgba(63,208,122,.25)}
+.mn-ai{position:absolute;bottom:3.9em;right:1.6em;width:min(24em,calc(100cqi - 3.2em));background:#fff;border:1px solid var(--c-line);border-radius:1em;box-shadow:0 1.4em 3em -1em rgba(0,0,0,.38);display:none;overflow:hidden;color:var(--c-ink)}
+.mn-float.open .mn-ai{display:grid}
+.mn-ai-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1em;padding:1em 1.1em;background:#18231F;color:#fff}
+.mn-ai-top b{display:block}
+.mn-ai-top span{font-size:.82em;opacity:.75}
+.mn-ai-x{background:none;border:0;color:#fff;font-size:1.5em;line-height:1;cursor:pointer;padding:0 .2em}
+.mn-ai-log{display:grid;gap:.6em;padding:1em 1.1em;max-height:17em;overflow:auto;align-content:start}
+.mn-ai-msg{padding:.65em .85em;border-radius:.8em;font-size:.95em;max-width:90%;line-height:1.45}
+.mn-ai-msg.bot{background:var(--c-sand);border-bottom-left-radius:.25em}
+.mn-ai-msg.me{background:var(--c-accent);color:#fff;justify-self:end;border-bottom-right-radius:.25em}
+.mn-ai-act{display:flex;align-items:center;gap:.4em;margin-top:.55em;font-weight:600;color:#0E7A43}
+.mn-ai-act.book{color:var(--c-accent)}
+.mn-ai-sug{display:flex;flex-wrap:wrap;gap:.4em;padding:0 1.1em 1.1em}
+.mn-ai-sug button{border:1px solid var(--c-line);background:#fff;border-radius:999px;padding:.5em .85em;font-size:.88em;cursor:pointer;color:var(--c-ink)}
+.mn-ai-sug button:hover{border-color:var(--c-ink)}
+.mn-ai-typing{display:inline-flex;gap:.3em;padding:.8em .9em;background:var(--c-sand);border-radius:.8em;justify-self:start}
+.mn-ai-typing i{width:.4em;height:.4em;border-radius:50%;background:var(--c-muted);animation:blink 1s infinite}
+.mn-ai-typing i:nth-child(2){animation-delay:.15s}.mn-ai-typing i:nth-child(3){animation-delay:.3s}
+.mn-sticky .mn-ghost--wa{background:#fff}
+@container (max-width:560px){
+  .mn-util{padding:.5em 1.2em}
+  .mn-util span:not(.mn-util-wa){display:none}
+  .mn-top .mn-wa-btn{margin-left:auto;width:2.4em;height:2.4em}
+  .mn-top .mn-btn{margin-left:0}
+  .mn-slots{position:relative;left:auto;bottom:auto;margin:-2.2em .8em 0;max-width:none}
+  .mn-trust{grid-template-columns:1fr 1fr;padding:1.4em 1.2em;gap:1.1em}
+  .mn-reviews{padding:1.8em 1.2em}
+  .mn-rev-list{grid-template-columns:repeat(3,84%);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.4em}
+  .mn-rev{scroll-snap-align:start}
+  .mn-float{bottom:5.2em}
+  .mn-ai-btn{right:1em;padding:.75em 1.05em;font-size:.92em}
+  .mn-ai{right:1em;width:calc(100cqi - 2em);bottom:3.6em}
+}
+/* old site: guestbook + contact form */
+.mo-form{margin-top:10px;border:1px solid #bbb;background:#f6f6f6;padding:8px;font-size:10px}
+.mo-form b{display:block;color:#1b4f8f;font:bold 12px Arial;margin-bottom:6px}
+.mo-fields{display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:center;font:10px Arial}
+.mo-fields i{height:14px;border:1px inset #999;background:#fff}
+.mo-fields i.tall{height:36px}
+.mo-send{display:inline-block;margin-top:6px;padding:2px 10px;border:2px outset #ccc;background:#ddd;font:11px Arial}
+.mo-form small{display:block;margin-top:4px;color:#888;font-size:10px}
+.mo-box u{color:#00e;cursor:pointer}
+
 /* markers on the mock (comparator only) */
 [data-mark]{position:relative}
 .cmp [data-mark]::after{content:attr(data-mark);position:absolute;top:-10px;right:-10px;width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--ivory);font:600 12px/24px var(--f-mono);text-align:center;z-index:4;box-shadow:0 0 0 2px #fff;transition:transform .2s var(--ease),background .2s}
@@ -696,6 +778,7 @@ img{max-width:100%}
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="ceiba-logo" viewBox="0 0 353.37 54"><g transform="translate(0 0) scale(.68)"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></g><g transform="translate(80 42) scale(.054 -.054)"><path transform="translate(0 0)" d="M393 598Q306 598 260.0 533.0Q214 468 214 355Q214 241 256.5 178.5Q299 116 393 116Q437 116 480.5 126.0Q524 136 575 154V27Q528 8 482.0 -1.0Q436 -10 379 -10Q269 -10 197.5 35.5Q126 81 92.0 163.5Q58 246 58 356Q58 464 97.0 547.0Q136 630 210.5 677.0Q285 724 393 724Q446 724 499.5 710.5Q553 697 602 674L553 551Q513 570 472.5 584.0Q432 598 393 598Z"/><path transform="translate(622 0)" d="M303 556Q416 556 482.0 491.5Q548 427 548 308V236H196Q198 173 233.5 137.0Q269 101 332 101Q385 101 428.0 111.5Q471 122 517 144V29Q477 9 432.5 -0.5Q388 -10 325 -10Q243 -10 180.0 20.5Q117 51 81.0 113.0Q45 175 45 269Q45 365 77.5 428.5Q110 492 168.0 524.0Q226 556 303 556ZM304 450Q261 450 232.5 422.0Q204 394 199 335H408Q407 385 382.0 417.5Q357 450 304 450Z"/><path transform="translate(1198 0)" d="M153 760Q186 760 210.0 744.5Q234 729 234 687Q234 646 210.0 630.0Q186 614 153 614Q119 614 95.5 630.0Q72 646 72 687Q72 729 95.5 744.5Q119 760 153 760ZM227 546V0H78V546Z"/><path transform="translate(1488 0)" d="M227 583Q227 552 225.0 522.0Q223 492 221 475H227Q249 509 286.0 532.5Q323 556 382 556Q474 556 531.0 484.5Q588 413 588 274Q588 134 530.0 62.0Q472 -10 378 -10Q318 -10 283.5 11.5Q249 33 227 60H217L192 0H78V760H227ZM334 437Q276 437 252.5 401.0Q229 365 227 291V275Q227 196 250.5 153.5Q274 111 336 111Q382 111 409.0 153.5Q436 196 436 276Q436 356 408.5 396.5Q381 437 334 437Z"/><path transform="translate(2106 0)" d="M302 557Q412 557 470.5 509.5Q529 462 529 364V0H425L396 74H392Q357 30 318.0 10.0Q279 -10 211 -10Q138 -10 90.0 32.5Q42 75 42 163Q42 250 103.0 291.5Q164 333 286 337L381 340V364Q381 407 358.5 427.0Q336 447 296 447Q256 447 218.0 435.5Q180 424 142 407L93 508Q137 531 190.5 544.0Q244 557 302 557ZM323 251Q251 249 223.0 225.0Q195 201 195 162Q195 128 215.0 113.5Q235 99 267 99Q315 99 348.0 127.5Q381 156 381 208V253Z"/><path transform="translate(2942 0)" d="M97 0V714H187V80H499V0Z"/><path transform="translate(3451 0)" d="M288 545Q386 545 433.0 502.0Q480 459 480 365V0H416L399 76H395Q360 32 321.5 11.0Q283 -10 215 -10Q142 -10 94.0 28.5Q46 67 46 149Q46 229 109.0 272.5Q172 316 303 320L394 323V355Q394 422 365.0 448.0Q336 474 283 474Q241 474 203.0 461.5Q165 449 132 433L105 499Q140 518 188.0 531.5Q236 545 288 545ZM314 259Q214 255 175.5 227.0Q137 199 137 148Q137 103 164.5 82.0Q192 61 235 61Q303 61 348.0 98.5Q393 136 393 214V262Z"/><path transform="translate(3997 0)" d="M173 575Q173 541 171.5 511.5Q170 482 168 465H173Q196 499 236.0 522.0Q276 545 339 545Q439 545 499.5 475.5Q560 406 560 268Q560 130 499.0 60.0Q438 -10 339 -10Q276 -10 236.0 13.0Q196 36 173 68H166L148 0H85V760H173ZM324 472Q239 472 206.0 423.0Q173 374 173 271V267Q173 168 205.5 115.5Q238 63 326 63Q398 63 433.5 116.0Q469 169 469 269Q469 472 324 472Z"/><path transform="translate(4597 0)" d="M434 148Q434 70 376.0 30.0Q318 -10 220 -10Q164 -10 123.5 -1.0Q83 8 52 24V104Q84 88 129.5 74.5Q175 61 222 61Q289 61 319.0 82.5Q349 104 349 140Q349 160 338.0 176.0Q327 192 298.5 208.0Q270 224 217 244Q165 264 128.0 284.0Q91 304 71.0 332.0Q51 360 51 404Q51 472 106.5 509.0Q162 546 252 546Q301 546 343.5 536.5Q386 527 423 510L393 440Q359 454 322.0 464.0Q285 474 246 474Q192 474 163.5 456.5Q135 439 135 409Q135 387 148.0 371.5Q161 356 191.5 341.5Q222 327 273 307Q324 288 360.0 268.0Q396 248 415.0 219.5Q434 191 434 148Z"/></g></symbol>
+  <symbol id="wa" viewBox="0 0 24 24"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.9L2.3 21.8l4.8-1.3A9.8 9.8 0 1 0 12 2.2Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.7 7.2c.2-.4.4-.4.7-.4h.6c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .6l-.5.7c-.1.2-.2.4 0 .6.6 1.1 1.5 2 2.6 2.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.4 0 .5-.1 1.2-.6 1.6-.6.5-1.4.8-2.2.6-1.2-.3-2.6-.9-4-2.3s-2.1-2.9-2.3-4c-.2-.9.1-1.7.6-2.1Z" fill="currentColor"/></symbol>
   <symbol id="lock" viewBox="0 0 12 12"><rect x="2" y="5" width="8" height="6" rx="1.5" fill="currentColor"/><path d="M4 5V3.6a2 2 0 0 1 4 0V5" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
 </svg>
 
@@ -780,6 +863,14 @@ img{max-width:100%}
             <span class="n" aria-hidden="true">4</span><h3>Horario y ubicación</h3>
             <span class="txt"><span class="before"><span>Hoy</span>La dirección está dentro de una imagen y la última noticia es de 2017.</span><span class="after"><span>Propuesta</span>Horario de hoy arriba, fachada, dirección en texto y «Abrir en mapas».</span></span>
           </button></li>
+          <li data-change="5"><button type="button" aria-label="Cambio 5: opiniones de pacientes. Mostrar en la página">
+            <span class="n" aria-hidden="true">5</span><h3>Opiniones de pacientes</h3>
+            <span class="txt"><span class="before"><span>Hoy</span>Un libro de visitas sin mensajes desde 2016.</span><span class="after"><span>Propuesta</span>Tu calificación y tus reseñas reales de Google en la portada.</span></span>
+          </button></li>
+          <li data-change="6"><button type="button" aria-label="Cambio 6: respuestas a cualquier hora. Mostrar en la página">
+            <span class="n" aria-hidden="true">6</span><h3>Respuestas a cualquier hora</h3>
+            <span class="txt"><span class="before"><span>Hoy</span>Un formulario que promete responder «a la brevedad».</span><span class="after"><span>Propuesta</span>Un asistente responde dudas al instante y pasa a tu WhatsApp lo que necesita a recepción. Pruébalo en la vista previa.</span></span>
+          </button></li>
         </ol>
         <div class="task">
           <p>Lo que gana la clínica</p>
@@ -838,7 +929,7 @@ img{max-width:100%}
           <label class="addon" for="addon-wa">
             <input type="checkbox" id="addon-wa" checked>
             <span class="sw" aria-hidden="true"></span>
-            <span class="addon-txt"><b>Recepción por WhatsApp</b><span>Responde con las respuestas que apruebas, recoge nombre, tratamiento y horario preferido, y pasa a recepción los casos clínicos y las urgencias. Un número, una sucursal y un flujo.</span></span>
+            <span class="addon-txt"><b>Recepción por WhatsApp</b><span>Responde con las respuestas que apruebas, recoge nombre, tratamiento y horario preferido, y pasa a recepción los casos clínicos y las urgencias. También responde desde el asistente de tu web. Un número, una sucursal y un flujo.</span></span>
             <span class="addon-price">$3,990<small>+ $1,490/mes</small></span>
           </label>
           <p class="addon-note">El piloto incluye 300 conversaciones atendidas al mes. Te avisamos al acercarte al límite y, si se agota, las conversaciones nuevas pasan directo a tu equipo.</p>
@@ -941,8 +1032,8 @@ img{max-width:100%}
     <div class="mo-nav"><span>Inicio</span><span>Quienes Somos</span><span>Servicios</span><span>Galeria</span><span>Noticias</span><span>Contactenos</span></div>
     <div class="mo-banner" data-mark="3"><span class="spark" style="left:60px;top:30px">✦</span><span class="spark" style="right:90px;top:120px">✦</span><span class="spark" style="left:200px;bottom:30px;font-size:18px">✦</span><span class="mo-arrow" style="left:0">‹</span><span class="mo-arrow" style="right:0">›</span><div class="slide-txt">¡¡PROMOCION DE VERANO!!<small>Blanqueamiento + limpieza ★ consulte condiciones ★</small></div><div class="mo-dots">● ○ ○ ○ ○</div></div>
     <div class="mo-body">
-      <div class="mo-main" data-mark="2"><h5>Bienvenidos a nuestra clinica</h5><p>Clinica Dental Arrayan es una clinica con mas de 15 años de experiencia al servicio de la comunidad, donde nuestro compromiso es entregar una atencion de calidad y con los mas altos estandares, con un equipo de profesionales altamente calificados y en constante perfeccionamiento para entregarle el mejor servicio a usted y su familia.</p><p>Nuestros servicios incluyen odontologia general, limpieza dental, blanqueamiento, ortodoncia, ortodoncia invisible, implantes, endodoncia, periodoncia, odontopediatria, protesis y urgencias dentales, ademas de convenios con diversas instituciones. Para mayor informacion sobre valores y horarios no dude en contactarnos a traves de nuestro telefono o acercarse a nuestras dependencias.</p><p>Visite nuestra galeria de fotos y conozca nuestras modernas instalaciones.</p></div>
-      <div class="mo-side"><div class="mo-box"><b>Horario de Atencion</b><p>Lunes a Viernes de 9:00 a 13:00 y de 15:00 a 20:00 hrs. Sabados consultar.</p></div><div class="mo-map" data-mark="4"><span>COMO LLEGAR: VER IMAGEN</span></div><div class="mo-box"><b>Noticias</b><p>Nueva sucursal proximamente!!! (actualizado 03/2017)</p></div></div>
+      <div class="mo-main" data-mark="2"><h5>Bienvenidos a nuestra clinica</h5><p>Clinica Dental Arrayan es una clinica con mas de 15 años de experiencia al servicio de la comunidad, donde nuestro compromiso es entregar una atencion de calidad y con los mas altos estandares, con un equipo de profesionales altamente calificados y en constante perfeccionamiento para entregarle el mejor servicio a usted y su familia.</p><p>Nuestros servicios incluyen odontologia general, limpieza dental, blanqueamiento, ortodoncia, ortodoncia invisible, implantes, endodoncia, periodoncia, odontopediatria, protesis y urgencias dentales, ademas de convenios con diversas instituciones. Para mayor informacion sobre valores y horarios no dude en contactarnos a traves de nuestro telefono o acercarse a nuestras dependencias.</p><p>Visite nuestra galeria de fotos y conozca nuestras modernas instalaciones.</p><div class="mo-form" data-mark="6"><b>Contactenos</b><div class="mo-fields"><span>Nombre:</span><i></i><span>E-mail:</span><i></i><span>Mensaje:</span><i class="tall"></i></div><span class="mo-send">Enviar</span><small>Responderemos a la brevedad.</small></div></div>
+      <div class="mo-side"><div class="mo-box"><b>Horario de Atencion</b><p>Lunes a Viernes de 9:00 a 13:00 y de 15:00 a 20:00 hrs. Sabados consultar.</p></div><div class="mo-map" data-mark="4"><span>COMO LLEGAR: VER IMAGEN</span></div><div class="mo-box" data-mark="5"><b>Testimonios</b><p>¡Firme nuestro libro de visitas! <u>click aqui</u><br>Ultimo mensaje: 12/2016</p></div><div class="mo-box"><b>Noticias</b><p>Nueva sucursal proximamente!!! (actualizado 03/2017)</p></div></div>
     </div>
     <div class="mo-foot" data-mark="1">Clinica Dental Arrayan © 2014 | Telefono: (33) 0000 0000 | Todos los derechos reservados | Mejor visualizado en 1024x768<br><span class="mo-counter">Visitas: 004213</span></div>
   </div>
@@ -950,24 +1041,47 @@ img{max-width:100%}
 
 <template id="tpl-new">
   <div class="mk-new">
-    <div class="mn-top"><div class="mn-brand"><b>Arrayán</b><span>Clínica dental</span></div><nav><span>Tratamientos</span><span>Equipo</span><span>Cómo llegar</span></nav><span class="mn-btn" data-mark="1">Reservar cita</span></div>
+    <div class="mn-util"><span>Urgencias el mismo día</span><span>Col. Providencia, Guadalajara</span><span class="mn-util-wa"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>33 0000 0000</span></div>
+    <div class="mn-top"><div class="mn-brand"><b>Arrayán</b><span>Clínica dental</span></div><nav><span>Tratamientos</span><span>Equipo</span><span>Opiniones</span><span>Cómo llegar</span></nav><span class="mn-wa-btn" title="WhatsApp"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg></span><span class="mn-btn" data-mark="1">Reservar cita</span></div>
     <div class="mn-hero">
       <div class="mn-copy">
         <p class="mn-open" data-mark="4"><i></i>Abierto hoy hasta las 20:00 · Av. Los Arrayanes 1240</p>
         <h3>Odontología sin apuro, con un plan claro <em>desde la primera visita.</em></h3>
         <p class="sub">Diagnóstico, limpieza, ortodoncia e implantes en un solo consultorio, con la misma dentista de principio a fin.</p>
-        <div class="mn-ctas"><span class="mn-btn">Reservar primera visita</span><span class="mn-ghost">Escribir por WhatsApp</span></div>
+        <div class="mn-ctas"><span class="mn-btn">Reservar primera visita</span><span class="mn-ghost mn-ghost--wa"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Escribir por WhatsApp</span></div>
+        <p class="mn-rating"><span class="mn-stars" aria-hidden="true">★★★★★</span><b>4.9</b> · 186 reseñas en Google</p>
       </div>
-      <div class="mn-photo" role="img" aria-label="Sala de atención de la clínica con luz natural y sillón dental"></div>
+      <div class="mn-photo-wrap">
+        <div class="mn-photo" role="img" aria-label="Sala de atención de la clínica con luz natural y sillón dental"></div>
+        <div class="mn-slots"><b>Próximas horas disponibles</b><div><span>Hoy 18:30</span><span>Mañana 10:00</span><span>Mañana 12:30</span></div><em>Ver agenda completa →</em></div>
+      </div>
     </div>
+    <ul class="mn-trust"><li><b>Desde 2009</b>en la colonia Providencia</li><li><b>Cédula profesional</b>4512378</li><li><b>Hasta 6 meses sin intereses</b>con tarjeta participante</li><li><b>Estacionamiento</b>para pacientes</li></ul>
     <div class="mn-treat" data-mark="2"><h4>Tratamientos</h4>
       <ul><li><b>Primera visita y diagnóstico</b><span>40 min · incluye radiografía</span><em>Reservar →</em></li><li><b>Limpieza dental</b><span>45 min</span><em>Reservar →</em></li><li><b>Ortodoncia invisible</b><span>Evaluación de 30 min</span><em>Reservar →</em></li><li><b>Implantes</b><span>Evaluación de 45 min</span><em>Reservar →</em></li><li><b>Blanqueamiento</b><span>2 sesiones de 60 min</span><em>Reservar →</em></li><li><b>Urgencias</b><span>Atención el mismo día</span><em>Llamar →</em></li></ul>
     </div>
     <div class="mn-space" role="img" aria-label="Recepción y sala de espera de la clínica"></div>
-    <div class="mn-team" data-mark="3"><div class="mn-portrait" role="img" aria-label="Retrato de la Dra. Valeria Ríos"></div><div><p class="mn-q">“Antes de empezar cualquier tratamiento, te muestro qué vemos y qué opciones tienes.”</p><b>Dra. Valeria Ríos</b><span>Rehabilitación oral · personaje ficticio</span></div></div>
-    <div class="mn-visit"><div class="mn-facade" role="img" aria-label="Fachada de la clínica"></div><div><h4>Cómo llegar</h4><dl><dt>Dirección</dt><dd>Av. Los Arrayanes 1240, local 3, Col. Providencia, Guadalajara</dd><dt>Lun a vie</dt><dd>9:00 a 20:00</dd><dt>Sábado</dt><dd>9:00 a 14:00</dd></dl><p style="margin-top:1.2em"><span class="mn-ghost">Abrir en mapas</span></p></div></div>
-    <div class="mn-foot">Clínica Dental Arrayán · Concepto de rediseño de Ceiba Labs</div>
-    <div class="mn-sticky"><span class="mn-btn">Reservar cita</span><span class="mn-ghost">WhatsApp</span></div>
+    <div class="mn-team" data-mark="3"><div class="mn-portrait" role="img" aria-label="Retrato de la Dra. Valeria Ríos"></div><div><p class="mn-q">“Antes de empezar cualquier tratamiento, te muestro qué vemos y qué opciones tienes.”</p><b>Dra. Valeria Ríos</b><span>Rehabilitación oral · cédula 4512378 · personaje ficticio</span></div></div>
+    <div class="mn-reviews" data-mark="5">
+      <div class="mn-rev-head"><h4>Lo que dicen los pacientes</h4><p><span class="mn-stars" aria-hidden="true">★★★★★</span><b>4.9 de 5</b> · 186 reseñas en Google</p></div>
+      <div class="mn-rev-list">
+        <figure class="mn-rev"><span class="mn-stars" aria-label="5 de 5">★★★★★</span><blockquote>Me explicaron el plan de ortodoncia con fotos y un presupuesto por escrito antes de empezar. Cero presión.</blockquote><figcaption><b>Mariana G.</b><span>Ortodoncia invisible · hace 2 semanas</span></figcaption></figure>
+        <figure class="mn-rev"><span class="mn-stars" aria-label="5 de 5">★★★★★</span><blockquote>Llegué con dolor un sábado y me atendieron en menos de una hora. La doctora me dijo exactamente qué me iba a hacer.</blockquote><figcaption><b>Jorge R.</b><span>Urgencia · hace 1 mes</span></figcaption></figure>
+        <figure class="mn-rev"><span class="mn-stars" aria-label="5 de 5">★★★★★</span><blockquote>Llevo a mis dos hijos desde hace años. Puntuales, y el consultorio siempre impecable.</blockquote><figcaption><b>Lucía M.</b><span>Limpieza · hace 3 meses</span></figcaption></figure>
+      </div>
+      <p class="mn-rev-more">Ver las 186 reseñas en Google →<small>Reseñas de ejemplo para el concepto</small></p>
+    </div>
+    <div class="mn-visit"><div class="mn-facade" role="img" aria-label="Fachada de la clínica"></div><div><h4>Cómo llegar</h4><dl><dt>Dirección</dt><dd>Av. Los Arrayanes 1240, local 3, Col. Providencia, Guadalajara</dd><dt>Lun a vie</dt><dd>9:00 a 20:00</dd><dt>Sábado</dt><dd>9:00 a 14:00</dd></dl><p style="margin-top:1.2em;display:flex;flex-wrap:wrap;gap:.6em"><span class="mn-ghost">Abrir en mapas</span><span class="mn-ghost mn-ghost--wa"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Escribir por WhatsApp</span></p></div></div>
+    <div class="mn-foot">Clínica Dental Arrayán · Aviso de privacidad · Concepto de rediseño de Ceiba Labs</div>
+    <div class="mn-float">
+      <div class="mn-ai" role="region" aria-label="Asistente de la clínica">
+        <div class="mn-ai-top"><div><b>Asistente Arrayán</b><span>Responde al instante y sigue por WhatsApp</span></div><button type="button" class="mn-ai-x" data-ai="toggle" aria-label="Cerrar asistente">×</button></div>
+        <div class="mn-ai-log"><p class="mn-ai-msg bot">Hola. Te ayudo con horarios, tratamientos y citas. ¿Qué necesitas?</p></div>
+        <div class="mn-ai-sug"><button type="button" data-ai="urg">¿Atienden urgencias hoy?</button><button type="button" data-ai="first">¿Qué incluye la primera visita?</button><button type="button" data-ai="msi">¿Tienen meses sin intereses?</button></div>
+      </div>
+      <button type="button" class="mn-ai-btn" data-ai="toggle" aria-expanded="false" data-mark="6"><span class="mn-ai-dot" aria-hidden="true"></span>Pregúntale al asistente</button>
+    </div>
+    <div class="mn-sticky"><span class="mn-btn">Reservar cita</span><span class="mn-ghost mn-ghost--wa"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>WhatsApp</span></div>
   </div>
 </template>
 
@@ -988,6 +1102,37 @@ img{max-width:100%}
   });
   fitOld(); new ResizeObserver(fitOld).observe(document.body);
   $$('.viewport').forEach(v => new ResizeObserver(fitOld).observe(v));
+
+  /* ---------- assistant inside the clinic concept ---------- */
+  const AI = {
+    urg: ['¿Atienden urgencias hoy?', 'Sí. Hoy atendemos hasta las 20:00 y guardamos espacios para urgencias. Si tienes dolor fuerte o inflamación, te paso con recepción por WhatsApp para darte la hora más cercana.', 'wa'],
+    first: ['¿Qué incluye la primera visita?', 'Dura 40 minutos: revisión completa, radiografía y un plan de tratamiento por escrito. Puedes reservarla aquí mismo.', 'book'],
+    msi: ['¿Tienen meses sin intereses?', 'Sí, hasta 6 meses sin intereses con tarjeta participante en ortodoncia, implantes y blanqueamiento.', 'wa']
+  };
+  const waIco = '<svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>';
+  const closeAI = f => { f.classList.remove('open'); f.querySelector('.mn-ai-btn').setAttribute('aria-expanded', 'false'); };
+  document.addEventListener('click', e => {
+    const t = e.target.closest('[data-ai]'); if (!t) return;
+    const fl = t.closest('.mn-float'); if (!fl) return;
+    const k = t.dataset.ai;
+    if (k === 'toggle') {
+      const o = !fl.classList.contains('open');
+      if (!o) return closeAI(fl);
+      fl.classList.add('open'); fl.querySelector('.mn-ai-btn').setAttribute('aria-expanded', 'true');
+      const first = fl.querySelector('.mn-ai-sug button:not([hidden])'); if (first) first.focus({ preventScroll: true });
+      return;
+    }
+    const a = AI[k]; if (!a) return;
+    const log = fl.querySelector('.mn-ai-log');
+    t.hidden = true;
+    log.insertAdjacentHTML('beforeend', `<p class="mn-ai-msg me">${a[0]}</p>`);
+    const act = a[2] === 'wa' ? `<span class="mn-ai-act">${waIco}Seguir por WhatsApp</span>` : '<span class="mn-ai-act book">Reservar primera visita →</span>';
+    const reply = () => { const ty = log.querySelector('.mn-ai-typing'); if (ty) ty.remove(); log.insertAdjacentHTML('beforeend', `<p class="mn-ai-msg bot">${a[1]}${act}</p>`); log.scrollTop = log.scrollHeight; };
+    if (reduce.matches) return reply();
+    log.insertAdjacentHTML('beforeend', '<span class="mn-ai-typing" aria-hidden="true"><i></i><i></i><i></i></span>');
+    log.scrollTop = log.scrollHeight; setTimeout(reply, 650);
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.mn-float.open').forEach(closeAI); });
 
   /* ---------- radiogroup helper (arrow keys + click) ---------- */
   function radiogroup(group, onChange) {

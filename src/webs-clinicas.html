@@ -23,6 +23,7 @@
 .ih-copy .lede{color:var(--ivory);font-size:clamp(19px,1.6vw,22px);max-width:34ch;line-height:1.38}
 .ih-visual{position:relative;display:grid;justify-items:center;padding-bottom:56px;min-width:0}
 .ih-phone{width:min(320px,100%);border-radius:36px;background:#060c0b;padding:10px;border:1px solid rgba(247,244,235,.16);box-shadow:0 40px 80px -30px rgba(0,0,0,.7)}
+.ih-phone .mn-float{display:none}
 .ih-phone .viewport{height:min(600px,120vw);border-radius:27px;overflow:hidden}
 .ih-chat{position:absolute;z-index:3;left:-10%;bottom:0;width:min(290px,82%);background:var(--ivory);color:var(--ink);border-radius:16px;padding:14px;display:grid;gap:8px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6);font-size:14px;line-height:1.4}
 .ih-chat .ct{font:500 12px var(--f-mono);color:rgba(11,21,20,.6);display:flex;justify-content:space-between}
@@ -134,7 +135,7 @@
     </div>
     <div class="ih-visual">
       <div class="ih-phone" aria-label="Concepto de rediseño de la web de una clínica dental ficticia, en el móvil">
-        <div class="viewport" aria-hidden="true"><div class="layers"><div class="layer" data-tpl="new"></div></div></div>
+        <div class="viewport" aria-hidden="true" inert><div class="layers"><div class="layer" data-tpl="new"></div></div></div>
       </div>
       <div class="ih-chat" aria-label="Ejemplo de recepción por WhatsApp">
         <div class="ct"><span>WhatsApp · Clínica Arrayán</span><span>21:40</span></div>
@@ -161,6 +162,7 @@
       <li><h3>Equipo con cédula profesional</h3><p>Nombre, especialidad y número de cédula de cada dentista, con una foto real del consultorio.</p><span class="in">Todos los planes</span></li>
       <li><h3>Aviso de privacidad</h3><p>Formularios que piden solo lo necesario y un aviso de privacidad para los datos de tus pacientes.</p><span class="in">Todos los planes</span></li>
       <li><h3>Horario de hoy y cómo llegar</h3><p>Abierto o cerrado en la primera línea, dirección en texto y botón para abrir en mapas.</p><span class="in">Todos los planes</span></li>
+      <li><h3>Reseñas de Google en la portada</h3><p>Tu calificación y las opiniones más recientes, con enlace para ver todas. Las tomamos de tu ficha de Google.</p><span class="in">Todos los planes</span></li>
       <li><h3>Medición de contactos</h3><p>Cuántas personas envían el formulario o tocan reservar, llamar o WhatsApp, mes a mes.</p><span class="in">Desde <b>Negocio</b></span></li>
       <li><h3>Catálogo de servicios</h3><p>Para clínicas con muchas especialidades: agregas o cambias servicios sin escribirnos.</p><span class="in"><b>Avanzado</b></span></li>
     </ul>
@@ -179,7 +181,7 @@
       {{CHAT}}
       <dl class="rec-scope">
         <div><dt>Un número, una sucursal, un flujo</dt><dd>El alcance inicial del módulo.</dd></div>
-        <div><dt>Respuestas aprobadas</dt><dd>Horarios, ubicación, tratamientos y cómo prepararse.</dd></div>
+        <div><dt>Respuestas aprobadas</dt><dd>En WhatsApp y en el asistente de tu web: horarios, ubicación, tratamientos.</dd></div>
         <div><dt>Datos para la cita</dt><dd>Nombre, tratamiento y horario preferido, listos para recepción.</dd></div>
         <div><dt>300 conversaciones al mes</dt><dd>Cupo del piloto. Te avisamos antes del límite; al agotarse, todo pasa a tu equipo.</dd></div>
       </dl>
