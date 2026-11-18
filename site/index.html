@@ -1,0 +1,1219 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Ceiba Labs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+/* Layout: dark opening → ivory band for the work → dark offer → ivory industries → dark AI → ivory FAQ → petrol close.
+   One look by design (brand palette), so no light/dark switching. */
+:root{
+  --ink:#0B1514; --ink-2:#121F1D; --ink-3:#1A2B28;
+  --petrol:#103D37; --petrol-2:#164A43;
+  --ivory:#F7F4EB; --ivory-2:#EDE9DC;
+  --lime:#D6FA52; --lime-press:#C3EA35;
+  --error-d:#FF9C86; --error-l:#B3261E;
+  --f-display:"Funnel Display","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --f-clinic:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --gut:max(20px, env(safe-area-inset-left,0px));
+  --gut-r:max(20px, env(safe-area-inset-right,0px));
+  --max:1240px;
+  --photo-room:url("img/room.jpg");--photo-doc:url("img/doc.jpg");--photo-facade:url("img/facade.jpg");--photo-reception:url("img/reception.jpg");
+  --ease:cubic-bezier(.2,.7,.1,1);
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--ink);color:var(--ivory);font:400 17px/1.55 var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:clip}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ink)}
+h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* bands */
+.band{--fg:var(--ivory);--muted:rgba(247,244,235,.68);--line:rgba(247,244,235,.14);--focus:var(--lime);--surface:var(--ink-2);background:var(--ink);color:var(--fg)}
+.band--light{--fg:var(--ink);--muted:rgba(11,21,20,.66);--line:rgba(11,21,20,.16);--focus:var(--petrol);--surface:#fff;background:var(--ivory);color-scheme:light}
+.band--petrol{background:var(--petrol);--surface:rgba(11,21,20,.35);--line:rgba(247,244,235,.2)}
+.wrap{max-width:calc(var(--max) + 40px);margin-inline:auto;padding-left:var(--gut);padding-right:var(--gut-r)}
+.section{padding-block:clamp(72px,10vw,136px)}
+:focus-visible{outline:2px solid var(--focus,var(--lime));outline-offset:3px;border-radius:6px}
+
+.h2{font-size:clamp(36px,5.2vw,68px);line-height:1;letter-spacing:-.03em;max-width:16ch}
+.lede{font-size:clamp(17px,1.5vw,20px);color:var(--muted);max-width:56ch;line-height:1.5}
+.mono{font-family:var(--f-mono);font-size:13px;letter-spacing:0}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 22px;border-radius:10px;border:0;cursor:pointer;font-weight:600;font-size:16px;text-decoration:none;white-space:nowrap;transition:background .15s,transform .15s,border-color .15s}
+.btn-primary{background:var(--lime);color:var(--ink)}
+.btn-primary:hover{background:var(--lime-press)}
+.btn-primary:active{transform:translateY(1px)}
+.btn-line{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn-line:hover{border-color:var(--fg)}
+.link{display:inline-flex;gap:8px;align-items:center;color:var(--fg);text-decoration:none;font-weight:500;border-bottom:1px solid var(--line);padding-bottom:2px;background:none;border-top:0;border-left:0;border-right:0;cursor:pointer;padding-inline:0}
+.link:hover{border-color:var(--fg)}
+.arrow{transition:transform .2s var(--ease)}
+.link:hover .arrow,.btn:hover .arrow{transform:translateX(3px)}
+
+/* header */
+.site-header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--ink);border-bottom:1px solid rgba(247,244,235,.1)}
+.nav{display:flex;align-items:center;gap:28px;height:68px}
+.brand{display:flex;color:var(--ivory)}
+.brand svg{height:26px;width:auto;display:block}
+.nav-links{display:flex;align-items:center;gap:26px;margin-left:auto;list-style:none;padding:0;margin-block:0}
+.nav-links a{text-decoration:none;color:rgba(247,244,235,.72);font-size:15px;font-weight:500}
+.nav-links a:hover,.nav-links a[aria-current="true"]{color:var(--ivory)}
+.nav .btn{height:40px;padding:0 16px;font-size:15px}
+.menu-btn{display:none;margin-left:auto;background:none;border:1px solid rgba(247,244,235,.2);border-radius:8px;height:40px;padding:0 14px;cursor:pointer;font-weight:500}
+@media (max-width:900px){
+  .menu-btn{display:inline-flex;align-items:center;gap:8px}
+  .nav-links{display:none}
+  .nav > .btn{display:none}
+  .site-header.open .nav-links{display:flex;flex-direction:column;position:absolute;left:0;right:0;top:68px;background:var(--ink);padding:12px var(--gut-r) 24px var(--gut);gap:0;border-bottom:1px solid rgba(247,244,235,.12)}
+  .site-header.open .nav-links a{display:block;padding:14px 0;font-size:20px;color:var(--ivory);border-bottom:1px solid rgba(247,244,235,.1)}
+  .site-header.open .nav-links .nav-cta{display:block;margin-top:18px}
+  .site-header.open .nav-links .nav-cta a{border:0;background:var(--lime);color:var(--ink);text-align:center;border-radius:10px;padding:14px;font-size:17px;font-weight:600}
+}
+.nav-cta{display:none}
+.has-sub{position:relative;display:flex;align-items:center;gap:2px;padding-block:20px}
+.sub-btn{display:grid;place-items:center;width:24px;height:28px;background:none;border:0;border-radius:6px;color:rgba(247,244,235,.72);cursor:pointer;padding:0}
+.sub{display:none;position:absolute;top:100%;left:-14px;min-width:210px;list-style:none;margin:0;padding:8px;background:var(--ink-2);border:1px solid rgba(247,244,235,.12);border-radius:12px;box-shadow:0 24px 40px -20px rgba(0,0,0,.6)}
+.has-sub:hover .sub,.has-sub:focus-within .sub,.has-sub.open .sub{display:grid}
+.sub a{display:block;padding:9px 12px;border-radius:8px}
+.sub a:hover{background:var(--ink-3)}
+@media (max-width:900px){
+  .site-header.open .nav-links{max-height:calc(100dvh - 68px);overflow:auto}
+  .site-header.open .has-sub{display:block;padding:0}
+  .sub-btn{display:none!important}
+  .site-header.open .sub{display:grid;position:static;background:none;border:0;box-shadow:none;padding:0 0 10px 16px;min-width:0}
+  .site-header.open .nav-links .sub a{font-size:16px;padding:9px 0;border:0;color:rgba(247,244,235,.72)}
+}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:80;background:var(--ivory);color:var(--ink);border-radius:12px;padding:12px 16px;font-size:14px;line-height:1.4;max-width:calc(100vw - 32px);width:max-content;box-shadow:0 20px 40px -12px rgba(0,0,0,.55);animation:pop .25s var(--ease) both}
+.toast code{font-family:var(--f-mono);font-size:13px}
+
+/* hero */
+.hero{padding-block:clamp(48px,7vw,96px) 0;overflow:clip}
+.hero h1{font-size:clamp(46px,8.6vw,132px);line-height:.92;letter-spacing:-.045em;font-weight:700;max-width:none}
+.hero h1 .soft{display:block;font-weight:400;color:rgba(247,244,235,.58)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,5vw,72px);margin-top:clamp(36px,4.5vw,64px);align-items:start}
+.hero-copy{display:grid;gap:28px;padding-bottom:clamp(40px,6vw,96px)}
+.hero-copy .lede{color:var(--ivory);font-size:clamp(19px,1.7vw,23px);max-width:28ch;line-height:1.35}
+.audit{display:grid;gap:10px}
+.audit label{font-weight:500;font-size:15px}
+.field-url{display:flex;align-items:stretch;background:var(--ink-2);border:1px solid rgba(247,244,235,.2);border-radius:12px;padding:6px;gap:6px;transition:border-color .15s}
+.field-url:focus-within{border-color:var(--lime)}
+.field-url.invalid{border-color:var(--error-d)}
+.field-url .prefix{display:flex;align-items:center;padding-left:12px;color:rgba(247,244,235,.45);font-family:var(--f-mono);font-size:15px}
+.field-url input{flex:1;min-width:0;background:transparent;border:0;color:var(--ivory);font:400 16px var(--f-mono);padding:0 4px;outline:none;height:52px}
+.field-url input::placeholder{color:rgba(247,244,235,.35)}
+.field-url .btn{height:52px}
+.hint{font-size:14px;color:var(--muted)}
+.err{font-size:14px;color:var(--error-d);display:flex;gap:8px}
+.band--light .err{color:var(--error-l)}
+.secondary-actions{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center}
+@media (max-width:520px){
+  .field-url{flex-direction:column;padding:6px}
+  .field-url .row{display:flex}
+  .field-url .btn{width:100%}
+}
+.field-url .row{display:flex;flex:1;min-width:0}
+
+.audit-result{border:1px solid rgba(247,244,235,.16);border-radius:12px;padding:18px 18px 20px;display:grid;gap:12px;background:var(--ink-2)}
+.audit-result h3{font-size:19px;letter-spacing:-.01em;font-weight:600}
+.audit-result p{color:var(--muted);font-size:15px}
+.audit-result .actions{display:flex;flex-wrap:wrap;gap:10px}
+.audit-result .btn{height:44px;font-size:15px}
+.audit-result code{font-family:var(--f-mono);color:var(--ivory);font-size:14px;word-break:break-all}
+
+.hero-visual{position:relative;margin-right:calc(-1 * var(--gut-r) - max(0px, (100vw - var(--max) - 40px) / 2) - 1px)}
+.hero-caption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;padding:14px 0 0;font-size:14px;color:var(--muted);padding-right:var(--gut-r)}
+.hero-caption strong{color:var(--ivory);font-weight:600}
+
+/* browser frame */
+.frame{background:#fff;border-radius:14px 0 0 0;overflow:hidden;box-shadow:0 40px 80px -30px rgba(0,0,0,.6);border:1px solid rgba(247,244,235,.16);border-right:0;border-bottom:0}
+.frame-bar{display:flex;align-items:center;gap:12px;height:42px;padding:0 14px;background:#ECEAE4;border-bottom:1px solid #DAD6CC;color:#3b4442}
+.frame-url{flex:1;min-width:0;display:flex;align-items:center;gap:8px;height:28px;border-radius:7px;background:#fff;padding:0 10px;font:400 12.5px var(--f-mono);color:#46504d;white-space:nowrap;overflow:hidden}
+.frame-url svg{flex:none}
+.state-tag{font:500 12px var(--f-mono);padding:4px 8px;border-radius:6px;background:var(--ink);color:var(--ivory);white-space:nowrap}
+.state-tag[data-state="new"]{background:var(--lime);color:var(--ink)}
+.viewport{position:relative;container-type:inline-size;background:#fff;color:#1d2420;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin}
+.layers{display:grid}
+.layers > .layer{grid-area:1/1;min-width:0}
+.layer[data-hidden="true"]{visibility:hidden;pointer-events:none}
+.wipe{position:absolute;top:0;bottom:0;left:0;width:2px;background:var(--lime);box-shadow:0 0 0 1px rgba(11,21,20,.25);pointer-events:none;opacity:0;z-index:5}
+.hero .viewport{height:clamp(380px,40vw,560px);overflow:hidden}
+
+/* ===================== MOCK: ACTUAL (old site, fixed 760px) ===================== */
+.mk-old{width:760px;font:12px/1.4 Verdana,Geneva,sans-serif;color:#333;background:#f2f2f2;transform-origin:top left}
+.mo-head{display:flex;align-items:center;gap:14px;padding:14px 18px;background:linear-gradient(#2a72c2,#1b4f8f);color:#fff;border-bottom:3px solid #f5c400}
+.mo-head b{display:block;font:bold 25px "Times New Roman",Times,serif;letter-spacing:1px;text-shadow:2px 2px 0 #0d2d55}
+.mo-head span{font:italic 13px "Times New Roman",serif;color:#cfe4ff}
+.mo-nav{display:flex;background:linear-gradient(#f8f8f8,#cfcfcf);border-bottom:1px solid #999}
+.mo-nav span{padding:7px 14px;border-right:1px solid #aaa;font:bold 11px Arial,sans-serif;color:#1b4f8f}
+.mo-banner{position:relative;height:210px;background:linear-gradient(120deg,#7fd3ff,#2d8fdc 55%,#1a5fb0);display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid #999}
+.mo-banner .spark{position:absolute;color:#fff;font:28px Arial;opacity:.8}
+.mo-banner .slide-txt{text-align:center;color:#fff;font:bold 30px "Comic Sans MS","Trebuchet MS",sans-serif;text-shadow:2px 2px 3px #0b3a74;line-height:1.15;position:relative}
+.mo-banner .slide-txt small{display:block;font:bold 15px Arial;color:#ffef7a;margin-top:8px}
+.mo-dots{position:absolute;bottom:8px;left:0;right:0;text-align:center;color:#fff;font:11px Arial;letter-spacing:5px}
+.mo-arrow{position:absolute;top:50%;margin-top:-16px;width:26px;height:32px;background:rgba(0,0,0,.35);color:#fff;font:bold 18px/32px Arial;text-align:center}
+.mo-body{display:grid;grid-template-columns:1fr 210px;gap:14px;padding:14px 18px;background:#fff}
+.mo-main h5{margin:0 0 8px;font:bold 17px "Times New Roman",serif;color:#1b4f8f;border-bottom:1px dotted #999;padding-bottom:4px}
+.mo-main p{font-size:11px;color:#555;text-align:justify;margin:0 0 8px}
+.mo-side{display:grid;gap:10px;align-content:start}
+.mo-box{border:1px solid #bbb;background:#f6f6f6}
+.mo-box b{display:block;background:#1b4f8f;color:#fff;font:bold 11px Arial;padding:4px 8px}
+.mo-box p{padding:6px 8px;font-size:10px;color:#555;margin:0}
+.mo-map{height:112px;background:repeating-linear-gradient(35deg,#e8e4d8 0 14px,#ddd7c6 14px 16px),#e8e4d8;position:relative;border:1px solid #bbb}
+.mo-map::before{content:"";position:absolute;inset:40% 0 auto;height:8px;background:#fff6c8;border-block:1px solid #d8c97a}
+.mo-map span{position:absolute;left:8px;bottom:6px;right:8px;font:bold 9px Arial;color:#a11;background:rgba(255,255,255,.85);padding:2px 4px}
+.mo-foot{padding:10px 18px 14px;background:#1b4f8f;color:#b8cde6;font:9px Arial;text-align:center}
+.mo-counter{display:inline-block;background:#000;color:#3f3;font:bold 10px "Courier New",monospace;padding:1px 4px;margin-top:4px}
+
+/* ===================== MOCK: PROPUESTA (responsive via container) ===================== */
+.mk-new{--c-ink:#18231F;--c-muted:#5E6A64;--c-paper:#FBFAF6;--c-sand:#EEEAE0;--c-accent:#1F4FD1;--c-line:#E2DED3;font-family:var(--f-body);font-size:clamp(10px,1.32cqi,15px);color:var(--c-ink);background:var(--c-paper);line-height:1.45;position:relative}
+.mn-top{display:flex;align-items:center;gap:2.2em;padding:1.3em 2.6em;border-bottom:1px solid var(--c-line);background:var(--c-paper);position:sticky;top:0;z-index:3}
+.mn-brand{display:flex;align-items:baseline;gap:.6em}
+.mn-brand b{font:400 2em/1 var(--f-clinic);letter-spacing:-.01em}
+.mn-brand span{font-size:.9em;color:var(--c-muted)}
+.mn-top nav{display:flex;gap:1.8em;margin-left:auto;font-size:1em;color:var(--c-muted)}
+.mn-btn{display:inline-flex;align-items:center;gap:.5em;background:var(--c-accent);color:#fff;border-radius:999px;padding:.75em 1.3em;font-weight:600;font-size:1em;white-space:nowrap}
+.mn-ghost{display:inline-flex;align-items:center;gap:.5em;border:1px solid #C9C4B6;border-radius:999px;padding:.72em 1.2em;font-weight:500;white-space:nowrap}
+.mn-hero{display:grid;grid-template-columns:1fr 1.05fr;gap:2.8em;padding:3.4em 2.6em 3em;align-items:center}
+.mn-open{display:inline-flex;align-items:center;gap:.6em;font-size:.95em;color:var(--c-muted);margin-bottom:1.4em}
+.mn-open i{width:.6em;height:.6em;border-radius:50%;background:#2E9D5B;flex:none}
+.mn-hero h3{font:400 3.7em/1.02 var(--f-clinic);letter-spacing:-.02em;margin-bottom:.45em;color:var(--c-ink);text-wrap:balance}
+.mn-hero h3 em{font-style:italic}
+.mn-hero p.sub{font-size:1.15em;color:var(--c-muted);max-width:30em;margin-bottom:1.7em}
+.mn-ctas{display:flex;flex-wrap:wrap;gap:.7em}
+.mn-photo{aspect-ratio:5/4;border-radius:.6em;background:var(--photo-room) center/cover #d9d4c6;max-width:100%}
+.mn-treat{padding:2.6em;border-top:1px solid var(--c-line);background:#fff}
+.mn-treat h4{font:400 2.1em/1.1 var(--f-clinic);margin-bottom:1em;color:var(--c-ink)}
+.mn-treat ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 2.6em}
+.mn-treat li{display:grid;grid-template-columns:1fr auto;gap:.2em 1em;padding:1em 0;border-top:1px solid var(--c-line)}
+.mn-treat li b{font-weight:600;font-size:1.08em}
+.mn-treat li span{color:var(--c-muted);font-size:.95em;grid-column:1}
+.mn-treat li em{grid-column:2;grid-row:1/3;align-self:center;font-style:normal;color:var(--c-accent);font-weight:600}
+.mn-team{display:grid;grid-template-columns:auto 1fr;gap:2em;align-items:center;padding:2.6em;background:var(--c-sand)}
+.mn-portrait{width:9.5em;aspect-ratio:4/5;border-radius:.5em;background:var(--photo-doc) center 20%/cover #c9c1b0}
+.mn-q{font:italic 400 1.75em/1.2 var(--f-clinic);margin-bottom:.7em;max-width:22em}
+.mn-team b{display:block}
+.mn-team span{color:var(--c-muted)}
+.mn-space{height:16em;background:var(--photo-reception) center/cover #d9d4c6}
+.mn-facade{aspect-ratio:4/5;max-height:18em;border-radius:.5em;background:var(--photo-facade) center/cover #d9d4c6}
+.mn-visit{display:grid;grid-template-columns:minmax(0,14em) 1fr;gap:2.4em;align-items:center;padding:2.6em;background:#fff;border-top:1px solid var(--c-line)}
+.mn-visit h4{font:400 2.1em/1.1 var(--f-clinic);color:var(--c-ink);margin-bottom:.5em}
+.mn-visit dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.4em 1.4em}
+.mn-visit dt{color:var(--c-muted)}
+.mn-visit dd{margin:0;font-weight:500}
+.mn-foot{padding:1.6em 2.6em;color:var(--c-muted);font-size:.9em;background:var(--c-paper);border-top:1px solid var(--c-line)}
+.mn-sticky{display:none}
+@container (max-width:560px){
+  .mk-new{font-size:clamp(12px,3.7cqi,15px)}
+  .mn-top{padding:1em 1.2em;gap:1em}
+  .mn-top nav{display:none}
+  .mn-top .mn-btn{margin-left:auto;padding:.6em 1em;font-size:.9em}
+  .mn-hero{grid-template-columns:1fr;padding:1.6em 1.2em 1.8em;gap:1.4em}
+  .mn-hero .mn-photo{order:-1;aspect-ratio:4/3}
+  .mn-hero h3{font-size:2.5em}
+  .mn-treat,.mn-team,.mn-visit{padding:1.8em 1.2em}
+  .mn-treat ul{grid-template-columns:1fr}
+  .mn-team{grid-template-columns:6em 1fr;gap:1.1em}
+  .mn-portrait{width:6em}
+  .mn-q{font-size:1.3em}
+  .mn-visit{grid-template-columns:1fr}
+  .mn-facade{aspect-ratio:16/10;max-height:none}
+  .mn-space{height:11em}
+  .mn-foot{padding:1.4em 1.2em 5em}
+  .mn-sticky{display:flex;position:sticky;bottom:0;z-index:3;padding:.8em 1.2em;background:rgba(251,250,246,.96);border-top:1px solid var(--c-line);gap:.6em}
+  .mn-sticky .mn-btn{flex:1;justify-content:center}
+}
+
+/* markers on the mock (comparator only) */
+[data-mark]{position:relative}
+.cmp [data-mark]::after{content:attr(data-mark);position:absolute;top:-10px;right:-10px;width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--ivory);font:600 12px/24px var(--f-mono);text-align:center;z-index:4;box-shadow:0 0 0 2px #fff;transition:transform .2s var(--ease),background .2s}
+.cmp .mn-top [data-mark]::after{top:-8px;right:-8px}
+.cmp [data-mark].hl::after{background:var(--lime);color:var(--ink);transform:scale(1.25)}
+.cmp [data-mark].hl{outline:2px dashed rgba(16,61,55,.55);outline-offset:4px}
+.cmp .mk-old .mo-foot[data-mark]::after{top:6px;right:auto;left:50%;margin-left:200px}
+.cmp .mk-old .mo-banner[data-mark]::after,.cmp .mk-old .mo-main[data-mark]::after{top:6px;right:6px}
+.cmp .mk-new [data-mark]::after{right:auto;left:-14px}
+.cmp .mk-old [data-mark]::after{width:30px;height:30px;line-height:30px;font-size:15px;top:4px;right:4px}
+.cmp .mk-old .mo-foot[data-mark]::after{top:-14px}
+
+/* ===================== COMPARATOR SECTION ===================== */
+.cmp-head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px 64px;align-items:end;margin-bottom:clamp(36px,5vw,56px)}
+.cmp-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,380px);gap:clamp(28px,4vw,56px);align-items:start}
+.cmp-stage{display:grid;gap:14px;min-width:0}
+.cmp-controls{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between}
+.seg{display:inline-flex;padding:4px;border-radius:12px;background:var(--ivory-2);border:1px solid var(--line);gap:4px}
+.seg button{border:0;background:transparent;border-radius:9px;height:44px;padding:0 18px;cursor:pointer;font-weight:600;font-size:15px;color:var(--muted);transition:background .2s,color .2s}
+.seg button[aria-checked="true"]{background:var(--ink);color:var(--ivory)}
+.seg button[aria-checked="true"][data-v="new"]{background:var(--lime);color:var(--ink);box-shadow:inset 0 0 0 1px rgba(11,21,20,.25)}
+.seg--quiet button{height:36px;padding:0 12px;font-size:14px}
+.seg--quiet button[aria-checked="true"]{background:#fff;color:var(--ink);box-shadow:0 1px 0 rgba(11,21,20,.08),inset 0 0 0 1px var(--line)}
+.cmp-frame{border-radius:14px;border:1px solid var(--line);box-shadow:0 30px 60px -36px rgba(11,21,20,.45);background:#fff;margin-inline:auto;width:100%;transition:max-width .45s var(--ease)}
+.cmp-frame .frame-bar{border-radius:14px 14px 0 0}
+.cmp-frame .viewport{height:min(620px,72vh);border-radius:0 0 14px 14px}
+.cmp-frame.is-mobile{max-width:390px}
+.cmp-frame.is-mobile .viewport{height:min(680px,76vh)}
+.cmp-label{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-between;font-size:14px;color:var(--muted)}
+.cmp-label strong{color:var(--fg)}
+
+.changes{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.changes li{border-bottom:1px solid var(--line)}
+.changes button{display:grid;grid-template-columns:28px 1fr;gap:6px 14px;width:100%;text-align:left;background:none;border:0;padding:18px 0;cursor:pointer;color:var(--fg)}
+.changes .n{width:24px;height:24px;border-radius:50%;background:var(--ink);color:var(--ivory);font:600 12px/24px var(--f-mono);text-align:center;margin-top:2px}
+.changes button:hover .n,.changes button:focus-visible .n,.changes li.hl .n{background:var(--lime);color:var(--ink)}
+.changes h3{font-size:19px;letter-spacing:-.01em;font-weight:600;line-height:1.25}
+.changes .txt{grid-column:2;display:grid;gap:6px;font-size:15px;line-height:1.45}
+.changes .before,.changes .after{display:grid;grid-template-columns:62px 1fr;gap:8px;transition:opacity .25s,color .25s}
+.changes .before span,.changes .after span{font:500 12px/1.9 var(--f-mono);color:var(--muted)}
+[data-view="old"] .changes .after,[data-view="new"] .changes .before{opacity:.42}
+.cmp-links{display:grid;gap:14px;margin-top:24px;justify-items:start}
+.task{margin-top:22px;padding:18px 20px;border-radius:12px;background:var(--ink);color:var(--ivory);display:grid;gap:6px}
+.task p{font-size:15px;color:rgba(247,244,235,.72)}
+.task strong{font:600 20px/1.2 var(--f-display);letter-spacing:-.01em}
+
+/* ===================== SUBSCRIPTION ===================== */
+.sub-head{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px 64px;align-items:end}
+.sub-head .h2{font-size:clamp(40px,6vw,84px);max-width:12ch}
+.steps{list-style:none;margin:clamp(48px,6vw,80px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));position:relative;counter-reset:s}
+.steps::before{content:"";position:absolute;left:0;right:0;top:19px;height:1px;background:var(--line)}
+.steps li{position:relative;padding-right:32px;display:grid;gap:12px;align-content:start}
+.steps .dot{width:40px;height:40px;border-radius:50%;border:1px solid rgba(247,244,235,.35);background:var(--ink);display:grid;place-items:center;font:500 14px var(--f-mono);position:relative}
+.steps li:first-child .dot{background:var(--lime);color:var(--ink);border-color:var(--lime)}
+.steps h3{font-size:24px;letter-spacing:-.02em;margin-top:10px}
+.steps p{color:var(--muted);font-size:16px;max-width:32ch}
+.steps .who{font:500 13px var(--f-mono);color:rgba(247,244,235,.5)}
+.includes{margin-top:clamp(64px,8vw,104px);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,2fr);gap:32px 64px;border-top:1px solid var(--line);padding-top:36px}
+.includes h3{font-size:28px;letter-spacing:-.02em;line-height:1.1}
+.includes h3 + p{color:var(--muted);margin-top:12px;font-size:16px}
+.inc-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px;margin:0}
+.inc-list div{padding:16px 0;border-bottom:1px solid var(--line);display:grid;gap:4px}
+.inc-list dt{font-weight:600}
+.inc-list dd{margin:0;color:var(--muted);font-size:15px}
+
+/* pricing rows */
+.pricing{padding-top:0}
+.pricing-inner{border-top:1px solid var(--line);padding-top:clamp(64px,8vw,104px)}
+.price-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px 48px;margin-bottom:40px}
+.price-head .h2{max-width:18ch}
+.plans{display:grid;border-top:1px solid var(--line)}
+.plan{display:grid;grid-template-columns:minmax(140px,1fr) minmax(0,2.2fr) minmax(130px,.9fr) minmax(130px,.9fr) auto;gap:16px 32px;align-items:center;padding:28px 0;border-bottom:1px solid var(--line)}
+.plan h3{font-size:30px;letter-spacing:-.025em}
+.plan .for{font-size:15px;color:var(--muted);margin-top:4px}
+.plan ul{margin:0;padding:0;list-style:none;display:grid;gap:4px;font-size:15px;color:rgba(247,244,235,.85)}
+.plan ul li::before{content:"";display:inline-block;width:10px;height:1px;background:currentColor;vertical-align:middle;margin-right:10px;opacity:.5}
+.price-cell{display:grid;gap:2px}
+.price-cell .k{font:500 12px var(--f-mono);color:rgba(247,244,235,.55)}
+.price-cell .v{font:600 18px var(--f-display);letter-spacing:-.01em}
+.price-cell .v small{display:block;font:400 13px var(--f-body);color:var(--muted)}
+.plan .btn{height:44px;font-size:15px}
+.price-cell .v{font-size:24px;font-variant-numeric:tabular-nums}
+.price-foot{margin-top:20px;font-size:14px;color:var(--muted);max-width:70ch}
+.plan--addon{border-top:1px dashed rgba(247,244,235,.3)}
+.plan--addon h3{font-size:24px}
+.plan--mid{background:linear-gradient(90deg,transparent,rgba(16,61,55,.55) 12%,rgba(16,61,55,.55) 88%,transparent)}
+.proto-note{margin-top:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;font:400 13px/1.5 var(--f-mono);color:rgba(247,244,235,.6)}
+.proto-note b{font-weight:500;color:var(--ivory);white-space:nowrap}
+
+/* ===================== INDUSTRIES ===================== */
+.ind-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,1fr);gap:clamp(32px,5vw,80px);margin-top:clamp(40px,5vw,64px);align-items:start}
+.ind-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.ind-list li{border-bottom:1px solid var(--line)}
+.ind-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:8px 32px;width:100%;padding:24px 0;background:none;border:0;text-align:left;cursor:pointer;color:var(--fg);align-items:baseline}
+.ind-row h3{font-size:clamp(30px,3.6vw,48px);letter-spacing:-.035em;line-height:1;font-weight:500;transition:transform .3s var(--ease)}
+.ind-row .use{font-size:16px;color:var(--muted);display:grid;gap:8px}
+.ind-row .act{font:500 13px var(--f-mono);color:var(--fg)}
+.ind-row[aria-pressed="true"] h3{transform:translateX(14px)}
+.ind-row[aria-pressed="true"] h3::before{content:"";position:absolute;margin-left:-22px;margin-top:.42em;width:10px;height:10px;border-radius:50%;background:var(--petrol)}
+.ind-row h3{position:relative}
+.ind-preview{position:sticky;top:100px;background:var(--petrol);color:var(--ivory);border-radius:18px;padding:24px;display:grid;gap:18px;min-height:460px;align-content:start}
+.ind-preview .cap{font-size:14px;color:rgba(247,244,235,.7)}
+.phone{background:var(--ivory);color:var(--ink);border-radius:22px;padding:18px;display:grid;gap:12px;max-width:300px;width:100%;margin-inline:auto;box-shadow:0 24px 50px -20px rgba(0,0,0,.5)}
+.phone .pt{font:600 18px var(--f-display);letter-spacing:-.01em}
+.phone .lb{font-size:12px;color:rgba(11,21,20,.6);margin-bottom:4px}
+.phone .opt{display:flex;flex-wrap:wrap;gap:6px}
+.phone .opt span{border:1px solid rgba(11,21,20,.18);border-radius:8px;padding:6px 10px;font-size:13px;background:#fff}
+.phone .opt span.on{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
+.phone .inp{border:1px solid rgba(11,21,20,.18);border-radius:8px;padding:9px 10px;font-size:13px;background:#fff;display:flex;justify-content:space-between}
+.phone .inp.tall{min-height:64px;align-items:flex-start;color:rgba(11,21,20,.6)}
+.phone .go{background:var(--petrol);color:var(--ivory);border-radius:10px;padding:12px;text-align:center;font-weight:600;font-size:14px}
+.phone .card{display:grid;grid-template-columns:56px 1fr;gap:10px;align-items:center;border-top:1px solid rgba(11,21,20,.1);padding-top:10px;font-size:13px}
+.phone .card i{height:44px;border-radius:6px;background:linear-gradient(135deg,#cfd8cc,#9fb3a6)}
+.phone .card b{display:block;font-size:13px}
+.phone .card u{text-decoration:none;color:var(--petrol);font-weight:600}
+.ind-panel{display:grid;gap:12px}
+.panel-link{color:var(--ivory);border-color:rgba(247,244,235,.3);justify-self:start}
+.ind-link{display:none}
+@media (max-width:1000px){.ind-link{display:inline-flex;gap:6px;margin:-8px 0 22px;font-size:15px;font-weight:500;text-decoration:none;color:var(--fg);border-bottom:1px solid var(--line);padding-bottom:2px}}
+.ind-panel[hidden]{display:none}
+
+/* ===================== AI ===================== */
+.ai-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,6vw,96px);align-items:start}
+.ai-copy{display:grid;gap:24px;align-content:start}
+.ai-flow{list-style:none;padding:0;margin:8px 0 0;display:grid;border-top:1px solid var(--line)}
+.ai-flow li{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);font-size:16px}
+.ai-flow li span{font:500 13px/1.9 var(--f-mono);color:rgba(247,244,235,.55)}
+.ai-flow li.esc span{color:var(--lime)}
+.ai-offer{display:grid;border-top:1px solid var(--line)}
+.ai-off{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px 28px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.ai-off h3{font-size:19px;letter-spacing:-.01em}
+.ai-off p{font-size:14px;color:var(--muted);margin-top:4px}
+.ai-off .price-cell .v{font-size:20px}
+@media (max-width:520px){.ai-off{grid-template-columns:1fr 1fr}.ai-off > div:first-child{grid-column:1/-1}}
+.chat{background:var(--ink-2);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.chat-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line);font-size:14px}
+.chat-top b{font-weight:600}
+.chat-top span{color:var(--muted);font-size:13px}
+.chat-body{padding:20px 18px;display:grid;gap:12px}
+.msg{max-width:84%;padding:11px 14px;border-radius:14px;font-size:15px;line-height:1.45}
+.msg.in{background:var(--ink-3);border-bottom-left-radius:4px}
+.msg.out{justify-self:end;background:var(--ivory);color:var(--ink);border-bottom-right-radius:4px}
+.msg small{display:block;font:400 11px var(--f-mono);opacity:.6;margin-bottom:3px}
+.handoff{border:1px dashed rgba(214,250,82,.6);border-radius:12px;padding:14px;display:grid;gap:6px;font-size:14px}
+.handoff b{color:var(--lime);font:500 13px var(--f-mono)}
+.handoff dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px}
+.handoff dt{color:var(--muted)}
+.handoff dd{margin:0}
+.chat-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 18px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+.chat-foot button{background:none;border:1px solid var(--line);border-radius:8px;height:34px;padding:0 12px;cursor:pointer;font-size:13px}
+.chat-foot button:hover{border-color:var(--ivory)}
+.chat .reveal{animation:pop .35s var(--ease) both}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.typing{display:inline-flex;gap:4px;padding:14px}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:blink 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes blink{50%{opacity:.25}}
+.inline-status{font-size:14px;color:var(--muted);min-height:1.4em}
+
+/* ===================== FAQ ===================== */
+.faq-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.6fr);gap:32px clamp(40px,6vw,96px);align-items:start}
+.faq-grid .h2{position:sticky;top:110px}
+.faq{border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-item h3{font:inherit}
+.faq-q{display:flex;justify-content:space-between;align-items:center;gap:24px;width:100%;padding:22px 0;background:none;border:0;cursor:pointer;text-align:left;font:600 19px/1.3 var(--f-display);letter-spacing:-.01em;color:var(--fg)}
+.faq-q .pm{flex:none;width:28px;height:28px;border-radius:50%;border:1px solid var(--line);position:relative;transition:background .2s,border-color .2s}
+.faq-q .pm::before,.faq-q .pm::after{content:"";position:absolute;left:50%;top:50%;width:11px;height:1.5px;background:currentColor;transform:translate(-50%,-50%);transition:transform .25s var(--ease)}
+.faq-q .pm::after{transform:translate(-50%,-50%) rotate(90deg)}
+.faq-q[aria-expanded="true"] .pm{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
+.faq-q[aria-expanded="true"] .pm::after{transform:translate(-50%,-50%) rotate(0)}
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s var(--ease)}
+.faq-a > div{overflow:hidden}
+.faq-more{padding-top:24px}
+.faq-a p{padding:0 48px 24px 0;color:var(--muted);max-width:62ch}
+.faq-item.open .faq-a{grid-template-rows:1fr}
+
+/* ===================== CLOSE / FORM ===================== */
+.close-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:40px clamp(40px,6vw,96px);align-items:start}
+.close-grid .h2{font-size:clamp(40px,5.6vw,76px);max-width:11ch}
+.close-copy{display:grid;gap:24px;align-content:start}
+.close-copy ol{margin:0;padding:0;list-style:none;display:grid;gap:10px;color:rgba(247,244,235,.82);font-size:16px}
+.close-copy ol li{display:grid;grid-template-columns:28px 1fr}
+.close-alt{font-size:15px;color:rgba(247,244,235,.78)}
+.seg--dark{display:flex;background:var(--ink-2);border-color:rgba(247,244,235,.14)}
+.seg--dark button{flex:1;color:rgba(247,244,235,.7)}
+.seg--dark button[aria-checked="true"]{background:var(--ivory);color:var(--ink)}
+.close-copy ol span{font:500 13px/1.7 var(--f-mono);color:rgba(247,244,235,.5)}
+.form{background:var(--ink);border-radius:18px;padding:clamp(20px,3vw,32px);display:grid;gap:18px;border:1px solid rgba(247,244,235,.1)}
+.form-note{display:flex;gap:10px;align-items:flex-start;font:400 13px/1.5 var(--f-mono);color:rgba(247,244,235,.7);padding:10px 12px;border-radius:8px;background:rgba(214,250,82,.07);border:1px solid rgba(214,250,82,.25)}
+.form-note b{color:var(--lime);font-weight:500;white-space:nowrap}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.fld{display:grid;gap:7px;min-width:0}
+.fld label{font-size:14px;font-weight:500}
+.fld label span{color:var(--muted);font-weight:400}
+.fld input,.fld select,.fld textarea{width:100%;background:var(--ink-2);border:1px solid rgba(247,244,235,.18);border-radius:10px;color:var(--ivory);font:400 16px var(--f-body);padding:0 14px;height:50px;outline:none;transition:border-color .15s}
+.fld textarea{height:auto;min-height:96px;padding:12px 14px;resize:vertical}
+.fld select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:calc(100% - 20px) 22px,calc(100% - 15px) 22px;background-size:5px 5px;background-repeat:no-repeat}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--lime)}
+.fld.invalid input,.fld.invalid select{border-color:var(--error-d)}
+.fld.valid input,.fld.valid select{border-color:rgba(214,250,82,.5)}
+.fld .err{min-height:0}
+.check{display:flex;gap:10px;align-items:center;font-size:15px;cursor:pointer;width:max-content;max-width:100%}
+.check input{width:20px;height:20px;accent-color:var(--lime);margin:0}
+.form .btn{width:100%;height:56px;font-size:17px}
+.success{display:grid;gap:14px}
+.success h3{font-size:28px;letter-spacing:-.02em}
+.success p{color:var(--muted)}
+.success dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:15px;border-top:1px solid var(--line);padding-top:14px}
+.success dt{color:var(--muted)}
+.success dd{margin:0;word-break:break-word}
+
+/* footer */
+.footer{padding-block:48px;border-top:1px solid rgba(247,244,235,.1);font-size:14px;color:rgba(247,244,235,.6)}
+.footer .wrap{display:flex;flex-wrap:wrap;gap:20px 40px;justify-content:space-between;align-items:center}
+.foot-legal{margin-top:28px;padding-top:20px;border-top:1px solid rgba(247,244,235,.08);font-size:13px}
+.footer svg{height:22px;width:auto;color:var(--ivory);display:block}
+.footer nav{display:flex;flex-wrap:wrap;gap:8px 24px}
+.footer a{text-decoration:none}
+.footer a:hover{color:var(--ivory)}
+
+/* dialog */
+dialog.diag{border:0;padding:0;background:var(--ivory);color:var(--ink);border-radius:18px;width:min(760px,calc(100vw - 24px));max-height:calc(100dvh - 24px);--fg:var(--ink);--muted:rgba(11,21,20,.66);--line:rgba(11,21,20,.14);--focus:var(--petrol);color-scheme:light}
+dialog.diag::backdrop{background:rgba(5,10,10,.72)}
+.diag-in{display:grid;grid-template-rows:auto 1fr auto;max-height:calc(100dvh - 24px)}
+.diag-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:22px 24px 18px;border-bottom:1px solid var(--line)}
+.diag-top h2{font-size:22px;letter-spacing:-.02em}
+.diag-top p{font-size:14px;color:var(--muted);margin-top:4px}
+.x{flex:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:20px;line-height:1}
+.diag-body{overflow:auto;padding:24px}
+.diag-progress{display:flex;gap:6px;margin-bottom:22px}
+.diag-progress button{flex:1;height:30px;border:0;background:none;padding:0;cursor:pointer;position:relative}
+.diag-progress button::before{content:"";position:absolute;left:0;right:0;top:50%;height:4px;margin-top:-2px;border-radius:2px;background:var(--ivory-2);transition:background .2s}
+.diag-progress button.done::before{background:var(--petrol)}
+.diag-progress button[aria-current="step"]::before{background:var(--ink)}
+.diag-step h3{font-size:clamp(26px,4vw,36px);letter-spacing:-.03em;line-height:1.05;margin:6px 0 20px}
+.diag-step .count{font:500 13px var(--f-mono);color:var(--muted)}
+.diag-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.diag-cols > div{border-radius:12px;padding:16px 18px;display:grid;gap:8px;align-content:start}
+.diag-cols .was{background:#fff;border:1px solid var(--line)}
+.diag-cols .now{background:var(--petrol);color:var(--ivory)}
+.diag-cols h4{font:500 13px var(--f-mono)}
+.diag-cols .now h4{color:var(--lime)}
+.diag-cols p{font-size:16px;line-height:1.45}
+.diag-why{margin-top:16px;font-size:15px;color:var(--muted)}
+.diag-foot{display:flex;justify-content:space-between;gap:10px;padding:16px 24px;border-top:1px solid var(--line);flex-wrap:wrap}
+.diag-foot .btn{height:46px;font-size:15px}
+.diag .btn-line{color:var(--ink)}
+
+/* hero intro wipe */
+@keyframes heroReveal{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes heroLine{0%{left:0;opacity:1}96%{opacity:1}100%{left:100%;opacity:0}}
+.hero .layer-new{animation:heroReveal 1.5s var(--ease) .7s both}
+.hero .wipe{animation:heroLine 1.5s var(--ease) .7s both}
+
+/* responsive */
+@media (max-width:1000px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-copy{padding-bottom:8px}
+  .hero-visual{margin-left:0}
+  .cmp-grid{grid-template-columns:1fr}
+  .ind-grid{grid-template-columns:1fr}
+  .ind-preview{display:none}
+  .ai-grid,.faq-grid,.close-grid,.sub-head,.cmp-head{grid-template-columns:1fr}
+  .faq-grid .h2{position:static}
+  .plan{grid-template-columns:1fr 1fr;align-items:start}
+  .plan > :nth-child(1),.plan > :nth-child(2){grid-column:1/-1}
+  .plan > .btn{grid-column:1/-1;justify-self:start}
+  .includes{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  body{font-size:16px}
+  .steps{grid-template-columns:1fr;gap:32px}
+  .steps::before{left:19px;right:auto;top:0;bottom:0;width:1px;height:auto}
+  .steps li{grid-template-columns:40px 1fr;gap:4px 18px;padding-right:0}
+  .steps li > :not(.dot){grid-column:2}
+  .steps .dot{grid-row:1/5}
+  .steps h3{margin-top:6px}
+  .inc-list{grid-template-columns:1fr}
+  .ind-row{grid-template-columns:1fr}
+  .ind-row[aria-pressed="true"] h3{transform:none}
+  .ind-row[aria-pressed="true"] h3::before{display:none}
+  .frow{grid-template-columns:1fr}
+  .diag-cols{grid-template-columns:1fr}
+  .ai-flow li{grid-template-columns:1fr;gap:2px}
+  .hero-visual .frame{border-radius:12px 0 0 0}
+  .faq-a p{padding-right:0}
+  .msg{max-width:92%}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .hero .layer-old{visibility:hidden}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ceiba-logo" viewBox="0 0 353.37 54"><g transform="translate(0 0) scale(.68)"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></g><g transform="translate(80 42) scale(.054 -.054)"><path transform="translate(0 0)" d="M393 598Q306 598 260.0 533.0Q214 468 214 355Q214 241 256.5 178.5Q299 116 393 116Q437 116 480.5 126.0Q524 136 575 154V27Q528 8 482.0 -1.0Q436 -10 379 -10Q269 -10 197.5 35.5Q126 81 92.0 163.5Q58 246 58 356Q58 464 97.0 547.0Q136 630 210.5 677.0Q285 724 393 724Q446 724 499.5 710.5Q553 697 602 674L553 551Q513 570 472.5 584.0Q432 598 393 598Z"/><path transform="translate(622 0)" d="M303 556Q416 556 482.0 491.5Q548 427 548 308V236H196Q198 173 233.5 137.0Q269 101 332 101Q385 101 428.0 111.5Q471 122 517 144V29Q477 9 432.5 -0.5Q388 -10 325 -10Q243 -10 180.0 20.5Q117 51 81.0 113.0Q45 175 45 269Q45 365 77.5 428.5Q110 492 168.0 524.0Q226 556 303 556ZM304 450Q261 450 232.5 422.0Q204 394 199 335H408Q407 385 382.0 417.5Q357 450 304 450Z"/><path transform="translate(1198 0)" d="M153 760Q186 760 210.0 744.5Q234 729 234 687Q234 646 210.0 630.0Q186 614 153 614Q119 614 95.5 630.0Q72 646 72 687Q72 729 95.5 744.5Q119 760 153 760ZM227 546V0H78V546Z"/><path transform="translate(1488 0)" d="M227 583Q227 552 225.0 522.0Q223 492 221 475H227Q249 509 286.0 532.5Q323 556 382 556Q474 556 531.0 484.5Q588 413 588 274Q588 134 530.0 62.0Q472 -10 378 -10Q318 -10 283.5 11.5Q249 33 227 60H217L192 0H78V760H227ZM334 437Q276 437 252.5 401.0Q229 365 227 291V275Q227 196 250.5 153.5Q274 111 336 111Q382 111 409.0 153.5Q436 196 436 276Q436 356 408.5 396.5Q381 437 334 437Z"/><path transform="translate(2106 0)" d="M302 557Q412 557 470.5 509.5Q529 462 529 364V0H425L396 74H392Q357 30 318.0 10.0Q279 -10 211 -10Q138 -10 90.0 32.5Q42 75 42 163Q42 250 103.0 291.5Q164 333 286 337L381 340V364Q381 407 358.5 427.0Q336 447 296 447Q256 447 218.0 435.5Q180 424 142 407L93 508Q137 531 190.5 544.0Q244 557 302 557ZM323 251Q251 249 223.0 225.0Q195 201 195 162Q195 128 215.0 113.5Q235 99 267 99Q315 99 348.0 127.5Q381 156 381 208V253Z"/><path transform="translate(2942 0)" d="M97 0V714H187V80H499V0Z"/><path transform="translate(3451 0)" d="M288 545Q386 545 433.0 502.0Q480 459 480 365V0H416L399 76H395Q360 32 321.5 11.0Q283 -10 215 -10Q142 -10 94.0 28.5Q46 67 46 149Q46 229 109.0 272.5Q172 316 303 320L394 323V355Q394 422 365.0 448.0Q336 474 283 474Q241 474 203.0 461.5Q165 449 132 433L105 499Q140 518 188.0 531.5Q236 545 288 545ZM314 259Q214 255 175.5 227.0Q137 199 137 148Q137 103 164.5 82.0Q192 61 235 61Q303 61 348.0 98.5Q393 136 393 214V262Z"/><path transform="translate(3997 0)" d="M173 575Q173 541 171.5 511.5Q170 482 168 465H173Q196 499 236.0 522.0Q276 545 339 545Q439 545 499.5 475.5Q560 406 560 268Q560 130 499.0 60.0Q438 -10 339 -10Q276 -10 236.0 13.0Q196 36 173 68H166L148 0H85V760H173ZM324 472Q239 472 206.0 423.0Q173 374 173 271V267Q173 168 205.5 115.5Q238 63 326 63Q398 63 433.5 116.0Q469 169 469 269Q469 472 324 472Z"/><path transform="translate(4597 0)" d="M434 148Q434 70 376.0 30.0Q318 -10 220 -10Q164 -10 123.5 -1.0Q83 8 52 24V104Q84 88 129.5 74.5Q175 61 222 61Q289 61 319.0 82.5Q349 104 349 140Q349 160 338.0 176.0Q327 192 298.5 208.0Q270 224 217 244Q165 264 128.0 284.0Q91 304 71.0 332.0Q51 360 51 404Q51 472 106.5 509.0Q162 546 252 546Q301 546 343.5 536.5Q386 527 423 510L393 440Q359 454 322.0 464.0Q285 474 246 474Q192 474 163.5 456.5Q135 439 135 409Q135 387 148.0 371.5Q161 356 191.5 341.5Q222 327 273 307Q324 288 360.0 268.0Q396 248 415.0 219.5Q434 191 434 148Z"/></g></symbol>
+  <symbol id="lock" viewBox="0 0 12 12"><rect x="2" y="5" width="8" height="6" rx="1.5" fill="currentColor"/><path d="M4 5V3.6a2 2 0 0 1 4 0V5" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
+</svg>
+
+<header class="site-header" id="top">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Ceiba Labs, inicio"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
+    <ul class="nav-links" id="nav-links">
+      <li class="has-sub"><a href="#suscripcion" data-route="/webs">Webs</a><button class="sub-btn" type="button" aria-expanded="false" aria-controls="sub-webs" aria-label="Ver industrias de Webs"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+        <ul class="sub" id="sub-webs">
+          <li><a href="webs-clinicas.html">Clínicas</a></li>
+          <li><a href="#industrias" data-route="/webs/restaurantes" data-ind="restaurantes">Restaurantes</a></li>
+          <li><a href="#industrias" data-route="/webs/inmobiliarias" data-ind="inmobiliarias">Inmobiliarias</a></li>
+          <li><a href="#industrias" data-route="/webs/hoteles" data-ind="hoteles">Hoteles</a></li>
+          <li><a href="#industrias" data-route="/webs/despachos" data-ind="despachos">Despachos</a></li>
+        </ul></li>
+      <li><a href="#ia" data-route="/ia">Inteligencia artificial</a></li>
+      <li><a href="#precios" data-route="/precios">Precios</a></li>
+      <li><a href="#antes-despues" data-route="/trabajo">Trabajo</a></li>
+      <li><a href="#" data-route="/nosotros">Nosotros</a></li>
+      <li class="nav-cta"><a href="#diagnostico">Diagnóstico gratis</a></li>
+    </ul>
+    <a class="btn btn-primary" href="#diagnostico">Diagnóstico gratis</a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-links">Menú</button>
+  </div>
+</header>
+
+<main>
+<!-- ============ HERO ============ -->
+<section class="band hero" aria-labelledby="hero-title">
+  <div class="wrap">
+    <h1 id="hero-title">Mira tu próxima web <span class="soft">antes de contratarla.</span></h1>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="lede">Diseñamos, publicamos y mantenemos tu sitio por una mensualidad.</p>
+        <form class="audit" id="audit-form" novalidate>
+          <label for="audit-url">URL de tu web</label>
+          <div class="field-url" id="audit-field">
+            <div class="row"><span class="prefix" aria-hidden="true">https://</span>
+            <input id="audit-url" name="url" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com" aria-describedby="audit-help"></div>
+            <button class="btn btn-primary" type="submit">Revisar mi web <span class="arrow" aria-hidden="true">→</span></button>
+          </div>
+          <p class="hint" id="audit-help">Diagnóstico gratis. Ves qué mejorar sin dejar tu correo, y si quieres te enviamos la propuesta.</p>
+          <div id="audit-out" aria-live="polite"></div>
+        </form>
+        <div class="secondary-actions">
+          <button class="link" type="button" id="no-web">Todavía no tengo web <span class="arrow" aria-hidden="true">→</span></button>
+          <a class="link" href="#antes-despues">Ver un ejemplo: clínica dental <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="frame" aria-label="Concepto de rediseño de la web de una clínica dental ficticia">
+          <div class="frame-bar"><div class="frame-url"><svg width="11" height="11" aria-hidden="true"><use href="#lock"/></svg>clinicaarrayan.mx</div><span class="state-tag" id="hero-tag" data-state="new">Propuesta</span></div>
+          <div class="viewport" id="hero-vp" aria-hidden="true">
+            <div class="layers">
+              <div class="layer layer-old" data-tpl="old"></div>
+              <div class="layer layer-new" data-tpl="new"></div>
+            </div>
+            <div class="wipe"></div>
+          </div>
+        </div>
+        <div class="hero-caption"><span><strong>Concepto de rediseño.</strong> Clínica Dental Arrayán es un negocio ficticio.</span><a class="link" href="#antes-despues">Comparar con la web actual</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BEFORE / AFTER ============ -->
+<section class="band band--light section" id="antes-despues" aria-labelledby="cmp-title" data-view="new">
+  <div class="wrap">
+    <div class="cmp-head">
+      <h2 class="h2" id="cmp-title">Pedir cita pasa de buscar un teléfono a dos toques.</h2>
+      <p class="lede">La misma clínica, con los mismos tratamientos. Cambia el orden de la información y lo que el paciente puede hacer desde el móvil. Alterna entre las dos versiones y toca cada cambio para verlo en la página.</p>
+    </div>
+    <div class="cmp-grid">
+      <div class="cmp-stage">
+        <div class="cmp-controls">
+          <div class="seg" role="radiogroup" aria-label="Versión de la web" id="seg-version">
+            <button type="button" role="radio" data-v="old" aria-checked="false" tabindex="-1">Actual</button>
+            <button type="button" role="radio" data-v="new" aria-checked="true" tabindex="0">Propuesta</button>
+          </div>
+          <div class="seg seg--quiet" role="radiogroup" aria-label="Tamaño de pantalla" id="seg-device">
+            <button type="button" role="radio" data-d="desk" aria-checked="true" tabindex="0">Escritorio</button>
+            <button type="button" role="radio" data-d="mob" aria-checked="false" tabindex="-1">Móvil</button>
+          </div>
+        </div>
+        <div class="cmp-frame cmp" id="cmp-frame">
+          <div class="frame-bar"><div class="frame-url"><svg width="11" height="11" aria-hidden="true"><use href="#lock"/></svg>clinicaarrayan.mx</div><span class="state-tag" id="cmp-tag" data-state="new">Propuesta</span></div>
+          <div class="viewport" id="cmp-vp" tabindex="0" aria-label="Vista previa de la web. Se puede desplazar.">
+            <div class="layers">
+              <div class="layer layer-old" data-tpl="old" data-hidden="true" aria-hidden="true"></div>
+              <div class="layer layer-new" data-tpl="new"></div>
+            </div>
+            <div class="wipe" id="cmp-wipe"></div>
+          </div>
+        </div>
+        <div class="cmp-label"><span><strong>Concepto de rediseño</strong> · Clínica Dental Arrayán, negocio ficticio</span><span id="cmp-status" aria-live="polite">Viendo la propuesta</span></div>
+      </div>
+
+      <div>
+        <ol class="changes" id="changes">
+          <li data-change="1"><button type="button" aria-label="Cambio 1: pedir cita. Mostrar en la página">
+            <span class="n" aria-hidden="true">1</span><h3>Pedir cita</h3>
+            <span class="txt"><span class="before"><span>Actual</span>El teléfono está en el pie de página, en letra de 9 px, y no se puede tocar para llamar.</span><span class="after"><span>Propuesta</span>«Reservar cita» arriba y fijo en el móvil. El paciente elige tratamiento y horario.</span></span>
+          </button></li>
+          <li data-change="2"><button type="button" aria-label="Cambio 2: tratamientos. Mostrar en la página">
+            <span class="n" aria-hidden="true">2</span><h3>Tratamientos</h3>
+            <span class="txt"><span class="before"><span>Actual</span>Once servicios dentro de un párrafo, sin duración ni forma de reservar.</span><span class="after"><span>Propuesta</span>Cada tratamiento en su fila, con duración y su propio botón de reserva.</span></span>
+          </button></li>
+          <li data-change="3"><button type="button" aria-label="Cambio 3: confianza. Mostrar en la página">
+            <span class="n" aria-hidden="true">3</span><h3>Confianza</h3>
+            <span class="txt"><span class="before"><span>Actual</span>Un carrusel de promociones ocupa la primera pantalla. No aparece el equipo.</span><span class="after"><span>Propuesta</span>Fotografía del consultorio y la dentista a cargo, con nombre y especialidad.</span></span>
+          </button></li>
+          <li data-change="4"><button type="button" aria-label="Cambio 4: horario y ubicación. Mostrar en la página">
+            <span class="n" aria-hidden="true">4</span><h3>Horario y ubicación</h3>
+            <span class="txt"><span class="before"><span>Actual</span>La dirección está dentro de una imagen: no se puede copiar ni abrir en mapas.</span><span class="after"><span>Propuesta</span>Horario de hoy en la primera línea, dirección en texto y botón «Cómo llegar».</span></span>
+          </button></li>
+        </ol>
+        <div class="task">
+          <p>La tarea que facilita</p>
+          <strong>Un paciente con dolor de muela encuentra horario y reserva sin llamar.</strong>
+        </div>
+        <div class="cmp-links"><a class="link" href="propuesta-clinica-arrayan.html">Ver cómo le llega esta propuesta a la clínica <span class="arrow" aria-hidden="true">→</span></a><a class="link" href="#" data-route="/trabajo">Ver más conceptos de rediseño</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SUBSCRIPTION ============ -->
+<section class="band section" id="suscripcion" aria-labelledby="sub-title">
+  <div class="wrap">
+    <div class="sub-head">
+      <h2 class="h2" id="sub-title">Primero ves tu web. Después decides.</h2>
+      <p class="lede">Una web por suscripción funciona como un servicio: no compras un archivo que luego nadie actualiza. Pagas una activación al empezar y una mensualidad que cubre diseño, publicación y mantenimiento.</p>
+    </div>
+    <ol class="steps">
+      <li><span class="dot" aria-hidden="true">1</span><h3>Revisamos tu web actual</h3><p>Nos das la URL o nos cuentas de tu negocio. Preparamos la propuesta de tu nueva portada con tus textos, fotos y servicios.</p><span class="who">Tú: 2 minutos · Nosotros: el diseño</span></li>
+      <li><span class="dot" aria-hidden="true">2</span><h3>Ves la propuesta y eliges plan</h3><p>La revisamos contigo. Si te convence, eliges un plan y pagas la activación. Si no, no contratas nada.</p><span class="who">Tú: decides con la web a la vista</span></li>
+      <li><span class="dot" aria-hidden="true">3</span><h3>Publicamos y la mantenemos</h3><p>Terminamos el resto de páginas, conectamos tu dominio y la publicamos. Cada mes nos ocupamos de cambios, seguridad y respaldos.</p><span class="who">Nosotros: cada mes</span></li>
+    </ol>
+    <div class="includes">
+      <div><h3>Qué cubre la mensualidad</h3><p>El alcance exacto depende del plan. Esto es lo que tiene cada sitio que publicamos.</p></div>
+      <dl class="inc-list">
+        <div><dt>Diseño a medida</dt><dd>Hecho para tu negocio y pensado primero para el móvil.</dd></div>
+        <div><dt>Publicación</dt><dd>Hosting, dominio conectado y certificado de seguridad.</dd></div>
+        <div><dt>Mantenimiento técnico</dt><dd>Actualizaciones, copias de respaldo y monitoreo de caídas.</dd></div>
+        <div><dt>Cambios de contenido</dt><dd>Textos, fotos, horarios y servicios: 30, 60 o 120 minutos al mes según tu plan.</dd></div>
+        <div><dt>Contacto conectado</dt><dd>Formularios, WhatsApp, mapa y reservas donde aplique.</dd></div>
+        <div><dt>Una persona a cargo</dt><dd>Hablas con quien diseñó tu web, no con un ticket.</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="band section pricing" id="precios" aria-labelledby="price-title">
+  <div class="wrap">
+    <div class="pricing-inner">
+      <div class="price-head">
+        <h2 class="h2" id="price-title">Tres planes. Activación una vez, mensualidad cada mes.</h2>
+        <a class="btn btn-line" href="#" data-route="/precios">Comparar planes y extras <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <div class="plans" role="list">
+        <div class="plan" role="listitem">
+          <div><h3>Esencial</h3><p class="for">Para aparecer bien y recibir mensajes</p></div>
+          <ul><li>Hasta 3 páginas, diseñadas para el móvil</li><li>Formulario y botón de WhatsApp</li><li>SEO básico, hosting y mantenimiento</li><li>30 minutos de cambios al mes</li></ul>
+          <div class="price-cell"><span class="k">Activación</span><span class="v">$3,490<small>pago único</small></span></div>
+          <div class="price-cell"><span class="k">Mensualidad</span><span class="v">$1,490<small>al mes</small></span></div>
+          <a class="btn btn-line" href="#" data-route="/precios">Ver plan</a>
+        </div>
+        <div class="plan plan--mid" role="listitem">
+          <div><h3>Negocio</h3><p class="for">Para recibir citas o reservas</p></div>
+          <ul><li>Hasta 7 páginas, con todo lo de Esencial</li><li>Integración con la agenda que ya usas</li><li>Medición de formularios y clics de contacto</li><li>60 minutos de cambios al mes</li></ul>
+          <div class="price-cell"><span class="k">Activación</span><span class="v">$5,490<small>pago único</small></span></div>
+          <div class="price-cell"><span class="k">Mensualidad</span><span class="v">$2,490<small>al mes</small></span></div>
+          <a class="btn btn-line" href="#" data-route="/precios">Ver plan</a>
+        </div>
+        <div class="plan" role="listitem">
+          <div><h3>Avanzado</h3><p class="for">Para mostrar un catálogo que tú actualizas</p></div>
+          <ul><li>Hasta 12 páginas, con todo lo de Negocio</li><li>Catálogo administrable de propiedades, habitaciones o servicios</li><li>120 minutos de cambios al mes</li></ul>
+          <div class="price-cell"><span class="k">Activación</span><span class="v">$8,490<small>pago único</small></span></div>
+          <div class="price-cell"><span class="k">Mensualidad</span><span class="v">$3,990<small>al mes</small></span></div>
+          <a class="btn btn-line" href="#" data-route="/precios">Ver plan</a>
+        </div>
+        <div class="plan plan--addon" role="listitem">
+          <div><h3><span aria-hidden="true">+ </span>Recepción por WhatsApp</h3><p class="for">Se suma a cualquier plan, o a la web que ya tienes</p></div>
+          <ul><li>Responde con las respuestas que apruebas</li><li>Recoge los datos para una cita o cotización</li><li>Deriva a tu equipo cuando corresponde</li><li>300 conversaciones atendidas al mes en el piloto</li></ul>
+          <div class="price-cell"><span class="k">Activación</span><span class="v">$3,990<small>pago único</small></span></div>
+          <div class="price-cell"><span class="k">Mensualidad</span><span class="v">$1,490<small>al mes</small></span></div>
+          <a class="btn btn-line" href="#ia">Ver cómo funciona</a>
+        </div>
+      </div>
+      <p class="price-foot">Precios de lanzamiento en México, en pesos mexicanos, con IVA incluido. Si aplica algún cargo de Meta o del proveedor de mensajería, lo desglosamos en tu propuesta.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INDUSTRIES ============ -->
+<section class="band band--light section" id="industrias" aria-labelledby="ind-title">
+  <div class="wrap">
+    <h2 class="h2" id="ind-title">Cada negocio tiene una acción que importa más.</h2>
+    <p class="lede" style="margin-top:20px">Diseñamos la web alrededor de esa acción. Así se ve en los rubros donde más trabajamos.</p>
+    <div class="ind-grid">
+      <ul class="ind-list" id="ind-list">
+        <li><button class="ind-row" type="button" data-ind="clinicas" aria-pressed="true"><h3>Clínicas</h3><span class="use">El paciente elige tratamiento y reserva su primera visita sin llamar.<span class="act">→ Reservar cita</span></span></button><a class="ind-link" href="webs-clinicas.html">Ver Webs para clínicas <span aria-hidden="true">→</span></a></li>
+        <li><button class="ind-row" type="button" data-ind="restaurantes" aria-pressed="false"><h3>Restaurantes</h3><span class="use">La carta se lee bien en el móvil y la mesa se reserva con personas y hora.<span class="act">→ Reservar mesa</span></span></button><a class="ind-link" href="#" data-route="/webs/restaurantes">Ver Webs para restaurantes <span aria-hidden="true">→</span></a></li>
+        <li><button class="ind-row" type="button" data-ind="inmobiliarias" aria-pressed="false"><h3>Inmobiliarias</h3><span class="use">Fichas de propiedades filtrables por zona y precio, con visita agendada desde la ficha.<span class="act">→ Agendar visita</span></span></button><a class="ind-link" href="#" data-route="/webs/inmobiliarias">Ver Webs para inmobiliarias <span aria-hidden="true">→</span></a></li>
+        <li><button class="ind-row" type="button" data-ind="hoteles" aria-pressed="false"><h3>Hoteles</h3><span class="use">El huésped ve disponibilidad por fechas y reserva directo en la web del hotel.<span class="act">→ Ver disponibilidad</span></span></button><a class="ind-link" href="#" data-route="/webs/hoteles">Ver Webs para hoteles <span aria-hidden="true">→</span></a></li>
+        <li><button class="ind-row" type="button" data-ind="despachos" aria-pressed="false"><h3>Despachos</h3><span class="use">Contables y abogados explican cada área y reciben consultas con el caso ya descrito.<span class="act">→ Enviar consulta</span></span></button><a class="ind-link" href="#" data-route="/webs/despachos">Ver Webs para despachos <span aria-hidden="true">→</span></a></li>
+      </ul>
+      <aside class="ind-preview" aria-label="Vista de la acción principal en el móvil">
+        <div class="ind-panel" data-panel="clinicas"><p class="cap">Clínicas · reserva de primera visita</p>
+          <div class="phone"><span class="pt">Reservar cita</span><div><p class="lb">Tratamiento</p><div class="inp">Primera visita y diagnóstico <span>⌄</span></div></div><div><p class="lb">Día</p><div class="opt"><span>Mié 18</span><span class="on">Jue 19</span><span>Vie 20</span></div></div><div><p class="lb">Hora</p><div class="opt"><span>16:30</span><span class="on">18:00</span><span>19:15</span></div></div><span class="go">Confirmar jueves 18:00</span></div></div>
+        <div class="ind-panel" data-panel="restaurantes" hidden><p class="cap">Restaurantes · reserva de mesa</p>
+          <div class="phone"><span class="pt">Reservar mesa</span><div><p class="lb">Personas</p><div class="opt"><span>2</span><span class="on">4</span><span>6</span><span>8+</span></div></div><div><p class="lb">Viernes 20</p><div class="opt"><span>20:00</span><span class="on">20:30</span><span>21:00</span><span>21:30</span></div></div><div><p class="lb">Ocasión</p><div class="inp">Cumpleaños <span>⌄</span></div></div><span class="go">Reservar para 4 a las 20:30</span></div></div>
+        <div class="ind-panel" data-panel="inmobiliarias" hidden><p class="cap">Inmobiliarias · ficha con visita</p>
+          <div class="phone"><span class="pt">Departamentos en arriendo</span><div class="opt"><span class="on">Roma Norte</span><span>2 dormitorios</span><span>Hasta tu presupuesto</span></div><div class="card"><i></i><span><b>Depto. 2D · 64 m²</b>Cerca de metro · <u>Agendar visita</u></span></div><div class="card"><i></i><span><b>Depto. 2D · 58 m²</b>Con estacionamiento · <u>Agendar visita</u></span></div></div></div>
+        <div class="ind-panel" data-panel="hoteles" hidden><p class="cap">Hoteles · disponibilidad directa</p>
+          <div class="phone"><span class="pt">Tu estadía</span><div class="frow" style="gap:8px;grid-template-columns:1fr 1fr"><div><p class="lb">Llegada</p><div class="inp">12 dic</div></div><div><p class="lb">Salida</p><div class="inp">15 dic</div></div></div><div><p class="lb">Habitación</p><div class="opt"><span class="on">Doble</span><span>Suite</span><span>Familiar</span></div></div><span class="go">Ver disponibilidad</span></div></div>
+        <div class="ind-panel" data-panel="despachos" hidden><p class="cap">Despachos · consulta con el caso descrito</p>
+          <div class="phone"><span class="pt">Cuéntanos tu caso</span><div><p class="lb">Área</p><div class="opt"><span>Laboral</span><span class="on">Tributaria</span><span>Familia</span></div></div><div><p class="lb">Qué pasó</p><div class="inp tall">Me llegó un requerimiento del SAT por la declaración del año pasado…</div></div><span class="go">Enviar consulta</span></div></div>
+        <a class="link panel-link" id="ind-page-link" href="webs-clinicas.html">Ver la página de Clínicas <span class="arrow" aria-hidden="true">→</span></a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AI ============ -->
+<section class="band section" id="ia" aria-labelledby="ia-title">
+  <div class="wrap ai-grid">
+    <div class="ai-copy">
+      <h2 class="h2" id="ia-title">La IA responde lo habitual y le pasa a tu equipo lo que no lo es.</h2>
+      <p class="lede">Además de webs, implementamos IA para atención, ventas y operación. Definimos con tu equipo qué puede contestar sola, qué no, y a quién deriva cada caso.</p>
+      <ol class="ai-flow">
+        <li><span>Responde</span>Horarios, tratamientos, precios publicados y cómo llegar.</li>
+        <li><span>Recoge</span>Nombre, tratamiento y horario preferido para la cita.</li>
+        <li class="esc"><span>Deriva</span>Casos clínicos, reclamos o pagos: pasan a una persona con el resumen listo.</li>
+        <li><span>Avisa</span>Cuando se acerca al cupo de 300 conversaciones del mes. Si se agota, todo pasa a tu equipo.</li>
+      </ol>
+      <div class="ai-offer">
+        <div class="ai-off"><div><h3>Recepción por WhatsApp</h3><p>Un número, una sucursal y un flujo. Funciona con cualquier plan o con la web que ya tienes.</p></div><div class="price-cell"><span class="k">Activación</span><span class="v">$3,990</span></div><div class="price-cell"><span class="k">Mensualidad</span><span class="v">$1,490</span></div></div>
+        <div class="ai-off"><div><h3>Automatización a medida</h3><p>Para un CRM, varias sucursales o un proceso interno. El diagnóstico se acredita al proyecto.</p></div><div class="price-cell"><span class="k">Diagnóstico</span><span class="v">$3,900</span></div><div class="price-cell"><span class="k">Piloto</span><span class="v"><small style="display:inline">desde </small>$19,900</span></div></div>
+      </div>
+      <div><a class="link" href="#" data-route="/ia">Ver Inteligencia artificial y el laboratorio <span class="arrow" aria-hidden="true">→</span></a></div>
+    </div>
+    <div class="chat" aria-label="Ejemplo de conversación con el asistente de una clínica">
+      <div class="chat-top"><b>Asistente · Clínica Arrayán</b><span>Ejemplo ficticio</span></div>
+      <div class="chat-body" id="chat-body">
+        <div class="msg out"><small>Paciente</small>Hola, ¿tienen hora mañana en la tarde para una limpieza?</div>
+        <div class="msg in"><small>Asistente</small>Hola. La limpieza dura 45 minutos y mañana jueves atendemos de 9:00 a 20:00. ¿Qué horario prefieres?</div>
+        <div class="msg out"><small>Paciente</small>A las 18:00. Otra cosa: me pusieron un implante en otra clínica y se mueve un poco.</div>
+        <div class="msg in"><small>Asistente</small>Anoté tu solicitud de limpieza para el jueves a las 18:00. Lo del implante tiene que verlo el equipo clínico, así que se lo paso a recepción junto con tu mensaje. Te confirman por este mismo chat.</div>
+        <div class="handoff"><b>Derivado a recepción</b><dl><dt>Motivo</dt><dd>Implante de otra clínica con movilidad</dd><dt>Solicitud</dt><dd>Limpieza · jue 18:00</dd><dt>Pendiente</dt><dd>Confirmar horario y revisar el implante</dd></dl></div>
+      </div>
+      <div class="chat-foot"><span>Conversación de ejemplo</span><button type="button" id="chat-replay">Ver de nuevo</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="band band--light section" id="preguntas" aria-labelledby="faq-title">
+  <div class="wrap faq-grid">
+    <h2 class="h2" id="faq-title">Lo que conviene saber antes de pedir la propuesta.</h2>
+    <div class="faq" id="faq">
+      <div class="faq-item open"><h3><button class="faq-q" type="button" aria-expanded="true" aria-controls="fa1" id="fq1">¿Tengo que pagar por el diagnóstico o la propuesta?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa1" role="region" aria-labelledby="fq1"><div><p>No. El diagnóstico y la propuesta son gratis. La activación y la mensualidad empiezan solo si decides activar tu web.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa2" id="fq2">¿Qué incluye la propuesta?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa2" role="region" aria-labelledby="fq2"><div><p>Un enlace privado con tu web actual y la propuesta lado a lado, en escritorio y móvil, la lista de mejoras, el plan que te recomendamos, su precio y hasta cuándo es válida. Desde ahí puedes activar tu web o agendar 15 minutos para conversarla.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa3" id="fq3">No tengo textos ni fotos. ¿Puedo pedirla igual?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa3" role="region" aria-labelledby="fq3"><div><p>Sí. Partimos de lo que ya existe: tu web, tus redes y tu ficha de Google. Si hace falta, te decimos qué fotos conviene tomar y escribimos los textos contigo.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa4" id="fq4">¿El dominio queda a nombre de mi negocio?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa4" role="region" aria-labelledby="fq4"><div><p>Sí. El dominio es tuyo. Si ya tienes uno, lo conectamos; si no, te ayudamos a registrarlo a tu nombre.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa5" id="fq5">¿Cómo pido cambios después de publicar?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa5" role="region" aria-labelledby="fq5"><div><p>Escribes a la persona que lleva tu web con lo que quieres cambiar: un horario, un precio, una foto nueva. Cada plan incluye tiempo de cambios al mes: 30 minutos en Esencial, 60 en Negocio y 120 en Avanzado.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa6" id="fq6">¿Puedo cancelar la suscripción?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa6" role="region" aria-labelledby="fq6"><div><p>Las condiciones de permanencia y cancelación están en la tabla de planes. Te las explicamos antes de que pagues la activación.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa7" id="fq7">¿Trabajan con negocios de mi país?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa7" role="region" aria-labelledby="fq7"><div><p>Trabajamos a distancia con negocios de Latinoamérica. Las reuniones son por videollamada y el seguimiento por WhatsApp o correo.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa9" id="fq9">¿Qué pasa si la recepción por WhatsApp llega a 300 conversaciones?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa9" role="region" aria-labelledby="fq9"><div><p>Te avisamos cuando te acercas al cupo del mes. Si se agota, las conversaciones nuevas pasan directo a tu equipo, sin respuestas automáticas, hasta el mes siguiente. Si aplica algún cargo de Meta por mensajes, aparece desglosado en tu propuesta.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa8" id="fq8">¿Necesito contratar IA para tener la web?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa8" role="region" aria-labelledby="fq8"><div><p>No. La consultoría de IA es una línea aparte. Puedes sumarla después, cuando tu web ya esté funcionando.</p></div></div></div>
+      <p class="faq-more"><a class="link" href="#" data-route="/precios">Ver todas las preguntas en Precios</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIAGNÓSTICO ============ -->
+<section class="band band--petrol section" id="diagnostico" aria-labelledby="close-title">
+  <div class="wrap close-grid">
+    <div class="close-copy">
+      <h2 class="h2" id="close-title">Pide tu diagnóstico gratis.</h2>
+      <p class="lede" style="color:rgba(247,244,235,.8)">Revisamos tu web, o tu perfil si todavía no tienes una, y te enviamos una propuesta privada con el antes y después, las mejoras, el plan y su precio.</p>
+      <ol>
+        <li><span>1</span>Nos dejas tu web, o tu Instagram o ficha de Google.</li>
+        <li><span>2</span>Preparamos tu propuesta en un enlace privado.</li>
+        <li><span>3</span>Desde ahí activas tu web o agendas 15 minutos para conversarla.</li>
+      </ol>
+      <p class="close-alt"><a class="link" href="propuesta-clinica-arrayan.html">Ver una propuesta privada de ejemplo <span class="arrow" aria-hidden="true">→</span></a></p>
+      <p class="close-alt">¿Prefieres conversar primero? <a class="link" href="#" data-route="/contacto">Agendar una llamada</a></p>
+    </div>
+    <form class="form" id="lead-form" novalidate>
+      <p class="form-note"><b>Prototipo</b><span>Este formulario valida los datos, pero no los envía ni los guarda.</span></p>
+      <div id="lead-fields" style="display:grid;gap:18px">
+        <div class="seg seg--dark" role="radiogroup" aria-label="¿Tienes web?" id="seg-mode">
+          <button type="button" role="radio" data-v="web" aria-checked="true" tabindex="0">Tengo web</button>
+          <button type="button" role="radio" data-v="noweb" aria-checked="false" tabindex="-1">Todavía no tengo web</button>
+        </div>
+        <div class="fld" data-f="site" data-mode="web"><label for="f-site">URL de tu web</label><input id="f-site" name="site" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com" aria-describedby="e-site"><p class="err" id="e-site" hidden></p></div>
+        <div data-mode="noweb" hidden style="display:grid;gap:18px">
+          <div class="frow">
+            <div class="fld" data-f="industry"><label for="f-industry">Rubro</label>
+              <select id="f-industry" name="industry" aria-describedby="e-industry"><option value="">Elige uno</option><option>Clínica o consultorio</option><option>Restaurante o café</option><option>Inmobiliaria</option><option>Hotel u hospedaje</option><option>Despacho contable o legal</option><option>Otro</option></select><p class="err" id="e-industry" hidden></p></div>
+            <div class="fld" data-f="city"><label for="f-city">Ciudad</label><input id="f-city" name="city" autocomplete="address-level2" placeholder="Ej.: Guadalajara" aria-describedby="e-city"><p class="err" id="e-city" hidden></p></div>
+          </div>
+          <div class="fld" data-f="social"><label for="f-social">Instagram o ficha de Google</label><input id="f-social" name="social" autocapitalize="off" spellcheck="false" placeholder="@tunegocio o enlace de Google Maps" aria-describedby="h-social e-social"><p class="hint" id="h-social">Con esto armamos tu propuesta aunque no tengas web.</p><p class="err" id="e-social" hidden></p></div>
+        </div>
+        <div class="frow">
+          <div class="fld" data-f="name"><label for="f-name">Tu nombre</label><input id="f-name" name="name" autocomplete="name" aria-describedby="e-name"><p class="err" id="e-name" hidden></p></div>
+          <div class="fld" data-f="biz"><label for="f-biz">Nombre del negocio</label><input id="f-biz" name="biz" autocomplete="organization" aria-describedby="e-biz"><p class="err" id="e-biz" hidden></p></div>
+        </div>
+        <div class="fld" data-f="contact"><label for="f-contact">WhatsApp o correo para enviarte la propuesta</label><input id="f-contact" name="contact" autocomplete="email" placeholder="+52 33 1234 5678 o tu@correo.com" aria-describedby="e-contact"><p class="err" id="e-contact" hidden></p></div>
+        <button class="btn btn-primary" type="submit">Pedir diagnóstico gratis <span class="arrow" aria-hidden="true">→</span></button>
+      </div>
+      <div class="success" id="lead-success" hidden tabindex="-1">
+        <h3>Diagnóstico solicitado. No se envió.</h3>
+        <p>En el sitio, aquí empezaría tu diagnóstico y recibirías la propuesta en un enlace privado. En este prototipo los datos quedan solo en tu pantalla.</p>
+        <dl id="lead-summary"></dl>
+        <div style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn btn-primary" href="propuesta-clinica-arrayan.html">Ver cómo llega una propuesta <span class="arrow" aria-hidden="true">→</span></a><button class="btn btn-line" type="button" id="lead-reset">Editar los datos</button></div>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="band footer">
+  <div class="wrap">
+    <svg viewBox="0 0 353.37 54" fill="currentColor" role="img" aria-label="Ceiba Labs"><use href="#ceiba-logo"/></svg>
+    <nav aria-label="Pie de página"><a href="#suscripcion" data-route="/webs">Webs</a><a href="#ia" data-route="/ia">Inteligencia artificial</a><a href="#precios" data-route="/precios">Precios</a><a href="#antes-despues" data-route="/trabajo">Trabajo</a><a href="#" data-route="/nosotros">Nosotros</a><a href="#" data-route="/contacto">Contacto</a><a href="#diagnostico">Diagnóstico gratis</a></nav>
+  </div>
+  <div class="wrap foot-legal"><span>© 2026 Ceiba Labs · Estudio digital para negocios de Latinoamérica</span><nav aria-label="Legal"><a href="#" data-route="/privacidad">Privacidad</a><a href="#" data-route="/terminos">Términos</a><a href="#" data-route="/baja">Darse de baja de correos</a></nav></div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<!-- example diagnostic -->
+<dialog class="diag" id="diag" aria-labelledby="diag-title">
+  <div class="diag-in">
+    <div class="diag-top"><div><h2 id="diag-title">Diagnóstico de ejemplo</h2><p>clinicaarrayan.mx · negocio ficticio. Así se ve el diagnóstico que acompaña cada propuesta.</p></div><button class="x" type="button" id="diag-close" aria-label="Cerrar diagnóstico">×</button></div>
+    <div class="diag-body">
+      <div class="diag-progress" id="diag-progress" aria-label="Pasos del diagnóstico"></div>
+      <div class="diag-step" id="diag-step" aria-live="polite"></div>
+    </div>
+    <div class="diag-foot"><button class="btn btn-line" type="button" id="diag-prev">← Anterior</button><button class="btn btn-primary" type="button" id="diag-next">Siguiente →</button></div>
+  </div>
+</dialog>
+
+<!-- mock templates -->
+<template id="tpl-old">
+  <div class="mk-old">
+    <div class="mo-head"><svg width="48" height="52" viewBox="0 0 48 52" aria-hidden="true"><path d="M10 4c6-4 10 2 14 2s8-6 14-2c7 5 6 16 3 24-2 6-3 22-8 22-4 0-4-14-9-14s-5 14-9 14C10 50 9 34 7 28 4 20 3 9 10 4Z" fill="#fff" stroke="#9cc6ef" stroke-width="2"/><circle cx="16" cy="14" r="3" fill="#cfe7ff"/></svg><div><b>CLINICA DENTAL ARRAYAN</b><span>Su sonrisa es nuestra prioridad</span></div></div>
+    <div class="mo-nav"><span>Inicio</span><span>Quienes Somos</span><span>Servicios</span><span>Galeria</span><span>Noticias</span><span>Contactenos</span></div>
+    <div class="mo-banner" data-mark="3"><span class="spark" style="left:60px;top:30px">✦</span><span class="spark" style="right:90px;top:120px">✦</span><span class="spark" style="left:200px;bottom:30px;font-size:18px">✦</span><span class="mo-arrow" style="left:0">‹</span><span class="mo-arrow" style="right:0">›</span><div class="slide-txt">¡¡PROMOCION DE VERANO!!<small>Blanqueamiento + limpieza ★ consulte condiciones ★</small></div><div class="mo-dots">● ○ ○ ○ ○</div></div>
+    <div class="mo-body">
+      <div class="mo-main" data-mark="2"><h5>Bienvenidos a nuestra clinica</h5><p>Clinica Dental Arrayan es una clinica con mas de 15 años de experiencia al servicio de la comunidad, donde nuestro compromiso es entregar una atencion de calidad y con los mas altos estandares, con un equipo de profesionales altamente calificados y en constante perfeccionamiento para entregarle el mejor servicio a usted y su familia.</p><p>Nuestros servicios incluyen odontologia general, limpieza dental, blanqueamiento, ortodoncia, ortodoncia invisible, implantes, endodoncia, periodoncia, odontopediatria, protesis y urgencias dentales, ademas de convenios con diversas instituciones. Para mayor informacion sobre valores y horarios no dude en contactarnos a traves de nuestro telefono o acercarse a nuestras dependencias.</p><p>Visite nuestra galeria de fotos y conozca nuestras modernas instalaciones.</p></div>
+      <div class="mo-side"><div class="mo-box"><b>Horario de Atencion</b><p>Lunes a Viernes de 9:00 a 13:00 y de 15:00 a 20:00 hrs. Sabados consultar.</p></div><div class="mo-map" data-mark="4"><span>COMO LLEGAR: VER IMAGEN</span></div><div class="mo-box"><b>Noticias</b><p>Nueva sucursal proximamente!!! (actualizado 03/2017)</p></div></div>
+    </div>
+    <div class="mo-foot" data-mark="1">Clinica Dental Arrayan © 2014 | Telefono: (33) 0000 0000 | Todos los derechos reservados | Mejor visualizado en 1024x768<br><span class="mo-counter">Visitas: 004213</span></div>
+  </div>
+</template>
+
+<template id="tpl-new">
+  <div class="mk-new">
+    <div class="mn-top"><div class="mn-brand"><b>Arrayán</b><span>Clínica dental</span></div><nav><span>Tratamientos</span><span>Equipo</span><span>Cómo llegar</span></nav><span class="mn-btn" data-mark="1">Reservar cita</span></div>
+    <div class="mn-hero">
+      <div class="mn-copy">
+        <p class="mn-open" data-mark="4"><i></i>Abierto hoy hasta las 20:00 · Av. Los Arrayanes 1240</p>
+        <h3>Odontología sin apuro, con un plan claro <em>desde la primera visita.</em></h3>
+        <p class="sub">Diagnóstico, limpieza, ortodoncia e implantes en un solo consultorio, con la misma dentista de principio a fin.</p>
+        <div class="mn-ctas"><span class="mn-btn">Reservar primera visita</span><span class="mn-ghost">Escribir por WhatsApp</span></div>
+      </div>
+      <div class="mn-photo" role="img" aria-label="Sala de atención de la clínica con luz natural y sillón dental"></div>
+    </div>
+    <div class="mn-treat" data-mark="2"><h4>Tratamientos</h4>
+      <ul><li><b>Primera visita y diagnóstico</b><span>40 min · incluye radiografía</span><em>Reservar →</em></li><li><b>Limpieza dental</b><span>45 min</span><em>Reservar →</em></li><li><b>Ortodoncia invisible</b><span>Evaluación de 30 min</span><em>Reservar →</em></li><li><b>Implantes</b><span>Evaluación de 45 min</span><em>Reservar →</em></li><li><b>Blanqueamiento</b><span>2 sesiones de 60 min</span><em>Reservar →</em></li><li><b>Urgencias</b><span>Atención el mismo día</span><em>Llamar →</em></li></ul>
+    </div>
+    <div class="mn-space" role="img" aria-label="Recepción y sala de espera de la clínica"></div>
+    <div class="mn-team" data-mark="3"><div class="mn-portrait" role="img" aria-label="Retrato de la Dra. Valeria Ríos"></div><div><p class="mn-q">“Antes de empezar cualquier tratamiento, te muestro qué vemos y qué opciones tienes.”</p><b>Dra. Valeria Ríos</b><span>Rehabilitación oral · personaje ficticio</span></div></div>
+    <div class="mn-visit"><div class="mn-facade" role="img" aria-label="Fachada de la clínica"></div><div><h4>Cómo llegar</h4><dl><dt>Dirección</dt><dd>Av. Los Arrayanes 1240, local 3, Col. Providencia, Guadalajara</dd><dt>Lun a vie</dt><dd>9:00 a 20:00</dd><dt>Sábado</dt><dd>9:00 a 14:00</dd></dl><p style="margin-top:1.2em"><span class="mn-ghost">Abrir en mapas</span></p></div></div>
+    <div class="mn-foot">Clínica Dental Arrayán · Concepto de rediseño de Ceiba Labs</div>
+    <div class="mn-sticky"><span class="mn-btn">Reservar cita</span><span class="mn-ghost">WhatsApp</span></div>
+  </div>
+</template>
+
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* ---------- clone mock templates ---------- */
+  $$('[data-tpl]').forEach(el => el.appendChild($('#tpl-' + el.dataset.tpl).content.cloneNode(true)));
+
+  /* old site is fixed-width: zoom it to fit its viewport, like a non-responsive site on a phone */
+  const fitOld = () => $$('.viewport').forEach(vp => {
+    const w = vp.clientWidth; const old = $('.mk-old', vp);
+    if (!old) return;
+    old.style.width = Math.max(760, w) + 'px'; old.style.zoom = Math.min(1, w / 760);
+  });
+  fitOld(); new ResizeObserver(fitOld).observe(document.body);
+  $$('.viewport').forEach(v => new ResizeObserver(fitOld).observe(v));
+
+  /* hero tag follows the intro wipe */
+  const heroTag = $('#hero-tag');
+  if (heroTag && !reduce.matches) {
+    heroTag.textContent = 'Actual'; heroTag.dataset.state = 'old';
+    setTimeout(() => { heroTag.textContent = 'Propuesta'; heroTag.dataset.state = 'new'; }, 1500);
+  }
+
+  /* ---------- mobile nav ---------- */
+  const header = $('.site-header'), menuBtn = $('#menu-btn');
+  menuBtn.addEventListener('click', () => {
+    const open = header.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open); menuBtn.textContent = open ? 'Cerrar' : 'Menú';
+  });
+  $$('#nav-links a').forEach(a => a.addEventListener('click', () => {
+    header.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.textContent = 'Menú';
+  }));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && header.classList.contains('open')) { menuBtn.click(); menuBtn.focus(); } });
+  // current section in nav
+  const navMap = new Map($$('#nav-links a[href^="#"]').map(a => [a.getAttribute('href').slice(1), a]));
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    const a = navMap.get(e.target.id); if (!a) return;
+    if (e.isIntersecting) { navMap.forEach(x => x.removeAttribute('aria-current')); a.setAttribute('aria-current', 'true'); }
+  }), { rootMargin: '-45% 0px -50% 0px' });
+  navMap.forEach((a, id) => { const s = document.getElementById(id); if (s) io.observe(s); });
+
+  /* ---------- radiogroup helper (arrow keys + click) ---------- */
+  function radiogroup(group, onChange) {
+    const btns = $$('[role="radio"]', group);
+    const select = (b, focus) => {
+      btns.forEach(x => { const on = x === b; x.setAttribute('aria-checked', on); x.tabIndex = on ? 0 : -1; });
+      if (focus) b.focus(); onChange(b);
+    };
+    btns.forEach((b, i) => {
+      b.addEventListener('click', () => { if (b.getAttribute('aria-checked') !== 'true') select(b); });
+      b.addEventListener('keydown', e => {
+        let j = null;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % btns.length;
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + btns.length) % btns.length;
+        if (j !== null) { e.preventDefault(); select(btns[j], true); }
+      });
+    });
+    return { set: v => { const b = btns.find(x => x.dataset.v === v || x.dataset.d === v); if (b && b.getAttribute('aria-checked') !== 'true') select(b); } };
+  }
+
+  /* ---------- comparator ---------- */
+  const cmpSection = $('#antes-despues'), vp = $('#cmp-vp'), frame = $('#cmp-frame');
+  const layerOld = $('.layer-old', vp), layerNew = $('.layer-new', vp), wipe = $('#cmp-wipe');
+  const tag = $('#cmp-tag'), status = $('#cmp-status');
+  let view = 'new', anim = null;
+  function setView(v) {
+    if (v === view) return; view = v;
+    cmpSection.dataset.view = v;
+    tag.textContent = v === 'new' ? 'Propuesta' : 'Actual'; tag.dataset.state = v;
+    status.textContent = v === 'new' ? 'Viendo la propuesta' : 'Viendo la web actual';
+    const inc = v === 'new' ? layerNew : layerOld, out = v === 'new' ? layerOld : layerNew;
+    vp.scrollTop = 0;
+    inc.dataset.hidden = 'false'; inc.removeAttribute('aria-hidden');
+    inc.style.zIndex = 2; out.style.zIndex = 1;
+    const finish = () => { out.dataset.hidden = 'true'; out.setAttribute('aria-hidden', 'true'); inc.style.clipPath = ''; wipe.style.opacity = 0; };
+    if (anim) anim.forEach(a => a.cancel());
+    if (reduce.matches) return finish();
+    const fromL = v === 'new';
+    const opts = { duration: 750, easing: 'cubic-bezier(.2,.7,.1,1)' };
+    anim = [
+      inc.animate([{ clipPath: fromL ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)' }, { clipPath: 'inset(0 0 0 0)' }], opts),
+      wipe.animate([{ left: fromL ? '0%' : '100%', opacity: 1 }, { left: fromL ? '100%' : '0%', opacity: 1 }], opts)
+    ];
+    anim[0].onfinish = finish;
+  }
+  const verGroup = radiogroup($('#seg-version'), b => setView(b.dataset.v));
+  radiogroup($('#seg-device'), b => { frame.classList.toggle('is-mobile', b.dataset.d === 'mob'); vp.scrollTop = 0; setTimeout(fitOld, 470); });
+
+  // change list ↔ markers
+  const marks = n => $$(`[data-mark="${n}"]`, vp);
+  $$('#changes li').forEach(li => {
+    const n = li.dataset.change, btn = $('button', li);
+    const on = () => { li.classList.add('hl'); marks(n).forEach(m => m.classList.add('hl')); };
+    const off = () => { li.classList.remove('hl'); marks(n).forEach(m => m.classList.remove('hl')); };
+    btn.addEventListener('mouseenter', on); btn.addEventListener('mouseleave', off);
+    btn.addEventListener('focus', on); btn.addEventListener('blur', off);
+    btn.addEventListener('click', () => {
+      const layer = view === 'new' ? layerNew : layerOld;
+      const m = $(`[data-mark="${n}"]`, layer); if (!m) return;
+      const top = m.getBoundingClientRect().top - vp.getBoundingClientRect().top + vp.scrollTop - 70;
+      vp.scrollTo({ top: Math.max(0, top), behavior: reduce.matches ? 'auto' : 'smooth' });
+      on(); clearTimeout(btn._t); btn._t = setTimeout(() => { if (document.activeElement !== btn) off(); }, 1600);
+      if (frame.getBoundingClientRect().top < 0 || frame.getBoundingClientRect().bottom > innerHeight) frame.scrollIntoView({ block: 'center', behavior: reduce.matches ? 'auto' : 'smooth' });
+    });
+  });
+
+  /* ---------- URL check (hero) ---------- */
+  function parseUrl(raw) {
+    let s = raw.trim();
+    if (!s) return { error: 'Escribe la dirección de tu web, por ejemplo tunegocio.com.' };
+    if (/\s/.test(s)) return { error: 'La dirección no puede tener espacios. Revisa cómo la escribiste.' };
+    if (!/^https?:\/\//i.test(s)) s = 'https://' + s;
+    let u; try { u = new URL(s); } catch { return { error: 'Eso no parece una dirección web. Debe verse como tunegocio.com.' }; }
+    const h = u.hostname.toLowerCase();
+    if (!/^([a-z0-9áéíóúñü-]+\.)+[a-z]{2,}$/i.test(h) || h.split('.').some(p => !p || p.startsWith('-') || p.endsWith('-')))
+      return { error: 'Falta la terminación del dominio, como .com, .mx o .cl.' };
+    return { host: h.replace(/^www\./, ''), href: u.href };
+  }
+  const auditForm = $('#audit-form'), auditInput = $('#audit-url'), auditField = $('#audit-field'), auditOut = $('#audit-out');
+  const esc = s => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  auditInput.addEventListener('input', () => { if (auditField.classList.contains('invalid')) { auditField.classList.remove('invalid'); auditInput.removeAttribute('aria-invalid'); auditOut.innerHTML = ''; } });
+  auditForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const r = parseUrl(auditInput.value);
+    if (r.error) {
+      auditField.classList.add('invalid'); auditInput.setAttribute('aria-invalid', 'true');
+      auditOut.innerHTML = `<p class="err" id="audit-err"><span aria-hidden="true">!</span>${r.error}</p>`;
+      auditInput.setAttribute('aria-describedby', 'audit-err audit-help'); auditInput.focus(); return;
+    }
+    auditInput.setAttribute('aria-describedby', 'audit-help');
+    if (r.host === 'clinicaarrayan.mx') { auditOut.innerHTML = ''; openDiag(); return; }
+    auditOut.innerHTML = `<div class="audit-result">
+      <h3>Recibimos <code>${esc(r.host)}</code></h3>
+      <p>El servicio de revisión automática no está conectado en este prototipo, así que no analizamos tu web ni mostramos resultados. En el sitio, este botón abre <code>/diagnostico</code> con tu resultado.</p>
+      <div class="actions"><button class="btn btn-primary" type="button" data-act="ask">Pedir el diagnóstico de ${esc(r.host)}</button><button class="btn btn-line" type="button" data-act="demo">Ver un diagnóstico de ejemplo</button></div></div>`;
+    $('[data-act="ask"]', auditOut).addEventListener('click', () => goToForm({ site: r.host }));
+    $('[data-act="demo"]', auditOut).addEventListener('click', openDiag);
+  });
+  $('#no-web').addEventListener('click', () => goToForm({ noweb: true }));
+
+  /* ---------- example diagnostic ---------- */
+  const steps = [
+    { t: 'Primera pantalla en el móvil', was: 'Un banner de promociones y el logo ocupan toda la pantalla. No se ve qué tratamientos hay ni cómo pedir hora.', now: 'Nombre, horario de hoy y botón «Reservar cita» en la primera pantalla. La foto muestra el consultorio real.', why: 'Quien llega desde Google o Instagram decide en segundos si sigue o vuelve atrás.' },
+    { t: 'Pedir una cita', was: 'El único teléfono está en el pie de página, en letra de 9 px. En el móvil no se puede tocar para llamar.', now: 'Botón de reserva fijo. El paciente elige tratamiento, día y hora. La clínica recibe la cita en su agenda.', why: 'Es la acción que más le importa a la clínica y hoy es la más difícil de encontrar.' },
+    { t: 'Tratamientos', was: 'Once servicios en un mismo párrafo, sin duración, sin descripción y sin forma de reservar uno en particular.', now: 'Seis tratamientos principales, cada uno con duración y su propio botón. El resto, en la página de cada área.', why: 'El paciente busca su problema concreto, no la lista completa.' },
+    { t: 'Confianza', was: 'Promociones con signos de exclamación y un contador de visitas. No aparece ninguna persona del equipo.', now: 'Fotografía del consultorio y presentación de la dentista a cargo, con su especialidad y cómo trabaja.', why: 'Antes de un tratamiento, la gente quiere saber quién la va a atender.' },
+    { t: 'Horario y ubicación', was: 'La dirección está dentro de una imagen: no se puede copiar ni abrir en mapas. La última noticia es de 2017.', now: 'Dirección en texto, botón «Abrir en mapas» y horario de hoy visible arriba.', why: 'Un dato desactualizado hace dudar de todo lo demás.' }
+  ];
+  const diag = $('#diag'), dStep = $('#diag-step'), dProg = $('#diag-progress'), dPrev = $('#diag-prev'), dNext = $('#diag-next');
+  let di = 0, lastFocus = null;
+  steps.forEach((s, i) => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', `Paso ${i + 1}: ${s.t}`); b.addEventListener('click', () => renderDiag(i)); dProg.appendChild(b); });
+  function renderDiag(i) {
+    di = i; const s = steps[i];
+    dStep.innerHTML = `<span class="count">Paso ${i + 1} de ${steps.length}</span><h3>${s.t}</h3>
+      <div class="diag-cols"><div class="was"><h4>Lo que encuentra el paciente hoy</h4><p>${s.was}</p></div><div class="now"><h4>Lo que proponemos</h4><p>${s.now}</p></div></div>
+      <p class="diag-why">${s.why}</p>`;
+    $$('button', dProg).forEach((b, j) => { b.classList.toggle('done', j < i); b.toggleAttribute('aria-current', j === i); if (j === i) b.setAttribute('aria-current', 'step'); });
+    dPrev.disabled = i === 0; dPrev.style.visibility = i === 0 ? 'hidden' : 'visible';
+    dNext.innerHTML = i === steps.length - 1 ? 'Ver la propuesta <span class="arrow" aria-hidden="true">→</span>' : 'Siguiente →';
+  }
+  function openDiag() { lastFocus = document.activeElement; renderDiag(0); diag.showModal(); dNext.focus(); }
+  dPrev.addEventListener('click', () => di > 0 && renderDiag(di - 1));
+  dNext.addEventListener('click', () => {
+    if (di < steps.length - 1) return renderDiag(di + 1);
+    diag.close(); verGroup.set('new');
+    cmpSection.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth' });
+    setTimeout(() => $('#seg-version [data-v="new"]').focus({ preventScroll: true }), 600);
+  });
+  $('#diag-close').addEventListener('click', () => diag.close());
+  diag.addEventListener('click', e => { if (e.target === diag) diag.close(); });
+  diag.addEventListener('keydown', e => {
+    if (e.target.closest('input,textarea')) return;
+    if (e.key === 'ArrowRight' && di < steps.length - 1) renderDiag(di + 1);
+    if (e.key === 'ArrowLeft' && di > 0) renderDiag(di - 1);
+  });
+  diag.addEventListener('close', () => { if (lastFocus && document.contains(lastFocus) && !lastFocus.closest('#diag')) lastFocus.focus({ preventScroll: true }); });
+
+  /* ---------- industries ---------- */
+  const indBtns = $$('.ind-row');
+  const selectInd = b => {
+    indBtns.forEach(x => x.setAttribute('aria-pressed', x === b));
+    $$('.ind-panel').forEach(p => p.hidden = p.dataset.panel !== b.dataset.ind);
+    const pl = $('#ind-page-link'); pl.firstChild.textContent = 'Ver la página de ' + $('h3', b).textContent + ' ';
+    if (b.dataset.ind === 'clinicas') { pl.href = 'webs-clinicas.html'; delete pl.dataset.route; } else { pl.href = '#'; pl.dataset.route = '/webs/' + b.dataset.ind; }
+  };
+  indBtns.forEach(b => { b.addEventListener('click', () => selectInd(b)); b.addEventListener('mouseenter', () => { if (matchMedia('(hover:hover)').matches) selectInd(b); }); b.addEventListener('focus', () => selectInd(b)); });
+
+  /* ---------- chat replay ---------- */
+  const chat = $('#chat-body'), items = [...chat.children];
+  let chatTimers = [];
+  $('#chat-replay').addEventListener('click', () => {
+    chatTimers.forEach(clearTimeout); chatTimers = [];
+    if (reduce.matches) return;
+    items.forEach(el => { el.hidden = true; el.classList.remove('reveal'); });
+    const typing = document.createElement('div'); typing.className = 'msg in typing'; typing.innerHTML = '<i></i><i></i><i></i>'; typing.setAttribute('aria-hidden', 'true');
+    let t = 200;
+    items.forEach(el => {
+      const isBot = el.classList.contains('in');
+      if (isBot) { chatTimers.push(setTimeout(() => chat.appendChild(typing), t)); t += 900; }
+      chatTimers.push(setTimeout(() => { typing.remove(); el.hidden = false; el.classList.add('reveal'); chat.appendChild(el); }, t));
+      t += isBot ? 700 : 900;
+    });
+  });
+
+  /* ---------- FAQ ---------- */
+  $$('.faq-q').forEach(q => q.addEventListener('click', () => {
+    const open = q.getAttribute('aria-expanded') === 'true';
+    q.setAttribute('aria-expanded', !open); q.closest('.faq-item').classList.toggle('open', !open);
+  }));
+
+  /* ---------- diagnóstico form ---------- */
+  const form = $('#lead-form');
+  let mode = 'web';
+  const rules = {
+    site: v => !v.trim() ? 'Escribe la dirección de tu web, o elige «Todavía no tengo web».' : (parseUrl(v).error || true),
+    industry: v => !!v || 'Elige el rubro que más se parece a tu negocio.',
+    city: v => v.trim().length >= 2 || 'Escribe la ciudad donde está tu negocio.',
+    social: v => {
+      const s = v.trim();
+      if (!s) return 'Déjanos tu Instagram o el enlace de tu ficha de Google.';
+      if (/^@?[a-z0-9._]{2,30}$/i.test(s)) return true;
+      return parseUrl(s).error ? 'Escribe tu usuario de Instagram (@tunegocio) o pega el enlace de Google Maps.' : true;
+    },
+    name: v => v.trim().length >= 2 || 'Escribe tu nombre para saber a quién contactar.',
+    biz: v => v.trim().length >= 2 || 'Escribe el nombre de tu negocio.',
+    contact: v => {
+      const s = v.trim();
+      if (!s) return 'Déjanos un WhatsApp o un correo para enviarte la propuesta.';
+      if (s.includes('@')) return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s) || 'Revisa el correo: debe verse como nombre@dominio.com.';
+      const d = s.replace(/[^\d]/g, '');
+      return (/^[+\d\s().-]+$/.test(s) && d.length >= 8 && d.length <= 15) || 'Revisa el número: incluye código de área, con al menos 8 dígitos.';
+    }
+  };
+  const fldOf = n => $(`[data-f="${n}"]`);
+  const inputOf = n => $('input,select', fldOf(n));
+  const activeFields = () => Object.keys(rules).filter(n => !fldOf(n).closest('[hidden]'));
+  function clearFld(n) { const f = fldOf(n); f.classList.remove('invalid', 'valid'); $('.err', f).hidden = true; inputOf(n).removeAttribute('aria-invalid'); }
+  function check(name, show = true) {
+    const fld = fldOf(name), input = inputOf(name), err = $('.err', fld);
+    const res = rules[name](input.value), ok = res === true;
+    if (show) {
+      fld.classList.toggle('invalid', !ok); fld.classList.toggle('valid', ok && !!input.value.trim());
+      input.setAttribute('aria-invalid', !ok); err.hidden = ok; err.textContent = ok ? '' : res;
+    }
+    return ok;
+  }
+  Object.keys(rules).forEach(n => {
+    const input = inputOf(n);
+    input.addEventListener('blur', () => { if (input.value.trim() || input.dataset.touched) check(n); input.dataset.touched = 1; });
+    input.addEventListener('input', () => { if (fldOf(n).classList.contains('invalid')) check(n); });
+    if (input.tagName === 'SELECT') input.addEventListener('change', () => check(n));
+  });
+  function setMode(v) {
+    mode = v;
+    $$('[data-mode]', form).forEach(el => el.hidden = el.dataset.mode !== v);
+    ['site', 'industry', 'city', 'social'].forEach(clearFld);
+  }
+  const modeGroup = radiogroup($('#seg-mode'), b => setMode(b.dataset.v));
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const bad = activeFields().filter(n => !check(n));
+    if (bad.length) { inputOf(bad[0]).focus(); return; }
+    const v = id => $(id).value.trim();
+    const rows = mode === 'web'
+      ? [['Web', parseUrl(v('#f-site')).host]]
+      : [['Web', 'Todavía no tiene'], ['Rubro', v('#f-industry')], ['Ciudad', v('#f-city')], ['Perfil', v('#f-social')]];
+    rows.push(['Nombre', v('#f-name')], ['Negocio', v('#f-biz')], ['Contacto', v('#f-contact')]);
+    $('#lead-summary').innerHTML = rows.map(([k, val]) => `<dt>${k}</dt><dd>${esc(val)}</dd>`).join('');
+    $('#lead-fields').hidden = true; const ok = $('#lead-success'); ok.hidden = false; ok.focus();
+  });
+  $('#lead-reset').addEventListener('click', () => { $('#lead-success').hidden = true; $('#lead-fields').hidden = false; inputOf(mode === 'web' ? 'site' : 'industry').focus(); });
+
+  function goToForm({ site, noweb: nw } = {}) {
+    $('#lead-success').hidden = true; $('#lead-fields').hidden = false;
+    if (site) { modeGroup.set('web'); $('#f-site').value = site; check('site'); }
+    if (nw) modeGroup.set('noweb');
+    $('#diagnostico').scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth' });
+    const target = site ? '#f-name' : nw ? '#f-industry' : '#f-site';
+    setTimeout(() => $(target).focus({ preventScroll: true }), reduce.matches ? 0 : 650);
+  }
+
+  /* ---------- submenu ---------- */
+  const closeSubs = () => $$('.has-sub.open').forEach(li => { li.classList.remove('open'); $('.sub-btn', li).setAttribute('aria-expanded', 'false'); });
+  $$('.sub-btn').forEach(b => b.addEventListener('click', () => { const li = b.closest('.has-sub'); const o = !li.classList.contains('open'); closeSubs(); li.classList.toggle('open', o); b.setAttribute('aria-expanded', o); }));
+  document.addEventListener('click', e => { if (!e.target.closest('.has-sub')) closeSubs(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSubs(); });
+
+  /* ---------- prototype routes: pages of the sitemap not built yet ---------- */
+  const toast = $('#toast'); let toastT;
+  const showToast = html => { toast.innerHTML = html; toast.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => toast.hidden = true, 4200); };
+  document.addEventListener('click', e => {
+    const a = e.target.closest('[data-route]'); if (!a) return;
+    const route = a.dataset.route, href = a.getAttribute('href') || '#';
+    if (a.dataset.ind && typeof selectInd === 'function') { const row = $(`.ind-row[data-ind="${a.dataset.ind}"]`); if (row) selectInd(row); }
+    if (href === '#') { e.preventDefault(); showToast(`<code>${route}</code> todavía no está en el prototipo.`); }
+    else showToast(`En el sitio, este enlace abre <code>${route}</code>. Aquí te llevamos a su adelanto en Inicio.`);
+  });
+})();
+</script>

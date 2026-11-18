@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Webs para clínicas · Ceiba Labs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+{{BASE_CSS}}
+/* ===================== INDUSTRY: CLÍNICAS ===================== */
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--photo-desk:url("img/desk.jpg")}
+.ind-hero{padding-block:clamp(36px,5vw,72px) clamp(56px,7vw,104px);overflow:clip}
+.ih-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(40px,6vw,96px);align-items:center}
+.crumb{display:flex;flex-wrap:wrap;gap:8px;font-size:14px;color:var(--muted);margin:0 0 28px;list-style:none;padding:0}
+.crumb a{text-decoration:none;color:var(--muted)}
+.crumb a:hover{color:var(--fg)}
+.crumb li + li::before{content:"/";margin-right:8px;opacity:.5}
+.ind-hero h1{font-size:clamp(44px,6.2vw,94px);line-height:.94;letter-spacing:-.045em;font-weight:700}
+.ind-hero h1 .soft{display:block;font-weight:400;color:rgba(247,244,235,.58)}
+.ih-copy{display:grid;gap:26px;min-width:0}
+.ih-copy .lede{color:var(--ivory);font-size:clamp(19px,1.6vw,22px);max-width:34ch;line-height:1.38}
+.ih-visual{position:relative;display:grid;justify-items:center;padding-bottom:56px;min-width:0}
+.ih-phone{width:min(320px,100%);border-radius:36px;background:#060c0b;padding:10px;border:1px solid rgba(247,244,235,.16);box-shadow:0 40px 80px -30px rgba(0,0,0,.7)}
+.ih-phone .viewport{height:min(600px,120vw);border-radius:27px;overflow:hidden}
+.ih-chat{position:absolute;z-index:3;left:-10%;bottom:0;width:min(290px,82%);background:var(--ivory);color:var(--ink);border-radius:16px;padding:14px;display:grid;gap:8px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6);font-size:14px;line-height:1.4}
+.ih-chat .ct{font:500 12px var(--f-mono);color:rgba(11,21,20,.6);display:flex;justify-content:space-between}
+.ih-chat .b{padding:9px 12px;border-radius:12px;max-width:90%}
+.ih-chat .b.p{background:#fff;border:1px solid rgba(11,21,20,.1);border-bottom-left-radius:4px}
+.ih-chat .b.a{background:var(--petrol);color:var(--ivory);justify-self:end;border-bottom-right-radius:4px}
+.ih-chat .h{font:500 12px var(--f-mono);color:var(--petrol);border-top:1px dashed rgba(11,21,20,.2);padding-top:8px}
+.ih-cap{margin-top:16px;font-size:14px;color:var(--muted);text-align:center}
+.ih-cap strong{color:var(--ivory);font-weight:600}
+
+.sec-head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px 64px;align-items:end}
+.feat{list-style:none;margin:clamp(40px,5vw,64px) 0 0;padding:0;border-top:1px solid var(--line)}
+.feat li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr) minmax(150px,auto);gap:8px 40px;padding:22px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.feat h3{font-size:22px;letter-spacing:-.02em;line-height:1.15}
+.feat p{color:var(--muted);max-width:56ch}
+.feat .in{font:500 13px var(--f-mono);color:rgba(247,244,235,.62);text-align:right}
+.feat .in b{color:var(--lime);font-weight:500}
+
+.rec-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(36px,5vw,80px);align-items:start}
+.rec-photo{display:grid;gap:12px;position:sticky;top:100px}
+.rec-photo .ph{aspect-ratio:4/5;border-radius:16px;background:var(--photo-desk) center/cover #0c1716;max-width:100%}
+.rec-photo p{font-size:14px;color:rgba(247,244,235,.7)}
+.rec-copy{display:grid;gap:24px;align-content:start;min-width:0}
+.rec-scope{margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px;border-top:1px solid var(--line)}
+.rec-scope div{padding:14px 0;border-bottom:1px solid var(--line);display:grid;gap:3px}
+.rec-scope dt{font-weight:600}
+.rec-scope dd{margin:0;font-size:15px;color:rgba(247,244,235,.72)}
+.rec-price{display:flex;flex-wrap:wrap;gap:16px 36px;align-items:end}
+.rec-price .price-cell .v{font-size:26px}
+.band--petrol .chat{background:rgba(11,21,20,.45)}
+
+.pack-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(28px,4vw,56px);margin-top:clamp(36px,5vw,56px);align-items:start}
+.pack{background:#fff;border:1px solid var(--line);border-radius:18px;padding:clamp(20px,3vw,32px);display:grid;gap:20px;box-shadow:0 30px 60px -40px rgba(11,21,20,.4)}
+.pack h3{font-size:clamp(26px,3vw,34px);letter-spacing:-.03em;line-height:1.05}
+.pack .offer{font-size:16px;color:var(--muted);max-width:44ch}
+.ptable{display:grid;font-variant-numeric:tabular-nums;border-top:1px solid var(--line)}
+.ptable .r{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);align-items:baseline;font-size:16px}
+.ptable .r span:nth-child(n+2){text-align:right;min-width:88px}
+.ptable .hd{font:500 12px var(--f-mono);color:var(--muted)}
+.ptable .tt{font:600 26px var(--f-display);letter-spacing:-.015em;border-bottom:0}
+.ptable .tt span:first-child{font:500 16px var(--f-body)}
+.pack .fine{font-size:14px;color:var(--muted)}
+.pack-acts{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center}
+.alt h3{font-size:22px;letter-spacing:-.02em;margin-bottom:6px}
+.alt > p{color:var(--muted);font-size:15px;margin-bottom:18px}
+.alt ul{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.alt li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 20px;padding:16px 0;border-bottom:1px solid var(--line)}
+.alt li b{font-weight:600}
+.alt li span{grid-column:1;font-size:15px;color:var(--muted)}
+.alt li em{grid-column:2;grid-row:1/3;align-self:center;font:500 14px var(--f-mono);font-style:normal;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.alt li em small{display:block;color:var(--muted);font-size:12px}
+.alt .link{margin-top:20px}
+
+.band:not(.band--light) .faq-q[aria-expanded="true"] .pm{background:var(--lime);color:var(--ink);border-color:var(--lime)}
+
+@media (max-width:1000px){
+  .ih-grid,.sec-head,.rec-grid,.pack-grid{grid-template-columns:1fr}
+  .ih-chat{left:0}
+  .rec-photo{position:static}
+  .rec-photo .ph{aspect-ratio:4/3}
+}
+@media (max-width:760px){
+  .feat li{grid-template-columns:1fr}
+  .feat .in{text-align:left}
+  .rec-scope{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+{{SYMBOLS}}
+
+<header class="site-header" id="top">
+  <div class="wrap nav">
+    <a class="brand" href="index.html" aria-label="Ceiba Labs, inicio"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
+    <ul class="nav-links" id="nav-links">
+      <li class="has-sub"><a href="index.html#suscripcion" aria-current="true">Webs</a><button class="sub-btn" type="button" aria-expanded="false" aria-controls="sub-webs" aria-label="Ver industrias de Webs"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+        <ul class="sub" id="sub-webs">
+          <li><a href="#top" aria-current="page">Clínicas</a></li>
+          <li><a href="#" data-route="/webs/restaurantes">Restaurantes</a></li>
+          <li><a href="#" data-route="/webs/inmobiliarias">Inmobiliarias</a></li>
+          <li><a href="#" data-route="/webs/hoteles">Hoteles</a></li>
+          <li><a href="#" data-route="/webs/despachos">Despachos</a></li>
+        </ul></li>
+      <li><a href="index.html#ia">Inteligencia artificial</a></li>
+      <li><a href="index.html#precios">Precios</a></li>
+      <li><a href="index.html#antes-despues">Trabajo</a></li>
+      <li><a href="#" data-route="/nosotros">Nosotros</a></li>
+      <li class="nav-cta"><a href="#diagnostico">Diagnóstico gratis</a></li>
+    </ul>
+    <a class="btn btn-primary" href="#diagnostico">Diagnóstico gratis</a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-links">Menú</button>
+  </div>
+</header>
+
+<main>
+<section class="band ind-hero" aria-labelledby="hero-title">
+  <div class="wrap ih-grid">
+    <div class="ih-copy">
+      <div>
+        <ol class="crumb" aria-label="Ruta"><li><a href="index.html">Inicio</a></li><li><a href="index.html#suscripcion">Webs</a></li><li aria-current="page">Clínicas</li></ol>
+        <h1 id="hero-title">Webs para clínicas <span class="soft">que facilitan pedir cita.</span></h1>
+      </div>
+      <p class="lede">Una web que facilita pedir cita. Una recepción por WhatsApp que recoge la solicitud cuando tu equipo está ocupado.</p>
+      {{AUDIT}}
+      <div class="secondary-actions">
+        <button class="link" type="button" id="no-web">Todavía no tengo web <span class="arrow" aria-hidden="true">→</span></button>
+        <a class="link" href="propuesta-clinica-arrayan.html">Ver una propuesta para una clínica <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <div class="ih-visual">
+      <div class="ih-phone" aria-label="Concepto de rediseño de la web de una clínica dental ficticia, en el móvil">
+        <div class="viewport" aria-hidden="true"><div class="layers"><div class="layer" data-tpl="new"></div></div></div>
+      </div>
+      <div class="ih-chat" aria-label="Ejemplo de recepción por WhatsApp">
+        <div class="ct"><span>WhatsApp · Clínica Arrayán</span><span>21:40</span></div>
+        <div class="b p">¿Tienen hora mañana para una limpieza?</div>
+        <div class="b a">Atendemos de 9:00 a 20:00. ¿Qué horario prefieres? Recepción te lo confirma.</div>
+        <div class="h">Si es un caso clínico, pasa a recepción con el resumen</div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap"><p class="ih-cap"><strong>Concepto de rediseño.</strong> Clínica Dental Arrayán es un negocio ficticio.</p></div>
+</section>
+
+{{CMP_SECTION}}
+
+<section class="band section" id="que-incluye" aria-labelledby="inc-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="h2" id="inc-title">Lo que necesita la web de una clínica.</h2>
+      <p class="lede">Lo que buscan tus pacientes antes de reservar y lo que tu equipo necesita para no perder solicitudes. A la derecha, desde qué plan viene incluido.</p>
+    </div>
+    <ul class="feat">
+      <li><h3>Reserva por tratamiento</h3><p>El paciente elige tratamiento, día y hora. La cita entra en la agenda que ya usa la clínica, con nombre y teléfono.</p><span class="in">Desde <b>Negocio</b></span></li>
+      <li><h3>Una página por tratamiento</h3><p>Qué es, cuánto dura y qué incluye la primera visita. Cada página responde a una búsqueda como «implantes en Providencia».</p><span class="in">3, 7 o 12 páginas según plan</span></li>
+      <li><h3>Equipo con cédula profesional</h3><p>Nombre, especialidad y número de cédula de cada dentista, con una foto real del consultorio.</p><span class="in">Todos los planes</span></li>
+      <li><h3>Aviso de privacidad</h3><p>Formularios que piden solo lo necesario y un aviso de privacidad para los datos de tus pacientes.</p><span class="in">Todos los planes</span></li>
+      <li><h3>Horario de hoy y cómo llegar</h3><p>Abierto o cerrado en la primera línea, dirección en texto y botón para abrir en mapas.</p><span class="in">Todos los planes</span></li>
+      <li><h3>Medición de contactos</h3><p>Cuántas personas envían el formulario o tocan reservar, llamar o WhatsApp, mes a mes.</p><span class="in">Desde <b>Negocio</b></span></li>
+      <li><h3>Catálogo de servicios</h3><p>Para clínicas con muchas especialidades: agregas o cambias servicios sin escribirnos.</p><span class="in"><b>Avanzado</b></span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="band band--petrol section" id="recepcion" aria-labelledby="rec-title">
+  <div class="wrap rec-grid">
+    <div class="rec-photo">
+      <div class="ph" role="img" aria-label="Recepcionista atendiendo a una paciente mientras el teléfono recibe mensajes"></div>
+      <p>Mientras recepción atiende en el mostrador, el WhatsApp de la clínica sigue contestando.</p>
+    </div>
+    <div class="rec-copy">
+      <h2 class="h2" id="rec-title">Recepción por WhatsApp para cuando tu equipo está ocupado.</h2>
+      <p class="lede" style="color:rgba(247,244,235,.82)">Configuramos las respuestas que tú apruebas. El asistente recoge los datos para la cita y le pasa a una persona lo que no debe contestar solo.</p>
+      {{CHAT}}
+      <dl class="rec-scope">
+        <div><dt>Un número, una sucursal, un flujo</dt><dd>El alcance inicial del módulo.</dd></div>
+        <div><dt>Respuestas aprobadas</dt><dd>Horarios, ubicación, tratamientos y cómo prepararse.</dd></div>
+        <div><dt>Datos para la cita</dt><dd>Nombre, tratamiento y horario preferido, listos para recepción.</dd></div>
+        <div><dt>300 conversaciones al mes</dt><dd>Cupo del piloto. Te avisamos antes del límite; al agotarse, todo pasa a tu equipo.</dd></div>
+      </dl>
+      <div class="rec-price">
+        <div class="price-cell"><span class="k">Activación</span><span class="v">$3,990</span></div>
+        <div class="price-cell"><span class="k">Mensualidad</span><span class="v">$1,490</span></div>
+        <p style="font-size:14px;color:rgba(247,244,235,.7);max-width:34ch">Con cualquier plan o con la web que ya tienes. IVA incluido.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band--light section" id="paquete" aria-labelledby="pack-title">
+  <div class="wrap">
+    <h2 class="h2" id="pack-title">El paquete para clínicas: web y recepción en un solo pago mensual.</h2>
+    <div class="pack-grid">
+      <div class="pack">
+        <h3>Web Negocio + Recepción por WhatsApp</h3>
+        <p class="offer">Cubre las dos formas en que un paciente pide cita: desde la web y por WhatsApp.</p>
+        <div class="ptable" role="table" aria-label="Precio del paquete">
+          <div class="r hd" role="row"><span role="columnheader">Partida</span><span role="columnheader">Activación</span><span role="columnheader">Al mes</span></div>
+          <div class="r" role="row"><span role="cell">Web Negocio</span><span role="cell">$5,490</span><span role="cell">$2,490</span></div>
+          <div class="r" role="row"><span role="cell">Recepción por WhatsApp</span><span role="cell">$3,990</span><span role="cell">$1,490</span></div>
+          <div class="r tt" role="row"><span role="cell">Total</span><span role="cell">$9,480</span><span role="cell">$3,980</span></div>
+        </div>
+        <p class="fine">Precios de lanzamiento en pesos mexicanos, con IVA incluido. La activación se paga al aprobar la propuesta y la mensualidad empieza al publicar. Si aplica algún cargo de Meta por mensajes, va desglosado en tu propuesta.</p>
+        <div class="pack-acts"><a class="btn btn-primary" href="#diagnostico">Pedir diagnóstico gratis <span class="arrow" aria-hidden="true">→</span></a><a class="link" href="propuesta-clinica-arrayan.html">Ver una propuesta con este paquete</a></div>
+      </div>
+      <div class="alt">
+        <h3>Otras combinaciones</h3>
+        <p>Si tu clínica está empezando o ya tiene una web que funciona.</p>
+        <ul>
+          <li><b>Web Esencial</b><span>Si por ahora das citas por teléfono o WhatsApp. Hasta 3 páginas.</span><em>$3,490<small>+ $1,490/mes</small></em></li>
+          <li><b>Web Negocio</b><span>Reservas en tu agenda, sin el módulo de WhatsApp.</span><em>$5,490<small>+ $2,490/mes</small></em></li>
+          <li><b>Web Avanzado</b><span>Hasta 12 páginas y catálogo de servicios que tú actualizas.</span><em>$8,490<small>+ $3,990/mes</small></em></li>
+          <li><b>Solo Recepción por WhatsApp</b><span>Si ya tienes una web y quieres sumar el asistente.</span><em>$3,990<small>+ $1,490/mes</small></em></li>
+        </ul>
+        <a class="link" href="index.html#precios">Comparar todos los planes <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band section" id="preguntas" aria-labelledby="faq-title">
+  <div class="wrap faq-grid">
+    <h2 class="h2" id="faq-title">Preguntas de clínicas antes de empezar.</h2>
+    <div class="faq">
+      <div class="faq-item open"><h3><button class="faq-q" type="button" aria-expanded="true" aria-controls="ca1" id="cq1">¿Con qué agenda se conecta?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="ca1" role="region" aria-labelledby="cq1"><div><p>Con la que ya usa tu clínica, si permite conexión. Lo revisamos en el diagnóstico, antes de proponerte un plan. Si quieres que el asistente de WhatsApp confirme citas en tiempo real, primero validamos esa conexión y cotizamos ese alcance aparte.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="ca2" id="cq2">¿El asistente responde dudas clínicas?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="ca2" role="region" aria-labelledby="cq2"><div><p>No. Responde horarios, ubicación, tratamientos disponibles y cómo prepararse, y recoge los datos para la cita. Síntomas, urgencias y casos clínicos pasan a tu equipo con el resumen de la conversación.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="ca3" id="cq3">¿Cómo se cuidan los datos de los pacientes?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="ca3" role="region" aria-labelledby="cq3"><div><p>Los formularios piden solo lo necesario para la cita y la web incluye tu aviso de privacidad. Tú decides quién del equipo recibe cada solicitud.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="ca4" id="cq4">¿Tengo que mostrar precios de tratamientos?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="ca4" role="region" aria-labelledby="cq4"><div><p>No. Puedes mostrar un precio «desde», solo el de la primera visita o ninguno. En cada tratamiento siempre mostramos la duración y qué incluye.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="ca5" id="cq5">Tengo varias sucursales. ¿Funciona igual?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="ca5" role="region" aria-labelledby="cq5"><div><p>El módulo de WhatsApp incluye una sucursal. Para varias sucursales, un CRM o un proceso interno, empezamos con un diagnóstico de $3,900 que se acredita al proyecto, y un piloto desde $19,900 para un flujo definido.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="ca6" id="cq6">¿Qué pasa al llegar a 300 conversaciones en el mes?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="ca6" role="region" aria-labelledby="cq6"><div><p>Te avisamos cuando te acercas al cupo. Si se agota, las conversaciones nuevas pasan directo a tu equipo hasta el mes siguiente.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band band--petrol section" id="diagnostico" aria-labelledby="close-title">
+  <div class="wrap close-grid">
+    <div class="close-copy">
+      <h2 class="h2" id="close-title">Pide el diagnóstico gratis de tu clínica.</h2>
+      <p class="lede" style="color:rgba(247,244,235,.8)">Revisamos tu web, o tu perfil si todavía no tienes una, y te enviamos una propuesta privada con el antes y después, el paquete y su precio.</p>
+      <ol>
+        <li><span>1</span>Nos dejas tu web, o tu Instagram o ficha de Google.</li>
+        <li><span>2</span>Preparamos tu propuesta en un enlace privado.</li>
+        <li><span>3</span>Desde ahí activas tu web o agendas 15 minutos para conversarla.</li>
+      </ol>
+      <p class="close-alt"><a class="link" href="propuesta-clinica-arrayan.html">Ver una propuesta privada de ejemplo <span class="arrow" aria-hidden="true">→</span></a></p>
+    </div>
+    {{FORM}}
+  </div>
+</section>
+</main>
+
+<footer class="band footer">
+  <div class="wrap">
+    <a href="index.html" aria-label="Ceiba Labs, inicio" style="color:var(--ivory)"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
+    <nav aria-label="Pie de página"><a href="index.html#suscripcion">Webs</a><a href="index.html#ia">Inteligencia artificial</a><a href="index.html#precios">Precios</a><a href="index.html#antes-despues">Trabajo</a><a href="#" data-route="/nosotros">Nosotros</a><a href="#" data-route="/contacto">Contacto</a><a href="#diagnostico">Diagnóstico gratis</a></nav>
+  </div>
+  <div class="wrap foot-legal"><span>© 2026 Ceiba Labs · Estudio digital para negocios de Latinoamérica</span><nav aria-label="Legal"><a href="#" data-route="/privacidad">Privacidad</a><a href="#" data-route="/terminos">Términos</a><a href="#" data-route="/baja">Darse de baja de correos</a></nav></div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+{{DIAG}}
+{{TEMPLATES}}
+<script>
+{{SCRIPT}}
+</script>
+</body>
+</html>
