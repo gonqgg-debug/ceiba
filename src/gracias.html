@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Web activada · Ceiba Labs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+{{BASE_CSS}}
+.thanks{min-height:100dvh;display:grid;grid-template-rows:auto 1fr auto}
+.thanks header{padding-block:22px}
+.thanks header svg{height:24px;width:auto;color:var(--ivory);display:block}
+.t-main{display:grid;align-content:center;gap:28px;padding-block:48px 72px;max-width:760px}
+.t-main h1{font-size:clamp(40px,6vw,76px);line-height:.98;letter-spacing:-.04em;font-weight:700}
+.t-main h1 span{color:var(--lime)}
+.t-main .lede{color:rgba(247,244,235,.82)}
+.t-steps{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.t-steps li{display:grid;grid-template-columns:40px 1fr;gap:4px 16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.t-steps span{font:500 13px/1.8 var(--f-mono);color:rgba(247,244,235,.55)}
+.t-steps b{display:block;font-weight:600}
+.t-steps p{color:var(--muted);font-size:15px;grid-column:2}
+.t-ref{font:400 12px var(--f-mono);color:rgba(247,244,235,.45);overflow-wrap:anywhere}
+.t-foot{padding-block:24px;font-size:14px;color:rgba(247,244,235,.55);border-top:1px solid rgba(247,244,235,.1)}
+</style>
+</head>
+<body class="band">
+{{SYMBOLS}}
+<div class="thanks">
+  <header class="wrap"><a href="index.html" aria-label="Ceiba Labs, ir al sitio"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a></header>
+  <main class="wrap t-main">
+    <h1>Tu web está activada. <span>Empezamos.</span></h1>
+    <p class="lede">Recibimos el pago de la activación. Stripe te envió el recibo y la factura al correo que usaste al pagar.</p>
+    <ol class="t-steps">
+      <li><span>1</span><div><b>Te escribimos hoy</b></div><p>La persona que preparó tu propuesta te contacta para coordinar textos, fotos y accesos.</p></li>
+      <li><span>2</span><div><b>Diseñamos el resto de las páginas</b></div><p>Revisas cada página antes de publicar y pides los ajustes que necesites.</p></li>
+      <li><span>3</span><div><b>Publicamos y empieza la mensualidad</b></div><p>El día que publicamos se cobra la primera mensualidad con la misma tarjeta. Tus facturas y tu método de pago se gestionan desde el portal de clientes.</p></li>
+    </ol>
+    <p class="t-ref" id="t-ref"></p>
+  </main>
+  <footer class="wrap t-foot">Ceiba Labs · Estudio digital para negocios de Latinoamérica</footer>
+</div>
+<script>
+  const id = new URLSearchParams(location.search).get('session_id');
+  if (id && /^cs_(test|live)_[A-Za-z0-9]+$/.test(id)) document.getElementById('t-ref').textContent = 'Referencia de pago: ' + id.slice(0, 24) + '…';
+</script>
+</body>
+</html>

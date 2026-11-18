@@ -62,6 +62,7 @@ pages = {
     "index.html": index,
     "propuesta-clinica-arrayan.html": fill("propuesta.html", {**shared, "{{CMP_JS}}": cmp_js, "{{HOME}}": "index.html"}),
     "webs-clinicas.html": fill("webs-clinicas.html", {**shared, **industry}),
+    "gracias.html": fill("gracias.html", {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBOLS}}"]}),
 }
 for name, html in pages.items():
     (SITE / name).write_text(html, encoding="utf-8")

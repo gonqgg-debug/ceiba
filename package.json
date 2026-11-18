@@ -1,0 +1,23 @@
+{
+  "name": "ceibalabs-site",
+  "version": "1.0.0",
+  "description": "Sitio de Ceiba Labs",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "stripe:setup": "node scripts/stripe-setup.mjs",
+    "build": "python3 build.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gonqgg-debug/ceiba.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gonqgg-debug/ceiba/issues"
+  },
+  "homepage": "https://github.com/gonqgg-debug/ceiba#readme",
+  "dependencies": {
+    "stripe": "^23.1.0"
+  },
+  "type": "module",
+  "private": true
+}

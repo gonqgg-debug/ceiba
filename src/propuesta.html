@@ -164,6 +164,9 @@ img{max-width:100%}
 .diag .check a{color:inherit}
 .diag .err{color:var(--error-l)}
 .act-form{display:grid;gap:16px}
+.pay-note{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.pay-note svg{flex:none;margin-top:3px;color:var(--petrol)}
+#act-next[aria-busy="true"]{opacity:.7;cursor:progress}
 .act-done{display:grid;gap:14px}
 .act-done .stamp{font:500 13px var(--f-mono);color:var(--petrol)}
 .act-done ol{margin:0;padding-left:20px;display:grid;gap:6px;color:var(--muted)}
@@ -394,27 +397,17 @@ img{max-width:100%}
 
 <dialog class="diag" id="act" aria-labelledby="act-title">
   <div class="diag-in">
-    <div class="diag-top"><div><h2 id="act-title">Activar mi web</h2><p id="act-sub">Paso 1 de 2 · Revisa tu plan</p></div><button class="x" type="button" id="act-close" aria-label="Cerrar">×</button></div>
+    <div class="diag-top"><div><h2 id="act-title">Activar mi web</h2><p id="act-sub">Revisa tu paquete antes de pagar</p></div><button class="x" type="button" id="act-close" aria-label="Cerrar">×</button></div>
     <div class="diag-body">
       <div id="act-1" class="act-form">
         <dl class="act-sum" id="act-sum"></dl>
-        <p style="font-size:15px;color:var(--muted)">Precios con IVA incluido. Antes de publicar revisas todas las páginas. La mensualidad empieza el día que publicamos.</p>
-      </div>
-      <form id="act-2" class="act-form" novalidate hidden>
-        <div class="fld" data-a="billname"><label for="a-billname">Nombre o razón social para la factura</label><input id="a-billname" autocomplete="organization" value="Clínica Dental Arrayán" aria-describedby="ae-billname"><p class="err" id="ae-billname" hidden></p></div>
-        <div class="fld" data-a="taxid"><label for="a-taxid">Identificación tributaria <span>(opcional)</span></label><input id="a-taxid" placeholder="RFC de 12 o 13 caracteres"></div>
-        <div class="fld" data-a="billmail"><label for="a-billmail">Correo para la factura</label><input id="a-billmail" type="email" autocomplete="email" placeholder="administracion@tuclinica.mx" aria-describedby="ae-billmail"><p class="err" id="ae-billmail" hidden></p></div>
+        <p style="font-size:15px;color:var(--muted)">Precios con IVA incluido. Antes de publicar revisas todas las páginas. La mensualidad empieza el día que publicamos y se cobra con la misma tarjeta.</p>
         <div class="fld" data-a="terms"><label class="check" for="a-terms"><input type="checkbox" id="a-terms" aria-describedby="ae-terms">Acepto los <a href="#" data-route="/terminos">términos</a> y la <a href="#" data-route="/privacidad">política de privacidad</a></label><p class="err" id="ae-terms" hidden></p></div>
-        <p class="form-note" style="color:var(--muted);background:#fff;border-color:var(--line)"><b style="color:var(--petrol)">Prototipo</b><span>El pago no está conectado. No se cobra nada.</span></p>
-      </form>
-      <div id="act-3" class="act-done" hidden tabindex="-1">
-        <span class="stamp">Prototipo · no se cobró nada</span>
-        <h3 style="font-size:28px;letter-spacing:-.02em">Aquí terminaría el pago de <span data-total-act>$9,480</span>.</h3>
-        <p style="color:var(--muted)">En el sitio, después del pago pasaría esto:</p>
-        <ol><li>Recibes la factura en <strong id="act-mail"></strong>.</li><li>Te escribimos para coordinar la revisión de textos y fotos.</li><li>Publicamos cuando apruebes y empieza la mensualidad de <strong data-total-mon>$3,980</strong>.</li></ol>
+        <p class="pay-note"><svg width="14" height="14" viewBox="0 0 12 12" aria-hidden="true"><use href="#lock"/></svg>Te llevamos a la página de pago segura de Stripe. Ahí ingresas tu tarjeta y los datos de facturación, incluido tu RFC si lo necesitas.</p>
+        <p class="err" id="act-error" role="alert" hidden></p>
       </div>
     </div>
-    <div class="diag-foot"><button class="btn btn-line" type="button" id="act-back">← Volver</button><button class="btn btn-primary" type="button" id="act-next">Continuar</button></div>
+    <div class="diag-foot"><button class="btn btn-line" type="button" id="act-cancel">Seguir revisando</button><button class="btn btn-primary" type="button" id="act-next">Ir al pago seguro <span class="arrow" aria-hidden="true">→</span></button></div>
   </div>
 </dialog>
 
@@ -531,43 +524,56 @@ img{max-width:100%}
   });
   $$('[data-call-link]').forEach(a => a.addEventListener('click', () => setTimeout(() => $('button', dayChips).focus({ preventScroll: true }), reduce.matches ? 0 : 600)));
 
-  /* ---------- activation dialog ---------- */
-  const act = $('#act'), s1 = $('#act-1'), s2 = $('#act-2'), s3 = $('#act-3'), back = $('#act-back'), next = $('#act-next'), sub = $('#act-sub');
-  let step = 1, lastFocus = null;
-  function render() {
-    s1.hidden = step !== 1; s2.hidden = step !== 2; s3.hidden = step !== 3;
-    sub.textContent = step === 1 ? 'Paso 1 de 2 · Revisa tu plan' : step === 2 ? 'Paso 2 de 2 · Datos para la factura' : 'Listo';
-    back.style.visibility = step === 2 ? 'visible' : 'hidden';
-    next.innerHTML = step === 1 ? 'Continuar' : step === 2 ? 'Ir al pago <span class="arrow" aria-hidden="true">→</span>' : 'Cerrar';
-  }
-  const arules = {
-    billname: () => $('#a-billname').value.trim().length >= 2 || 'Escribe el nombre o la razón social que irá en la factura.',
-    billmail: () => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test($('#a-billmail').value.trim()) || 'Escribe un correo válido para recibir la factura.',
-    terms: () => $('#a-terms').checked || 'Para continuar, acepta los términos y la política de privacidad.'
-  };
-  const acheck = n => {
-    const res = arules[n](), ok = res === true, f = $(`[data-a="${n}"]`), err = $('.err', f), inp = $('input', f);
-    f.classList.toggle('invalid', !ok); err.hidden = ok; err.textContent = ok ? '' : res; inp.setAttribute('aria-invalid', !ok);
+  /* ---------- activation → Stripe Checkout ---------- */
+  const act = $('#act'), next = $('#act-next'), errBox = $('#act-error'), terms = $('#a-terms');
+  const PROPOSAL = 'clinica-arrayan';
+  let lastFocus = null;
+  const termsOk = () => {
+    const ok = terms.checked;
+    $('[data-a="terms"]').classList.toggle('invalid', !ok);
+    $('#ae-terms').hidden = ok;
+    $('#ae-terms').textContent = ok ? '' : 'Para continuar, acepta los términos y la política de privacidad.';
+    terms.setAttribute('aria-invalid', !ok);
     return ok;
   };
-  ['billname', 'billmail'].forEach(n => $(`[data-a="${n}"] input`).addEventListener('blur', () => acheck(n)));
-  $('#a-terms').addEventListener('change', () => acheck('terms'));
-  $$('[data-activate]').forEach(b => b.addEventListener('click', () => { lastFocus = b; step = 1; render(); act.showModal(); next.focus(); }));
-  next.addEventListener('click', () => {
-    if (step === 1) { step = 2; render(); $('#a-billname').focus(); return; }
-    if (step === 2) {
-      const bad = Object.keys(arules).filter(n => !acheck(n));
-      if (bad.length) { $(`[data-a="${bad[0]}"] input`).focus(); return; }
-      $('#act-mail').textContent = $('#a-billmail').value.trim();
-      step = 3; render(); s3.focus(); return;
+  const showError = msg => { errBox.textContent = msg; errBox.hidden = false; };
+  const setBusy = busy => {
+    next.disabled = busy;
+    if (busy) next.setAttribute('aria-busy', 'true'); else next.removeAttribute('aria-busy');
+    next.firstChild.textContent = busy ? 'Abriendo el pago… ' : 'Ir al pago seguro ';
+  };
+  terms.addEventListener('change', termsOk);
+  $$('[data-activate]').forEach(b => b.addEventListener('click', () => { lastFocus = b; errBox.hidden = true; act.showModal(); terms.focus(); }));
+  next.addEventListener('click', async () => {
+    errBox.hidden = true;
+    if (!termsOk()) { terms.focus(); return; }
+    setBusy(true);
+    try {
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ proposal: PROPOSAL, plan, whatsapp: addon.checked }),
+      });
+      if (res.status === 404 || res.status === 405) throw Object.assign(new Error('sin servidor'), { preview: true });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.url) throw new Error(data.error || 'No pudimos abrir el pago. Intenta de nuevo en unos minutos.');
+      window.location.href = data.url;
+      return;
+    } catch (err) {
+      const preview = err.preview || err instanceof TypeError;
+      showError(preview
+        ? 'El pago no está disponible en esta vista previa. En el sitio publicado, este botón abre la página de pago segura de Stripe.'
+        : err.message);
     }
-    act.close();
+    setBusy(false);
   });
-  $('#act-2').addEventListener('submit', e => { e.preventDefault(); next.click(); });
-  back.addEventListener('click', () => { step = 1; render(); next.focus(); });
+  $('#act-cancel').addEventListener('click', () => act.close());
   $('#act-close').addEventListener('click', () => act.close());
   act.addEventListener('click', e => { if (e.target === act) act.close(); });
   act.addEventListener('close', () => { if (lastFocus && document.contains(lastFocus)) lastFocus.focus({ preventScroll: true }); });
+  if (new URLSearchParams(window.location.search).get('pago') === 'cancelado') {
+    showToast('El pago se canceló. No se cobró nada; puedes activarla cuando quieras.');
+  }
 })();
 </script>
 </body>
