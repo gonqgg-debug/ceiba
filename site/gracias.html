@@ -86,16 +86,16 @@ button{font:inherit;color:inherit}
 .nav-cta{display:none}
 .has-sub{position:relative;display:flex;align-items:center;gap:2px;padding-block:20px}
 .sub-btn{display:grid;place-items:center;width:24px;height:28px;background:none;border:0;border-radius:6px;color:rgba(247,244,235,.72);cursor:pointer;padding:0}
-.sub{display:none;position:absolute;top:100%;left:-14px;min-width:210px;list-style:none;margin:0;padding:8px;background:var(--ink-2);border:1px solid rgba(247,244,235,.12);border-radius:12px;box-shadow:0 24px 40px -20px rgba(0,0,0,.6)}
-.has-sub:hover .sub,.has-sub:focus-within .sub,.has-sub.open .sub{display:grid}
-.sub a{display:block;padding:9px 12px;border-radius:8px}
-.sub a:hover{background:var(--ink-3)}
+.nav-sub{display:none;position:absolute;top:100%;left:-14px;min-width:210px;list-style:none;margin:0;padding:8px;background:var(--ink-2);border:1px solid rgba(247,244,235,.12);border-radius:12px;box-shadow:0 24px 40px -20px rgba(0,0,0,.6)}
+.has-sub:hover .nav-sub,.has-sub:focus-within .nav-sub,.has-sub.open .nav-sub{display:grid}
+.nav-sub a{display:block;padding:9px 12px;border-radius:8px}
+.nav-sub a:hover{background:var(--ink-3)}
 @media (max-width:900px){
   .site-header.open .nav-links{max-height:calc(100dvh - 68px);overflow:auto}
   .site-header.open .has-sub{display:block;padding:0}
   .sub-btn{display:none!important}
-  .site-header.open .sub{display:grid;position:static;background:none;border:0;box-shadow:none;padding:0 0 10px 16px;min-width:0}
-  .site-header.open .nav-links .sub a{font-size:16px;padding:9px 0;border:0;color:rgba(247,244,235,.72)}
+  .site-header.open .nav-sub{display:grid;position:static;background:none;border:0;box-shadow:none;padding:0 0 10px 16px;min-width:0}
+  .site-header.open .nav-links .nav-sub a{font-size:16px;padding:9px 0;border:0;color:rgba(247,244,235,.72)}
 }
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:80;background:var(--ivory);color:var(--ink);border-radius:12px;padding:12px 16px;font-size:14px;line-height:1.4;max-width:calc(100vw - 32px);width:max-content;box-shadow:0 20px 40px -12px rgba(0,0,0,.55);animation:pop .25s var(--ease) both}
 .toast code{font-family:var(--f-mono);font-size:13px}
@@ -245,7 +245,9 @@ button{font:inherit;color:inherit}
 .mn-wa-btn{display:inline-grid;place-items:center;width:2.7em;height:2.7em;border-radius:50%;border:1px solid #C9C4B6;flex:none}
 .mn-wa-btn .wa-ico{width:1.35em;height:1.35em}
 .mn-ghost--wa{gap:.45em}
-.mn-rating{margin-top:1.5em;display:flex;align-items:center;gap:.5em;font-size:.95em;color:var(--c-muted)}
+.mn-call{margin-top:1em;font-size:.95em;color:var(--c-muted)}
+.mn-call b{color:var(--c-ink);font-weight:600}
+.mn-rating{margin-top:.6em;display:flex;align-items:center;gap:.5em;font-size:.95em;color:var(--c-muted)}
 .mn-rating b{color:var(--c-ink)}
 .mn-stars{color:#E2A21B;letter-spacing:.06em}
 .mn-photo-wrap{position:relative;min-width:0}

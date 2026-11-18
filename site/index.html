@@ -84,16 +84,16 @@ button{font:inherit;color:inherit}
 .nav-cta{display:none}
 .has-sub{position:relative;display:flex;align-items:center;gap:2px;padding-block:20px}
 .sub-btn{display:grid;place-items:center;width:24px;height:28px;background:none;border:0;border-radius:6px;color:rgba(247,244,235,.72);cursor:pointer;padding:0}
-.sub{display:none;position:absolute;top:100%;left:-14px;min-width:210px;list-style:none;margin:0;padding:8px;background:var(--ink-2);border:1px solid rgba(247,244,235,.12);border-radius:12px;box-shadow:0 24px 40px -20px rgba(0,0,0,.6)}
-.has-sub:hover .sub,.has-sub:focus-within .sub,.has-sub.open .sub{display:grid}
-.sub a{display:block;padding:9px 12px;border-radius:8px}
-.sub a:hover{background:var(--ink-3)}
+.nav-sub{display:none;position:absolute;top:100%;left:-14px;min-width:210px;list-style:none;margin:0;padding:8px;background:var(--ink-2);border:1px solid rgba(247,244,235,.12);border-radius:12px;box-shadow:0 24px 40px -20px rgba(0,0,0,.6)}
+.has-sub:hover .nav-sub,.has-sub:focus-within .nav-sub,.has-sub.open .nav-sub{display:grid}
+.nav-sub a{display:block;padding:9px 12px;border-radius:8px}
+.nav-sub a:hover{background:var(--ink-3)}
 @media (max-width:900px){
   .site-header.open .nav-links{max-height:calc(100dvh - 68px);overflow:auto}
   .site-header.open .has-sub{display:block;padding:0}
   .sub-btn{display:none!important}
-  .site-header.open .sub{display:grid;position:static;background:none;border:0;box-shadow:none;padding:0 0 10px 16px;min-width:0}
-  .site-header.open .nav-links .sub a{font-size:16px;padding:9px 0;border:0;color:rgba(247,244,235,.72)}
+  .site-header.open .nav-sub{display:grid;position:static;background:none;border:0;box-shadow:none;padding:0 0 10px 16px;min-width:0}
+  .site-header.open .nav-links .nav-sub a{font-size:16px;padding:9px 0;border:0;color:rgba(247,244,235,.72)}
 }
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:80;background:var(--ivory);color:var(--ink);border-radius:12px;padding:12px 16px;font-size:14px;line-height:1.4;max-width:calc(100vw - 32px);width:max-content;box-shadow:0 20px 40px -12px rgba(0,0,0,.55);animation:pop .25s var(--ease) both}
 .toast code{font-family:var(--f-mono);font-size:13px}
@@ -243,7 +243,9 @@ button{font:inherit;color:inherit}
 .mn-wa-btn{display:inline-grid;place-items:center;width:2.7em;height:2.7em;border-radius:50%;border:1px solid #C9C4B6;flex:none}
 .mn-wa-btn .wa-ico{width:1.35em;height:1.35em}
 .mn-ghost--wa{gap:.45em}
-.mn-rating{margin-top:1.5em;display:flex;align-items:center;gap:.5em;font-size:.95em;color:var(--c-muted)}
+.mn-call{margin-top:1em;font-size:.95em;color:var(--c-muted)}
+.mn-call b{color:var(--c-ink);font-weight:600}
+.mn-rating{margin-top:.6em;display:flex;align-items:center;gap:.5em;font-size:.95em;color:var(--c-muted)}
 .mn-rating b{color:var(--c-ink)}
 .mn-stars{color:#E2A21B;letter-spacing:.06em}
 .mn-photo-wrap{position:relative;min-width:0}
@@ -624,7 +626,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     <a class="brand" href="#top" aria-label="Ceiba Labs, inicio"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
     <ul class="nav-links" id="nav-links">
       <li class="has-sub"><a href="#suscripcion" data-route="/webs">Páginas web</a><button class="sub-btn" type="button" aria-expanded="false" aria-controls="sub-webs" aria-label="Ver tipos de negocio"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
-        <ul class="sub" id="sub-webs">
+        <ul class="nav-sub" id="sub-webs">
           <li><a href="webs-clinicas.html">Clínicas</a></li>
           <li><a href="#industrias" data-route="/webs/restaurantes" data-ind="restaurantes">Restaurantes</a></li>
           <li><a href="#industrias" data-route="/webs/inmobiliarias" data-ind="inmobiliarias">Inmobiliarias</a></li>
@@ -835,7 +837,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       </ul>
       <aside class="ind-preview" aria-label="Vista de la acción principal en el celular">
         <div class="ind-panel" data-panel="clinicas"><p class="cap">Clínicas · cita de primera visita</p>
-          <div class="phone"><span class="pt">Agendar cita</span><div><p class="lb">Tratamiento</p><div class="inp">Primera visita y diagnóstico <span>⌄</span></div></div><div><p class="lb">Día</p><div class="opt"><span>Mié 18</span><span class="on">Jue 19</span><span>Vie 20</span></div></div><div><p class="lb">Hora</p><div class="opt"><span>16:30</span><span class="on">18:00</span><span>19:15</span></div></div><span class="go">Confirmar jueves 18:00</span></div></div>
+          <div class="phone"><span class="pt">Agendar cita</span><div><p class="lb">Tratamiento</p><div class="inp">Valoración con radiografía <span>⌄</span></div></div><div><p class="lb">Día</p><div class="opt"><span>Mié 18</span><span class="on">Jue 19</span><span>Vie 20</span></div></div><div><p class="lb">Hora</p><div class="opt"><span>16:30</span><span class="on">18:00</span><span>19:15</span></div></div><span class="go">Confirmar jueves 18:00</span></div></div>
         <div class="ind-panel" data-panel="restaurantes" hidden><p class="cap">Restaurantes · reserva de mesa</p>
           <div class="phone"><span class="pt">Reservar mesa</span><div><p class="lb">Personas</p><div class="opt"><span>2</span><span class="on">4</span><span>6</span><span>8+</span></div></div><div><p class="lb">Viernes 20</p><div class="opt"><span>20:00</span><span class="on">20:30</span><span>21:00</span><span>21:30</span></div></div><div><p class="lb">Ocasión</p><div class="inp">Cumpleaños <span>⌄</span></div></div><span class="go">Reservar para 4 a las 20:30</span></div></div>
         <div class="ind-panel" data-panel="inmobiliarias" hidden><p class="cap">Inmobiliarias · ficha con visita</p>
@@ -991,9 +993,10 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     <div class="mn-hero">
       <div class="mn-copy">
         <p class="mn-open" data-mark="4"><i></i>Abierto hoy hasta las 20:00 · Av. Los Arrayanes 1240</p>
-        <h3>Odontología sin apuro, con un plan claro <em>desde la primera visita.</em></h3>
-        <p class="sub">Diagnóstico, limpieza, ortodoncia e implantes en un solo consultorio, con la misma dentista de principio a fin.</p>
-        <div class="mn-ctas"><span class="mn-btn">Agendar primera visita</span><span class="mn-ghost mn-ghost--wa"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Escribir por WhatsApp</span></div>
+        <h3>Dentista en Providencia, <em>Guadalajara.</em></h3>
+        <p class="sub">Urgencias el mismo día y citas esta semana. Valoración, limpieza, ortodoncia invisible e implantes, con el costo explicado antes de empezar.</p>
+        <div class="mn-ctas"><span class="mn-btn">Agendar cita</span><span class="mn-ghost mn-ghost--wa"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Escribir por WhatsApp</span></div>
+        <p class="mn-call">o llama al <b>33 0000 0000</b></p>
         <p class="mn-rating"><span class="mn-stars" aria-hidden="true">★★★★★</span><b>4.9</b> · 186 reseñas en Google</p>
       </div>
       <div class="mn-photo-wrap">
@@ -1003,10 +1006,10 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     </div>
     <ul class="mn-trust"><li><b>Desde 2009</b>en la colonia Providencia</li><li><b>Cédula profesional</b>4512378</li><li><b>Hasta 6 meses sin intereses</b>con tarjeta participante</li><li><b>Estacionamiento</b>para pacientes</li></ul>
     <div class="mn-treat" data-mark="2"><h4>Tratamientos</h4>
-      <ul><li><b>Primera visita y diagnóstico</b><span>40 min · incluye radiografía</span><em>Agendar →</em></li><li><b>Limpieza dental</b><span>45 min</span><em>Agendar →</em></li><li><b>Ortodoncia invisible</b><span>Evaluación de 30 min</span><em>Agendar →</em></li><li><b>Implantes</b><span>Evaluación de 45 min</span><em>Agendar →</em></li><li><b>Blanqueamiento</b><span>2 sesiones de 60 min</span><em>Agendar →</em></li><li><b>Urgencias</b><span>Atención el mismo día</span><em>Llamar →</em></li></ul>
+      <ul><li><b>Valoración con radiografía</b><span>40 min · $350, se descuenta si empiezas tratamiento</span><em>Agendar →</em></li><li><b>Limpieza dental</b><span>45 min</span><em>Agendar →</em></li><li><b>Ortodoncia invisible</b><span>Evaluación de 30 min</span><em>Agendar →</em></li><li><b>Implantes</b><span>Evaluación de 45 min</span><em>Agendar →</em></li><li><b>Blanqueamiento</b><span>2 sesiones de 60 min</span><em>Agendar →</em></li><li><b>Urgencias</b><span>Atención el mismo día</span><em>Llamar →</em></li></ul>
     </div>
     <div class="mn-space" role="img" aria-label="Recepción y sala de espera de la clínica"></div>
-    <div class="mn-team" data-mark="3"><div class="mn-portrait" role="img" aria-label="Retrato de la Dra. Valeria Ríos"></div><div><p class="mn-q">“Antes de empezar cualquier tratamiento, te muestro qué vemos y qué opciones tienes.”</p><b>Dra. Valeria Ríos</b><span>Rehabilitación oral · cédula 4512378 · personaje ficticio</span></div></div>
+    <div class="mn-team" data-mark="3"><div class="mn-portrait" role="img" aria-label="Retrato de la Dra. Valeria Ríos"></div><div><p class="mn-q">“Antes de empezar, te explico qué tienes, qué opciones hay y cuánto cuesta cada una.”</p><b>Dra. Valeria Ríos</b><span>Rehabilitación oral · cédula 4512378 · personaje ficticio</span></div></div>
     <div class="mn-reviews" data-mark="5">
       <div class="mn-rev-head"><h4>Lo que dicen los pacientes</h4><p><span class="mn-stars" aria-hidden="true">★★★★★</span><b>4.9 de 5</b> · 186 reseñas en Google</p></div>
       <div class="mn-rev-list">
@@ -1022,7 +1025,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       <div class="mn-ai" role="region" aria-label="Asistente de la clínica">
         <div class="mn-ai-top"><div><b>Asistente Arrayán</b><span>Responde al instante y sigue por WhatsApp</span></div><button type="button" class="mn-ai-x" data-ai="toggle" aria-label="Cerrar asistente">×</button></div>
         <div class="mn-ai-log"><p class="mn-ai-msg bot">Hola. Te ayudo con horarios, tratamientos y citas. ¿Qué necesitas?</p></div>
-        <div class="mn-ai-sug"><button type="button" data-ai="urg">¿Atienden urgencias hoy?</button><button type="button" data-ai="first">¿Qué incluye la primera visita?</button><button type="button" data-ai="msi">¿Tienen meses sin intereses?</button></div>
+        <div class="mn-ai-sug"><button type="button" data-ai="urg">¿Atienden urgencias hoy?</button><button type="button" data-ai="first">¿Cuánto cuesta la valoración?</button><button type="button" data-ai="msi">¿Tienen meses sin intereses?</button></div>
       </div>
       <button type="button" class="mn-ai-btn" data-ai="toggle" aria-expanded="false" data-mark="6"><span class="mn-ai-dot" aria-hidden="true"></span>Pregúntale al asistente</button>
     </div>
@@ -1051,7 +1054,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   /* ---------- assistant inside the clinic concept ---------- */
   const AI = {
     urg: ['¿Atienden urgencias hoy?', 'Sí. Hoy atendemos hasta las 20:00 y guardamos espacios para urgencias. Si tienes dolor fuerte o inflamación, te paso con recepción por WhatsApp para darte la hora más cercana.', 'wa'],
-    first: ['¿Qué incluye la primera visita?', 'Dura 40 minutos: revisión completa, radiografía y un plan de tratamiento por escrito. Puedes agendarla aquí mismo.', 'book'],
+    first: ['¿Cuánto cuesta la valoración?', 'Cuesta $350, dura 40 minutos e incluye radiografía. Si empiezas tratamiento, se descuenta. Puedes agendarla aquí mismo.', 'book'],
     msi: ['¿Tienen meses sin intereses?', 'Sí, hasta 6 meses sin intereses con tarjeta participante en ortodoncia, implantes y blanqueamiento.', 'wa']
   };
   const waIco = '<svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>';
@@ -1071,7 +1074,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     const log = fl.querySelector('.mn-ai-log');
     t.hidden = true;
     log.insertAdjacentHTML('beforeend', `<p class="mn-ai-msg me">${a[0]}</p>`);
-    const act = a[2] === 'wa' ? `<span class="mn-ai-act">${waIco}Seguir por WhatsApp</span>` : '<span class="mn-ai-act book">Agendar primera visita →</span>';
+    const act = a[2] === 'wa' ? `<span class="mn-ai-act">${waIco}Seguir por WhatsApp</span>` : '<span class="mn-ai-act book">Agendar valoración →</span>';
     const reply = () => { const ty = log.querySelector('.mn-ai-typing'); if (ty) ty.remove(); log.insertAdjacentHTML('beforeend', `<p class="mn-ai-msg bot">${a[1]}${act}</p>`); log.scrollTop = log.scrollHeight; };
     if (reduce.matches) return reply();
     log.insertAdjacentHTML('beforeend', '<span class="mn-ai-typing" aria-hidden="true"><i></i><i></i><i></i></span>');
