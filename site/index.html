@@ -100,8 +100,8 @@ button{font:inherit;color:inherit}
 
 /* hero */
 .hero{padding-block:clamp(48px,7vw,96px) 0;overflow:clip}
-.hero h1{font-size:clamp(46px,8.6vw,132px);line-height:.92;letter-spacing:-.045em;font-weight:700;max-width:none}
-.hero h1 .soft{display:block;font-weight:400;color:rgba(247,244,235,.58)}
+.hero h1{font-size:clamp(42px,6.6vw,100px);line-height:.95;letter-spacing:-.04em;font-weight:700;max-width:15em}
+.hero h1 .soft{font-weight:400;color:rgba(247,244,235,.58)}
 .hero-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,5vw,72px);margin-top:clamp(36px,4.5vw,64px);align-items:start}
 .hero-copy{display:grid;gap:28px;padding-bottom:clamp(40px,6vw,96px)}
 .hero-copy .lede{color:var(--ivory);font-size:clamp(19px,1.7vw,23px);max-width:28ch;line-height:1.35}
@@ -623,7 +623,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   <div class="wrap nav">
     <a class="brand" href="#top" aria-label="Ceiba Labs, inicio"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
     <ul class="nav-links" id="nav-links">
-      <li class="has-sub"><a href="#suscripcion" data-route="/webs">Webs</a><button class="sub-btn" type="button" aria-expanded="false" aria-controls="sub-webs" aria-label="Ver industrias de Webs"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+      <li class="has-sub"><a href="#suscripcion" data-route="/webs">Páginas web</a><button class="sub-btn" type="button" aria-expanded="false" aria-controls="sub-webs" aria-label="Ver tipos de negocio"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
         <ul class="sub" id="sub-webs">
           <li><a href="webs-clinicas.html">Clínicas</a></li>
           <li><a href="#industrias" data-route="/webs/restaurantes" data-ind="restaurantes">Restaurantes</a></li>
@@ -635,9 +635,9 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       <li><a href="#precios" data-route="/precios">Precios</a></li>
       <li><a href="#antes-despues" data-route="/trabajo">Trabajo</a></li>
       <li><a href="#" data-route="/nosotros">Nosotros</a></li>
-      <li class="nav-cta"><a href="#diagnostico">Diagnóstico gratis</a></li>
+      <li class="nav-cta"><a href="#diagnostico">Propuesta gratis</a></li>
     </ul>
-    <a class="btn btn-primary" href="#diagnostico">Diagnóstico gratis</a>
+    <a class="btn btn-primary" href="#diagnostico">Propuesta gratis</a>
     <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-links">Menú</button>
   </div>
 </header>
@@ -646,28 +646,28 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 <!-- ============ HERO ============ -->
 <section class="band hero" aria-labelledby="hero-title">
   <div class="wrap">
-    <h1 id="hero-title">Mira tu próxima web <span class="soft">antes de contratarla.</span></h1>
+    <h1 id="hero-title">Te mostramos tu nueva página web <span class="soft">antes de que pagues un peso.</span></h1>
     <div class="hero-grid">
       <div class="hero-copy">
-        <p class="lede">Diseñamos, publicamos y mantenemos tu sitio por una mensualidad.</p>
+        <p class="lede">La diseñamos, la publicamos y la mantenemos por una mensualidad fija. Primero ves cómo quedaría tu negocio y después decides.</p>
         <form class="audit" id="audit-form" novalidate>
-          <label for="audit-url">URL de tu web</label>
+          <label for="audit-url">¿Ya tienes página? Escribe la dirección</label>
           <div class="field-url" id="audit-field">
             <div class="row"><span class="prefix" aria-hidden="true">https://</span>
             <input id="audit-url" name="url" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com" aria-describedby="audit-help"></div>
-            <button class="btn btn-primary" type="submit">Revisar mi web <span class="arrow" aria-hidden="true">→</span></button>
+            <button class="btn btn-primary" type="submit">Ver cómo quedaría <span class="arrow" aria-hidden="true">→</span></button>
           </div>
-          <p class="hint" id="audit-help">Diagnóstico gratis. Ves qué mejorar sin dejar tu correo, y si quieres te enviamos la propuesta.</p>
+          <p class="hint" id="audit-help">Es gratis y no te pedimos tu correo para empezar.</p>
           <div id="audit-out" aria-live="polite"></div>
         </form>
         <div class="secondary-actions">
-          <button class="link" type="button" id="no-web">Todavía no tengo web <span class="arrow" aria-hidden="true">→</span></button>
-          <a class="link" href="#antes-despues">Ver un ejemplo: clínica dental <span aria-hidden="true">↓</span></a>
+          <button class="link" type="button" id="no-web">No tengo página todavía <span class="arrow" aria-hidden="true">→</span></button>
+          <a class="link" href="#antes-despues">Ver el ejemplo de una clínica dental <span aria-hidden="true">↓</span></a>
         </div>
       </div>
       <div class="hero-visual">
-        <div class="frame" aria-label="Concepto de rediseño de la web de una clínica dental ficticia">
-          <div class="frame-bar"><div class="frame-url"><svg width="11" height="11" aria-hidden="true"><use href="#lock"/></svg>clinicaarrayan.mx</div><span class="state-tag" id="hero-tag" data-state="new">Propuesta</span></div>
+        <div class="frame" aria-label="Ejemplo de rediseño de la página de una clínica dental ficticia">
+          <div class="frame-bar"><div class="frame-url"><svg width="11" height="11" aria-hidden="true"><use href="#lock"/></svg>clinicaarrayan.mx</div><span class="state-tag" id="hero-tag" data-state="new">Después</span></div>
           <div class="viewport" id="hero-vp" aria-hidden="true" inert>
             <div class="layers">
               <div class="layer layer-old" data-tpl="old"></div>
@@ -676,7 +676,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
             <div class="wipe"></div>
           </div>
         </div>
-        <div class="hero-caption"><span><strong>Concepto de rediseño.</strong> Clínica Dental Arrayán es un negocio ficticio.</span><a class="link" href="#antes-despues">Comparar con la web actual</a></div>
+        <div class="hero-caption"><span><strong>Ejemplo de rediseño:</strong> así quedaría la página de una clínica dental. El negocio es ficticio.</span><a class="link" href="#antes-despues">Comparar con la página de hoy</a></div>
       </div>
     </div>
   </div>
@@ -686,24 +686,24 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 <section class="band band--light section" id="antes-despues" aria-labelledby="cmp-title" data-view="new">
   <div class="wrap">
     <div class="cmp-head">
-      <h2 class="h2" id="cmp-title">Pedir cita pasa de buscar un teléfono a dos toques.</h2>
-      <p class="lede">La misma clínica, con los mismos tratamientos. Cambia el orden de la información y lo que el paciente puede hacer desde el móvil. Alterna entre las dos versiones y toca cada cambio para verlo en la página.</p>
+      <h2 class="h2" id="cmp-title">Así quedaría la página de una clínica dental.</h2>
+      <p class="lede">Compara la página de hoy con la que haríamos. Toca cada número para ver qué cambia para el paciente.</p>
     </div>
     <div class="cmp-grid">
       <div class="cmp-stage">
         <div class="cmp-controls">
-          <div class="seg" role="radiogroup" aria-label="Versión de la web" id="seg-version">
-            <button type="button" role="radio" data-v="old" aria-checked="false" tabindex="-1">Actual</button>
-            <button type="button" role="radio" data-v="new" aria-checked="true" tabindex="0">Propuesta</button>
+          <div class="seg" role="radiogroup" aria-label="Versión de la página" id="seg-version">
+            <button type="button" role="radio" data-v="old" aria-checked="false" tabindex="-1">Antes</button>
+            <button type="button" role="radio" data-v="new" aria-checked="true" tabindex="0">Después</button>
           </div>
           <div class="seg seg--quiet" role="radiogroup" aria-label="Tamaño de pantalla" id="seg-device">
-            <button type="button" role="radio" data-d="desk" aria-checked="true" tabindex="0">Escritorio</button>
-            <button type="button" role="radio" data-d="mob" aria-checked="false" tabindex="-1">Móvil</button>
+            <button type="button" role="radio" data-d="desk" aria-checked="true" tabindex="0">Computadora</button>
+            <button type="button" role="radio" data-d="mob" aria-checked="false" tabindex="-1">Celular</button>
           </div>
         </div>
         <div class="cmp-frame cmp" id="cmp-frame">
-          <div class="frame-bar"><div class="frame-url"><svg width="11" height="11" aria-hidden="true"><use href="#lock"/></svg>clinicaarrayan.mx</div><span class="state-tag" id="cmp-tag" data-state="new">Propuesta</span></div>
-          <div class="viewport" id="cmp-vp" tabindex="0" aria-label="Vista previa de la web. Se puede desplazar.">
+          <div class="frame-bar"><div class="frame-url"><svg width="11" height="11" aria-hidden="true"><use href="#lock"/></svg>clinicaarrayan.mx</div><span class="state-tag" id="cmp-tag" data-state="new">Después</span></div>
+          <div class="viewport" id="cmp-vp" tabindex="0" aria-label="Vista previa de la página. Se puede desplazar.">
             <div class="layers">
               <div class="layer layer-old" data-tpl="old" data-hidden="true" aria-hidden="true"></div>
               <div class="layer layer-new" data-tpl="new"></div>
@@ -711,41 +711,41 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
             <div class="wipe" id="cmp-wipe"></div>
           </div>
         </div>
-        <div class="cmp-label"><span><strong>Concepto de rediseño</strong> · Clínica Dental Arrayán, negocio ficticio</span><span id="cmp-status" aria-live="polite">Viendo la propuesta</span></div>
+        <div class="cmp-label"><span><strong>Ejemplo de rediseño</strong> · Clínica Dental Arrayán, negocio ficticio</span><span id="cmp-status" aria-live="polite">Viendo cómo quedaría</span></div>
       </div>
 
       <div>
         <ol class="changes" id="changes">
-          <li data-change="1"><button type="button" aria-label="Cambio 1: pedir cita. Mostrar en la página">
-            <span class="n" aria-hidden="true">1</span><h3>Pedir cita</h3>
-            <span class="txt"><span class="before"><span>Actual</span>El teléfono está en el pie de página, en letra de 9 px, y no se puede tocar para llamar.</span><span class="after"><span>Propuesta</span>«Reservar cita» arriba y fijo en el móvil. El paciente elige tratamiento y horario.</span></span>
+          <li data-change="1"><button type="button" aria-label="Cambio 1: agendar una cita. Mostrar en la página">
+            <span class="n" aria-hidden="true">1</span><h3>Agendar una cita</h3>
+            <span class="txt"><span class="before"><span>Antes</span>El teléfono está escondido al final de la página y no se puede marcar desde el celular.</span><span class="after"><span>Después</span>El botón «Agendar cita» siempre está a la vista. El paciente elige tratamiento y horario.</span></span>
           </button></li>
           <li data-change="2"><button type="button" aria-label="Cambio 2: tratamientos. Mostrar en la página">
             <span class="n" aria-hidden="true">2</span><h3>Tratamientos</h3>
-            <span class="txt"><span class="before"><span>Actual</span>Once servicios dentro de un párrafo, sin duración ni forma de reservar.</span><span class="after"><span>Propuesta</span>Cada tratamiento en su fila, con duración y su propio botón de reserva.</span></span>
+            <span class="txt"><span class="before"><span>Antes</span>Once servicios mezclados en un solo párrafo.</span><span class="after"><span>Después</span>Cada tratamiento con lo que dura y su propio botón para agendar.</span></span>
           </button></li>
-          <li data-change="3"><button type="button" aria-label="Cambio 3: confianza. Mostrar en la página">
-            <span class="n" aria-hidden="true">3</span><h3>Confianza</h3>
-            <span class="txt"><span class="before"><span>Actual</span>Un carrusel de promociones ocupa la primera pantalla. No aparece el equipo.</span><span class="after"><span>Propuesta</span>Fotografía del consultorio y la dentista a cargo, con nombre y especialidad.</span></span>
+          <li data-change="3"><button type="button" aria-label="Cambio 3: quién te atiende. Mostrar en la página">
+            <span class="n" aria-hidden="true">3</span><h3>Quién te atiende</h3>
+            <span class="txt"><span class="before"><span>Antes</span>Una promoción ocupa toda la pantalla y no aparece nadie del equipo.</span><span class="after"><span>Después</span>Fotos reales del consultorio y de la dentista, con su especialidad.</span></span>
           </button></li>
-          <li data-change="4"><button type="button" aria-label="Cambio 4: horario y ubicación. Mostrar en la página">
-            <span class="n" aria-hidden="true">4</span><h3>Horario y ubicación</h3>
-            <span class="txt"><span class="before"><span>Actual</span>La dirección está dentro de una imagen: no se puede copiar ni abrir en mapas.</span><span class="after"><span>Propuesta</span>Horario de hoy en la primera línea, dirección en texto y botón «Cómo llegar».</span></span>
+          <li data-change="4"><button type="button" aria-label="Cambio 4: cómo llegar. Mostrar en la página">
+            <span class="n" aria-hidden="true">4</span><h3>Cómo llegar</h3>
+            <span class="txt"><span class="before"><span>Antes</span>La dirección está en una imagen que no se puede copiar ni abrir en el mapa.</span><span class="after"><span>Después</span>El horario de hoy arriba, la dirección escrita y un botón para abrir el mapa.</span></span>
           </button></li>
           <li data-change="5"><button type="button" aria-label="Cambio 5: opiniones de pacientes. Mostrar en la página">
             <span class="n" aria-hidden="true">5</span><h3>Opiniones de pacientes</h3>
-            <span class="txt"><span class="before"><span>Actual</span>Un libro de visitas sin mensajes desde 2016.</span><span class="after"><span>Propuesta</span>Calificación y reseñas de Google en la portada, con enlace para ver todas.</span></span>
+            <span class="txt"><span class="before"><span>Antes</span>Un libro de visitas sin mensajes desde 2016.</span><span class="after"><span>Después</span>Las reseñas de Google en la portada.</span></span>
           </button></li>
-          <li data-change="6"><button type="button" aria-label="Cambio 6: respuestas a cualquier hora. Mostrar en la página">
-            <span class="n" aria-hidden="true">6</span><h3>Respuestas a cualquier hora</h3>
-            <span class="txt"><span class="before"><span>Actual</span>Un formulario que promete responder «a la brevedad».</span><span class="after"><span>Propuesta</span>Un asistente responde dudas frecuentes al instante y pasa a WhatsApp lo que necesita a una persona.</span></span>
+          <li data-change="6"><button type="button" aria-label="Cambio 6: respuestas de noche y en fin de semana. Mostrar en la página">
+            <span class="n" aria-hidden="true">6</span><h3>Respuestas de noche y en fin de semana</h3>
+            <span class="txt"><span class="before"><span>Antes</span>Un formulario que promete contestar «a la brevedad».</span><span class="after"><span>Después</span>Un asistente contesta al momento y pasa a WhatsApp lo que necesita una persona.</span></span>
           </button></li>
         </ol>
         <div class="task">
-          <p>La tarea que facilita</p>
-          <strong>Un paciente con dolor de muela encuentra horario y reserva sin llamar.</strong>
+          <p>Lo que gana la clínica</p>
+          <strong>Más citas agendadas sin tener que contestar el teléfono.</strong>
         </div>
-        <div class="cmp-links"><a class="link" href="propuesta-clinica-arrayan.html">Ver cómo le llega esta propuesta a la clínica <span class="arrow" aria-hidden="true">→</span></a><a class="link" href="#" data-route="/trabajo">Ver más conceptos de rediseño</a></div>
+        <div class="cmp-links"><a class="link" href="propuesta-clinica-arrayan.html">Ver cómo le llega la propuesta a la clínica <span class="arrow" aria-hidden="true">→</span></a><a class="link" href="#" data-route="/trabajo">Ver más ejemplos de rediseño</a></div>
       </div>
     </div>
   </div>
@@ -755,23 +755,23 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 <section class="band section" id="suscripcion" aria-labelledby="sub-title">
   <div class="wrap">
     <div class="sub-head">
-      <h2 class="h2" id="sub-title">Primero ves tu web. Después decides.</h2>
-      <p class="lede">Una web por suscripción funciona como un servicio: no compras un archivo que luego nadie actualiza. Pagas una activación al empezar y una mensualidad que cubre diseño, publicación y mantenimiento.</p>
+      <h2 class="h2" id="sub-title">Primero ves tu página. Después decides.</h2>
+      <p class="lede">Pagas un monto inicial para empezar y una mensualidad que incluye diseño, publicación y mantenimiento. Tu página no se queda olvidada.</p>
     </div>
     <ol class="steps">
-      <li><span class="dot" aria-hidden="true">1</span><h3>Revisamos tu web actual</h3><p>Nos das la URL o nos cuentas de tu negocio. Preparamos la propuesta de tu nueva portada con tus textos, fotos y servicios.</p><span class="who">Tú: 2 minutos · Nosotros: el diseño</span></li>
-      <li><span class="dot" aria-hidden="true">2</span><h3>Ves la propuesta y eliges plan</h3><p>La revisamos contigo. Si te convence, eliges un plan y pagas la activación. Si no, no contratas nada.</p><span class="who">Tú: decides con la web a la vista</span></li>
-      <li><span class="dot" aria-hidden="true">3</span><h3>Publicamos y la mantenemos</h3><p>Terminamos el resto de páginas, conectamos tu dominio y la publicamos. Cada mes nos ocupamos de cambios, seguridad y respaldos.</p><span class="who">Nosotros: cada mes</span></li>
+      <li><span class="dot" aria-hidden="true">1</span><h3>Nos mandas tu página o tu Instagram</h3><p>Con eso preparamos cómo quedaría tu nueva página, con tus fotos, servicios y datos.</p><span class="who">Tú: 2 minutos</span></li>
+      <li><span class="dot" aria-hidden="true">2</span><h3>Te la mostramos y decides</h3><p>Si te gusta, eliges un plan y haces el pago inicial. Si no, no pagas nada.</p><span class="who">Tú: decides con la página a la vista</span></li>
+      <li><span class="dot" aria-hidden="true">3</span><h3>La publicamos y nos encargamos</h3><p>Terminamos el resto de la página, la publicamos y cada mes hacemos los cambios que nos pidas.</p><span class="who">Nosotros: cada mes</span></li>
     </ol>
     <div class="includes">
-      <div><h3>Qué cubre la mensualidad</h3><p>El alcance exacto depende del plan. Esto es lo que tiene cada sitio que publicamos.</p></div>
+      <div><h3>Qué incluye la mensualidad</h3><p>Lo que cambia entre planes es el número de páginas y cuántos cambios nos puedes pedir al mes.</p></div>
       <dl class="inc-list">
-        <div><dt>Diseño a medida</dt><dd>Hecho para tu negocio y pensado primero para el móvil.</dd></div>
-        <div><dt>Publicación</dt><dd>Hosting, dominio conectado y certificado de seguridad.</dd></div>
+        <div><dt>Diseño a medida</dt><dd>Hecho para tu negocio y pensado primero para el celular.</dd></div>
+        <div><dt>Publicación</dt><dd>Hosting, tu dominio (.com o .mx) y certificado de seguridad.</dd></div>
         <div><dt>Mantenimiento técnico</dt><dd>Actualizaciones, copias de respaldo y monitoreo de caídas.</dd></div>
-        <div><dt>Cambios de contenido</dt><dd>Textos, fotos, horarios y servicios: 30, 60 o 120 minutos al mes según tu plan.</dd></div>
-        <div><dt>Contacto conectado</dt><dd>Formularios, WhatsApp, mapa y reservas donde aplique.</dd></div>
-        <div><dt>Una persona a cargo</dt><dd>Hablas con quien diseñó tu web, no con un ticket.</dd></div>
+        <div><dt>Cambios cada mes</dt><dd>Nos pides cambios de textos, fotos, horarios o precios: hasta 30, 60 o 120 minutos al mes según tu plan.</dd></div>
+        <div><dt>Formas de contacto</dt><dd>Formularios, WhatsApp, mapa y citas o reservas en línea según tu negocio.</dd></div>
+        <div><dt>Una persona a cargo</dt><dd>Hablas con quien diseñó tu página, no con un sistema de tickets.</dd></div>
       </dl>
     </div>
   </div>
@@ -782,35 +782,35 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   <div class="wrap">
     <div class="pricing-inner">
       <div class="price-head">
-        <h2 class="h2" id="price-title">Tres planes. Activación una vez, mensualidad cada mes.</h2>
+        <div><h2 class="h2" id="price-title">Precios claros, en pesos y con IVA incluido.</h2><p class="lede" style="margin-top:16px">Pagas un monto inicial cuando decides empezar y la mensualidad desde que tu página está publicada.</p></div>
         <a class="btn btn-line" href="#" data-route="/precios">Comparar planes y extras <span class="arrow" aria-hidden="true">→</span></a>
       </div>
       <div class="plans" role="list">
         <div class="plan" role="listitem">
-          <div><h3>Esencial</h3><p class="for">Para aparecer bien y recibir mensajes</p></div>
-          <ul><li>Hasta 3 páginas, diseñadas para el móvil</li><li>Formulario y botón de WhatsApp</li><li>SEO básico, hosting y mantenimiento</li><li>30 minutos de cambios al mes</li></ul>
-          <div class="price-cell"><span class="k">Activación</span><span class="v">$3,490<small>pago único</small></span></div>
+          <div><h3>Esencial</h3><p class="for">Para que te encuentren y te escriban</p></div>
+          <ul><li>Hasta 3 páginas, pensadas para el celular</li><li>Formulario y botón de WhatsApp</li><li>SEO básico, hosting y mantenimiento</li><li>Hasta 30 minutos de cambios al mes</li></ul>
+          <div class="price-cell"><span class="k">Pago inicial</span><span class="v">$3,490<small>pago único</small></span></div>
           <div class="price-cell"><span class="k">Mensualidad</span><span class="v">$1,490<small>al mes</small></span></div>
           <a class="btn btn-line" href="#" data-route="/precios">Ver plan</a>
         </div>
         <div class="plan plan--mid" role="listitem">
-          <div><h3>Negocio</h3><p class="for">Para recibir citas o reservas</p></div>
-          <ul><li>Hasta 7 páginas, con todo lo de Esencial</li><li>Integración con la agenda que ya usas</li><li>Medición de formularios y clics de contacto</li><li>60 minutos de cambios al mes</li></ul>
-          <div class="price-cell"><span class="k">Activación</span><span class="v">$5,490<small>pago único</small></span></div>
+          <div><h3>Negocio</h3><p class="for">Para recibir citas y reservas en línea</p></div>
+          <ul><li>Hasta 7 páginas, con todo lo de Esencial</li><li>Conectada con la agenda que ya usas</li><li>Te decimos cuántas personas te escribieron o llamaron desde la página</li><li>Hasta 60 minutos de cambios al mes, por ejemplo horarios, precios o fotos</li></ul>
+          <div class="price-cell"><span class="k">Pago inicial</span><span class="v">$5,490<small>pago único</small></span></div>
           <div class="price-cell"><span class="k">Mensualidad</span><span class="v">$2,490<small>al mes</small></span></div>
           <a class="btn btn-line" href="#" data-route="/precios">Ver plan</a>
         </div>
         <div class="plan" role="listitem">
-          <div><h3>Avanzado</h3><p class="for">Para mostrar un catálogo que tú actualizas</p></div>
-          <ul><li>Hasta 12 páginas, con todo lo de Negocio</li><li>Catálogo administrable de propiedades, habitaciones o servicios</li><li>120 minutos de cambios al mes</li></ul>
-          <div class="price-cell"><span class="k">Activación</span><span class="v">$8,490<small>pago único</small></span></div>
+          <div><h3>Avanzado</h3><p class="for">Para mostrar un catálogo que tú mismo actualizas</p></div>
+          <ul><li>Hasta 12 páginas, con todo lo de Negocio</li><li>Catálogo de propiedades, habitaciones o servicios que tú actualizas</li><li>Hasta 120 minutos de cambios al mes</li></ul>
+          <div class="price-cell"><span class="k">Pago inicial</span><span class="v">$8,490<small>pago único</small></span></div>
           <div class="price-cell"><span class="k">Mensualidad</span><span class="v">$3,990<small>al mes</small></span></div>
           <a class="btn btn-line" href="#" data-route="/precios">Ver plan</a>
         </div>
         <div class="plan plan--addon" role="listitem">
-          <div><h3><span aria-hidden="true">+ </span>Recepción por WhatsApp</h3><p class="for">Se suma a cualquier plan, o a la web que ya tienes</p></div>
-          <ul><li>Responde en WhatsApp y desde un asistente en tu web</li><li>Recoge los datos para una cita o cotización</li><li>Deriva a tu equipo cuando corresponde</li><li>300 conversaciones atendidas al mes en el piloto</li></ul>
-          <div class="price-cell"><span class="k">Activación</span><span class="v">$3,990<small>pago único</small></span></div>
+          <div><h3><span aria-hidden="true">+ </span>Asistente de WhatsApp</h3><p class="for">Se suma a cualquier plan, o a la página que ya tienes</p></div>
+          <ul><li>Contesta en WhatsApp y en tu página las preguntas de siempre</li><li>Toma los datos para una cita o cotización</li><li>Te pasa con alguien del equipo cuando hace falta</li><li>Hasta 300 conversaciones al mes durante el piloto</li></ul>
+          <div class="price-cell"><span class="k">Pago inicial</span><span class="v">$3,990<small>pago único</small></span></div>
           <div class="price-cell"><span class="k">Mensualidad</span><span class="v">$1,490<small>al mes</small></span></div>
           <a class="btn btn-line" href="#ia">Ver cómo funciona</a>
         </div>
@@ -823,19 +823,19 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 <!-- ============ INDUSTRIES ============ -->
 <section class="band band--light section" id="industrias" aria-labelledby="ind-title">
   <div class="wrap">
-    <h2 class="h2" id="ind-title">Cada negocio tiene una acción que importa más.</h2>
-    <p class="lede" style="margin-top:20px">Diseñamos la web alrededor de esa acción. Así se ve en los rubros donde más trabajamos.</p>
+    <h2 class="h2" id="ind-title">¿Qué tipo de negocio tienes?</h2>
+    <p class="lede" style="margin-top:20px">Cada página está pensada para lo que más necesitas que hagan tus clientes: agendar, reservar, cotizar o escribirte.</p>
     <div class="ind-grid">
       <ul class="ind-list" id="ind-list">
-        <li><button class="ind-row" type="button" data-ind="clinicas" aria-pressed="true"><h3>Clínicas</h3><span class="use">El paciente elige tratamiento y reserva su primera visita sin llamar.<span class="act">→ Reservar cita</span></span></button><a class="ind-link" href="webs-clinicas.html">Ver Webs para clínicas <span aria-hidden="true">→</span></a></li>
-        <li><button class="ind-row" type="button" data-ind="restaurantes" aria-pressed="false"><h3>Restaurantes</h3><span class="use">La carta se lee bien en el móvil y la mesa se reserva con personas y hora.<span class="act">→ Reservar mesa</span></span></button><a class="ind-link" href="#" data-route="/webs/restaurantes">Ver Webs para restaurantes <span aria-hidden="true">→</span></a></li>
-        <li><button class="ind-row" type="button" data-ind="inmobiliarias" aria-pressed="false"><h3>Inmobiliarias</h3><span class="use">Fichas de propiedades filtrables por zona y precio, con visita agendada desde la ficha.<span class="act">→ Agendar visita</span></span></button><a class="ind-link" href="#" data-route="/webs/inmobiliarias">Ver Webs para inmobiliarias <span aria-hidden="true">→</span></a></li>
-        <li><button class="ind-row" type="button" data-ind="hoteles" aria-pressed="false"><h3>Hoteles</h3><span class="use">El huésped ve disponibilidad por fechas y reserva directo en la web del hotel.<span class="act">→ Ver disponibilidad</span></span></button><a class="ind-link" href="#" data-route="/webs/hoteles">Ver Webs para hoteles <span aria-hidden="true">→</span></a></li>
-        <li><button class="ind-row" type="button" data-ind="despachos" aria-pressed="false"><h3>Despachos</h3><span class="use">Contables y abogados explican cada área y reciben consultas con el caso ya descrito.<span class="act">→ Enviar consulta</span></span></button><a class="ind-link" href="#" data-route="/webs/despachos">Ver Webs para despachos <span aria-hidden="true">→</span></a></li>
+        <li><button class="ind-row" type="button" data-ind="clinicas" aria-pressed="true"><h3>Clínicas</h3><span class="use">Tus pacientes agendan su primera cita sin tener que llamar.<span class="act">→ Agendar cita</span></span></button><a class="ind-link" href="webs-clinicas.html">Ver páginas para clínicas <span aria-hidden="true">→</span></a></li>
+        <li><button class="ind-row" type="button" data-ind="restaurantes" aria-pressed="false"><h3>Restaurantes</h3><span class="use">Tus clientes ven el menú en el celular y reservan mesa.<span class="act">→ Reservar mesa</span></span></button><a class="ind-link" href="#" data-route="/webs/restaurantes">Ver páginas para restaurantes <span aria-hidden="true">→</span></a></li>
+        <li><button class="ind-row" type="button" data-ind="inmobiliarias" aria-pressed="false"><h3>Inmobiliarias</h3><span class="use">Los interesados filtran por zona y precio, y agendan la visita desde la ficha.<span class="act">→ Agendar visita</span></span></button><a class="ind-link" href="#" data-route="/webs/inmobiliarias">Ver páginas para inmobiliarias <span aria-hidden="true">→</span></a></li>
+        <li><button class="ind-row" type="button" data-ind="hoteles" aria-pressed="false"><h3>Hoteles</h3><span class="use">Tus huéspedes ven las fechas libres y reservan directo contigo, sin pasar por otras plataformas.<span class="act">→ Ver disponibilidad</span></span></button><a class="ind-link" href="#" data-route="/webs/hoteles">Ver páginas para hoteles <span aria-hidden="true">→</span></a></li>
+        <li><button class="ind-row" type="button" data-ind="despachos" aria-pressed="false"><h3>Despachos</h3><span class="use">Tus clientes te cuentan su caso antes de la primera llamada.<span class="act">→ Enviar consulta</span></span></button><a class="ind-link" href="#" data-route="/webs/despachos">Ver páginas para despachos <span aria-hidden="true">→</span></a></li>
       </ul>
-      <aside class="ind-preview" aria-label="Vista de la acción principal en el móvil">
-        <div class="ind-panel" data-panel="clinicas"><p class="cap">Clínicas · reserva de primera visita</p>
-          <div class="phone"><span class="pt">Reservar cita</span><div><p class="lb">Tratamiento</p><div class="inp">Primera visita y diagnóstico <span>⌄</span></div></div><div><p class="lb">Día</p><div class="opt"><span>Mié 18</span><span class="on">Jue 19</span><span>Vie 20</span></div></div><div><p class="lb">Hora</p><div class="opt"><span>16:30</span><span class="on">18:00</span><span>19:15</span></div></div><span class="go">Confirmar jueves 18:00</span></div></div>
+      <aside class="ind-preview" aria-label="Vista de la acción principal en el celular">
+        <div class="ind-panel" data-panel="clinicas"><p class="cap">Clínicas · cita de primera visita</p>
+          <div class="phone"><span class="pt">Agendar cita</span><div><p class="lb">Tratamiento</p><div class="inp">Primera visita y diagnóstico <span>⌄</span></div></div><div><p class="lb">Día</p><div class="opt"><span>Mié 18</span><span class="on">Jue 19</span><span>Vie 20</span></div></div><div><p class="lb">Hora</p><div class="opt"><span>16:30</span><span class="on">18:00</span><span>19:15</span></div></div><span class="go">Confirmar jueves 18:00</span></div></div>
         <div class="ind-panel" data-panel="restaurantes" hidden><p class="cap">Restaurantes · reserva de mesa</p>
           <div class="phone"><span class="pt">Reservar mesa</span><div><p class="lb">Personas</p><div class="opt"><span>2</span><span class="on">4</span><span>6</span><span>8+</span></div></div><div><p class="lb">Viernes 20</p><div class="opt"><span>20:00</span><span class="on">20:30</span><span>21:00</span><span>21:30</span></div></div><div><p class="lb">Ocasión</p><div class="inp">Cumpleaños <span>⌄</span></div></div><span class="go">Reservar para 4 a las 20:30</span></div></div>
         <div class="ind-panel" data-panel="inmobiliarias" hidden><p class="cap">Inmobiliarias · ficha con visita</p>
@@ -854,19 +854,19 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 <section class="band section" id="ia" aria-labelledby="ia-title">
   <div class="wrap ai-grid">
     <div class="ai-copy">
-      <h2 class="h2" id="ia-title">La IA responde lo habitual y le pasa a tu equipo lo que no lo es.</h2>
-      <p class="lede">Además de webs, implementamos IA para atención, ventas y operación. Definimos con tu equipo qué puede contestar sola, qué no, y a quién deriva cada caso.</p>
+      <h2 class="h2" id="ia-title">Un asistente que contesta tu WhatsApp aunque estés ocupado.</h2>
+      <p class="lede">Responde lo de siempre (horarios, precios, ubicación), toma los datos para la cita y te pasa con una persona cuando hace falta, por ejemplo si alguien tiene una urgencia.</p>
       <ol class="ai-flow">
-        <li><span>Responde</span>Horarios, tratamientos, precios publicados y cómo llegar.</li>
-        <li><span>Recoge</span>Nombre, tratamiento y horario preferido para la cita.</li>
-        <li class="esc"><span>Deriva</span>Casos clínicos, reclamos o pagos: pasan a una persona con el resumen listo.</li>
-        <li><span>Avisa</span>Cuando se acerca al cupo de 300 conversaciones del mes. Si se agota, todo pasa a tu equipo.</li>
+        <li><span>Contesta</span>Horarios, tratamientos, precios y cómo llegar.</li>
+        <li><span>Anota</span>Nombre, tratamiento y el horario que prefiere el paciente.</li>
+        <li class="esc"><span>Te lo pasa</span>Urgencias, quejas o pagos: te llegan a ti con el resumen de la conversación.</li>
+        <li><span>Te avisa</span>Si se acerca a las 300 conversaciones del mes. Al llegar al límite, todo pasa a tu equipo.</li>
       </ol>
       <div class="ai-offer">
-        <div class="ai-off"><div><h3>Recepción por WhatsApp</h3><p>Un número, una sucursal y un flujo. Funciona con cualquier plan o con la web que ya tienes.</p></div><div class="price-cell"><span class="k">Activación</span><span class="v">$3,990</span></div><div class="price-cell"><span class="k">Mensualidad</span><span class="v">$1,490</span></div></div>
-        <div class="ai-off"><div><h3>Automatización a medida</h3><p>Para un CRM, varias sucursales o un proceso interno. El diagnóstico se acredita al proyecto.</p></div><div class="price-cell"><span class="k">Diagnóstico</span><span class="v">$3,900</span></div><div class="price-cell"><span class="k">Piloto</span><span class="v"><small style="display:inline">desde </small>$19,900</span></div></div>
+        <div class="ai-off"><div><h3>Asistente de WhatsApp</h3><p>Para un número y una sucursal. Funciona con cualquier plan o con la página que ya tienes.</p></div><div class="price-cell"><span class="k">Pago inicial</span><span class="v">$3,990</span></div><div class="price-cell"><span class="k">Mensualidad</span><span class="v">$1,490</span></div></div>
+        <div class="ai-off"><div><h3>Proyectos de IA a medida</h3><p>Para varias sucursales, tu CRM o un proceso interno. El costo del diagnóstico se descuenta del proyecto.</p></div><div class="price-cell"><span class="k">Diagnóstico</span><span class="v">$3,900</span></div><div class="price-cell"><span class="k">Piloto</span><span class="v"><small style="display:inline">desde </small>$19,900</span></div></div>
       </div>
-      <div><a class="link" href="#" data-route="/ia">Ver Inteligencia artificial y el laboratorio <span class="arrow" aria-hidden="true">→</span></a></div>
+      <div><a class="link" href="#" data-route="/ia">Conoce cómo usamos la IA <span class="arrow" aria-hidden="true">→</span></a></div>
     </div>
     <div class="chat" aria-label="Ejemplo de conversación con el asistente de una clínica">
       <div class="chat-top"><b>Asistente · Clínica Arrayán</b><span>Ejemplo ficticio</span></div>
@@ -875,7 +875,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
         <div class="msg in"><small>Asistente</small>Hola. La limpieza dura 45 minutos y mañana jueves atendemos de 9:00 a 20:00. ¿Qué horario prefieres?</div>
         <div class="msg out"><small>Paciente</small>A las 18:00. Otra cosa: me pusieron un implante en otra clínica y se mueve un poco.</div>
         <div class="msg in"><small>Asistente</small>Anoté tu solicitud de limpieza para el jueves a las 18:00. Lo del implante tiene que verlo el equipo clínico, así que se lo paso a recepción junto con tu mensaje. Te confirman por este mismo chat.</div>
-        <div class="handoff"><b>Derivado a recepción</b><dl><dt>Motivo</dt><dd>Implante de otra clínica con movilidad</dd><dt>Solicitud</dt><dd>Limpieza · jue 18:00</dd><dt>Pendiente</dt><dd>Confirmar horario y revisar el implante</dd></dl></div>
+        <div class="handoff"><b>Pasado a recepción</b><dl><dt>Motivo</dt><dd>Implante de otra clínica con movilidad</dd><dt>Solicitud</dt><dd>Limpieza · jue 18:00</dd><dt>Pendiente</dt><dd>Confirmar horario y revisar el implante</dd></dl></div>
       </div>
       <div class="chat-foot"><span>Conversación de ejemplo</span><button type="button" id="chat-replay">Ver de nuevo</button></div>
     </div>
@@ -885,17 +885,17 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 <!-- ============ FAQ ============ -->
 <section class="band band--light section" id="preguntas" aria-labelledby="faq-title">
   <div class="wrap faq-grid">
-    <h2 class="h2" id="faq-title">Lo que conviene saber antes de pedir la propuesta.</h2>
+    <h2 class="h2" id="faq-title">Preguntas frecuentes</h2>
     <div class="faq" id="faq">
-      <div class="faq-item open"><h3><button class="faq-q" type="button" aria-expanded="true" aria-controls="fa1" id="fq1">¿Tengo que pagar por el diagnóstico o la propuesta?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa1" role="region" aria-labelledby="fq1"><div><p>No. El diagnóstico y la propuesta son gratis. La activación y la mensualidad empiezan solo si decides activar tu web.</p></div></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa2" id="fq2">¿Qué incluye la propuesta?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa2" role="region" aria-labelledby="fq2"><div><p>Un enlace privado con tu web actual y la propuesta lado a lado, en escritorio y móvil, la lista de mejoras, el plan que te recomendamos, su precio y hasta cuándo es válida. Desde ahí puedes activar tu web o agendar 15 minutos para conversarla.</p></div></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa3" id="fq3">No tengo textos ni fotos. ¿Puedo pedirla igual?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa3" role="region" aria-labelledby="fq3"><div><p>Sí. Partimos de lo que ya existe: tu web, tus redes y tu ficha de Google. Si hace falta, te decimos qué fotos conviene tomar y escribimos los textos contigo.</p></div></div></div>
+      <div class="faq-item open"><h3><button class="faq-q" type="button" aria-expanded="true" aria-controls="fa1" id="fq1">¿Tengo que pagar por la propuesta?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa1" role="region" aria-labelledby="fq1"><div><p>No, es gratis. Solo pagas el monto inicial y la mensualidad si decides activar tu página.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa2" id="fq2">¿Qué incluye la propuesta?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa2" role="region" aria-labelledby="fq2"><div><p>Un enlace privado donde ves tu página de hoy junto a cómo quedaría, en computadora y en celular. También incluye qué mejoras, el plan que te recomendamos, el precio y hasta cuándo es válida. Desde ahí puedes activarla o agendar una llamada de 15 minutos.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa3" id="fq3">No tengo textos ni fotos. ¿Puedo pedirla igual?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa3" role="region" aria-labelledby="fq3"><div><p>Sí. Partimos de lo que ya tienes: tu página, tus redes y tu perfil de Google. Si hace falta, te decimos qué fotos conviene tomar y escribimos los textos contigo.</p></div></div></div>
       <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa4" id="fq4">¿El dominio queda a nombre de mi negocio?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa4" role="region" aria-labelledby="fq4"><div><p>Sí. El dominio es tuyo. Si ya tienes uno, lo conectamos; si no, te ayudamos a registrarlo a tu nombre.</p></div></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa5" id="fq5">¿Cómo pido cambios después de publicar?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa5" role="region" aria-labelledby="fq5"><div><p>Escribes a la persona que lleva tu web con lo que quieres cambiar: un horario, un precio, una foto nueva. Cada plan incluye tiempo de cambios al mes: 30 minutos en Esencial, 60 en Negocio y 120 en Avanzado.</p></div></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa6" id="fq6">¿Puedo cancelar la suscripción?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa6" role="region" aria-labelledby="fq6"><div><p>Las condiciones de permanencia y cancelación están en la tabla de planes. Te las explicamos antes de que pagues la activación.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa5" id="fq5">¿Cómo pido cambios después de publicar?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa5" role="region" aria-labelledby="fq5"><div><p>Le escribes a la persona que lleva tu página con lo que quieres cambiar: un horario, un precio, una foto nueva. Cada plan incluye tiempo de cambios al mes: 30 minutos en Esencial, 60 en Negocio y 120 en Avanzado.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa6" id="fq6">¿Puedo cancelar la suscripción?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa6" role="region" aria-labelledby="fq6"><div><p>Las condiciones de permanencia y cancelación están en la tabla de planes. Te las explicamos antes de que hagas el pago inicial.</p></div></div></div>
       <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa7" id="fq7">¿Trabajan con negocios de mi país?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa7" role="region" aria-labelledby="fq7"><div><p>Trabajamos a distancia con negocios de Latinoamérica. Las reuniones son por videollamada y el seguimiento por WhatsApp o correo.</p></div></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa9" id="fq9">¿Qué pasa si la recepción por WhatsApp llega a 300 conversaciones?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa9" role="region" aria-labelledby="fq9"><div><p>Te avisamos cuando te acercas al cupo del mes. Si se agota, las conversaciones nuevas pasan directo a tu equipo, sin respuestas automáticas, hasta el mes siguiente. Si aplica algún cargo de Meta por mensajes, aparece desglosado en tu propuesta.</p></div></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa8" id="fq8">¿Necesito contratar IA para tener la web?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa8" role="region" aria-labelledby="fq8"><div><p>No. La consultoría de IA es una línea aparte. Puedes sumarla después, cuando tu web ya esté funcionando.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa9" id="fq9">¿Qué pasa si el asistente de WhatsApp llega a 300 conversaciones?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa9" role="region" aria-labelledby="fq9"><div><p>Te avisamos cuando te acercas al cupo del mes. Si se agota, las conversaciones nuevas pasan directo a tu equipo, sin respuestas automáticas, hasta el mes siguiente. Si aplica algún cargo de Meta por mensajes, aparece desglosado en tu propuesta.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa8" id="fq8">¿Tengo que contratar el asistente de WhatsApp para tener mi página?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa8" role="region" aria-labelledby="fq8"><div><p>No. Es opcional. Puedes sumarlo después, cuando tu página ya esté funcionando.</p></div></div></div>
       <p class="faq-more"><a class="link" href="#" data-route="/precios">Ver todas las preguntas en Precios</a></p>
     </div>
   </div>
@@ -905,12 +905,12 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 <section class="band band--petrol section" id="diagnostico" aria-labelledby="close-title">
   <div class="wrap close-grid">
     <div class="close-copy">
-      <h2 class="h2" id="close-title">Pide tu diagnóstico gratis.</h2>
-      <p class="lede" style="color:rgba(247,244,235,.8)">Revisamos tu web, o tu perfil si todavía no tienes una, y te enviamos una propuesta privada con el antes y después, las mejoras, el plan y su precio.</p>
+      <h2 class="h2" id="close-title">Pide tu propuesta gratis.</h2>
+      <p class="lede" style="color:rgba(247,244,235,.8)">Mándanos tu página o tu Instagram. Te enviamos un enlace privado con cómo quedaría tu nueva página, el plan que te conviene y el precio.</p>
       <ol>
-        <li><span>1</span>Nos dejas tu web, o tu Instagram o ficha de Google.</li>
+        <li><span>1</span>Nos mandas tu página, tu Instagram o tu perfil de Google.</li>
         <li><span>2</span>Preparamos tu propuesta en un enlace privado.</li>
-        <li><span>3</span>Desde ahí activas tu web o agendas 15 minutos para conversarla.</li>
+        <li><span>3</span>Si te gusta, la activas ahí mismo o hablamos 15 minutos.</li>
       </ol>
       <p class="close-alt"><a class="link" href="propuesta-clinica-arrayan.html">Ver una propuesta privada de ejemplo <span class="arrow" aria-hidden="true">→</span></a></p>
       <p class="close-alt">¿Prefieres conversar primero? <a class="link" href="#" data-route="/contacto">Agendar una llamada</a></p>
@@ -918,29 +918,29 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     <form class="form" id="lead-form" novalidate>
       <p class="form-note"><b>Prototipo</b><span>Este formulario valida los datos, pero no los envía ni los guarda.</span></p>
       <div id="lead-fields" style="display:grid;gap:18px">
-        <div class="seg seg--dark" role="radiogroup" aria-label="¿Tienes web?" id="seg-mode">
-          <button type="button" role="radio" data-v="web" aria-checked="true" tabindex="0">Tengo web</button>
-          <button type="button" role="radio" data-v="noweb" aria-checked="false" tabindex="-1">Todavía no tengo web</button>
+        <div class="seg seg--dark" role="radiogroup" aria-label="¿Tienes página web?" id="seg-mode">
+          <button type="button" role="radio" data-v="web" aria-checked="true" tabindex="0">Ya tengo página</button>
+          <button type="button" role="radio" data-v="noweb" aria-checked="false" tabindex="-1">No tengo página</button>
         </div>
-        <div class="fld" data-f="site" data-mode="web"><label for="f-site">URL de tu web</label><input id="f-site" name="site" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com" aria-describedby="e-site"><p class="err" id="e-site" hidden></p></div>
+        <div class="fld" data-f="site" data-mode="web"><label for="f-site">Dirección de tu página</label><input id="f-site" name="site" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com" aria-describedby="e-site"><p class="err" id="e-site" hidden></p></div>
         <div data-mode="noweb" hidden style="display:grid;gap:18px">
           <div class="frow">
             <div class="fld" data-f="industry"><label for="f-industry">Rubro</label>
               <select id="f-industry" name="industry" aria-describedby="e-industry"><option value="">Elige uno</option><option>Clínica o consultorio</option><option>Restaurante o café</option><option>Inmobiliaria</option><option>Hotel u hospedaje</option><option>Despacho contable o legal</option><option>Otro</option></select><p class="err" id="e-industry" hidden></p></div>
             <div class="fld" data-f="city"><label for="f-city">Ciudad</label><input id="f-city" name="city" autocomplete="address-level2" placeholder="Ej.: Guadalajara" aria-describedby="e-city"><p class="err" id="e-city" hidden></p></div>
           </div>
-          <div class="fld" data-f="social"><label for="f-social">Instagram o ficha de Google</label><input id="f-social" name="social" autocapitalize="off" spellcheck="false" placeholder="@tunegocio o enlace de Google Maps" aria-describedby="h-social e-social"><p class="hint" id="h-social">Con esto armamos tu propuesta aunque no tengas web.</p><p class="err" id="e-social" hidden></p></div>
+          <div class="fld" data-f="social"><label for="f-social">Tu Instagram o tu perfil de Google Maps</label><input id="f-social" name="social" autocapitalize="off" spellcheck="false" placeholder="@tunegocio o enlace de Google Maps" aria-describedby="h-social e-social"><p class="hint" id="h-social">Con esto armamos tu propuesta aunque no tengas página.</p><p class="err" id="e-social" hidden></p></div>
         </div>
         <div class="frow">
           <div class="fld" data-f="name"><label for="f-name">Tu nombre</label><input id="f-name" name="name" autocomplete="name" aria-describedby="e-name"><p class="err" id="e-name" hidden></p></div>
           <div class="fld" data-f="biz"><label for="f-biz">Nombre del negocio</label><input id="f-biz" name="biz" autocomplete="organization" aria-describedby="e-biz"><p class="err" id="e-biz" hidden></p></div>
         </div>
-        <div class="fld" data-f="contact"><label for="f-contact">WhatsApp o correo para enviarte la propuesta</label><input id="f-contact" name="contact" autocomplete="email" placeholder="+52 33 1234 5678 o tu@correo.com" aria-describedby="e-contact"><p class="err" id="e-contact" hidden></p></div>
-        <button class="btn btn-primary" type="submit">Pedir diagnóstico gratis <span class="arrow" aria-hidden="true">→</span></button>
+        <div class="fld" data-f="contact"><label for="f-contact">Tu WhatsApp o correo</label><input id="f-contact" name="contact" autocomplete="email" placeholder="+52 33 1234 5678 o tu@correo.com" aria-describedby="e-contact"><p class="err" id="e-contact" hidden></p></div>
+        <button class="btn btn-primary" type="submit">Quiero mi propuesta gratis <span class="arrow" aria-hidden="true">→</span></button>
       </div>
       <div class="success" id="lead-success" hidden tabindex="-1">
-        <h3>Diagnóstico solicitado. No se envió.</h3>
-        <p>En el sitio, aquí empezaría tu diagnóstico y recibirías la propuesta en un enlace privado. En este prototipo los datos quedan solo en tu pantalla.</p>
+        <h3>Recibimos tus datos. (Es una prueba: no se envió.)</h3>
+        <p>En el sitio publicado, aquí te confirmaríamos que recibimos tus datos y te enviaríamos la propuesta. En esta prueba no se guarda nada.</p>
         <dl id="lead-summary"></dl>
         <div style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn btn-primary" href="propuesta-clinica-arrayan.html">Ver cómo llega una propuesta <span class="arrow" aria-hidden="true">→</span></a><button class="btn btn-line" type="button" id="lead-reset">Editar los datos</button></div>
       </div>
@@ -952,7 +952,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 <footer class="band footer">
   <div class="wrap">
     <svg viewBox="0 0 353.37 54" fill="currentColor" role="img" aria-label="Ceiba Labs"><use href="#ceiba-logo"/></svg>
-    <nav aria-label="Pie de página"><a href="#suscripcion" data-route="/webs">Webs</a><a href="#ia" data-route="/ia">Inteligencia artificial</a><a href="#precios" data-route="/precios">Precios</a><a href="#antes-despues" data-route="/trabajo">Trabajo</a><a href="#" data-route="/nosotros">Nosotros</a><a href="#" data-route="/contacto">Contacto</a><a href="#diagnostico">Diagnóstico gratis</a></nav>
+    <nav aria-label="Pie de página"><a href="#suscripcion" data-route="/webs">Páginas web</a><a href="#ia" data-route="/ia">Inteligencia artificial</a><a href="#precios" data-route="/precios">Precios</a><a href="#antes-despues" data-route="/trabajo">Trabajo</a><a href="#" data-route="/nosotros">Nosotros</a><a href="#" data-route="/contacto">Contacto</a><a href="#diagnostico">Propuesta gratis</a></nav>
   </div>
   <div class="wrap foot-legal"><span>© 2026 Ceiba Labs · Estudio digital para negocios de Latinoamérica</span><nav aria-label="Legal"><a href="#" data-route="/privacidad">Privacidad</a><a href="#" data-route="/terminos">Términos</a><a href="#" data-route="/baja">Darse de baja de correos</a></nav></div>
 </footer>
@@ -961,9 +961,9 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 <!-- example diagnostic -->
 <dialog class="diag" id="diag" aria-labelledby="diag-title">
   <div class="diag-in">
-    <div class="diag-top"><div><h2 id="diag-title">Diagnóstico de ejemplo</h2><p>clinicaarrayan.mx · negocio ficticio. Así se ve el diagnóstico que acompaña cada propuesta.</p></div><button class="x" type="button" id="diag-close" aria-label="Cerrar diagnóstico">×</button></div>
+    <div class="diag-top"><div><h2 id="diag-title">Revisión de ejemplo</h2><p>clinicaarrayan.mx · negocio ficticio. Así es la revisión que acompaña cada propuesta.</p></div><button class="x" type="button" id="diag-close" aria-label="Cerrar revisión">×</button></div>
     <div class="diag-body">
-      <div class="diag-progress" id="diag-progress" aria-label="Pasos del diagnóstico"></div>
+      <div class="diag-progress" id="diag-progress" aria-label="Pasos de la revisión"></div>
       <div class="diag-step" id="diag-step" aria-live="polite"></div>
     </div>
     <div class="diag-foot"><button class="btn btn-line" type="button" id="diag-prev">← Anterior</button><button class="btn btn-primary" type="button" id="diag-next">Siguiente →</button></div>
@@ -987,13 +987,13 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 <template id="tpl-new">
   <div class="mk-new">
     <div class="mn-util"><span>Urgencias el mismo día</span><span>Col. Providencia, Guadalajara</span><span class="mn-util-wa"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>33 0000 0000</span></div>
-    <div class="mn-top"><div class="mn-brand"><b>Arrayán</b><span>Clínica dental</span></div><nav><span>Tratamientos</span><span>Equipo</span><span>Opiniones</span><span>Cómo llegar</span></nav><span class="mn-wa-btn" title="WhatsApp"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg></span><span class="mn-btn" data-mark="1">Reservar cita</span></div>
+    <div class="mn-top"><div class="mn-brand"><b>Arrayán</b><span>Clínica dental</span></div><nav><span>Tratamientos</span><span>Equipo</span><span>Opiniones</span><span>Cómo llegar</span></nav><span class="mn-wa-btn" title="WhatsApp"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg></span><span class="mn-btn" data-mark="1">Agendar cita</span></div>
     <div class="mn-hero">
       <div class="mn-copy">
         <p class="mn-open" data-mark="4"><i></i>Abierto hoy hasta las 20:00 · Av. Los Arrayanes 1240</p>
         <h3>Odontología sin apuro, con un plan claro <em>desde la primera visita.</em></h3>
         <p class="sub">Diagnóstico, limpieza, ortodoncia e implantes en un solo consultorio, con la misma dentista de principio a fin.</p>
-        <div class="mn-ctas"><span class="mn-btn">Reservar primera visita</span><span class="mn-ghost mn-ghost--wa"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Escribir por WhatsApp</span></div>
+        <div class="mn-ctas"><span class="mn-btn">Agendar primera visita</span><span class="mn-ghost mn-ghost--wa"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Escribir por WhatsApp</span></div>
         <p class="mn-rating"><span class="mn-stars" aria-hidden="true">★★★★★</span><b>4.9</b> · 186 reseñas en Google</p>
       </div>
       <div class="mn-photo-wrap">
@@ -1003,7 +1003,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     </div>
     <ul class="mn-trust"><li><b>Desde 2009</b>en la colonia Providencia</li><li><b>Cédula profesional</b>4512378</li><li><b>Hasta 6 meses sin intereses</b>con tarjeta participante</li><li><b>Estacionamiento</b>para pacientes</li></ul>
     <div class="mn-treat" data-mark="2"><h4>Tratamientos</h4>
-      <ul><li><b>Primera visita y diagnóstico</b><span>40 min · incluye radiografía</span><em>Reservar →</em></li><li><b>Limpieza dental</b><span>45 min</span><em>Reservar →</em></li><li><b>Ortodoncia invisible</b><span>Evaluación de 30 min</span><em>Reservar →</em></li><li><b>Implantes</b><span>Evaluación de 45 min</span><em>Reservar →</em></li><li><b>Blanqueamiento</b><span>2 sesiones de 60 min</span><em>Reservar →</em></li><li><b>Urgencias</b><span>Atención el mismo día</span><em>Llamar →</em></li></ul>
+      <ul><li><b>Primera visita y diagnóstico</b><span>40 min · incluye radiografía</span><em>Agendar →</em></li><li><b>Limpieza dental</b><span>45 min</span><em>Agendar →</em></li><li><b>Ortodoncia invisible</b><span>Evaluación de 30 min</span><em>Agendar →</em></li><li><b>Implantes</b><span>Evaluación de 45 min</span><em>Agendar →</em></li><li><b>Blanqueamiento</b><span>2 sesiones de 60 min</span><em>Agendar →</em></li><li><b>Urgencias</b><span>Atención el mismo día</span><em>Llamar →</em></li></ul>
     </div>
     <div class="mn-space" role="img" aria-label="Recepción y sala de espera de la clínica"></div>
     <div class="mn-team" data-mark="3"><div class="mn-portrait" role="img" aria-label="Retrato de la Dra. Valeria Ríos"></div><div><p class="mn-q">“Antes de empezar cualquier tratamiento, te muestro qué vemos y qué opciones tienes.”</p><b>Dra. Valeria Ríos</b><span>Rehabilitación oral · cédula 4512378 · personaje ficticio</span></div></div>
@@ -1017,7 +1017,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       <p class="mn-rev-more">Ver las 186 reseñas en Google →<small>Reseñas de ejemplo para el concepto</small></p>
     </div>
     <div class="mn-visit"><div class="mn-facade" role="img" aria-label="Fachada de la clínica"></div><div><h4>Cómo llegar</h4><dl><dt>Dirección</dt><dd>Av. Los Arrayanes 1240, local 3, Col. Providencia, Guadalajara</dd><dt>Lun a vie</dt><dd>9:00 a 20:00</dd><dt>Sábado</dt><dd>9:00 a 14:00</dd></dl><p style="margin-top:1.2em;display:flex;flex-wrap:wrap;gap:.6em"><span class="mn-ghost">Abrir en mapas</span><span class="mn-ghost mn-ghost--wa"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Escribir por WhatsApp</span></p></div></div>
-    <div class="mn-foot">Clínica Dental Arrayán · Aviso de privacidad · Concepto de rediseño de Ceiba Labs</div>
+    <div class="mn-foot">Clínica Dental Arrayán · Aviso de privacidad · Ejemplo de rediseño de Ceiba Labs</div>
     <div class="mn-float">
       <div class="mn-ai" role="region" aria-label="Asistente de la clínica">
         <div class="mn-ai-top"><div><b>Asistente Arrayán</b><span>Responde al instante y sigue por WhatsApp</span></div><button type="button" class="mn-ai-x" data-ai="toggle" aria-label="Cerrar asistente">×</button></div>
@@ -1026,7 +1026,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       </div>
       <button type="button" class="mn-ai-btn" data-ai="toggle" aria-expanded="false" data-mark="6"><span class="mn-ai-dot" aria-hidden="true"></span>Pregúntale al asistente</button>
     </div>
-    <div class="mn-sticky"><span class="mn-btn">Reservar cita</span><span class="mn-ghost mn-ghost--wa"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>WhatsApp</span></div>
+    <div class="mn-sticky"><span class="mn-btn">Agendar cita</span><span class="mn-ghost mn-ghost--wa"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>WhatsApp</span></div>
   </div>
 </template>
 
@@ -1051,7 +1051,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   /* ---------- assistant inside the clinic concept ---------- */
   const AI = {
     urg: ['¿Atienden urgencias hoy?', 'Sí. Hoy atendemos hasta las 20:00 y guardamos espacios para urgencias. Si tienes dolor fuerte o inflamación, te paso con recepción por WhatsApp para darte la hora más cercana.', 'wa'],
-    first: ['¿Qué incluye la primera visita?', 'Dura 40 minutos: revisión completa, radiografía y un plan de tratamiento por escrito. Puedes reservarla aquí mismo.', 'book'],
+    first: ['¿Qué incluye la primera visita?', 'Dura 40 minutos: revisión completa, radiografía y un plan de tratamiento por escrito. Puedes agendarla aquí mismo.', 'book'],
     msi: ['¿Tienen meses sin intereses?', 'Sí, hasta 6 meses sin intereses con tarjeta participante en ortodoncia, implantes y blanqueamiento.', 'wa']
   };
   const waIco = '<svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>';
@@ -1071,7 +1071,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     const log = fl.querySelector('.mn-ai-log');
     t.hidden = true;
     log.insertAdjacentHTML('beforeend', `<p class="mn-ai-msg me">${a[0]}</p>`);
-    const act = a[2] === 'wa' ? `<span class="mn-ai-act">${waIco}Seguir por WhatsApp</span>` : '<span class="mn-ai-act book">Reservar primera visita →</span>';
+    const act = a[2] === 'wa' ? `<span class="mn-ai-act">${waIco}Seguir por WhatsApp</span>` : '<span class="mn-ai-act book">Agendar primera visita →</span>';
     const reply = () => { const ty = log.querySelector('.mn-ai-typing'); if (ty) ty.remove(); log.insertAdjacentHTML('beforeend', `<p class="mn-ai-msg bot">${a[1]}${act}</p>`); log.scrollTop = log.scrollHeight; };
     if (reduce.matches) return reply();
     log.insertAdjacentHTML('beforeend', '<span class="mn-ai-typing" aria-hidden="true"><i></i><i></i><i></i></span>');
@@ -1082,8 +1082,8 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   /* hero tag follows the intro wipe */
   const heroTag = $('#hero-tag');
   if (heroTag && !reduce.matches) {
-    heroTag.textContent = 'Actual'; heroTag.dataset.state = 'old';
-    setTimeout(() => { heroTag.textContent = 'Propuesta'; heroTag.dataset.state = 'new'; }, 1500);
+    heroTag.textContent = 'Antes'; heroTag.dataset.state = 'old';
+    setTimeout(() => { heroTag.textContent = 'Después'; heroTag.dataset.state = 'new'; }, 1500);
   }
 
   /* ---------- mobile nav ---------- */
@@ -1131,8 +1131,8 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   function setView(v) {
     if (v === view) return; view = v;
     cmpSection.dataset.view = v;
-    tag.textContent = v === 'new' ? 'Propuesta' : 'Actual'; tag.dataset.state = v;
-    status.textContent = v === 'new' ? 'Viendo la propuesta' : 'Viendo la web actual';
+    tag.textContent = v === 'new' ? 'Después' : 'Antes'; tag.dataset.state = v;
+    status.textContent = v === 'new' ? 'Viendo cómo quedaría' : 'Viendo la página de hoy';
     const inc = v === 'new' ? layerNew : layerOld, out = v === 'new' ? layerOld : layerNew;
     vp.scrollTop = 0;
     inc.dataset.hidden = 'false'; inc.removeAttribute('aria-hidden');
@@ -1172,13 +1172,13 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   /* ---------- URL check (hero) ---------- */
   function parseUrl(raw) {
     let s = raw.trim();
-    if (!s) return { error: 'Escribe la dirección de tu web, por ejemplo tunegocio.com.' };
+    if (!s) return { error: 'Escribe la dirección de tu página, por ejemplo tunegocio.com' };
     if (/\s/.test(s)) return { error: 'La dirección no puede tener espacios. Revisa cómo la escribiste.' };
     if (!/^https?:\/\//i.test(s)) s = 'https://' + s;
-    let u; try { u = new URL(s); } catch { return { error: 'Eso no parece una dirección web. Debe verse como tunegocio.com.' }; }
+    let u; try { u = new URL(s); } catch { return { error: 'Esa dirección no parece válida. Debe verse como tunegocio.com' }; }
     const h = u.hostname.toLowerCase();
     if (!/^([a-z0-9áéíóúñü-]+\.)+[a-z]{2,}$/i.test(h) || h.split('.').some(p => !p || p.startsWith('-') || p.endsWith('-')))
-      return { error: 'Falta la terminación del dominio, como .com, .mx o .cl.' };
+      return { error: 'Le falta el final, como .com o .com.mx' };
     return { host: h.replace(/^www\./, ''), href: u.href };
   }
   const auditForm = $('#audit-form'), auditInput = $('#audit-url'), auditField = $('#audit-field'), auditOut = $('#audit-out');
@@ -1196,8 +1196,8 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     if (r.host === 'clinicaarrayan.mx') { auditOut.innerHTML = ''; openDiag(); return; }
     auditOut.innerHTML = `<div class="audit-result">
       <h3>Recibimos <code>${esc(r.host)}</code></h3>
-      <p>El servicio de revisión automática no está conectado en este prototipo, así que no analizamos tu web ni mostramos resultados. En el sitio, este botón abre <code>/diagnostico</code> con tu resultado.</p>
-      <div class="actions"><button class="btn btn-primary" type="button" data-act="ask">Pedir el diagnóstico de ${esc(r.host)}</button><button class="btn btn-line" type="button" data-act="demo">Ver un diagnóstico de ejemplo</button></div></div>`;
+      <p>El servicio de revisión automática no está conectado en este prototipo, así que no analizamos tu página ni mostramos resultados. En el sitio, este botón abre <code>/diagnostico</code> con tu resultado.</p>
+      <div class="actions"><button class="btn btn-primary" type="button" data-act="ask">Pedir la propuesta para ${esc(r.host)}</button><button class="btn btn-line" type="button" data-act="demo">Ver una revisión de ejemplo</button></div></div>`;
     $('[data-act="ask"]', auditOut).addEventListener('click', () => goToForm({ site: r.host }));
     $('[data-act="demo"]', auditOut).addEventListener('click', openDiag);
   });
@@ -1205,12 +1205,12 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 
   /* ---------- example diagnostic ---------- */
   const steps = [
-    { t: 'Primera pantalla en el móvil', was: 'Un banner de promociones y el logo ocupan toda la pantalla. No se ve qué tratamientos hay ni cómo pedir hora.', now: 'Nombre, horario de hoy y botón «Reservar cita» en la primera pantalla. La foto muestra el consultorio real.', why: 'Quien llega desde Google o Instagram decide en segundos si sigue o vuelve atrás.' },
-    { t: 'Pedir una cita', was: 'El único teléfono está en el pie de página, en letra de 9 px. En el móvil no se puede tocar para llamar.', now: 'Botón de reserva fijo. El paciente elige tratamiento, día y hora. La clínica recibe la cita en su agenda.', why: 'Es la acción que más le importa a la clínica y hoy es la más difícil de encontrar.' },
+    { t: 'Lo primero que se ve en el celular', was: 'Un banner de promociones y el logo ocupan toda la pantalla. No se ve qué tratamientos hay ni cómo pedir hora.', now: 'Nombre, horario de hoy y botón «Reservar cita» en la primera pantalla. La foto muestra el consultorio real.', why: 'Quien llega desde Google o Instagram decide en segundos si sigue o vuelve atrás.' },
+    { t: 'Pedir una cita', was: 'El único teléfono está en el pie de página, en letra de 9 px. En el celular no se puede tocar para llamar.', now: 'Botón para agendar siempre visible. El paciente elige tratamiento, día y hora. La clínica recibe la cita en su agenda.', why: 'Es la acción que más le importa a la clínica y hoy es la más difícil de encontrar.' },
     { t: 'Tratamientos', was: 'Once servicios en un mismo párrafo, sin duración, sin descripción y sin forma de reservar uno en particular.', now: 'Seis tratamientos principales, cada uno con duración y su propio botón. El resto, en la página de cada área.', why: 'El paciente busca su problema concreto, no la lista completa.' },
     { t: 'Confianza', was: 'Promociones con signos de exclamación y un contador de visitas. No aparece ninguna persona del equipo.', now: 'Fotografía del consultorio y presentación de la dentista a cargo, con su especialidad y cómo trabaja.', why: 'Antes de un tratamiento, la gente quiere saber quién la va a atender.' },
     { t: 'Opiniones y respuestas', was: 'Un libro de visitas sin mensajes desde 2016 y un formulario que promete responder «a la brevedad».', now: 'Reseñas de Google en la portada y un asistente que responde dudas al instante y sigue por WhatsApp.', why: 'Las dudas también llegan fuera del horario de recepción.' },
-    { t: 'Horario y ubicación', was: 'La dirección está dentro de una imagen: no se puede copiar ni abrir en mapas. La última noticia es de 2017.', now: 'Dirección en texto, botón «Abrir en mapas» y horario de hoy visible arriba.', why: 'Un dato desactualizado hace dudar de todo lo demás.' }
+    { t: 'Horario y ubicación', was: 'La dirección está en una imagen que no se puede copiar ni abrir en el mapa. La última noticia es de 2017.', now: 'Dirección en texto, botón «Abrir en mapas» y horario de hoy visible arriba.', why: 'Un dato desactualizado hace dudar de todo lo demás.' }
   ];
   const diag = $('#diag'), dStep = $('#diag-step'), dProg = $('#diag-progress'), dPrev = $('#diag-prev'), dNext = $('#diag-next');
   let di = 0, lastFocus = null;
@@ -1278,12 +1278,12 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   const form = $('#lead-form');
   let mode = 'web';
   const rules = {
-    site: v => !v.trim() ? 'Escribe la dirección de tu web, o elige «Todavía no tengo web».' : (parseUrl(v).error || true),
+    site: v => !v.trim() ? 'Escribe la dirección de tu página, o elige «No tengo página».' : (parseUrl(v).error || true),
     industry: v => !!v || 'Elige el rubro que más se parece a tu negocio.',
     city: v => v.trim().length >= 2 || 'Escribe la ciudad donde está tu negocio.',
     social: v => {
       const s = v.trim();
-      if (!s) return 'Déjanos tu Instagram o el enlace de tu ficha de Google.';
+      if (!s) return 'Déjanos tu Instagram o el enlace de tu perfil de Google Maps.';
       if (/^@?[a-z0-9._]{2,30}$/i.test(s)) return true;
       return parseUrl(s).error ? 'Escribe tu usuario de Instagram (@tunegocio) o pega el enlace de Google Maps.' : true;
     },
@@ -1294,7 +1294,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       if (!s) return 'Déjanos un WhatsApp o un correo para enviarte la propuesta.';
       if (s.includes('@')) return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s) || 'Revisa el correo: debe verse como nombre@dominio.com.';
       const d = s.replace(/[^\d]/g, '');
-      return (/^[+\d\s().-]+$/.test(s) && d.length >= 8 && d.length <= 15) || 'Revisa el número: incluye código de área, con al menos 8 dígitos.';
+      return (/^[+\d\s().-]+$/.test(s) && d.length >= 8 && d.length <= 15) || 'Revisa el número. Escríbelo con lada, por ejemplo 33 1234 5678';
     }
   };
   const fldOf = n => $(`[data-f="${n}"]`);
@@ -1328,8 +1328,8 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     if (bad.length) { inputOf(bad[0]).focus(); return; }
     const v = id => $(id).value.trim();
     const rows = mode === 'web'
-      ? [['Web', parseUrl(v('#f-site')).host]]
-      : [['Web', 'Todavía no tiene'], ['Rubro', v('#f-industry')], ['Ciudad', v('#f-city')], ['Perfil', v('#f-social')]];
+      ? [['Página', parseUrl(v('#f-site')).host]]
+      : [['Página', 'No tiene'], ['Rubro', v('#f-industry')], ['Ciudad', v('#f-city')], ['Perfil', v('#f-social')]];
     rows.push(['Nombre', v('#f-name')], ['Negocio', v('#f-biz')], ['Contacto', v('#f-contact')]);
     $('#lead-summary').innerHTML = rows.map(([k, val]) => `<dt>${k}</dt><dd>${esc(val)}</dd>`).join('');
     $('#lead-fields').hidden = true; const ok = $('#lead-success'); ok.hidden = false; ok.focus();

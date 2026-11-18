@@ -52,13 +52,13 @@ export async function POST(request) {
       customer_creation: 'always',
       payment_intent_data: {
         setup_future_usage: 'off_session',
-        description: `Activación · ${packageName} · ${proposal.business}`,
+        description: `Pago inicial · ${packageName} · ${proposal.business}`,
         metadata,
       },
       invoice_creation: {
         enabled: true,
         invoice_data: {
-          description: `Activación de ${packageName} para ${proposal.business}. La mensualidad de ${mxn(totals.monthly)} empieza el día en que se publica la web.`,
+          description: `Pago inicial de ${packageName} para ${proposal.business}. La mensualidad de ${mxn(totals.monthly)} empieza el día que publicamos la página.`,
           metadata,
           custom_fields: [{ name: 'Propuesta', value: slug }],
           footer: 'Ceiba Labs · Estudio digital para negocios de Latinoamérica · www.ceibalabs.io',
@@ -71,7 +71,7 @@ export async function POST(request) {
       locale: 'es-419',
       custom_text: {
         submit: {
-          message: `Hoy pagas la activación. La mensualidad de ${mxn(totals.monthly)} se cobra con esta tarjeta a partir del día en que publiquemos tu web. Precios con IVA incluido.`,
+          message: `Hoy pagas solo el monto inicial. La mensualidad de ${mxn(totals.monthly)} se cobra con esta tarjeta desde el día que publiquemos tu página. Precios con IVA.`,
         },
       },
       metadata,

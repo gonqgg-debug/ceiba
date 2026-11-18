@@ -83,7 +83,7 @@ async function ensurePortal() {
   return res;
 }
 
-const PHASE_LABEL = { activacion: 'Activación', mensual: 'Mensualidad', unico: '' };
+const PHASE_LABEL = { activacion: 'Pago inicial', mensual: 'Mensualidad', unico: '' };
 for (const p of allPrices()) {
   const label = PHASE_LABEL[p.phase];
   const item = { name: label ? `${p.item.name} · ${label}` : p.item.name, description: p.item.description };

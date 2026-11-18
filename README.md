@@ -48,12 +48,12 @@ build.py                 Arma site/ a partir de src/
 
 Son precios de lanzamiento para probar en México, en MXN y con IVA incluido. Falta confirmar si las cifras ya incluyen el IVA.
 
-| | Activación | Mensualidad |
+| | Pago inicial | Mensualidad |
 |---|---|---|
-| Web Esencial | $3,490 | $1,490 |
-| Web Negocio | $5,490 | $2,490 |
-| Web Avanzado | $8,490 | $3,990 |
-| Recepción por WhatsApp (módulo) | $3,990 | $1,490 |
+| Plan Esencial | $3,490 | $1,490 |
+| Plan Negocio | $5,490 | $2,490 |
+| Plan Avanzado | $8,490 | $3,990 |
+| Asistente de WhatsApp | $3,990 | $1,490 |
 | Automatización a medida | Diagnóstico $3,900, acreditable | Piloto desde $19,900 |
 
 ## Qué es prototipo y qué no
@@ -66,12 +66,12 @@ Son precios de lanzamiento para probar en México, en MXN y con IVA incluido. Fa
 
 ## Pagos con Stripe
 
-La propuesta privada cobra la activación con **Stripe Checkout** (página alojada por Stripe) y la mensualidad empieza **al publicar la web**.
+La propuesta privada cobra el pago inicial con **Stripe Checkout** (página alojada por Stripe) y la mensualidad empieza **al publicar la web**.
 
 ```
 Cliente en /p/[negocio]
   └─ «Activar mi web» → POST /api/checkout → Stripe Checkout
-        cobra la activación, genera la factura y guarda la tarjeta
+        cobra el pago inicial, genera la factura y guarda la tarjeta
   └─ webhook checkout.session.completed → POST /api/webhook
         deja en el cliente la tarjeta por defecto y el plan elegido
 Equipo de Ceiba publica la web
