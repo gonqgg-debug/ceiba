@@ -154,31 +154,56 @@ button{font:inherit;color:inherit}
 .wipe{position:absolute;top:0;bottom:0;left:0;width:2px;background:var(--lime);box-shadow:0 0 0 1px rgba(11,21,20,.25);pointer-events:none;opacity:0;z-index:5}
 .hero .viewport{height:clamp(380px,40vw,560px);overflow:hidden}
 
-/* ===================== MOCK: ACTUAL (old site, fixed 760px) ===================== */
-.mk-old{width:760px;font:12px/1.4 Verdana,Geneva,sans-serif;color:#333;background:#f2f2f2;transform-origin:top left}
-.mo-head{display:flex;align-items:center;gap:14px;padding:14px 18px;background:linear-gradient(#2a72c2,#1b4f8f);color:#fff;border-bottom:3px solid #f5c400}
-.mo-head b{display:block;font:bold 25px "Times New Roman",Times,serif;letter-spacing:1px;text-shadow:2px 2px 0 #0d2d55}
-.mo-head span{font:italic 13px "Times New Roman",serif;color:#cfe4ff}
-.mo-nav{display:flex;background:linear-gradient(#f8f8f8,#cfcfcf);border-bottom:1px solid #999}
-.mo-nav span{padding:7px 14px;border-right:1px solid #aaa;font:bold 11px Arial,sans-serif;color:#1b4f8f}
-.mo-banner{position:relative;height:210px;background:linear-gradient(120deg,#7fd3ff,#2d8fdc 55%,#1a5fb0);display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid #999}
-.mo-banner .spark{position:absolute;color:#fff;font:28px Arial;opacity:.8}
-.mo-banner .slide-txt{text-align:center;color:#fff;font:bold 30px "Comic Sans MS","Trebuchet MS",sans-serif;text-shadow:2px 2px 3px #0b3a74;line-height:1.15;position:relative}
-.mo-banner .slide-txt small{display:block;font:bold 15px Arial;color:#ffef7a;margin-top:8px}
-.mo-dots{position:absolute;bottom:8px;left:0;right:0;text-align:center;color:#fff;font:11px Arial;letter-spacing:5px}
-.mo-arrow{position:absolute;top:50%;margin-top:-16px;width:26px;height:32px;background:rgba(0,0,0,.35);color:#fff;font:bold 18px/32px Arial;text-align:center}
-.mo-body{display:grid;grid-template-columns:1fr 210px;gap:14px;padding:14px 18px;background:#fff}
-.mo-main h5{margin:0 0 8px;font:bold 17px "Times New Roman",serif;color:#1b4f8f;border-bottom:1px dotted #999;padding-bottom:4px}
-.mo-main p{font-size:11px;color:#555;text-align:justify;margin:0 0 8px}
-.mo-side{display:grid;gap:10px;align-content:start}
-.mo-box{border:1px solid #bbb;background:#f6f6f6}
-.mo-box b{display:block;background:#1b4f8f;color:#fff;font:bold 11px Arial;padding:4px 8px}
-.mo-box p{padding:6px 8px;font-size:10px;color:#555;margin:0}
-.mo-map{height:112px;background:repeating-linear-gradient(35deg,#e8e4d8 0 14px,#ddd7c6 14px 16px),#e8e4d8;position:relative;border:1px solid #bbb}
-.mo-map::before{content:"";position:absolute;inset:40% 0 auto;height:8px;background:#fff6c8;border-block:1px solid #d8c97a}
-.mo-map span{position:absolute;left:8px;bottom:6px;right:8px;font:bold 9px Arial;color:#a11;background:rgba(255,255,255,.85);padding:2px 4px}
-.mo-foot{padding:10px 18px 14px;background:#1b4f8f;color:#b8cde6;font:9px Arial;text-align:center}
-.mo-counter{display:inline-block;background:#000;color:#3f3;font:bold 10px "Courier New",monospace;padding:1px 4px;margin-top:4px}
+/* ===================== MOCK: ACTUAL (plantilla de WordPress de hace años, 760px fijos) ===================== */
+.mk-old{width:760px;font:13px/1.55 Arial,Helvetica,sans-serif;color:#5b6770;background:#fff;transform-origin:top left}
+.mo-top{display:flex;gap:18px;padding:6px 24px;background:#1BA8C9;color:#e6f7fb;font-size:11px}
+.mo-top .mo-social{margin-left:auto;font-weight:bold}
+.mo-head{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;border-bottom:1px solid #eef1f2}
+.mo-logo{display:flex;align-items:center;gap:8px}
+.mo-logo b{font:bold 13px/1.1 Arial;color:#2b3a42;text-transform:uppercase;letter-spacing:.5px}
+.mo-logo b span{display:block;color:#1BA8C9;font-size:20px;letter-spacing:1px}
+.mo-head nav{display:flex;gap:16px;font:bold 11px Arial;color:#2b3a42;letter-spacing:.6px}
+.mo-head nav .on{color:#1BA8C9;border-bottom:2px solid #1BA8C9;padding-bottom:3px}
+.mo-slider{position:relative;height:250px;background:url(img/old-stock.jpg) 70% center/cover #f2f2f2}
+.mo-cap{position:absolute;left:40px;top:46px;width:330px;background:rgba(27,168,201,.88);color:#fff;padding:18px 20px}
+.mo-cap b{display:block;font:bold 20px/1.2 Arial;margin-bottom:8px}
+.mo-cap span{display:block;font-size:12px;margin-bottom:12px}
+.mo-cap i{display:inline-block;font:bold 11px Arial;font-style:normal;border:2px solid #fff;padding:6px 14px;letter-spacing:1px}
+.mo-arr{position:absolute;top:50%;margin-top:-18px;width:36px;height:36px;background:rgba(0,0,0,.25);color:#fff;font:24px/34px Arial;text-align:center}
+.mo-arr.l{left:10px}.mo-arr.r{right:10px}
+.mo-dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:6px}
+.mo-dots i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.6)}
+.mo-dots i.on{background:#1BA8C9}
+.mo-welcome{padding:30px 70px 8px;text-align:center}
+.mo-welcome h5,.mo-services h5{margin:0;font:bold 18px Arial;color:#2b3a42;letter-spacing:1px}
+.mo-welcome hr{width:50px;border:0;border-top:3px solid #1BA8C9;margin:10px auto 14px}
+.mo-welcome p{margin:0}
+.mo-services{padding:24px 24px 30px;text-align:center}
+.mo-svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.mo-svc-grid > div{padding:20px 14px;border:1px solid #eef1f2;box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.mo-svc-grid .ico{display:inline-grid;place-items:center;width:56px;height:56px;border-radius:50%;background:#e3f5f9;margin-bottom:8px}
+.mo-svc-grid b{display:block;color:#2b3a42;font-size:14px;margin-bottom:6px}
+.mo-svc-grid p{font-size:12px;margin:0 0 10px}
+.mo-svc-grid i{font:bold 10px Arial;font-style:normal;color:#1BA8C9;letter-spacing:1px}
+.mo-row{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:24px;background:#f5f7f8}
+.mo-row h6{margin:0 0 8px;font:bold 12px Arial;color:#2b3a42;letter-spacing:1px}
+.mo-fields{display:grid;gap:6px}
+.mo-fields i{display:block;font:11px Arial;font-style:normal;color:#9aa4aa;background:#fff;border:1px solid #dde3e6;padding:6px 8px}
+.mo-fields i.tall{height:46px}
+.mo-send{display:inline-block;margin-top:8px;background:#1BA8C9;color:#fff;font:bold 11px Arial;padding:7px 18px;letter-spacing:1px}
+.mo-form small{display:block;margin-top:6px;font-size:10px;color:#9aa4aa}
+.mo-map{position:relative;background:#e5e3df;height:176px;display:grid;place-items:center}
+.mo-map-err{width:86%;background:#fff;padding:10px;font-size:10px;color:#333;box-shadow:0 1px 4px rgba(0,0,0,.3);display:grid;gap:6px}
+.mo-map-err b{font-size:10.5px}
+.mo-map-err u{justify-self:end;color:#1a73e8;text-decoration:none;font-weight:bold}
+.mo-fb{background:#fff;border:1px solid #dddfe2;font-size:11px}
+.mo-fb .fb-top{background:#3b5998;color:#fff;padding:8px 10px;font-weight:bold}
+.mo-fb .fb-body{padding:10px;display:grid;gap:4px}
+.mo-fb .fb-body span,.mo-fb .fb-body p:first-of-type{color:#90949c}
+.mo-fb p{margin:0}
+.mo-foot{padding:14px 24px;background:#2b3a42;color:#9aa7ae;font-size:11px;text-align:center}
+.mo-cookie{position:sticky;bottom:0;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 24px;background:rgba(43,58,66,.96);color:#fff;font-size:11px}
+.mo-cookie u{text-decoration:none;background:#1BA8C9;padding:5px 12px;font-weight:bold;white-space:nowrap}
 
 /* ===================== MOCK: PROPUESTA (responsive via container) ===================== */
 .mk-new{--c-ink:#18231F;--c-muted:#5E6A64;--c-paper:#FBFAF6;--c-sand:#EEEAE0;--c-accent:#1F4FD1;--c-line:#E2DED3;font-family:var(--f-body);font-size:clamp(10px,1.32cqi,15px);color:var(--c-ink);background:var(--c-paper);line-height:1.45;position:relative}
@@ -375,15 +400,6 @@ button{font:inherit;color:inherit}
   .mk-new .mn-car{grid-auto-columns:82%;gap:.9em}
   .mn-car-nav{display:none}
 }
-/* old site: guestbook + contact form */
-.mo-form{margin-top:10px;border:1px solid #bbb;background:#f6f6f6;padding:8px;font-size:10px}
-.mo-form b{display:block;color:#1b4f8f;font:bold 12px Arial;margin-bottom:6px}
-.mo-fields{display:grid;grid-template-columns:60px 1fr;gap:4px;align-items:center;font:10px Arial}
-.mo-fields i{height:14px;border:1px inset #999;background:#fff}
-.mo-fields i.tall{height:36px}
-.mo-send{display:inline-block;margin-top:6px;padding:2px 10px;border:2px outset #ccc;background:#ddd;font:11px Arial}
-.mo-form small{display:block;margin-top:4px;color:#888;font-size:10px}
-.mo-box u{color:#00e;cursor:pointer}
 
 /* markers on the mock (comparator only) */
 [data-mark]{position:relative}
@@ -391,11 +407,9 @@ button{font:inherit;color:inherit}
 .cmp .mn-top [data-mark]::after{top:-8px;right:-8px}
 .cmp [data-mark].hl::after{background:var(--lime);color:var(--ink);transform:scale(1.25)}
 .cmp [data-mark].hl{outline:2px dashed rgba(16,61,55,.55);outline-offset:4px}
-.cmp .mk-old .mo-foot[data-mark]::after{top:6px;right:auto;left:50%;margin-left:200px}
-.cmp .mk-old .mo-banner[data-mark]::after,.cmp .mk-old .mo-main[data-mark]::after{top:6px;right:6px}
 .cmp .mk-new [data-mark]::after{right:auto;left:-14px}
 .cmp .mk-old [data-mark]::after{width:30px;height:30px;line-height:30px;font-size:15px;top:4px;right:4px}
-.cmp .mk-old .mo-foot[data-mark]::after{top:-14px}
+.cmp .mk-old .mo-top[data-mark]::after{top:-2px;right:auto;left:330px}
 
 /* ===================== COMPARATOR SECTION ===================== */
 .cmp-head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px 64px;align-items:end;margin-bottom:clamp(36px,5vw,56px)}
@@ -643,10 +657,13 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 .diag .btn-line{color:var(--ink)}
 
 /* hero intro wipe */
-@keyframes heroReveal{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
-@keyframes heroLine{0%{left:0;opacity:1}96%{opacity:1}100%{left:100%;opacity:0}}
-.hero .layer-new{animation:heroReveal 1.5s var(--ease) .7s both}
-.hero .wipe{animation:heroLine 1.5s var(--ease) .7s both}
+/* Portada: un escáner lima recorre la web vieja y la convierte en la nueva (ciclo de 8 s) */
+@keyframes heroScanReveal{0%,14%{clip-path:inset(0 100% 0 0);opacity:1}42%{clip-path:inset(0 0 0 0);opacity:1}88%{clip-path:inset(0 0 0 0);opacity:1}95%{clip-path:inset(0 0 0 0);opacity:0}96%,100%{clip-path:inset(0 100% 0 0);opacity:0}}
+@keyframes heroScanLine{0%,13%{left:0;opacity:0}14%{left:0;opacity:1}42%{left:100%;opacity:1}43%,100%{left:100%;opacity:0}}
+.hero .layer-new{animation:heroScanReveal 8s cubic-bezier(.45,0,.3,1) .4s infinite both}
+.hero .wipe{width:3px;box-shadow:0 0 16px 4px rgba(214,250,82,.8),0 0 56px 14px rgba(214,250,82,.35);animation:heroScanLine 8s cubic-bezier(.45,0,.3,1) .4s infinite both}
+.hero .wipe::before{content:"";position:absolute;top:0;bottom:0;right:3px;width:150px;background:linear-gradient(90deg,rgba(214,250,82,0),rgba(214,250,82,.3))}
+.hero.scan-paused .layer-new,.hero.scan-paused .wipe{animation-play-state:paused}
 
 /* responsive */
 @media (max-width:1000px){
@@ -794,15 +811,15 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
         <ol class="changes" id="changes">
           <li data-change="1"><button type="button" aria-label="Cambio 1: agendar una cita. Mostrar en la página">
             <span class="n" aria-hidden="true">1</span><h3>Agendar una cita</h3>
-            <span class="txt"><span class="before"><span>Antes</span>El teléfono está escondido al final de la página y no se puede marcar desde el celular.</span><span class="after"><span>Después</span>El botón «Agenda tu cita» siempre está a la vista. El paciente elige tratamiento y horario.</span></span>
+            <span class="txt"><span class="before"><span>Antes</span>Solo hay un teléfono en letra chiquita arriba y no se puede marcar desde el celular.</span><span class="after"><span>Después</span>El botón «Agenda tu cita» siempre está a la vista. El paciente elige tratamiento y horario.</span></span>
           </button></li>
           <li data-change="2"><button type="button" aria-label="Cambio 2: tratamientos. Mostrar en la página">
             <span class="n" aria-hidden="true">2</span><h3>Tratamientos</h3>
-            <span class="txt"><span class="before"><span>Antes</span>Once servicios mezclados en un solo párrafo.</span><span class="after"><span>Después</span>Cada tratamiento con foto, precio y su propio botón para agendar.</span></span>
+            <span class="txt"><span class="before"><span>Antes</span>Tres recuadros genéricos con «Leer más» y ningún precio.</span><span class="after"><span>Después</span>Cada tratamiento con foto, precio y su propio botón para agendar.</span></span>
           </button></li>
           <li data-change="3"><button type="button" aria-label="Cambio 3: quién te atiende. Mostrar en la página">
             <span class="n" aria-hidden="true">3</span><h3>Quién te atiende</h3>
-            <span class="txt"><span class="before"><span>Antes</span>Una promoción ocupa toda la pantalla y no aparece nadie del equipo.</span><span class="after"><span>Después</span>Fotos reales del consultorio y de la dentista, con su especialidad.</span></span>
+            <span class="txt"><span class="before"><span>Antes</span>Un carrusel con foto de banco ocupa la pantalla y no aparece nadie del equipo.</span><span class="after"><span>Después</span>Fotos reales del consultorio y de la dentista, con su especialidad.</span></span>
           </button></li>
         </ol>
         <details class="more-changes">
@@ -810,11 +827,11 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
           <ol class="changes" start="4">
           <li data-change="4"><button type="button" aria-label="Cambio 4: cómo llegar. Mostrar en la página">
             <span class="n" aria-hidden="true">4</span><h3>Cómo llegar</h3>
-            <span class="txt"><span class="before"><span>Antes</span>La dirección está en una imagen que no se puede copiar ni abrir en el mapa.</span><span class="after"><span>Después</span>El horario de hoy arriba, la dirección escrita y un botón para abrir el mapa.</span></span>
+            <span class="txt"><span class="before"><span>Antes</span>El mapa no carga y la dirección no se puede abrir desde el celular.</span><span class="after"><span>Después</span>El horario de hoy arriba, la dirección escrita y un botón para abrir el mapa.</span></span>
           </button></li>
           <li data-change="5"><button type="button" aria-label="Cambio 5: opiniones de pacientes. Mostrar en la página">
             <span class="n" aria-hidden="true">5</span><h3>Opiniones de pacientes</h3>
-            <span class="txt"><span class="before"><span>Antes</span>Un libro de visitas sin mensajes desde 2016.</span><span class="after"><span>Después</span>Las reseñas de Google en la portada.</span></span>
+            <span class="txt"><span class="before"><span>Antes</span>Un recuadro de Facebook con la última publicación de 2019.</span><span class="after"><span>Después</span>Las reseñas de Google en la portada.</span></span>
           </button></li>
           <li data-change="6"><button type="button" aria-label="Cambio 6: respuestas de noche y en fin de semana. Mostrar en la página">
             <span class="n" aria-hidden="true">6</span><h3>Respuestas de noche y en fin de semana</h3>
@@ -1046,14 +1063,28 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 <!-- mock templates -->
 <template id="tpl-old">
   <div class="mk-old">
-    <div class="mo-head"><svg width="48" height="52" viewBox="0 0 48 52" aria-hidden="true"><path d="M10 4c6-4 10 2 14 2s8-6 14-2c7 5 6 16 3 24-2 6-3 22-8 22-4 0-4-14-9-14s-5 14-9 14C10 50 9 34 7 28 4 20 3 9 10 4Z" fill="#fff" stroke="#9cc6ef" stroke-width="2"/><circle cx="16" cy="14" r="3" fill="#cfe7ff"/></svg><div><b>CLINICA DENTAL ARRAYAN</b><span>Su sonrisa es nuestra prioridad</span></div></div>
-    <div class="mo-nav"><span>Inicio</span><span>Quienes Somos</span><span>Servicios</span><span>Galeria</span><span>Noticias</span><span>Contactenos</span></div>
-    <div class="mo-banner" data-mark="3"><span class="spark" style="left:60px;top:30px">✦</span><span class="spark" style="right:90px;top:120px">✦</span><span class="spark" style="left:200px;bottom:30px;font-size:18px">✦</span><span class="mo-arrow" style="left:0">‹</span><span class="mo-arrow" style="right:0">›</span><div class="slide-txt">¡¡PROMOCION DE VERANO!!<small>Blanqueamiento + limpieza ★ consulte condiciones ★</small></div><div class="mo-dots">● ○ ○ ○ ○</div></div>
-    <div class="mo-body">
-      <div class="mo-main" data-mark="2"><h5>Bienvenidos a nuestra clinica</h5><p>Clinica Dental Arrayan es una clinica con mas de 15 años de experiencia al servicio de la comunidad, donde nuestro compromiso es entregar una atencion de calidad y con los mas altos estandares, con un equipo de profesionales altamente calificados y en constante perfeccionamiento para entregarle el mejor servicio a usted y su familia.</p><p>Nuestros servicios incluyen odontologia general, limpieza dental, blanqueamiento, ortodoncia, ortodoncia invisible, implantes, endodoncia, periodoncia, odontopediatria, protesis y urgencias dentales, ademas de convenios con diversas instituciones. Para mayor informacion sobre valores y horarios no dude en contactarnos a traves de nuestro telefono o acercarse a nuestras dependencias.</p><p>Visite nuestra galeria de fotos y conozca nuestras modernas instalaciones.</p><div class="mo-form" data-mark="6"><b>Contactenos</b><div class="mo-fields"><span>Nombre:</span><i></i><span>E-mail:</span><i></i><span>Mensaje:</span><i class="tall"></i></div><span class="mo-send">Enviar</span><small>Responderemos a la brevedad.</small></div></div>
-      <div class="mo-side"><div class="mo-box"><b>Horario de Atencion</b><p>Lunes a Viernes de 9:00 a 13:00 y de 15:00 a 20:00 hrs. Sabados consultar.</p></div><div class="mo-map" data-mark="4"><span>COMO LLEGAR: VER IMAGEN</span></div><div class="mo-box" data-mark="5"><b>Testimonios</b><p>¡Firme nuestro libro de visitas! <u>click aqui</u><br>Ultimo mensaje: 12/2016</p></div><div class="mo-box"><b>Noticias</b><p>Nueva sucursal proximamente!!! (actualizado 03/2017)</p></div></div>
+    <div class="mo-top" data-mark="1"><span>✉ contacto@clinicaarrayan.mx</span><span>☎ (33) 0000 0000</span><span class="mo-social">f&nbsp;&nbsp;in&nbsp;&nbsp;ig</span></div>
+    <div class="mo-head"><div class="mo-logo"><svg width="34" height="36" viewBox="0 0 48 52" aria-hidden="true"><path d="M10 4c6-4 10 2 14 2s8-6 14-2c7 5 6 16 3 24-2 6-3 22-8 22-4 0-4-14-9-14s-5 14-9 14C10 50 9 34 7 28 4 20 3 9 10 4Z" fill="#1BA8C9"/></svg><b>Clínica Dental<span>Arrayán</span></b></div><nav><span class="on">INICIO</span><span>NOSOTROS</span><span>SERVICIOS</span><span>GALERÍA</span><span>BLOG</span><span>CONTACTO</span></nav></div>
+    <div class="mo-slider" data-mark="3">
+      <div class="mo-cap"><b>¡TU SONRISA ES NUESTRA PRIORIDAD!</b><span>Contamos con la más alta tecnología y un equipo de profesionales a tu servicio.</span><i>LEER MÁS</i></div>
+      <span class="mo-arr l">‹</span><span class="mo-arr r">›</span>
+      <div class="mo-dots"><i class="on"></i><i></i><i></i></div>
     </div>
-    <div class="mo-foot" data-mark="1">Clinica Dental Arrayan © 2014 | Telefono: (33) 0000 0000 | Todos los derechos reservados | Mejor visualizado en 1024x768<br><span class="mo-counter">Visitas: 004213</span></div>
+    <div class="mo-welcome"><h5>BIENVENIDOS A CLÍNICA DENTAL ARRAYÁN</h5><hr><p>Somos una clínica dental con más de 15 años de experiencia, comprometidos con brindarte un servicio de calidad, con calidez humana y los más altos estándares en odontología.</p></div>
+    <div class="mo-services" data-mark="2"><h5>NUESTROS SERVICIOS</h5>
+      <div class="mo-svc-grid">
+        <div><span class="ico"><svg width="24" height="26" viewBox="0 0 48 52" aria-hidden="true"><path d="M10 4c6-4 10 2 14 2s8-6 14-2c7 5 6 16 3 24-2 6-3 22-8 22-4 0-4-14-9-14s-5 14-9 14C10 50 9 34 7 28 4 20 3 9 10 4Z" fill="#1BA8C9"/></svg></span><b>Odontología General</b><p>Contamos con todos los tratamientos para el cuidado de tu salud bucal.</p><i>LEER MÁS</i></div>
+        <div><span class="ico"><svg width="24" height="26" viewBox="0 0 48 52" aria-hidden="true"><path d="M10 4c6-4 10 2 14 2s8-6 14-2c7 5 6 16 3 24-2 6-3 22-8 22-4 0-4-14-9-14s-5 14-9 14C10 50 9 34 7 28 4 20 3 9 10 4Z" fill="#1BA8C9"/></svg></span><b>Ortodoncia</b><p>Corregimos la posición de tus dientes con las mejores técnicas.</p><i>LEER MÁS</i></div>
+        <div><span class="ico"><svg width="24" height="26" viewBox="0 0 48 52" aria-hidden="true"><path d="M10 4c6-4 10 2 14 2s8-6 14-2c7 5 6 16 3 24-2 6-3 22-8 22-4 0-4-14-9-14s-5 14-9 14C10 50 9 34 7 28 4 20 3 9 10 4Z" fill="#1BA8C9"/></svg></span><b>Estética Dental</b><p>Luce una sonrisa perfecta con nuestros tratamientos estéticos.</p><i>LEER MÁS</i></div>
+      </div>
+    </div>
+    <div class="mo-row">
+      <div class="mo-form" data-mark="6"><h6>CONTÁCTANOS</h6><div class="mo-fields"><i>Nombre</i><i>Correo electrónico</i><i>Teléfono</i><i class="tall">Mensaje</i></div><span class="mo-send">ENVIAR</span><small>Te responderemos a la brevedad.</small></div>
+      <div><h6>UBICACIÓN</h6><div class="mo-map" data-mark="4"><div class="mo-map-err"><b>Esta página no puede cargar Google Maps correctamente.</b><span>¿Eres el propietario de este sitio web?</span><u>Aceptar</u></div></div></div>
+      <div><h6>SÍGUENOS</h6><div class="mo-fb" data-mark="5"><div class="fb-top">Clínica Dental Arrayán</div><div class="fb-body"><span>1,204 Me gusta</span><p>14 de febrero de 2019</p><p>¡Feliz día del amor y la amistad! Regala una sonrisa 💕</p></div></div></div>
+    </div>
+    <div class="mo-foot">© 2017 Clínica Dental Arrayán. Todos los derechos reservados.</div>
+    <div class="mo-cookie">Este sitio web utiliza cookies para mejorar su experiencia de navegación. <u>Aceptar</u></div>
   </div>
 </template>
 
@@ -1173,9 +1204,20 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   /* hero tag follows the intro wipe */
   const heroTag = $('#hero-tag');
   if (heroTag && !reduce.matches) {
-    heroTag.textContent = 'Antes'; heroTag.dataset.state = 'old';
-    setTimeout(() => { heroTag.textContent = 'Después'; heroTag.dataset.state = 'new'; }, 1500);
+    const heroNew = document.querySelector('.hero .layer-new');
+    const setTag = v => { heroTag.textContent = v === 'new' ? 'Después' : 'Antes'; heroTag.dataset.state = v; };
+    const cycle = () => {
+      setTag('old'); clearTimeout(heroTag._a); clearTimeout(heroTag._b);
+      heroTag._a = setTimeout(() => setTag('new'), 8000 * 0.3);
+      heroTag._b = setTimeout(() => setTag('old'), 8000 * 0.95);
+    };
+    heroNew.addEventListener('animationstart', cycle);
+    heroNew.addEventListener('animationiteration', cycle);
+    // Pausa el escáner cuando la portada no está a la vista
+    new IntersectionObserver(([e]) => document.querySelector('.hero').classList.toggle('scan-paused', !e.isIntersecting))
+      .observe(document.getElementById('hero-vp'));
   }
+
 
   /* ---------- mobile nav ---------- */
   const header = $('.site-header'), menuBtn = $('#menu-btn');
@@ -1296,12 +1338,12 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 
   /* ---------- example diagnostic ---------- */
   const steps = [
-    { t: 'Lo primero que se ve en el celular', was: 'Un banner de promociones y el logo ocupan toda la pantalla. No se ve qué tratamientos hay ni cómo pedir hora.', now: 'Nombre, horario de hoy y botón «Reservar cita» en la primera pantalla. La foto muestra el consultorio real.', why: 'Quien llega desde Google o Instagram decide en segundos si sigue o vuelve atrás.' },
-    { t: 'Pedir una cita', was: 'El único teléfono está en el pie de página, en letra de 9 px. En el celular no se puede tocar para llamar.', now: 'Botón para agendar siempre visible. El paciente elige tratamiento, día y hora. La clínica recibe la cita en su agenda.', why: 'Es la acción que más le importa a la clínica y hoy es la más difícil de encontrar.' },
-    { t: 'Tratamientos', was: 'Once servicios en un mismo párrafo, sin duración, sin descripción y sin forma de reservar uno en particular.', now: 'Seis tratamientos principales, cada uno con duración y su propio botón. El resto, en la página de cada área.', why: 'El paciente busca su problema concreto, no la lista completa.' },
-    { t: 'Confianza', was: 'Promociones con signos de exclamación y un contador de visitas. No aparece ninguna persona del equipo.', now: 'Fotografía del consultorio y presentación de la dentista a cargo, con su especialidad y cómo trabaja.', why: 'Antes de un tratamiento, la gente quiere saber quién la va a atender.' },
-    { t: 'Opiniones y respuestas', was: 'Un libro de visitas sin mensajes desde 2016 y un formulario que promete responder «a la brevedad».', now: 'Reseñas de Google en la portada y un asistente que responde dudas al instante y sigue por WhatsApp.', why: 'Las dudas también llegan fuera del horario de recepción.' },
-    { t: 'Horario y ubicación', was: 'La dirección está en una imagen que no se puede copiar ni abrir en el mapa. La última noticia es de 2017.', now: 'Dirección en texto, botón «Abrir en mapas» y horario de hoy visible arriba.', why: 'Un dato desactualizado hace dudar de todo lo demás.' }
+    { t: 'Lo primero que se ve en el celular', was: 'Un carrusel con foto de banco ocupa toda la pantalla. No se ve qué tratamientos hay ni cómo pedir hora.', now: 'Nombre, horario de hoy y botón «Agenda tu cita» en la primera pantalla. La foto muestra el consultorio real.', why: 'Quien llega desde Google o Instagram decide en segundos si sigue o vuelve atrás.' },
+    { t: 'Pedir una cita', was: 'El único teléfono está arriba, en letra chiquita. En el celular no se puede tocar para llamar.', now: 'Botón para agendar siempre visible. El paciente elige tratamiento, día y hora. La clínica recibe la cita en su agenda.', why: 'Es la acción que más le importa a la clínica y hoy es la más difícil de encontrar.' },
+    { t: 'Tratamientos', was: 'Tres recuadros genéricos con «Leer más», sin precios y sin forma de agendar uno en particular.', now: 'Seis tratamientos principales, cada uno con duración y su propio botón. El resto, en la página de cada área.', why: 'El paciente busca su problema concreto, no la lista completa.' },
+    { t: 'Confianza', was: 'Fotos de banco y frases como «¡Tu sonrisa es nuestra prioridad!». No aparece ninguna persona del equipo.', now: 'Fotografía del consultorio y presentación de la dentista a cargo, con su especialidad y cómo trabaja.', why: 'Antes de un tratamiento, la gente quiere saber quién la va a atender.' },
+    { t: 'Opiniones y respuestas', was: 'Un recuadro de Facebook con la última publicación de 2019 y un formulario que promete responder «a la brevedad».', now: 'Reseñas de Google en la portada y un asistente que responde dudas al instante y sigue por WhatsApp.', why: 'Las dudas también llegan fuera del horario de recepción.' },
+    { t: 'Horario y ubicación', was: 'El mapa muestra un error y no carga. El pie de página dice © 2017.', now: 'Dirección en texto, botón «Abrir en mapas» y horario de hoy visible arriba.', why: 'Un dato desactualizado hace dudar de todo lo demás.' }
   ];
   const diag = $('#diag'), dStep = $('#diag-step'), dProg = $('#diag-progress'), dPrev = $('#diag-prev'), dNext = $('#diag-next');
   let di = 0, lastFocus = null;
