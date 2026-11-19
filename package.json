@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/gonqgg-debug/ceiba#readme",
   "dependencies": {
+    "@anthropic-ai/sdk": "^1.11.0",
     "stripe": "^23.1.0"
   },
   "type": "module",

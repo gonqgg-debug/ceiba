@@ -31,6 +31,14 @@
     {
       "source": "/admin",
       "destination": "/admin.html"
+    },
+    {
+      "source": "/cuenta/:slug",
+      "destination": "/cuenta.html"
+    },
+    {
+      "source": "/cuenta",
+      "destination": "/cuenta.html"
     }
   ],
   "redirects": [
@@ -44,5 +52,10 @@
       "destination": "/p/clinica-arrayan",
       "permanent": false
     }
-  ]
+  ],
+  "functions": {
+    "api/chat.js": {
+      "maxDuration": 120
+    }
+  }
 }

@@ -5,8 +5,9 @@
 //   invoice.paid, invoice.payment_failed, customer.subscription.deleted
 // y guarda su secreto de firma en STRIPE_WEBHOOK_SECRET.
 import { json, stripe } from '../lib/stripe.js';
-import { dbReady, update } from '../lib/db.js';
+import { dbReady, select, update } from '../lib/db.js';
 import { escHtml, mailReady, sendMail } from '../lib/notify.js';
+import { chatUrl, ensureChat } from '../lib/client-chat.js';
 
 export async function POST(request) {
   const signature = request.headers.get('stripe-signature');
@@ -49,6 +50,19 @@ export async function handle(event) {
           status: 'activada', activated_at: new Date().toISOString(), stripe_customer_id: obj.customer,
           recommended_plan: meta.ceiba_plan, whatsapp_recommended: meta.ceiba_whatsapp === 'true',
         });
+        // El agente de IA atiende al cliente desde ahora: se crea su chat y le mandamos el enlace.
+        try {
+          const prop = (await select('proposals', `slug=eq.${encodeURIComponent(meta.ceiba_proposal)}&select=id,business&limit=1`))?.[0];
+          const email = obj.customer_details?.email;
+          await ensureChat({ proposalId: prop?.id, slug: meta.ceiba_proposal, business: prop?.business, email });
+          if (email && mailReady()) {
+            const link = chatUrl(meta.ceiba_proposal);
+            await sendMail({
+              to: email, subject: 'Empecemos tu página · Ceiba Labs', replyTo: process.env.CEIBA_REPLY_TO || undefined,
+              html: `<div style="max-width:560px;font:15px/1.6 sans-serif;color:#0B1514"><p>¡Gracias! Ya está confirmado tu pago.</p><p>Para construir tu página necesitamos tu logo, unas fotos, tus colores y algunos datos. Te atiende nuestro asistente en un chat privado: puedes hacerlo desde el celular en unos 10 minutos.</p><p><a href="${link}" style="display:inline-block;background:#D6FA52;color:#0B1514;padding:12px 20px;border-radius:10px;font-weight:600;text-decoration:none">Empezar ahora</a></p><p>Guarda este correo: con este mismo enlace vuelves cuando quieras para ver tu avance, pedir cambios o resolver dudas.</p><p>Equipo de Ceiba Labs</p></div>`,
+            }).catch(err => console.error('webhook: correo de bienvenida no enviado', err.message));
+          }
+        } catch (err) { console.error('webhook: no se creó el chat', err.message); }
       }
       if (mailReady() && process.env.CEIBA_NOTIFY_EMAIL) {
         const total = `$${(obj.amount_total / 100).toLocaleString('en-US')} ${obj.currency.toUpperCase()}`;

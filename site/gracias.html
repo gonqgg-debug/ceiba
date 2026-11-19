@@ -739,17 +739,24 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     <h1>Listo, <span>ya empezamos con tu página.</span></h1>
     <p class="lede">Recibimos tu pago inicial. Stripe te envió el recibo y la factura al correo que usaste al pagar.</p>
     <ol class="t-steps">
-      <li><span>1</span><div><b>Te escribimos hoy</b></div><p>La persona que preparó tu propuesta te contacta para coordinar textos, fotos y accesos.</p></li>
+      <li><span>1</span><div><b>Mándanos tus materiales</b></div><p>Nuestro asistente te pide en un chat tu logo, fotos, colores, datos y dominio. Son unos 10 minutos y puedes hacerlo desde el celular.</p></li>
       <li><span>2</span><div><b>Diseñamos el resto de las páginas</b></div><p>Revisas cada página antes de publicar y pides los ajustes que necesites.</p></li>
       <li><span>3</span><div><b>Publicamos y empieza la mensualidad</b></div><p>El día que publicamos se cobra la primera mensualidad con la misma tarjeta. Tus facturas y tu método de pago se gestionan desde el portal de clientes.</p></li>
     </ol>
+    <p><a class="btn btn-primary" id="t-go" href="/cuenta" hidden>Empezar ahora <span class="arrow" aria-hidden="true">→</span></a></p>
     <p class="t-ref" id="t-ref"></p>
   </main>
   <footer class="wrap t-foot">Ceiba Labs · Estudio digital para negocios de Latinoamérica</footer>
 </div>
 <script>
   const id = new URLSearchParams(location.search).get('session_id');
-  if (id && /^cs_(test|live)_[A-Za-z0-9]+$/.test(id)) document.getElementById('t-ref').textContent = 'Referencia de pago: ' + id.slice(0, 24) + '…';
+  if (id && /^cs_(test|live)_[A-Za-z0-9]+$/.test(id)) {
+    document.getElementById('t-ref').textContent = 'Referencia de pago: ' + id.slice(0, 24) + '…';
+    // Enlace al chat del asistente (también llega por correo)
+    fetch('/api/chat?session_id=' + encodeURIComponent(id)).then(r => r.ok ? r.json() : null).then(d => {
+      if (d?.url) { const a = document.getElementById('t-go'); a.href = d.url; a.hidden = false; }
+    }).catch(() => {});
+  }
 </script>
 </body>
 </html>

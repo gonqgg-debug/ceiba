@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
+<meta name="robots" content="noindex,nofollow">
+<title>Tu página · Ceiba Labs</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0B1514">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+{{BASE_CSS}}
+body{background:var(--ink);color:var(--ivory)}
+.cu{min-height:100dvh;display:grid;grid-template-rows:auto 1fr}
+.cu-top{display:flex;align-items:center;gap:16px;padding:16px clamp(16px,3vw,32px);border-bottom:1px solid rgba(247,244,235,.1)}
+.cu-top svg.logo{height:22px;width:auto;color:var(--ivory);--logo-tree:var(--lime);display:block}
+.cu-top .biz{margin-left:auto;text-align:right;display:grid;gap:2px}
+.cu-top .biz b{font:600 15px var(--f-display)}
+.cu-top .biz span{font-size:13px;color:var(--lime)}
+.cu-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;min-height:0;height:calc(100dvh - 63px)}
+/* chat */
+.cu-chat{display:grid;grid-template-rows:1fr auto;min-height:0;border-right:1px solid rgba(247,244,235,.1)}
+.cu-log{overflow-y:auto;padding:28px clamp(16px,4vw,48px) 12px;display:flex;flex-direction:column;gap:14px;scroll-behavior:smooth}
+.msg{max-width:min(620px,86%);display:grid;gap:8px;animation:in .3s ease-out}
+@keyframes in{from{opacity:0;transform:translateY(6px)}}
+.msg p{margin:0;padding:12px 15px;border-radius:16px;font-size:16px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
+.msg.bot{align-self:flex-start;grid-template-columns:30px 1fr;align-items:start}
+.msg.bot .av{width:30px;height:30px;border-radius:9px;background:rgba(214,250,82,.12);display:grid;place-items:center;margin-top:4px}
+.msg.bot .av svg{width:18px;fill:var(--lime)}
+.msg.bot p{background:rgba(247,244,235,.06);border:1px solid rgba(247,244,235,.1);border-top-left-radius:6px}
+.msg.me{align-self:flex-end;justify-items:end}
+.msg.me p{background:rgba(214,250,82,.14);border:1px solid rgba(214,250,82,.3);border-top-right-radius:6px}
+.msg .files{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+.msg .files span{font-size:13px;padding:6px 10px;border-radius:10px;background:rgba(247,244,235,.06);border:1px solid rgba(247,244,235,.12)}
+.typing{align-self:flex-start;display:flex;gap:5px;padding:14px 16px;margin-left:40px;border-radius:16px;background:rgba(247,244,235,.06)}
+.typing i{width:7px;height:7px;border-radius:50%;background:rgba(247,244,235,.5);animation:blink 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-left:40px}
+.opts button{font:500 15px var(--f-body);color:var(--ivory);background:transparent;border:1px solid rgba(214,250,82,.45);border-radius:12px;padding:9px 14px;cursor:pointer;transition:background .2s}
+.opts button:hover{background:rgba(214,250,82,.12)}
+/* escribir */
+.cu-compose{padding:12px clamp(16px,4vw,48px) calc(16px + env(safe-area-inset-bottom));border-top:1px solid rgba(247,244,235,.08)}
+.pend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.pend div{position:relative;display:flex;align-items:center;gap:8px;font-size:13px;padding:6px 30px 6px 6px;border-radius:12px;background:rgba(247,244,235,.06);border:1px solid rgba(247,244,235,.12);max-width:240px}
+.pend img,.pend .ph{width:36px;height:36px;border-radius:8px;object-fit:cover;background:rgba(247,244,235,.1);display:grid;place-items:center;font:600 10px var(--f-mono);flex:none}
+.pend span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pend em{font-style:normal;font-size:11px;color:var(--lime)}
+.pend button{position:absolute;right:6px;top:50%;translate:0 -50%;width:20px;height:20px;border-radius:50%;border:0;background:rgba(247,244,235,.15);color:var(--ivory);cursor:pointer;font-size:13px;line-height:1}
+.bar{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:end;padding:8px;border-radius:16px;background:rgba(247,244,235,.05);border:1px solid rgba(247,244,235,.14)}
+.bar:focus-within{border-color:var(--lime)}
+.bar textarea{resize:none;border:0;background:transparent;color:var(--ivory);font:400 16px/1.5 var(--f-body);padding:9px 4px;max-height:160px;outline:none}
+.bar textarea::placeholder{color:rgba(247,244,235,.4)}
+.ico{width:42px;height:42px;border-radius:12px;border:0;display:grid;place-items:center;cursor:pointer;flex:none}
+.ico svg{width:20px;height:20px}
+.ico.att{background:transparent;color:rgba(247,244,235,.75)}
+.ico.att:hover{color:var(--lime)}
+.ico.send{background:var(--lime);color:var(--ink)}
+.ico:disabled{opacity:.45;cursor:default}
+.hint{margin-top:8px;font-size:12px;color:rgba(247,244,235,.45)}
+.drop{position:fixed;inset:0;z-index:20;display:grid;place-items:center;background:rgba(11,21,20,.85);border:3px dashed var(--lime);font:600 22px var(--f-display);color:var(--lime);pointer-events:none}
+/* panel */
+.cu-side{overflow-y:auto;padding:28px 24px;display:grid;gap:26px;align-content:start}
+.ph-k{font:500 12px var(--f-mono);color:var(--lime)}
+.cu-side h2{font:700 24px/1.15 var(--f-display);letter-spacing:-.02em;margin-top:6px}
+.cu-side .sub{font-size:14px;color:rgba(247,244,235,.65);margin-top:6px;line-height:1.5}
+.meter{height:6px;border-radius:9px;background:rgba(247,244,235,.1);overflow:hidden;margin-top:14px}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,#0E9F8A,var(--lime));transition:width .6s}
+.chk{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.chk li{display:grid;grid-template-columns:24px 1fr;gap:2px 12px;padding:10px 0;border-bottom:1px solid rgba(247,244,235,.08)}
+.chk li::before{content:"";grid-row:span 2;width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(247,244,235,.3);margin-top:1px}
+.chk li.ok::before{background:var(--lime) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3.2 3L15 6.5' fill='none' stroke='%230B1514' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat;border-color:var(--lime)}
+.chk b{font-size:15px;font-weight:600}
+.chk span{font-size:13px;color:rgba(247,244,235,.6)}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.thumbs div{aspect-ratio:1;border-radius:10px;background:rgba(247,244,235,.06) center/cover;position:relative;overflow:hidden}
+.thumbs div em{position:absolute;left:4px;bottom:4px;font:500 10px var(--f-mono);font-style:normal;background:rgba(11,21,20,.75);padding:2px 5px;border-radius:5px}
+.side-note{font-size:13px;color:rgba(247,244,235,.55);line-height:1.5}
+/* sin enlace */
+.cu-gate{display:grid;place-items:center;padding:40px 16px}
+.cu-gate form{width:min(440px,100%);display:grid;gap:14px;text-align:left}
+.cu-gate h1{font:700 clamp(30px,4vw,40px)/1.05 var(--f-display);letter-spacing:-.03em}
+.cu-gate p{color:rgba(247,244,235,.7)}
+.cu-gate input{height:52px;border-radius:12px;border:1px solid rgba(247,244,235,.18);background:rgba(247,244,235,.05);color:var(--ivory);padding:0 14px;font:400 16px var(--f-body)}
+.cu-gate input:focus{outline:none;border-color:var(--lime)}
+.cu-gate .ok{color:var(--lime)}
+.cu-err{margin:10px 0 0;color:#FFB59C;font-size:14px}
+@media (max-width:900px){
+  .cu-grid{grid-template-columns:1fr;height:auto}
+  .cu-chat{border-right:0;height:calc(100dvh - 63px - 54px)}
+  .cu-side{order:-1;padding:0;gap:0}
+  .cu-side > details{border-bottom:1px solid rgba(247,244,235,.1)}
+}
+@media (min-width:901px){.cu-side > details > summary{display:none}.cu-side > details > div{display:grid!important;gap:26px}}
+.cu-side > details > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:14px 16px;font-size:14px}
+.cu-side > details > summary::-webkit-details-marker{display:none}
+.cu-side > details > summary b{color:var(--lime)}
+.cu-side > details > div{padding:0 16px 20px;display:grid;gap:22px}
+</style>
+</head>
+<body>
+{{SYMBOLS}}
+<div class="cu">
+  <header class="cu-top">
+    <a href="/" aria-label="Ceiba Labs"><svg class="logo" viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
+    <div class="biz" id="biz" hidden><b id="biz-name"></b><span id="biz-phase"></span></div>
+  </header>
+
+  <section class="cu-gate" id="gate" hidden>
+    <form id="gate-form" novalidate>
+      <h1>Vuelve a tu chat.</h1>
+      <p>Escribe el correo con el que pagaste y te mandamos tu enlace privado.</p>
+      <input id="gate-email" type="email" autocomplete="email" placeholder="tu@correo.com" aria-label="Tu correo">
+      <button class="btn btn-primary" type="submit">Enviarme el enlace <span class="arrow" aria-hidden="true">→</span></button>
+      <p class="ok" id="gate-ok" hidden>Si ese correo tiene una página con nosotros, te llegará el enlace en unos minutos.</p>
+    </form>
+  </section>
+
+  <div class="cu-grid" id="app" hidden>
+    <section class="cu-chat" aria-label="Chat con el asistente de Ceiba Labs">
+      <div class="cu-log" id="log" aria-live="polite"></div>
+      <form class="cu-compose" id="compose">
+        <div class="pend" id="pend"></div>
+        <div class="bar">
+          <button type="button" class="ico att" id="att" aria-label="Adjuntar archivos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5l-8.6 8.6a5 5 0 0 1-7.1-7.1l8.6-8.6a3.4 3.4 0 0 1 4.8 4.8l-8.6 8.6a1.7 1.7 0 0 1-2.4-2.4l7.9-7.9"/></svg></button>
+          <textarea id="text" rows="1" placeholder="Escribe un mensaje…" aria-label="Mensaje"></textarea>
+          <button type="submit" class="ico send" id="send" aria-label="Enviar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+        <input type="file" id="file" multiple accept="image/*,.pdf,.zip,.svg,.ai,.eps" hidden>
+        <p class="hint">Puedes arrastrar aquí tus archivos. Imágenes, PDF o ZIP de hasta 25 MB.</p>
+        <p class="cu-err" id="err" role="alert" hidden></p>
+      </form>
+    </section>
+    <aside class="cu-side">
+      <details id="side-d">
+        <summary><span id="sum-txt">Tu avance</span> <b id="sum-n"></b></summary>
+        <div>
+          <div><p class="ph-k" id="ph-k"></p><h2 id="ph-h"></h2><p class="sub" id="ph-s"></p><div class="meter"><i id="meter" style="width:0"></i></div></div>
+          <ul class="chk" id="chk"></ul>
+          <div id="thumbs-w" hidden><p class="ph-k" style="margin-bottom:10px">Lo que nos has mandado</p><div class="thumbs" id="thumbs"></div></div>
+          <p class="side-note">Guarda este enlace: con él vuelves cuando quieras para ver tu avance, pedir cambios o resolver dudas.</p>
+        </div>
+      </details>
+    </aside>
+  </div>
+</div>
+<div class="drop" id="drop" hidden>Suelta tus archivos aquí</div>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const TREE = '<svg viewBox="0 0 100 72" aria-hidden="true"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></svg>';
+  const PHASE = {
+    arranque: ['Paso 1 de 3', 'Reunimos tus materiales', 'Con esto armamos tu página. Puedes hacerlo en partes y volver cuando quieras.'],
+    construccion: ['Paso 2 de 3', 'Estamos construyendo tu página', 'Te avisamos aquí y por correo en cuanto tengas tu vista previa.'],
+    soporte: ['Paso 3 de 3', 'Tu página está publicada', 'Escríbenos aquí para pedir cambios o resolver cualquier duda.'],
+  };
+
+  const slug = location.pathname.split('/')[2] || '';
+  const key = `ceiba_chat_${slug}`;
+  const store = { get() { try { return localStorage.getItem(key); } catch { return null; } }, set(v) { try { localStorage.setItem(key, v); } catch {} } };
+  const t = new URLSearchParams(location.search).get('t') || store.get();
+
+  /* ---------- sin enlace: pedirlo por correo ---------- */
+  if (!slug || !t) {
+    $('#gate').hidden = false;
+    $('#gate-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      await fetch('/api/chat', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'link', email: $('#gate-email').value }) }).catch(() => {});
+      $('#gate-ok').hidden = false;
+    });
+    return;
+  }
+  store.set(t);
+
+  const log = $('#log'), err = $('#err');
+  let pending = [], busy = false;
+  const showErr = m => { err.textContent = m; err.hidden = !m; };
+  const scroll = () => requestAnimationFrame(() => { log.scrollTop = log.scrollHeight; });
+
+  const bubble = m => m.who === 'bot'
+    ? `<div class="msg bot"><span class="av">${TREE}</span><p>${esc(m.text)}</p></div>`
+    : `<div class="msg me">${m.text ? `<p>${esc(m.text)}</p>` : ''}${m.files?.length ? `<div class="files">${m.files.map(f => `<span>📎 ${esc(f)}</span>`).join('')}</div>` : ''}</div>`;
+
+  function render(s, options = []) {
+    $('#biz').hidden = false; $('#biz-name').textContent = s.business || 'Tu página';
+    const [k, h, sub] = PHASE[s.phase] || PHASE.arranque;
+    $('#biz-phase').textContent = h; $('#ph-k').textContent = k; $('#ph-h').textContent = h; $('#ph-s').textContent = sub;
+    const c = s.checklist;
+    $('#meter').style.width = `${s.phase === 'arranque' ? Math.round(c.done / c.total * 100) : 100}%`;
+    $('#sum-txt').textContent = h; $('#sum-n').textContent = s.phase === 'arranque' ? `${c.done}/${c.total}` : '';
+    $('#chk').innerHTML = c.items.map(i => `<li class="${i.done ? 'ok' : ''}"><b>${esc(i.label)}</b><span>${esc(i.detail)}</span></li>`).join('');
+    const imgs = (s.files || []).filter(f => f.url);
+    $('#thumbs-w').hidden = !imgs.length;
+    $('#thumbs').innerHTML = imgs.map(f => `<div style="background-image:url('${esc(f.url)}')" title="${esc(f.name)}">${f.kind ? `<em>${esc({ logo: 'logo', foto: 'foto', guia_marca: 'marca' }[f.kind] || f.kind)}</em>` : ''}</div>`).join('');
+    const msgs = [{ who: 'bot', text: s.greeting }, ...s.messages];
+    log.innerHTML = msgs.map(bubble).join('') + (options.length ? `<div class="opts">${options.map(o => `<button type="button">${esc(o)}</button>`).join('')}</div>` : '');
+    scroll();
+  }
+
+  async function load() {
+    const r = await fetch(`/api/chat?slug=${encodeURIComponent(slug)}&t=${encodeURIComponent(t)}`);
+    const d = await r.json().catch(() => ({}));
+    if (!r.ok) { $('#gate').hidden = false; $('#gate h1').textContent = r.status === 401 ? 'Ese enlace no es válido.' : 'No encontramos tu chat.'; wireGate(); return; }
+    $('#app').hidden = false; render(d, d.messages.length ? [] : ['Sí, empecemos', 'No tengo logo']);
+  }
+  function wireGate() {
+    $('#gate-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      await fetch('/api/chat', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'link', email: $('#gate-email').value }) }).catch(() => {});
+      $('#gate-ok').hidden = false;
+    });
+  }
+
+  /* ---------- archivos ---------- */
+  function renderPending() {
+    $('#pend').innerHTML = pending.map((p, i) => `<div>${p.preview ? `<img src="${p.preview}" alt="">` : `<span class="ph">${esc((p.file.name.split('.').pop() || '').toUpperCase().slice(0, 4))}</span>`}<span>${esc(p.file.name)}</span>${p.state !== 'ok' ? `<em>${p.state === 'error' ? 'error' : 'subiendo…'}</em>` : ''}<button type="button" data-i="${i}" aria-label="Quitar">×</button></div>`).join('');
+    $('#send').disabled = busy || pending.some(p => p.state === 'up');
+  }
+  async function addFiles(list) {
+    showErr('');
+    for (const file of list) {
+      const p = { file, state: 'up', preview: /^image\/(png|jpe?g|webp|gif)$/.test(file.type) ? URL.createObjectURL(file) : null };
+      pending.push(p); renderPending();
+      try {
+        const type = file.type || (/\.svg$/i.test(file.name) ? 'image/svg+xml' : /\.pdf$/i.test(file.name) ? 'application/pdf' : /\.zip$/i.test(file.name) ? 'application/zip' : /\.(ai|eps)$/i.test(file.name) ? 'application/postscript' : '');
+        const r = await fetch('/api/chat', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'upload', slug, t, name: file.name, type, size: file.size }) });
+        const d = await r.json();
+        if (!r.ok) throw new Error(d.error || 'No se pudo subir.');
+        const up = await fetch(d.uploadUrl, { method: 'PUT', headers: { 'content-type': type, 'x-upsert': 'false' }, body: file });
+        if (!up.ok) throw new Error('No se pudo subir el archivo.');
+        Object.assign(p, { state: 'ok', path: d.path, type });
+      } catch (x) { p.state = 'error'; showErr(`${file.name}: ${x.message}`); }
+      renderPending();
+    }
+  }
+  $('#att').addEventListener('click', () => $('#file').click());
+  $('#file').addEventListener('change', e => { addFiles([...e.target.files]); e.target.value = ''; });
+  $('#pend').addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (b) { pending.splice(+b.dataset.i, 1); renderPending(); } });
+  let dragN = 0;
+  addEventListener('dragenter', e => { if (e.dataTransfer?.types?.includes('Files')) { dragN++; $('#drop').hidden = false; } });
+  addEventListener('dragleave', () => { if (--dragN <= 0) { dragN = 0; $('#drop').hidden = true; } });
+  addEventListener('dragover', e => e.preventDefault());
+  addEventListener('drop', e => { e.preventDefault(); dragN = 0; $('#drop').hidden = true; if (e.dataTransfer?.files?.length) addFiles([...e.dataTransfer.files]); });
+
+  /* ---------- enviar ---------- */
+  const ta = $('#text');
+  const grow = () => { ta.style.height = 'auto'; ta.style.height = Math.min(ta.scrollHeight, 160) + 'px'; };
+  ta.addEventListener('input', grow);
+  ta.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey && !matchMedia('(pointer:coarse)').matches) { e.preventDefault(); $('#compose').requestSubmit(); } });
+  async function send(text) {
+    const files = pending.filter(p => p.state === 'ok');
+    if (busy || (!text.trim() && !files.length)) return;
+    busy = true; showErr('');
+    log.querySelector('.opts')?.remove();
+    log.insertAdjacentHTML('beforeend', bubble({ who: 'me', text: text.trim(), files: files.map(f => f.file.name) }) + '<div class="typing" id="typing"><i></i><i></i><i></i></div>');
+    scroll();
+    ta.value = ''; grow(); pending = []; renderPending();
+    try {
+      const r = await fetch('/api/chat', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'message', slug, t, text: text.trim(), files: files.map(f => ({ path: f.path, name: f.file.name, type: f.type, size: f.file.size })) }) });
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(d.error || 'No pudimos enviar tu mensaje.');
+      render(d, d.options || []);
+    } catch (x) { $('#typing')?.remove(); showErr(x.message); }
+    busy = false; renderPending(); ta.focus();
+  }
+  $('#compose').addEventListener('submit', e => { e.preventDefault(); send(ta.value); });
+  log.addEventListener('click', e => { const b = e.target.closest('.opts button'); if (b) send(b.textContent); });
+
+  if (matchMedia('(min-width:901px)').matches) $('#side-d').open = true;
+  load();
+})();
+</script>
+</body>
+</html>
