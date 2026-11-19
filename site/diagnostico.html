@@ -827,7 +827,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     <div class="wrap dg-ask-grid">
       <div>
         <h2 id="ask-title">Mira cómo quedaría tu nueva página.</h2>
-        <p class="lede">Te mandamos tu propuesta en <b>24 horas hábiles</b>, en un enlace privado. No tienes que pagar nada para verla.</p>
+        <p class="lede">Te mandamos tu propuesta en <b>24 horas hábiles</b>, en un enlace privado: una portada hecha a tu gusto y optimizada para clínicas. No tienes que pagar nada para verla.</p>
         <ol class="dg-get">
           <li><span>1</span>Tu portada nueva, en computadora y en celular.</li>
           <li><span>2</span>Qué cambiamos y por qué, punto por punto.</li>
@@ -967,12 +967,17 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     e.preventDefault();
     const bad = Object.keys(rules).filter(n => !check(n));
     if (bad.length) { inp(bad[0]).focus(); return; }
+    // Antes de enviar: cuestionario de estilo (una vez; se puede omitir)
+    if (window.CeibaPrefs && !$('#ask-form')._skipQuiz) {
+      $('#ask-form')._quiz = window.CeibaPrefs.ask($('#ask-form'), prefs => { $('#ask-form')._prefs = prefs; $('#ask-form')._skipQuiz = true; $('#ask-form')._quiz.close(); $('#ask-form').requestSubmit(); }, { fields: $('#ask-fields') });
+      return;
+    }
     const btn = $('#ask-btn'), ferr = $('#ask-err');
     btn.disabled = true; btn.firstChild.textContent = 'Enviando… '; ferr.hidden = true;
     try {
       const res = await fetch('/api/lead', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({
         source: 'diagnostico', mode: 'web', site: host, name: inp('name').value, biz: inp('biz').value, contact: inp('contact').value,
-        company_url: $('#f-company-url').value, audit, utm,
+        company_url: $('#f-company-url').value, audit, utm, preferences: $('#ask-form')._prefs || null,
       }) });
       const d = await res.json();
       if (!res.ok) {
@@ -994,5 +999,6 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   if (start.host) run(start.host); else { show('ask'); input.focus(); }
 })();
 </script>
+<script src="/assets/prefs.js" defer></script>
 </body>
 </html>

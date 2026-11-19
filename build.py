@@ -74,6 +74,7 @@ pages = {
 (SITE / "assets").mkdir(exist_ok=True)
 (SITE / "assets" / "clinica.css").write_text((SRC / "assets/clinica.css").read_text(encoding="utf-8"), encoding="utf-8")
 (SITE / "assets" / "clinica.js").write_text((SRC / "assets/clinica.js").read_text(encoding="utf-8"), encoding="utf-8")
+(SITE / "assets" / "prefs.js").write_text((SRC / "assets/prefs.js").read_text(encoding="utf-8"), encoding="utf-8")
 (SITE / "assets" / "tpl-clinica.js").write_text((ROOT / "lib/templates/clinica.js").read_text(encoding="utf-8"), encoding="utf-8")
 (SITE / "assets" / "vista.js").write_text((SRC / "assets/vista.js").read_text(encoding="utf-8"), encoding="utf-8")
 (ROOT / "lib" / "generated").mkdir(exist_ok=True)

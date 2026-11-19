@@ -44,7 +44,7 @@ function page(p, { admin }) {
 <body>
 ${SYMBOLS}
 <div class="vp-bar" id="vp-bar" role="region" aria-label="Vista previa">
-  <p><span class="tag${draft ? ' tag--draft' : ''}">${draft ? 'Borrador' : 'Vista previa'}</span>Así se vería la página de <b>${esc(p.business)}</b>. Todavía no está publicada.</p>
+  <p><span class="tag${draft ? ' tag--draft' : ''}">${draft ? 'Borrador' : 'Vista previa'}</span>Así se vería la página de <b>${esc(p.business)}</b>, optimizada para ${esc(p.vertical || 'clínicas')}. Todavía no está publicada.</p>
   <div class="vp-acts"><a class="vp-btn" href="/p/${esc(p.slug)}">Ver mi propuesta</a><a class="vp-btn vp-btn--main" href="/p/${esc(p.slug)}#plan">Activar mi página</a><button class="vp-btn vp-x" type="button" id="vp-hide" aria-label="Ocultar barra de vista previa">×</button></div>
 </div>
 <button class="vp-pill" id="vp-pill" type="button" hidden>Vista previa · Ceiba Labs</button>

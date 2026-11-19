@@ -11,6 +11,28 @@ import { fireRoutine } from '../lib/routine.js';
 
 const INDUSTRIES = ['Clínica o consultorio', 'Restaurante o café', 'Inmobiliaria', 'Hotel u hospedaje', 'Despacho contable o legal', 'Otro'];
 const SOURCES = ['home', 'diagnostico', 'clinicas'];
+const PREF = {
+  style: ['moderno', 'elegante', 'calido', 'tecnologico'], mode: ['light', 'dark', 'any'], tone: ['tu', 'usted'],
+  goals: ['citas', 'estetica', 'urgencias', 'google', 'zonas', 'confianza'],
+};
+const PREF_LABEL = {
+  style: { moderno: 'Moderno y limpio', elegante: 'Elegante y premium', calido: 'Cálido y familiar', tecnologico: 'Clínico y tecnológico' },
+  mode: { light: 'Fondo claro', dark: 'Fondo oscuro', any: 'Que elija Ceiba' }, tone: { tu: 'De tú', usted: 'De usted' },
+  goals: { citas: 'Más citas de valoración', estetica: 'Vender tratamientos estéticos', urgencias: 'Atender urgencias', google: 'Que lo encuentren en Google', zonas: 'Pacientes de otras zonas', confianza: 'Transmitir más confianza' },
+};
+function cleanPrefs(p) {
+  if (!p || typeof p !== 'object') return null;
+  const out = {};
+  for (const k of ['style', 'mode', 'tone']) if (PREF[k].includes(p[k])) out[k] = p[k];
+  if (p.color === 'logo' || /^#[0-9a-f]{6}$/i.test(p.color || '')) out.color = p.color;
+  if (Array.isArray(p.goals)) out.goals = p.goals.filter(g => PREF.goals.includes(g)).slice(0, 6);
+  const ref = clean(p.ref, 200); if (ref) out.ref = ref;
+  return Object.keys(out).length ? out : null;
+}
+const prefsText = p => !p ? '' : [
+  p.style && PREF_LABEL.style[p.style], p.mode && PREF_LABEL.mode[p.mode], p.color && (p.color === 'logo' ? 'Color de su logo' : `Color ${p.color}`),
+  p.tone && PREF_LABEL.tone[p.tone], p.goals?.length && `Quiere: ${p.goals.map(g => PREF_LABEL.goals[g]).join(', ')}`, p.ref && `Le gusta: ${p.ref}`,
+].filter(Boolean).join(' · ');
 const clean = (v, max = 200) => String(v ?? '').replace(/[\u0000-\u001f\u007f]/g, ' ').trim().slice(0, max);
 
 function validate(b) {
@@ -46,6 +68,7 @@ function teamEmail(lead, due) {
     ['Negocio', lead.business], ['Nombre', lead.name], ['Contacto', `${lead.contact} (${lead.contact_type === 'email' ? 'correo' : 'WhatsApp'})`],
     ['Página', lead.site_host ? `https://${lead.site_host}` : 'No tiene'],
     ...(lead.has_site ? [] : [['Rubro', lead.industry || '—'], ['Ciudad', lead.city], ['Perfil', lead.social]]),
+    ...(lead.preferences ? [['Preferencias', prefsText(lead.preferences)]] : []),
     ['Origen', lead.source], ['Entregar', `${due.day}, ${due.time} (${due.tz})`],
   ];
   const checks = lead.audit?.checks?.length
@@ -96,6 +119,7 @@ export async function POST(request) {
     ...row,
     source: SOURCES.includes(b.source) ? b.source : 'home',
     audit: serverAudit || auditSummary(b.audit),
+    preferences: cleanPrefs(b.preferences),
     page_snapshot: snapshot,
     due_at: due.toISOString(),
     utm: b.utm && typeof b.utm === 'object' ? Object.fromEntries(Object.entries(b.utm).slice(0, 6).map(([k, v]) => [clean(k, 30), clean(v, 120)])) : null,

@@ -21,7 +21,7 @@ const todayMx = () => new Date(Date.now() - 6 * 3600e3).toISOString().slice(0, 1
 const addDays = (iso, n) => new Date(Date.parse(`${iso}T12:00:00Z`) + n * 864e5).toISOString().slice(0, 10);
 
 async function getBySlug(slug) {
-  const rows = await select('proposals', `slug=eq.${slug}&select=*,leads!leads_proposal_id_fkey(id,name,business,contact,contact_type,site_host,industry,city,social,audit,created_at,due_at,status)&limit=1`);
+  const rows = await select('proposals', `slug=eq.${slug}&select=*,leads!leads_proposal_id_fkey(id,name,business,contact,contact_type,site_host,industry,city,social,audit,preferences,created_at,due_at,status)&limit=1`);
   return rows?.[0] || null;
 }
 

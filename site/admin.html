@@ -792,6 +792,8 @@ textarea.json{width:100%;min-height:420px;font:400 12.5px/1.5 var(--f-mono);back
     corners: { soft: 'Suaves', sharp: 'Rectas' },
     buttons: { pill: 'Redondos', square: 'Rectangulares', outline: 'Con contorno' },
   };
+  const PL = { moderno: 'Moderno y limpio', elegante: 'Elegante y premium', calido: 'Cálido y familiar', tecnologico: 'Clínico y tecnológico', light: 'Fondo claro', dark: 'Fondo oscuro', any: 'Que elija Ceiba', tu: 'De tú', usted: 'De usted', citas: 'más citas', estetica: 'tratamientos estéticos', urgencias: 'urgencias', google: 'Google', zonas: 'otras zonas', confianza: 'confianza' };
+  const prefsLine = p => [p.style && PL[p.style], p.mode && PL[p.mode], p.color && (p.color === 'logo' ? 'color de su logo' : `color ${p.color}`), p.tone && PL[p.tone], p.goals?.length && `quiere: ${p.goals.map(g => PL[g]).join(', ')}`, p.ref && `le gusta: ${p.ref}`].filter(Boolean).join(' · ');
   const THEME_LABEL = { mode: 'Modo', hero: 'Foto principal', font: 'Tipografía', corners: 'Esquinas', buttons: 'Botones' };
   const LEAD = { nuevo: 'Nueva', generando: 'Armando borrador', en_revision: 'Por revisar', propuesta_enviada: 'Enviada', descartado: 'Descartada', error: 'Error' };
   const PROP = { borrador: 'Borrador', enviada: 'Enviada', vista: 'La vio', activada: 'Pagó', vencida: 'Vencida', descartada: 'Descartada' };
@@ -851,6 +853,7 @@ textarea.json{width:100%;min-height:420px;font:400 12.5px/1.5 var(--f-mono);back
             <dt>Contacto</dt><dd>${esc(lead.name)} · ${esc(lead.contact)}</dd>
             <dt>Página</dt><dd>${lead.site_host ? `<a class="link" href="https://${esc(lead.site_host)}" target="_blank" rel="noopener">${esc(lead.site_host)}</a>` : 'No tiene'}</dd>
             ${lead.industry ? `<dt>Rubro</dt><dd>${esc(lead.industry)} · ${esc(lead.city)}</dd>` : ''}${lead.social ? `<dt>Perfil</dt><dd>${esc(lead.social)}</dd>` : ''}
+            ${lead.preferences ? `<dt>Le gusta</dt><dd>${esc(prefsLine(lead.preferences))}</dd>` : ''}
             <dt>Entregar</dt><dd>${fmt(lead.due_at)}</dd>
             ${p.valid_until ? `<dt>Vigencia</dt><dd>hasta ${esc(p.valid_until)}</dd>` : ''}
           </dl></section>

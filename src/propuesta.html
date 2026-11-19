@@ -17,6 +17,15 @@
 <style>
 {{BASE_CSS}}
 /* ===================== PRIVATE PROPOSAL ===================== */
+.vert-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:32px clamp(32px,5vw,80px);align-items:start}
+.vert-tag{display:inline-block;font:500 13px var(--f-mono);color:var(--petrol);background:rgba(16,61,55,.08);border:1px solid rgba(16,61,55,.18);border-radius:999px;padding:6px 12px;margin-bottom:18px}
+.vert-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.vert-list li{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:4px}
+.vert-list b{font-weight:600}
+.vert-list span{color:var(--muted);font-size:15px}
+.p-prefs{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:18px;font-size:15px;color:rgba(247,244,235,.78)}
+.p-prefs b{color:var(--lime);font-weight:500}
+@media (max-width:860px){.vert-grid,.vert-list{grid-template-columns:1fr}}
 .p-changes{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;margin-top:18px;padding:16px 18px;border-radius:14px;background:#fff;border:1px solid var(--line)}
 .p-changes > div{display:grid;gap:2px;max-width:52ch}
 .p-changes b{font-weight:600}
@@ -225,6 +234,7 @@ img{max-width:100%}
   <div class="wrap">
     <h1 id="p-title">{{P_H1}}</h1>
     <p class="lede">{{P_LEDE}} Aquí ves cómo quedaría, qué incluye, el precio y hasta cuándo es válida. Si te gusta, la activas desde aquí mismo.</p>
+    {{P_PREFS}}
     <div class="hero-acts">
       <a class="btn btn-primary" href="{{P_VISTA}}" target="_blank" rel="noopener">Ver mi página en pantalla completa <span class="arrow" aria-hidden="true">↗</span></a>
       <a class="btn btn-line" href="#antes-despues">Ver el antes y después <span aria-hidden="true">↓</span></a>
@@ -271,6 +281,15 @@ img{max-width:100%}
           <strong>{{P_GAIN}}</strong>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band--light section p-vert" aria-labelledby="vert-title">
+  <div class="wrap">
+    <div class="vert-grid">
+      <div><span class="vert-tag">{{P_VERT_TAG}}</span><h2 class="h2" id="vert-title">{{P_VERT_TITLE}}</h2><p class="lede" style="margin-top:16px">{{P_VERT_LEDE}}</p></div>
+      <ul class="vert-list">{{P_VERT_ITEMS}}</ul>
     </div>
   </div>
 </section>

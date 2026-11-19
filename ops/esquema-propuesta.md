@@ -9,6 +9,8 @@ Las columnas de la tabla mandan sobre el JSON para `slug`, `business`, `recommen
   "contactName": "Valeria",              // nombre de quien pidió la propuesta (solo el nombre)
   "siteHost": "clinicaarrayan.mx",       // sin https ni www; vacío si no tiene página
   "template": "clinica",                 // única plantilla por ahora
+  "vertical": "clínicas dentales",       // «Optimizada para …» en la propuesta y la vista previa
+  "prefsSummary": "estilo elegante, fondo oscuro, de usted", // lo que eligió el cliente en el cuestionario
   "lede": "La hicimos con la información de tu página actual y tu perfil de Google.",
   "cmpLede": "Usamos tus servicios, tu horario y tu dirección.",
   "planTitle": "Te recomendamos el Plan Negocio con Asistente de WhatsApp.",   // opcional
