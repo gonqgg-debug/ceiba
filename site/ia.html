@@ -748,7 +748,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 .ia-price{margin-top:auto;padding-top:16px;border-top:1px solid var(--line);font:500 14px var(--f-mono);color:var(--muted)}
 .ia-price b{display:block;font:700 26px/1.1 var(--f-display);letter-spacing:-.02em;color:var(--fg);margin-bottom:4px}
 
-.ia-uses{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:40px}
+.ia-uses{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:40px}
 .ia-use{padding:22px;border-radius:16px;border:1px solid var(--line);display:grid;gap:12px;align-content:start}
 .ia-use b{font-size:18px;font-weight:600}
 .ia-use ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;color:var(--muted);font-size:15px}
@@ -855,6 +855,94 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 .ia-adopt-step p{color:var(--muted);font-size:15px}
 .ia-tools{display:flex;flex-wrap:wrap;gap:6px;padding-top:6px}
 .ia-tools span{font-size:12px;font-weight:500;padding:6px 10px;border-radius:999px;background:var(--ivory);border:1px solid var(--line)}
+/* ---------- Sistemas reales ---------- */
+.ia-cases{background:#0B1514}
+.ia-case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:40px clamp(40px,6vw,96px);align-items:center;padding-block:clamp(48px,6vw,80px);border-top:1px solid rgba(247,244,235,.1)}
+.ia-case:first-of-type{border-top:0}
+.ia-case:nth-of-type(even) > .ia-viz{order:-1}
+.ia-case h3{font-size:clamp(28px,3vw,40px);line-height:1.05;letter-spacing:-.03em;font-weight:700;max-width:16ch;margin-top:10px}
+.ia-case .ia-sub{color:rgba(247,244,235,.75)}
+.ia-case .ia-list{margin-top:20px}
+.ia-for{display:flex;flex-wrap:wrap;gap:6px;margin-top:22px;align-items:center}
+.ia-for small{font:500 12px var(--f-mono);color:rgba(247,244,235,.55);margin-right:4px}
+.ia-for span{font-size:13px;padding:6px 10px;border-radius:999px;border:1px solid rgba(214,250,82,.3);color:var(--lime)}
+.ia-viz{position:relative;border-radius:22px;background:linear-gradient(155deg,#14302A,#0E201C);border:1px solid rgba(247,244,235,.1);padding:20px 20px 34px;box-shadow:0 40px 80px -40px rgba(0,0,0,.8);min-height:360px;overflow:hidden}
+.ia-viz-top{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:14px}
+.ia-viz-top .dot{width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(214,250,82,.22);animation:blink 1.4s infinite}
+.ia-viz-top small{margin-left:auto;font:500 11px var(--f-mono);color:rgba(247,244,235,.55)}
+.ia-viz-note{position:absolute;right:16px;bottom:12px;font:500 10px var(--f-mono);color:rgba(247,244,235,.35)}
+/* prospección */
+.ia-run{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.ia-run li{display:grid;grid-template-columns:20px 1fr auto;gap:10px;align-items:center;font-size:14px;padding:9px 12px;border-radius:12px;background:rgba(247,244,235,.04);border:1px solid rgba(247,244,235,.07);opacity:.3;transition:opacity .4s,background .4s}
+.ia-run li::before{content:"";width:14px;height:14px;border-radius:50%;border:1.5px solid rgba(247,244,235,.35)}
+.ia-run li.on{opacity:1}
+.ia-run li.done::before{background:var(--lime);border-color:var(--lime);box-shadow:inset 0 0 0 3px #14302A}
+.ia-run li b{font:600 13px var(--f-mono);color:var(--lime)}
+.ia-pipe{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:14px}
+.ia-pipe div{display:grid;gap:4px;padding:10px 8px;border-radius:12px;background:rgba(247,244,235,.05);text-align:center}
+.ia-pipe b{font:700 22px var(--f-display);letter-spacing:-.02em;transition:color .3s}
+.ia-pipe b.bump{color:var(--lime)}
+.ia-pipe span{font-size:11px;line-height:1.2;color:rgba(247,244,235,.6)}
+/* pedidos */
+.ia-order{display:grid;grid-template-columns:1.1fr .9fr;gap:12px;align-items:end}
+.ia-order .ia-demo-chat{min-height:330px}
+.ia-btns{display:grid;gap:4px;margin-top:6px}
+.ia-btns i{font-style:normal;text-align:center;font-size:13px;font-weight:600;color:#0B7A64;background:#fff;border-radius:8px;padding:7px;box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.ia-cat{background:#fff;color:#15211D;border-radius:16px;padding:12px;display:grid;gap:8px;opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s cubic-bezier(.2,.8,.2,1);box-shadow:0 30px 60px -30px rgba(0,0,0,.7)}
+.ia-cat.on{opacity:1;transform:none}
+.ia-cat > b{font:600 15px var(--f-display)}
+.ia-cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.ia-cat-grid div{border:1px solid #E3E7E5;border-radius:10px;padding:8px;display:grid;gap:3px;font-size:11px}
+.ia-cat-grid div::before{content:"";height:34px;border-radius:7px;background:linear-gradient(135deg,#E4F5EC,#F3F0E6)}
+.ia-cat-grid div.add{border-color:#0B7A64;box-shadow:inset 0 0 0 1px #0B7A64}
+.ia-cat-sum{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:600;background:#0F5C4B;color:#fff;border-radius:10px;padding:9px 10px}
+.ia-staff{margin-top:8px;font:500 11px var(--f-mono);color:#0F5C4B;background:#E4F5EC;border-radius:8px;padding:6px 8px;opacity:0;transition:opacity .5s}
+.ia-staff.on{opacity:1}
+/* contabilidad */
+.ia-books{display:grid;gap:6px}
+.ia-books-h,.ia-book{display:grid;grid-template-columns:1.3fr 1fr 1.4fr;gap:10px;align-items:center;font-size:13px}
+.ia-books-h{font:500 11px var(--f-mono);color:rgba(247,244,235,.5);padding:0 12px}
+.ia-book{padding:10px 12px;border-radius:12px;background:rgba(247,244,235,.04);border:1px solid rgba(247,244,235,.07)}
+.ia-book small{color:rgba(247,244,235,.6)}
+.ia-st{justify-self:start;font-size:11px;font-weight:600;padding:4px 8px;border-radius:999px;background:rgba(247,244,235,.08);color:rgba(247,244,235,.75);transition:background .4s,color .4s}
+.ia-st.ok{background:rgba(214,250,82,.16);color:var(--lime)}
+.ia-st.warn{background:rgba(255,190,90,.16);color:#FFC46B}
+.ia-crew{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(247,244,235,.08)}
+.ia-crew span{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:6px 10px;border-radius:999px;background:rgba(247,244,235,.05);color:rgba(247,244,235,.8);transition:background .3s,color .3s}
+.ia-crew span::before{content:"";width:6px;height:6px;border-radius:50%;background:rgba(247,244,235,.35)}
+.ia-crew span.on{background:rgba(214,250,82,.12);color:var(--ivory)}
+.ia-crew span.on::before{background:var(--lime)}
+.ia-crew span.me::before{background:#FFC46B}
+/* análisis */
+.ia-rep{background:#fff;color:#15211D;border-radius:16px;padding:16px;display:grid;gap:12px}
+.ia-rep-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.ia-rep-h b{font:600 17px var(--f-display)}
+.ia-rep-h small{font:500 11px var(--f-mono);color:#6B7774}
+.ia-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ia-kpis div{border:1px solid #E3E7E5;border-radius:10px;padding:8px 10px;display:grid;gap:2px}
+.ia-kpis span{font-size:11px;color:#6B7774}
+.ia-kpis b{font:700 18px var(--f-display);letter-spacing:-.02em}
+.ia-kpis em{font-style:normal;font-size:11px;font-weight:600;color:#0B7A64}
+.ia-kpis em.dn{color:#C8553D}
+.ia-spark{width:100%;height:70px;display:block}
+.ia-spark path.l{fill:none;stroke:#0F5C4B;stroke-width:2.2;stroke-dasharray:600;stroke-dashoffset:600;transition:stroke-dashoffset 2s ease}
+.ia-spark path.a{fill:url(#iaSg);opacity:0;transition:opacity 1s .8s}
+.ia-rep.on .ia-spark path.l{stroke-dashoffset:0}.ia-rep.on .ia-spark path.a{opacity:1}
+.ia-finds{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.ia-finds li{display:grid;grid-template-columns:22px 1fr;gap:8px;font-size:13px;line-height:1.4;padding:9px 10px;border-radius:10px;background:#F5F3EC;opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s}
+.ia-finds li.on{opacity:1;transform:none}
+.ia-finds li span{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;font-size:12px;background:#0F5C4B;color:#D6FA52}
+/* cualquier industria */
+.ia-any{margin-top:clamp(40px,5vw,64px);padding:clamp(24px,3vw,36px);border-radius:24px;background:rgba(214,250,82,.06);border:1px solid rgba(214,250,82,.2);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:28px 48px;align-items:start}
+.ia-any h3{font-size:clamp(24px,2.4vw,32px);line-height:1.1;letter-spacing:-.025em}
+.ia-any p{color:rgba(247,244,235,.75);margin-top:12px}
+.ia-map{display:grid;gap:10px}
+.ia-map div{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.6fr);gap:12px;padding-bottom:10px;border-bottom:1px solid rgba(247,244,235,.08);font-size:15px}
+.ia-map div:last-child{border-bottom:0;padding-bottom:0}
+.ia-map b{font-weight:600}
+.ia-map span{color:rgba(247,244,235,.7)}
+@media (max-width:980px){.ia-case,.ia-any{grid-template-columns:1fr}.ia-case:nth-of-type(even) > .ia-viz{order:0}}
+@media (max-width:640px){.ia-order{grid-template-columns:1fr}.ia-pipe{grid-template-columns:repeat(3,1fr)}.ia-pipe div:nth-child(n+4){display:none}.ia-books-h,.ia-book{grid-template-columns:1fr 1fr}.ia-books-h :nth-child(2),.ia-book > :nth-child(2){display:none}.ia-map div{grid-template-columns:1fr;gap:4px}}
 @media (max-width:1100px){.ia-ways,.ia-autos{grid-template-columns:1fr 1fr}}
 @media (max-width:980px){.ia-split{grid-template-columns:1fr}.ia-split--flip .ia-agent{order:2}}
 @media (max-width:640px){.ia-ways,.ia-autos{grid-template-columns:1fr}.ia-demo{grid-template-columns:1fr}.ia-demo-chat{min-height:260px}}
@@ -897,8 +985,8 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   <div class="wrap ia-hero-grid">
     <div>
       <h1 id="ia-title">Inteligencia artificial aplicada a <span class="ia-shine">cómo trabaja tu negocio.</span></h1>
-      <p class="lede">Diseñamos asistentes, agentes y automatizaciones a partir de tus procesos reales de atención, ventas y operación. Empezamos por un problema concreto, lo medimos y acompañamos a tu equipo mientras lo adopta.</p>
-      <div class="ia-acts"><a class="btn btn-primary" href="#contacto">Hablemos de tu operación <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-line" href="#demo">Ver la demo de WhatsApp</a></div>
+      <p class="lede">Construimos agentes que ocupan puestos completos: buscan clientes y les dan seguimiento, toman pedidos, procesan facturas y analizan tus ventas cada mañana. Partimos de cómo trabaja hoy tu equipo, empezamos por un problema concreto y lo medimos.</p>
+      <div class="ia-acts"><a class="btn btn-primary" href="#contacto">Hablemos de tu operación <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-line" href="#sistemas">Ver lo que ya construimos</a></div>
       <p class="ia-note">Trabajamos con las herramientas que tu equipo ya usa. No necesitas tener tu página con nosotros.</p>
     </div>
     <div class="ia-phone" aria-label="Ejemplo de conversación con el asistente de WhatsApp de una clínica">
@@ -913,32 +1001,119 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 <section class="band band--light section" id="formas" aria-labelledby="formas-title">
   <div class="wrap">
     <p class="ia-kick" data-reveal>Cómo usamos la IA</p>
-    <h2 class="ia-h" id="formas-title" data-reveal>Cuatro formas de poner la IA a trabajar en tu negocio.</h2>
-    <p class="ia-sub" data-reveal>No todo se resuelve con un chatbot. Elegimos la herramienta según el problema: a veces es un asistente, a veces un agente que hace el trabajo completo y a veces basta con quitar pasos del proceso.</p>
+    <h2 class="ia-h" id="formas-title" data-reveal>Mucho más que un chatbot.</h2>
+    <p class="ia-sub" data-reveal>Elegimos la herramienta según el problema: a veces es un asistente que atiende, a veces un agente que hace el trabajo de un puesto y a veces un tablero donde tu equipo ve todo en un solo lugar.</p>
     <div class="ia-ways">
-      <a class="ia-way" href="#demo" data-reveal><span class="ia-way-n">01</span><b>Asistentes de atención</b><p>Responden en WhatsApp y en tu página, recogen solicitudes y pasan al equipo lo que necesita a una persona.</p><em>Ver la demo →</em></a>
-      <a class="ia-way" href="#agentes" data-reveal><span class="ia-way-n">02</span><b>Agentes de IA para operación</b><p>Hacen tareas de varios pasos: leen una solicitud, consultan tus sistemas, preparan el documento y te piden aprobación.</p><em>Ver cómo trabaja un agente →</em></a>
-      <a class="ia-way" href="#automatizacion" data-reveal><span class="ia-way-n">03</span><b>Automatización de procesos</b><p>Conectamos tus herramientas para que la información pase sola: recordatorios, seguimiento, captura y reportes.</p><em>Ver ejemplos →</em></a>
-      <a class="ia-way" href="#operacion" data-reveal><span class="ia-way-n">04</span><b>Rediseño de procesos y adopción</b><p>Revisamos cómo pasa el trabajo de una persona a otra, quitamos pasos y acompañamos a tu equipo con lo nuevo.</p><em>Ver cómo lo hacemos →</em></a>
+      <a class="ia-way" href="#sistemas" data-reveal><span class="ia-way-n">01</span><b>Agentes que ocupan un puesto</b><p>Prospección y ventas, contabilidad, compras, análisis. Trabajan todos los días y te piden aprobación en lo importante.</p><em>Ver sistemas reales →</em></a>
+      <a class="ia-way" href="#demo" data-reveal><span class="ia-way-n">02</span><b>Atención y pedidos por WhatsApp</b><p>Asistentes que responden, apartan citas y toman pedidos con catálogo digital, en tu mismo número.</p><em>Ver la demo →</em></a>
+      <a class="ia-way" href="#caso-datos" data-reveal><span class="ia-way-n">03</span><b>Datos, análisis y tableros</b><p>Juntamos la información de tus ventas y sistemas, y un agente te explica cada mañana qué pasó y qué hacer.</p><em>Ver el analista →</em></a>
+      <a class="ia-way" href="#operacion" data-reveal><span class="ia-way-n">04</span><b>Procesos a medida y adopción</b><p>Rediseñamos cómo pasa el trabajo de una persona a otra, conectamos tus herramientas y acompañamos a tu equipo.</p><em>Ver cómo lo hacemos →</em></a>
     </div>
   </div>
 </section>
 
-<section class="band section" id="demo" aria-labelledby="demo-title">
-  <div class="wrap ia-split">
-    <div>
-      <p class="ia-kick" data-reveal>01 · Asistentes de atención</p>
-      <h2 class="ia-h" id="demo-title" data-reveal>Tu cliente conversa. Tu equipo recibe la solicitud lista.</h2>
-      <p class="ia-sub" data-reveal style="color:rgba(247,244,235,.75)">El asistente contesta precios, horarios, ubicación y requisitos con la información que tú apruebas. Cuando el cliente quiere agendar o cotizar, arma la solicitud con lo necesario y se la pasa a quien le toca. Si algo requiere a una persona, avisa y no inventa.</p>
-      <ul class="ia-list" data-reveal><li>WhatsApp y el chat de tu página, en tu mismo número</li><li>Aparta citas o reservaciones y manda recordatorios</li><li>Urgencias y quejas pasan directo a tu equipo, con resumen</li><li>Responde de noche y en fin de semana</li></ul>
-    </div>
-    <div class="ia-demo" data-reveal aria-label="Ejemplo: la conversación y la solicitud que recibe recepción">
-      <div class="ia-demo-chat" id="ia-demo-chat"></div>
-      <div class="ia-demo-card" id="ia-demo-card">
-        <span class="tag">Para recepción · 18:42</span>
-        <b>Solicitud de cita</b>
-        <dl><dt>Paciente</dt><dd>Mariana G.</dd><dt>Servicio</dt><dd>Limpieza · $700</dd><dt>Horario</dt><dd>Mañana 10:00</dd><dt>Nota</dt><dd>Primera vez en la clínica</dd></dl>
-        <div class="acts"><span class="ok">Confirmar</span><span>Proponer otro horario</span></div>
+<section class="band section ia-cases" id="sistemas" aria-labelledby="sis-title">
+  <div class="wrap">
+    <p class="ia-kick" data-reveal>Lo que ya construimos</p>
+    <h2 class="ia-h" id="sis-title" data-reveal>Sistemas que trabajan todos los días en un negocio real.</h2>
+    <p class="ia-sub" data-reveal style="color:rgba(247,244,235,.75)">Estos cuatro los construimos para una cadena de minimarkets y hoy operan a diario. Te los mostramos porque la misma idea funciona en casi cualquier industria.</p>
+
+    <article class="ia-case" id="caso-ventas">
+      <div>
+        <p class="ia-kick" data-reveal>Agente de prospección y ventas</p>
+        <h3 data-reveal>Cada mañana busca clientes nuevos, les escribe y les da seguimiento.</h3>
+        <p class="ia-sub" data-reveal>Lo creamos para encontrar locales para nuevas sucursales. Todos los días ejecuta una rutina: busca opciones en mapas, portales y redes, encuentra al contacto correcto, le escribe un correo personalizado y registra todo en el CRM. Cuando alguien responde, lo mueve de etapa y agenda el siguiente paso.</p>
+        <ul class="ia-list" data-reveal><li>Investiga y califica cada prospecto antes de escribir</li><li>Correos personalizados, no plantillas masivas</li><li>Maneja el CRM: etapas, notas, actividades y seguimiento</li><li>Tu equipo entra solo cuando hay una conversación real</li></ul>
+        <div class="ia-for" data-reveal><small>Sirve para</small><span>Ventas B2B</span><span>Inmobiliarias</span><span>Distribuidores</span><span>Agencias y despachos</span><span>Cualquier negocio que vende</span></div>
+      </div>
+      <div class="ia-viz" data-reveal aria-label="Ejemplo de la rutina diaria del agente de prospección">
+        <div class="ia-viz-top"><span class="dot"></span><b>Rutina diaria de prospección</b><small id="v1-time">07:00</small></div>
+        <ol class="ia-run" id="v1-run">
+          <li>Busca opciones nuevas en mapas y portales<b>+38</b></li>
+          <li>Encuentra al contacto que decide<b>+21</b></li>
+          <li>Escribe un correo a cada uno<b>21</b></li>
+          <li>Revisa respuestas y actualiza el CRM<b>3</b></li>
+          <li>Agenda seguimientos para mañana<b>12</b></li>
+        </ol>
+        <div class="ia-pipe" id="v1-pipe"><div><b>142</b><span>Identificados</span></div><div><b>96</b><span>Contactados</span></div><div><b>18</b><span>Respondieron</span></div><div><b>7</b><span>En conversación</span></div><div><b>3</b><span>Oportunidad</span></div></div>
+        <span class="ia-viz-note">Ilustrativo</span>
+      </div>
+    </article>
+
+    <article class="ia-case" id="caso-pedidos">
+      <div>
+        <p class="ia-kick" data-reveal>Pedidos por WhatsApp con catálogo digital</p>
+        <h3 data-reveal>Tu cliente pide por WhatsApp como siempre. El pedido llega completo a tienda.</h3>
+        <p class="ia-sub" data-reveal>Un bot mixto: botones para lo que conviene guiar (hacer pedido, ver su pedido, cancelar) e IA cuando el cliente escribe libre, como «¿tienen leche deslactosada?». Le muestra los productos y lo lleva a un catálogo tipo app donde arma su carrito. El equipo recibe el pedido en un panel y le avisa cuando sale.</p>
+        <ul class="ia-list" data-reveal><li>Árbol de opciones e IA trabajando juntos</li><li>Catálogo web con búsqueda, promociones y recomendaciones</li><li>Panel para el equipo: pedidos, faltantes y chats</li><li>Si el cliente prefiere a una persona, la pide con un botón</li></ul>
+        <div class="ia-for" data-reveal><small>Sirve para</small><span>Tiendas y minimarkets</span><span>Restaurantes</span><span>Farmacias</span><span>Ferreterías y refacciones</span><span>Distribución</span></div>
+      </div>
+      <div class="ia-viz" data-reveal aria-label="Ejemplo: un pedido por WhatsApp que termina en el catálogo digital">
+        <div class="ia-order">
+          <div class="ia-demo-chat" id="v2-chat"></div>
+          <div>
+            <div class="ia-cat" id="v2-cat"><b>Catálogo · Tu tienda</b><div class="ia-cat-grid"><div class="add">Leche deslactosada 1 L</div><div>Pan de caja grande</div><div class="add">Huevo blanco 12 pzs</div><div>Café molido 250 g</div></div><div class="ia-cat-sum"><span>3 productos</span><span>Enviar pedido →</span></div></div>
+            <p class="ia-staff" id="v2-staff">Pedido #1042 · recibido en tienda</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="ia-case" id="caso-contable">
+      <div>
+        <p class="ia-kick" data-reveal>Equipo contable de agentes</p>
+        <h3 data-reveal>Un agente por puesto, y un tablero donde tu equipo trabaja.</h3>
+        <p class="ia-sub" data-reveal>Dividimos el trabajo contable como lo haría un equipo: un agente recibe las facturas, otro revisa cada línea contra el catálogo, otro la verifica contra la compra, otro concilia bancos y pagos, otro prepara los asientos y reportes del cierre. Lo que un agente no puede resolver llega como excepción al tablero, y el cierre del mes lo aprueba una persona.</p>
+        <ul class="ia-list" data-reveal><li>Facturas, compras, bancos y cierre mensual conectados</li><li>Cada agente con permisos solo para su parte</li><li>Excepciones y decisiones quedan registradas</li><li>El contador revisa y aprueba en lugar de capturar</li></ul>
+        <div class="ia-for" data-reveal><small>Sirve para</small><span>Cualquier empresa con facturas</span><span>Despachos contables</span><span>Compras y almacén</span><span>Cuentas por pagar</span></div>
+      </div>
+      <div class="ia-viz" data-reveal aria-label="Ejemplo del tablero contable con agentes">
+        <div class="ia-viz-top"><span class="dot"></span><b>Tablero contable</b><small id="v3-exc">0 excepciones</small></div>
+        <div class="ia-books">
+          <div class="ia-books-h"><span>Factura</span><span>Proveedor</span><span>Estado</span></div>
+          <div class="ia-book"><span>F-2291</span><small>Lácteos del Valle</small><span class="ia-st">Recibida</span></div>
+          <div class="ia-book"><span>F-2292</span><small>Abarrotes Norte</small><span class="ia-st">Recibida</span></div>
+          <div class="ia-book"><span>F-2293</span><small>Bebidas Sol</small><span class="ia-st">Recibida</span></div>
+          <div class="ia-book"><span>F-2294</span><small>Limpieza Total</small><span class="ia-st">Recibida</span></div>
+        </div>
+        <div class="ia-crew" id="v3-crew"><span>Recepción</span><span>Revisión de líneas</span><span>Verificación</span><span>Bancos y pagos</span><span>Asientos</span><span>Reportes</span><span class="me">Aprobación: persona</span></div>
+        <span class="ia-viz-note">Ilustrativo</span>
+      </div>
+    </article>
+
+    <article class="ia-case" id="caso-datos">
+      <div>
+        <p class="ia-kick" data-reveal>Analista de ventas diario</p>
+        <h3 data-reveal>Todos los días te explica qué pasó en tu negocio y qué conviene hacer.</h3>
+        <p class="ia-sub" data-reveal>Primero sacamos más datos de las ventas: cada ticket, producto, hora y sucursal, conectados al punto de venta. Después creamos un agente que los analiza cada día con definiciones exactas de margen y comparativos, y publica sus hallazgos: qué subió, qué bajó, qué se compra junto, qué horarios rinden y dónde se está perdiendo margen.</p>
+        <ul class="ia-list" data-reveal><li>Ventas, margen y canastas con cifras que cuadran</li><li>Comparativos contra la semana y el año anterior</li><li>Hallazgos en lenguaje claro, con su gráfica</li><li>Muchísimo más detalle para decidir</li></ul>
+        <div class="ia-for" data-reveal><small>Sirve para</small><span>Retail</span><span>Restaurantes</span><span>Clínicas</span><span>E-commerce</span><span>Cualquier negocio con ventas</span></div>
+      </div>
+      <div class="ia-viz" data-reveal aria-label="Ejemplo del reporte diario del analista de ventas">
+        <div class="ia-rep" id="v4-rep">
+          <div class="ia-rep-h"><b>Reporte de ayer</b><small>publicado 07:30</small></div>
+          <div class="ia-kpis"><div><span>Ventas</span><b>+12%</b><em>vs. martes pasado</em></div><div><span>Ticket promedio</span><b>+4%</b><em>más productos</em></div><div><span>Margen</span><b>−0.8 pts</b><em class="dn">limpieza</em></div></div>
+          <svg class="ia-spark" viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="iaSg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0F5C4B" stop-opacity=".25"/><stop offset="1" stop-color="#0F5C4B" stop-opacity="0"/></linearGradient></defs><path class="a" d="M0 52 L30 48 L60 50 L90 40 L120 44 L150 34 L180 38 L210 26 L240 30 L270 16 L300 12 L300 70 L0 70Z"/><path class="l" d="M0 52 L30 48 L60 50 L90 40 L120 44 L150 34 L180 38 L210 26 L240 30 L270 16 L300 12"/></svg>
+          <ul class="ia-finds" id="v4-finds">
+            <li><span>↑</span>Bebidas explican la mitad del aumento, sobre todo entre 6 y 9 pm.</li>
+            <li><span>∞</span>En 4 de cada 10 tickets con pan también hay leche: conviene ponerlos juntos.</li>
+            <li><span>!</span>El margen de limpieza bajó porque subió el costo de un proveedor.</li>
+          </ul>
+        </div>
+        <span class="ia-viz-note">Ilustrativo</span>
+      </div>
+    </article>
+
+    <div class="ia-any" data-reveal>
+      <div>
+        <h3>Lo mismo se puede hacer en tu industria.</h3>
+        <p>Cambian los datos y las herramientas, pero el patrón es el mismo: un agente que hace el trabajo repetitivo, un tablero donde tu equipo decide y una persona que aprueba lo importante. Y hay muchos casos que no están en esta página: cuéntanos el tuyo.</p>
+      </div>
+      <div class="ia-map">
+        <div><b>Prospección y seguimiento</b><span>Inmobiliarias que buscan propietarios, distribuidores que buscan puntos de venta, despachos que buscan empresas</span></div>
+        <div><b>Pedidos y reservas</b><span>Restaurantes, farmacias, ferreterías, hoteles y cualquier negocio que recibe pedidos por WhatsApp</span></div>
+        <div><b>Back office con agentes</b><span>Facturas, cuentas por pagar, conciliaciones, inventario, compras, expedientes y documentos</span></div>
+        <div><b>Análisis diario</b><span>Ventas por sucursal, ocupación, citas y tratamientos, margen por producto, desempeño del equipo</span></div>
       </div>
     </div>
   </div>
@@ -958,26 +1133,32 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       </ol>
     </div>
     <div>
-      <p class="ia-kick" data-reveal>02 · Agentes de IA para operación</p>
-      <h2 class="ia-h" id="ag-title" data-reveal>Un agente no solo contesta: hace el trabajo completo.</h2>
-      <p class="ia-sub" data-reveal>Un agente de IA sigue los pasos que hoy hace una persona: lee, consulta tus sistemas, prepara y entrega. Lo diseñamos para que se detenga y te pida aprobación en lo importante, como un precio o un pago.</p>
+      <p class="ia-kick" data-reveal>Cómo trabaja un agente</p>
+      <h2 class="ia-h" id="ag-title" data-reveal>Un agente no solo contesta: hace el trabajo de un puesto.</h2>
+      <p class="ia-sub" data-reveal>Un agente sigue los pasos que hoy hace una persona: lee, consulta tus sistemas, prepara y entrega. Puede trabajar solo cuando alguien le escribe o ejecutar una rutina todos los días a la misma hora. Lo diseñamos para que se detenga y te pida aprobación en lo importante, como un precio o un pago.</p>
       <div class="ia-examples" data-reveal>
-        <span>Preparar cotizaciones con tu lista de precios</span><span>Clasificar y asignar solicitudes que llegan por correo</span><span>Conciliar pagos con facturas</span><span>Resumir expedientes o historiales antes de una cita</span><span>Capturar pedidos en tu sistema desde un mensaje</span><span>Revisar documentos y avisar qué falta</span>
+        <span>Preparar cotizaciones con tu lista de precios</span><span>Buscar prospectos y darles seguimiento</span><span>Procesar facturas y cuentas por pagar</span><span>Clasificar y asignar solicitudes que llegan por correo</span><span>Conciliar pagos con facturas</span><span>Resumir expedientes o historiales antes de una cita</span><span>Capturar pedidos en tu sistema desde un mensaje</span><span>Revisar documentos y avisar qué falta</span>
       </div>
     </div>
   </div>
 </section>
 
-<section class="band section" id="automatizacion" aria-labelledby="au-title">
-  <div class="wrap">
-    <p class="ia-kick" data-reveal>03 · Automatización de procesos</p>
-    <h2 class="ia-h" id="au-title" data-reveal>Que la información pase sola de una herramienta a otra.</h2>
-    <p class="ia-sub" data-reveal style="color:rgba(247,244,235,.75)">Conectamos lo que ya usas para que nadie copie y pegue datos, ni se le olvide un seguimiento.</p>
-    <div class="ia-autos">
-      <div class="ia-auto" data-reveal><div class="flow"><i>Cita agendada</i><span></span><i>Recordatorio 24 h antes</i><span></span><i>Confirma o reagenda</i></div><b>Recordatorios y confirmaciones</b><p>Menos citas perdidas sin que recepción llame uno por uno.</p></div>
-      <div class="ia-auto" data-reveal><div class="flow"><i>Cotización enviada</i><span></span><i>3 días sin respuesta</i><span></span><i>Seguimiento automático</i></div><b>Seguimiento de ventas</b><p>Ninguna cotización se queda olvidada en una bandeja.</p></div>
-      <div class="ia-auto" data-reveal><div class="flow"><i>Formulario o WhatsApp</i><span></span><i>Tu CRM u hoja de cálculo</i><span></span><i>Aviso al responsable</i></div><b>Captura sin duplicar</b><p>Los datos se escriben una vez y llegan a donde se necesitan.</p></div>
-      <div class="ia-auto" data-reveal><div class="flow"><i>Ventas, citas y pagos</i><span></span><i>Reporte semanal</i><span></span><i>A tu correo los lunes</i></div><b>Reportes sin armarlos a mano</b><p>Los números de la semana, listos antes de tu junta.</p></div>
+<section class="band section" id="demo" aria-labelledby="demo-title">
+  <div class="wrap ia-split">
+    <div>
+      <p class="ia-kick" data-reveal>Atención por WhatsApp</p>
+      <h2 class="ia-h" id="demo-title" data-reveal>Tu cliente conversa. Tu equipo recibe la solicitud lista.</h2>
+      <p class="ia-sub" data-reveal style="color:rgba(247,244,235,.75)">El asistente contesta precios, horarios, ubicación y requisitos con la información que tú apruebas. Cuando el cliente quiere agendar o cotizar, arma la solicitud con lo necesario y se la pasa a quien le toca. Si algo requiere a una persona, avisa y no inventa.</p>
+      <ul class="ia-list" data-reveal><li>WhatsApp y el chat de tu página, en tu mismo número</li><li>Aparta citas o reservaciones y manda recordatorios</li><li>Urgencias y quejas pasan directo a tu equipo, con resumen</li><li>Responde de noche y en fin de semana</li></ul>
+    </div>
+    <div class="ia-demo" data-reveal aria-label="Ejemplo: la conversación y la solicitud que recibe recepción">
+      <div class="ia-demo-chat" id="ia-demo-chat"></div>
+      <div class="ia-demo-card" id="ia-demo-card">
+        <span class="tag">Para recepción · 18:42</span>
+        <b>Solicitud de cita</b>
+        <dl><dt>Paciente</dt><dd>Mariana G.</dd><dt>Servicio</dt><dd>Limpieza · $700</dd><dt>Horario</dt><dd>Mañana 10:00</dd><dt>Nota</dt><dd>Primera vez en la clínica</dd></dl>
+        <div class="acts"><span class="ok">Confirmar</span><span>Proponer otro horario</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -985,18 +1166,32 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 <section class="band band--light section" id="operacion" aria-labelledby="op-title">
   <div class="wrap ia-split">
     <div>
-      <p class="ia-kick" data-reveal>04 · Rediseño de procesos y adopción</p>
+      <p class="ia-kick" data-reveal>Procesos a medida y adopción</p>
       <h2 class="ia-h" id="op-title" data-reveal>Mejoremos cómo pasa el trabajo de una persona a otra.</h2>
       <p class="ia-sub" data-reveal>Antes de automatizar, revisamos el proceso completo con quien lo hace todos los días. Muchas veces lo que más ahorra es quitar un paso, definir un responsable o capturar el dato una sola vez. Después conectamos las herramientas y acompañamos a tu equipo hasta que lo nuevo se vuelve costumbre.</p>
       <p class="ia-stuck-t" data-reveal>Dónde solemos encontrar trabajo atorado</p>
-      <ul class="ia-stuck" data-reveal><li>Cotizaciones que nadie le da seguimiento</li><li>Información que se captura dos veces</li><li>Solicitudes que llegan sin responsable</li><li>Aprobaciones que viven en chats y se pierden</li><li>Reportes que alguien arma a mano cada semana</li></ul>
+      <ul class="ia-stuck" data-reveal><li>Cotizaciones que nadie le da seguimiento</li><li>Información que se captura dos veces</li><li>Solicitudes que llegan sin responsable</li><li>Aprobaciones que viven en chats y se pierden</li><li>Reportes que alguien arma a mano cada semana</li><li>Facturas que se capturan y revisan una por una</li><li>Datos de ventas que nadie tiene tiempo de analizar</li></ul>
     </div>
     <div class="ia-adopt" data-reveal>
       <div class="ia-adopt-step"><span>1</span><div><b>Mapeamos el proceso</b><p>Quién hace qué, con qué herramienta y dónde se espera.</p></div></div>
       <div class="ia-adopt-step"><span>2</span><div><b>Lo rediseñamos</b><p>Menos pasos, un responsable por etapa y datos que se capturan una vez.</p></div></div>
       <div class="ia-adopt-step"><span>3</span><div><b>Conectamos y automatizamos</b><p>Agentes y automatizaciones donde de verdad ahorran tiempo.</p></div></div>
       <div class="ia-adopt-step"><span>4</span><div><b>Capacitamos y medimos</b><p>Tu equipo aprende a usarlo y medimos tiempos antes y después.</p></div></div>
-      <div class="ia-tools"><span>WhatsApp Business</span><span>Gmail y Outlook</span><span>Google Sheets y Excel</span><span>Tu CRM</span><span>Facturación</span><span>Tu sistema interno</span></div>
+      <div class="ia-tools"><span>WhatsApp Business</span><span>Gmail y Outlook</span><span>Google Sheets y Excel</span><span>Tu CRM</span><span>Facturación</span><span>Punto de venta</span><span>Odoo y ERPs</span><span>Bancos</span><span>Tu sistema interno</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="band section" id="automatizacion" aria-labelledby="au-title">
+  <div class="wrap">
+    <p class="ia-kick" data-reveal>Automatización</p>
+    <h2 class="ia-h" id="au-title" data-reveal>Que la información pase sola de una herramienta a otra.</h2>
+    <p class="ia-sub" data-reveal style="color:rgba(247,244,235,.75)">Conectamos lo que ya usas para que nadie copie y pegue datos, ni se le olvide un seguimiento.</p>
+    <div class="ia-autos">
+      <div class="ia-auto" data-reveal><div class="flow"><i>Cita agendada</i><span></span><i>Recordatorio 24 h antes</i><span></span><i>Confirma o reagenda</i></div><b>Recordatorios y confirmaciones</b><p>Menos citas perdidas sin que recepción llame uno por uno.</p></div>
+      <div class="ia-auto" data-reveal><div class="flow"><i>Cotización enviada</i><span></span><i>3 días sin respuesta</i><span></span><i>Seguimiento automático</i></div><b>Seguimiento de ventas</b><p>Ninguna cotización se queda olvidada en una bandeja.</p></div>
+      <div class="ia-auto" data-reveal><div class="flow"><i>Formulario o WhatsApp</i><span></span><i>Tu CRM u hoja de cálculo</i><span></span><i>Aviso al responsable</i></div><b>Captura sin duplicar</b><p>Los datos se escriben una vez y llegan a donde se necesitan.</p></div>
+      <div class="ia-auto" data-reveal><div class="flow"><i>Ventas, citas y pagos</i><span></span><i>Reporte semanal</i><span></span><i>A tu correo los lunes</i></div><b>Reportes sin armarlos a mano</b><p>Los números de la semana, listos antes de tu junta.</p></div>
     </div>
   </div>
 </section>
@@ -1013,9 +1208,9 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
         <p class="ia-price"><b>$3,990</b>de inicio + $1,490 al mes</p>
       </article>
       <article class="ia-svc">
-        <h3>Agentes y automatización a medida</h3>
-        <p>Para lo que tu equipo repite todos los días: lo diseñamos, lo conectamos a tus herramientas y lo probamos con un caso real.</p>
-        <ul><li>Agentes que preparan cotizaciones, capturan pedidos o revisan documentos</li><li>Recordatorios, seguimiento y reportes automáticos</li><li>Integración con tu CRM, hojas de cálculo o sistema</li><li>Capacitación a tu equipo</li></ul>
+        <h3>Agentes, tableros y procesos a medida</h3>
+        <p>Para lo que tu equipo repite todos los días: lo diseñamos, lo conectamos a tus sistemas y lo probamos con un caso real antes de ampliarlo.</p>
+        <ul><li>Agentes de prospección, contabilidad, compras o análisis</li><li>Pedidos por WhatsApp con catálogo digital</li><li>Tablero donde tu equipo revisa, aprueba y atiende excepciones</li><li>Integración con tu CRM, punto de venta, ERP o bancos</li><li>Capacitación y mejora mensual</li></ul>
         <p class="ia-price"><b>Desde $19,900</b>el piloto, cotizado a la medida</p>
       </article>
       <article class="ia-svc">
@@ -1033,11 +1228,14 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   <div class="wrap">
     <p class="ia-kick" data-reveal>Por tipo de negocio</p>
     <h2 class="ia-h" id="uses-title" data-reveal>Lo que puede hacer en tu negocio.</h2>
+    <p class="ia-sub" data-reveal style="color:rgba(247,244,235,.75)">Algunos ejemplos. Si tu industria no está aquí, casi seguro también aplica.</p>
     <div class="ia-uses">
-      <div class="ia-use" data-reveal><b>Clínicas y consultorios</b><ul><li>Responder precios y requisitos</li><li>Apartar, confirmar y recordar citas</li><li>Resumir el historial antes de la consulta</li><li>Seguimiento de presupuestos de tratamiento</li></ul></div>
-      <div class="ia-use" data-reveal><b>Restaurantes y cafés</b><ul><li>Tomar reservaciones y pedidos</li><li>Mandar el menú del día</li><li>Inventario y pedidos a proveedores</li><li>Cotizar eventos privados</li></ul></div>
-      <div class="ia-use" data-reveal><b>Inmobiliarias</b><ul><li>Calificar a quien pregunta</li><li>Mandar fichas y agendar visitas</li><li>Asignar prospectos al asesor</li><li>Dar seguimiento hasta el cierre</li></ul></div>
-      <div class="ia-use" data-reveal><b>Despachos y empresas de servicios</b><ul><li>Pedir y revisar documentos pendientes</li><li>Clasificar solicitudes por correo</li><li>Conciliar pagos con facturas</li><li>Reportes para la dirección</li></ul></div>
+      <div class="ia-use" data-reveal><b>Tiendas y retail</b><ul><li>Pedidos por WhatsApp con catálogo</li><li>Facturas de proveedores y compras</li><li>Análisis diario de ventas y margen</li><li>Faltantes y reabasto</li></ul></div>
+      <div class="ia-use" data-reveal><b>Restaurantes y hoteles</b><ul><li>Reservaciones y pedidos</li><li>Inventario y pedidos a proveedores</li><li>Ventas por platillo, turno y sucursal</li><li>Cotizar eventos y grupos</li></ul></div>
+      <div class="ia-use" data-reveal><b>Inmobiliarias</b><ul><li>Buscar propietarios y desarrollos</li><li>Calificar a quien pregunta</li><li>Mandar fichas y agendar visitas</li><li>Seguimiento en el CRM hasta el cierre</li></ul></div>
+      <div class="ia-use" data-reveal><b>Clínicas y consultorios</b><ul><li>Apartar, confirmar y recordar citas</li><li>Seguimiento de presupuestos</li><li>Resumir el historial antes de la consulta</li><li>Tratamientos y ocupación por día</li></ul></div>
+      <div class="ia-use" data-reveal><b>Despachos contables y legales</b><ul><li>Pedir y revisar documentos</li><li>Procesar facturas de sus clientes</li><li>Conciliaciones y cierres</li><li>Prospectar empresas nuevas</li></ul></div>
+      <div class="ia-use" data-reveal><b>Distribuidores y B2B</b><ul><li>Prospección y seguimiento de cuentas</li><li>Cotizaciones con tu lista de precios</li><li>Pedidos desde WhatsApp o correo</li><li>Cobranza y cuentas por cobrar</li></ul></div>
     </div>
   </div>
 </section>
@@ -1072,7 +1270,9 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     <h2 class="ia-h" id="faq-title" data-reveal style="font-size:clamp(30px,3.4vw,44px)">Preguntas frecuentes.</h2>
     <div class="ia-faq">
       <details><summary>¿Qué diferencia hay entre un asistente y un agente?</summary><p>El asistente conversa: responde y recoge datos. El agente además ejecuta: consulta tus sistemas, prepara documentos y completa tareas de varios pasos, pidiendo tu aprobación cuando hace falta.</p></details>
-      <details><summary>¿Con qué herramientas trabajan?</summary><p>Con las que ya usas: WhatsApp Business, correo, hojas de cálculo, tu CRM o tu sistema de facturación. En el diagnóstico revisamos qué se puede conectar y cómo.</p></details>
+      <details><summary>¿Un agente reemplaza a una persona de mi equipo?</summary><p>Se encarga de la parte repetitiva de un puesto: buscar, capturar, revisar, conciliar, dar seguimiento. Tu equipo pasa a revisar, decidir y atender lo que el agente marca como excepción. Lo importante siempre lo aprueba una persona.</p></details>
+      <details><summary>¿Esto funciona para mi industria?</summary><p>Casi seguro. Lo que construimos para un minimarket (prospección, pedidos, contabilidad y análisis) se repite en inmobiliarias, restaurantes, clínicas, despachos y distribuidores. En el diagnóstico vemos cuál conviene primero.</p></details>
+      <details><summary>¿Con qué herramientas trabajan?</summary><p>Con las que ya usas: WhatsApp Business, correo, hojas de cálculo, tu CRM, tu punto de venta, Odoo u otro ERP, o tu sistema de facturación. Si hace falta, construimos el tablero. En el diagnóstico revisamos qué se puede conectar y cómo.</p></details>
       <details><summary>¿Necesito tener mi página con Ceiba?</summary><p>No. El asistente funciona con tu número de WhatsApp. Si además tienes tu página con nosotros, también responde ahí.</p></details>
       <details><summary>¿Qué pasa si le preguntan algo que no sabe?</summary><p>No inventa: avisa que una persona de tu equipo le responde y te pasa la conversación con un resumen.</p></details>
       <details><summary>¿Funciona de noche y en fin de semana?</summary><p>Sí. Contesta a cualquier hora y deja apartadas las citas o solicitudes para que tu equipo las vea al llegar.</p></details>
@@ -1096,7 +1296,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
         </div>
         <div class="fld" data-f="contact"><label for="i-contact">Tu WhatsApp o correo</label><input id="i-contact" autocomplete="email" placeholder="+52 33 1234 5678 o tu@correo.com"><p class="err" hidden></p></div>
         <div class="fld" data-f="message"><label for="i-msg">¿Qué te gustaría resolver?</label><textarea id="i-msg" maxlength="1500" placeholder="Por ejemplo: las cotizaciones llegan por correo y WhatsApp, las hace una sola persona y muchas se quedan sin seguimiento."></textarea><p class="err" hidden></p>
-          <div class="ia-chips" aria-label="Ideas"><button type="button">Asistente de WhatsApp</button><button type="button">Un agente que haga cotizaciones</button><button type="button">Automatizar seguimiento</button><button type="button">Revisar un proceso que se atora</button><button type="button">Conectar mis herramientas</button><button type="button">Reportes automáticos</button></div></div>
+          <div class="ia-chips" aria-label="Ideas"><button type="button">Asistente de WhatsApp</button><button type="button">Un agente que busque clientes</button><button type="button">Pedidos por WhatsApp</button><button type="button">Automatizar contabilidad</button><button type="button">Analizar mis ventas</button><button type="button">Un agente que haga cotizaciones</button><button type="button">Automatizar seguimiento</button><button type="button">Revisar un proceso que se atora</button><button type="button">Conectar mis herramientas</button><button type="button">Reportes automáticos</button></div></div>
         <div class="trap" aria-hidden="true" style="position:absolute;left:-9999px"><input id="i-trap" tabindex="-1" autocomplete="off"></div>
         <p class="err" id="ia-err" role="alert" hidden></p>
         <button class="btn btn-primary" type="submit" id="ia-btn">Quiero mi diagnóstico <span class="arrow" aria-hidden="true">→</span></button>
@@ -1186,6 +1386,51 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   }
   const sio = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; if (e.target.id === 'demo') demo(); if (e.target.id === 'agentes') agent(); }), { threshold: .3 });
   ['demo', 'agentes'].forEach(id => document.getElementById(id) && sio.observe(document.getElementById(id)));
+
+  /* sistemas reales: cada visual arranca al verse y se repite */
+  const once = new Set();
+  const loop = async (key, fn) => { if (once.has(key)) return; once.add(key); while (true) { await fn(); if (reduce) return; await wait(4000); } };
+  const cases = {
+    'caso-ventas': () => loop('v1', async () => {
+      const lis = [...document.querySelectorAll('#v1-run li')], nums = [...document.querySelectorAll('#v1-pipe b')], base = [142, 96, 18, 7, 3], add = [38, 21, 3, 2, 1], times = ['07:00', '07:12', '07:31', '07:44', '07:52'];
+      lis.forEach(li => li.className = ''); nums.forEach((b, i) => b.textContent = base[i]);
+      for (let i = 0; i < lis.length; i++) {
+        lis[i].classList.add('on'); $('#v1-time').textContent = times[i]; await wait(1100); lis[i].classList.add('done');
+        const n = nums[i]; n.textContent = base[i] + add[i]; n.classList.add('bump'); setTimeout(() => n.classList.remove('bump'), 700);
+      }
+      $('#v1-time').textContent = 'listo · mañana 07:00';
+    }),
+    'caso-pedidos': () => loop('v2', async () => {
+      const chat = $('#v2-chat'), cat = $('#v2-cat'), staff = $('#v2-staff');
+      chat.innerHTML = ''; cat.classList.remove('on'); staff.classList.remove('on');
+      const say = async (w, t, ms = 900) => { if (w === 'bot') { const d = document.createElement('span'); d.className = 'ia-typing'; d.innerHTML = '<i></i><i></i><i></i>'; chat.appendChild(d); await wait(ms); d.remove(); } else await wait(ms); chat.insertAdjacentHTML('beforeend', `<div class="ia-msg${w === 'me' ? ' me' : ''}">${t}</div>`); while (chat.scrollHeight > chat.clientHeight && chat.children.length > 1) chat.firstElementChild.remove(); };
+      await say('me', 'Hola');
+      await say('bot', '¡Hola! ¿Qué quieres hacer?<div class="ia-btns"><i>Hacer pedido</i><i>Ver mi pedido</i><i>Hablar con alguien</i></div>');
+      await say('me', '¿tienen leche deslactosada y huevo?', 1300);
+      await say('bot', 'Sí 🙌 Encontré: Leche deslactosada 1 L y Huevo blanco 12 pzs.<div class="ia-btns"><i>Ver en el catálogo</i></div>', 1100);
+      await wait(700); cat.classList.add('on'); await wait(1600); staff.classList.add('on');
+    }),
+    'caso-contable': () => loop('v3', async () => {
+      const st = [...document.querySelectorAll('.ia-book .ia-st')], crew = [...document.querySelectorAll('#v3-crew span')], exc = $('#v3-exc');
+      st.forEach(s => { s.className = 'ia-st'; s.textContent = 'Recibida'; }); crew.forEach(c => c.classList.remove('on')); exc.textContent = '0 excepciones';
+      const flow = [[1, 'Líneas revisadas'], [2, 'Verificada vs compra'], [3, 'Pagada y conciliada']];
+      crew[0].classList.add('on'); await wait(800);
+      for (const [c, label] of flow) {
+        crew[c].classList.add('on'); await wait(900);
+        st.forEach((s, i) => { if (i === 2 && c >= 2) { s.className = 'ia-st warn'; s.textContent = 'Excepción: precio'; exc.textContent = '1 excepción'; } else { s.className = 'ia-st' + (c === 3 ? ' ok' : ''); s.textContent = label; } });
+      }
+      crew[4].classList.add('on'); await wait(700); crew[5].classList.add('on'); await wait(700); crew[6].classList.add('on');
+    }),
+    'caso-datos': () => loop('v4', async () => {
+      const rep = $('#v4-rep'), fs = [...document.querySelectorAll('#v4-finds li')];
+      rep.classList.remove('on'); fs.forEach(f => f.classList.remove('on')); await wait(300);
+      rep.classList.add('on'); await wait(1400);
+      for (const f of fs) { f.classList.add('on'); await wait(900); }
+      await wait(2500);
+    }),
+  };
+  const cio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) cases[e.target.id]?.(); }), { threshold: .35 });
+  Object.keys(cases).forEach(id => document.getElementById(id) && cio.observe(document.getElementById(id)));
 
   /* formulario */
   const rules = {
