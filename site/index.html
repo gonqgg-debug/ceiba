@@ -1177,7 +1177,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       const first = fl.querySelector('.mn-ai-sug button:not([hidden])'); if (first) first.focus({ preventScroll: true });
       return;
     }
-    const a = AI[k]; if (!a) return;
+    const a = AI[k] || (k === 'faq' ? [esc(t.textContent), esc(t.dataset.a || ''), t.dataset.act === 'book' ? 'book' : 'wa'] : null); if (!a) return;
     const log = fl.querySelector('.mn-ai-log');
     t.hidden = true;
     log.insertAdjacentHTML('beforeend', `<p class="mn-ai-msg me">${a[0]}</p>`);

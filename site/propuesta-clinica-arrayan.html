@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>Propuesta Clínica Arrayán</title>
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="icon" href="favicon.ico" sizes="32x32">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Propuesta para Clínica Dental Arrayán · Ceiba Labs</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="/apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0B1514">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,7 +29,7 @@
   --gut:max(20px, env(safe-area-inset-left,0px));
   --gut-r:max(20px, env(safe-area-inset-right,0px));
   --max:1240px;
-  --photo-room:url("img/room.jpg");--photo-doc:url("img/doc.jpg");--photo-facade:url("img/facade.jpg");--photo-reception:url("img/reception.jpg");
+  --photo-room:url("/img/room.jpg");--photo-doc:url("/img/doc.jpg");--photo-facade:url("/img/facade.jpg");--photo-reception:url("/img/reception.jpg");
   --ease:cubic-bezier(.2,.7,.1,1);
   color-scheme:dark;
 }
@@ -166,7 +166,7 @@ button{font:inherit;color:inherit}
 .mo-logo b span{display:block;color:#1BA8C9;font-size:20px;letter-spacing:1px}
 .mo-head nav{display:flex;gap:16px;font:bold 11px Arial;color:#2b3a42;letter-spacing:.6px}
 .mo-head nav .on{color:#1BA8C9;border-bottom:2px solid #1BA8C9;padding-bottom:3px}
-.mo-slider{position:relative;height:250px;background:url(img/old-stock.jpg) 70% center/cover #f2f2f2}
+.mo-slider{position:relative;height:250px;background:url(/img/old-stock.jpg) 70% center/cover #f2f2f2}
 .mo-cap{position:absolute;left:40px;top:46px;width:330px;background:rgba(27,168,201,.88);color:#fff;padding:18px 20px}
 .mo-cap b{display:block;font:bold 20px/1.2 Arial;margin-bottom:8px}
 .mo-cap span{display:block;font-size:12px;margin-bottom:12px}
@@ -712,6 +712,12 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 }
 
 /* ===================== PRIVATE PROPOSAL ===================== */
+.shot{min-height:100%;background:#F3F1EA url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='40'%3E%3Ctext x='0' y='24' font-family='sans-serif' font-size='14' fill='%235E6A64'%3ECargando tu página actual…%3C/text%3E%3C/svg%3E") 50% 120px no-repeat}
+.shot img{display:block;width:100%;height:auto;min-height:200px}
+.shot-mob{display:none!important}
+.is-mobile .shot-desk{display:none!important}
+.is-mobile .shot-mob{display:block!important}
+.shot--none{display:grid;place-items:center;min-height:460px;padding:32px;text-align:center;color:#5E6A64;font-size:17px;background-image:none}
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 img{max-width:100%}
 .p-header,.p-sticky{--fg:var(--ivory);--line:rgba(247,244,235,.24);--focus:var(--lime)}
@@ -886,7 +892,7 @@ img{max-width:100%}
 
 <header class="p-header">
   <div class="wrap">
-    <a class="brand" href="index.html" aria-label="Ceiba Labs, ir al sitio"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
+    <a class="brand" href="/" aria-label="Ceiba Labs, ir al sitio"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
     <span class="p-title">Propuesta privada para Clínica Dental Arrayán</span>
     <div class="p-actions">
       <span class="p-valid" data-left-short>Válida hasta el 2 dic</span>
@@ -901,17 +907,12 @@ img{max-width:100%}
 <section class="band p-hero" aria-labelledby="p-title">
   <div class="wrap">
     <h1 id="p-title">Valeria, así podría verse la página de <span class="soft">Clínica Dental Arrayán.</span></h1>
-    <p class="lede">La hicimos con la información de tu página actual, tu perfil de Google y tu Instagram. Aquí ves cómo quedaría, qué incluye, el precio y hasta cuándo es válida. Si te gusta, la activas desde aquí mismo.</p>
+    <p class="lede">La hicimos con la información de tu página actual y tu perfil de Google. Aquí ves cómo quedaría, qué incluye, el precio y hasta cuándo es válida. Si te gusta, la activas desde aquí mismo.</p>
     <div class="hero-acts">
-      <a class="btn btn-primary" href="#antes-despues">Ver el antes y después <span aria-hidden="true">↓</span></a>
-      <a class="btn btn-line" href="#plan">Ver plan y precio</a>
+      <a class="btn btn-primary" href="/vista/clinica-arrayan" target="_blank" rel="noopener">Ver mi página en pantalla completa <span class="arrow" aria-hidden="true">↗</span></a>
+      <a class="btn btn-line" href="#antes-despues">Ver el antes y después <span aria-hidden="true">↓</span></a>
     </div>
-    <dl class="p-meta">
-      <div><dt>Preparada para</dt><dd>Dra. Valeria Ríos</dd></div>
-      <div><dt>Página revisada</dt><dd>clinicaarrayan.mx</dd></div>
-      <div><dt>Fecha</dt><dd>18 de noviembre de 2026</dd></div>
-      <div><dt>Válida hasta</dt><dd>2 de diciembre de 2026 · <span class="left" id="days-left">quedan 14 días</span></dd></div>
-    </dl>
+    <dl class="p-meta"><div><dt>Preparada para</dt><dd>Valeria</dd></div><div><dt>Página revisada</dt><dd>clinicaarrayan.mx</dd></div><div><dt>Fecha</dt><dd>18 de noviembre de 2026</dd></div><div><dt>Válida hasta</dt><dd>2 de diciembre de 2026 · <span class="left" id="days-left"></span></dd></div></dl>
   </div>
 </section>
 
@@ -919,7 +920,7 @@ img{max-width:100%}
   <div class="wrap">
     <div class="cmp-head">
       <h2 class="h2" id="cmp-title">Tu página hoy y cómo quedaría.</h2>
-      <p class="lede">Usamos tus tratamientos, tu horario y tu dirección. Compara las dos versiones y toca cada número para ver qué cambia para tus pacientes.</p>
+      <p class="lede">Usamos tus servicios, tu horario y tu dirección. Compara las dos versiones y toca cada número para ver qué cambia para tus pacientes.</p>
     </div>
     <div class="cmp-grid">
       <div class="cmp-stage">
@@ -938,42 +939,79 @@ img{max-width:100%}
           <div class="viewport" id="cmp-vp" tabindex="0" aria-label="Vista previa de la página. Se puede desplazar.">
             <div class="layers">
               <div class="layer layer-old" data-tpl="old" data-hidden="true" aria-hidden="true"></div>
-              <div class="layer layer-new" data-tpl="new"></div>
+              <div class="layer layer-new"><div class="mk-new" style="--c-accent:#1F4FD1">
+  <div class="mn-util"><span>¿Urgencia? Te atendemos hoy</span><span>Lunes a viernes de 9 a 20 h y sábados de 9 a 14 h</span><span class="mn-util-wa" data-sec="whatsapp"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>33 0000 0000</span></div>
+  <div class="mn-top"><div class="mn-brand"><b>Arrayán</b><span>Clínica dental</span></div><nav><span>Tratamientos</span><span>Precios</span><span>Doctora</span><span>Opiniones</span><span>Ubicación</span></nav><span class="mn-wa-btn" title="WhatsApp"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg></span><span class="mn-btn" data-mark="1" data-sec="cta">Agenda tu cita</span></div>
+  <div class="mn-hero" data-sec="hero">
+    <div class="mn-copy">
+      <h3>Agenda tu valoración dental sin costo</h3>
+      <p class="sub">Conoce cómo están tus dientes y encías, y sal de tu primera cita con tu presupuesto en la mano. Estamos en Providencia, Guadalajara.</p>
+      <div class="mn-ctas"><span class="mn-btn">Agenda gratis</span><span class="mn-ghost mn-ghost--wa"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Agendar por WhatsApp</span></div>
+      <p class="mn-call">Llamar para agendar: <b>33 0000 0000</b></p>
+      <p class="mn-rating"><b>4.9</b><span class="mn-stars" aria-hidden="true">★★★★★</span><span>186 reseñas en Google</span></p>
+    </div>
+    <div class="mn-photo-wrap">
+      <div class="mn-photo" role="img" aria-label="La Dra. Valeria Ríos en su consultorio" style="background-image:url('/img/doc.jpg')"></div>
+      <div class="mn-slots"><b>Horarios disponibles</b><div><span>Hoy 18:30</span><span>Mañana 10:00</span><span>Mañana 12:30</span></div><em>Ver más horarios</em></div>
+    </div>
+  </div>
+  <ul class="mn-trust" data-sec="trust"><li><b>Más de 15 años</b>cuidando sonrisas en Providencia</li><li><b>Cédula profesional</b>4512378</li><li><b>Hasta 6 MSI</b>en tratamientos mayores a $1,200</li><li><b>Estacionamiento gratis</b>frente a la clínica</li></ul>
+  <div class="mn-treat" data-mark="2" data-sec="services"><div class="mn-treat-head"><h4>Nuestros tratamientos</h4><div class="mn-car-nav"><button type="button" data-car="prev" aria-label="Anterior"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" data-car="next" aria-label="Siguiente"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>
+    <ul class="mn-car" tabindex="0" aria-label="Nuestros tratamientos, desliza para ver más"><li class="mn-tc"><div class="mn-tc-img" role="img" aria-label="La dentista le muestra una radiografía a una paciente" style="background-image:url('/img/t-valoracion.jpg')"></div><div class="mn-tc-body"><b>Valoración dental</b><i>Sin costo</i><span>Revisamos dientes y encías, y te tomamos radiografía. Sales con tu presupuesto.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" role="img" aria-label="Limpieza dental a una paciente" style="background-image:url('/img/t-limpieza.jpg')"></div><div class="mn-tc-body"><b>Limpieza dental</b><i>$700</i><span>Retira el sarro y la placa que no quita el cepillado. Se recomienda 2 veces al año.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" role="img" aria-label="Paciente con un alineador transparente" style="background-image:url('/img/t-alineadores.jpg')"></div><div class="mn-tc-body"><b>Alineadores transparentes</b><i>Valoración sin costo</i><span>Casi no se notan y te los puedes quitar para comer.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" role="img" aria-label="Paciente sonriendo después de su tratamiento" style="background-image:url('/img/t-implantes.jpg')"></div><div class="mn-tc-body"><b>Implantes dentales</b><i>Desde $14,500</i><span>Reemplaza el diente que te falta con una pieza fija.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" role="img" aria-label="Paciente con una sonrisa blanca" style="background-image:url('/img/t-blanqueamiento.jpg')"></div><div class="mn-tc-body"><b>Blanqueamiento</b><i>$3,800</i><span>Dientes más blancos en dos sesiones.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" role="img" aria-label="La dentista atiende a un paciente con dolor de muela" style="background-image:url('/img/t-urgencias.jpg')"></div><div class="mn-tc-body"><b>Urgencias</b><i>Hoy mismo</i><span>¿Dolor, golpe o un diente roto? Llámanos y te hacemos un espacio.</span><em>Llamar</em></div></li></ul>
+    <p class="mn-note">*Los precios pueden cambiar según tu caso y te los confirmamos en tu valoración. Aceptamos efectivo, tarjetas de débito y crédito.</p>
+  </div>
+  <div class="mn-team" data-mark="3" data-sec="team"><div class="mn-portrait" role="img" aria-label="Consultorio de la clínica" style="background-image:url('/img/room.jpg')"></div><div class="mn-cred"><h4>Tu sonrisa en manos expertas</h4><p>La Dra. Valeria Ríos es cirujana dentista egresada de la Universidad de Guadalajara y especialista en rehabilitación oral. Lleva más de 15 años atendiendo a familias en Providencia.</p><ul><li>Cédula profesional 4512378</li><li>Cédula de especialidad 7718203</li><li>No trabajamos con pasantes: siempre te atiende una especialista</li></ul><small>Personaje ficticio del ejemplo</small></div></div>
+  <div class="mn-reviews" data-mark="5" data-sec="reviews">
+    <div class="mn-rev-head"><h4>Lo que dicen nuestros pacientes</h4><p><b>4.9 de 5</b><span class="mn-stars" aria-hidden="true">★★★★★</span><span>186 reseñas en Google</span></p></div>
+    <div class="mn-rev-list"><figure class="mn-rev"><span class="mn-stars" aria-label="5 de 5">★★★★★</span><blockquote>Muy buena atención, la doctora Valeria me explicó todo el tratamiento con calma y el precio desde el principio. Súper recomendable 👍</blockquote><figcaption><b>Mariana G.</b><span>Alineadores, hace 2 semanas</span></figcaption></figure><figure class="mn-rev"><span class="mn-stars" aria-label="5 de 5">★★★★★</span><blockquote>Fui por una urgencia un sábado, no tenía cita pero me hicieron un espacio y ese mismo día se me quitó el dolor. Gracias!!</blockquote><figcaption><b>Jorge R.</b><span>Urgencia, hace 1 mes</span></figcaption></figure><figure class="mn-rev"><span class="mn-stars" aria-label="5 de 5">★★★★★</span><blockquote>Llevo a mis hijos desde hace años, siempre son puntuales y el consultorio está muy limpio.</blockquote><figcaption><b>Lucía M.</b><span>Limpieza, hace 3 meses</span></figcaption></figure></div>
+    <p class="mn-rev-more">Ver todas las reseñas en Google<small>Reseñas de ejemplo para el concepto</small></p>
+  </div>
+  <div class="mn-visit" data-mark="4" data-sec="visit"><div class="mn-facade" role="img" aria-label="Fachada de la clínica" style="background-image:url('/img/facade.jpg')"></div><div><h4>Visítanos</h4><dl><dt>Dirección</dt><dd>Av. Los Arrayanes 1240, local 3, Col. Providencia, Guadalajara</dd><dt>Lunes a viernes</dt><dd>9:00 a 20:00</dd><dt>Sábados</dt><dd>9:00 a 14:00</dd><dt>Estacionamiento</dt><dd>Gratis, frente a la clínica</dd></dl><p class="mn-visit-acts"><span class="mn-ghost">Abrir en Google Maps</span><span class="mn-ghost mn-ghost--wa"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Agendar por WhatsApp</span></p></div></div>
+  <div class="mn-foot"><span>Clínica Dental Arrayán</span><span>Aviso de privacidad</span><span>Ejemplo de rediseño de Ceiba Labs</span></div>
+  <div class="mn-float">
+    <div class="mn-ai" role="region" aria-label="Chat de Clínica Dental Arrayán">
+      <div class="mn-ai-top"><div><b>Clínica Arrayán</b><span>Te respondemos aquí o por WhatsApp</span></div><button type="button" class="mn-ai-x" data-ai="toggle" aria-label="Cerrar chat">×</button></div>
+      <div class="mn-ai-log"><p class="mn-ai-msg bot">Hola 👋 ¿En qué te podemos ayudar?</p></div>
+      <div class="mn-ai-sug"><button type="button" data-ai="faq" data-a="Sí, atendemos urgencias el mismo día. Escríbenos por WhatsApp o llámanos y te hacemos un espacio lo antes posible." data-act="wa">¿Atienden urgencias hoy?</button><button type="button" data-ai="faq" data-a="Es sin costo 😊 Revisamos tus dientes y encías, te tomamos radiografía y te damos tu presupuesto. ¿Te agendo?" data-act="book">¿Cuánto cuesta la valoración?</button><button type="button" data-ai="faq" data-a="Sí, hasta 6 MSI con tarjetas participantes en tratamientos mayores a $1,200." data-act="wa">¿Tienen meses sin intereses?</button></div>
+    </div>
+    <button type="button" class="mn-ai-btn" data-ai="toggle" aria-expanded="false" data-mark="6" data-sec="chat"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>¿Dudas? Pregúntanos</button>
+  </div>
+  <div class="mn-sticky"><span class="mn-btn">Agenda tu cita</span><span class="mn-ghost mn-ghost--wa"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>WhatsApp</span></div>
+</div></div>
             </div>
             <div class="wipe" id="cmp-wipe"></div>
           </div>
         </div>
-        <div class="cmp-label"><span><strong>Portada</strong> · el resto de la página se diseña cuando la activas</span><span id="cmp-status" aria-live="polite">Viendo cómo quedaría</span></div>
+        <div class="cmp-label"><span><strong>Portada</strong> · <a class="link" href="/vista/clinica-arrayan" target="_blank" rel="noopener">Abrir en pantalla completa ↗</a></span><span id="cmp-status" aria-live="polite">Viendo cómo quedaría</span></div>
       </div>
       <div>
         <ol class="changes" id="changes">
-          <li data-change="1"><button type="button" aria-label="Cambio 1: agendar una cita. Mostrar en la página">
+          <li data-change="1"><button type="button" aria-label="Cambio 1: Agendar una cita. Mostrar en la página">
             <span class="n" aria-hidden="true">1</span><h3>Agendar una cita</h3>
             <span class="txt"><span class="before"><span>Antes</span>Tu teléfono está arriba en letra chiquita y no se puede marcar desde el celular.</span><span class="after"><span>Después</span>El botón «Agenda tu cita» siempre está a la vista. El paciente elige tratamiento y horario.</span></span>
           </button></li>
-          <li data-change="2"><button type="button" aria-label="Cambio 2: tratamientos. Mostrar en la página">
+          <li data-change="2"><button type="button" aria-label="Cambio 2: Tratamientos. Mostrar en la página">
             <span class="n" aria-hidden="true">2</span><h3>Tratamientos</h3>
             <span class="txt"><span class="before"><span>Antes</span>Tus servicios están en tres recuadros con «Leer más» y sin precios.</span><span class="after"><span>Después</span>Seis tratamientos principales, cada uno con foto, precio y su botón para agendar.</span></span>
           </button></li>
-          <li data-change="3"><button type="button" aria-label="Cambio 3: quién te atiende. Mostrar en la página">
+          <li data-change="3"><button type="button" aria-label="Cambio 3: Quién te atiende. Mostrar en la página">
             <span class="n" aria-hidden="true">3</span><h3>Quién te atiende</h3>
             <span class="txt"><span class="before"><span>Antes</span>Un carrusel con foto de banco ocupa la pantalla y no apareces tú.</span><span class="after"><span>Después</span>Fotos de tu consultorio y de ti, con tu especialidad.</span></span>
           </button></li>
-          <li data-change="4"><button type="button" aria-label="Cambio 4: cómo llegar. Mostrar en la página">
+          <li data-change="4"><button type="button" aria-label="Cambio 4: Cómo llegar. Mostrar en la página">
             <span class="n" aria-hidden="true">4</span><h3>Cómo llegar</h3>
             <span class="txt"><span class="before"><span>Antes</span>El mapa no carga y el pie de página dice © 2017.</span><span class="after"><span>Después</span>El horario de hoy arriba, la fachada, la dirección escrita y un botón para abrir el mapa.</span></span>
           </button></li>
-          <li data-change="5"><button type="button" aria-label="Cambio 5: opiniones de pacientes. Mostrar en la página">
+          <li data-change="5"><button type="button" aria-label="Cambio 5: Opiniones de pacientes. Mostrar en la página">
             <span class="n" aria-hidden="true">5</span><h3>Opiniones de pacientes</h3>
             <span class="txt"><span class="before"><span>Antes</span>Un recuadro de Facebook con la última publicación de 2019.</span><span class="after"><span>Después</span>Tu calificación y tus reseñas reales de Google en la portada.</span></span>
           </button></li>
-          <li data-change="6"><button type="button" aria-label="Cambio 6: respuestas de noche y en fin de semana. Mostrar en la página">
+          <li data-change="6"><button type="button" aria-label="Cambio 6: Respuestas de noche y en fin de semana. Mostrar en la página">
             <span class="n" aria-hidden="true">6</span><h3>Respuestas de noche y en fin de semana</h3>
             <span class="txt"><span class="before"><span>Antes</span>Un formulario que promete contestar «a la brevedad».</span><span class="after"><span>Después</span>Un asistente contesta al momento y pasa a tu WhatsApp lo que necesita recepción. Pruébalo en la vista previa.</span></span>
-          </button></li>
-        </ol>
+          </button></li></ol>
         <div class="task">
-          <p>Lo que gana la clínica</p>
+          <p>Lo que gana tu negocio</p>
           <strong>Las citas llegan con el tratamiento elegido, sin depender de que alguien conteste el teléfono.</strong>
         </div>
       </div>
@@ -988,40 +1026,25 @@ img{max-width:100%}
       <p class="lede">Arriba ves la portada. Cuando la activas diseñamos el resto y lo revisas todo antes de publicar.</p>
     </div>
     <div class="mej-grid">
-      <div class="mej"><h3>Páginas</h3><ul>
-        <li><b>Inicio</b><span>La portada que acabas de ver.</span></li>
-        <li><b>Cuatro páginas de tratamiento</b><span>Valoración, ortodoncia invisible, implantes y blanqueamiento: qué es, cuánto dura y su botón para agendar.</span></li>
-        <li><b>Equipo</b><span>Tu presentación, especialidad y cédula profesional.</span></li>
-        <li><b>Cómo llegar</b><span>Fachada, dirección, estacionamiento y transporte cercano. Son 7 páginas, el máximo del plan Negocio.</span></li>
-      </ul></div>
-      <div class="mej"><h3>Para la clínica</h3><ul>
-        <li><b>Citas en tu agenda</b><span>Conectamos la agenda que ya usa la clínica. Cada cita llega con nombre, teléfono y tratamiento.</span></li>
-        <li><b>Cuántos pacientes te contactan</b><span>Te decimos cuántas personas te escribieron, llamaron o agendaron desde la página.</span></li>
-        <li><b>60 minutos de cambios al mes</b><span>Nos escribes un horario, un precio o una foto nueva y lo actualizamos.</span></li>
-        <li><b>Mantenimiento</b><span>Hosting, seguridad, respaldos y actualizaciones, cada mes.</span></li>
-      </ul></div>
-      <div class="mej"><h3>Para aparecer en Google</h3><ul>
-        <li><b>Una página por tratamiento</b><span>Pensada para búsquedas como «implantes en Providencia».</span></li>
-        <li><b>Datos que Google entiende</b><span>Horario, dirección y teléfono marcados para buscadores.</span></li>
-        <li><b>Tu ficha conectada</b><span>Tu página y tu perfil de Google muestran la misma información.</span></li>
-        <li><b>Rápida en el celular</b><span>Fotos optimizadas y sin carruseles que retrasan la carga.</span></li>
-      </ul></div>
+      <div class="mej"><h3>Páginas</h3><ul><li><b>Inicio</b><span>La portada que acabas de ver.</span></li><li><b>Una página por servicio principal</b><span>Qué es, cuánto cuesta o cuánto dura, y su botón para agendar o cotizar.</span></li><li><b>Quiénes somos y cómo llegar</b><span>Tu equipo, dirección, horario y estacionamiento.</span></li></ul></div>
+      <div class="mej"><h3>Para tu negocio</h3><ul><li><b>Citas y mensajes en un solo lugar</b><span>Cada solicitud llega con nombre, teléfono y lo que necesita.</span></li><li><b>Cuántas personas te contactan</b><span>Te decimos cuántos te escribieron, llamaron o agendaron desde la página.</span></li><li><b>Cambios cada mes</b><span>Nos escribes un horario, un precio o una foto nueva y lo actualizamos.</span></li><li><b>Mantenimiento</b><span>Hosting, seguridad, respaldos y actualizaciones, cada mes.</span></li></ul></div>
+      <div class="mej"><h3>Para aparecer en Google</h3><ul><li><b>Una página por servicio</b><span>Pensada para lo que la gente busca en tu zona.</span></li><li><b>Datos que Google entiende</b><span>Horario, dirección y teléfono marcados para buscadores.</span></li><li><b>Tu ficha conectada</b><span>Tu página y tu perfil de Google muestran la misma información.</span></li><li><b>Rápida en el celular</b><span>Fotos optimizadas y sin nada que retrase la carga.</span></li></ul></div>
     </div>
   </div>
 </section>
 
 <section class="band band--light section" id="plan" aria-labelledby="plan-title">
   <div class="wrap">
-    <h2 class="h2" id="plan-title">Te recomendamos el plan Negocio con asistente de WhatsApp.</h2>
-    <p class="lede" style="margin-top:20px">Una página que facilita agendar cita y un asistente de WhatsApp que toma la solicitud cuando tu equipo está ocupado. Puedes cambiar de plan o quitar el asistente, y el total se actualiza.</p>
+    <h2 class="h2" id="plan-title">Te recomendamos el Plan Negocio con Asistente de WhatsApp.</h2>
+    <p class="lede" style="margin-top:20px">Puedes cambiar de plan o sumar el asistente, y el total se actualiza.</p>
     <div class="plan-grid">
       <div style="display:grid;gap:28px;min-width:0">
         <div>
           <h3 class="pl-group">1 · Plan</h3>
           <div class="pl-list" role="radiogroup" aria-label="Plan" id="pl-list">
-            <button class="pl" type="button" role="radio" data-plan="esencial" aria-checked="false" tabindex="-1"><span class="radio" aria-hidden="true"></span><h3>Esencial <span class="pl-price">$3,490 + $1,490/mes</span></h3><p class="why">Una página clara mientras sigues dando citas por teléfono o WhatsApp.</p><ul><li>Hasta 3 páginas: Inicio, Tratamientos y Cómo llegar</li><li>Formulario y botón de WhatsApp, sin agenda en línea</li><li>Hasta 30 minutos de cambios al mes</li></ul></button>
-            <button class="pl" type="button" role="radio" data-plan="negocio" aria-checked="true" tabindex="0"><span class="radio" aria-hidden="true"></span><h3>Negocio <span class="pl-price">$5,490 + $2,490/mes</span><small>Recomendado para tu clínica</small></h3><p class="why">Todo lo que viste en esta propuesta.</p><ul><li>Hasta 7 páginas: Inicio, cuatro tratamientos, Equipo y Cómo llegar</li><li>Conectada con la agenda que ya usa la clínica</li><li>Te decimos cuántos pacientes te contactaron</li><li>Hasta 60 minutos de cambios al mes</li></ul></button>
-            <button class="pl" type="button" role="radio" data-plan="avanzado" aria-checked="false" tabindex="-1"><span class="radio" aria-hidden="true"></span><h3>Avanzado <span class="pl-price">$8,490 + $3,990/mes</span></h3><p class="why">Si quieres una página para cada uno de tus once servicios y actualizarlos tú.</p><ul><li>Hasta 12 páginas, con todo lo de Negocio</li><li>Catálogo de servicios que tú actualizas</li><li>Hasta 120 minutos de cambios al mes</li></ul></button>
+            <button class="pl" type="button" role="radio" data-plan="esencial" aria-checked="false" tabindex="-1"><span class="radio" aria-hidden="true"></span><h3>Esencial <span class="pl-price">$3,490 + $1,490/mes</span></h3><p class="why">Una página clara para que te encuentren y te escriban, mientras sigues atendiendo por teléfono o WhatsApp.</p><ul><li>Hasta 3 páginas</li><li>Formulario y botón de WhatsApp</li><li>Hasta 30 minutos de cambios al mes</li></ul></button>
+            <button class="pl" type="button" role="radio" data-plan="negocio" aria-checked="true" tabindex="0"><span class="radio" aria-hidden="true"></span><h3>Negocio <span class="pl-price">$5,490 + $2,490/mes</span><small>Recomendado para tu negocio</small></h3><p class="why">Todo lo que viste en esta propuesta, con citas o solicitudes directo a tu agenda.</p><ul><li>Hasta 7 páginas</li><li>Conectada con la agenda que ya usas</li><li>Te decimos cuántas personas te contactaron</li><li>Hasta 60 minutos de cambios al mes</li></ul></button>
+            <button class="pl" type="button" role="radio" data-plan="avanzado" aria-checked="false" tabindex="-1"><span class="radio" aria-hidden="true"></span><h3>Avanzado <span class="pl-price">$8,490 + $3,990/mes</span></h3><p class="why">Si tienes muchos servicios y quieres una página para cada uno, que tú mismo actualizas.</p><ul><li>Hasta 12 páginas, con todo lo de Negocio</li><li>Catálogo de servicios que tú actualizas</li><li>Hasta 120 minutos de cambios al mes</li></ul></button>
           </div>
         </div>
         <div>
@@ -1029,7 +1052,7 @@ img{max-width:100%}
           <label class="addon" for="addon-wa">
             <input type="checkbox" id="addon-wa" checked>
             <span class="sw" aria-hidden="true"></span>
-            <span class="addon-txt"><b>Asistente de WhatsApp</b><span>Contesta las preguntas de siempre con las respuestas que tú apruebas, anota nombre, tratamiento y horario, y pasa a recepción las urgencias y los casos clínicos. Funciona en WhatsApp y en tu página, para un número y una sucursal.</span></span>
+            <span class="addon-txt"><b>Asistente de WhatsApp</b><span>Contesta las preguntas de siempre con las respuestas que tú apruebas, anota los datos de la cita o la cotización y le pasa a tu equipo lo que necesita una persona. Funciona en WhatsApp y en tu página, para un número y una sucursal.</span></span>
             <span class="addon-price">$3,990<small>+ $1,490/mes</small></span>
           </label>
           <p class="addon-note">El piloto incluye hasta 300 conversaciones al mes. Te avisamos al acercarte al límite y, si se agota, las conversaciones nuevas pasan directo a tu equipo.</p>
@@ -1040,7 +1063,7 @@ img{max-width:100%}
         <div class="sum-table" id="sum-table" aria-live="polite"></div>
         <dl class="sum-meta">
           <dt>Cargos de Meta por mensajes</dt><dd>Se confirman al conectar tu número. Si aplican, aparecen aquí desglosados.</dd>
-          <dt>Precio válido hasta</dt><dd>2 dic 2026 · <span id="sum-left">quedan 14 días</span></dd>
+          <dt>Precio válido hasta</dt><dd>2 dic · <span id="sum-left">quedan 14 días</span></dd>
         </dl>
         <button class="btn btn-primary" type="button" data-activate>Activar y pagar <span data-total-act>$9,480</span></button>
         <button class="btn btn-primary renew" type="button" data-renew-btn>Pedir propuesta actualizada</button>
@@ -1086,7 +1109,7 @@ img{max-width:100%}
 
 <footer class="band p-footer">
   <div class="wrap">
-    <a href="index.html" aria-label="Ceiba Labs, ir al sitio"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
+    <a href="/" aria-label="Ceiba Labs, ir al sitio"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
     <span>Este enlace es privado y no aparece en buscadores.</span>
     <nav aria-label="Legal"><a href="#" data-route="/privacidad">Privacidad</a><a href="#" data-route="/terminos">Términos</a><a href="#" data-route="/baja">Darse de baja de correos</a></nav>
   </div>
@@ -1162,7 +1185,7 @@ img{max-width:100%}
     </div>
     <ul class="mn-trust"><li><b>Más de 15 años</b>cuidando sonrisas en Providencia</li><li><b>Cédula profesional</b>4512378</li><li><b>Hasta 6 MSI</b>en tratamientos mayores a $1,200</li><li><b>Estacionamiento gratis</b>frente a la clínica</li></ul>
     <div class="mn-treat" data-mark="2"><div class="mn-treat-head"><h4>Nuestros tratamientos</h4><div class="mn-car-nav"><button type="button" data-car="prev" aria-label="Tratamiento anterior"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" data-car="next" aria-label="Siguiente tratamiento"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>
-      <ul class="mn-car" tabindex="0" aria-label="Tratamientos, desliza para ver más"><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-valoracion.jpg)" role="img" aria-label="La dentista le muestra una radiografía a una paciente"></div><div class="mn-tc-body"><b>Valoración dental</b><i>Sin costo</i><span>Revisamos dientes y encías, y te tomamos radiografía. Sales con tu presupuesto.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-limpieza.jpg)" role="img" aria-label="Limpieza dental a una paciente"></div><div class="mn-tc-body"><b>Limpieza dental</b><i>$700</i><span>Retira el sarro y la placa que no quita el cepillado. Se recomienda 2 veces al año.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-alineadores.jpg)" role="img" aria-label="Paciente con un alineador transparente"></div><div class="mn-tc-body"><b>Alineadores transparentes</b><i>Valoración sin costo</i><span>Casi no se notan y te los puedes quitar para comer.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-implantes.jpg)" role="img" aria-label="Paciente sonriendo después de su tratamiento"></div><div class="mn-tc-body"><b>Implantes dentales</b><i>Desde $14,500</i><span>Reemplaza el diente que te falta con una pieza fija.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-blanqueamiento.jpg)" role="img" aria-label="Paciente con una sonrisa blanca"></div><div class="mn-tc-body"><b>Blanqueamiento</b><i>$3,800</i><span>Dientes más blancos en dos sesiones.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-urgencias.jpg)" role="img" aria-label="La dentista atiende a un paciente con dolor de muela"></div><div class="mn-tc-body"><b>Urgencias</b><i>Hoy mismo</i><span>¿Dolor, golpe o un diente roto? Llámanos y te hacemos un espacio.</span><em>Llamar</em></div></li></ul>
+      <ul class="mn-car" tabindex="0" aria-label="Tratamientos, desliza para ver más"><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(/img/t-valoracion.jpg)" role="img" aria-label="La dentista le muestra una radiografía a una paciente"></div><div class="mn-tc-body"><b>Valoración dental</b><i>Sin costo</i><span>Revisamos dientes y encías, y te tomamos radiografía. Sales con tu presupuesto.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(/img/t-limpieza.jpg)" role="img" aria-label="Limpieza dental a una paciente"></div><div class="mn-tc-body"><b>Limpieza dental</b><i>$700</i><span>Retira el sarro y la placa que no quita el cepillado. Se recomienda 2 veces al año.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(/img/t-alineadores.jpg)" role="img" aria-label="Paciente con un alineador transparente"></div><div class="mn-tc-body"><b>Alineadores transparentes</b><i>Valoración sin costo</i><span>Casi no se notan y te los puedes quitar para comer.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(/img/t-implantes.jpg)" role="img" aria-label="Paciente sonriendo después de su tratamiento"></div><div class="mn-tc-body"><b>Implantes dentales</b><i>Desde $14,500</i><span>Reemplaza el diente que te falta con una pieza fija.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(/img/t-blanqueamiento.jpg)" role="img" aria-label="Paciente con una sonrisa blanca"></div><div class="mn-tc-body"><b>Blanqueamiento</b><i>$3,800</i><span>Dientes más blancos en dos sesiones.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(/img/t-urgencias.jpg)" role="img" aria-label="La dentista atiende a un paciente con dolor de muela"></div><div class="mn-tc-body"><b>Urgencias</b><i>Hoy mismo</i><span>¿Dolor, golpe o un diente roto? Llámanos y te hacemos un espacio.</span><em>Llamar</em></div></li></ul>
       <p class="mn-note">*Los precios pueden cambiar según tu caso y te los confirmamos en tu valoración. Aceptamos efectivo, tarjetas de débito y crédito.</p>
     </div>
     <div class="mn-team" data-mark="3"><div class="mn-portrait" role="img" aria-label="Consultorio de la clínica"></div><div class="mn-cred"><h4>Tu sonrisa en manos expertas</h4><p>La Dra. Valeria Ríos es cirujana dentista egresada de la Universidad de Guadalajara y especialista en rehabilitación oral. Lleva más de 15 años atendiendo a familias en Providencia.</p><ul><li>Cédula profesional 4512378</li><li>Cédula de especialidad 7718203</li><li>No trabajamos con pasantes: siempre te atiende una especialista</li></ul><small>Personaje ficticio del ejemplo</small></div></div>
@@ -1226,7 +1249,7 @@ img{max-width:100%}
       const first = fl.querySelector('.mn-ai-sug button:not([hidden])'); if (first) first.focus({ preventScroll: true });
       return;
     }
-    const a = AI[k]; if (!a) return;
+    const a = AI[k] || (k === 'faq' ? [esc(t.textContent), esc(t.dataset.a || ''), t.dataset.act === 'book' ? 'book' : 'wa'] : null); if (!a) return;
     const log = fl.querySelector('.mn-ai-log');
     t.hidden = true;
     log.insertAdjacentHTML('beforeend', `<p class="mn-ai-msg me">${a[0]}</p>`);
@@ -1324,15 +1347,17 @@ img{max-width:100%}
 
 
   /* ---------- validity ---------- */
-  const VALID_UNTIL = new Date(2026, 11, 2, 23, 59, 59);
+  const P = {"slug":"clinica-arrayan","plan":"negocio","validUntil":"2026-12-02","validShort":"2 dic","wa":{"activation":3990,"monthly":1490}};
+  const [vy, vm, vd] = P.validUntil.split('-').map(Number);
+  const VALID_UNTIL = new Date(Date.UTC(vy, vm - 1, vd, 23, 59, 59) + 6 * 3600e3); // fin del día, hora del centro
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const days = Math.round((new Date(2026, 11, 2) - today) / 864e5);
+  const days = Math.round((new Date(vy, vm - 1, vd) - today) / 864e5);
   const expired = now > VALID_UNTIL;
   const leftTxt = expired ? 'vencida' : days === 0 ? 'vence hoy' : days === 1 ? 'queda 1 día' : `quedan ${days} días`;
   $('#days-left').textContent = leftTxt;
   $('#sum-left').textContent = leftTxt.charAt(0).toUpperCase() + leftTxt.slice(1);
-  $('[data-left-short]').textContent = expired ? 'Propuesta vencida' : `Válida hasta el 2 dic · ${leftTxt}`;
+  $('[data-left-short]').textContent = expired ? 'Propuesta vencida' : `Válida hasta el ${P.validShort} · ${leftTxt}`;
   if (expired) { document.body.classList.add('expired'); $('#exp-banner').hidden = false; }
 
   /* ---------- toast + routes not in the prototype ---------- */
@@ -1348,7 +1373,7 @@ img{max-width:100%}
   const PLANS = { esencial: ['Esencial', 3490, 1490], negocio: ['Negocio', 5490, 2490], avanzado: ['Avanzado', 8490, 3990] };
   const WA = ['Asistente de WhatsApp', 3990, 1490];
   const mxn = n => '$' + n.toLocaleString('en-US');
-  let plan = 'negocio';
+  let plan = P.plan;
   const addon = $('#addon-wa');
   function renderTotals() {
     const [pName, pAct, pMon] = PLANS[plan];
@@ -1361,7 +1386,7 @@ img{max-width:100%}
       `<div class="st-row st-total"><span>Total</span><span>${mxn(tAct)}</span><span>${mxn(tMon)}</span></div>
        <p class="st-when"><span>Hoy pagas solo el monto inicial.</span><span>La mensualidad empieza cuando publicamos.</span></p>`;
     $('#act-sum').innerHTML = rows.map(r => `<dt>${r[0]}</dt><dd>${mxn(r[1])} + ${mxn(r[2])}/mes</dd>`).join('') +
-      `<dt><strong>Pagas hoy · pago inicial</strong></dt><dd><strong>${mxn(tAct)}</strong></dd><dt>Mensualidad desde la publicación</dt><dd>${mxn(tMon)}</dd><dt>Precio válido hasta</dt><dd>2 dic 2026</dd>`;
+      `<dt><strong>Pagas hoy · pago inicial</strong></dt><dd><strong>${mxn(tAct)}</strong></dd><dt>Mensualidad desde la publicación</dt><dd>${mxn(tMon)}</dd><dt>Precio válido hasta</dt><dd>${P.validShort}</dd>`;
     $$('[data-total-act]').forEach(el => el.textContent = mxn(tAct));
     $$('[data-total-mon]').forEach(el => el.textContent = mxn(tMon));
     $$('[data-pack-name]').forEach(el => el.textContent = pack);
@@ -1428,7 +1453,7 @@ img{max-width:100%}
 
   /* ---------- activation → Stripe Checkout ---------- */
   const act = $('#act'), next = $('#act-next'), errBox = $('#act-error'), terms = $('#a-terms');
-  const PROPOSAL = 'clinica-arrayan';
+  const PROPOSAL = P.slug;
   let lastFocus = null;
   const termsOk = () => {
     const ok = terms.checked;

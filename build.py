@@ -64,11 +64,36 @@ index = ('<!doctype html>\n<html lang="es">\n<meta charset="utf-8">\n'
 
 pages = {
     "index.html": index,
-    "propuesta-clinica-arrayan.html": fill("propuesta.html", {**shared, "{{CMP_JS}}": cmp_js, "{{HOME}}": "index.html"}),
     "webs-clinicas.html": fill("webs-clinicas.html", {**shared, **industry}),
     "diagnostico.html": fill("diagnostico.html", {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBOLS}}"]}),
     "gracias.html": fill("gracias.html", {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBOLS}}"]}),
 }
+# Vista previa en pantalla completa (/vista/[slug]): CSS de la portada nueva,
+# la plantilla como módulo para el navegador y los símbolos para el servidor.
+mock_css = home[home.index("/* ===================== MOCK: PROPUESTA"):home.index("/* markers on the mock")]
+root_vars = home[home.index(":root{"):home.index("}", home.index(":root{")) + 1]
+(SITE / "assets").mkdir(exist_ok=True)
+(SITE / "assets" / "clinica.css").write_text(
+    "/* Generado por build.py a partir de src/home.html. No editar. */\n" + root_vars +
+    "\n*,*::before,*::after{box-sizing:border-box}\n@keyframes blink{50%{opacity:.25}}\n" + mock_css, encoding="utf-8")
+(SITE / "assets" / "tpl-clinica.js").write_text((ROOT / "lib/templates/clinica.js").read_text(encoding="utf-8"), encoding="utf-8")
+(SITE / "assets" / "vista.js").write_text((SRC / "assets/vista.js").read_text(encoding="utf-8"), encoding="utf-8")
+(ROOT / "lib" / "generated").mkdir(exist_ok=True)
+import json
+# Propuesta privada: plantilla con marcadores {{P_...}} que llena lib/render-proposal.js
+import re
+proposal = fill("propuesta.html", {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBOLS}}"], "{{CMP_JS}}": cmp_js, "{{HOME}}": "/"})
+absolute = lambda t: re.sub(r'(["\'(])(img/|favicon|apple-touch-icon)', r'\1/\2', t)
+(ROOT / "lib" / "generated" / "shared.js").write_text(
+    "// Generado por build.py a partir de src/. No editar.\n"
+    "export const SYMBOLS = " + json.dumps(shared["{{SYMBOLS}}"], ensure_ascii=False) + ";\n"
+    "export const TEMPLATES = " + json.dumps(absolute(shared["{{TEMPLATES}}"]), ensure_ascii=False) + ";\n"
+    "export const PROPOSAL_HTML = " + json.dumps(absolute(proposal), ensure_ascii=False) + ";\n", encoding="utf-8")
+
+# Copia estática de la propuesta de ejemplo (la misma que sirve /p/clinica-arrayan)
+import subprocess
+subprocess.run(["node", str(ROOT / "scripts/render-static.mjs")], check=True)
+
 for name, html in pages.items():
     (SITE / name).write_text(html, encoding="utf-8")
     print(f"site/{name}  {len(html.encode()) // 1024} KB")

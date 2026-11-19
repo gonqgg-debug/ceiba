@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>Propuesta Clínica Arrayán</title>
+<title>{{P_TITLE}}</title>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -15,6 +15,12 @@
 <style>
 {{BASE_CSS}}
 /* ===================== PRIVATE PROPOSAL ===================== */
+.shot{min-height:100%;background:#F3F1EA url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='40'%3E%3Ctext x='0' y='24' font-family='sans-serif' font-size='14' fill='%235E6A64'%3ECargando tu página actual…%3C/text%3E%3C/svg%3E") 50% 120px no-repeat}
+.shot img{display:block;width:100%;height:auto;min-height:200px}
+.shot-mob{display:none!important}
+.is-mobile .shot-desk{display:none!important}
+.is-mobile .shot-mob{display:block!important}
+.shot--none{display:grid;place-items:center;min-height:460px;padding:32px;text-align:center;color:#5E6A64;font-size:17px;background-image:none}
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 img{max-width:100%}
 .p-header,.p-sticky{--fg:var(--ivory);--line:rgba(247,244,235,.24);--focus:var(--lime)}
@@ -181,14 +187,14 @@ img{max-width:100%}
 <body>
 {{SYMBOLS}}
 
-<div class="exp-banner" id="exp-banner" hidden><div class="wrap"><span>Esta propuesta venció el <strong>2 de diciembre de 2026</strong>. Los precios y la disponibilidad pueden haber cambiado.</span><button class="link" type="button" data-renew-btn style="color:inherit">Pedir una propuesta actualizada</button></div></div>
+<div class="exp-banner" id="exp-banner" hidden><div class="wrap"><span>Esta propuesta venció el <strong>{{P_VALID_LONG}}</strong>. Los precios y la disponibilidad pueden haber cambiado.</span><button class="link" type="button" data-renew-btn style="color:inherit">Pedir una propuesta actualizada</button></div></div>
 
 <header class="p-header">
   <div class="wrap">
     <a class="brand" href="{{HOME}}" aria-label="Ceiba Labs, ir al sitio"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
-    <span class="p-title">Propuesta privada para Clínica Dental Arrayán</span>
+    <span class="p-title">Propuesta privada para {{P_BUSINESS}}</span>
     <div class="p-actions">
-      <span class="p-valid" data-left-short>Válida hasta el 2 dic</span>
+      <span class="p-valid" data-left-short>Válida hasta el {{P_VALID_SHORT}}</span>
       <a class="btn btn-line" href="#decidir" data-call-link>Hablar 15 min</a>
       <button class="btn btn-primary" type="button" data-activate>Activar mi página</button>
       <button class="btn btn-primary renew" type="button" data-renew-btn>Pedir actualización</button>
@@ -199,18 +205,13 @@ img{max-width:100%}
 <main>
 <section class="band p-hero" aria-labelledby="p-title">
   <div class="wrap">
-    <h1 id="p-title">Valeria, así podría verse la página de <span class="soft">Clínica Dental Arrayán.</span></h1>
-    <p class="lede">La hicimos con la información de tu página actual, tu perfil de Google y tu Instagram. Aquí ves cómo quedaría, qué incluye, el precio y hasta cuándo es válida. Si te gusta, la activas desde aquí mismo.</p>
+    <h1 id="p-title">{{P_H1}}</h1>
+    <p class="lede">{{P_LEDE}} Aquí ves cómo quedaría, qué incluye, el precio y hasta cuándo es válida. Si te gusta, la activas desde aquí mismo.</p>
     <div class="hero-acts">
-      <a class="btn btn-primary" href="#antes-despues">Ver el antes y después <span aria-hidden="true">↓</span></a>
-      <a class="btn btn-line" href="#plan">Ver plan y precio</a>
+      <a class="btn btn-primary" href="{{P_VISTA}}" target="_blank" rel="noopener">Ver mi página en pantalla completa <span class="arrow" aria-hidden="true">↗</span></a>
+      <a class="btn btn-line" href="#antes-despues">Ver el antes y después <span aria-hidden="true">↓</span></a>
     </div>
-    <dl class="p-meta">
-      <div><dt>Preparada para</dt><dd>Dra. Valeria Ríos</dd></div>
-      <div><dt>Página revisada</dt><dd>clinicaarrayan.mx</dd></div>
-      <div><dt>Fecha</dt><dd>18 de noviembre de 2026</dd></div>
-      <div><dt>Válida hasta</dt><dd>2 de diciembre de 2026 · <span class="left" id="days-left">quedan 14 días</span></dd></div>
-    </dl>
+    <dl class="p-meta">{{P_META}}</dl>
   </div>
 </section>
 
@@ -218,7 +219,7 @@ img{max-width:100%}
   <div class="wrap">
     <div class="cmp-head">
       <h2 class="h2" id="cmp-title">Tu página hoy y cómo quedaría.</h2>
-      <p class="lede">Usamos tus tratamientos, tu horario y tu dirección. Compara las dos versiones y toca cada número para ver qué cambia para tus pacientes.</p>
+      <p class="lede">{{P_CMP_LEDE}} Compara las dos versiones y toca cada número para ver qué cambia para tus pacientes.</p>
     </div>
     <div class="cmp-grid">
       <div class="cmp-stage">
@@ -233,47 +234,22 @@ img{max-width:100%}
           </div>
         </div>
         <div class="cmp-frame cmp" id="cmp-frame">
-          <div class="frame-bar"><div class="frame-url"><svg width="11" height="11" aria-hidden="true"><use href="#lock"/></svg>clinicaarrayan.mx</div><span class="state-tag" id="cmp-tag" data-state="new">Después</span></div>
+          <div class="frame-bar"><div class="frame-url"><svg width="11" height="11" aria-hidden="true"><use href="#lock"/></svg>{{P_HOST}}</div><span class="state-tag" id="cmp-tag" data-state="new">Después</span></div>
           <div class="viewport" id="cmp-vp" tabindex="0" aria-label="Vista previa de la página. Se puede desplazar.">
             <div class="layers">
-              <div class="layer layer-old" data-tpl="old" data-hidden="true" aria-hidden="true"></div>
-              <div class="layer layer-new" data-tpl="new"></div>
+              <div class="layer layer-old"{{P_OLD_ATTR}} data-hidden="true" aria-hidden="true">{{P_LAYER_OLD}}</div>
+              <div class="layer layer-new">{{P_LAYER_NEW}}</div>
             </div>
             <div class="wipe" id="cmp-wipe"></div>
           </div>
         </div>
-        <div class="cmp-label"><span><strong>Portada</strong> · el resto de la página se diseña cuando la activas</span><span id="cmp-status" aria-live="polite">Viendo cómo quedaría</span></div>
+        <div class="cmp-label"><span><strong>Portada</strong> · <a class="link" href="{{P_VISTA}}" target="_blank" rel="noopener">Abrir en pantalla completa ↗</a></span><span id="cmp-status" aria-live="polite">Viendo cómo quedaría</span></div>
       </div>
       <div>
-        <ol class="changes" id="changes">
-          <li data-change="1"><button type="button" aria-label="Cambio 1: agendar una cita. Mostrar en la página">
-            <span class="n" aria-hidden="true">1</span><h3>Agendar una cita</h3>
-            <span class="txt"><span class="before"><span>Antes</span>Tu teléfono está arriba en letra chiquita y no se puede marcar desde el celular.</span><span class="after"><span>Después</span>El botón «Agenda tu cita» siempre está a la vista. El paciente elige tratamiento y horario.</span></span>
-          </button></li>
-          <li data-change="2"><button type="button" aria-label="Cambio 2: tratamientos. Mostrar en la página">
-            <span class="n" aria-hidden="true">2</span><h3>Tratamientos</h3>
-            <span class="txt"><span class="before"><span>Antes</span>Tus servicios están en tres recuadros con «Leer más» y sin precios.</span><span class="after"><span>Después</span>Seis tratamientos principales, cada uno con foto, precio y su botón para agendar.</span></span>
-          </button></li>
-          <li data-change="3"><button type="button" aria-label="Cambio 3: quién te atiende. Mostrar en la página">
-            <span class="n" aria-hidden="true">3</span><h3>Quién te atiende</h3>
-            <span class="txt"><span class="before"><span>Antes</span>Un carrusel con foto de banco ocupa la pantalla y no apareces tú.</span><span class="after"><span>Después</span>Fotos de tu consultorio y de ti, con tu especialidad.</span></span>
-          </button></li>
-          <li data-change="4"><button type="button" aria-label="Cambio 4: cómo llegar. Mostrar en la página">
-            <span class="n" aria-hidden="true">4</span><h3>Cómo llegar</h3>
-            <span class="txt"><span class="before"><span>Antes</span>El mapa no carga y el pie de página dice © 2017.</span><span class="after"><span>Después</span>El horario de hoy arriba, la fachada, la dirección escrita y un botón para abrir el mapa.</span></span>
-          </button></li>
-          <li data-change="5"><button type="button" aria-label="Cambio 5: opiniones de pacientes. Mostrar en la página">
-            <span class="n" aria-hidden="true">5</span><h3>Opiniones de pacientes</h3>
-            <span class="txt"><span class="before"><span>Antes</span>Un recuadro de Facebook con la última publicación de 2019.</span><span class="after"><span>Después</span>Tu calificación y tus reseñas reales de Google en la portada.</span></span>
-          </button></li>
-          <li data-change="6"><button type="button" aria-label="Cambio 6: respuestas de noche y en fin de semana. Mostrar en la página">
-            <span class="n" aria-hidden="true">6</span><h3>Respuestas de noche y en fin de semana</h3>
-            <span class="txt"><span class="before"><span>Antes</span>Un formulario que promete contestar «a la brevedad».</span><span class="after"><span>Después</span>Un asistente contesta al momento y pasa a tu WhatsApp lo que necesita recepción. Pruébalo en la vista previa.</span></span>
-          </button></li>
-        </ol>
+        <ol class="changes" id="changes">{{P_CHANGES}}</ol>
         <div class="task">
-          <p>Lo que gana la clínica</p>
-          <strong>Las citas llegan con el tratamiento elegido, sin depender de que alguien conteste el teléfono.</strong>
+          <p>Lo que gana tu negocio</p>
+          <strong>{{P_GAIN}}</strong>
         </div>
       </div>
     </div>
@@ -286,49 +262,28 @@ img{max-width:100%}
       <h2 class="h2" id="mej-title">Qué incluye tu página completa.</h2>
       <p class="lede">Arriba ves la portada. Cuando la activas diseñamos el resto y lo revisas todo antes de publicar.</p>
     </div>
-    <div class="mej-grid">
-      <div class="mej"><h3>Páginas</h3><ul>
-        <li><b>Inicio</b><span>La portada que acabas de ver.</span></li>
-        <li><b>Cuatro páginas de tratamiento</b><span>Valoración, ortodoncia invisible, implantes y blanqueamiento: qué es, cuánto dura y su botón para agendar.</span></li>
-        <li><b>Equipo</b><span>Tu presentación, especialidad y cédula profesional.</span></li>
-        <li><b>Cómo llegar</b><span>Fachada, dirección, estacionamiento y transporte cercano. Son 7 páginas, el máximo del plan Negocio.</span></li>
-      </ul></div>
-      <div class="mej"><h3>Para la clínica</h3><ul>
-        <li><b>Citas en tu agenda</b><span>Conectamos la agenda que ya usa la clínica. Cada cita llega con nombre, teléfono y tratamiento.</span></li>
-        <li><b>Cuántos pacientes te contactan</b><span>Te decimos cuántas personas te escribieron, llamaron o agendaron desde la página.</span></li>
-        <li><b>60 minutos de cambios al mes</b><span>Nos escribes un horario, un precio o una foto nueva y lo actualizamos.</span></li>
-        <li><b>Mantenimiento</b><span>Hosting, seguridad, respaldos y actualizaciones, cada mes.</span></li>
-      </ul></div>
-      <div class="mej"><h3>Para aparecer en Google</h3><ul>
-        <li><b>Una página por tratamiento</b><span>Pensada para búsquedas como «implantes en Providencia».</span></li>
-        <li><b>Datos que Google entiende</b><span>Horario, dirección y teléfono marcados para buscadores.</span></li>
-        <li><b>Tu ficha conectada</b><span>Tu página y tu perfil de Google muestran la misma información.</span></li>
-        <li><b>Rápida en el celular</b><span>Fotos optimizadas y sin carruseles que retrasan la carga.</span></li>
-      </ul></div>
+    <div class="mej-grid">{{P_INCLUDES}}
     </div>
   </div>
 </section>
 
 <section class="band band--light section" id="plan" aria-labelledby="plan-title">
   <div class="wrap">
-    <h2 class="h2" id="plan-title">Te recomendamos el plan Negocio con asistente de WhatsApp.</h2>
-    <p class="lede" style="margin-top:20px">Una página que facilita agendar cita y un asistente de WhatsApp que toma la solicitud cuando tu equipo está ocupado. Puedes cambiar de plan o quitar el asistente, y el total se actualiza.</p>
+    <h2 class="h2" id="plan-title">{{P_PLAN_H2}}</h2>
+    <p class="lede" style="margin-top:20px">{{P_PLAN_LEDE}}</p>
     <div class="plan-grid">
       <div style="display:grid;gap:28px;min-width:0">
         <div>
           <h3 class="pl-group">1 · Plan</h3>
-          <div class="pl-list" role="radiogroup" aria-label="Plan" id="pl-list">
-            <button class="pl" type="button" role="radio" data-plan="esencial" aria-checked="false" tabindex="-1"><span class="radio" aria-hidden="true"></span><h3>Esencial <span class="pl-price">$3,490 + $1,490/mes</span></h3><p class="why">Una página clara mientras sigues dando citas por teléfono o WhatsApp.</p><ul><li>Hasta 3 páginas: Inicio, Tratamientos y Cómo llegar</li><li>Formulario y botón de WhatsApp, sin agenda en línea</li><li>Hasta 30 minutos de cambios al mes</li></ul></button>
-            <button class="pl" type="button" role="radio" data-plan="negocio" aria-checked="true" tabindex="0"><span class="radio" aria-hidden="true"></span><h3>Negocio <span class="pl-price">$5,490 + $2,490/mes</span><small>Recomendado para tu clínica</small></h3><p class="why">Todo lo que viste en esta propuesta.</p><ul><li>Hasta 7 páginas: Inicio, cuatro tratamientos, Equipo y Cómo llegar</li><li>Conectada con la agenda que ya usa la clínica</li><li>Te decimos cuántos pacientes te contactaron</li><li>Hasta 60 minutos de cambios al mes</li></ul></button>
-            <button class="pl" type="button" role="radio" data-plan="avanzado" aria-checked="false" tabindex="-1"><span class="radio" aria-hidden="true"></span><h3>Avanzado <span class="pl-price">$8,490 + $3,990/mes</span></h3><p class="why">Si quieres una página para cada uno de tus once servicios y actualizarlos tú.</p><ul><li>Hasta 12 páginas, con todo lo de Negocio</li><li>Catálogo de servicios que tú actualizas</li><li>Hasta 120 minutos de cambios al mes</li></ul></button>
+          <div class="pl-list" role="radiogroup" aria-label="Plan" id="pl-list">{{P_PLANS}}
           </div>
         </div>
         <div>
           <h3 class="pl-group">2 · Asistente</h3>
           <label class="addon" for="addon-wa">
-            <input type="checkbox" id="addon-wa" checked>
+            <input type="checkbox" id="addon-wa"{{P_ADDON_CHECKED}}>
             <span class="sw" aria-hidden="true"></span>
-            <span class="addon-txt"><b>Asistente de WhatsApp</b><span>Contesta las preguntas de siempre con las respuestas que tú apruebas, anota nombre, tratamiento y horario, y pasa a recepción las urgencias y los casos clínicos. Funciona en WhatsApp y en tu página, para un número y una sucursal.</span></span>
+            <span class="addon-txt"><b>Asistente de WhatsApp</b><span>Contesta las preguntas de siempre con las respuestas que tú apruebas, anota los datos de la cita o la cotización y le pasa a tu equipo lo que necesita una persona. Funciona en WhatsApp y en tu página, para un número y una sucursal.</span></span>
             <span class="addon-price">$3,990<small>+ $1,490/mes</small></span>
           </label>
           <p class="addon-note">El piloto incluye hasta 300 conversaciones al mes. Te avisamos al acercarte al límite y, si se agota, las conversaciones nuevas pasan directo a tu equipo.</p>
@@ -339,7 +294,7 @@ img{max-width:100%}
         <div class="sum-table" id="sum-table" aria-live="polite"></div>
         <dl class="sum-meta">
           <dt>Cargos de Meta por mensajes</dt><dd>Se confirman al conectar tu número. Si aplican, aparecen aquí desglosados.</dd>
-          <dt>Precio válido hasta</dt><dd>2 dic 2026 · <span id="sum-left">quedan 14 días</span></dd>
+          <dt>Precio válido hasta</dt><dd>{{P_VALID_SHORT}} · <span id="sum-left">quedan 14 días</span></dd>
         </dl>
         <button class="btn btn-primary" type="button" data-activate>Activar y pagar <span data-total-act>$9,480</span></button>
         <button class="btn btn-primary renew" type="button" data-renew-btn>Pedir propuesta actualizada</button>
@@ -415,7 +370,7 @@ img{max-width:100%}
   </div>
 </dialog>
 
-{{TEMPLATES}}
+{{P_TEMPLATES}}
 
 <script>
 (() => {
@@ -426,15 +381,17 @@ img{max-width:100%}
 {{CMP_JS}}
 
   /* ---------- validity ---------- */
-  const VALID_UNTIL = new Date(2026, 11, 2, 23, 59, 59);
+  const P = {{P_JSON}};
+  const [vy, vm, vd] = P.validUntil.split('-').map(Number);
+  const VALID_UNTIL = new Date(Date.UTC(vy, vm - 1, vd, 23, 59, 59) + 6 * 3600e3); // fin del día, hora del centro
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const days = Math.round((new Date(2026, 11, 2) - today) / 864e5);
+  const days = Math.round((new Date(vy, vm - 1, vd) - today) / 864e5);
   const expired = now > VALID_UNTIL;
   const leftTxt = expired ? 'vencida' : days === 0 ? 'vence hoy' : days === 1 ? 'queda 1 día' : `quedan ${days} días`;
   $('#days-left').textContent = leftTxt;
   $('#sum-left').textContent = leftTxt.charAt(0).toUpperCase() + leftTxt.slice(1);
-  $('[data-left-short]').textContent = expired ? 'Propuesta vencida' : `Válida hasta el 2 dic · ${leftTxt}`;
+  $('[data-left-short]').textContent = expired ? 'Propuesta vencida' : `Válida hasta el ${P.validShort} · ${leftTxt}`;
   if (expired) { document.body.classList.add('expired'); $('#exp-banner').hidden = false; }
 
   /* ---------- toast + routes not in the prototype ---------- */
@@ -450,7 +407,7 @@ img{max-width:100%}
   const PLANS = { esencial: ['Esencial', 3490, 1490], negocio: ['Negocio', 5490, 2490], avanzado: ['Avanzado', 8490, 3990] };
   const WA = ['Asistente de WhatsApp', 3990, 1490];
   const mxn = n => '$' + n.toLocaleString('en-US');
-  let plan = 'negocio';
+  let plan = P.plan;
   const addon = $('#addon-wa');
   function renderTotals() {
     const [pName, pAct, pMon] = PLANS[plan];
@@ -463,7 +420,7 @@ img{max-width:100%}
       `<div class="st-row st-total"><span>Total</span><span>${mxn(tAct)}</span><span>${mxn(tMon)}</span></div>
        <p class="st-when"><span>Hoy pagas solo el monto inicial.</span><span>La mensualidad empieza cuando publicamos.</span></p>`;
     $('#act-sum').innerHTML = rows.map(r => `<dt>${r[0]}</dt><dd>${mxn(r[1])} + ${mxn(r[2])}/mes</dd>`).join('') +
-      `<dt><strong>Pagas hoy · pago inicial</strong></dt><dd><strong>${mxn(tAct)}</strong></dd><dt>Mensualidad desde la publicación</dt><dd>${mxn(tMon)}</dd><dt>Precio válido hasta</dt><dd>2 dic 2026</dd>`;
+      `<dt><strong>Pagas hoy · pago inicial</strong></dt><dd><strong>${mxn(tAct)}</strong></dd><dt>Mensualidad desde la publicación</dt><dd>${mxn(tMon)}</dd><dt>Precio válido hasta</dt><dd>${P.validShort}</dd>`;
     $$('[data-total-act]').forEach(el => el.textContent = mxn(tAct));
     $$('[data-total-mon]').forEach(el => el.textContent = mxn(tMon));
     $$('[data-pack-name]').forEach(el => el.textContent = pack);
@@ -530,7 +487,7 @@ img{max-width:100%}
 
   /* ---------- activation → Stripe Checkout ---------- */
   const act = $('#act'), next = $('#act-next'), errBox = $('#act-error'), terms = $('#a-terms');
-  const PROPOSAL = 'clinica-arrayan';
+  const PROPOSAL = P.slug;
   let lastFocus = null;
   const termsOk = () => {
     const ok = terms.checked;

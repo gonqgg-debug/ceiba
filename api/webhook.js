@@ -5,6 +5,8 @@
 //   invoice.paid, invoice.payment_failed, customer.subscription.deleted
 // y guarda su secreto de firma en STRIPE_WEBHOOK_SECRET.
 import { json, stripe } from '../lib/stripe.js';
+import { dbReady, update } from '../lib/db.js';
+import { escHtml, mailReady, sendMail } from '../lib/notify.js';
 
 export async function POST(request) {
   const signature = request.headers.get('stripe-signature');
@@ -41,7 +43,22 @@ export async function handle(event) {
         metadata: { ...obj.metadata, ceiba_activation_session: obj.id, ceiba_status: 'activada' },
       });
       console.info(`Web activada: ${obj.metadata.ceiba_proposal} · plan ${obj.metadata.ceiba_plan} · cliente ${obj.customer}`);
-      // Pendiente: avisar al equipo (correo o Slack) y crear el proyecto.
+      const meta = obj.metadata;
+      if (dbReady()) {
+        await update('proposals', `slug=eq.${encodeURIComponent(meta.ceiba_proposal)}`, {
+          status: 'activada', activated_at: new Date().toISOString(), stripe_customer_id: obj.customer,
+          recommended_plan: meta.ceiba_plan, whatsapp_recommended: meta.ceiba_whatsapp === 'true',
+        });
+      }
+      if (mailReady() && process.env.CEIBA_NOTIFY_EMAIL) {
+        const total = `$${(obj.amount_total / 100).toLocaleString('en-US')} ${obj.currency.toUpperCase()}`;
+        const who = obj.customer_details?.email || obj.customer;
+        await sendMail({
+          to: process.env.CEIBA_NOTIFY_EMAIL.split(','),
+          subject: `Pagó: ${meta.ceiba_proposal} (${total})`,
+          html: `<p style="font:15px sans-serif">Se activó la propuesta <b>${escHtml(meta.ceiba_proposal)}</b>: ${escHtml(meta.ceiba_plan)}${meta.ceiba_whatsapp === 'true' ? ' + Asistente de WhatsApp' : ''}. Pago inicial: ${total}. Cliente: ${escHtml(who)}.</p><p style="font:15px sans-serif">Siguiente paso: escribirle hoy para pedir textos, fotos y accesos.</p>`,
+        }).catch(err => console.error('aviso de pago no enviado', err.message));
+      }
       return;
     }
     case 'invoice.paid':

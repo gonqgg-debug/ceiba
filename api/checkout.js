@@ -17,9 +17,9 @@ export async function POST(request) {
   try { body = await request.json(); } catch { return json({ error: 'Solicitud inválida.' }, 400); }
 
   const { proposal: slug, plan, whatsapp } = body ?? {};
-  const { proposal, error, status } = getProposal(slug);
+  const { proposal, error, status } = await getProposal(slug);
   if (error) return json({ error }, status);
-  if (!PLANS[plan] || !proposal.allowedPlans.includes(plan)) return json({ error: 'Ese plan no está disponible en esta propuesta.' }, 400);
+  if (!PLANS[plan] || !(proposal.allowedPlans || Object.keys(PLANS)).includes(plan)) return json({ error: 'Ese plan no está disponible en esta propuesta.' }, 400);
   const withWhatsapp = whatsapp === true;
 
   const activationKeys = [lookupKey('web', plan, 'activacion'), ...(withWhatsapp ? [lookupKey('modulo', 'whatsapp', 'activacion')] : [])];

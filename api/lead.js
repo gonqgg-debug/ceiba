@@ -6,6 +6,8 @@ import { dbReady, insert } from '../lib/db.js';
 import { escHtml, mailReady, sendMail } from '../lib/notify.js';
 import { json, siteUrl } from '../lib/stripe.js';
 import { parseSite } from '../lib/url.js';
+import { readSite } from '../lib/site-reader.js';
+import { fireRoutine } from '../lib/routine.js';
 
 const INDUSTRIES = ['Clínica o consultorio', 'Restaurante o café', 'Inmobiliaria', 'Hotel u hospedaje', 'Despacho contable o legal', 'Otro'];
 const SOURCES = ['home', 'diagnostico', 'clinicas'];
@@ -80,10 +82,21 @@ export async function POST(request) {
   if (Object.keys(errors).length) return json({ error: 'Revisa los datos marcados.', fields: errors }, 400);
 
   const now = new Date(), due = dueDate(now), label = dueLabel(due);
+
+  // Leemos la página del cliente para que la rutina tenga su contenido.
+  // La revisión del servidor reemplaza a la que mandó el navegador.
+  let snapshot = null, serverAudit = null;
+  if (row.has_site) {
+    try {
+      const r = await readSite(parseSite(b.site).href);
+      if (r.reachable) { snapshot = r.content; serverAudit = { reachable: true, title: r.review.title, seconds: +(r.page.total / 1000).toFixed(1), checks: r.review.checks.map(({ id, status, detail }) => ({ id, status, detail })) }; }
+    } catch (err) { console.warn('lead: no se pudo leer la página', row.site_host, err.message); }
+  }
   const lead = {
     ...row,
     source: SOURCES.includes(b.source) ? b.source : 'home',
-    audit: auditSummary(b.audit),
+    audit: serverAudit || auditSummary(b.audit),
+    page_snapshot: snapshot,
     due_at: due.toISOString(),
     utm: b.utm && typeof b.utm === 'object' ? Object.fromEntries(Object.entries(b.utm).slice(0, 6).map(([k, v]) => [clean(k, 30), clean(v, 120)])) : null,
     user_agent: clean(request.headers.get('user-agent'), 300),
@@ -104,6 +117,9 @@ export async function POST(request) {
     emailed = client?.status === 'fulfilled';
     if (client?.status === 'rejected') console.error('lead: no salió la confirmación al cliente', client.reason?.message);
   } else console.warn('lead: correo no configurado');
+
+  // Dispara la rutina de Claude que arma el borrador (si está configurada).
+  if (saved) await fireRoutine(lead).catch(err => console.error('lead: no se disparó la rutina', err.message));
 
   // Si no quedó registro en ningún lado, el cliente debe saberlo y escribirnos.
   if (!saved && !notified) return json({ error: 'No pudimos registrar tu solicitud. Intenta de nuevo o escríbenos por WhatsApp.' }, 502);

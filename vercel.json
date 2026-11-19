@@ -2,5 +2,23 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "outputDirectory": "site",
   "buildCommand": "",
-  "cleanUrls": false
+  "cleanUrls": false,
+  "rewrites": [
+    {
+      "source": "/vista/:slug",
+      "destination": "/api/vista?slug=:slug"
+    },
+    {
+      "source": "/p/:slug",
+      "destination": "/api/p?slug=:slug"
+    },
+    {
+      "source": "/diagnostico",
+      "destination": "/diagnostico.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    }
+  ]
 }
