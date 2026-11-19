@@ -988,6 +988,33 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 .ix-eyebrow span{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(214,250,82,.2);animation:blink 1.6s infinite}
 .ix-prop-a{font-size:12px;font-weight:600;color:#0F5C4B;margin-top:4px}
 .ix-close-p{color:rgba(247,244,235,.8);font-size:18px;max-width:52ch;margin-top:18px}
+.ix-close .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;align-items:start!important}
+.ix-cons-list{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:10px}
+.ix-cons-list li{display:grid;grid-template-columns:22px 1fr;gap:8px;color:rgba(247,244,235,.88)}
+.ix-cons-list li::before{content:"✓";color:var(--lime);font-weight:700}
+.ix-close-alt{margin-top:24px;color:rgba(247,244,235,.75);font-size:15px}
+.ix-cons{position:relative;background:var(--ivory);color:var(--ink);border-radius:24px;padding:clamp(22px,3vw,32px);box-shadow:0 50px 100px -40px rgba(0,0,0,.6);--fg:var(--ink);--muted:#5C6865;--line:rgba(11,21,20,.14)}
+.ix-cons-in{display:grid;gap:16px}
+.ix-cons-t{font:600 22px var(--f-display);letter-spacing:-.015em}
+.ix-cons-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ix-cons .fld{display:grid;gap:6px}
+.ix-cons label,.ix-cons legend{font-weight:500;font-size:14px;padding:0}
+.ix-cons legend small{color:var(--muted);font-weight:400}
+.ix-cons input,.ix-cons textarea{width:100%;font:400 16px var(--f-body);color:var(--ink);background:#fff;border:1px solid rgba(11,21,20,.18);border-radius:10px;padding:12px 14px}
+.ix-cons textarea{min-height:92px;resize:vertical}
+.ix-cons input:focus,.ix-cons textarea:focus{outline:2px solid var(--petrol);outline-offset:1px}
+.ix-cons .fld.invalid input,.ix-cons .fld.invalid textarea{border-color:#C8553D}
+.ix-cons .err{color:#B3461E;font-size:14px;margin:0}
+.ix-cons-q{border:0;margin:0;padding:0;display:grid;gap:8px}
+.ix-cons-pills{display:flex;flex-wrap:wrap;gap:6px}
+.ix-cons-pills button{font:inherit;font-size:14px;padding:8px 12px;border-radius:999px;border:1px solid rgba(11,21,20,.2);background:#fff;color:var(--ink);cursor:pointer}
+.ix-cons-pills button[aria-pressed="true"]{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
+.ix-cons .btn{justify-self:start}
+.ix-cons-ok{display:grid;gap:10px}
+.ix-cons-ok b{font:600 24px var(--f-display)}
+.ix-cons-ok p{color:var(--muted)}
+@media (max-width:980px){.ix-close .wrap{grid-template-columns:1fr!important}}
+@media (max-width:520px){.ix-cons-row{grid-template-columns:1fr}}
 
 /* ---------- lo que está cambiando ---------- */
 .ix-shift-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px clamp(40px,6vw,96px);align-items:center}
@@ -1159,8 +1186,8 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       <p class="ix-eyebrow ix-in"><span></span>Estudio digital · webs, procesos e IA</p>
       <h1 id="ix-title" class="ix-in d1">Tus clientes ya le preguntan a la IA <span class="ix-shine">a quién elegir.</span></h1>
       <p class="lede ix-in d1">¿Tu negocio aparece en la respuesta? Te ayudamos a que te encuentren, te escriban y te elijan, y a que tu operación trabaje sola. Empezamos por tu página web y crecemos con agentes y procesos a tu medida.</p>
-      <div class="ix-ctas ix-in d2"><a class="btn btn-primary" href="/diagnostico">Revisar mi negocio gratis <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-line ix-glass" href="#camino">Ver cómo lo hacemos <span class="arrow" aria-hidden="true">↓</span></a></div>
-      <p class="ix-alt ix-in d3">Sin costo: ves cómo quedaría tu página antes de decidir. ¿Sin página todavía? <a class="link" href="/ia#contacto">Hablemos de tu negocio <span class="arrow" aria-hidden="true">→</span></a></p>
+      <div class="ix-ctas ix-in d2"><a class="btn btn-primary" href="#consultoria">Agendar una consultoría <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-line ix-glass" href="/webs">Revisar mi página web</a></div>
+      <p class="ix-alt ix-in d3">Primera sesión sin costo para revisar tu negocio completo. O mira primero <a class="link" href="#camino">cómo lo hacemos <span class="arrow" aria-hidden="true">↓</span></a></p>
     </div>
     <div class="ix-stage" id="ix-stage" aria-label="Ejemplo: la página de una clínica hecha por Ceiba y su asistente de WhatsApp">
       <div class="ix-layer ix-in d2"><div class="ix-frame"><div class="ix-bar"><i></i><i></i><i></i><span>clinicaarrayan.mx</span></div><div class="ix-vp" aria-hidden="true"><div class="cx" style="--a:#1F4FD1;--fh:'Red Hat Display',ui-sans-serif,system-ui,sans-serif;--fb:'Red Hat Text',ui-sans-serif,system-ui,sans-serif" data-name="Clínica Dental Arrayán" data-wa="523300000000">
@@ -1290,7 +1317,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
           <h3>Una página que Google y la IA entienden, y que convierte visitas en clientes.</h3>
           <p>Tu página nueva, por suscripción: rápida en el celular, con precios, horarios y reseñas claros, y con los datos estructurados que buscadores y asistentes de IA usan para recomendar. Te la mostramos terminada antes de que pagues.</p>
           <ul class="ix-ticks"><li>Lista para Google y asistentes de IA</li><li>Agendar o pedir en un toque</li><li>La ves antes de decidir</li></ul>
-          <div class="ix-ch-acts"><a class="btn btn-primary" href="/diagnostico">Revisar mi página gratis <span class="arrow" aria-hidden="true">→</span></a><a class="link" href="/webs">Ver páginas web</a></div>
+          <div class="ix-ch-acts"><a class="btn btn-primary" href="/webs">Revisar mi página web <span class="arrow" aria-hidden="true">→</span></a><a class="link" href="/webs#optimizada-ia">Cómo las optimizamos para IA</a></div>
         </div>
         <div class="ix-ex ix-ex--book" data-reveal data-delay="1" aria-label="Ejemplo: agendar una cita desde el celular en tres toques">
           <div class="ix-ph"><div class="ix-ph-in">
@@ -1356,7 +1383,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
           <h3>Cada mañana sabes qué pasó y qué conviene hacer.</h3>
           <p>Juntamos los datos de tus ventas, citas o pedidos, y un agente los analiza todos los días: qué subió, qué bajó, qué se vende junto y dónde pierdes margen. Con un tablero hecho para tu equipo y procesos a la medida para lo que tu negocio necesite.</p>
           <ul class="ix-ticks"><li>Reporte diario en lenguaje claro</li><li>Tableros para tu equipo</li><li>Procesos hechos a tu medida</li></ul>
-          <div class="ix-ch-acts"><a class="btn btn-line" href="/ia#contacto">Hablar de tu operación <span class="arrow" aria-hidden="true">→</span></a></div>
+          <div class="ix-ch-acts"><a class="btn btn-primary" href="#consultoria">Agendar una consultoría <span class="arrow" aria-hidden="true">→</span></a></div>
         </div>
         <div class="ix-ex ix-ex--data" data-reveal data-delay="1" aria-label="Ejemplo: el reporte diario del analista de ventas">
           <div class="ix-rep" id="ix-rep">
@@ -1390,7 +1417,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
         <span class="ix-res-k" id="ix-res-k">0 de 5 respuestas</span>
         <b id="ix-res-t">Contesta las preguntas para ver tu etapa.</b>
         <p id="ix-res-p">Ubicamos a tu negocio en una de las cuatro etapas y te decimos cuál es el siguiente paso.</p>
-        <a class="btn btn-primary" id="ix-res-cta" href="/diagnostico" hidden>Revisar mi página gratis <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn-primary" id="ix-res-cta" href="/webs" hidden>Revisar mi página web <span class="arrow" aria-hidden="true">→</span></a>
       </div>
     </div>
   </div>
@@ -1484,10 +1511,36 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   </div>
 </section>
 
-<section class="band ix-close" aria-labelledby="close-title">
+<section class="band ix-close" id="consultoria" aria-labelledby="close-title">
   <div class="wrap">
-    <div><h2 id="close-title" data-reveal>Que la próxima recomendación sea tu negocio.</h2><p class="ix-close-p" data-reveal data-delay="1">Revisamos tu página gratis y te mostramos cómo quedaría. O cuéntanos cómo funciona hoy tu operación y te decimos qué conviene automatizar primero.</p></div>
-    <div class="acts" data-reveal data-delay="1"><a class="btn btn-primary" href="/diagnostico">Revisar mi negocio gratis <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-line" href="/ia#contacto" style="border-color:rgba(247,244,235,.5)">Hablar de tu operación</a></div>
+    <div>
+      <p class="ix-kick" data-reveal style="color:var(--lime)">Consultoría</p>
+      <h2 id="close-title" data-reveal>Que la próxima recomendación sea tu negocio.</h2>
+      <p class="ix-close-p" data-reveal data-delay="1">Agenda una sesión para revisar tu negocio completo: cómo te encuentran, cómo atiendes, qué trabajo se repite y qué datos no estás usando. Sales con un plan por etapas y con lo que conviene hacer primero.</p>
+      <ul class="ix-cons-list" data-reveal data-delay="2"><li>Primera sesión de 30 minutos, sin costo</li><li>Por videollamada, con quien diseña la solución</li><li>Si no conviene automatizar algo, te lo decimos</li></ul>
+      <p class="ix-close-alt" data-reveal data-delay="3">¿Solo quieres revisar tu página? <a class="link" href="/webs">Analízala gratis aquí <span class="arrow" aria-hidden="true">→</span></a></p>
+    </div>
+    <form class="ix-cons" id="cons-form" novalidate data-reveal data-delay="1">
+      <div id="cons-fields" class="ix-cons-in">
+        <b class="ix-cons-t">Agenda tu sesión</b>
+        <div class="ix-cons-row">
+          <div class="fld" data-f="name"><label for="c-name">Tu nombre</label><input id="c-name" autocomplete="name"><p class="err" hidden></p></div>
+          <div class="fld" data-f="biz"><label for="c-biz">Tu negocio</label><input id="c-biz" autocomplete="organization"><p class="err" hidden></p></div>
+        </div>
+        <div class="fld" data-f="contact"><label for="c-contact">Tu WhatsApp o correo</label><input id="c-contact" autocomplete="email" placeholder="+52 33 1234 5678 o tu@correo.com"><p class="err" hidden></p></div>
+        <fieldset class="ix-cons-q"><legend>¿Qué te interesa? <small>(elige las que quieras)</small></legend>
+          <div class="ix-cons-pills" data-multi="interests"><button type="button" data-v="web">Página web</button><button type="button" data-v="asistente">Asistente de WhatsApp</button><button type="button" data-v="agentes">Agentes y automatización</button><button type="button" data-v="datos">Datos y reportes</button><button type="button" data-v="todo">Todo / no sé por dónde empezar</button></div>
+        </fieldset>
+        <div class="fld" data-f="message"><label for="c-msg">Cuéntanos de tu negocio</label><textarea id="c-msg" maxlength="1500" placeholder="A qué se dedican, cuántas personas son y qué les quita más tiempo hoy."></textarea><p class="err" hidden></p></div>
+        <fieldset class="ix-cons-q"><legend>¿Cuándo te queda mejor?</legend>
+          <div class="ix-cons-pills" data-one="slot"><button type="button" data-v="manana">Mañanas</button><button type="button" data-v="tarde">Tardes</button><button type="button" data-v="cualquiera">Cualquier horario</button></div>
+        </fieldset>
+        <div aria-hidden="true" style="position:absolute;left:-9999px"><input id="c-trap" tabindex="-1" autocomplete="off"></div>
+        <p class="err" id="cons-err" role="alert" hidden></p>
+        <button class="btn btn-primary" type="submit" id="cons-btn">Agendar mi consultoría <span class="arrow" aria-hidden="true">→</span></button>
+      </div>
+      <div class="ix-cons-ok" id="cons-ok" hidden tabindex="-1"><b>Listo, recibimos tu solicitud.</b><p id="cons-when"></p><p>Mientras, puedes <a class="link" href="/webs">revisar tu página web gratis</a>.</p></div>
+    </form>
   </div>
 </section>
 </main>
@@ -1639,11 +1692,11 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   /* ---------- ¿en qué etapa está tu negocio? ---------- */
   const qs = [...document.querySelectorAll('#ix-qs li')];
   const RES = {
-    1: ['Etapa 1: que te encuentren', 'Hoy hay clientes buscando un negocio como el tuyo que terminan con otro. Lo primero es una página clara, lista para Google y la IA, donde agendar o pedir sea fácil.', '/diagnostico', 'Revisar mi página gratis'],
+    1: ['Etapa 1: que te encuentren', 'Hoy hay clientes buscando un negocio como el tuyo que terminan con otro. Lo primero es una página clara, lista para Google y la IA, donde agendar o pedir sea fácil.', '/webs', 'Revisar mi página web'],
     2: ['Etapa 2: que te escriban y te elijan', 'Ya te encuentran, pero cada mensaje que tarda en responderse es una venta que se va con la competencia. Un asistente de WhatsApp responde y aparta en segundos, a cualquier hora.', '/ia#contacto', 'Quiero un asistente'],
-    3: ['Etapa 3: que tu operación trabaje sola', 'Tu equipo sigue haciendo a mano trabajo que un agente puede hacer todos los días: capturar, dar seguimiento, conciliar. Ahí están tus horas y tus ventas perdidas.', '/ia#contacto', 'Hablar de mi operación'],
-    4: ['Etapa 4: que decidas con datos', 'Tu negocio ya funciona bien. Lo siguiente es entenderlo a fondo: un analista que cada mañana te diga qué cambió y qué hacer.', '/ia#contacto', 'Quiero mi analista diario'],
-    5: ['Vas adelante', 'Tu negocio ya hace lo que muchos apenas empiezan. Hablemos de procesos y agentes a la medida para crecer sin crecer el equipo.', '/ia#contacto', 'Hablar de lo siguiente'],
+    3: ['Etapa 3: que tu operación trabaje sola', 'Tu equipo sigue haciendo a mano trabajo que un agente puede hacer todos los días: capturar, dar seguimiento, conciliar. Ahí están tus horas y tus ventas perdidas.', '#consultoria', 'Agendar una consultoría'],
+    4: ['Etapa 4: que decidas con datos', 'Tu negocio ya funciona bien. Lo siguiente es entenderlo a fondo: un analista que cada mañana te diga qué cambió y qué hacer.', '#consultoria', 'Agendar una consultoría'],
+    5: ['Vas adelante', 'Tu negocio ya hace lo que muchos apenas empiezan. Hablemos de procesos y agentes a la medida para crecer sin crecer el equipo.', '#consultoria', 'Agendar una consultoría'],
   };
   const resK = document.getElementById('ix-res-k'), resT = document.getElementById('ix-res-t'), resP = document.getElementById('ix-res-p'), resCta = document.getElementById('ix-res-cta'), resBar = document.getElementById('ix-res-bar');
   const score = () => {
@@ -1663,6 +1716,36 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     score();
   }));
   qs.forEach(li => li.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', 'false')));
+
+  /* ---------- consultoría ---------- */
+  const cform = document.getElementById('cons-form');
+  cform.querySelectorAll('.ix-cons-pills').forEach(g => {
+    g.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', 'false'));
+    g.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (g.dataset.multi) b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true'); else g.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); });
+  });
+  const cf = n => cform.querySelector(`[data-f="${n}"]`), ci = n => cf(n).querySelector('input,textarea');
+  const picked = sel => [...cform.querySelectorAll(`${sel} [aria-pressed="true"]`)].map(b => b.dataset.v);
+  const crules = {
+    name: v => v.trim().length >= 2 || 'Escribe tu nombre.',
+    biz: v => v.trim().length >= 2 || 'Escribe el nombre de tu negocio.',
+    contact: v => { const s = v.trim(); if (s.includes('@')) return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s) || 'Revisa el correo.'; const d = s.replace(/\D/g, ''); return (d.length >= 8 && d.length <= 15) || 'Déjanos un WhatsApp con lada o un correo.'; },
+    message: v => v.trim().length >= 5 || picked('[data-multi]').length > 0 || 'Cuéntanos un poco de tu negocio o elige qué te interesa.',
+  };
+  const ccheck = (n, msg) => { const r = msg ?? crules[n](ci(n).value), ok = r === true; cf(n).classList.toggle('invalid', !ok); const e = cf(n).querySelector('.err'); e.hidden = ok; e.textContent = ok ? '' : r; ci(n).setAttribute('aria-invalid', !ok); return ok; };
+  cform.addEventListener('submit', async e => {
+    e.preventDefault();
+    const bad = Object.keys(crules).filter(n => !ccheck(n)); if (bad.length) { ci(bad[0]).focus(); return; }
+    const btn = document.getElementById('cons-btn'), err = document.getElementById('cons-err'); btn.disabled = true; err.hidden = true;
+    try {
+      const r = await fetch('/api/lead', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ source: 'consultoria', mode: 'consultoria', name: ci('name').value, biz: ci('biz').value, contact: ci('contact').value, message: ci('message').value, interests: picked('[data-multi]'), slot: picked('[data-one]')[0] || null, company_url: document.getElementById('c-trap').value }) });
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok) { if (d.fields) Object.entries(d.fields).forEach(([k, m]) => cf(k) && ccheck(k, m)); throw new Error(d.error || 'No pudimos enviar tu solicitud.'); }
+      const first = ci('name').value.trim().split(/\s+/)[0];
+      document.getElementById('cons-when').textContent = d.dueDay ? `${first}, te escribimos ${d.dueDay}, ${d.dueTime.replace(/\.$/, '')}, para confirmar el día y la hora de tu sesión.` : 'Te escribimos pronto para confirmar el día y la hora de tu sesión.';
+      document.getElementById('cons-fields').hidden = true; const ok = document.getElementById('cons-ok'); ok.hidden = false; ok.focus();
+    } catch (x) { err.textContent = x.message; err.hidden = false; }
+    btn.disabled = false;
+  });
 
   /* ---------- luz que sigue al cursor en las tarjetas de rubros ---------- */
   document.querySelectorAll('#ix-ind > *').forEach(c => c.addEventListener('pointermove', e => {

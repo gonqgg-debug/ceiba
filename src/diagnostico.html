@@ -68,6 +68,11 @@
   .tag{grid-row:auto;margin-bottom:6px}
   .frow{grid-template-columns:1fr}
 }
+.dg-score{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;margin:4px 0 18px;padding:18px 20px;border-radius:16px;background:var(--ink);color:var(--ivory)}
+.dg-score > div{width:88px;height:88px;border-radius:50%;display:grid;place-content:center;text-align:center;background:radial-gradient(closest-side,var(--ink) 78%,transparent 80% 100%),conic-gradient(var(--lime) calc(var(--s)*1%),rgba(247,244,235,.14) 0)}
+.dg-score b{font:700 28px/1 var(--f-display)}
+.dg-score span{font-size:11px;opacity:.7}
+.dg-score p{margin:0;color:rgba(247,244,235,.8);font-size:15px}
 </style>
 </head>
 <body class="band">
@@ -207,18 +212,20 @@
     $('#done-title').innerHTML = fix
       ? `Encontramos ${fix} ${fix === 1 ? 'cosa' : 'cosas'} que te pueden estar costando clientes <span class="soft">en ${esc(d.host)}.</span>`
       : `${esc(d.host)} cumple lo básico. <span class="soft">Ahora toca que te traiga más clientes.</span>`;
-    $('#done-sum').innerHTML = `<span><b>${d.counts.bad}</b> faltan</span><span><b>${d.counts.warn}</b> mejorables</span><span><b>${d.counts.ok}</b> bien</span><span>Tardó <b>${d.seconds}</b> s</span>`;
+    $('#done-sum').innerHTML = `<span><b>${d.counts.bad}</b> faltan</span><span><b>${d.counts.warn}</b> mejorables</span><span><b>${d.counts.ok}</b> bien</span><span>Tardó <b>${d.seconds}</b> s</span>${d.seoScore != null ? `<span>SEO e IA <b>${d.seoScore}</b>/100</span>` : ''}`;
     const OFFER = { 'Plan Negocio': 'Lo incluye el Plan Negocio', 'Asistente de WhatsApp': 'Lo resuelve el Asistente de WhatsApp', 'todos los planes': 'Incluido en todos los planes' };
     const GROUPS = [
       ['basico', 'Lo básico', 'Lo mínimo para que quien llega no se vaya.'],
-      ['clientes', 'Lo que te trae más clientes', 'Lo que hace que te encuentren en Google y que una visita termine en cita o venta.'],
+      ['visibilidad', 'SEO y visibilidad en la IA', 'Lo que hace que Google y asistentes como ChatGPT, Gemini o Perplexity te encuentren, te entiendan y te recomienden.'],
+      ['clientes', 'Lo que te trae más clientes', 'Lo que hace que una visita termine en cita o venta, y que sepas cuántas llegan.'],
     ];
     const item = c => `<li><span class="tag tag--${c.status}">${LABEL[c.status]}</span><h3>${esc(c.label)}</h3><p>${esc(c.detail)}</p>${c.offer ? `<p class="offer">${esc(OFFER[c.offer] || c.offer)}</p>` : ''}</li>`;
     $('#done-groups').innerHTML = GROUPS.map(([id, title, sub]) => {
       const list = checks.filter(c => (c.group || 'basico') === id);
       if (!list.length) return '';
       const miss = list.filter(c => c.status !== 'ok').length;
-      return `<section aria-labelledby="g-${id}"><div class="dg-ghead"><h2 id="g-${id}">${title}</h2><span>${miss ? `${miss} de ${list.length} por mejorar` : 'Todo bien'}</span></div><p class="dg-gsub">${sub}</p><ul class="dg-list">${list.map(item).join('')}</ul></section>`;
+      const meter = id === 'visibilidad' && d.seoScore != null ? `<div class="dg-score" style="--s:${d.seoScore}"><div><b>${d.seoScore}</b><span>/100</span></div><p>${d.seoScore >= 80 ? 'Buena base. Lo siguiente es contenido y reseñas.' : d.seoScore >= 50 ? 'Te encuentran a medias: hay datos que Google y la IA no pueden leer.' : 'Hoy es difícil que Google o la IA te recomienden.'} Todas nuestras páginas salen con esta base completa.</p></div>` : '';
+      return `<section aria-labelledby="g-${id}"><div class="dg-ghead"><h2 id="g-${id}">${title}</h2><span>${miss ? `${miss} de ${list.length} por mejorar` : 'Todo bien'}</span></div><p class="dg-gsub">${sub}</p>${meter}<ul class="dg-list">${list.map(item).join('')}</ul></section>`;
     }).join('');
     show('done'); openAsk();
     $('#done-title').setAttribute('tabindex', '-1'); $('#done-title').focus({ preventScroll: true });

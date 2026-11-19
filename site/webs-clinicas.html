@@ -825,13 +825,13 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       </div>
       <p class="lede">Para que tus pacientes vean tus tratamientos y agenden desde el celular, sin llamar. Y un asistente de WhatsApp que contesta cuando tu equipo está ocupado.</p>
       <form class="audit" id="audit-form" novalidate>
-          <label for="audit-url">¿Ya tienes página? Escribe la dirección</label>
+          <label for="audit-url" id="revisar">¿Ya tienes página? Analiza su SEO y su visibilidad en la IA</label>
           <div class="field-url" id="audit-field">
             <div class="row"><span class="prefix" aria-hidden="true">https://</span>
             <input id="audit-url" name="url" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com" aria-describedby="audit-help"></div>
-            <button class="btn btn-primary" type="submit">Ver cómo quedaría <span class="arrow" aria-hidden="true">→</span></button>
+            <button class="btn btn-primary" type="submit">Analizar gratis <span class="arrow" aria-hidden="true">→</span></button>
           </div>
-          <p class="hint" id="audit-help">Es gratis y no te pedimos tu correo para empezar.</p>
+          <p class="hint" id="audit-help">Te damos un puntaje de 0 a 100, lo que falta y cómo quedaría tu página nueva. No te pedimos tu correo para empezar.</p>
           <div id="audit-out" aria-live="polite"></div>
         </form>
       <div class="secondary-actions">
