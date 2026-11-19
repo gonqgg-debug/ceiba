@@ -771,6 +771,96 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 .loaded .ix-in{opacity:1;translate:0 0}
 .loaded .ix-in.d1{transition-delay:.15s}.loaded .ix-in.d2{transition-delay:.45s}.loaded .ix-in.d3{transition-delay:.75s}.loaded .ix-in.d4{transition-delay:1.05s}
 
+/* ---------- hero: panel «Tu negocio, funcionando» ---------- */
+.hx-panel{position:relative;border-radius:20px;background:#FBFAF6;color:#15211D;box-shadow:0 60px 110px -50px rgba(0,0,0,.85),0 0 0 1px rgba(247,244,235,.14);overflow:hidden;transform:rotateY(calc(-7deg + var(--mx) * 4deg)) rotateX(calc(4deg - var(--my) * 3deg));transition:transform .35s cubic-bezier(.2,.7,.1,1)}
+.hx-top{display:flex;align-items:center;gap:12px;padding:12px 16px;background:#EFECE3;font-size:14px}
+.hx-dots{display:flex;gap:6px}.hx-dots i{width:9px;height:9px;border-radius:50%;background:#D3CEC2}
+.hx-top small{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font:500 11px var(--f-mono);color:#0F5C4B}
+.hx-live{width:7px;height:7px;border-radius:50%;background:#1FAF7A;box-shadow:0 0 0 3px rgba(31,175,122,.2);animation:blink 1.4s infinite}
+.hx-tabs{display:flex;gap:4px;padding:10px 12px 0;border-bottom:1px solid #E6E3DA}
+.hx-tabs span{position:relative;padding:8px 10px 11px;font-size:13px;font-weight:600;color:#7A8582;white-space:nowrap;transition:color .3s}
+.hx-tabs span.on{color:#15211D}
+.hx-tabs i{position:absolute;left:10px;right:10px;bottom:-1px;height:2px;border-radius:2px;background:#0F5C4B;transform:scaleX(0);transform-origin:left}
+.hx-tabs span.on i{animation:hxTab var(--hx-dur,5s) linear forwards}
+@keyframes hxTab{to{transform:scaleX(1)}}
+.hx-panes{position:relative;height:clamp(300px,27vw,350px)}
+.hx-pane{position:absolute;inset:0;padding:18px;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .25s,transform .25s,visibility 0s .25s;pointer-events:none}
+.hx-pane.on{opacity:1;visibility:visible;transform:none;transition:opacity .45s .2s,transform .45s .2s cubic-bezier(.2,.7,.1,1),visibility 0s}
+/* web */
+.hx-pane[data-k="web"]{display:grid;grid-template-columns:1.25fr 1fr;gap:14px;align-items:stretch}
+.hx-site{border-radius:12px;background:#fff;border:1px solid #E6E3DA;overflow:hidden;display:grid;grid-template-rows:auto 1fr auto}
+.hx-site-bar{display:flex;align-items:center;gap:6px;padding:9px 10px;border-bottom:1px solid #EFECE3;font-size:12px}
+.hx-site-bar span{width:22px;height:5px;border-radius:3px;background:#E3E0D6}
+.hx-site-bar b{margin-right:auto;font-weight:700}
+.hx-site-bar em{font-style:normal;font-size:10px;font-weight:600;color:#fff;background:#15211D;border-radius:999px;padding:4px 8px}
+.hx-site-hero{padding:14px 12px;display:grid;gap:7px;align-content:center;background:linear-gradient(160deg,#F1F6F3,#fff)}
+.hx-site-hero i{display:block;height:9px;border-radius:5px;background:#15211D;transform-origin:left;animation:ixBuild 5s cubic-bezier(.2,.7,.1,1) infinite}
+.hx-site-hero .t1{width:85%}.hx-site-hero .t2{width:60%;animation-delay:.15s}.hx-site-hero .t3{width:70%;height:6px;background:#B8C2BF;animation-delay:.3s}
+.hx-site-hero em{justify-self:start;margin-top:4px;font-style:normal;font-size:12px;font-weight:700;color:#0B1514;background:#D6FA52;border-radius:999px;padding:7px 12px;box-shadow:0 0 0 0 rgba(214,250,82,.6);animation:hxPulse 2.4s infinite}
+@keyframes hxPulse{60%{box-shadow:0 0 0 10px rgba(214,250,82,0)}}
+.hx-site-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:10px}
+.hx-site-cards i{height:34px;border-radius:7px;background:#F1EEE6}
+.hx-side{display:grid;gap:8px;align-content:stretch}
+.hx-stat{display:grid;gap:2px;align-content:center;padding:10px 12px;border-radius:12px;background:#fff;border:1px solid #E6E3DA}
+.hx-stat span{font-size:12px;color:#6B7774}
+.hx-stat b{font:700 24px/1.1 var(--f-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.hx-stat b small{font-size:13px;color:#6B7774;font-weight:500}
+.hx-stat.ok{background:#0F5C4B;border-color:#0F5C4B;color:#fff}.hx-stat.ok span,.hx-stat.ok small{color:rgba(255,255,255,.75)!important}.hx-stat.ok b{color:#D6FA52}
+/* whatsapp */
+.hx-pane[data-k="wa"]{display:grid;grid-template-columns:1.1fr 1fr;gap:14px;align-items:end}
+.hx-chat{height:100%;border-radius:12px;background:#EFEAE2;padding:12px;display:flex;flex-direction:column;justify-content:flex-end;gap:7px;overflow:hidden}
+.hx-chat p{max-width:88%;padding:7px 10px;border-radius:11px;font-size:13px;line-height:1.35;background:#fff;align-self:flex-start;box-shadow:0 1px 0 rgba(0,0,0,.06);animation:ixPop .35s cubic-bezier(.2,.8,.2,1.2)}
+.hx-chat p.me{background:#D9FDD3;align-self:flex-end}
+.hx-req{display:grid;gap:7px;padding:14px;border-radius:14px;background:#fff;border:1px solid #E6E3DA;box-shadow:0 24px 40px -28px rgba(11,21,20,.5);opacity:0;transform:translateY(10px) scale(.97);transition:opacity .5s,transform .5s cubic-bezier(.2,.8,.2,1)}
+.hx-req.on{opacity:1;transform:none}
+.hx-req span{justify-self:start;font:500 10px var(--f-mono);color:#0F5C4B;background:#E4F5EC;padding:4px 8px;border-radius:999px}
+.hx-req b{font:600 16px var(--f-display)}
+.hx-req dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:12px}
+.hx-req dt{color:#6B7774}.hx-req dd{margin:0;font-weight:500}
+.hx-req em{justify-self:start;font-style:normal;font-size:12px;font-weight:600;color:#fff;background:#0F5C4B;border-radius:999px;padding:7px 12px}
+/* agentes */
+.hx-pane[data-k="agents"]{display:grid;gap:8px;align-content:start}
+.hx-agents{display:grid;gap:6px}
+.hx-agents > div{display:grid;grid-template-columns:30px 1fr auto;gap:10px;align-items:center;padding:8px 10px;border-radius:12px;background:#fff;border:1px solid #E6E3DA}
+.hx-agents .ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:#0B1514;color:#D6FA52;font-weight:700;font-size:13px}
+.hx-agents p{margin:0;display:grid}.hx-agents b{font-size:13px}.hx-agents small{font-size:11px;color:#6B7774}
+.hx-agents em{font-style:normal;font:600 12px var(--f-mono);color:#7A8582;white-space:nowrap}
+.hx-agents em.done{color:#0F5C4B}
+.hx-ask{display:grid;grid-template-columns:1fr auto;gap:0 10px;align-items:center;padding:9px 12px;border-radius:12px;background:#FFF5C4;color:#4D3E00;opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s}
+.hx-ask.on{opacity:1;transform:none}
+.hx-ask b{font-size:13px}.hx-ask span{grid-row:2;font-size:12px}
+.hx-ask i{grid-row:span 2;font-style:normal;font-size:12px;font-weight:600;padding:7px 11px;border-radius:999px;background:#0B1514;color:#FFF5C4}
+/* datos */
+.hx-pane[data-k="data"]{display:grid;gap:12px;align-content:start}
+.hx-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.hx-kpis div{display:grid;gap:2px;padding:9px 10px;border-radius:12px;background:#fff;border:1px solid #E6E3DA}
+.hx-kpis span{font-size:11px;color:#6B7774}.hx-kpis b{font:700 20px var(--f-display);letter-spacing:-.02em;color:#0F5C4B}
+.hx-bars{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;align-items:end;height:110px;padding:10px 12px;border-radius:12px;background:#fff;border:1px solid #E6E3DA}
+.hx-bars i{display:block;height:0;border-radius:6px 6px 3px 3px;background:#CFE3DA;transition:height .9s cubic-bezier(.2,.7,.1,1)}
+.hx-bars i.hi{background:linear-gradient(#D6FA52,#0E9F8A)}
+.hx-pane.on .hx-bars i{height:var(--h)}
+.hx-pane.on .hx-bars i:nth-child(2){transition-delay:.06s}.hx-pane.on .hx-bars i:nth-child(3){transition-delay:.12s}.hx-pane.on .hx-bars i:nth-child(4){transition-delay:.18s}.hx-pane.on .hx-bars i:nth-child(5){transition-delay:.24s}.hx-pane.on .hx-bars i:nth-child(6){transition-delay:.3s}.hx-pane.on .hx-bars i:nth-child(7){transition-delay:.36s}
+.hx-insight{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;padding:10px 12px;border-radius:12px;background:#0B1514;color:#F7F4EB;font-size:13px;line-height:1.45}
+.hx-insight span{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;background:#D6FA52;color:#0B1514;font-size:12px}
+.hx-insight p{margin:0}
+/* avisos flotantes */
+.hx-toast{position:absolute;display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:14px;background:#fff;color:#15211D;font-size:13px;box-shadow:0 30px 60px -24px rgba(0,0,0,.6),0 0 0 1px rgba(11,21,20,.06);transition:opacity .4s,translate .4s}
+.hx-toast .ic{width:28px;height:28px;flex:none;border-radius:9px;display:grid;place-items:center;background:#D6FA52;color:#0B1514;font-weight:700}
+.hx-toast b{display:block;font-size:13px}.hx-toast small{color:#5C6865;font-size:12px}
+.hx-toast--a{right:-24px;top:-22px;transform:translate(calc(var(--mx) * 22px),calc(var(--my) * 16px))}
+.hx-toast--b{left:-30px;bottom:-26px;transform:translate(calc(var(--mx) * -18px),calc(var(--my) * -14px))}
+.hx-toast.swap{opacity:0;translate:0 -6px}
+@media (max-width:980px){.hx-panel{transform:none}}
+@media (max-width:640px){
+  .hx-tabs{overflow:hidden}.hx-tabs span{padding:8px 7px 11px;font-size:12px}
+  .hx-panes{height:330px}
+  .hx-pane[data-k="web"],.hx-pane[data-k="wa"]{grid-template-columns:1fr}
+  .hx-side{grid-template-columns:repeat(3,1fr)}.hx-stat b{font-size:18px}
+  .hx-site-cards{display:none}
+  .hx-req{position:absolute;right:14px;bottom:14px;width:62%}
+  .hx-toast--a{right:-6px;top:-30px}.hx-toast--b{display:none}
+}
+
 /* ---------- cinta ---------- */
 .ix-marquee{margin-top:-4vw;position:relative;z-index:2;overflow:hidden;padding:18px 0;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .ix-marquee div{display:flex;gap:12px;width:max-content;animation:ixMarq 42s linear infinite}
@@ -1183,88 +1273,49 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   <canvas class="ix-grad" id="ix-grad" aria-hidden="true"></canvas>
   <div class="wrap ix-hero-grid">
     <div>
-      <h1 id="ix-title" class="ix-in">Diseñamos lo que tus clientes ven <span class="ix-shine">y cómo trabaja tu negocio.</span></h1>
-      <p class="lede ix-in d1">Somos un estudio digital. Hacemos páginas web que Google y la IA entienden, y llevamos la inteligencia artificial a tu operación con asistentes, agentes y procesos a tu medida.</p>
+      <h1 id="ix-title" class="ix-in">Implementamos la tecnología <span class="ix-shine">que hace crecer tu negocio.</span></h1>
+      <p class="lede ix-in d1">No nos quedamos en la recomendación: diseñamos, construimos y dejamos funcionando tu página web, tus asistentes de WhatsApp, tus agentes de IA y tus procesos. Y acompañamos a tu equipo hasta que se vuelven costumbre.</p>
       <div class="ix-ctas ix-in d2"><a class="btn btn-primary" href="#consultoria">Agendar una consultoría <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-line ix-glass" href="/webs">Revisar mi página web</a></div>
-      <p class="ix-alt ix-in d3">Primera sesión sin costo para revisar tu negocio completo. O mira primero <a class="link" href="#camino">cómo lo hacemos <span class="arrow" aria-hidden="true">↓</span></a></p>
     </div>
-    <div class="ix-stage" id="ix-stage" aria-label="Ejemplo: la página de una clínica hecha por Ceiba y su asistente de WhatsApp">
-      <div class="ix-layer ix-in d2"><div class="ix-frame"><div class="ix-bar"><i></i><i></i><i></i><span>clinicaarrayan.mx</span></div><div class="ix-vp" aria-hidden="true"><div class="cx" style="--a:#1F4FD1;--fh:'Red Hat Display',ui-sans-serif,system-ui,sans-serif;--fb:'Red Hat Text',ui-sans-serif,system-ui,sans-serif" data-name="Clínica Dental Arrayán" data-wa="523300000000">
-<div class="cx-util"><span><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6L13 3Z"/></svg>¿Urgencia? Te atendemos hoy</span><span class="cx-util-h"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM12 7.5V12l3 2"/></svg>Lunes a viernes de 9 a 20 h y sábados de 9 a 14 h</span><span class="cx-util-tel"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5.5a2 2 0 0 1 2-2Z"/></svg>33 0000 0000</span></div>
-<header class="cx-top"><div class="cx-brand"><img src="/img/arrayan-logo.svg" alt="Clínica Dental Arrayán" class="cx-logo-wide"></div>
-    <nav class="cx-nav"><span>Tratamientos</span><span>Precios</span><span>Doctora</span><span>Opiniones</span><span>Ubicación</span></nav>
-    <div class="cx-top-acts"><span class="cx-btn cx-btn--line cx-hide-s"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5.5a2 2 0 0 1 2-2Z"/></svg>Llamar</span><span class="cx-btn" data-sec="cta">Agenda tu cita</span></div></header>
-<section class="cx-hero" data-sec="hero"><div class="cx-hero-copy">
-      <p class="cx-rating"><span class="cx-stars" aria-hidden="true">★★★★★</span><b>4.9</b><span>186 reseñas en Google</span></p>
-      <h1>Agenda tu valoración dental sin costo</h1>
-      <p class="cx-lede">Conoce cómo están tus dientes y encías, y sal de tu primera cita con tu presupuesto en la mano. Estamos en Providencia, Guadalajara.</p>
-      <div class="cx-ctas"><span class="cx-btn cx-btn--lg">Agenda gratis<svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="cx-btn cx-btn--lg cx-btn--ghost"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Agendar por WhatsApp</span></div>
-      <p class="cx-call">Llamar para agendar: <span class=""><b>33 0000 0000</b></span></p>
-    </div>
-    <div class="cx-hero-media"><div class="cx-hero-img" role="img" aria-label="La Dra. Valeria Ríos en su consultorio" style="background-image:url('/img/doc.jpg')"></div>
-      <div class="cx-float cx-slots"><b><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5h16v13H4zM4 10h16M8.5 3.5v4M15.5 3.5v4"/></svg>Próximos horarios</b><div><span>Hoy 18:30</span><span>Mañana 10:00</span><span>Mañana 12:30</span></div></div>
-      <div class="cx-float cx-rate-card"><span class="cx-stars" aria-hidden="true">★★★★★</span><b>4.9 de 5</b><small>186 reseñas</small></div>
-    </div></section>
-<section class="cx-benefits" data-sec="trust"><div class="cx-benefit"><svg class="cx-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5c1.6-.9 3.1.2 5 .2s3.4-1.1 5-.2c2.4 1.4 2.3 5 1.2 8-.9 2.4-1.1 8.5-3 8.5-1.6 0-1.4-5.2-3.2-5.2S10.6 20 9 20c-1.9 0-2.1-6.1-3-8.5C4.9 8.5 4.6 4.9 7 3.5Z"/></svg><b>Valoración sin costo</b><span>con radiografía y presupuesto por escrito</span></div><div class="cx-benefit"><svg class="cx-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16M4 12h16"/></svg><b>Radiografía digital</b><span>ves tu diagnóstico en pantalla, el mismo día</span></div><div class="cx-benefit"><svg class="cx-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3zM3 10h18M7 14.5h4"/></svg><b>Hasta 6 MSI</b><span>en tratamientos mayores a $1,200</span></div><div class="cx-benefit"><svg class="cx-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16.5h14M6.5 16.5V19M17.5 16.5V19M4.5 16.5v-4l2-5h11l2 5v4M4.5 12.5h15M8 14.5h.01M16 14.5h.01"/></svg><b>Estacionamiento gratis</b><span>frente a la clínica</span></div></section>
-<section class="cx-stats"><div><b>15+</b><span>años en Providencia</span></div><div><b>4.9</b><span>de calificación en Google</span></div><div><b>3</b><span>especialistas con cédula</span></div><div><b>Hoy</b><span>atendemos urgencias</span></div></section>
-<section class="cx-today cx-sec"><div class="cx-today-copy"><h2>Te atendemos hoy mismo</h2><p>Si tienes dolor, se te rompió un diente o se cayó una corona, te hacemos un espacio el mismo día.</p><dl class="cx-hours"><dt>Lunes a viernes</dt><dd>9:00 a 20:00</dd><dt>Sábados</dt><dd>9:00 a 14:00</dd><dt>Estacionamiento</dt><dd>Gratis, frente a la clínica</dd></dl></div>
-    <div class="cx-panel"><ul class="cx-checks"><li><svg class="cx-ico-c" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6L13 3Z"/></svg><span>Urgencias el mismo día, en horario de la clínica</span></li><li><svg class="cx-ico-c" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z"/></svg><span>Fuera de horario te respondemos por WhatsApp para apartar tu cita</span></li><li><svg class="cx-ico-c" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5c1.6-.9 3.1.2 5 .2s3.4-1.1 5-.2c2.4 1.4 2.3 5 1.2 8-.9 2.4-1.1 8.5-3 8.5-1.6 0-1.4-5.2-3.2-5.2S10.6 20 9 20c-1.9 0-2.1-6.1-3-8.5C4.9 8.5 4.6 4.9 7 3.5Z"/></svg><span>Valoración sin costo con radiografía</span></li><li><svg class="cx-ico-c" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3zM3 10h18M7 14.5h4"/></svg><span>Hasta 6 meses sin intereses con tarjetas participantes</span></li></ul><span class="cx-btn">Agenda tu cita</span></div></section>
-<section class="cx-services cx-sec" data-sec="services"><div class="cx-head"><div><h2>Nuestros tratamientos</h2><p>Los más pedidos en la clínica. Te confirmamos el precio en tu valoración.</p></div><div class="cx-car-nav"><button type="button" data-cx-car="prev" aria-label="Anterior"><svg class="cx-ico-s cx-flip" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><button type="button" data-cx-car="next" aria-label="Siguiente"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div>
-    <ul class="cx-car" tabindex="0" aria-label="Nuestros tratamientos, desliza para ver más"><li class="cx-card"><div class="cx-card-img" role="img" aria-label="La dentista le muestra una radiografía a una paciente" style="background-image:url('/img/t-valoracion.jpg')"></div><div class="cx-card-body"><div class="cx-card-t"><b>Valoración dental</b><i>Sin costo</i></div><p>Revisamos dientes y encías, y te tomamos radiografía. Sales con tu presupuesto.</p><span class="cx-link">Agendar<svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></li><li class="cx-card"><div class="cx-card-img" role="img" aria-label="Limpieza dental a una paciente" style="background-image:url('/img/t-limpieza.jpg')"></div><div class="cx-card-body"><div class="cx-card-t"><b>Limpieza dental</b><i>$700</i></div><p>Retira el sarro y la placa que no quita el cepillado. Se recomienda 2 veces al año.</p><span class="cx-link">Agendar<svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></li><li class="cx-card"><div class="cx-card-img" role="img" aria-label="Paciente con un alineador transparente" style="background-image:url('/img/t-alineadores.jpg')"></div><div class="cx-card-body"><div class="cx-card-t"><b>Alineadores transparentes</b><i>Valoración sin costo</i></div><p>Casi no se notan y te los puedes quitar para comer.</p><span class="cx-link">Agendar<svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></li><li class="cx-card"><div class="cx-card-img" role="img" aria-label="Paciente sonriendo después de su tratamiento" style="background-image:url('/img/t-implantes.jpg')"></div><div class="cx-card-body"><div class="cx-card-t"><b>Implantes dentales</b><i>Desde $14,500</i></div><p>Reemplaza el diente que te falta con una pieza fija.</p><span class="cx-link">Agendar<svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></li><li class="cx-card"><div class="cx-card-img" role="img" aria-label="Paciente con una sonrisa blanca" style="background-image:url('/img/t-blanqueamiento.jpg')"></div><div class="cx-card-body"><div class="cx-card-t"><b>Blanqueamiento</b><i>$3,800</i></div><p>Dientes más blancos en dos sesiones.</p><span class="cx-link">Agendar<svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></li><li class="cx-card"><div class="cx-card-img" role="img" aria-label="La dentista atiende a un paciente con dolor de muela" style="background-image:url('/img/t-urgencias.jpg')"></div><div class="cx-card-body"><div class="cx-card-t"><b>Urgencias</b><i>Hoy mismo</i></div><p>¿Dolor, golpe o un diente roto? Llámanos y te hacemos un espacio.</p><span class="cx-link">Llamar<svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></li></ul>
-    <div class="cx-pills"><span>También atendemos:</span><em>Resinas</em><em>Endodoncia</em><em>Coronas de zirconia</em><em>Periodoncia</em><em>Odontopediatría</em><em>Extracción de muelas del juicio</em><em>Guardas para bruxismo</em></div>
-    <p class="cx-note">*Los precios pueden cambiar según tu caso y te los confirmamos en tu valoración. Aceptamos efectivo, tarjetas de débito y crédito.</p></section>
-<section class="cx-prices cx-sec"><div class="cx-prices-in"><div class="cx-prices-copy"><h2>Precios claros, sin sorpresas</h2><p>Precios de referencia. Te confirmamos el tuyo en tu valoración, antes de empezar.</p><span class="cx-btn">Agenda tu cita</span></div><ul><li><span>Valoración dental</span><i aria-hidden="true"></i><b>Sin costo</b></li><li><span>Limpieza dental</span><i aria-hidden="true"></i><b>$700</b></li><li><span>Alineadores transparentes</span><i aria-hidden="true"></i><b>Valoración sin costo</b></li><li><span>Implantes dentales</span><i aria-hidden="true"></i><b>Desde $14,500</b></li><li><span>Blanqueamiento</span><i aria-hidden="true"></i><b>$3,800</b></li><li><span>Urgencias</span><i aria-hidden="true"></i><b>Hoy mismo</b></li></ul></div></section>
-<section class="cx-finder cx-sec"><div class="cx-panel cx-finder-in"><div><h2>¿Qué necesitas?</h2><p>Elige una opción y te decimos cómo empezar.</p></div>
-    <div class="cx-finder-opts" role="radiogroup" aria-label="Servicio"><button type="button" role="radio" aria-checked="true" data-cx-pick="0">Valoración dental</button><button type="button" role="radio" aria-checked="false" data-cx-pick="1">Limpieza dental</button><button type="button" role="radio" aria-checked="false" data-cx-pick="2">Alineadores transparentes</button><button type="button" role="radio" aria-checked="false" data-cx-pick="3">Implantes dentales</button><button type="button" role="radio" aria-checked="false" data-cx-pick="4">Blanqueamiento</button><button type="button" role="radio" aria-checked="false" data-cx-pick="5">Urgencias</button></div>
-    <div class="cx-finder-out" aria-live="polite"><div data-cx-res="0"><b>Valoración dental</b><i>Sin costo</i><p>Revisamos dientes y encías, y te tomamos radiografía. Sales con tu presupuesto.</p><span class="cx-btn"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Quiero agendar</span></div><div data-cx-res="1" hidden><b>Limpieza dental</b><i>$700</i><p>Retira el sarro y la placa que no quita el cepillado. Se recomienda 2 veces al año.</p><span class="cx-btn"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Quiero agendar</span></div><div data-cx-res="2" hidden><b>Alineadores transparentes</b><i>Valoración sin costo</i><p>Casi no se notan y te los puedes quitar para comer.</p><span class="cx-btn"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Quiero agendar</span></div><div data-cx-res="3" hidden><b>Implantes dentales</b><i>Desde $14,500</i><p>Reemplaza el diente que te falta con una pieza fija.</p><span class="cx-btn"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Quiero agendar</span></div><div data-cx-res="4" hidden><b>Blanqueamiento</b><i>$3,800</i><p>Dientes más blancos en dos sesiones.</p><span class="cx-btn"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Quiero agendar</span></div><div data-cx-res="5" hidden><b>Urgencias</b><i>Hoy mismo</i><p>¿Dolor, golpe o un diente roto? Llámanos y te hacemos un espacio.</p><span class="cx-btn"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Quiero agendar</span></div></div></div></section>
-<section class="cx-offers cx-sec"><div class="cx-head"><div><h2>Paquetes para empezar</h2><p>Precios cerrados, sin letras chiquitas.</p></div></div><div class="cx-offer-list"><div class="cx-offer"><em>Para empezar</em><b>Revisión completa</b><p>Valoración, radiografía digital y presupuesto por escrito.</p><div class="cx-offer-p"><strong>Sin costo</strong></div><span class="cx-btn cx-btn--line">Lo quiero</span></div><div class="cx-offer cx-offer--hl"><em>El más pedido</em><b>Limpieza + blanqueamiento</b><p>Limpieza profunda y blanqueamiento en consultorio en dos sesiones.</p><div class="cx-offer-p"><s>$4,500</s><strong>$3,990</strong></div><span class="cx-btn">Lo quiero</span></div><div class="cx-offer"><b>Plan familiar de limpieza</b><p>Limpieza para 4 integrantes. Ideal para regreso a clases.</p><div class="cx-offer-p"><strong>$2,400</strong></div><span class="cx-btn cx-btn--line">Lo quiero</span></div></div><p class="cx-note">Precios de ejemplo para el concepto.</p></section>
-<section class="cx-ai cx-sec" data-sec="chat"><div class="cx-ai-in"><div class="cx-ai-copy"><span class="cx-kicker"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5c.6 4 2.4 6 6.5 6.5-4.1.6-5.9 2.5-6.5 6.5-.6-4-2.4-5.9-6.5-6.5 4.1-.5 5.9-2.5 6.5-6.5ZM18.5 15.5c.3 1.6 1 2.3 2.5 2.5-1.5.3-2.2 1-2.5 2.5-.3-1.5-1-2.2-2.5-2.5 1.5-.2 2.2-.9 2.5-2.5Z"/></svg>Asistente con IA</span><h2>Resuelve tus dudas y aparta tu cita, a cualquier hora</h2><p>Nuestro asistente responde al momento con precios, horarios y ubicación, y aparta tu cita. Si tu caso necesita a la doctora, te pasa con recepción por WhatsApp.</p>
-      <ul class="cx-checks"><li><svg class="cx-ico-c" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17.5 19.5 7"/></svg><span>Precios, horarios y ubicación al momento</span></li><li><svg class="cx-ico-c" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17.5 19.5 7"/></svg><span>Aparta tu cita sin esperar respuesta</span></li><li><svg class="cx-ico-c" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17.5 19.5 7"/></svg><span>Atiende de noche y en fin de semana</span></li><li><svg class="cx-ico-c" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17.5 19.5 7"/></svg><span>Te pasa con recepción cuando lo necesitas</span></li></ul>
-      <p class="cx-ai-try"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z"/></svg>Pruébalo: escribe una pregunta en el chat.</p></div>
-    <div class="cx-phone"><div class="cx-phone-top"><span class="cx-avatar" aria-hidden="true"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5c.6 4 2.4 6 6.5 6.5-4.1.6-5.9 2.5-6.5 6.5-.6-4-2.4-5.9-6.5-6.5 4.1-.5 5.9-2.5 6.5-6.5ZM18.5 15.5c.3 1.6 1 2.3 2.5 2.5-1.5.3-2.2 1-2.5 2.5-.3-1.5-1-2.2-2.5-2.5 1.5-.2 2.2-.9 2.5-2.5Z"/></svg></span><div><b>Clínica Arrayán</b><small>Asistente · responde al momento</small></div></div>
-      <div class="cx-phone-log" data-cx-log aria-live="polite"></div>
-      <form class="cx-ask" data-cx-ask inert><input name="q" placeholder="Escribe tu pregunta…" autocomplete="off" aria-label="Escribe tu pregunta al asistente"><button type="submit" aria-label="Enviar"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form></div></div></section>
-<section class="cx-process cx-sec"><div class="cx-head"><div><h2>Cómo es tu primera visita</h2><p>Sin sorpresas: sabes qué tienes y cuánto cuesta antes de empezar.</p></div></div><ol><li><span class="cx-num">1</span><b>Valoración</b><p>Revisamos dientes y encías y te tomamos radiografía digital. Dura unos 40 minutos.</p></li><li><span class="cx-num">2</span><b>Plan por escrito</b><p>Te explicamos tus opciones y te damos tu presupuesto por etapas.</p></li><li><span class="cx-num">3</span><b>Tratamiento a tu ritmo</b><p>Avanzas por etapas, según tu tiempo y tu presupuesto, con meses sin intereses.</p></li><li><span class="cx-num">4</span><b>Seguimiento</b><p>Te recordamos tus citas de control por WhatsApp.</p></li></ol></section>
-<section class="cx-team cx-sec" data-sec="team"><div class="cx-head"><div><h2>Quién te atiende</h2><p>Cada tratamiento lo hace un especialista con cédula, no pasantes. La clínica la dirige la Dra. Valeria Ríos, especialista en rehabilitación oral, con más de 15 años en Providencia.</p></div></div>
-    <ul class="cx-people"><li><div class="cx-person-img" role="img" aria-label="Dra. Valeria Ríos" style="background-image:url('/img/doc.jpg')"></div><div class="cx-person-t"><b>Dra. Valeria Ríos</b><span>Rehabilitación oral · Directora</span><small>Cédula 4512378</small></div></li><li><div class="cx-person-img" role="img" aria-label="Dr. Andrés Medina" style="background-image:url('/img/team-ortodoncia.jpg')"></div><div class="cx-person-t"><b>Dr. Andrés Medina</b><span>Ortodoncia y alineadores</span><small>Cédula 6639012</small></div></li><li><div class="cx-person-img" role="img" aria-label="Dra. Paola Núñez" style="background-image:url('/img/team-pediatria.jpg')"></div><div class="cx-person-t"><b>Dra. Paola Núñez</b><span>Odontopediatría</span><small>Cédula 8120457</small></div></li></ul>
-    <p class="cx-note">Personas ficticias del ejemplo</p></section>
-<section class="cx-tech cx-sec"><div class="cx-tech-in"><div class="cx-tech-img" role="img" aria-label="Radiografía digital en pantalla" style="background-image:url('/img/t-valoracion.jpg')"></div><div class="cx-tech-copy"><h2>Tecnología que se nota en tu tratamiento</h2><p>Equipo digital para que veas lo que tienes, entiendas tus opciones y tu tratamiento dure menos.</p><div class="cx-tech-grid"><div><svg class="cx-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16M4 12h16"/></svg><b>Radiografía digital</b><span>Menos radiación y la ves en pantalla al momento.</span></div><div><svg class="cx-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5c.6 4 2.4 6 6.5 6.5-4.1.6-5.9 2.5-6.5 6.5-.6-4-2.4-5.9-6.5-6.5 4.1-.5 5.9-2.5 6.5-6.5ZM18.5 15.5c.3 1.6 1 2.3 2.5 2.5-1.5.3-2.2 1-2.5 2.5-.3-1.5-1-2.2-2.5-2.5 1.5-.2 2.2-.9 2.5-2.5Z"/></svg><b>Escáner intraoral</b><span>Adiós a las pastas: tomamos la impresión de tus dientes en 3D.</span></div><div><svg class="cx-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.5 3.2 8 7.5 9.5 4.3-1.5 7.5-5 7.5-9.5V6L12 3ZM9 12l2 2 4-4"/></svg><b>Esterilización certificada</b><span>Instrumental esterilizado y sellado para cada paciente.</span></div><div><svg class="cx-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7a4.3 4.3 0 0 1 7.5 2.8C19.5 15.4 12 20 12 20Z"/></svg><b>Anestesia sin dolor</b><span>Anestesia tópica y aplicación lenta para que no duela.</span></div></div></div></div></section>
-<section class="cx-gallery cx-sec"><div class="cx-head"><div><h2>Conoce la clínica</h2><p>Consultorios con luz natural, equipo digital y una sala de espera tranquila en Providencia.</p></div></div><div class="cx-mosaic"><div class="cx-tile cx-tile--0" role="img" aria-label="Consultorio" style="background-image:url('/img/room.jpg')"></div><div class="cx-tile cx-tile--1" role="img" aria-label="Revisión de radiografía" style="background-image:url('/img/t-valoracion.jpg')"></div><div class="cx-tile cx-tile--2" role="img" aria-label="Recepción" style="background-image:url('/img/reception.jpg')"></div><div class="cx-tile cx-tile--3" role="img" aria-label="Limpieza dental" style="background-image:url('/img/t-limpieza.jpg')"></div><div class="cx-tile cx-tile--4" role="img" aria-label="Fachada de la clínica" style="background-image:url('/img/facade.jpg')"></div><div class="cx-tile cx-tile--5" role="img" aria-label="Consulta con la doctora" style="background-image:url('/img/desk.jpg')"></div></div></section>
-<section class="cx-reviews cx-sec" data-sec="reviews"><div class="cx-head"><div><h2>Lo que dicen nuestros pacientes</h2><p class="cx-rating"><span class="cx-stars" aria-hidden="true">★★★★★</span><b>4.9</b><span>186 reseñas en Google</span></p></div></div>
-    <div class="cx-rev-list"><figure class="cx-rev"><span class="cx-stars" aria-label="5 de 5">★★★★★</span><blockquote>Muy buena atención, la doctora Valeria me explicó todo el tratamiento con calma y el precio desde el principio. Súper recomendable 👍</blockquote><figcaption><span class="cx-avatar" aria-hidden="true">M</span><b>Mariana G.</b><small>Alineadores, hace 2 semanas</small></figcaption></figure><figure class="cx-rev"><span class="cx-stars" aria-label="5 de 5">★★★★★</span><blockquote>Fui por una urgencia un sábado, no tenía cita pero me hicieron un espacio y ese mismo día se me quitó el dolor. Gracias!!</blockquote><figcaption><span class="cx-avatar" aria-hidden="true">J</span><b>Jorge R.</b><small>Urgencia, hace 1 mes</small></figcaption></figure><figure class="cx-rev"><span class="cx-stars" aria-label="5 de 5">★★★★★</span><blockquote>Llevo a mis hijos desde hace años, siempre son puntuales y el consultorio está muy limpio.</blockquote><figcaption><span class="cx-avatar" aria-hidden="true">L</span><b>Lucía M.</b><small>Limpieza, hace 3 meses</small></figcaption></figure></div>
-    <p class="cx-note">Reseñas de ejemplo para el concepto</p></section>
-<section class="cx-pay cx-sec"><div class="cx-pay-in"><div><h2>Paga como te acomode</h2><p>Hasta 6 meses sin intereses en tratamientos mayores a $1,200.</p></div><div class="cx-pay-lists"><div class="cx-chips"><span><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3zM3 10h18M7 14.5h4"/></svg>Efectivo</span><span><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3zM3 10h18M7 14.5h4"/></svg>Visa y Mastercard</span><span><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3zM3 10h18M7 14.5h4"/></svg>American Express</span><span><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3zM3 10h18M7 14.5h4"/></svg>Transferencia</span><span><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3zM3 10h18M7 14.5h4"/></svg>3 y 6 MSI</span></div><p class="cx-pay-l">Aseguradoras</p><div class="cx-chips"><span><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.5 3.2 8 7.5 9.5 4.3-1.5 7.5-5 7.5-9.5V6L12 3ZM9 12l2 2 4-4"/></svg>GNP</span><span><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.5 3.2 8 7.5 9.5 4.3-1.5 7.5-5 7.5-9.5V6L12 3ZM9 12l2 2 4-4"/></svg>AXA</span><span><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.5 3.2 8 7.5 9.5 4.3-1.5 7.5-5 7.5-9.5V6L12 3ZM9 12l2 2 4-4"/></svg>MetLife</span></div></div></div></section>
-<section class="cx-faq cx-sec"><div class="cx-head"><div><h2>Preguntas frecuentes</h2></div></div><div class="cx-faq-list"><details open><summary>¿Cuánto cuesta la primera cita?<span aria-hidden="true"></span></summary><p>La valoración es sin costo e incluye radiografía. Sales con tu diagnóstico y tu presupuesto por escrito.</p></details><details><summary>¿Atienden urgencias?<span aria-hidden="true"></span></summary><p>Sí, el mismo día en horario de la clínica: dolor fuerte, infección, diente roto o corona caída.</p></details><details><summary>¿Puedo pagar a meses sin intereses?<span aria-hidden="true"></span></summary><p>Sí, hasta 6 MSI con tarjetas participantes en tratamientos mayores a $1,200.</p></details><details><summary>¿Atienden niños?<span aria-hidden="true"></span></summary><p>Sí, la Dra. Paola Núñez es odontopediatra y atiende desde los 2 años.</p></details><details><summary>¿Hay estacionamiento?<span aria-hidden="true"></span></summary><p>Sí, gratis y frente a la clínica.</p></details></div></section>
-<section class="cx-visit cx-sec" data-sec="visit"><div class="cx-visit-card"><div class="cx-visit-img" role="img" aria-label="Fachada de la clínica" style="background-image:url('/img/facade.jpg')"></div><div class="cx-visit-info"><h2>Visítanos</h2>
-      <p class="cx-addr"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/></svg>Av. Los Arrayanes 1240, local 3, Col. Providencia, Guadalajara</p><p class="cx-zones">Nos visitan de Providencia, Colomos, Chapalita, Zapopan centro y Country Club.</p>
-      <dl class="cx-hours"><dt>Lunes a viernes</dt><dd>9:00 a 20:00</dd><dt>Sábados</dt><dd>9:00 a 14:00</dd><dt>Estacionamiento</dt><dd>Gratis, frente a la clínica</dd></dl>
-      <div class="cx-ctas"><span class="cx-btn"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/></svg>Abrir en Google Maps</span><span class="cx-btn cx-btn--ghost"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>WhatsApp</span></div></div></div>
-    </section>
-<section class="cx-book cx-sec"><div class="cx-panel cx-book-in"><div class="cx-book-copy"><h2>Agenda tu cita</h2><p>Déjanos tus datos y te confirmamos por WhatsApp.</p></div>
-    <form class="cx-form" data-cx-form inert><label><span>Nombre</span><input name="n" autocomplete="name" required></label><label><span>Teléfono</span><input name="t" type="tel" autocomplete="tel" inputmode="tel"></label>
-      <label class="cx-wide"><span>¿Qué necesitas?</span><select name="s"><option value="">Elige una opción</option><option>Valoración dental</option><option>Limpieza dental</option><option>Alineadores transparentes</option><option>Implantes dentales</option><option>Blanqueamiento</option><option>Urgencias</option><option>Otro</option></select></label>
-      <label><span>Día que prefieres</span><input name="d" placeholder="Ej.: martes en la tarde"></label><label><span>Comentarios</span><input name="m"></label>
-      <button class="cx-btn cx-btn--lg cx-wide" type="submit"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Enviar y agendar</button><small class="cx-wide">Al enviar aceptas nuestro aviso de privacidad.</small></form></div></section>
-<footer class="cx-foot"><div class="cx-foot-cols"><div><span class="cx-foot-logo"><img src="/img/arrayan-logo.svg" alt="Clínica Dental Arrayán"></span><p>Av. Los Arrayanes 1240, local 3, Col. Providencia, Guadalajara</p></div>
-      <div><b>Servicios</b><span>Valoración dental</span><span>Limpieza dental</span><span>Alineadores transparentes</span><span>Implantes dentales</span><span>Blanqueamiento</span><span>Urgencias</span></div>
-      <div><b>Contacto</b><span class="">33 0000 0000</span><span class="">WhatsApp</span><span class="">hola@clinicaarrayan.mx</span><span>Lunes a viernes: 9:00 a 20:00</span><span>Sábados: 9:00 a 14:00</span></div></div>
-    <div class="cx-foot-legal"><span>© 2026 Clínica Dental Arrayán</span><span>Aviso de privacidad</span><span>Aviso COFEPRIS 2514XXXXX (ejemplo)</span><span>Responsable sanitario: Dra. Valeria Ríos, cédula 4512378</span><span>Ejemplo de rediseño de Ceiba Labs</span></div></footer>
-<div class="cx-fab"><div class="cx-chat" role="region" aria-label="Chat de Clínica Dental Arrayán"><div class="cx-chat-top"><div><b>Clínica Arrayán</b><span>Te respondemos aquí o por WhatsApp</span></div><button type="button" data-cx-chat="toggle" aria-label="Cerrar chat">×</button></div>
-      <div class="cx-chat-log"><p class="cx-msg">Hola 👋 ¿En qué te podemos ayudar?</p></div>
-      <div class="cx-chat-sug"><button type="button" data-cx-q data-a="Sí, atendemos urgencias el mismo día. Escríbenos por WhatsApp o llámanos y te hacemos un espacio lo antes posible." data-act="wa">¿Atienden urgencias hoy?</button><button type="button" data-cx-q data-a="Es sin costo 😊 Revisamos tus dientes y encías, te tomamos radiografía y te damos tu presupuesto. ¿Te agendo?" data-act="book">¿Cuánto cuesta la valoración?</button><button type="button" data-cx-q data-a="Sí, hasta 6 MSI con tarjetas participantes en tratamientos mayores a $1,200." data-act="wa">¿Tienen meses sin intereses?</button></div>
-      <form class="cx-ask cx-ask--chat" data-cx-ask inert><input name="q" placeholder="Escribe tu pregunta…" autocomplete="off" aria-label="Escribe tu pregunta"><button type="submit" aria-label="Enviar"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form></div>
-    
-    <button type="button" class="cx-chat-btn" data-cx-chat="toggle" aria-expanded="false" aria-label="¿Dudas? Pregúntanos"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z"/></svg><span class="cx-chat-l">¿Dudas? Pregúntanos</span></button>
-    <span class="cx-wa-fab" aria-label="WhatsApp"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg></span></div>
-  <div class="cx-sticky"><span class="cx-btn">Agenda tu cita</span><span class="cx-btn cx-btn--ghost"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>WhatsApp</span></div>
-<script type="application/json" class="cx-kb">{"name":"Clínica Dental Arrayán","wa":"523300000000","book":"","maps":"","address":"Av. Los Arrayanes 1240, local 3, Col. Providencia, Guadalajara","hours":[["Lunes a viernes","9:00 a 20:00"],["Sábados","9:00 a 14:00"],["Estacionamiento","Gratis, frente a la clínica"]],"slots":["Hoy 18:30","Mañana 10:00","Mañana 12:30"],"faq":[["¿Cuánto cuesta la primera cita?","La valoración es sin costo e incluye radiografía. Sales con tu diagnóstico y tu presupuesto por escrito."],["¿Atienden urgencias?","Sí, el mismo día en horario de la clínica: dolor fuerte, infección, diente roto o corona caída."],["¿Puedo pagar a meses sin intereses?","Sí, hasta 6 MSI con tarjetas participantes en tratamientos mayores a $1,200."],["¿Atienden niños?","Sí, la Dra. Paola Núñez es odontopediatra y atiende desde los 2 años."],["¿Hay estacionamiento?","Sí, gratis y frente a la clínica."],["¿Atienden urgencias hoy?","Sí, atendemos urgencias el mismo día. Escríbenos por WhatsApp o llámanos y te hacemos un espacio lo antes posible."],["¿Cuánto cuesta la valoración?","Es sin costo 😊 Revisamos tus dientes y encías, te tomamos radiografía y te damos tu presupuesto. ¿Te agendo?"],["¿Tienen meses sin intereses?","Sí, hasta 6 MSI con tarjetas participantes en tratamientos mayores a $1,200."]],"services":[["Valoración dental","Sin costo","Revisamos dientes y encías, y te tomamos radiografía. Sales con tu presupuesto."],["Limpieza dental","$700","Retira el sarro y la placa que no quita el cepillado. Se recomienda 2 veces al año."],["Alineadores transparentes","Valoración sin costo","Casi no se notan y te los puedes quitar para comer."],["Implantes dentales","Desde $14,500","Reemplaza el diente que te falta con una pieza fija."],["Blanqueamiento","$3,800","Dientes más blancos en dos sesiones."],["Urgencias","Hoy mismo","¿Dolor, golpe o un diente roto? Llámanos y te hacemos un espacio."]],"more":["Resinas","Endodoncia","Coronas de zirconia","Periodoncia","Odontopediatría","Extracción de muelas del juicio","Guardas para bruxismo"],"pay":["Efectivo","Visa y Mastercard","American Express","Transferencia","3 y 6 MSI","GNP","AXA","MetLife"],"today":["Urgencias el mismo día, en horario de la clínica","Fuera de horario te respondemos por WhatsApp para apartar tu cita","Valoración sin costo con radiografía","Hasta 6 meses sin intereses con tarjetas participantes"]}</script>
-</div></div></div></div>
-      <div class="ix-card ix-toast ix-in d4" aria-hidden="true"><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0B1514" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h16v13H4zM4 10h16M8.5 3.5v4M15.5 3.5v4"/></svg></span><div><b>Solicitud de cita</b><small>Lista para confirmar · Limpieza, mañana 10:00</small></div></div>
-      <div class="ix-card ix-prop ix-in d4" aria-hidden="true"><span>✦ Asistente de IA</span><b>«¿Qué dentista me recomiendas?»</b><div class="bar"><i></i></div><small class="ix-prop-a">1. Clínica Dental Arrayán · ★ 4.9</small></div>
-      <div class="ix-card ix-chat ix-in d3" aria-hidden="true">
-        <div class="ix-chat-top"><svg viewBox="0 0 24 24"><use href="#wa"/></svg><div><b>Clínica Arrayán</b><small>Asistente · responde al momento</small></div></div>
-        <div class="ix-chat-log" id="ix-chat-log"></div>
+    <div class="ix-stage" id="ix-stage" aria-label="Ejemplo: lo que implementamos funcionando en un negocio: página web, WhatsApp, agentes de IA y datos">
+      <div class="hx-panel ix-in d2" aria-hidden="true">
+        <div class="hx-top"><span class="hx-dots"><i></i><i></i><i></i></span><b>Tu negocio, funcionando</b><small><span class="hx-live"></span>en vivo</small></div>
+        <div class="hx-tabs" id="hx-tabs"><span class="on">Página web<i></i></span><span>WhatsApp<i></i></span><span>Agentes de IA<i></i></span><span>Datos<i></i></span></div>
+        <div class="hx-panes" id="hx-panes">
+          <div class="hx-pane on" data-k="web">
+            <div class="hx-site">
+              <div class="hx-site-bar"><b>Tu negocio</b><span></span><span></span><span></span><em>Contacto</em></div>
+              <div class="hx-site-hero"><i class="t1"></i><i class="t2"></i><i class="t3"></i><em id="hx-cta">Agenda tu cita</em></div>
+              <div class="hx-site-cards"><i></i><i></i><i></i></div>
+            </div>
+            <div class="hx-side">
+              <div class="hx-stat"><span>Te encontraron en Google</span><b data-to="1240">0</b></div>
+              <div class="hx-stat"><span>Solicitudes este mes</span><b data-to="86">0</b></div>
+              <div class="hx-stat ok"><span>Lista para la IA</span><b>100<small>/100</small></b></div>
+            </div>
+          </div>
+          <div class="hx-pane" data-k="wa">
+            <div class="hx-chat" id="hx-chat"></div>
+            <div class="hx-req" id="hx-req"><span>Para tu equipo</span><b>Reserva lista</b><dl><dt>Cuándo</dt><dd>Sábado 8:00 p. m.</dd><dt>Personas</dt><dd>12 · terraza</dd><dt>Nombre</dt><dd>Andrea R.</dd></dl><em>Confirmar</em></div>
+          </div>
+          <div class="hx-pane" data-k="agents">
+            <div class="hx-agents" id="hx-agents">
+              <div><span class="ic">↗</span><p><b>Prospección</b><small>Busca clientes nuevos y les escribe</small></p><em data-to="21" data-u="correos">—</em></div>
+              <div><span class="ic">≡</span><p><b>Facturas</b><small>Revisa cada línea contra la compra</small></p><em data-to="34" data-u="revisadas">—</em></div>
+              <div><span class="ic">▣</span><p><b>Pedidos</b><small>Captura lo que llega por WhatsApp</small></p><em data-to="8" data-u="capturados">—</em></div>
+              <div><span class="ic">↻</span><p><b>Seguimiento</b><small>Recuerda a quien no ha respondido</small></p><em data-to="12" data-u="enviados">—</em></div>
+            </div>
+            <div class="hx-ask" id="hx-ask"><b>1 decisión para ti</b><span>Precio fuera de rango en una factura</span><i>Revisar</i></div>
+          </div>
+          <div class="hx-pane" data-k="data">
+            <div class="hx-kpis"><div><span>Ventas de ayer</span><b>+18%</b></div><div><span>Ticket promedio</span><b>+6%</b></div><div><span>Clientes nuevos</span><b>14</b></div></div>
+            <div class="hx-bars" id="hx-bars"><i style="--h:38%"></i><i style="--h:52%"></i><i style="--h:44%"></i><i style="--h:61%"></i><i style="--h:57%"></i><i style="--h:74%"></i><i style="--h:92%" class="hi"></i></div>
+            <div class="hx-insight"><span>✦</span><p>El sábado subió 18%, sobre todo por la tarde. Conviene reforzar ese turno.</p></div>
+          </div>
+        </div>
       </div>
+      <div class="hx-toast hx-toast--a ix-in d3" id="hx-toast-a" aria-hidden="true"><span class="ic">✓</span><div><b>Nuevo cliente desde Google</b><small>Inmobiliaria · pidió una visita</small></div></div>
+      <div class="hx-toast hx-toast--b ix-in d4" id="hx-toast-b" aria-hidden="true"><span class="ic">✓</span><div><b>Factura conciliada</b><small>Contabilidad · sin intervención</small></div></div>
     </div>
   </div>
 </section>
@@ -1597,22 +1648,53 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     });
   }
 
-  /* ---------- chat del hero que se repite ---------- */
-  const log = document.getElementById('ix-chat-log');
-  const chat = [['me', 'Hola, ¿tienen cita mañana para limpieza?'], ['bot', 'Sí 😊 Mañana a las 10:00 o a las 12:30. ¿Cuál te aparto?'], ['me', '10:00 porfa'], ['bot', 'Listo, quedó apartada.<small>Limpieza · mañana 10:00</small>']];
+  /* ---------- hero: el panel recorre lo que implementamos ---------- */
   const wait = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
-  const toast = document.querySelector('.ix-toast');
-  (async function play() {
-    while (true) {
-      log.innerHTML = ''; toast.classList.remove('pop');
-      await wait(900);
-      for (const [who, txt] of chat) {
-        if (who === 'bot') { const d = document.createElement('span'); d.className = 'ix-dots'; d.innerHTML = '<i></i><i></i><i></i>'; log.appendChild(d); await wait(1000); d.remove(); } else await wait(1100);
-        log.insertAdjacentHTML('beforeend', `<p class="ix-msg${who === 'me' ? ' me' : ''}">${txt}</p>`);
+  const tabs = [...document.querySelectorAll('#hx-tabs span')], panes = [...document.querySelectorAll('#hx-panes .hx-pane')];
+  const DUR = 5200; document.getElementById('hx-panes').closest('.hx-panel').style.setProperty('--hx-dur', DUR + 'ms');
+  const countUp = (el, end, ms = 1100) => { if (reduce) { el.textContent = end.toLocaleString('en-US'); return; } const t = performance.now(); const f = n => { const p = Math.min(1, (n - t) / ms); el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))).toLocaleString('en-US'); if (p < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); };
+  const CTAS = ['Agenda tu cita', 'Pide tu cotización', 'Reserva tu mesa', 'Agenda una visita'];
+  let ctaI = 0;
+  const scenes = {
+    web: async () => {
+      document.querySelectorAll('.hx-stat b[data-to]').forEach(b => countUp(b, +b.dataset.to));
+      const cta = document.getElementById('hx-cta'); for (let i = 0; i < 2; i++) { await wait(1900); ctaI = (ctaI + 1) % CTAS.length; cta.textContent = CTAS[ctaI]; }
+    },
+    wa: async () => {
+      const chat = document.getElementById('hx-chat'), req = document.getElementById('hx-req');
+      chat.innerHTML = ''; req.classList.remove('on');
+      for (const [w, t] of [['me', '¿Tienen lugar para 12 personas el sábado?'], ['bot', 'Sí 🙌 Te aparto la terraza a las 8 p. m. ¿A nombre de quién?'], ['me', 'Andrea, gracias']]) {
+        await wait(w === 'bot' ? 900 : 700); chat.insertAdjacentHTML('beforeend', `<p class="${w === 'me' ? 'me' : ''}">${t}</p>`);
       }
-      void toast.offsetWidth; toast.classList.add('pop');
+      await wait(500); req.classList.add('on');
+    },
+    agents: async () => {
+      const rows = [...document.querySelectorAll('#hx-agents em')], ask = document.getElementById('hx-ask');
+      rows.forEach(e => { e.textContent = 'trabajando…'; e.classList.remove('done'); }); ask.classList.remove('on');
+      for (const e of rows) { await wait(650); e.textContent = `${e.dataset.to} ${e.dataset.u} ✓`; e.classList.add('done'); }
+      await wait(400); ask.classList.add('on');
+    },
+    data: async () => {},
+  };
+  const TOASTS = [
+    ['Nuevo cliente desde Google', 'Inmobiliaria · pidió una visita'], ['Pedido #1042 recibido', 'Tienda · por WhatsApp'],
+    ['Cita confirmada', 'Clínica · mañana 10:00'], ['Factura conciliada', 'Contabilidad · sin intervención'],
+    ['Cotización enviada', 'Distribuidora · 3 días de seguimiento'], ['Reserva lista', 'Restaurante · sábado 8 p. m.'],
+  ];
+  const tA = document.getElementById('hx-toast-a'), tB = document.getElementById('hx-toast-b');
+  let ti = 0;
+  const swapToast = async el => { el.classList.add('swap'); await wait(400); const [b, sm] = TOASTS[ti++ % TOASTS.length]; el.querySelector('b').textContent = b; el.querySelector('small').textContent = sm; el.classList.remove('swap'); };
+  let heroOn = true;
+  new IntersectionObserver(([e]) => { heroOn = e.isIntersecting; }).observe(document.getElementById('ix-stage'));
+  (async function cycle() {
+    let i = 0;
+    while (true) {
+      tabs.forEach((t, k) => t.classList.toggle('on', k === i)); panes.forEach((p, k) => p.classList.toggle('on', k === i));
+      const started = performance.now();
+      if (heroOn) { swapToast(i % 2 ? tB : tA); await scenes[panes[i].dataset.k](); }
       if (reduce) return;
-      await wait(6000);
+      await wait(Math.max(400, DUR - (performance.now() - started)));
+      i = (i + 1) % panes.length;
     }
   })();
 

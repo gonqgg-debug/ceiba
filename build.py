@@ -128,16 +128,12 @@ def linkfix(html):
         html = html.replace(a, b)
     return html
 
-# La portada de clínicas de ejemplo, renderizada con la plantilla real (para Inicio)
-arrayan_mock = subprocess.run(["node", "--input-type=module", "-e",
-    "import d from './lib/demos/clinica-arrayan.js'; import { renderClinica } from './lib/templates/clinica.js';"
-    "process.stdout.write(renderClinica(d.page, { mode: 'mock' }))"], capture_output=True, text=True, cwd=ROOT, check=True).stdout
 head_tags = ('<link rel="icon" href="/favicon.svg" type="image/svg+xml">\n<link rel="icon" href="/favicon.ico" sizes="32x32">\n'
              '<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n<meta name="theme-color" content="#0B1514">')
 common = {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBOLS}}"], "{{HEAD_TAGS}}": head_tags}
 
 pages = {
-    "index.html": site_chrome(fill("inicio.html", {**common, "{{ARRAYAN}}": arrayan_mock}), "inicio"),
+    "index.html": site_chrome(fill("inicio.html", common), "inicio"),
     "webs.html": site_chrome(index, "webs", cta="#diagnostico", own_menu=True),
     "ia.html": site_chrome(fill("ia.html", common), "ia"),
     "webs-clinicas.html": site_chrome(fill("webs-clinicas.html", {**shared, **industry}), "clinicas", cta="#diagnostico", own_menu=True),
