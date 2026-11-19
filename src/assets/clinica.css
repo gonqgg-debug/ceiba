@@ -8,8 +8,9 @@
   font:400 clamp(10px,1.12cqi,16px)/1.55 var(--fb);color:var(--fg);background:var(--bg);position:relative;-webkit-font-smoothing:antialiased;text-align:left
 }
 .cx *,.cx *::before,.cx *::after{box-sizing:border-box}
-.cx h1,.cx h2,.cx h3{font-family:var(--fh);color:var(--fg);margin:0;text-wrap:balance;letter-spacing:-.02em}
-.cx p{margin:0}
+:where(.cx) :is(h1,h2,h3){margin:0}
+.cx h1,.cx h2,.cx h3{font-family:var(--fh);color:var(--fg);text-wrap:balance;letter-spacing:-.02em}
+:where(.cx) p{margin:0}
 .cx a{color:inherit;text-decoration:none}
 .cx button{font:inherit;color:inherit}
 .cx [hidden]{display:none!important}
@@ -42,14 +43,14 @@
 .cx-top-acts{display:flex;gap:.6em}
 
 /* hero */
-.cx-hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:3em;align-items:center;padding:4em var(--pad) 4.5em;max-width:84em;margin:0 auto}
-.cx-rating{display:inline-flex;align-items:center;gap:.5em;font-size:.92em;color:var(--muted);margin-bottom:1.2em;background:var(--soft);padding:.45em .9em;border-radius:999px}
+.cx-hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:4em;align-items:center;padding:5em var(--pad) 6em;max-width:84em;margin:0 auto}
+.cx-rating{display:inline-flex;align-items:center;gap:.5em;font-size:.92em;color:var(--muted);margin-bottom:1.6em;background:var(--soft);padding:.45em .9em;border-radius:999px}
 .cx-rating b{color:var(--fg)}
 .cx-stars{color:#F2A516;letter-spacing:.05em}
-.cx-hero h1{font-size:3.6em;line-height:1.02;font-weight:700;margin-bottom:.4em}
-.cx-lede{font-size:1.18em;color:var(--muted);max-width:32em;margin-bottom:1.8em}
-.cx-ctas{display:flex;flex-wrap:wrap;gap:.7em}
-.cx-call{margin-top:1.2em;color:var(--muted);font-size:.95em}
+.cx-hero h1{font-size:3.6em;line-height:1.04;font-weight:700;margin-bottom:.45em}
+.cx-lede{font-size:1.18em;line-height:1.6;color:var(--muted);max-width:32em;margin-bottom:2.4em}
+.cx-ctas{display:flex;flex-wrap:wrap;gap:.8em}
+.cx-call{margin-top:1.6em;color:var(--muted);font-size:.95em}
 .cx-call b{color:var(--fg)}
 .cx-hero-media{position:relative;min-width:0}
 .cx-hero-img{aspect-ratio:1/1.02;border-radius:46% 54% 42% 58% / 52% 44% 56% 48%;background:center 22%/cover no-repeat;box-shadow:0 0 0 1.2em var(--soft),0 0 0 2.4em color-mix(in srgb,var(--a) 4%,var(--bg))}
@@ -71,20 +72,20 @@
 .cx-benefit span{color:var(--muted);font-size:.92em}
 
 /* secciones */
-.cx-sec{padding:4.5em var(--pad);max-width:84em;margin:0 auto}
-.cx-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2em;margin-bottom:2em}
+.cx-sec{padding:5.5em var(--pad);max-width:84em;margin:0 auto}
+.cx-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2em;margin-bottom:2.6em}
 .cx-head h2,.cx-today h2,.cx-finder h2,.cx-book h2,.cx-visit h2{font-size:2.3em;line-height:1.08;font-weight:700}
-.cx-head p{color:var(--muted);margin-top:.6em;max-width:40em;font-size:1.05em}
+.cx-head p{color:var(--muted);margin-top:.9em;line-height:1.6;max-width:40em;font-size:1.05em}
 .cx-note{margin-top:1.4em;color:var(--muted);font-size:.88em}
 .cx-panel{background:var(--soft);border-radius:2em;padding:2.4em;position:relative}
 
 /* atención de hoy */
 .cx-today{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:3em;align-items:center}
-.cx-today-copy p{color:var(--muted);margin-top:.9em;font-size:1.05em;max-width:30em}
+.cx-today-copy p{color:var(--muted);margin-top:1.1em;line-height:1.6;font-size:1.05em;max-width:30em}
 .cx-hours{display:grid;grid-template-columns:auto 1fr;gap:.45em 1.4em;margin:1.4em 0 0}
 .cx-hours dt{color:var(--muted)}
 .cx-hours dd{margin:0;font-weight:600}
-.cx-checks{list-style:none;margin:0 0 1.6em;padding:0;display:grid;gap:1em}
+.cx-checks{list-style:none;margin:0 0 2em;padding:0;display:grid;gap:1.15em}
 .cx-checks li{display:flex;gap:.9em;align-items:center;font-weight:500}
 
 /* servicios */
@@ -263,7 +264,7 @@
 .cx-ai-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:3em;align-items:center;padding:3em;border-radius:2.2em;background:radial-gradient(120% 140% at 100% 0%,var(--tint),var(--soft) 55%,var(--bg))}
 .cx-kicker{display:inline-flex;align-items:center;gap:.45em;font-size:.82em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--a);background:var(--card);padding:.45em .85em;border-radius:999px;box-shadow:inset 0 0 0 1px var(--tint);margin-bottom:1em}
 .cx-ai h2{font-size:2.3em;line-height:1.08;font-weight:700}
-.cx-ai-copy > p{color:var(--muted);margin:.8em 0 1.6em;font-size:1.05em}
+.cx-ai-copy > p{color:var(--muted);line-height:1.6;margin:1em 0 2em;font-size:1.05em}
 .cx-ai-try{display:flex;align-items:center;gap:.5em;color:var(--a);font-weight:600;font-size:.95em;margin-top:-.4em}
 .cx-phone{background:var(--card);border-radius:1.8em;box-shadow:0 2em 4em -2em rgba(15,30,25,.45),0 0 0 1px var(--line);overflow:hidden;display:grid;grid-template-rows:auto 1fr auto;height:28em}
 .cx-phone-top{display:flex;align-items:center;gap:.8em;padding:1em 1.2em;border-bottom:1px solid var(--line)}
@@ -370,17 +371,17 @@
   .cx-top{padding:.85em var(--pad)}
   .cx-hide-s{display:none!important}
   .cx-top .cx-btn{height:2.6em;padding:0 1em;font-size:.9em}
-  .cx-hero{grid-template-columns:1fr;padding:1.6em var(--pad) 2.5em;gap:2.2em}
+  .cx-hero{grid-template-columns:1fr;padding:1.8em var(--pad) 3em;gap:2.4em}
   .cx-hero-media{order:-1;padding:0 1.2em}
   .cx-hero-img{aspect-ratio:1/.95;box-shadow:0 0 0 .7em var(--soft)}
   .cx-hero h1{font-size:2.25em}
-  .cx-lede{font-size:1.05em;margin-bottom:1.4em}
+  .cx-lede{font-size:1.05em;margin-bottom:1.8em}
   .cx-ctas .cx-btn{flex:1 1 100%}
   .cx-slots{left:0;bottom:-1em}
   .cx-rate-card{right:0;top:.5em}
   .cx-benefits{grid-template-columns:1fr 1fr;gap:.7em}
   .cx-benefit{padding:1.1em}
-  .cx-sec{padding:3em var(--pad)}
+  .cx-sec{padding:3.5em var(--pad)}
   .cx-head{flex-direction:column;align-items:flex-start;gap:1em;margin-bottom:1.4em}
   .cx-head h2,.cx-today h2,.cx-finder h2,.cx-book h2,.cx-visit h2{font-size:1.75em}
   .cx-today,.cx-finder-in,.cx-team-solo,.cx-visit-card,.cx-book-in{grid-template-columns:1fr}
