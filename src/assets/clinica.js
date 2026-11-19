@@ -168,7 +168,7 @@
     if (t) { t.hidden = true; t.closest('.cx-fab').querySelector('.cx-chat-btn')?.click(); }
   });
   // Saludo del chat flotante en la vista previa
-  setTimeout(() => document.querySelectorAll('.vista .cx-teaser').forEach(t => { if (!t.closest('.cx-fab').classList.contains('open')) t.hidden = false; }), 3500);
+  setTimeout(() => document.querySelectorAll('.vista .cx-teaser').forEach(t => { if (!t.closest('.cx-fab').classList.contains('open')) { t.hidden = false; setTimeout(() => { t.hidden = true; }, 7000); } }), 3500);
 
   bindCars(); bindDemos();
   new MutationObserver(() => { bindCars(); bindDemos(); }).observe(document.documentElement, { childList: true, subtree: true });
