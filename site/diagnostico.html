@@ -6,9 +6,9 @@
 <meta name="robots" content="noindex">
 <title>Revisión de tu página · Ceiba Labs</title>
 <meta name="description" content="Revisamos tu página en segundos: celular, WhatsApp, botón para agendar, velocidad y cómo te ve Google.">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="icon" href="favicon.ico" sizes="32x32">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="/apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0B1514">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +30,7 @@
   --gut:max(20px, env(safe-area-inset-left,0px));
   --gut-r:max(20px, env(safe-area-inset-right,0px));
   --max:1240px;
-  --photo-room:url("img/room.jpg");--photo-doc:url("img/doc.jpg");--photo-facade:url("img/facade.jpg");--photo-reception:url("img/reception.jpg");
+  --photo-room:url("/img/room.jpg");--photo-doc:url("/img/doc.jpg");--photo-facade:url("/img/facade.jpg");--photo-reception:url("/img/reception.jpg");
   --ease:cubic-bezier(.2,.7,.1,1);
   color-scheme:dark;
 }
@@ -167,7 +167,7 @@ button{font:inherit;color:inherit}
 .mo-logo b span{display:block;color:#1BA8C9;font-size:20px;letter-spacing:1px}
 .mo-head nav{display:flex;gap:16px;font:bold 11px Arial;color:#2b3a42;letter-spacing:.6px}
 .mo-head nav .on{color:#1BA8C9;border-bottom:2px solid #1BA8C9;padding-bottom:3px}
-.mo-slider{position:relative;height:250px;background:url(img/old-stock.jpg) 70% center/cover #f2f2f2}
+.mo-slider{position:relative;height:250px;background:url(/img/old-stock.jpg) 70% center/cover #f2f2f2}
 .mo-cap{position:absolute;left:40px;top:46px;width:330px;background:rgba(27,168,201,.88);color:#fff;padding:18px 20px}
 .mo-cap b{display:block;font:bold 20px/1.2 Arial;margin-bottom:8px}
 .mo-cap span{display:block;font-size:12px;margin-bottom:12px}
@@ -774,7 +774,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   <symbol id="lock" viewBox="0 0 12 12"><rect x="2" y="5" width="8" height="6" rx="1.5" fill="currentColor"/><path d="M4 5V3.6a2 2 0 0 1 4 0V5" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
 </svg>
 <header class="wrap dg-head">
-  <a href="index.html" aria-label="Ceiba Labs, ir a Inicio"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
+  <a href="/" aria-label="Ceiba Labs, ir a Inicio"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
   <a class="link" href="index.html#precios">Ver precios</a>
 </header>
 
@@ -819,7 +819,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     <div id="st-off" hidden style="display:grid;gap:20px">
       <h1>No pudimos revisar <span class="soft" data-host></span></h1>
       <div class="dg-off"><b id="off-reason"></b><p>No pasa nada: igual podemos preparar tu propuesta. La revisamos a mano.</p></div>
-      <p><a class="link" href="diagnostico.html" id="off-retry">Probar con otra dirección</a></p>
+      <p><a class="link" href="/diagnostico" id="off-retry">Probar con otra dirección</a></p>
     </div>
   </section>
 
@@ -850,7 +850,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
           <p class="done-when" id="ok-when"></p>
           <p id="ok-how"></p>
           <p>Si quieres contarnos algo más, como qué no te gusta de tu página actual o qué servicios te importan más, escríbenos por WhatsApp y lo sumamos a tu propuesta.</p>
-          <div><a class="btn btn-line" href="propuesta-clinica-arrayan.html">Ver una propuesta de ejemplo</a></div>
+          <div><a class="btn btn-line" href="/p/clinica-arrayan">Ver una propuesta de ejemplo</a></div>
         </div>
       </form>
     </div>

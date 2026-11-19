@@ -13,12 +13,36 @@
       "destination": "/api/p?slug=:slug"
     },
     {
+      "source": "/webs",
+      "destination": "/webs.html"
+    },
+    {
+      "source": "/webs/clinicas",
+      "destination": "/webs-clinicas.html"
+    },
+    {
+      "source": "/ia",
+      "destination": "/ia.html"
+    },
+    {
       "source": "/diagnostico",
       "destination": "/diagnostico.html"
     },
     {
       "source": "/admin",
       "destination": "/admin.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/webs-clinicas.html",
+      "destination": "/webs/clinicas",
+      "permanent": true
+    },
+    {
+      "source": "/propuesta-clinica-arrayan.html",
+      "destination": "/p/clinica-arrayan",
+      "permanent": false
     }
   ]
 }

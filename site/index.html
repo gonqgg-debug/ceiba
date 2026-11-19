@@ -1,17 +1,20 @@
 <!doctype html>
 <html lang="es">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="icon" href="favicon.ico" sizes="32x32">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Ceiba Labs · Páginas web e inteligencia artificial para negocios</title>
+<meta name="description" content="Diseñamos, publicamos y mantenemos tu página web por una mensualidad fija, y ponemos asistentes con IA que contestan WhatsApp y automatizan lo repetitivo. Precios en pesos mexicanos.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="/apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0B1514">
-<title>Ceiba Labs</title>
-<meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Red+Hat+Display:wght@500;600;700&family=Red+Hat+Text:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700;800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Red+Hat+Display:wght@500;600;700&family=Red+Hat+Text:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/clinica.css">
 <style>
+
 /* Layout: dark opening → ivory band for the work → dark offer → ivory industries → dark AI → ivory FAQ → petrol close.
    One look by design (brand palette), so no light/dark switching. */
 :root{
@@ -27,7 +30,7 @@
   --gut:max(20px, env(safe-area-inset-left,0px));
   --gut-r:max(20px, env(safe-area-inset-right,0px));
   --max:1240px;
-  --photo-room:url("img/room.jpg");--photo-doc:url("img/doc.jpg");--photo-facade:url("img/facade.jpg");--photo-reception:url("img/reception.jpg");
+  --photo-room:url("/img/room.jpg");--photo-doc:url("/img/doc.jpg");--photo-facade:url("/img/facade.jpg");--photo-reception:url("/img/reception.jpg");
   --ease:cubic-bezier(.2,.7,.1,1);
   color-scheme:dark;
 }
@@ -164,7 +167,7 @@ button{font:inherit;color:inherit}
 .mo-logo b span{display:block;color:#1BA8C9;font-size:20px;letter-spacing:1px}
 .mo-head nav{display:flex;gap:16px;font:bold 11px Arial;color:#2b3a42;letter-spacing:.6px}
 .mo-head nav .on{color:#1BA8C9;border-bottom:2px solid #1BA8C9;padding-bottom:3px}
-.mo-slider{position:relative;height:250px;background:url(img/old-stock.jpg) 70% center/cover #f2f2f2}
+.mo-slider{position:relative;height:250px;background:url(/img/old-stock.jpg) 70% center/cover #f2f2f2}
 .mo-cap{position:absolute;left:40px;top:46px;width:330px;background:rgba(27,168,201,.88);color:#fff;padding:18px 20px}
 .mo-cap b{display:block;font:bold 20px/1.2 Arial;margin-bottom:8px}
 .mo-cap span{display:block;font-size:12px;margin-bottom:12px}
@@ -708,816 +711,581 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .hero .layer-old{visibility:hidden}
 }
-</style>
 
+/* ===================== INICIO GENERAL ===================== */
+@property --ang{syntax:'<angle>';inherits:false;initial-value:0deg}
+.site-header{background:rgba(11,21,20,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+
+/* ---------- hero ---------- */
+.ix-hero{position:relative;isolation:isolate;padding-block:clamp(56px,8vw,120px) clamp(120px,14vw,200px);clip-path:polygon(0 0,100% 0,100% 84%,0 100%);overflow:hidden;background:var(--ink)}
+.ix-grad{position:absolute;inset:0;width:100%;height:100%;z-index:-2;display:block}
+.ix-hero::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 70% at 18% 42%,rgba(11,21,20,.72),transparent 72%),linear-gradient(180deg,rgba(11,21,20,.35),transparent 30%)}
+.ix-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:56px clamp(40px,5vw,80px);align-items:center}
+.ix-hero h1{font-size:clamp(40px,4.9vw,74px);line-height:1;letter-spacing:-.045em;font-weight:700;max-width:15ch}
+.ix-shine{background:linear-gradient(100deg,#D6FA52 0%,#7EE8C6 35%,#F7F4EB 50%,#7EE8C6 65%,#D6FA52 100%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:ixShine 7s linear infinite}
+@keyframes ixShine{to{background-position:-220% 0}}
+.ix-hero .lede{margin-top:26px;color:rgba(247,244,235,.84);font-size:clamp(17px,1.5vw,21px)}
+.ix-audit{margin-top:36px;display:grid;gap:10px;max-width:580px}
+.ix-audit label{font-weight:500;font-size:15px}
+.ix-audit .field-url{background:rgba(18,31,29,.82);backdrop-filter:blur(8px)}
+.ix-alt{margin-top:18px;font-size:15px;color:rgba(247,244,235,.75)}
+
+/* escenario del producto */
+.ix-stage{position:relative;min-width:0;perspective:1600px;--mx:0;--my:0}
+.ix-layer{transition:transform .35s cubic-bezier(.2,.7,.1,1)}
+.ix-frame{position:relative;border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 50px 100px -40px rgba(0,0,0,.8),0 0 0 1px rgba(247,244,235,.14);transform:rotateY(calc(-9deg + var(--mx) * 4deg)) rotateX(calc(5deg - var(--my) * 3deg));transform-style:preserve-3d}
+.ix-bar{display:flex;align-items:center;gap:6px;padding:10px 12px;background:#EDEAE1}
+.ix-bar i{width:9px;height:9px;border-radius:50%;background:#D3CEC2}
+.ix-bar span{margin-left:10px;flex:1;background:#fff;border-radius:6px;font:400 12px var(--f-mono);color:#5C6865;padding:5px 10px}
+.ix-vp{container-type:inline-size;height:clamp(340px,33vw,460px);overflow:hidden;position:relative}
+.ix-vp .cx{pointer-events:none;animation:ixScroll 22s cubic-bezier(.45,0,.2,1) infinite}
+@keyframes ixScroll{0%,30%{transform:translateY(0)}42%,58%{transform:translateY(-6.5%)}70%,84%{transform:translateY(-13%)}96%,100%{transform:translateY(0)}}
+.ix-vp .cx-fab,.ix-vp .cx-sticky{display:none}
+.ix-card{position:absolute;background:#fff;color:#15211D;border-radius:16px;box-shadow:0 30px 60px -24px rgba(0,0,0,.6),0 0 0 1px rgba(11,21,20,.06)}
+.ix-chat{left:-34px;bottom:-46px;width:min(290px,76%);overflow:hidden;font-size:14px;transform:translate(calc(var(--mx) * -18px),calc(var(--my) * -14px))}
+.ix-chat-top{display:flex;align-items:center;gap:10px;padding:11px 14px;background:#0F5C4B;color:#fff}
+.ix-chat-top b{display:block;font-size:14px}
+.ix-chat-top small{opacity:.8;font-size:12px}
+.ix-chat-top svg{width:22px;height:22px;color:#25D366;flex:none}
+.ix-chat-log{display:flex;flex-direction:column;justify-content:flex-end;gap:7px;padding:12px;background:#EFEAE2;height:196px;overflow:hidden}
+.ix-msg{max-width:86%;padding:7px 10px;border-radius:12px;line-height:1.4;background:#fff;align-self:flex-start;box-shadow:0 1px 0 rgba(0,0,0,.06);animation:ixPop .35s cubic-bezier(.2,.8,.2,1.2)}
+.ix-msg.me{background:#D9FDD3;align-self:flex-end}
+.ix-msg small{display:block;margin-top:4px;color:#0F5C4B;font-weight:600}
+.ix-dots{align-self:flex-start;background:#fff;border-radius:12px;padding:9px 11px;display:inline-flex;gap:4px}
+.ix-dots i{width:6px;height:6px;border-radius:50%;background:#8a9490;animation:blink 1s infinite}
+.ix-dots i:nth-child(2){animation-delay:.15s}.ix-dots i:nth-child(3){animation-delay:.3s}
+@keyframes ixPop{from{opacity:0;transform:translateY(8px) scale(.96)}}
+.ix-toast{right:-22px;top:46px;display:flex;align-items:center;gap:10px;padding:11px 14px;font-size:14px;transform:translate(calc(var(--mx) * 22px),calc(var(--my) * 16px))}
+.ix-toast .ic{width:32px;height:32px;border-radius:10px;background:#D6FA52;display:grid;place-items:center;flex:none}
+.ix-toast b{display:block;font-size:14px}
+.ix-toast small{color:#5C6865}
+.ix-toast.pop{animation:ixToast 6s cubic-bezier(.2,.8,.2,1) infinite}
+@keyframes ixToast{0%{opacity:0;translate:0 -10px}8%,70%{opacity:1;translate:0 0}80%,100%{opacity:0;translate:0 -6px}}
+.ix-prop{right:22px;bottom:-30px;padding:12px 14px;display:grid;gap:3px;font-size:13px;min-width:200px;transform:translate(calc(var(--mx) * 12px),calc(var(--my) * 10px))}
+.ix-prop span{font:500 11px var(--f-mono);color:#0F5C4B;letter-spacing:.04em;text-transform:uppercase}
+.ix-prop b{font-size:15px}
+.ix-prop .bar{height:6px;border-radius:9px;background:#EDEAE1;overflow:hidden;margin-top:6px}
+.ix-prop .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#103D37,#D6FA52);border-radius:9px;animation:ixBar 5s ease-in-out infinite}
+@keyframes ixBar{0%{width:6%}70%,100%{width:100%}}
+.ix-in{opacity:0;translate:0 24px;transition:opacity .8s cubic-bezier(.2,.7,.1,1),translate .8s cubic-bezier(.2,.7,.1,1)}
+.loaded .ix-in{opacity:1;translate:0 0}
+.loaded .ix-in.d1{transition-delay:.15s}.loaded .ix-in.d2{transition-delay:.45s}.loaded .ix-in.d3{transition-delay:.75s}.loaded .ix-in.d4{transition-delay:1.05s}
+
+/* ---------- cinta ---------- */
+.ix-marquee{margin-top:-4vw;position:relative;z-index:2;overflow:hidden;padding:18px 0;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.ix-marquee div{display:flex;gap:12px;width:max-content;animation:ixMarq 42s linear infinite}
+.ix-marquee span{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;padding:10px 16px;border-radius:999px;background:#fff;color:var(--ink);font-size:15px;font-weight:500;box-shadow:0 8px 24px -16px rgba(11,21,20,.4);border:1px solid rgba(11,21,20,.08)}
+.ix-marquee span::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--petrol)}
+@keyframes ixMarq{to{transform:translateX(-50%)}}
+
+/* ---------- aparición al hacer scroll ---------- */
+[data-reveal]{opacity:0;translate:0 32px;transition:opacity .9s cubic-bezier(.2,.7,.1,1),translate .9s cubic-bezier(.2,.7,.1,1)}
+[data-reveal].in{opacity:1;translate:0 0}
+[data-reveal][data-delay="1"]{transition-delay:.12s}[data-reveal][data-delay="2"]{transition-delay:.24s}[data-reveal][data-delay="3"]{transition-delay:.36s}[data-reveal][data-delay="4"]{transition-delay:.48s}
+
+.ix-kick{font:500 13px var(--f-mono);color:var(--petrol);letter-spacing:.02em}
+.band:not(.band--light) .ix-kick{color:var(--lime)}
+.ix-h{font-size:clamp(36px,4.6vw,64px);line-height:1;letter-spacing:-.04em;font-weight:700;max-width:16ch;margin-top:14px}
+.ix-sub{margin-top:18px;font-size:clamp(17px,1.4vw,20px);color:var(--muted);max-width:56ch;line-height:1.55}
+
+/* ---------- servicios ---------- */
+.ix-services{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:48px}
+.ix-svc{position:relative;display:grid;gap:18px;align-content:start;padding:clamp(26px,3vw,38px);border-radius:24px;background:#fff;isolation:isolate;transition:transform .4s cubic-bezier(.2,.7,.1,1),box-shadow .4s}
+.ix-svc::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;background:conic-gradient(from var(--ang),rgba(16,61,55,.15),rgba(16,61,55,.15) 60%,#D6FA52 75%,#0E9F8A 85%,rgba(16,61,55,.15));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:ixAng 6s linear infinite;z-index:-1}
+@keyframes ixAng{to{--ang:360deg}}
+.ix-svc:hover{transform:translateY(-6px);box-shadow:0 40px 70px -40px rgba(11,21,20,.45)}
+.ix-svc--dark{background:var(--ink);color:var(--ivory);--fg:var(--ivory);--muted:rgba(247,244,235,.72);--line:rgba(247,244,235,.16)}
+.ix-svc h3{font-size:clamp(28px,2.8vw,38px);letter-spacing:-.03em;line-height:1.02}
+.ix-svc > p{color:var(--muted);font-size:17px;max-width:44ch}
+.ix-svc ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.ix-svc li{display:grid;grid-template-columns:22px 1fr;gap:8px;font-size:16px}
+.ix-svc li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--petrol);margin-top:9px}
+.ix-svc--dark li::before{background:var(--lime)}
+.ix-price{font:500 14px var(--f-mono);color:var(--muted);padding-top:16px;border-top:1px solid var(--line)}
+.ix-price b{color:var(--fg);font-weight:600}
+.ix-svc .btn{justify-self:start}
+.ix-mini{height:150px;border-radius:16px;overflow:hidden;position:relative}
+.ix-mini--web{background:linear-gradient(160deg,#F1EEE4,#E6EFE9);padding:14px}
+.ix-mini--web .w{height:100%;border-radius:10px;background:#fff;box-shadow:0 10px 30px -18px rgba(11,21,20,.4);padding:12px;display:grid;grid-template-columns:1.2fr 1fr;grid-template-rows:auto 1fr;gap:10px}
+.ix-mini--web .w i{display:block;border-radius:6px;background:#E7E3D8;transform-origin:left;animation:ixBuild 4.5s cubic-bezier(.2,.7,.1,1) infinite}
+.ix-mini--web .w .t{grid-column:1/-1;height:10px;width:40%;background:#103D37}
+.ix-mini--web .w .h{height:auto;display:grid;gap:7px;background:none;animation:none}
+.ix-mini--web .w .h b{display:block;height:12px;border-radius:5px;background:#15211D;transform-origin:left;animation:ixBuild 4.5s .2s cubic-bezier(.2,.7,.1,1) infinite}
+.ix-mini--web .w .h b:nth-child(2){width:70%;animation-delay:.35s}
+.ix-mini--web .w .h em{display:block;width:44%;height:16px;border-radius:999px;background:#1F4FD1;margin-top:6px;transform-origin:left;animation:ixBuild 4.5s .5s cubic-bezier(.2,.7,.1,1) infinite}
+.ix-mini--web .w .p{background:linear-gradient(135deg,#103D37,#0E9F8A);animation-delay:.6s}
+@keyframes ixBuild{0%{transform:scaleX(0);opacity:0}18%,80%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+.ix-mini--ia{background:linear-gradient(160deg,#16302B,#0F2420);padding:14px;display:flex;flex-direction:column;justify-content:flex-end;gap:7px}
+.ix-mini--ia p{max-width:78%;padding:7px 10px;border-radius:11px;font-size:13px;line-height:1.35;background:#fff;color:#15211D;align-self:flex-start;opacity:0;animation:ixChat 6s infinite}
+.ix-mini--ia p.me{background:#D9FDD3;align-self:flex-end}
+.ix-mini--ia p:nth-child(1){animation-delay:.2s}.ix-mini--ia p:nth-child(2){animation-delay:1.2s}.ix-mini--ia p:nth-child(3){animation-delay:2.2s}
+@keyframes ixChat{0%{opacity:0;transform:translateY(8px)}8%,80%{opacity:1;transform:none}92%,100%{opacity:0}}
+
+/* ---------- cifras ---------- */
+.ix-nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:52px;border-top:1px solid var(--line)}
+.ix-nums div{padding:28px 24px 0 0;display:grid;gap:8px}
+.ix-nums b{font:700 clamp(44px,5vw,72px)/1 var(--f-display);letter-spacing:-.04em;background:linear-gradient(120deg,var(--ivory),#7EE8C6 70%,var(--lime));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ix-nums span{color:var(--muted);font-size:16px;max-width:22ch}
+
+/* ---------- raíces (red conectada) ---------- */
+.ix-roots .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:40px clamp(40px,5vw,80px);align-items:center}
+.ix-net{width:100%;height:auto;overflow:visible}
+.ix-net .ln{fill:none;stroke:rgba(247,244,235,.18);stroke-width:1.5}
+.ix-net .ln-a{fill:none;stroke:url(#ixLine);stroke-width:2;stroke-dasharray:6 10;animation:ixDash 2.4s linear infinite}
+@keyframes ixDash{to{stroke-dashoffset:-32}}
+.ix-net .node rect{fill:rgba(247,244,235,.06);stroke:rgba(247,244,235,.22)}
+.ix-net .node text{fill:#F7F4EB;font:600 15px var(--f-body)}
+.ix-net .node .sub{fill:rgba(247,244,235,.6);font:400 12px var(--f-body)}
+.ix-net .core circle{fill:#D6FA52}
+.ix-net .core .halo{fill:none;stroke:#D6FA52;opacity:.5;transform-origin:center;transform-box:fill-box;animation:ixHalo 2.8s ease-out infinite}
+@keyframes ixHalo{from{transform:scale(1);opacity:.55}to{transform:scale(2.2);opacity:0}}
+.ix-net .pulse{fill:#D6FA52;filter:drop-shadow(0 0 6px #D6FA52)}
+.ix-story{margin-top:22px;padding:18px 20px;border-left:2px solid var(--lime);color:rgba(247,244,235,.8);font-size:16px;line-height:1.6;max-width:52ch;background:rgba(247,244,235,.03);border-radius:0 12px 12px 0}
+
+/* ---------- pasos ---------- */
+.ix-steps{position:relative;list-style:none;margin:52px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.ix-steps::before{content:"";position:absolute;left:0;right:0;top:22px;height:2px;background:var(--line)}
+.ix-steps::after{content:"";position:absolute;left:0;top:22px;height:2px;width:100%;background:linear-gradient(90deg,var(--petrol),#0E9F8A,var(--lime));transform:scaleX(var(--p,0));transform-origin:left;transition:transform .2s linear}
+.ix-steps li{position:relative;display:grid;gap:12px;z-index:1}
+.ix-steps .n{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:var(--ivory);border:2px solid var(--line);font:600 16px var(--f-mono);transition:background .4s,border-color .4s,color .4s}
+.ix-steps li.on .n{background:var(--petrol);border-color:var(--petrol);color:var(--ivory)}
+.ix-steps b{font:600 22px var(--f-display);letter-spacing:-.015em}
+.ix-steps p{color:var(--muted);font-size:16px;max-width:34ch}
+
+/* ---------- industrias ---------- */
+.ix-ind{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-top:44px}
+.ix-ind a,.ix-ind div{--x:50%;--y:50%;position:relative;overflow:hidden;display:grid;gap:8px;align-content:start;padding:22px;border-radius:18px;border:1px solid var(--line);text-decoration:none;color:inherit;min-height:176px;transition:transform .35s cubic-bezier(.2,.7,.1,1),border-color .35s}
+.ix-ind a::before,.ix-ind div::before{content:"";position:absolute;inset:0;background:radial-gradient(240px circle at var(--x) var(--y),rgba(214,250,82,.16),transparent 60%);opacity:0;transition:opacity .3s;pointer-events:none}
+.ix-ind a:hover,.ix-ind div:hover{transform:translateY(-4px);border-color:rgba(247,244,235,.3)}
+.ix-ind a:hover::before,.ix-ind div:hover::before{opacity:1}
+.ix-ind a{background:var(--ivory);color:var(--ink);border-color:var(--ivory)}
+.ix-ind a::before{background:radial-gradient(240px circle at var(--x) var(--y),rgba(16,61,55,.14),transparent 60%)}
+.ix-ind b{font-size:18px;font-weight:600;position:relative}
+.ix-ind span{font-size:14px;color:var(--muted);position:relative}
+.ix-ind a span{color:rgba(11,21,20,.66)}
+.ix-ind em{font:500 12px var(--f-mono);font-style:normal;margin-top:auto;color:var(--muted);position:relative}
+.ix-ind a em{color:var(--petrol)}
+
+/* ---------- por qué ---------- */
+.ix-why{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:44px}
+.ix-why div{display:grid;gap:10px;align-content:start;padding:24px;border-radius:18px;background:#fff;border:1px solid var(--line)}
+.ix-why .ic{width:40px;height:40px;border-radius:12px;background:var(--ink);color:var(--lime);display:grid;place-items:center;margin-bottom:6px}
+.ix-why .ic svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ix-why b{font-size:18px;font-weight:600}
+.ix-why p{color:var(--muted);font-size:15px}
+
+/* ---------- preguntas ---------- */
+.ix-faq{display:grid;margin-top:36px;max-width:780px;border-top:1px solid var(--line)}
+.ix-faq details{border-bottom:1px solid var(--line)}
+.ix-faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;padding:22px 0;font-weight:500;font-size:18px}
+.ix-faq summary::-webkit-details-marker{display:none}
+.ix-faq summary::after{content:"+";font-weight:400;font-size:24px;line-height:1;color:var(--muted);transition:transform .3s}
+.ix-faq details[open] summary::after{transform:rotate(45deg)}
+.ix-faq details p{color:var(--muted);padding-bottom:22px;max-width:62ch}
+
+/* ---------- cierre ---------- */
+.ix-close{position:relative;isolation:isolate;overflow:hidden;clip-path:polygon(0 12%,100% 0,100% 100%,0 100%);padding-block:clamp(110px,12vw,170px) clamp(80px,9vw,130px);background:linear-gradient(120deg,#0B1514,#103D37 35%,#0E6B58 65%,#103D37);background-size:220% 220%;animation:ixBg 16s ease-in-out infinite alternate}
+@keyframes ixBg{to{background-position:100% 100%}}
+.ix-close::after{content:"";position:absolute;width:60vw;height:60vw;right:-20vw;top:-10vw;border-radius:50%;background:radial-gradient(circle,rgba(214,250,82,.22),transparent 60%);z-index:-1;animation:ixFloat 12s ease-in-out infinite alternate}
+@keyframes ixFloat{to{transform:translate(-12vw,8vw)}}
+.ix-close .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) auto;gap:28px 48px;align-items:end}
+.ix-close h2{font-size:clamp(40px,5.4vw,76px);line-height:.98;letter-spacing:-.045em;max-width:15ch}
+.ix-close .acts{display:flex;flex-wrap:wrap;gap:10px}
+
+@media (max-width:1100px){.ix-ind{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:980px){
+  .ix-hero-grid,.ix-services,.ix-roots .wrap,.ix-close .wrap{grid-template-columns:1fr}
+  .ix-hero{clip-path:polygon(0 0,100% 0,100% 92%,0 100%);padding-bottom:140px}
+  .ix-frame{transform:none}
+  .ix-why{grid-template-columns:1fr 1fr}
+  .ix-ind{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .ix-chat{left:-8px;bottom:-40px;width:82%}
+  .ix-toast{right:-6px;top:30px}
+  .ix-prop{display:none}
+  .ix-steps{grid-template-columns:1fr}
+  .ix-steps::before,.ix-steps::after{display:none}
+  .ix-why,.ix-ind{grid-template-columns:1fr}
+  .ix-ind a,.ix-ind div{min-height:0}
+  .ix-nums div{padding-right:12px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  [data-reveal],.ix-in{opacity:1;translate:none}
+}
+</style>
+</head>
+<body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="ceiba-logo" viewBox="0 0 353.37 54"><g transform="translate(0 0) scale(.68)"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></g><g transform="translate(80 42) scale(.054 -.054)"><path transform="translate(0 0)" d="M393 598Q306 598 260.0 533.0Q214 468 214 355Q214 241 256.5 178.5Q299 116 393 116Q437 116 480.5 126.0Q524 136 575 154V27Q528 8 482.0 -1.0Q436 -10 379 -10Q269 -10 197.5 35.5Q126 81 92.0 163.5Q58 246 58 356Q58 464 97.0 547.0Q136 630 210.5 677.0Q285 724 393 724Q446 724 499.5 710.5Q553 697 602 674L553 551Q513 570 472.5 584.0Q432 598 393 598Z"/><path transform="translate(622 0)" d="M303 556Q416 556 482.0 491.5Q548 427 548 308V236H196Q198 173 233.5 137.0Q269 101 332 101Q385 101 428.0 111.5Q471 122 517 144V29Q477 9 432.5 -0.5Q388 -10 325 -10Q243 -10 180.0 20.5Q117 51 81.0 113.0Q45 175 45 269Q45 365 77.5 428.5Q110 492 168.0 524.0Q226 556 303 556ZM304 450Q261 450 232.5 422.0Q204 394 199 335H408Q407 385 382.0 417.5Q357 450 304 450Z"/><path transform="translate(1198 0)" d="M153 760Q186 760 210.0 744.5Q234 729 234 687Q234 646 210.0 630.0Q186 614 153 614Q119 614 95.5 630.0Q72 646 72 687Q72 729 95.5 744.5Q119 760 153 760ZM227 546V0H78V546Z"/><path transform="translate(1488 0)" d="M227 583Q227 552 225.0 522.0Q223 492 221 475H227Q249 509 286.0 532.5Q323 556 382 556Q474 556 531.0 484.5Q588 413 588 274Q588 134 530.0 62.0Q472 -10 378 -10Q318 -10 283.5 11.5Q249 33 227 60H217L192 0H78V760H227ZM334 437Q276 437 252.5 401.0Q229 365 227 291V275Q227 196 250.5 153.5Q274 111 336 111Q382 111 409.0 153.5Q436 196 436 276Q436 356 408.5 396.5Q381 437 334 437Z"/><path transform="translate(2106 0)" d="M302 557Q412 557 470.5 509.5Q529 462 529 364V0H425L396 74H392Q357 30 318.0 10.0Q279 -10 211 -10Q138 -10 90.0 32.5Q42 75 42 163Q42 250 103.0 291.5Q164 333 286 337L381 340V364Q381 407 358.5 427.0Q336 447 296 447Q256 447 218.0 435.5Q180 424 142 407L93 508Q137 531 190.5 544.0Q244 557 302 557ZM323 251Q251 249 223.0 225.0Q195 201 195 162Q195 128 215.0 113.5Q235 99 267 99Q315 99 348.0 127.5Q381 156 381 208V253Z"/><path transform="translate(2942 0)" d="M97 0V714H187V80H499V0Z"/><path transform="translate(3451 0)" d="M288 545Q386 545 433.0 502.0Q480 459 480 365V0H416L399 76H395Q360 32 321.5 11.0Q283 -10 215 -10Q142 -10 94.0 28.5Q46 67 46 149Q46 229 109.0 272.5Q172 316 303 320L394 323V355Q394 422 365.0 448.0Q336 474 283 474Q241 474 203.0 461.5Q165 449 132 433L105 499Q140 518 188.0 531.5Q236 545 288 545ZM314 259Q214 255 175.5 227.0Q137 199 137 148Q137 103 164.5 82.0Q192 61 235 61Q303 61 348.0 98.5Q393 136 393 214V262Z"/><path transform="translate(3997 0)" d="M173 575Q173 541 171.5 511.5Q170 482 168 465H173Q196 499 236.0 522.0Q276 545 339 545Q439 545 499.5 475.5Q560 406 560 268Q560 130 499.0 60.0Q438 -10 339 -10Q276 -10 236.0 13.0Q196 36 173 68H166L148 0H85V760H173ZM324 472Q239 472 206.0 423.0Q173 374 173 271V267Q173 168 205.5 115.5Q238 63 326 63Q398 63 433.5 116.0Q469 169 469 269Q469 472 324 472Z"/><path transform="translate(4597 0)" d="M434 148Q434 70 376.0 30.0Q318 -10 220 -10Q164 -10 123.5 -1.0Q83 8 52 24V104Q84 88 129.5 74.5Q175 61 222 61Q289 61 319.0 82.5Q349 104 349 140Q349 160 338.0 176.0Q327 192 298.5 208.0Q270 224 217 244Q165 264 128.0 284.0Q91 304 71.0 332.0Q51 360 51 404Q51 472 106.5 509.0Q162 546 252 546Q301 546 343.5 536.5Q386 527 423 510L393 440Q359 454 322.0 464.0Q285 474 246 474Q192 474 163.5 456.5Q135 439 135 409Q135 387 148.0 371.5Q161 356 191.5 341.5Q222 327 273 307Q324 288 360.0 268.0Q396 248 415.0 219.5Q434 191 434 148Z"/></g></symbol>
   <symbol id="wa" viewBox="0 0 24 24"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.9L2.3 21.8l4.8-1.3A9.8 9.8 0 1 0 12 2.2Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.7 7.2c.2-.4.4-.4.7-.4h.6c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .6l-.5.7c-.1.2-.2.4 0 .6.6 1.1 1.5 2 2.6 2.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.4 0 .5-.1 1.2-.6 1.6-.6.5-1.4.8-2.2.6-1.2-.3-2.6-.9-4-2.3s-2.1-2.9-2.3-4c-.2-.9.1-1.7.6-2.1Z" fill="currentColor"/></symbol>
   <symbol id="lock" viewBox="0 0 12 12"><rect x="2" y="5" width="8" height="6" rx="1.5" fill="currentColor"/><path d="M4 5V3.6a2 2 0 0 1 4 0V5" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
 </svg>
-
 <header class="site-header" id="top">
   <div class="wrap nav">
-    <a class="brand" href="#top" aria-label="Ceiba Labs, inicio"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
+    <a class="brand" href="/" aria-label="Ceiba Labs, inicio"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
     <ul class="nav-links" id="nav-links">
-      <li class="has-sub"><a href="#suscripcion" data-route="/webs">Páginas web</a><button class="sub-btn" type="button" aria-expanded="false" aria-controls="sub-webs" aria-label="Ver tipos de negocio"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
-        <ul class="nav-sub" id="sub-webs">
-          <li><a href="webs-clinicas.html">Clínicas</a></li>
-          <li><a href="#industrias" data-route="/webs/restaurantes" data-ind="restaurantes">Restaurantes</a></li>
-          <li><a href="#industrias" data-route="/webs/inmobiliarias" data-ind="inmobiliarias">Inmobiliarias</a></li>
-          <li><a href="#industrias" data-route="/webs/hoteles" data-ind="hoteles">Hoteles</a></li>
-          <li><a href="#industrias" data-route="/webs/despachos" data-ind="despachos">Despachos</a></li>
-        </ul></li>
-      <li><a href="#ia" data-route="/ia">Inteligencia artificial</a></li>
-      <li><a href="#precios" data-route="/precios">Precios</a></li>
-      <li><a href="#antes-despues" data-route="/trabajo">Trabajo</a></li>
-      <li><a href="#" data-route="/nosotros">Nosotros</a></li>
-      <li class="nav-cta"><a href="#diagnostico">Propuesta gratis</a></li>
+      <li class="has-sub"><a href="/webs">Páginas web</a><button class="sub-btn" type="button" aria-expanded="false" aria-controls="sub-webs" aria-label="Ver tipos de negocio"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+        <ul class="nav-sub" id="sub-webs"><li><a href="/webs">Todas las páginas web</a></li><li><a href="/webs/clinicas">Clínicas y consultorios</a></li><li><a href="#" data-soon="Restaurantes">Restaurantes <small>pronto</small></a></li><li><a href="#" data-soon="Inmobiliarias">Inmobiliarias <small>pronto</small></a></li><li><a href="#" data-soon="Hoteles">Hoteles <small>pronto</small></a></li><li><a href="#" data-soon="Despachos">Despachos <small>pronto</small></a></li></ul></li>
+      <li><a href="/ia">Inteligencia artificial</a></li>
+      <li><a href="/webs#precios">Precios</a></li>
+      <li class="nav-cta"><a href="/diagnostico">Propuesta gratis</a></li>
     </ul>
-    <a class="btn btn-primary" href="#diagnostico">Propuesta gratis</a>
+    <a class="btn btn-primary" href="/diagnostico">Propuesta gratis</a>
     <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-links">Menú</button>
   </div>
 </header>
 
 <main>
-<!-- ============ HERO ============ -->
-<section class="band hero" aria-labelledby="hero-title">
-  <div class="wrap">
-    <h1 id="hero-title">Te mostramos tu nueva página web <span class="soft">antes de que pagues un peso.</span></h1>
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <p class="lede">Diseñamos, publicamos y mantenemos tu página por una mensualidad fija.</p>
-        <form class="audit" id="audit-form" novalidate>
-          <label for="audit-url">¿Ya tienes página? Escribe la dirección</label>
-          <div class="field-url" id="audit-field">
-            <div class="row"><span class="prefix" aria-hidden="true">https://</span>
-            <input id="audit-url" name="url" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com" aria-describedby="audit-help"></div>
-            <button class="btn btn-primary" type="submit">Ver cómo quedaría <span class="arrow" aria-hidden="true">→</span></button>
-          </div>
-          <p class="hint" id="audit-help">Es gratis y no te pedimos tu correo para empezar.</p>
-          <div id="audit-out" aria-live="polite"></div>
-        </form>
-        <div class="secondary-actions">
-          <button class="link" type="button" id="no-web">No tengo página todavía <span class="arrow" aria-hidden="true">→</span></button>
-          <a class="link" href="#antes-despues">Ver el ejemplo de una clínica dental <span aria-hidden="true">↓</span></a>
+<section class="band ix-hero" aria-labelledby="ix-title">
+  <canvas class="ix-grad" id="ix-grad" aria-hidden="true"></canvas>
+  <div class="wrap ix-hero-grid">
+    <div>
+      <h1 id="ix-title" class="ix-in">Páginas web e <span class="ix-shine">inteligencia artificial</span> para negocios que atienden clientes.</h1>
+      <p class="lede ix-in d1">Diseñamos, publicamos y mantenemos tu página por una mensualidad fija. Y ponemos asistentes que contestan tu WhatsApp, agendan y te pasan lo que necesita una persona.</p>
+      <form class="audit ix-audit ix-in d2" id="ix-audit" novalidate>
+        <label for="ix-url">¿Tienes página? Revísala gratis</label>
+        <div class="field-url" id="ix-field">
+          <div class="row"><span class="prefix" aria-hidden="true">https://</span>
+          <input id="ix-url" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com" aria-describedby="ix-help"></div>
+          <button class="btn btn-primary" type="submit">Revisar mi página <span class="arrow" aria-hidden="true">→</span></button>
         </div>
-      </div>
-      <div class="hero-visual">
-        <div class="frame" aria-label="Ejemplo de rediseño de la página de una clínica dental ficticia">
-          <div class="frame-bar"><div class="frame-url"><svg width="11" height="11" aria-hidden="true"><use href="#lock"/></svg>clinicaarrayan.mx</div><span class="state-tag" id="hero-tag" data-state="new">Después</span></div>
-          <div class="viewport" id="hero-vp" aria-hidden="true" inert>
-            <div class="layers">
-              <div class="layer layer-old" data-tpl="old"></div>
-              <div class="layer layer-new" data-tpl="new"></div>
-            </div>
-            <div class="wipe"></div>
-          </div>
-        </div>
-        <div class="hero-caption"><span><strong>Ejemplo de rediseño:</strong> así quedaría la página de una clínica dental. El negocio es ficticio.</span><a class="link" href="#antes-despues">Comparar con la página de hoy</a></div>
-      </div>
+        <p class="hint" id="ix-help">Te mostramos cómo quedaría tu página nueva antes de que pagues un peso.</p>
+        <p class="err" id="ix-err" hidden></p>
+      </form>
+      <p class="ix-alt ix-in d3">¿Buscas automatizar tu atención? <a class="link" href="/ia">Conoce los servicios de IA <span class="arrow" aria-hidden="true">→</span></a></p>
     </div>
-  </div>
-</section>
-
-<!-- ============ BEFORE / AFTER ============ -->
-<section class="band band--light section" id="antes-despues" aria-labelledby="cmp-title" data-view="new">
-  <div class="wrap">
-    <div class="cmp-head">
-      <h2 class="h2" id="cmp-title">Así quedaría la página de una clínica dental.</h2>
-      <p class="lede">Compara la página de hoy con la que haríamos. Toca cada número para ver qué cambia para el paciente.</p>
+    <div class="ix-stage" id="ix-stage" aria-label="Ejemplo: la página de una clínica hecha por Ceiba y su asistente de WhatsApp">
+      <div class="ix-layer ix-in d2"><div class="ix-frame"><div class="ix-bar"><i></i><i></i><i></i><span>clinicaarrayan.mx</span></div><div class="ix-vp" aria-hidden="true"><div class="cx" style="--a:#1F4FD1;--fh:'Red Hat Display',ui-sans-serif,system-ui,sans-serif;--fb:'Red Hat Text',ui-sans-serif,system-ui,sans-serif" data-name="Clínica Dental Arrayán" data-wa="523300000000">
+<div class="cx-util"><span><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6L13 3Z"/></svg>¿Urgencia? Te atendemos hoy</span><span class="cx-util-h"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM12 7.5V12l3 2"/></svg>Lunes a viernes de 9 a 20 h y sábados de 9 a 14 h</span><span class="cx-util-tel"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5.5a2 2 0 0 1 2-2Z"/></svg>33 0000 0000</span></div>
+<header class="cx-top"><div class="cx-brand"><img src="/img/arrayan-logo.svg" alt="Clínica Dental Arrayán" class="cx-logo-wide"></div>
+    <nav class="cx-nav"><span>Tratamientos</span><span>Precios</span><span>Doctora</span><span>Opiniones</span><span>Ubicación</span></nav>
+    <div class="cx-top-acts"><span class="cx-btn cx-btn--line cx-hide-s"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5.5a2 2 0 0 1 2-2Z"/></svg>Llamar</span><span class="cx-btn" data-sec="cta">Agenda tu cita</span></div></header>
+<section class="cx-hero" data-sec="hero"><div class="cx-hero-copy">
+      <p class="cx-rating"><span class="cx-stars" aria-hidden="true">★★★★★</span><b>4.9</b><span>186 reseñas en Google</span></p>
+      <h1>Agenda tu valoración dental sin costo</h1>
+      <p class="cx-lede">Conoce cómo están tus dientes y encías, y sal de tu primera cita con tu presupuesto en la mano. Estamos en Providencia, Guadalajara.</p>
+      <div class="cx-ctas"><span class="cx-btn cx-btn--lg">Agenda gratis<svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="cx-btn cx-btn--lg cx-btn--ghost"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Agendar por WhatsApp</span></div>
+      <p class="cx-call">Llamar para agendar: <span class=""><b>33 0000 0000</b></span></p>
     </div>
-    <div class="cmp-grid">
-      <div class="cmp-stage">
-        <div class="cmp-controls">
-          <div class="seg" role="radiogroup" aria-label="Versión de la página" id="seg-version">
-            <button type="button" role="radio" data-v="old" aria-checked="false" tabindex="-1">Antes</button>
-            <button type="button" role="radio" data-v="new" aria-checked="true" tabindex="0">Después</button>
-          </div>
-          <div class="seg seg--quiet" role="radiogroup" aria-label="Tamaño de pantalla" id="seg-device">
-            <button type="button" role="radio" data-d="desk" aria-checked="true" tabindex="0">Computadora</button>
-            <button type="button" role="radio" data-d="mob" aria-checked="false" tabindex="-1">Celular</button>
-          </div>
-        </div>
-        <div class="cmp-frame cmp" id="cmp-frame">
-          <div class="frame-bar"><div class="frame-url"><svg width="11" height="11" aria-hidden="true"><use href="#lock"/></svg>clinicaarrayan.mx</div><span class="state-tag" id="cmp-tag" data-state="new">Después</span></div>
-          <div class="viewport" id="cmp-vp" tabindex="0" aria-label="Vista previa de la página. Se puede desplazar.">
-            <div class="layers">
-              <div class="layer layer-old" data-tpl="old" data-hidden="true" aria-hidden="true"></div>
-              <div class="layer layer-new" data-tpl="new"></div>
-            </div>
-            <div class="wipe" id="cmp-wipe"></div>
-          </div>
-        </div>
-        <div class="cmp-label"><span><strong>Ejemplo de rediseño</strong> · Clínica Dental Arrayán, negocio ficticio</span><span id="cmp-status" aria-live="polite">Viendo cómo quedaría</span></div>
-      </div>
-
-      <div>
-        <ol class="changes" id="changes">
-          <li data-change="1"><button type="button" aria-label="Cambio 1: agendar una cita. Mostrar en la página">
-            <span class="n" aria-hidden="true">1</span><h3>Agendar una cita</h3>
-            <span class="txt"><span class="before"><span>Antes</span>Solo hay un teléfono en letra chiquita arriba y no se puede marcar desde el celular.</span><span class="after"><span>Después</span>El botón «Agenda tu cita» siempre está a la vista. El paciente elige tratamiento y horario.</span></span>
-          </button></li>
-          <li data-change="2"><button type="button" aria-label="Cambio 2: tratamientos. Mostrar en la página">
-            <span class="n" aria-hidden="true">2</span><h3>Tratamientos</h3>
-            <span class="txt"><span class="before"><span>Antes</span>Tres recuadros genéricos con «Leer más» y ningún precio.</span><span class="after"><span>Después</span>Cada tratamiento con foto, precio y su propio botón para agendar.</span></span>
-          </button></li>
-          <li data-change="3"><button type="button" aria-label="Cambio 3: quién te atiende. Mostrar en la página">
-            <span class="n" aria-hidden="true">3</span><h3>Quién te atiende</h3>
-            <span class="txt"><span class="before"><span>Antes</span>Un carrusel con foto de banco ocupa la pantalla y no aparece nadie del equipo.</span><span class="after"><span>Después</span>Fotos reales del consultorio y de la dentista, con su especialidad.</span></span>
-          </button></li>
-        </ol>
-        <details class="more-changes">
-          <summary>3 mejoras más en esta demo: ubicación, opiniones y respuestas de noche</summary>
-          <ol class="changes" start="4">
-          <li data-change="4"><button type="button" aria-label="Cambio 4: cómo llegar. Mostrar en la página">
-            <span class="n" aria-hidden="true">4</span><h3>Cómo llegar</h3>
-            <span class="txt"><span class="before"><span>Antes</span>El mapa no carga y la dirección no se puede abrir desde el celular.</span><span class="after"><span>Después</span>El horario de hoy arriba, la dirección escrita y un botón para abrir el mapa.</span></span>
-          </button></li>
-          <li data-change="5"><button type="button" aria-label="Cambio 5: opiniones de pacientes. Mostrar en la página">
-            <span class="n" aria-hidden="true">5</span><h3>Opiniones de pacientes</h3>
-            <span class="txt"><span class="before"><span>Antes</span>Un recuadro de Facebook con la última publicación de 2019.</span><span class="after"><span>Después</span>Las reseñas de Google en la portada.</span></span>
-          </button></li>
-          <li data-change="6"><button type="button" aria-label="Cambio 6: respuestas de noche y en fin de semana. Mostrar en la página">
-            <span class="n" aria-hidden="true">6</span><h3>Respuestas de noche y en fin de semana</h3>
-            <span class="txt"><span class="before"><span>Antes</span>Un formulario que promete contestar «a la brevedad».</span><span class="after"><span>Después</span>Un asistente contesta al momento y pasa a WhatsApp lo que necesita una persona.</span></span>
-          </button></li>
-          </ol>
-        </details>
-        <div class="task">
-          <p>Lo que gana la clínica</p>
-          <strong>Más citas agendadas sin tener que contestar el teléfono.</strong>
-        </div>
-        <div class="cmp-links"><a class="link" href="propuesta-clinica-arrayan.html">Ver la propuesta que recibiría esta clínica <span class="arrow" aria-hidden="true">→</span></a></div>
+    <div class="cx-hero-media"><div class="cx-hero-img" role="img" aria-label="La Dra. Valeria Ríos en su consultorio" style="background-image:url('/img/doc.jpg')"></div>
+      <div class="cx-float cx-slots"><b><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5h16v13H4zM4 10h16M8.5 3.5v4M15.5 3.5v4"/></svg>Próximos horarios</b><div><span>Hoy 18:30</span><span>Mañana 10:00</span><span>Mañana 12:30</span></div></div>
+      <div class="cx-float cx-rate-card"><span class="cx-stars" aria-hidden="true">★★★★★</span><b>4.9 de 5</b><small>186 reseñas</small></div>
+    </div></section>
+<section class="cx-benefits" data-sec="trust"><div class="cx-benefit"><svg class="cx-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5c1.6-.9 3.1.2 5 .2s3.4-1.1 5-.2c2.4 1.4 2.3 5 1.2 8-.9 2.4-1.1 8.5-3 8.5-1.6 0-1.4-5.2-3.2-5.2S10.6 20 9 20c-1.9 0-2.1-6.1-3-8.5C4.9 8.5 4.6 4.9 7 3.5Z"/></svg><b>Valoración sin costo</b><span>con radiografía y presupuesto por escrito</span></div><div class="cx-benefit"><svg class="cx-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16M4 12h16"/></svg><b>Radiografía digital</b><span>ves tu diagnóstico en pantalla, el mismo día</span></div><div class="cx-benefit"><svg class="cx-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3zM3 10h18M7 14.5h4"/></svg><b>Hasta 6 MSI</b><span>en tratamientos mayores a $1,200</span></div><div class="cx-benefit"><svg class="cx-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16.5h14M6.5 16.5V19M17.5 16.5V19M4.5 16.5v-4l2-5h11l2 5v4M4.5 12.5h15M8 14.5h.01M16 14.5h.01"/></svg><b>Estacionamiento gratis</b><span>frente a la clínica</span></div></section>
+<section class="cx-stats"><div><b>15+</b><span>años en Providencia</span></div><div><b>4.9</b><span>de calificación en Google</span></div><div><b>3</b><span>especialistas con cédula</span></div><div><b>Hoy</b><span>atendemos urgencias</span></div></section>
+<section class="cx-today cx-sec"><div class="cx-today-copy"><h2>Te atendemos hoy mismo</h2><p>Si tienes dolor, se te rompió un diente o se cayó una corona, te hacemos un espacio el mismo día.</p><dl class="cx-hours"><dt>Lunes a viernes</dt><dd>9:00 a 20:00</dd><dt>Sábados</dt><dd>9:00 a 14:00</dd><dt>Estacionamiento</dt><dd>Gratis, frente a la clínica</dd></dl></div>
+    <div class="cx-panel"><ul class="cx-checks"><li><svg class="cx-ico-c" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6L13 3Z"/></svg><span>Urgencias el mismo día, en horario de la clínica</span></li><li><svg class="cx-ico-c" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z"/></svg><span>Fuera de horario te respondemos por WhatsApp para apartar tu cita</span></li><li><svg class="cx-ico-c" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5c1.6-.9 3.1.2 5 .2s3.4-1.1 5-.2c2.4 1.4 2.3 5 1.2 8-.9 2.4-1.1 8.5-3 8.5-1.6 0-1.4-5.2-3.2-5.2S10.6 20 9 20c-1.9 0-2.1-6.1-3-8.5C4.9 8.5 4.6 4.9 7 3.5Z"/></svg><span>Valoración sin costo con radiografía</span></li><li><svg class="cx-ico-c" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3zM3 10h18M7 14.5h4"/></svg><span>Hasta 6 meses sin intereses con tarjetas participantes</span></li></ul><span class="cx-btn">Agenda tu cita</span></div></section>
+<section class="cx-services cx-sec" data-sec="services"><div class="cx-head"><div><h2>Nuestros tratamientos</h2><p>Los más pedidos en la clínica. Te confirmamos el precio en tu valoración.</p></div><div class="cx-car-nav"><button type="button" data-cx-car="prev" aria-label="Anterior"><svg class="cx-ico-s cx-flip" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><button type="button" data-cx-car="next" aria-label="Siguiente"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div>
+    <ul class="cx-car" tabindex="0" aria-label="Nuestros tratamientos, desliza para ver más"><li class="cx-card"><div class="cx-card-img" role="img" aria-label="La dentista le muestra una radiografía a una paciente" style="background-image:url('/img/t-valoracion.jpg')"></div><div class="cx-card-body"><div class="cx-card-t"><b>Valoración dental</b><i>Sin costo</i></div><p>Revisamos dientes y encías, y te tomamos radiografía. Sales con tu presupuesto.</p><span class="cx-link">Agendar<svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></li><li class="cx-card"><div class="cx-card-img" role="img" aria-label="Limpieza dental a una paciente" style="background-image:url('/img/t-limpieza.jpg')"></div><div class="cx-card-body"><div class="cx-card-t"><b>Limpieza dental</b><i>$700</i></div><p>Retira el sarro y la placa que no quita el cepillado. Se recomienda 2 veces al año.</p><span class="cx-link">Agendar<svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></li><li class="cx-card"><div class="cx-card-img" role="img" aria-label="Paciente con un alineador transparente" style="background-image:url('/img/t-alineadores.jpg')"></div><div class="cx-card-body"><div class="cx-card-t"><b>Alineadores transparentes</b><i>Valoración sin costo</i></div><p>Casi no se notan y te los puedes quitar para comer.</p><span class="cx-link">Agendar<svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></li><li class="cx-card"><div class="cx-card-img" role="img" aria-label="Paciente sonriendo después de su tratamiento" style="background-image:url('/img/t-implantes.jpg')"></div><div class="cx-card-body"><div class="cx-card-t"><b>Implantes dentales</b><i>Desde $14,500</i></div><p>Reemplaza el diente que te falta con una pieza fija.</p><span class="cx-link">Agendar<svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></li><li class="cx-card"><div class="cx-card-img" role="img" aria-label="Paciente con una sonrisa blanca" style="background-image:url('/img/t-blanqueamiento.jpg')"></div><div class="cx-card-body"><div class="cx-card-t"><b>Blanqueamiento</b><i>$3,800</i></div><p>Dientes más blancos en dos sesiones.</p><span class="cx-link">Agendar<svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></li><li class="cx-card"><div class="cx-card-img" role="img" aria-label="La dentista atiende a un paciente con dolor de muela" style="background-image:url('/img/t-urgencias.jpg')"></div><div class="cx-card-body"><div class="cx-card-t"><b>Urgencias</b><i>Hoy mismo</i></div><p>¿Dolor, golpe o un diente roto? Llámanos y te hacemos un espacio.</p><span class="cx-link">Llamar<svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></li></ul>
+    <div class="cx-pills"><span>También atendemos:</span><em>Resinas</em><em>Endodoncia</em><em>Coronas de zirconia</em><em>Periodoncia</em><em>Odontopediatría</em><em>Extracción de muelas del juicio</em><em>Guardas para bruxismo</em></div>
+    <p class="cx-note">*Los precios pueden cambiar según tu caso y te los confirmamos en tu valoración. Aceptamos efectivo, tarjetas de débito y crédito.</p></section>
+<section class="cx-prices cx-sec"><div class="cx-prices-in"><div class="cx-prices-copy"><h2>Precios claros, sin sorpresas</h2><p>Precios de referencia. Te confirmamos el tuyo en tu valoración, antes de empezar.</p><span class="cx-btn">Agenda tu cita</span></div><ul><li><span>Valoración dental</span><i aria-hidden="true"></i><b>Sin costo</b></li><li><span>Limpieza dental</span><i aria-hidden="true"></i><b>$700</b></li><li><span>Alineadores transparentes</span><i aria-hidden="true"></i><b>Valoración sin costo</b></li><li><span>Implantes dentales</span><i aria-hidden="true"></i><b>Desde $14,500</b></li><li><span>Blanqueamiento</span><i aria-hidden="true"></i><b>$3,800</b></li><li><span>Urgencias</span><i aria-hidden="true"></i><b>Hoy mismo</b></li></ul></div></section>
+<section class="cx-finder cx-sec"><div class="cx-panel cx-finder-in"><div><h2>¿Qué necesitas?</h2><p>Elige una opción y te decimos cómo empezar.</p></div>
+    <div class="cx-finder-opts" role="radiogroup" aria-label="Servicio"><button type="button" role="radio" aria-checked="true" data-cx-pick="0">Valoración dental</button><button type="button" role="radio" aria-checked="false" data-cx-pick="1">Limpieza dental</button><button type="button" role="radio" aria-checked="false" data-cx-pick="2">Alineadores transparentes</button><button type="button" role="radio" aria-checked="false" data-cx-pick="3">Implantes dentales</button><button type="button" role="radio" aria-checked="false" data-cx-pick="4">Blanqueamiento</button><button type="button" role="radio" aria-checked="false" data-cx-pick="5">Urgencias</button></div>
+    <div class="cx-finder-out" aria-live="polite"><div data-cx-res="0"><b>Valoración dental</b><i>Sin costo</i><p>Revisamos dientes y encías, y te tomamos radiografía. Sales con tu presupuesto.</p><span class="cx-btn"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Quiero agendar</span></div><div data-cx-res="1" hidden><b>Limpieza dental</b><i>$700</i><p>Retira el sarro y la placa que no quita el cepillado. Se recomienda 2 veces al año.</p><span class="cx-btn"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Quiero agendar</span></div><div data-cx-res="2" hidden><b>Alineadores transparentes</b><i>Valoración sin costo</i><p>Casi no se notan y te los puedes quitar para comer.</p><span class="cx-btn"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Quiero agendar</span></div><div data-cx-res="3" hidden><b>Implantes dentales</b><i>Desde $14,500</i><p>Reemplaza el diente que te falta con una pieza fija.</p><span class="cx-btn"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Quiero agendar</span></div><div data-cx-res="4" hidden><b>Blanqueamiento</b><i>$3,800</i><p>Dientes más blancos en dos sesiones.</p><span class="cx-btn"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Quiero agendar</span></div><div data-cx-res="5" hidden><b>Urgencias</b><i>Hoy mismo</i><p>¿Dolor, golpe o un diente roto? Llámanos y te hacemos un espacio.</p><span class="cx-btn"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Quiero agendar</span></div></div></div></section>
+<section class="cx-offers cx-sec"><div class="cx-head"><div><h2>Paquetes para empezar</h2><p>Precios cerrados, sin letras chiquitas.</p></div></div><div class="cx-offer-list"><div class="cx-offer"><em>Para empezar</em><b>Revisión completa</b><p>Valoración, radiografía digital y presupuesto por escrito.</p><div class="cx-offer-p"><strong>Sin costo</strong></div><span class="cx-btn cx-btn--line">Lo quiero</span></div><div class="cx-offer cx-offer--hl"><em>El más pedido</em><b>Limpieza + blanqueamiento</b><p>Limpieza profunda y blanqueamiento en consultorio en dos sesiones.</p><div class="cx-offer-p"><s>$4,500</s><strong>$3,990</strong></div><span class="cx-btn">Lo quiero</span></div><div class="cx-offer"><b>Plan familiar de limpieza</b><p>Limpieza para 4 integrantes. Ideal para regreso a clases.</p><div class="cx-offer-p"><strong>$2,400</strong></div><span class="cx-btn cx-btn--line">Lo quiero</span></div></div><p class="cx-note">Precios de ejemplo para el concepto.</p></section>
+<section class="cx-ai cx-sec" data-sec="chat"><div class="cx-ai-in"><div class="cx-ai-copy"><span class="cx-kicker"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5c.6 4 2.4 6 6.5 6.5-4.1.6-5.9 2.5-6.5 6.5-.6-4-2.4-5.9-6.5-6.5 4.1-.5 5.9-2.5 6.5-6.5ZM18.5 15.5c.3 1.6 1 2.3 2.5 2.5-1.5.3-2.2 1-2.5 2.5-.3-1.5-1-2.2-2.5-2.5 1.5-.2 2.2-.9 2.5-2.5Z"/></svg>Asistente con IA</span><h2>Resuelve tus dudas y aparta tu cita, a cualquier hora</h2><p>Nuestro asistente responde al momento con precios, horarios y ubicación, y aparta tu cita. Si tu caso necesita a la doctora, te pasa con recepción por WhatsApp.</p>
+      <ul class="cx-checks"><li><svg class="cx-ico-c" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17.5 19.5 7"/></svg><span>Precios, horarios y ubicación al momento</span></li><li><svg class="cx-ico-c" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17.5 19.5 7"/></svg><span>Aparta tu cita sin esperar respuesta</span></li><li><svg class="cx-ico-c" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17.5 19.5 7"/></svg><span>Atiende de noche y en fin de semana</span></li><li><svg class="cx-ico-c" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17.5 19.5 7"/></svg><span>Te pasa con recepción cuando lo necesitas</span></li></ul>
+      <p class="cx-ai-try"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z"/></svg>Pruébalo: escribe una pregunta en el chat.</p></div>
+    <div class="cx-phone"><div class="cx-phone-top"><span class="cx-avatar" aria-hidden="true"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5c.6 4 2.4 6 6.5 6.5-4.1.6-5.9 2.5-6.5 6.5-.6-4-2.4-5.9-6.5-6.5 4.1-.5 5.9-2.5 6.5-6.5ZM18.5 15.5c.3 1.6 1 2.3 2.5 2.5-1.5.3-2.2 1-2.5 2.5-.3-1.5-1-2.2-2.5-2.5 1.5-.2 2.2-.9 2.5-2.5Z"/></svg></span><div><b>Clínica Arrayán</b><small>Asistente · responde al momento</small></div></div>
+      <div class="cx-phone-log" data-cx-log aria-live="polite"></div>
+      <form class="cx-ask" data-cx-ask inert><input name="q" placeholder="Escribe tu pregunta…" autocomplete="off" aria-label="Escribe tu pregunta al asistente"><button type="submit" aria-label="Enviar"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form></div></div></section>
+<section class="cx-process cx-sec"><div class="cx-head"><div><h2>Cómo es tu primera visita</h2><p>Sin sorpresas: sabes qué tienes y cuánto cuesta antes de empezar.</p></div></div><ol><li><span class="cx-num">1</span><b>Valoración</b><p>Revisamos dientes y encías y te tomamos radiografía digital. Dura unos 40 minutos.</p></li><li><span class="cx-num">2</span><b>Plan por escrito</b><p>Te explicamos tus opciones y te damos tu presupuesto por etapas.</p></li><li><span class="cx-num">3</span><b>Tratamiento a tu ritmo</b><p>Avanzas por etapas, según tu tiempo y tu presupuesto, con meses sin intereses.</p></li><li><span class="cx-num">4</span><b>Seguimiento</b><p>Te recordamos tus citas de control por WhatsApp.</p></li></ol></section>
+<section class="cx-team cx-sec" data-sec="team"><div class="cx-head"><div><h2>Quién te atiende</h2><p>Cada tratamiento lo hace un especialista con cédula, no pasantes. La clínica la dirige la Dra. Valeria Ríos, especialista en rehabilitación oral, con más de 15 años en Providencia.</p></div></div>
+    <ul class="cx-people"><li><div class="cx-person-img" role="img" aria-label="Dra. Valeria Ríos" style="background-image:url('/img/doc.jpg')"></div><div class="cx-person-t"><b>Dra. Valeria Ríos</b><span>Rehabilitación oral · Directora</span><small>Cédula 4512378</small></div></li><li><div class="cx-person-img" role="img" aria-label="Dr. Andrés Medina" style="background-image:url('/img/team-ortodoncia.jpg')"></div><div class="cx-person-t"><b>Dr. Andrés Medina</b><span>Ortodoncia y alineadores</span><small>Cédula 6639012</small></div></li><li><div class="cx-person-img" role="img" aria-label="Dra. Paola Núñez" style="background-image:url('/img/team-pediatria.jpg')"></div><div class="cx-person-t"><b>Dra. Paola Núñez</b><span>Odontopediatría</span><small>Cédula 8120457</small></div></li></ul>
+    <p class="cx-note">Personas ficticias del ejemplo</p></section>
+<section class="cx-tech cx-sec"><div class="cx-tech-in"><div class="cx-tech-img" role="img" aria-label="Radiografía digital en pantalla" style="background-image:url('/img/t-valoracion.jpg')"></div><div class="cx-tech-copy"><h2>Tecnología que se nota en tu tratamiento</h2><p>Equipo digital para que veas lo que tienes, entiendas tus opciones y tu tratamiento dure menos.</p><div class="cx-tech-grid"><div><svg class="cx-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16M4 12h16"/></svg><b>Radiografía digital</b><span>Menos radiación y la ves en pantalla al momento.</span></div><div><svg class="cx-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5c.6 4 2.4 6 6.5 6.5-4.1.6-5.9 2.5-6.5 6.5-.6-4-2.4-5.9-6.5-6.5 4.1-.5 5.9-2.5 6.5-6.5ZM18.5 15.5c.3 1.6 1 2.3 2.5 2.5-1.5.3-2.2 1-2.5 2.5-.3-1.5-1-2.2-2.5-2.5 1.5-.2 2.2-.9 2.5-2.5Z"/></svg><b>Escáner intraoral</b><span>Adiós a las pastas: tomamos la impresión de tus dientes en 3D.</span></div><div><svg class="cx-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.5 3.2 8 7.5 9.5 4.3-1.5 7.5-5 7.5-9.5V6L12 3ZM9 12l2 2 4-4"/></svg><b>Esterilización certificada</b><span>Instrumental esterilizado y sellado para cada paciente.</span></div><div><svg class="cx-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7a4.3 4.3 0 0 1 7.5 2.8C19.5 15.4 12 20 12 20Z"/></svg><b>Anestesia sin dolor</b><span>Anestesia tópica y aplicación lenta para que no duela.</span></div></div></div></div></section>
+<section class="cx-gallery cx-sec"><div class="cx-head"><div><h2>Conoce la clínica</h2><p>Consultorios con luz natural, equipo digital y una sala de espera tranquila en Providencia.</p></div></div><div class="cx-mosaic"><div class="cx-tile cx-tile--0" role="img" aria-label="Consultorio" style="background-image:url('/img/room.jpg')"></div><div class="cx-tile cx-tile--1" role="img" aria-label="Revisión de radiografía" style="background-image:url('/img/t-valoracion.jpg')"></div><div class="cx-tile cx-tile--2" role="img" aria-label="Recepción" style="background-image:url('/img/reception.jpg')"></div><div class="cx-tile cx-tile--3" role="img" aria-label="Limpieza dental" style="background-image:url('/img/t-limpieza.jpg')"></div><div class="cx-tile cx-tile--4" role="img" aria-label="Fachada de la clínica" style="background-image:url('/img/facade.jpg')"></div><div class="cx-tile cx-tile--5" role="img" aria-label="Consulta con la doctora" style="background-image:url('/img/desk.jpg')"></div></div></section>
+<section class="cx-reviews cx-sec" data-sec="reviews"><div class="cx-head"><div><h2>Lo que dicen nuestros pacientes</h2><p class="cx-rating"><span class="cx-stars" aria-hidden="true">★★★★★</span><b>4.9</b><span>186 reseñas en Google</span></p></div></div>
+    <div class="cx-rev-list"><figure class="cx-rev"><span class="cx-stars" aria-label="5 de 5">★★★★★</span><blockquote>Muy buena atención, la doctora Valeria me explicó todo el tratamiento con calma y el precio desde el principio. Súper recomendable 👍</blockquote><figcaption><span class="cx-avatar" aria-hidden="true">M</span><b>Mariana G.</b><small>Alineadores, hace 2 semanas</small></figcaption></figure><figure class="cx-rev"><span class="cx-stars" aria-label="5 de 5">★★★★★</span><blockquote>Fui por una urgencia un sábado, no tenía cita pero me hicieron un espacio y ese mismo día se me quitó el dolor. Gracias!!</blockquote><figcaption><span class="cx-avatar" aria-hidden="true">J</span><b>Jorge R.</b><small>Urgencia, hace 1 mes</small></figcaption></figure><figure class="cx-rev"><span class="cx-stars" aria-label="5 de 5">★★★★★</span><blockquote>Llevo a mis hijos desde hace años, siempre son puntuales y el consultorio está muy limpio.</blockquote><figcaption><span class="cx-avatar" aria-hidden="true">L</span><b>Lucía M.</b><small>Limpieza, hace 3 meses</small></figcaption></figure></div>
+    <p class="cx-note">Reseñas de ejemplo para el concepto</p></section>
+<section class="cx-pay cx-sec"><div class="cx-pay-in"><div><h2>Paga como te acomode</h2><p>Hasta 6 meses sin intereses en tratamientos mayores a $1,200.</p></div><div class="cx-pay-lists"><div class="cx-chips"><span><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3zM3 10h18M7 14.5h4"/></svg>Efectivo</span><span><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3zM3 10h18M7 14.5h4"/></svg>Visa y Mastercard</span><span><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3zM3 10h18M7 14.5h4"/></svg>American Express</span><span><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3zM3 10h18M7 14.5h4"/></svg>Transferencia</span><span><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3zM3 10h18M7 14.5h4"/></svg>3 y 6 MSI</span></div><p class="cx-pay-l">Aseguradoras</p><div class="cx-chips"><span><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.5 3.2 8 7.5 9.5 4.3-1.5 7.5-5 7.5-9.5V6L12 3ZM9 12l2 2 4-4"/></svg>GNP</span><span><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.5 3.2 8 7.5 9.5 4.3-1.5 7.5-5 7.5-9.5V6L12 3ZM9 12l2 2 4-4"/></svg>AXA</span><span><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 6v5.5c0 4.5 3.2 8 7.5 9.5 4.3-1.5 7.5-5 7.5-9.5V6L12 3ZM9 12l2 2 4-4"/></svg>MetLife</span></div></div></div></section>
+<section class="cx-faq cx-sec"><div class="cx-head"><div><h2>Preguntas frecuentes</h2></div></div><div class="cx-faq-list"><details open><summary>¿Cuánto cuesta la primera cita?<span aria-hidden="true"></span></summary><p>La valoración es sin costo e incluye radiografía. Sales con tu diagnóstico y tu presupuesto por escrito.</p></details><details><summary>¿Atienden urgencias?<span aria-hidden="true"></span></summary><p>Sí, el mismo día en horario de la clínica: dolor fuerte, infección, diente roto o corona caída.</p></details><details><summary>¿Puedo pagar a meses sin intereses?<span aria-hidden="true"></span></summary><p>Sí, hasta 6 MSI con tarjetas participantes en tratamientos mayores a $1,200.</p></details><details><summary>¿Atienden niños?<span aria-hidden="true"></span></summary><p>Sí, la Dra. Paola Núñez es odontopediatra y atiende desde los 2 años.</p></details><details><summary>¿Hay estacionamiento?<span aria-hidden="true"></span></summary><p>Sí, gratis y frente a la clínica.</p></details></div></section>
+<section class="cx-visit cx-sec" data-sec="visit"><div class="cx-visit-card"><div class="cx-visit-img" role="img" aria-label="Fachada de la clínica" style="background-image:url('/img/facade.jpg')"></div><div class="cx-visit-info"><h2>Visítanos</h2>
+      <p class="cx-addr"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/></svg>Av. Los Arrayanes 1240, local 3, Col. Providencia, Guadalajara</p><p class="cx-zones">Nos visitan de Providencia, Colomos, Chapalita, Zapopan centro y Country Club.</p>
+      <dl class="cx-hours"><dt>Lunes a viernes</dt><dd>9:00 a 20:00</dd><dt>Sábados</dt><dd>9:00 a 14:00</dd><dt>Estacionamiento</dt><dd>Gratis, frente a la clínica</dd></dl>
+      <div class="cx-ctas"><span class="cx-btn"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/></svg>Abrir en Google Maps</span><span class="cx-btn cx-btn--ghost"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>WhatsApp</span></div></div></div>
+    </section>
+<section class="cx-book cx-sec"><div class="cx-panel cx-book-in"><div class="cx-book-copy"><h2>Agenda tu cita</h2><p>Déjanos tus datos y te confirmamos por WhatsApp.</p></div>
+    <form class="cx-form" data-cx-form inert><label><span>Nombre</span><input name="n" autocomplete="name" required></label><label><span>Teléfono</span><input name="t" type="tel" autocomplete="tel" inputmode="tel"></label>
+      <label class="cx-wide"><span>¿Qué necesitas?</span><select name="s"><option value="">Elige una opción</option><option>Valoración dental</option><option>Limpieza dental</option><option>Alineadores transparentes</option><option>Implantes dentales</option><option>Blanqueamiento</option><option>Urgencias</option><option>Otro</option></select></label>
+      <label><span>Día que prefieres</span><input name="d" placeholder="Ej.: martes en la tarde"></label><label><span>Comentarios</span><input name="m"></label>
+      <button class="cx-btn cx-btn--lg cx-wide" type="submit"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Enviar y agendar</button><small class="cx-wide">Al enviar aceptas nuestro aviso de privacidad.</small></form></div></section>
+<footer class="cx-foot"><div class="cx-foot-cols"><div><span class="cx-foot-logo"><img src="/img/arrayan-logo.svg" alt="Clínica Dental Arrayán"></span><p>Av. Los Arrayanes 1240, local 3, Col. Providencia, Guadalajara</p></div>
+      <div><b>Servicios</b><span>Valoración dental</span><span>Limpieza dental</span><span>Alineadores transparentes</span><span>Implantes dentales</span><span>Blanqueamiento</span><span>Urgencias</span></div>
+      <div><b>Contacto</b><span class="">33 0000 0000</span><span class="">WhatsApp</span><span class="">hola@clinicaarrayan.mx</span><span>Lunes a viernes: 9:00 a 20:00</span><span>Sábados: 9:00 a 14:00</span></div></div>
+    <div class="cx-foot-legal"><span>© 2026 Clínica Dental Arrayán</span><span>Aviso de privacidad</span><span>Aviso COFEPRIS 2514XXXXX (ejemplo)</span><span>Responsable sanitario: Dra. Valeria Ríos, cédula 4512378</span><span>Ejemplo de rediseño de Ceiba Labs</span></div></footer>
+<div class="cx-fab"><div class="cx-chat" role="region" aria-label="Chat de Clínica Dental Arrayán"><div class="cx-chat-top"><div><b>Clínica Arrayán</b><span>Te respondemos aquí o por WhatsApp</span></div><button type="button" data-cx-chat="toggle" aria-label="Cerrar chat">×</button></div>
+      <div class="cx-chat-log"><p class="cx-msg">Hola 👋 ¿En qué te podemos ayudar?</p></div>
+      <div class="cx-chat-sug"><button type="button" data-cx-q data-a="Sí, atendemos urgencias el mismo día. Escríbenos por WhatsApp o llámanos y te hacemos un espacio lo antes posible." data-act="wa">¿Atienden urgencias hoy?</button><button type="button" data-cx-q data-a="Es sin costo 😊 Revisamos tus dientes y encías, te tomamos radiografía y te damos tu presupuesto. ¿Te agendo?" data-act="book">¿Cuánto cuesta la valoración?</button><button type="button" data-cx-q data-a="Sí, hasta 6 MSI con tarjetas participantes en tratamientos mayores a $1,200." data-act="wa">¿Tienen meses sin intereses?</button></div>
+      <form class="cx-ask cx-ask--chat" data-cx-ask inert><input name="q" placeholder="Escribe tu pregunta…" autocomplete="off" aria-label="Escribe tu pregunta"><button type="submit" aria-label="Enviar"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></form></div>
+    
+    <button type="button" class="cx-chat-btn" data-cx-chat="toggle" aria-expanded="false" aria-label="¿Dudas? Pregúntanos"><svg class="cx-ico-s" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z"/></svg><span class="cx-chat-l">¿Dudas? Pregúntanos</span></button>
+    <span class="cx-wa-fab" aria-label="WhatsApp"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg></span></div>
+  <div class="cx-sticky"><span class="cx-btn">Agenda tu cita</span><span class="cx-btn cx-btn--ghost"><svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>WhatsApp</span></div>
+<script type="application/json" class="cx-kb">{"name":"Clínica Dental Arrayán","wa":"523300000000","book":"","maps":"","address":"Av. Los Arrayanes 1240, local 3, Col. Providencia, Guadalajara","hours":[["Lunes a viernes","9:00 a 20:00"],["Sábados","9:00 a 14:00"],["Estacionamiento","Gratis, frente a la clínica"]],"slots":["Hoy 18:30","Mañana 10:00","Mañana 12:30"],"faq":[["¿Cuánto cuesta la primera cita?","La valoración es sin costo e incluye radiografía. Sales con tu diagnóstico y tu presupuesto por escrito."],["¿Atienden urgencias?","Sí, el mismo día en horario de la clínica: dolor fuerte, infección, diente roto o corona caída."],["¿Puedo pagar a meses sin intereses?","Sí, hasta 6 MSI con tarjetas participantes en tratamientos mayores a $1,200."],["¿Atienden niños?","Sí, la Dra. Paola Núñez es odontopediatra y atiende desde los 2 años."],["¿Hay estacionamiento?","Sí, gratis y frente a la clínica."],["¿Atienden urgencias hoy?","Sí, atendemos urgencias el mismo día. Escríbenos por WhatsApp o llámanos y te hacemos un espacio lo antes posible."],["¿Cuánto cuesta la valoración?","Es sin costo 😊 Revisamos tus dientes y encías, te tomamos radiografía y te damos tu presupuesto. ¿Te agendo?"],["¿Tienen meses sin intereses?","Sí, hasta 6 MSI con tarjetas participantes en tratamientos mayores a $1,200."]],"services":[["Valoración dental","Sin costo","Revisamos dientes y encías, y te tomamos radiografía. Sales con tu presupuesto."],["Limpieza dental","$700","Retira el sarro y la placa que no quita el cepillado. Se recomienda 2 veces al año."],["Alineadores transparentes","Valoración sin costo","Casi no se notan y te los puedes quitar para comer."],["Implantes dentales","Desde $14,500","Reemplaza el diente que te falta con una pieza fija."],["Blanqueamiento","$3,800","Dientes más blancos en dos sesiones."],["Urgencias","Hoy mismo","¿Dolor, golpe o un diente roto? Llámanos y te hacemos un espacio."]],"more":["Resinas","Endodoncia","Coronas de zirconia","Periodoncia","Odontopediatría","Extracción de muelas del juicio","Guardas para bruxismo"],"pay":["Efectivo","Visa y Mastercard","American Express","Transferencia","3 y 6 MSI","GNP","AXA","MetLife"],"today":["Urgencias el mismo día, en horario de la clínica","Fuera de horario te respondemos por WhatsApp para apartar tu cita","Valoración sin costo con radiografía","Hasta 6 meses sin intereses con tarjetas participantes"]}</script>
+</div></div></div></div>
+      <div class="ix-card ix-toast ix-in d4" aria-hidden="true"><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0B1514" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h16v13H4zM4 10h16M8.5 3.5v4M15.5 3.5v4"/></svg></span><div><b>Nueva cita</b><small>Limpieza · mañana 10:00</small></div></div>
+      <div class="ix-card ix-prop ix-in d4" aria-hidden="true"><span>Propuesta</span><b>Lista para Clínica Arrayán</b><div class="bar"><i></i></div></div>
+      <div class="ix-card ix-chat ix-in d3" aria-hidden="true">
+        <div class="ix-chat-top"><svg viewBox="0 0 24 24"><use href="#wa"/></svg><div><b>Clínica Arrayán</b><small>Asistente · responde al momento</small></div></div>
+        <div class="ix-chat-log" id="ix-chat-log"></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ SUBSCRIPTION ============ -->
-<section class="band section" id="suscripcion" aria-labelledby="sub-title">
+<div class="ix-marquee" aria-hidden="true"><div id="ix-marq"><span>Diseño a la medida de tu rubro</span><span>Asistente de WhatsApp</span><span>Citas en línea</span><span>Hosting y seguridad</span><span>Cambios cada mes</span><span>SEO para tu colonia</span><span>Meses sin intereses</span><span>Aviso de privacidad</span><span>Respuestas a cualquier hora</span><span>Precios en pesos</span></div></div>
+
+<section class="band band--light section" aria-labelledby="svc-title">
   <div class="wrap">
-    <div class="sub-head">
-      <h2 class="h2" id="sub-title">Primero ves tu página. Después decides.</h2>
-      <p class="lede">Pagas un monto inicial para empezar y una mensualidad que incluye diseño, publicación y mantenimiento. Tu página no se queda olvidada.</p>
+    <p class="ix-kick" data-reveal>Qué hacemos</p>
+    <h2 class="ix-h" id="svc-title" data-reveal data-delay="1">Dos servicios, un mismo equipo.</h2>
+    <p class="ix-sub" data-reveal data-delay="2">Contrata uno o los dos. Juntos funcionan mejor: la página atrae al cliente y el asistente lo atiende.</p>
+    <div class="ix-services">
+      <article class="ix-svc" data-reveal>
+        <div class="ix-mini ix-mini--web" aria-hidden="true"><div class="w"><i class="t"></i><div class="h"><b></b><b></b><em></em></div><i class="p"></i></div></div>
+        <h3>Páginas web por suscripción</h3>
+        <p>Te la diseñamos, la publicamos y la mantenemos. Pagas un inicio y una mensualidad fija, con cambios incluidos cada mes.</p>
+        <ul><li>Pensada para tu tipo de negocio y para el celular</li><li>Botón para agendar o cotizar y WhatsApp a la vista</li><li>Hosting, seguridad, respaldos y cambios cada mes</li><li>Ves tu propuesta antes de pagar</li></ul>
+        <p class="ix-price">Desde <b>$3,490</b> de inicio y <b>$1,490 al mes</b></p>
+        <a class="btn btn-line" href="/webs">Ver páginas web <span class="arrow" aria-hidden="true">→</span></a>
+      </article>
+      <article class="ix-svc ix-svc--dark" data-reveal data-delay="1">
+        <div class="ix-mini ix-mini--ia" aria-hidden="true"><p class="me">¿Tienen cita hoy?</p><p>Sí, a las 18:30. ¿Te la aparto?</p><p class="me">Sí, gracias</p></div>
+        <h3>Inteligencia artificial</h3>
+        <p>Asistentes que contestan WhatsApp con las respuestas que tú apruebas, y automatizaciones para lo que tu equipo repite todos los días.</p>
+        <ul><li>Asistente de WhatsApp y de tu página</li><li>Aparta citas y toma los datos de cada cliente</li><li>Recordatorios, cotizaciones y seguimiento automáticos</li><li>Empezamos con un diagnóstico de tus procesos</li></ul>
+        <p class="ix-price">Asistente desde <b>$3,990</b> + <b>$1,490 al mes</b> · Diagnóstico <b>$3,900</b></p>
+        <a class="btn btn-primary" href="/ia">Ver inteligencia artificial <span class="arrow" aria-hidden="true">→</span></a>
+      </article>
     </div>
-    <ol class="steps">
-      <li><span class="dot" aria-hidden="true">1</span><h3>Nos mandas tu página o tu Instagram</h3><p>Con eso preparamos cómo quedaría tu nueva página, con tus fotos, servicios y datos.</p><span class="who">Tú: 2 minutos</span></li>
-      <li><span class="dot" aria-hidden="true">2</span><h3>Te la mostramos y decides</h3><p>Si te gusta, eliges un plan y haces el pago inicial. Si no, no pagas nada.</p><span class="who">Tú: decides con la página a la vista</span></li>
-      <li><span class="dot" aria-hidden="true">3</span><h3>La publicamos y nos encargamos</h3><p>Terminamos el resto de la página, la publicamos y cada mes hacemos los cambios que nos pidas.</p><span class="who">Nosotros: cada mes</span></li>
+  </div>
+</section>
+
+<section class="band section ix-roots" aria-labelledby="roots-title">
+  <div class="wrap">
+    <div>
+      <p class="ix-kick" data-reveal>Por qué nos llamamos así</p>
+      <h2 class="ix-h" id="roots-title" data-reveal data-delay="1">Todo conectado, como las raíces de una ceiba.</h2>
+      <p class="ix-sub" data-reveal data-delay="2" style="color:rgba(247,244,235,.75)">Tu página, tu WhatsApp y tu agenda trabajan juntos. El cliente que llega por Google agenda en un toque, y el que escribe de noche recibe respuesta.</p>
+      <p class="ix-story" data-reveal data-delay="3">La ceiba es el árbol sagrado de los mayas: sus raíces y sus ramas unían todo. Así queremos que funcione tu negocio en internet.</p>
+      <div class="ix-nums" id="ix-nums">
+        <div data-reveal><b data-count="24">0</b><span>horas hábiles para tener tu propuesta</span></div>
+        <div data-reveal data-delay="1"><b>$0</b><span>para ver cómo quedaría tu página</span></div>
+        <div data-reveal data-delay="2"><b>24/7</b><span>responde tu asistente de WhatsApp</span></div>
+      </div>
+    </div>
+    <svg class="ix-net" viewBox="0 0 560 520" role="img" aria-label="Tu página, WhatsApp, tu agenda, tu equipo y los reportes, conectados a Ceiba" data-reveal data-delay="1">
+      <defs><linearGradient id="ixLine" x1="0" x2="1"><stop offset="0" stop-color="#0E9F8A"/><stop offset="1" stop-color="#D6FA52"/></linearGradient></defs>
+      <g id="ix-paths">
+        <path id="p1" class="ln" d="M280 260 C 230 200, 160 150, 110 92"/>
+        <path id="p2" class="ln" d="M280 260 C 340 190, 400 150, 450 92"/>
+        <path id="p3" class="ln" d="M280 260 C 200 270, 140 290, 92 300"/>
+        <path id="p4" class="ln" d="M280 260 C 360 280, 420 290, 470 300"/>
+        <path id="p5" class="ln" d="M280 260 C 280 330, 280 390, 280 440"/>
+      </g>
+      <use href="#p1" class="ln-a"/><use href="#p2" class="ln-a"/><use href="#p3" class="ln-a"/><use href="#p4" class="ln-a"/><use href="#p5" class="ln-a"/>
+      <circle r="5" class="pulse"><animateMotion dur="2.6s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#p1"/></animateMotion></circle>
+      <circle r="5" class="pulse"><animateMotion dur="3.1s" begin=".6s" repeatCount="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear"><mpath href="#p2"/></animateMotion></circle>
+      <circle r="5" class="pulse"><animateMotion dur="2.4s" begin="1.1s" repeatCount="indefinite"><mpath href="#p3"/></animateMotion></circle>
+      <circle r="5" class="pulse"><animateMotion dur="2.9s" begin=".3s" repeatCount="indefinite"><mpath href="#p4"/></animateMotion></circle>
+      <circle r="5" class="pulse"><animateMotion dur="2.2s" begin="1.4s" repeatCount="indefinite"><mpath href="#p5"/></animateMotion></circle>
+      <g class="node" transform="translate(30 56)"><rect width="160" height="64" rx="16"/><text x="18" y="29">Tu página</text><text class="sub" x="18" y="47">Te encuentran en Google</text></g>
+      <g class="node" transform="translate(370 56)"><rect width="160" height="64" rx="16"/><text x="18" y="29">WhatsApp</text><text class="sub" x="18" y="47">Responde a cualquier hora</text></g>
+      <g class="node" transform="translate(10 268)"><rect width="150" height="64" rx="16"/><text x="18" y="29">Tu agenda</text><text class="sub" x="18" y="47">Citas sin llamadas</text></g>
+      <g class="node" transform="translate(400 268)"><rect width="150" height="64" rx="16"/><text x="18" y="29">Tu equipo</text><text class="sub" x="18" y="47">Recibe lo importante</text></g>
+      <g class="node" transform="translate(200 440)"><rect width="160" height="64" rx="16"/><text x="18" y="29">Reportes</text><text class="sub" x="18" y="47">Cuántos te contactaron</text></g>
+      <g class="core" transform="translate(280 260)"><circle r="38" class="halo"/><circle r="38"/><g transform="translate(-22 -12) scale(.44)" fill="#0B1514"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></g></g>
+    </svg>
+  </div>
+</section>
+
+<section class="band band--light section" aria-labelledby="how-title">
+  <div class="wrap">
+    <p class="ix-kick" data-reveal>Cómo empezamos</p>
+    <h2 class="ix-h" id="how-title" data-reveal data-delay="1">De tu página de hoy a la nueva, en tres pasos.</h2>
+    <ol class="ix-steps" id="ix-steps">
+      <li><span class="n">1</span><b>Revisamos tu negocio gratis</b><p>Nos mandas tu página, tu Instagram o tu perfil de Google y nos cuentas qué te gustaría resolver.</p></li>
+      <li><span class="n">2</span><b>Te mandamos una propuesta</b><p>En 24 horas hábiles recibes un enlace privado: tu página nueva en pantalla completa, qué automatizaríamos y el precio.</p></li>
+      <li><span class="n">3</span><b>Lo publicamos y lo mantenemos</b><p>Si te gusta, lo activas ahí mismo. Nosotros lo publicamos, lo cuidamos y lo mejoramos cada mes.</p></li>
     </ol>
-    <div class="includes">
-      <div><h3>Qué incluye la mensualidad</h3><p>Lo que cambia entre planes es el número de páginas y cuántos cambios nos puedes pedir al mes.</p></div>
-      <dl class="inc-list">
-        <div><dt>Diseño a medida</dt><dd>Hecho para tu negocio y pensado primero para el celular.</dd></div>
-        <div><dt>Publicación</dt><dd>Hosting, tu dominio (.com o .mx) y certificado de seguridad.</dd></div>
-        <div><dt>Mantenimiento técnico</dt><dd>Actualizaciones, copias de respaldo y monitoreo de caídas.</dd></div>
-        <div><dt>Cambios cada mes</dt><dd>Nos pides cambios de textos, fotos, horarios o precios: hasta 30, 60 o 120 minutos al mes según tu plan.</dd></div>
-        <div><dt>Formas de contacto</dt><dd>Formularios, WhatsApp, mapa y citas o reservas en línea según tu negocio.</dd></div>
-        <div><dt>Una persona a cargo</dt><dd>Hablas con quien diseñó tu página, no con un sistema de tickets.</dd></div>
-      </dl>
-    </div>
   </div>
 </section>
 
-<!-- ============ PRICING ============ -->
-<section class="band section pricing" id="precios" aria-labelledby="price-title">
+<section class="band section" aria-labelledby="ind-title">
   <div class="wrap">
-    <div class="pricing-inner">
-      <div class="price-head">
-        <div><h2 class="h2" id="price-title">Precios claros, en pesos mexicanos.</h2><p class="lede" style="margin-top:16px">Pagas un monto inicial cuando decides empezar y la mensualidad desde que tu página está publicada.</p></div>
-        <a class="btn btn-line" href="#" data-route="/precios">Comparar planes y extras <span class="arrow" aria-hidden="true">→</span></a>
-      </div>
-      <div class="plans" role="list">
-        <div class="plan" role="listitem">
-          <div><h3>Esencial</h3><p class="for">Para que te encuentren y te escriban</p></div>
-          <ul><li>Hasta 3 páginas, pensadas para el celular</li><li>Formulario y botón de WhatsApp</li><li>SEO básico, hosting y mantenimiento</li><li>Hasta 30 minutos de cambios al mes</li></ul>
-          <div class="price-cell"><span class="k">Pago inicial</span><span class="v">$3,490<small>pago único</small></span></div>
-          <div class="price-cell"><span class="k">Mensualidad</span><span class="v">$1,490<small>al mes</small></span></div>
-          <a class="btn btn-line" href="#" data-route="/precios">Ver plan</a>
-        </div>
-        <div class="plan plan--mid" role="listitem">
-          <div><h3>Negocio</h3><p class="for">Para recibir citas y reservas en línea</p></div>
-          <ul><li>Hasta 7 páginas, con todo lo de Esencial</li><li>Conectada con la agenda que ya usas</li><li>Te decimos cuántas personas te escribieron o llamaron desde la página</li><li>Hasta 60 minutos de cambios al mes, por ejemplo horarios, precios o fotos</li></ul>
-          <div class="price-cell"><span class="k">Pago inicial</span><span class="v">$5,490<small>pago único</small></span></div>
-          <div class="price-cell"><span class="k">Mensualidad</span><span class="v">$2,490<small>al mes</small></span></div>
-          <a class="btn btn-line" href="#" data-route="/precios">Ver plan</a>
-        </div>
-        <div class="plan" role="listitem">
-          <div><h3>Avanzado</h3><p class="for">Para mostrar un catálogo que tú mismo actualizas</p></div>
-          <ul><li>Hasta 12 páginas, con todo lo de Negocio</li><li>Catálogo de propiedades, habitaciones o servicios que tú actualizas</li><li>Hasta 120 minutos de cambios al mes</li></ul>
-          <div class="price-cell"><span class="k">Pago inicial</span><span class="v">$8,490<small>pago único</small></span></div>
-          <div class="price-cell"><span class="k">Mensualidad</span><span class="v">$3,990<small>al mes</small></span></div>
-          <a class="btn btn-line" href="#" data-route="/precios">Ver plan</a>
-        </div>
-      </div>
-      <div class="addon-block">
-        <p class="addon-k">Agrega IA a cualquier plan</p>
-        <div class="plan plan--addon">
-          <div><h3><span aria-hidden="true">+ </span>Asistente de WhatsApp</h3><p class="for">Se suma a cualquier plan, o a la página que ya tienes</p></div>
-          <ul><li>Contesta en WhatsApp y en tu página las preguntas de siempre</li><li>Toma los datos para una cita o cotización</li><li>Te pasa con alguien del equipo cuando hace falta</li><li>Hasta 300 conversaciones al mes durante el piloto</li></ul>
-          <div class="price-cell"><span class="k">Pago inicial</span><span class="v">$3,990<small>pago único</small></span></div>
-          <div class="price-cell"><span class="k">Mensualidad</span><span class="v">$1,490<small>al mes</small></span></div>
-          <a class="btn btn-line" href="#ia">Ver cómo funciona</a>
-        </div>
-      </div>
-      <p class="price-foot">Precios de lanzamiento en pesos mexicanos. Es el precio final que pagas. Si aplica algún cargo de Meta o del proveedor de mensajería, lo desglosamos en tu propuesta.</p>
+    <p class="ix-kick" data-reveal>Por tipo de negocio</p>
+    <h2 class="ix-h" id="ind-title" data-reveal data-delay="1">Hecho para tu rubro, no una plantilla cualquiera.</h2>
+    <p class="ix-sub" data-reveal data-delay="2" style="color:rgba(247,244,235,.72)">Cada rubro tiene su plantilla, su lenguaje y lo que necesita para convertir visitas en clientes.</p>
+    <div class="ix-ind" id="ix-ind">
+      <a href="/webs/clinicas" data-reveal><b>Clínicas y consultorios</b><span>Citas, especialistas con cédula, precios claros y COFEPRIS.</span><em>Ver páginas para clínicas →</em></a>
+      <div data-reveal data-delay="1"><b>Restaurantes y cafés</b><span>Menú en el celular, reservaciones y pedidos.</span><em>Muy pronto</em></div>
+      <div data-reveal data-delay="2"><b>Inmobiliarias</b><span>Propiedades que tú actualizas y visitas agendadas.</span><em>Muy pronto</em></div>
+      <div data-reveal data-delay="3"><b>Hoteles y hospedaje</b><span>Habitaciones, tarifas y reservaciones directas.</span><em>Muy pronto</em></div>
+      <div data-reveal data-delay="4"><b>Despachos</b><span>Confianza, servicios claros y asesorías agendadas.</span><em>Muy pronto</em></div>
     </div>
   </div>
 </section>
 
-<!-- ============ INDUSTRIES ============ -->
-<section class="band band--light section" id="industrias" aria-labelledby="ind-title">
+<section class="band band--light section" aria-labelledby="why-title">
   <div class="wrap">
-    <h2 class="h2" id="ind-title">¿Qué tipo de negocio tienes?</h2>
-    <p class="lede" style="margin-top:20px">Cada página está pensada para lo que más necesitas que hagan tus clientes: agendar, reservar, cotizar o escribirte.</p>
-    <div class="ind-grid">
-      <ul class="ind-list" id="ind-list">
-        <li><button class="ind-row" type="button" data-ind="clinicas" aria-pressed="true"><h3>Clínicas</h3><span class="use">Tus pacientes agendan su primera cita sin tener que llamar.<span class="act">→ Agendar cita</span></span></button><a class="ind-link" href="webs-clinicas.html">Ver páginas para clínicas <span aria-hidden="true">→</span></a></li>
-        <li><button class="ind-row" type="button" data-ind="restaurantes" aria-pressed="false"><h3>Restaurantes</h3><span class="use">Tus clientes ven el menú en el celular y reservan mesa.<span class="act">→ Reservar mesa</span></span></button><a class="ind-link" href="#" data-route="/webs/restaurantes">Ver páginas para restaurantes <span aria-hidden="true">→</span></a></li>
-        <li><button class="ind-row" type="button" data-ind="inmobiliarias" aria-pressed="false"><h3>Inmobiliarias</h3><span class="use">Los interesados filtran por zona y precio, y agendan la visita desde la ficha.<span class="act">→ Agendar visita</span></span></button><a class="ind-link" href="#" data-route="/webs/inmobiliarias">Ver páginas para inmobiliarias <span aria-hidden="true">→</span></a></li>
-        <li><button class="ind-row" type="button" data-ind="hoteles" aria-pressed="false"><h3>Hoteles</h3><span class="use">Tus huéspedes ven las fechas libres y reservan directo contigo, sin pasar por otras plataformas.<span class="act">→ Ver disponibilidad</span></span></button><a class="ind-link" href="#" data-route="/webs/hoteles">Ver páginas para hoteles <span aria-hidden="true">→</span></a></li>
-        <li><button class="ind-row" type="button" data-ind="despachos" aria-pressed="false"><h3>Despachos</h3><span class="use">Tus clientes te cuentan su caso antes de la primera llamada.<span class="act">→ Enviar consulta</span></span></button><a class="ind-link" href="#" data-route="/webs/despachos">Ver páginas para despachos <span aria-hidden="true">→</span></a></li>
-      </ul>
-      <aside class="ind-preview" aria-label="Vista de la acción principal en el celular">
-        <div class="ind-panel" data-panel="clinicas"><p class="cap">Clínicas · cita de primera visita</p>
-          <div class="phone"><span class="pt">Agendar cita</span><div><p class="lb">Tratamiento</p><div class="inp">Valoración con radiografía <span>⌄</span></div></div><div><p class="lb">Día</p><div class="opt"><span>Mié 18</span><span class="on">Jue 19</span><span>Vie 20</span></div></div><div><p class="lb">Hora</p><div class="opt"><span>16:30</span><span class="on">18:00</span><span>19:15</span></div></div><span class="go">Confirmar jueves 18:00</span></div></div>
-        <div class="ind-panel" data-panel="restaurantes" hidden><p class="cap">Restaurantes · reserva de mesa</p>
-          <div class="phone"><span class="pt">Reservar mesa</span><div><p class="lb">Personas</p><div class="opt"><span>2</span><span class="on">4</span><span>6</span><span>8+</span></div></div><div><p class="lb">Viernes 20</p><div class="opt"><span>20:00</span><span class="on">20:30</span><span>21:00</span><span>21:30</span></div></div><div><p class="lb">Ocasión</p><div class="inp">Cumpleaños <span>⌄</span></div></div><span class="go">Reservar para 4 a las 20:30</span></div></div>
-        <div class="ind-panel" data-panel="inmobiliarias" hidden><p class="cap">Inmobiliarias · ficha con visita</p>
-          <div class="phone"><span class="pt">Departamentos en arriendo</span><div class="opt"><span class="on">Roma Norte</span><span>2 dormitorios</span><span>Hasta tu presupuesto</span></div><div class="card"><i></i><span><b>Depto. 2D · 64 m²</b>Cerca de metro · <u>Agendar visita</u></span></div><div class="card"><i></i><span><b>Depto. 2D · 58 m²</b>Con estacionamiento · <u>Agendar visita</u></span></div></div></div>
-        <div class="ind-panel" data-panel="hoteles" hidden><p class="cap">Hoteles · disponibilidad directa</p>
-          <div class="phone"><span class="pt">Tu estadía</span><div class="frow" style="gap:8px;grid-template-columns:1fr 1fr"><div><p class="lb">Llegada</p><div class="inp">12 dic</div></div><div><p class="lb">Salida</p><div class="inp">15 dic</div></div></div><div><p class="lb">Habitación</p><div class="opt"><span class="on">Doble</span><span>Suite</span><span>Familiar</span></div></div><span class="go">Ver disponibilidad</span></div></div>
-        <div class="ind-panel" data-panel="despachos" hidden><p class="cap">Despachos · consulta con el caso descrito</p>
-          <div class="phone"><span class="pt">Cuéntanos tu caso</span><div><p class="lb">Área</p><div class="opt"><span>Laboral</span><span class="on">Tributaria</span><span>Familia</span></div></div><div><p class="lb">Qué pasó</p><div class="inp tall">Me llegó un requerimiento del SAT por la declaración del año pasado…</div></div><span class="go">Enviar consulta</span></div></div>
-        <a class="link panel-link" id="ind-page-link" href="webs-clinicas.html">Ver la página de Clínicas <span class="arrow" aria-hidden="true">→</span></a>
-      </aside>
+    <p class="ix-kick" data-reveal>Por qué Ceiba</p>
+    <h2 class="ix-h" id="why-title" data-reveal data-delay="1">Lo que nos hace distintos.</h2>
+    <div class="ix-why">
+      <div data-reveal><span class="ic"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.8"/></svg></span><b>Ves el resultado antes de pagar</b><p>Tu propuesta trae tu página nueva en pantalla completa, no un presupuesto en PDF.</p></div>
+      <div data-reveal data-delay="1"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 6.5h18v11H3zM3 10h18M7 14.5h4"/></svg></span><b>Precio fijo, en pesos</b><p>Un pago inicial y una mensualidad. Es el precio final, sin cargos sorpresa.</p></div>
+      <div data-reveal data-delay="2"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4.5 20.5c.8-3.6 3.8-5.5 7.5-5.5s6.7 1.9 7.5 5.5"/></svg></span><b>Un equipo que lo mantiene</b><p>No te dejamos con una plantilla y una contraseña: hacemos los cambios por ti cada mes.</p></div>
+      <div data-reveal data-delay="3"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5Z"/></svg></span><b>Pensado para Latinoamérica</b><p>WhatsApp primero, meses sin intereses y el lenguaje de tus clientes.</p></div>
+    </div>
+    <h2 class="ix-h" id="faq-title" data-reveal style="font-size:clamp(30px,3.4vw,44px);margin-top:96px">Preguntas frecuentes.</h2>
+    <div class="ix-faq" data-reveal data-delay="1">
+      <details><summary>¿Puedo contratar solo la inteligencia artificial?</summary><p>Sí. El asistente de WhatsApp y las automatizaciones se contratan por separado. Si tu página no es de Ceiba, en el diagnóstico revisamos cómo conectarlos.</p></details>
+      <details><summary>¿Qué pasa si no me gusta la propuesta?</summary><p>No pagas nada. Además, tu propuesta incluye una ronda de ajustes antes de activar: colores, tipografía, textos o fotos.</p></details>
+      <details><summary>¿Cuánto tarda?</summary><p>La propuesta llega en 24 horas hábiles. Los tiempos de construcción y publicación te los confirmamos en la propuesta, según lo que incluya.</p></details>
+      <details><summary>¿En qué países trabajan?</summary><p>Empezamos en México, con precios en pesos mexicanos.</p></details>
     </div>
   </div>
 </section>
 
-<!-- ============ AI ============ -->
-<section class="band section" id="ia" aria-labelledby="ia-title">
-  <div class="wrap ai-grid">
-    <div class="ai-copy">
-      <h2 class="h2" id="ia-title">Tu WhatsApp responde mientras tú atiendes.</h2>
-      <div><a class="link" href="#" data-route="/ia">Conoce cómo usamos la IA <span class="arrow" aria-hidden="true">→</span></a></div>
-    </div>
-    <div class="chat" aria-label="Ejemplo de conversación con el asistente de una clínica">
-      <div class="chat-top"><b>Asistente · Clínica Arrayán</b><span>Ejemplo ficticio</span></div>
-      <div class="chat-body" id="chat-body">
-        <div class="msg out"><small>Paciente</small>Hola, ¿tienen hora mañana en la tarde para una limpieza?</div>
-        <div class="msg in"><small>Asistente</small>Hola. La limpieza dura 45 minutos y mañana jueves atendemos de 9:00 a 20:00. ¿Qué horario prefieres?</div>
-        <div class="msg out"><small>Paciente</small>A las 18:00. Otra cosa: me pusieron un implante en otra clínica y se mueve un poco.</div>
-        <div class="msg in"><small>Asistente</small>Anoté tu solicitud de limpieza para el jueves a las 18:00. Lo del implante tiene que verlo el equipo clínico, así que se lo paso a recepción junto con tu mensaje. Te confirman por este mismo chat.</div>
-        <div class="handoff"><b>Pasado a recepción</b><dl><dt>Motivo</dt><dd>Implante de otra clínica con movilidad</dd><dt>Solicitud</dt><dd>Limpieza · jue 18:00</dd><dt>Pendiente</dt><dd>Confirmar horario y revisar el implante</dd></dl></div>
-      </div>
-      <div class="chat-foot"><span>Conversación de ejemplo</span><button type="button" id="chat-replay">Ver de nuevo</button></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ FAQ ============ -->
-<section class="band band--light section" id="preguntas" aria-labelledby="faq-title">
-  <div class="wrap faq-grid">
-    <h2 class="h2" id="faq-title">Preguntas frecuentes</h2>
-    <div class="faq" id="faq">
-      <div class="faq-item open"><h3><button class="faq-q" type="button" aria-expanded="true" aria-controls="fa1" id="fq1">¿Tengo que pagar por la propuesta?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa1" role="region" aria-labelledby="fq1"><div><p>No, es gratis. Solo pagas el monto inicial y la mensualidad si decides activar tu página.</p></div></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa2" id="fq2">¿Qué incluye la propuesta?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa2" role="region" aria-labelledby="fq2"><div><p>Un enlace privado donde ves tu página de hoy junto a cómo quedaría, en computadora y en celular. También incluye qué mejoras, el plan que te recomendamos, el precio y hasta cuándo es válida. Desde ahí puedes activarla o agendar una llamada de 15 minutos.</p></div></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa3" id="fq3">No tengo textos ni fotos. ¿Puedo pedirla igual?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa3" role="region" aria-labelledby="fq3"><div><p>Sí. Partimos de lo que ya tienes: tu página, tus redes y tu perfil de Google. Si hace falta, te decimos qué fotos conviene tomar y escribimos los textos contigo.</p></div></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa4" id="fq4">¿El dominio queda a nombre de mi negocio?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa4" role="region" aria-labelledby="fq4"><div><p>Sí. El dominio es tuyo. Si ya tienes uno, lo conectamos; si no, te ayudamos a registrarlo a tu nombre.</p></div></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa5" id="fq5">¿Cómo pido cambios después de publicar?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa5" role="region" aria-labelledby="fq5"><div><p>Le escribes a la persona que lleva tu página con lo que quieres cambiar: un horario, un precio, una foto nueva. Cada plan incluye tiempo de cambios al mes: 30 minutos en Esencial, 60 en Negocio y 120 en Avanzado.</p></div></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa6" id="fq6">¿Puedo cancelar la suscripción?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa6" role="region" aria-labelledby="fq6"><div><p>Las condiciones de permanencia y cancelación están en la tabla de planes. Te las explicamos antes de que hagas el pago inicial.</p></div></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa7" id="fq7">¿Trabajan con negocios de mi país?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa7" role="region" aria-labelledby="fq7"><div><p>Trabajamos a distancia con negocios de Latinoamérica. Las reuniones son por videollamada y el seguimiento por WhatsApp o correo.</p></div></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa9" id="fq9">¿Qué pasa si el asistente de WhatsApp llega a 300 conversaciones?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa9" role="region" aria-labelledby="fq9"><div><p>Te avisamos cuando te acercas al cupo del mes. Si se agota, las conversaciones nuevas pasan directo a tu equipo, sin respuestas automáticas, hasta el mes siguiente. Si aplica algún cargo de Meta por mensajes, aparece desglosado en tu propuesta.</p></div></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa8" id="fq8">¿Tengo que contratar el asistente de WhatsApp para tener mi página?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa8" role="region" aria-labelledby="fq8"><div><p>No. Es opcional. Puedes sumarlo después, cuando tu página ya esté funcionando.</p></div></div></div>
-      <p class="faq-more"><a class="link" href="#" data-route="/precios">Ver todas las preguntas en Precios</a></p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ DIAGNÓSTICO ============ -->
-<section class="band band--petrol section" id="diagnostico" aria-labelledby="close-title">
-  <div class="wrap close-grid">
-    <div class="close-copy">
-      <h2 class="h2" id="close-title">Pide tu propuesta gratis.</h2>
-      <p class="lede" style="color:rgba(247,244,235,.8)">Mándanos tu página o tu Instagram. Te enviamos un enlace privado con cómo quedaría tu nueva página, el plan que te conviene y el precio.</p>
-      <ol>
-        <li><span>1</span>Nos mandas tu página, tu Instagram o tu perfil de Google.</li>
-        <li><span>2</span>Preparamos tu propuesta en un enlace privado.</li>
-        <li><span>3</span>Si te gusta, la activas ahí mismo o hablamos 15 minutos.</li>
-      </ol>
-      <p class="close-alt"><a class="link" href="propuesta-clinica-arrayan.html">Ver una propuesta privada de ejemplo <span class="arrow" aria-hidden="true">→</span></a></p>
-      <p class="close-alt">¿Prefieres conversar primero? <a class="link" href="#" data-route="/contacto">Agendar una llamada</a></p>
-    </div>
-    <form class="form" id="lead-form" novalidate>
-      <div id="lead-fields" style="display:grid;gap:18px">
-        <div class="seg seg--dark" role="radiogroup" aria-label="¿Tienes página web?" id="seg-mode">
-          <button type="button" role="radio" data-v="web" aria-checked="true" tabindex="0">Ya tengo página</button>
-          <button type="button" role="radio" data-v="noweb" aria-checked="false" tabindex="-1">No tengo página</button>
-        </div>
-        <div class="fld" data-f="site" data-mode="web"><label for="f-site">Dirección de tu página</label><input id="f-site" name="site" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com" aria-describedby="e-site"><p class="err" id="e-site" hidden></p></div>
-        <div data-mode="noweb" hidden style="display:grid;gap:18px">
-          <div class="frow">
-            <div class="fld" data-f="industry"><label for="f-industry">Rubro</label>
-              <select id="f-industry" name="industry" aria-describedby="e-industry"><option value="">Elige uno</option><option>Clínica o consultorio</option><option>Restaurante o café</option><option>Inmobiliaria</option><option>Hotel u hospedaje</option><option>Despacho contable o legal</option><option>Otro</option></select><p class="err" id="e-industry" hidden></p></div>
-            <div class="fld" data-f="city"><label for="f-city">Ciudad</label><input id="f-city" name="city" autocomplete="address-level2" placeholder="Ej.: Guadalajara" aria-describedby="e-city"><p class="err" id="e-city" hidden></p></div>
-          </div>
-          <div class="fld" data-f="social"><label for="f-social">Tu Instagram o tu perfil de Google Maps</label><input id="f-social" name="social" autocapitalize="off" spellcheck="false" placeholder="@tunegocio o enlace de Google Maps" aria-describedby="h-social e-social"><p class="hint" id="h-social">Con esto armamos tu propuesta aunque no tengas página.</p><p class="err" id="e-social" hidden></p></div>
-        </div>
-        <div class="frow">
-          <div class="fld" data-f="name"><label for="f-name">Tu nombre</label><input id="f-name" name="name" autocomplete="name" aria-describedby="e-name"><p class="err" id="e-name" hidden></p></div>
-          <div class="fld" data-f="biz"><label for="f-biz">Nombre del negocio</label><input id="f-biz" name="biz" autocomplete="organization" aria-describedby="e-biz"><p class="err" id="e-biz" hidden></p></div>
-        </div>
-        <div class="fld" data-f="contact"><label for="f-contact">Tu WhatsApp o correo</label><input id="f-contact" name="contact" autocomplete="email" placeholder="+52 33 1234 5678 o tu@correo.com" aria-describedby="e-contact"><p class="err" id="e-contact" hidden></p></div>
-        <div class="trap" aria-hidden="true"><label for="f-company-url">No llenar</label><input id="f-company-url" name="company_url" tabindex="-1" autocomplete="off"></div>
-        <p class="form-err" id="lead-err" role="alert" hidden></p>
-        <button class="btn btn-primary" type="submit" id="lead-btn">Quiero mi propuesta gratis <span class="arrow" aria-hidden="true">→</span></button>
-      </div>
-      <div class="success" id="lead-success" hidden tabindex="-1">
-        <h3>Listo, recibimos tu solicitud.</h3>
-        <p class="done-when" id="lead-when"></p>
-        <p id="lead-how"></p>
-        <dl id="lead-summary"></dl>
-        <div style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn btn-line" href="propuesta-clinica-arrayan.html">Ver una propuesta de ejemplo</a><button class="btn btn-line" type="button" id="lead-reset">Corregir mis datos</button></div>
-      </div>
-    </form>
+<section class="band ix-close" aria-labelledby="close-title">
+  <div class="wrap">
+    <h2 id="close-title" data-reveal>Empieza por ver cómo quedaría tu página.</h2>
+    <div class="acts" data-reveal data-delay="1"><a class="btn btn-primary" href="/diagnostico">Revisar mi página gratis <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-line" href="/ia#contacto" style="border-color:rgba(247,244,235,.5)">Hablar de IA</a></div>
   </div>
 </section>
 </main>
 
 <footer class="band footer">
   <div class="wrap">
-    <svg viewBox="0 0 353.37 54" fill="currentColor" role="img" aria-label="Ceiba Labs"><use href="#ceiba-logo"/></svg>
-    <nav aria-label="Pie de página"><a href="#suscripcion" data-route="/webs">Páginas web</a><a href="#ia" data-route="/ia">Inteligencia artificial</a><a href="#precios" data-route="/precios">Precios</a><a href="#antes-despues" data-route="/trabajo">Trabajo</a><a href="#" data-route="/nosotros">Nosotros</a><a href="#" data-route="/contacto">Contacto</a><a href="#diagnostico">Propuesta gratis</a></nav>
+    <a href="/" aria-label="Ceiba Labs, inicio" style="color:inherit"><svg viewBox="0 0 353.37 54" fill="currentColor" role="img" aria-label="Ceiba Labs"><use href="#ceiba-logo"/></svg></a>
+    <nav aria-label="Pie de página"><a href="/webs">Páginas web</a><a href="/webs/clinicas">Clínicas</a><a href="/ia">Inteligencia artificial</a><a href="/webs#precios">Precios</a><a href="/p/clinica-arrayan">Propuesta de ejemplo</a><a href="/diagnostico">Propuesta gratis</a></nav>
   </div>
-  <div class="wrap foot-legal"><span>© 2026 Ceiba Labs · Estudio digital para negocios de Latinoamérica</span><nav aria-label="Legal"><a href="#" data-route="/privacidad">Privacidad</a><a href="#" data-route="/terminos">Términos</a><a href="#" data-route="/baja">Darse de baja de correos</a></nav></div>
+  <div class="wrap foot-legal"><span>© 2026 Ceiba Labs · Estudio digital para negocios de Latinoamérica</span><nav aria-label="Legal"><a href="#" data-soon="Privacidad">Privacidad</a><a href="#" data-soon="Términos">Términos</a></nav></div>
 </footer>
-<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-
-<!-- example diagnostic -->
-<dialog class="diag" id="diag" aria-labelledby="diag-title">
-  <div class="diag-in">
-    <div class="diag-top"><div><h2 id="diag-title">Revisión de ejemplo</h2><p>clinicaarrayan.mx · negocio ficticio. Así es la revisión que acompaña cada propuesta.</p></div><button class="x" type="button" id="diag-close" aria-label="Cerrar revisión">×</button></div>
-    <div class="diag-body">
-      <div class="diag-progress" id="diag-progress" aria-label="Pasos de la revisión"></div>
-      <div class="diag-step" id="diag-step" aria-live="polite"></div>
-    </div>
-    <div class="diag-foot"><button class="btn btn-line" type="button" id="diag-prev">← Anterior</button><button class="btn btn-primary" type="button" id="diag-next">Siguiente →</button></div>
-  </div>
-</dialog>
-
-<!-- mock templates -->
-<template id="tpl-old">
-  <div class="mk-old">
-    <div class="mo-top" data-mark="1"><span>✉ contacto@clinicaarrayan.mx</span><span>☎ (33) 0000 0000</span><span class="mo-social">f&nbsp;&nbsp;in&nbsp;&nbsp;ig</span></div>
-    <div class="mo-head"><div class="mo-logo"><svg width="34" height="36" viewBox="0 0 48 52" aria-hidden="true"><path d="M10 4c6-4 10 2 14 2s8-6 14-2c7 5 6 16 3 24-2 6-3 22-8 22-4 0-4-14-9-14s-5 14-9 14C10 50 9 34 7 28 4 20 3 9 10 4Z" fill="#1BA8C9"/></svg><b>Clínica Dental<span>Arrayán</span></b></div><nav><span class="on">INICIO</span><span>NOSOTROS</span><span>SERVICIOS</span><span>GALERÍA</span><span>BLOG</span><span>CONTACTO</span></nav></div>
-    <div class="mo-slider" data-mark="3">
-      <div class="mo-cap"><b>¡TU SONRISA ES NUESTRA PRIORIDAD!</b><span>Contamos con la más alta tecnología y un equipo de profesionales a tu servicio.</span><i>LEER MÁS</i></div>
-      <span class="mo-arr l">‹</span><span class="mo-arr r">›</span>
-      <div class="mo-dots"><i class="on"></i><i></i><i></i></div>
-    </div>
-    <div class="mo-welcome"><h5>BIENVENIDOS A CLÍNICA DENTAL ARRAYÁN</h5><hr><p>Somos una clínica dental con más de 15 años de experiencia, comprometidos con brindarte un servicio de calidad, con calidez humana y los más altos estándares en odontología.</p></div>
-    <div class="mo-services" data-mark="2"><h5>NUESTROS SERVICIOS</h5>
-      <div class="mo-svc-grid">
-        <div><span class="ico"><svg width="24" height="26" viewBox="0 0 48 52" aria-hidden="true"><path d="M10 4c6-4 10 2 14 2s8-6 14-2c7 5 6 16 3 24-2 6-3 22-8 22-4 0-4-14-9-14s-5 14-9 14C10 50 9 34 7 28 4 20 3 9 10 4Z" fill="#1BA8C9"/></svg></span><b>Odontología General</b><p>Contamos con todos los tratamientos para el cuidado de tu salud bucal.</p><i>LEER MÁS</i></div>
-        <div><span class="ico"><svg width="24" height="26" viewBox="0 0 48 52" aria-hidden="true"><path d="M10 4c6-4 10 2 14 2s8-6 14-2c7 5 6 16 3 24-2 6-3 22-8 22-4 0-4-14-9-14s-5 14-9 14C10 50 9 34 7 28 4 20 3 9 10 4Z" fill="#1BA8C9"/></svg></span><b>Ortodoncia</b><p>Corregimos la posición de tus dientes con las mejores técnicas.</p><i>LEER MÁS</i></div>
-        <div><span class="ico"><svg width="24" height="26" viewBox="0 0 48 52" aria-hidden="true"><path d="M10 4c6-4 10 2 14 2s8-6 14-2c7 5 6 16 3 24-2 6-3 22-8 22-4 0-4-14-9-14s-5 14-9 14C10 50 9 34 7 28 4 20 3 9 10 4Z" fill="#1BA8C9"/></svg></span><b>Estética Dental</b><p>Luce una sonrisa perfecta con nuestros tratamientos estéticos.</p><i>LEER MÁS</i></div>
-      </div>
-    </div>
-    <div class="mo-row">
-      <div class="mo-form" data-mark="6"><h6>CONTÁCTANOS</h6><div class="mo-fields"><i>Nombre</i><i>Correo electrónico</i><i>Teléfono</i><i class="tall">Mensaje</i></div><span class="mo-send">ENVIAR</span><small>Te responderemos a la brevedad.</small></div>
-      <div><h6>UBICACIÓN</h6><div class="mo-map" data-mark="4"><div class="mo-map-err"><b>Esta página no puede cargar Google Maps correctamente.</b><span>¿Eres el propietario de este sitio web?</span><u>Aceptar</u></div></div></div>
-      <div><h6>SÍGUENOS</h6><div class="mo-fb" data-mark="5"><div class="fb-top">Clínica Dental Arrayán</div><div class="fb-body"><span>1,204 Me gusta</span><p>14 de febrero de 2019</p><p>¡Feliz día del amor y la amistad! Regala una sonrisa 💕</p></div></div></div>
-    </div>
-    <div class="mo-foot">© 2017 Clínica Dental Arrayán. Todos los derechos reservados.</div>
-    <div class="mo-cookie">Este sitio web utiliza cookies para mejorar su experiencia de navegación. <u>Aceptar</u></div>
-  </div>
-</template>
-
-<template id="tpl-new">
-  <div class="mk-new">
-    <div class="mn-util"><span>¿Urgencia? Te atendemos hoy</span><span>Lunes a viernes de 9 a 20 h y sábados de 9 a 14 h</span><span class="mn-util-wa"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>33 0000 0000</span></div>
-    <div class="mn-top"><div class="mn-brand"><b>Arrayán</b><span>Clínica dental</span></div><nav><span>Tratamientos</span><span>Precios</span><span>Doctora</span><span>Opiniones</span><span>Ubicación</span></nav><span class="mn-wa-btn" title="WhatsApp"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg></span><span class="mn-btn" data-mark="1">Agenda tu cita</span></div>
-    <div class="mn-hero">
-      <div class="mn-copy">
-        <h3>Agenda tu valoración dental sin costo</h3>
-        <p class="sub">Conoce cómo están tus dientes y encías, y sal de tu primera cita con tu presupuesto en la mano. Estamos en Providencia, Guadalajara.</p>
-        <div class="mn-ctas"><span class="mn-btn">Agenda gratis</span><span class="mn-ghost mn-ghost--wa"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Agendar por WhatsApp</span></div>
-        <p class="mn-call">Llamar para agendar: <b>33 0000 0000</b></p>
-        <p class="mn-rating"><b>4.9</b><span class="mn-stars" aria-hidden="true">★★★★★</span><span>186 reseñas en Google</span></p>
-      </div>
-      <div class="mn-photo-wrap">
-        <div class="mn-photo" role="img" aria-label="La Dra. Valeria Ríos en su consultorio"></div>
-        <div class="mn-slots"><b>Horarios disponibles</b><div><span>Hoy 18:30</span><span>Mañana 10:00</span><span>Mañana 12:30</span></div><em>Ver más horarios</em></div>
-      </div>
-    </div>
-    <ul class="mn-trust"><li><b>Más de 15 años</b>cuidando sonrisas en Providencia</li><li><b>Cédula profesional</b>4512378</li><li><b>Hasta 6 MSI</b>en tratamientos mayores a $1,200</li><li><b>Estacionamiento gratis</b>frente a la clínica</li></ul>
-    <div class="mn-treat" data-mark="2"><div class="mn-treat-head"><h4>Nuestros tratamientos</h4><div class="mn-car-nav"><button type="button" data-car="prev" aria-label="Tratamiento anterior"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" data-car="next" aria-label="Siguiente tratamiento"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>
-      <ul class="mn-car" tabindex="0" aria-label="Tratamientos, desliza para ver más"><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-valoracion.jpg)" role="img" aria-label="La dentista le muestra una radiografía a una paciente"></div><div class="mn-tc-body"><b>Valoración dental</b><i>Sin costo</i><span>Revisamos dientes y encías, y te tomamos radiografía. Sales con tu presupuesto.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-limpieza.jpg)" role="img" aria-label="Limpieza dental a una paciente"></div><div class="mn-tc-body"><b>Limpieza dental</b><i>$700</i><span>Retira el sarro y la placa que no quita el cepillado. Se recomienda 2 veces al año.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-alineadores.jpg)" role="img" aria-label="Paciente con un alineador transparente"></div><div class="mn-tc-body"><b>Alineadores transparentes</b><i>Valoración sin costo</i><span>Casi no se notan y te los puedes quitar para comer.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-implantes.jpg)" role="img" aria-label="Paciente sonriendo después de su tratamiento"></div><div class="mn-tc-body"><b>Implantes dentales</b><i>Desde $14,500</i><span>Reemplaza el diente que te falta con una pieza fija.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-blanqueamiento.jpg)" role="img" aria-label="Paciente con una sonrisa blanca"></div><div class="mn-tc-body"><b>Blanqueamiento</b><i>$3,800</i><span>Dientes más blancos en dos sesiones.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-urgencias.jpg)" role="img" aria-label="La dentista atiende a un paciente con dolor de muela"></div><div class="mn-tc-body"><b>Urgencias</b><i>Hoy mismo</i><span>¿Dolor, golpe o un diente roto? Llámanos y te hacemos un espacio.</span><em>Llamar</em></div></li></ul>
-      <p class="mn-note">*Los precios pueden cambiar según tu caso y te los confirmamos en tu valoración. Aceptamos efectivo, tarjetas de débito y crédito.</p>
-    </div>
-    <div class="mn-team" data-mark="3"><div class="mn-portrait" role="img" aria-label="Consultorio de la clínica"></div><div class="mn-cred"><h4>Tu sonrisa en manos expertas</h4><p>La Dra. Valeria Ríos es cirujana dentista egresada de la Universidad de Guadalajara y especialista en rehabilitación oral. Lleva más de 15 años atendiendo a familias en Providencia.</p><ul><li>Cédula profesional 4512378</li><li>Cédula de especialidad 7718203</li><li>No trabajamos con pasantes: siempre te atiende una especialista</li></ul><small>Personaje ficticio del ejemplo</small></div></div>
-    <div class="mn-reviews" data-mark="5">
-      <div class="mn-rev-head"><h4>Lo que dicen nuestros pacientes</h4><p><b>4.9 de 5</b><span class="mn-stars" aria-hidden="true">★★★★★</span><span>186 reseñas en Google</span></p></div>
-      <div class="mn-rev-list">
-        <figure class="mn-rev"><span class="mn-stars" aria-label="5 de 5">★★★★★</span><blockquote>Muy buena atención, la doctora Valeria me explicó todo el tratamiento con calma y el precio desde el principio. Súper recomendable 👍</blockquote><figcaption><b>Mariana G.</b><span>Alineadores, hace 2 semanas</span></figcaption></figure>
-        <figure class="mn-rev"><span class="mn-stars" aria-label="5 de 5">★★★★★</span><blockquote>Fui por una urgencia un sábado, no tenía cita pero me hicieron un espacio y ese mismo día se me quitó el dolor. Gracias!!</blockquote><figcaption><b>Jorge R.</b><span>Urgencia, hace 1 mes</span></figcaption></figure>
-        <figure class="mn-rev"><span class="mn-stars" aria-label="5 de 5">★★★★★</span><blockquote>Llevo a mis hijos desde hace años, siempre son puntuales y el consultorio está muy limpio.</blockquote><figcaption><b>Lucía M.</b><span>Limpieza, hace 3 meses</span></figcaption></figure>
-      </div>
-      <p class="mn-rev-more">Ver todas las reseñas en Google<small>Reseñas de ejemplo para el concepto</small></p>
-    </div>
-    <div class="mn-visit" data-mark="4"><div class="mn-facade" role="img" aria-label="Fachada de la clínica"></div><div><h4>Visítanos</h4><dl><dt>Dirección</dt><dd>Av. Los Arrayanes 1240, local 3, Col. Providencia, Guadalajara</dd><dt>Lunes a viernes</dt><dd>9:00 a 20:00</dd><dt>Sábados</dt><dd>9:00 a 14:00</dd><dt>Estacionamiento</dt><dd>Gratis, frente a la clínica</dd></dl><p class="mn-visit-acts"><span class="mn-ghost">Abrir en Google Maps</span><span class="mn-ghost mn-ghost--wa"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>Agendar por WhatsApp</span></p></div></div>
-    <div class="mn-foot"><span>Clínica Dental Arrayán</span><span>Aviso de privacidad</span><span>Ejemplo de rediseño de Ceiba Labs</span></div>
-    <div class="mn-float">
-      <div class="mn-ai" role="region" aria-label="Chat de la clínica">
-        <div class="mn-ai-top"><div><b>Clínica Arrayán</b><span>Te respondemos aquí o por WhatsApp</span></div><button type="button" class="mn-ai-x" data-ai="toggle" aria-label="Cerrar chat">×</button></div>
-        <div class="mn-ai-log"><p class="mn-ai-msg bot">Hola 👋 ¿En qué te podemos ayudar?</p></div>
-        <div class="mn-ai-sug"><button type="button" data-ai="urg">¿Atienden urgencias hoy?</button><button type="button" data-ai="first">¿Cuánto cuesta la valoración?</button><button type="button" data-ai="msi">¿Tienen meses sin intereses?</button></div>
-      </div>
-      <button type="button" class="mn-ai-btn" data-ai="toggle" aria-expanded="false" data-mark="6"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4V5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>¿Dudas? Pregúntanos</button>
-    </div>
-    <div class="mn-sticky"><span class="mn-btn">Agenda tu cita</span><span class="mn-ghost mn-ghost--wa"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>WhatsApp</span></div>
-  </div>
-</template>
 
 <script>
 (() => {
-  const $ = (s, r = document) => r.querySelector(s);
-  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  requestAnimationFrame(() => document.body.classList.add('loaded'));
 
-  /* ---------- clone mock templates ---------- */
-  $$('[data-tpl]').forEach(el => el.appendChild($('#tpl-' + el.dataset.tpl).content.cloneNode(true)));
-
-  /* old site is fixed-width: zoom it to fit its viewport, like a non-responsive site on a phone */
-  const fitOld = () => $$('.viewport').forEach(vp => {
-    const w = vp.clientWidth; const old = $('.mk-old', vp);
-    if (!old) return;
-    old.style.width = Math.max(760, w) + 'px'; old.style.zoom = Math.min(1, w / 760);
-  });
-  fitOld(); new ResizeObserver(fitOld).observe(document.body);
-  $$('.viewport').forEach(v => new ResizeObserver(fitOld).observe(v));
-
-  /* ---------- assistant inside the clinic concept ---------- */
-  const AI = {
-    urg: ['¿Atienden urgencias hoy?', 'Sí, atendemos urgencias el mismo día. Escríbenos por WhatsApp o llámanos y te hacemos un espacio lo antes posible.', 'wa'],
-    first: ['¿Cuánto cuesta la valoración?', 'Es sin costo 😊 Revisamos tus dientes y encías, te tomamos radiografía y te damos tu presupuesto. ¿Te agendo?', 'book'],
-    msi: ['¿Tienen meses sin intereses?', 'Sí, hasta 6 MSI con tarjetas participantes en tratamientos mayores a $1,200.', 'wa']
-  };
-  const waIco = '<svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>';
-  const closeAI = f => { f.classList.remove('open'); f.querySelector('.mn-ai-btn').setAttribute('aria-expanded', 'false'); };
-  document.addEventListener('click', e => {
-    const t = e.target.closest('[data-ai]'); if (!t) return;
-    const fl = t.closest('.mn-float'); if (!fl) return;
-    const k = t.dataset.ai;
-    if (k === 'toggle') {
-      const o = !fl.classList.contains('open');
-      if (!o) return closeAI(fl);
-      fl.classList.add('open'); fl.querySelector('.mn-ai-btn').setAttribute('aria-expanded', 'true');
-      const first = fl.querySelector('.mn-ai-sug button:not([hidden])'); if (first) first.focus({ preventScroll: true });
-      return;
-    }
-    const a = AI[k] || (k === 'faq' ? [esc(t.textContent), esc(t.dataset.a || ''), t.dataset.act === 'book' ? 'book' : 'wa'] : null); if (!a) return;
-    const log = fl.querySelector('.mn-ai-log');
-    t.hidden = true;
-    log.insertAdjacentHTML('beforeend', `<p class="mn-ai-msg me">${a[0]}</p>`);
-    const act = a[2] === 'wa' ? `<span class="mn-ai-act">${waIco}Seguir por WhatsApp</span>` : '<span class="mn-ai-act book">Agenda tu valoración</span>';
-    const reply = () => { const ty = log.querySelector('.mn-ai-typing'); if (ty) ty.remove(); log.insertAdjacentHTML('beforeend', `<p class="mn-ai-msg bot">${a[1]}${act}</p>`); log.scrollTop = log.scrollHeight; };
-    if (reduce.matches) return reply();
-    log.insertAdjacentHTML('beforeend', '<span class="mn-ai-typing" aria-hidden="true"><i></i><i></i><i></i></span>');
-    log.scrollTop = log.scrollHeight; setTimeout(reply, 650);
-  });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.mn-float.open').forEach(closeAI); });
-
-  /* ---------- carrusel de tratamientos (dentro de la web de ejemplo) ---------- */
-  const syncCar = track => {
-    const nav = track.closest('.mn-treat')?.querySelector('.mn-car-nav'); if (!nav) return;
-    nav.querySelector('[data-car="prev"]').disabled = track.scrollLeft < 4;
-    nav.querySelector('[data-car="next"]').disabled = track.scrollLeft + track.clientWidth > track.scrollWidth - 4;
-  };
-  document.addEventListener('click', e => {
-    const b = e.target.closest('[data-car]'); if (!b) return;
-    const track = b.closest('.mn-treat').querySelector('.mn-car');
-    const card = track.querySelector('.mn-tc');
-    const step = card.getBoundingClientRect().width + (parseFloat(getComputedStyle(track).columnGap) || 0);
-    track.scrollBy({ left: b.dataset.car === 'next' ? step : -step, behavior: reduce.matches ? 'auto' : 'smooth' });
-  });
-  document.querySelectorAll('.mn-car').forEach(t => {
-    t.addEventListener('scroll', () => syncCar(t), { passive: true });
-    new ResizeObserver(() => syncCar(t)).observe(t);
-  });
-
-  /* hero tag follows the intro wipe */
-  const heroTag = $('#hero-tag');
-  if (heroTag && !reduce.matches) {
-    const heroNew = document.querySelector('.hero .layer-new');
-    const setTag = v => { heroTag.textContent = v === 'new' ? 'Después' : 'Antes'; heroTag.dataset.state = v; };
-    const cycle = () => {
-      setTag('old'); clearTimeout(heroTag._a); clearTimeout(heroTag._b);
-      heroTag._a = setTimeout(() => setTag('new'), 8000 * 0.3);
-      heroTag._b = setTimeout(() => setTag('old'), 8000 * 0.95);
-    };
-    heroNew.addEventListener('animationstart', cycle);
-    heroNew.addEventListener('animationiteration', cycle);
-    // Pausa el escáner cuando la portada no está a la vista
-    new IntersectionObserver(([e]) => document.querySelector('.hero').classList.toggle('scan-paused', !e.isIntersecting))
-      .observe(document.getElementById('hero-vp'));
-  }
-
-
-  /* ---------- mobile nav ---------- */
-  const header = $('.site-header'), menuBtn = $('#menu-btn');
-  menuBtn.addEventListener('click', () => {
-    const open = header.classList.toggle('open');
-    menuBtn.setAttribute('aria-expanded', open); menuBtn.textContent = open ? 'Cerrar' : 'Menú';
-  });
-  $$('#nav-links a').forEach(a => a.addEventListener('click', () => {
-    header.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.textContent = 'Menú';
-  }));
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && header.classList.contains('open')) { menuBtn.click(); menuBtn.focus(); } });
-  // current section in nav
-  const navMap = new Map($$('#nav-links a[href^="#"]').map(a => [a.getAttribute('href').slice(1), a]));
-  const io = new IntersectionObserver(es => es.forEach(e => {
-    const a = navMap.get(e.target.id); if (!a) return;
-    if (e.isIntersecting) { navMap.forEach(x => x.removeAttribute('aria-current')); a.setAttribute('aria-current', 'true'); }
-  }), { rootMargin: '-45% 0px -50% 0px' });
-  navMap.forEach((a, id) => { const s = document.getElementById(id); if (s) io.observe(s); });
-
-  /* ---------- radiogroup helper (arrow keys + click) ---------- */
-  function radiogroup(group, onChange) {
-    const btns = $$('[role="radio"]', group);
-    const select = (b, focus) => {
-      btns.forEach(x => { const on = x === b; x.setAttribute('aria-checked', on); x.tabIndex = on ? 0 : -1; });
-      if (focus) b.focus(); onChange(b);
-    };
-    btns.forEach((b, i) => {
-      b.addEventListener('click', () => { if (b.getAttribute('aria-checked') !== 'true') select(b); });
-      b.addEventListener('keydown', e => {
-        let j = null;
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % btns.length;
-        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + btns.length) % btns.length;
-        if (j !== null) { e.preventDefault(); select(btns[j], true); }
-      });
-    });
-    return { set: v => { const b = btns.find(x => x.dataset.v === v || x.dataset.d === v); if (b && b.getAttribute('aria-checked') !== 'true') select(b); } };
-  }
-
-  /* ---------- comparator ---------- */
-  const cmpSection = $('#antes-despues'), vp = $('#cmp-vp'), frame = $('#cmp-frame');
-  const layerOld = $('.layer-old', vp), layerNew = $('.layer-new', vp), wipe = $('#cmp-wipe');
-  const tag = $('#cmp-tag'), status = $('#cmp-status');
-  let view = 'new', anim = null;
-  function setView(v) {
-    if (v === view) return; view = v;
-    cmpSection.dataset.view = v;
-    tag.textContent = v === 'new' ? 'Después' : 'Antes'; tag.dataset.state = v;
-    status.textContent = v === 'new' ? 'Viendo cómo quedaría' : 'Viendo la página de hoy';
-    const inc = v === 'new' ? layerNew : layerOld, out = v === 'new' ? layerOld : layerNew;
-    vp.scrollTop = 0;
-    inc.dataset.hidden = 'false'; inc.removeAttribute('aria-hidden');
-    inc.style.zIndex = 2; out.style.zIndex = 1;
-    const finish = () => { out.dataset.hidden = 'true'; out.setAttribute('aria-hidden', 'true'); inc.style.clipPath = ''; wipe.style.opacity = 0; };
-    if (anim) anim.forEach(a => a.cancel());
-    if (reduce.matches) return finish();
-    const fromL = v === 'new';
-    const opts = { duration: 750, easing: 'cubic-bezier(.2,.7,.1,1)' };
-    anim = [
-      inc.animate([{ clipPath: fromL ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)' }, { clipPath: 'inset(0 0 0 0)' }], opts),
-      wipe.animate([{ left: fromL ? '0%' : '100%', opacity: 1 }, { left: fromL ? '100%' : '0%', opacity: 1 }], opts)
-    ];
-    anim[0].onfinish = finish;
-  }
-  const verGroup = radiogroup($('#seg-version'), b => setView(b.dataset.v));
-  radiogroup($('#seg-device'), b => { frame.classList.toggle('is-mobile', b.dataset.d === 'mob'); vp.scrollTop = 0; setTimeout(fitOld, 470); });
-
-  // change list ↔ markers
-  const marks = n => $$(`[data-mark="${n}"]`, vp);
-  $$('.changes li[data-change]').forEach(li => {
-    const n = li.dataset.change, btn = $('button', li);
-    const on = () => { li.classList.add('hl'); marks(n).forEach(m => m.classList.add('hl')); };
-    const off = () => { li.classList.remove('hl'); marks(n).forEach(m => m.classList.remove('hl')); };
-    btn.addEventListener('mouseenter', on); btn.addEventListener('mouseleave', off);
-    btn.addEventListener('focus', on); btn.addEventListener('blur', off);
-    btn.addEventListener('click', () => {
-      const layer = view === 'new' ? layerNew : layerOld;
-      const m = $(`[data-mark="${n}"]`, layer); if (!m) return;
-      const top = m.getBoundingClientRect().top - vp.getBoundingClientRect().top + vp.scrollTop - 70;
-      vp.scrollTo({ top: Math.max(0, top), behavior: reduce.matches ? 'auto' : 'smooth' });
-      on(); clearTimeout(btn._t); btn._t = setTimeout(() => { if (document.activeElement !== btn) off(); }, 1600);
-      if (frame.getBoundingClientRect().top < 0 || frame.getBoundingClientRect().bottom > innerHeight) frame.scrollIntoView({ block: 'center', behavior: reduce.matches ? 'auto' : 'smooth' });
-    });
-  });
-
-  /* ---------- URL check (hero) ---------- */
-  function parseUrl(raw) {
-    let s = raw.trim();
-    if (!s) return { error: 'Escribe la dirección de tu página, por ejemplo tunegocio.com' };
-    if (/\s/.test(s)) return { error: 'La dirección no puede tener espacios. Revisa cómo la escribiste.' };
-    if (!/^https?:\/\//i.test(s)) s = 'https://' + s;
-    let u; try { u = new URL(s); } catch { return { error: 'Esa dirección no parece válida. Debe verse como tunegocio.com' }; }
-    const h = u.hostname.toLowerCase();
-    if (!/^([a-z0-9áéíóúñü-]+\.)+[a-z]{2,}$/i.test(h) || h.split('.').some(p => !p || p.startsWith('-') || p.endsWith('-')))
-      return { error: 'Le falta el final, como .com o .com.mx' };
-    return { host: h.replace(/^www\./, ''), href: u.href };
-  }
-  const auditForm = $('#audit-form'), auditInput = $('#audit-url'), auditField = $('#audit-field'), auditOut = $('#audit-out');
-  const esc = s => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  auditInput.addEventListener('input', () => { if (auditField.classList.contains('invalid')) { auditField.classList.remove('invalid'); auditInput.removeAttribute('aria-invalid'); auditOut.innerHTML = ''; } });
-  auditForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const r = parseUrl(auditInput.value);
-    if (r.error) {
-      auditField.classList.add('invalid'); auditInput.setAttribute('aria-invalid', 'true');
-      auditOut.innerHTML = `<p class="err" id="audit-err"><span aria-hidden="true">!</span>${r.error}</p>`;
-      auditInput.setAttribute('aria-describedby', 'audit-err audit-help'); auditInput.focus(); return;
-    }
-    auditInput.setAttribute('aria-describedby', 'audit-help');
-    if (r.host === 'clinicaarrayan.mx') { auditOut.innerHTML = ''; openDiag(); return; }
-    location.href = 'diagnostico.html?url=' + encodeURIComponent(r.host);
-  });
-  $('#no-web').addEventListener('click', () => goToForm({ noweb: true }));
-
-  /* ---------- example diagnostic ---------- */
-  const steps = [
-    { t: 'Lo primero que se ve en el celular', was: 'Un carrusel con foto de banco ocupa toda la pantalla. No se ve qué tratamientos hay ni cómo pedir hora.', now: 'Nombre, horario de hoy y botón «Agenda tu cita» en la primera pantalla. La foto muestra el consultorio real.', why: 'Quien llega desde Google o Instagram decide en segundos si sigue o vuelve atrás.' },
-    { t: 'Pedir una cita', was: 'El único teléfono está arriba, en letra chiquita. En el celular no se puede tocar para llamar.', now: 'Botón para agendar siempre visible. El paciente elige tratamiento, día y hora. La clínica recibe la cita en su agenda.', why: 'Es la acción que más le importa a la clínica y hoy es la más difícil de encontrar.' },
-    { t: 'Tratamientos', was: 'Tres recuadros genéricos con «Leer más», sin precios y sin forma de agendar uno en particular.', now: 'Seis tratamientos principales, cada uno con duración y su propio botón. El resto, en la página de cada área.', why: 'El paciente busca su problema concreto, no la lista completa.' },
-    { t: 'Confianza', was: 'Fotos de banco y frases como «¡Tu sonrisa es nuestra prioridad!». No aparece ninguna persona del equipo.', now: 'Fotografía del consultorio y presentación de la dentista a cargo, con su especialidad y cómo trabaja.', why: 'Antes de un tratamiento, la gente quiere saber quién la va a atender.' },
-    { t: 'Opiniones y respuestas', was: 'Un recuadro de Facebook con la última publicación de 2019 y un formulario que promete responder «a la brevedad».', now: 'Reseñas de Google en la portada y un asistente que responde dudas al instante y sigue por WhatsApp.', why: 'Las dudas también llegan fuera del horario de recepción.' },
-    { t: 'Horario y ubicación', was: 'El mapa muestra un error y no carga. El pie de página dice © 2017.', now: 'Dirección en texto, botón «Abrir en mapas» y horario de hoy visible arriba.', why: 'Un dato desactualizado hace dudar de todo lo demás.' }
+  /* ---------- degradado vivo del hero (canvas 2D, se pausa fuera de pantalla) ---------- */
+  const cv = document.getElementById('ix-grad'), ctx = cv.getContext('2d');
+  const blobs = [
+    { c: [16, 61, 55], r: .75, x: .2, y: .3, sx: .00011, sy: .00017, a: 1 },
+    { c: [14, 159, 138], r: .6, x: .78, y: .22, sx: .00014, sy: .0001, a: 1.1 },
+    { c: [214, 250, 82], r: .48, x: .88, y: .78, sx: .00009, sy: .00013, a: .85 },
+    { c: [30, 122, 92], r: .6, x: .45, y: .85, sx: .00012, sy: .00008, a: .8 },
+    { c: [126, 232, 198], r: .4, x: .62, y: .45, sx: .00016, sy: .00012, a: .6 },
+    { c: [31, 79, 209], r: .38, x: .95, y: .05, sx: .00013, sy: .00015, a: .35 },
   ];
-  const diag = $('#diag'), dStep = $('#diag-step'), dProg = $('#diag-progress'), dPrev = $('#diag-prev'), dNext = $('#diag-next');
-  let di = 0, lastFocus = null;
-  steps.forEach((s, i) => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', `Paso ${i + 1}: ${s.t}`); b.addEventListener('click', () => renderDiag(i)); dProg.appendChild(b); });
-  function renderDiag(i) {
-    di = i; const s = steps[i];
-    dStep.innerHTML = `<span class="count">Paso ${i + 1} de ${steps.length}</span><h3>${s.t}</h3>
-      <div class="diag-cols"><div class="was"><h4>Lo que encuentra el paciente hoy</h4><p>${s.was}</p></div><div class="now"><h4>Lo que proponemos</h4><p>${s.now}</p></div></div>
-      <p class="diag-why">${s.why}</p>`;
-    $$('button', dProg).forEach((b, j) => { b.classList.toggle('done', j < i); b.toggleAttribute('aria-current', j === i); if (j === i) b.setAttribute('aria-current', 'step'); });
-    dPrev.disabled = i === 0; dPrev.style.visibility = i === 0 ? 'hidden' : 'visible';
-    dNext.innerHTML = i === steps.length - 1 ? 'Ver la propuesta <span class="arrow" aria-hidden="true">→</span>' : 'Siguiente →';
-  }
-  function openDiag() { lastFocus = document.activeElement; renderDiag(0); diag.showModal(); dNext.focus(); }
-  dPrev.addEventListener('click', () => di > 0 && renderDiag(di - 1));
-  dNext.addEventListener('click', () => {
-    if (di < steps.length - 1) return renderDiag(di + 1);
-    diag.close(); verGroup.set('new');
-    cmpSection.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth' });
-    setTimeout(() => $('#seg-version [data-v="new"]').focus({ preventScroll: true }), 600);
-  });
-  $('#diag-close').addEventListener('click', () => diag.close());
-  diag.addEventListener('click', e => { if (e.target === diag) diag.close(); });
-  diag.addEventListener('keydown', e => {
-    if (e.target.closest('input,textarea')) return;
-    if (e.key === 'ArrowRight' && di < steps.length - 1) renderDiag(di + 1);
-    if (e.key === 'ArrowLeft' && di > 0) renderDiag(di - 1);
-  });
-  diag.addEventListener('close', () => { if (lastFocus && document.contains(lastFocus) && !lastFocus.closest('#diag')) lastFocus.focus({ preventScroll: true }); });
-
-  /* ---------- industries ---------- */
-  const indBtns = $$('.ind-row');
-  const selectInd = b => {
-    indBtns.forEach(x => x.setAttribute('aria-pressed', x === b));
-    $$('.ind-panel').forEach(p => p.hidden = p.dataset.panel !== b.dataset.ind);
-    const pl = $('#ind-page-link'); pl.firstChild.textContent = 'Ver la página de ' + $('h3', b).textContent + ' ';
-    if (b.dataset.ind === 'clinicas') { pl.href = 'webs-clinicas.html'; delete pl.dataset.route; } else { pl.href = '#'; pl.dataset.route = '/webs/' + b.dataset.ind; }
+  let W, H, run = true, t0 = performance.now();
+  const size = () => { const r = cv.getBoundingClientRect(), d = Math.min(devicePixelRatio || 1, 1.5); W = cv.width = Math.round(r.width * d / 2); H = cv.height = Math.round(r.height * d / 2); };
+  const draw = t => {
+    ctx.fillStyle = '#0B1514'; ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+    for (const [i, b] of blobs.entries()) {
+      const x = (b.x + Math.sin(t * b.sx + i) * .18) * W, y = (b.y + Math.cos(t * b.sy + i * 1.7) * .16) * H, r = b.r * Math.max(W, H);
+      const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+      g.addColorStop(0, `rgba(${b.c},${.55 * b.a})`); g.addColorStop(.45, `rgba(${b.c},${.18 * b.a})`); g.addColorStop(1, `rgba(${b.c},0)`);
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+    }
+    ctx.globalCompositeOperation = 'source-over';
   };
-  indBtns.forEach(b => { b.addEventListener('click', () => selectInd(b)); b.addEventListener('mouseenter', () => { if (matchMedia('(hover:hover)').matches) selectInd(b); }); b.addEventListener('focus', () => selectInd(b)); });
+  let last = 0;
+  const loop = now => { if (!run) return; if (now - last > 33) { draw(now - t0); last = now; } requestAnimationFrame(loop); };
+  size(); draw(0); addEventListener('resize', () => { size(); draw(performance.now() - t0); });
+  if (!reduce) {
+    new IntersectionObserver(([e]) => { run = e.isIntersecting; if (run) requestAnimationFrame(loop); }).observe(cv);
+  }
 
-  /* ---------- chat replay ---------- */
-  const chat = $('#chat-body'), handoff = $('.handoff', chat), items = [...chat.children].filter(el => el !== handoff);
-  let chatTimers = [];
-  $('#chat-replay').addEventListener('click', () => {
-    chatTimers.forEach(clearTimeout); chatTimers = [];
-    if (reduce.matches) return;
-    items.forEach(el => { el.hidden = true; el.classList.remove('reveal'); });
-    const typing = document.createElement('div'); typing.className = 'msg in typing'; typing.innerHTML = '<i></i><i></i><i></i>'; typing.setAttribute('aria-hidden', 'true');
-    let t = 200;
-    items.forEach(el => {
-      const isBot = el.classList.contains('in');
-      if (isBot) { chatTimers.push(setTimeout(() => chat.insertBefore(typing, handoff), t)); t += 900; }
-      chatTimers.push(setTimeout(() => { typing.remove(); el.hidden = false; el.classList.add('reveal'); chat.insertBefore(el, handoff); }, t));
-      t += isBot ? 700 : 900;
+  /* ---------- profundidad con el mouse ---------- */
+  const stage = document.getElementById('ix-stage');
+  if (!reduce && matchMedia('(pointer:fine)').matches) {
+    document.querySelector('.ix-hero').addEventListener('pointermove', e => {
+      const r = stage.getBoundingClientRect();
+      stage.style.setProperty('--mx', ((e.clientX - r.left) / r.width - .5).toFixed(3));
+      stage.style.setProperty('--my', ((e.clientY - r.top) / r.height - .5).toFixed(3));
     });
-  });
+  }
 
-  /* ---------- FAQ ---------- */
-  $$('.faq-q').forEach(q => q.addEventListener('click', () => {
-    const open = q.getAttribute('aria-expanded') === 'true';
-    q.setAttribute('aria-expanded', !open); q.closest('.faq-item').classList.toggle('open', !open);
+  /* ---------- chat del hero que se repite ---------- */
+  const log = document.getElementById('ix-chat-log');
+  const chat = [['me', 'Hola, ¿tienen cita mañana para limpieza?'], ['bot', 'Sí 😊 Mañana a las 10:00 o a las 12:30. ¿Cuál te aparto?'], ['me', '10:00 porfa'], ['bot', 'Listo, quedó apartada.<small>Limpieza · mañana 10:00</small>']];
+  const wait = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
+  const toast = document.querySelector('.ix-toast');
+  (async function play() {
+    while (true) {
+      log.innerHTML = ''; toast.classList.remove('pop');
+      await wait(900);
+      for (const [who, txt] of chat) {
+        if (who === 'bot') { const d = document.createElement('span'); d.className = 'ix-dots'; d.innerHTML = '<i></i><i></i><i></i>'; log.appendChild(d); await wait(1000); d.remove(); } else await wait(1100);
+        log.insertAdjacentHTML('beforeend', `<p class="ix-msg${who === 'me' ? ' me' : ''}">${txt}</p>`);
+      }
+      void toast.offsetWidth; toast.classList.add('pop');
+      if (reduce) return;
+      await wait(6000);
+    }
+  })();
+
+  /* ---------- duplicar la cinta para que sea continua ---------- */
+  const mq = document.getElementById('ix-marq'); mq.innerHTML += mq.innerHTML;
+
+  /* ---------- aparición al hacer scroll + contadores ---------- */
+  const count = el => {
+    const end = +el.dataset.count; if (reduce || !end) { el.textContent = end; return; }
+    const t = performance.now(); const step = n => { const p = Math.min(1, (n - t) / 1200); el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step); }; requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; e.target.classList.add('in'); e.target.querySelectorAll('[data-count]').forEach(count); io.unobserve(e.target); }), { threshold: .18, rootMargin: '0px 0px -6% 0px' });
+  document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+
+  /* ---------- la línea de los pasos se dibuja con el scroll ---------- */
+  const steps = document.getElementById('ix-steps'), items = steps.querySelectorAll('li');
+  const onScroll = () => {
+    const r = steps.getBoundingClientRect(), p = Math.max(0, Math.min(1, (innerHeight * .75 - r.top) / (r.height + innerHeight * .25)));
+    steps.style.setProperty('--p', p.toFixed(3));
+    items.forEach((li, i) => li.classList.toggle('on', p >= i / items.length + .05));
+  };
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  /* ---------- luz que sigue al cursor en las tarjetas de rubros ---------- */
+  document.querySelectorAll('#ix-ind > *').forEach(c => c.addEventListener('pointermove', e => {
+    const r = c.getBoundingClientRect(); c.style.setProperty('--x', `${e.clientX - r.left}px`); c.style.setProperty('--y', `${e.clientY - r.top}px`);
   }));
 
-  /* ---------- diagnóstico form ---------- */
-  const form = $('#lead-form');
-  let mode = 'web';
-  const rules = {
-    site: v => !v.trim() ? 'Escribe la dirección de tu página, o elige «No tengo página».' : (parseUrl(v).error || true),
-    industry: v => !!v || 'Elige el rubro que más se parece a tu negocio.',
-    city: v => v.trim().length >= 2 || 'Escribe la ciudad donde está tu negocio.',
-    social: v => {
-      const s = v.trim();
-      if (!s) return 'Déjanos tu Instagram o el enlace de tu perfil de Google Maps.';
-      if (/^@?[a-z0-9._]{2,30}$/i.test(s)) return true;
-      return parseUrl(s).error ? 'Escribe tu usuario de Instagram (@tunegocio) o pega el enlace de Google Maps.' : true;
-    },
-    name: v => v.trim().length >= 2 || 'Escribe tu nombre para saber a quién contactar.',
-    biz: v => v.trim().length >= 2 || 'Escribe el nombre de tu negocio.',
-    contact: v => {
-      const s = v.trim();
-      if (!s) return 'Déjanos un WhatsApp o un correo para enviarte la propuesta.';
-      if (s.includes('@')) return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s) || 'Revisa el correo: debe verse como nombre@dominio.com.';
-      const d = s.replace(/[^\d]/g, '');
-      return (/^[+\d\s().-]+$/.test(s) && d.length >= 8 && d.length <= 15) || 'Revisa el número. Escríbelo con lada, por ejemplo 33 1234 5678';
-    }
-  };
-  const fldOf = n => $(`[data-f="${n}"]`);
-  const inputOf = n => $('input,select', fldOf(n));
-  const activeFields = () => Object.keys(rules).filter(n => !fldOf(n).closest('[hidden]'));
-  function clearFld(n) { const f = fldOf(n); f.classList.remove('invalid', 'valid'); $('.err', f).hidden = true; inputOf(n).removeAttribute('aria-invalid'); }
-  function check(name, show = true) {
-    const fld = fldOf(name), input = inputOf(name), err = $('.err', fld);
-    const res = rules[name](input.value), ok = res === true;
-    if (show) {
-      fld.classList.toggle('invalid', !ok); fld.classList.toggle('valid', ok && !!input.value.trim());
-      input.setAttribute('aria-invalid', !ok); err.hidden = ok; err.textContent = ok ? '' : res;
-    }
-    return ok;
-  }
-  Object.keys(rules).forEach(n => {
-    const input = inputOf(n);
-    input.addEventListener('blur', () => { if (input.value.trim() || input.dataset.touched) check(n); input.dataset.touched = 1; });
-    input.addEventListener('input', () => { if (fldOf(n).classList.contains('invalid')) check(n); });
-    if (input.tagName === 'SELECT') input.addEventListener('change', () => check(n));
-  });
-  function setMode(v) {
-    mode = v;
-    $$('[data-mode]', form).forEach(el => el.hidden = el.dataset.mode !== v);
-    ['site', 'industry', 'city', 'social'].forEach(clearFld);
-  }
-  const modeGroup = radiogroup($('#seg-mode'), b => setMode(b.dataset.v));
-  form.addEventListener('submit', async e => {
+  /* ---------- revisión de URL ---------- */
+  const form = document.getElementById('ix-audit'), input = document.getElementById('ix-url'), err = document.getElementById('ix-err'), field = document.getElementById('ix-field');
+  form.addEventListener('submit', e => {
     e.preventDefault();
-    const bad = activeFields().filter(n => !check(n));
-    if (bad.length) { inputOf(bad[0]).focus(); return; }
-    // Antes de enviar: cuestionario de estilo (una vez; se puede omitir)
-    if (window.CeibaPrefs && !form._skipQuiz) {
-      form._quiz = window.CeibaPrefs.ask(form, prefs => { form._prefs = prefs; form._skipQuiz = true; form._quiz.close(); form.requestSubmit(); }, { fields: $('#lead-fields') });
-      return;
-    }
-    const v = id => $(id).value.trim();
-    const btn = $('#lead-btn'), ferr = $('#lead-err'), label = btn.firstChild.textContent;
-    btn.disabled = true; btn.firstChild.textContent = 'Enviando… '; ferr.hidden = true;
-    try {
-      const res = await fetch('/api/lead', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({
-        source: /clinicas/.test(location.pathname) ? 'clinicas' : 'home', mode,
-        site: v('#f-site'), industry: v('#f-industry'), city: v('#f-city'), social: v('#f-social'),
-        name: v('#f-name'), biz: v('#f-biz'), contact: v('#f-contact'), company_url: v('#f-company-url'), preferences: form._prefs || null,
-        utm: Object.fromEntries([...new URLSearchParams(location.search)].filter(([k]) => k.startsWith('utm_'))),
-      }) });
-      const d = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(d.error || '');
-      const rows = mode === 'web'
-        ? [['Página', parseUrl(v('#f-site')).host]]
-        : [['Página', 'No tiene'], ['Rubro', v('#f-industry')], ['Ciudad', v('#f-city')], ['Perfil', v('#f-social')]];
-      rows.push(['Nombre', v('#f-name')], ['Negocio', v('#f-biz')], ['Contacto', v('#f-contact')]);
-      $('#lead-summary').innerHTML = rows.map(([k, val]) => `<dt>${k}</dt><dd>${esc(val)}</dd>`).join('');
-      const first = v('#f-name').split(/\s+/)[0];
-      $('#lead-when').innerHTML = d.dueDay ? `${esc(first)}, te mandamos tu propuesta <span>${esc(d.dueDay)}</span>, ${esc(d.dueTime.replace(/\.$/, ''))}.` : '';
-      $('#lead-how').textContent = d.emailed ? 'Te enviamos un correo de confirmación. El enlace a tu propuesta llega a ese mismo correo.' : d.channel === 'email' ? 'Te mandamos el enlace a tu propuesta al correo que nos dejaste.' : 'Te mandamos el enlace a tu propuesta por WhatsApp, al número que nos dejaste.';
-      $('#lead-fields').hidden = true; const ok = $('#lead-success'); ok.hidden = false; ok.focus();
-    } catch (err) {
-      ferr.textContent = err.message || 'No pudimos enviar tu solicitud. Revisa tu conexión e intenta de nuevo.';
-      ferr.hidden = false;
-    } finally { btn.disabled = false; btn.firstChild.textContent = label; }
+    let s = input.value.trim();
+    const fail = m => { err.innerHTML = '<span aria-hidden="true">!</span>' + m; err.hidden = false; field.classList.add('invalid'); input.setAttribute('aria-invalid', 'true'); input.focus(); };
+    if (!s) return fail('Escribe la dirección de tu página, por ejemplo tunegocio.com');
+    if (/\s/.test(s)) return fail('La dirección no puede tener espacios.');
+    if (!/^https?:\/\//i.test(s)) s = 'https://' + s;
+    let host; try { host = new URL(s).hostname.toLowerCase(); } catch { return fail('Esa dirección no parece válida. Debe verse como tunegocio.com'); }
+    if (!/^([a-z0-9-]+\.)+[a-z]{2,}$/.test(host)) return fail('Le falta el final, como .com o .com.mx');
+    location.href = '/diagnostico?url=' + encodeURIComponent(host.replace(/^www\./, ''));
   });
-  $('#lead-reset').addEventListener('click', () => { $('#lead-success').hidden = true; $('#lead-fields').hidden = false; inputOf(mode === 'web' ? 'site' : 'industry').focus(); });
-
-  function goToForm({ site, noweb: nw } = {}) {
-    $('#lead-success').hidden = true; $('#lead-fields').hidden = false;
-    if (site) { modeGroup.set('web'); $('#f-site').value = site; check('site'); }
-    if (nw) modeGroup.set('noweb');
-    $('#diagnostico').scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth' });
-    const target = site ? '#f-name' : nw ? '#f-industry' : '#f-site';
-    setTimeout(() => $(target).focus({ preventScroll: true }), reduce.matches ? 0 : 650);
+  input.addEventListener('input', () => { err.hidden = true; field.classList.remove('invalid'); input.removeAttribute('aria-invalid'); });
+})();
+</script>
+<script>
+(() => {
+  if (!window.__ceibaMenu) {
+  const h = document.querySelector('.site-header'), b = document.getElementById('menu-btn');
+  b?.addEventListener('click', () => { const o = !h.classList.contains('open'); h.classList.toggle('open', o); b.setAttribute('aria-expanded', o); });
+  const close = () => document.querySelectorAll('.has-sub.open').forEach(li => { li.classList.remove('open'); li.querySelector('.sub-btn').setAttribute('aria-expanded', 'false'); });
+  document.querySelectorAll('.sub-btn').forEach(x => x.addEventListener('click', () => { const li = x.closest('.has-sub'), o = !li.classList.contains('open'); close(); li.classList.toggle('open', o); x.setAttribute('aria-expanded', o); }));
+  document.addEventListener('click', e => { if (!e.target.closest('.has-sub')) close(); });
   }
-
-  /* ---------- submenu ---------- */
-  const closeSubs = () => $$('.has-sub.open').forEach(li => { li.classList.remove('open'); $('.sub-btn', li).setAttribute('aria-expanded', 'false'); });
-  $$('.sub-btn').forEach(b => b.addEventListener('click', () => { const li = b.closest('.has-sub'); const o = !li.classList.contains('open'); closeSubs(); li.classList.toggle('open', o); b.setAttribute('aria-expanded', o); }));
-  document.addEventListener('click', e => { if (!e.target.closest('.has-sub')) closeSubs(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSubs(); });
-
-  /* ---------- prototype routes: pages of the sitemap not built yet ---------- */
-  const toast = $('#toast'); let toastT;
-  const showToast = html => { toast.innerHTML = html; toast.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => toast.hidden = true, 4200); };
-  document.addEventListener('click', e => {
-    const a = e.target.closest('[data-route]'); if (!a) return;
-    const route = a.dataset.route, href = a.getAttribute('href') || '#';
-    if (a.dataset.ind && typeof selectInd === 'function') { const row = $(`.ind-row[data-ind="${a.dataset.ind}"]`); if (row) selectInd(row); }
-    if (href === '#') { e.preventDefault(); showToast(`<code>${route}</code> todavía no está en el prototipo.`); }
-    else showToast(`En el sitio, este enlace abre <code>${route}</code>. Aquí te llevamos a su adelanto en Inicio.`);
+  let t; document.addEventListener('click', e => {
+    const a = e.target.closest('[data-soon]'); if (!a) return; e.preventDefault();
+    let el = document.getElementById('soon-toast'); if (!el) { el = Object.assign(document.createElement('div'), { id: 'soon-toast', className: 'toast' }); el.setAttribute('role', 'status'); document.body.appendChild(el); }
+    el.textContent = a.dataset.soon + ': muy pronto.'; el.hidden = false; clearTimeout(t); t = setTimeout(() => el.hidden = true, 3200);
   });
 })();
 </script>
-<script src="/assets/prefs.js" defer></script>
+</body>
+</html>

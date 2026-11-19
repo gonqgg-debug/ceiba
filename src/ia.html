@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Inteligencia artificial para negocios · Ceiba Labs</title>
+<meta name="description" content="Asistente de WhatsApp con IA, automatizaciones a medida y diagnóstico de procesos para negocios de México. Tú apruebas lo que responde y decides cuándo pasa a una persona.">
+{{HEAD_TAGS}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+{{BASE_CSS}}
+/* ===================== IA ===================== */
+.ia-hero{padding-block:clamp(48px,7vw,96px)}
+.ia-hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:48px clamp(40px,5vw,80px);align-items:center}
+.ia-hero h1{font-size:clamp(40px,5.2vw,70px);line-height:1;letter-spacing:-.04em;font-weight:700;max-width:14ch}
+.ia-hero h1 .soft{color:rgba(247,244,235,.55)}
+.ia-hero .lede{margin-top:24px;color:rgba(247,244,235,.8)}
+.ia-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:36px}
+.ia-note{margin-top:18px;font-size:15px;color:rgba(247,244,235,.65)}
+.ia-phone{justify-self:center;width:min(380px,100%);border-radius:30px;background:#0E1513;padding:10px;box-shadow:0 40px 80px -36px rgba(0,0,0,.8),0 0 0 1px rgba(247,244,235,.14)}
+.ia-phone-in{border-radius:22px;overflow:hidden;background:#EFEAE2;display:grid;grid-template-rows:auto 1fr;height:520px}
+.ia-wa-top{display:flex;align-items:center;gap:10px;padding:14px 16px;background:#0F5C4B;color:#fff}
+.ia-wa-top span{width:34px;height:34px;border-radius:50%;background:#fff;color:#0F5C4B;display:grid;place-items:center;font-weight:700}
+.ia-wa-top b{display:block;font-size:15px}
+.ia-wa-top small{font-size:12px;opacity:.8}
+.ia-log{display:flex;flex-direction:column;gap:8px;padding:14px;overflow:hidden;justify-content:flex-end}
+.ia-msg{max-width:84%;padding:9px 12px;border-radius:12px;font-size:15px;line-height:1.4;background:#fff;color:#15211D;align-self:flex-start;box-shadow:0 1px 0 rgba(0,0,0,.06);animation:iaIn .3s ease-out}
+.ia-msg.me{background:#D9FDD3;align-self:flex-end}
+.ia-msg.sys{align-self:center;background:#FFF5C4;font-size:13px;color:#5b4a00;text-align:center}
+.ia-msg small{display:block;margin-top:5px;font-size:12px;color:#0F5C4B;font-weight:600}
+.ia-typing{align-self:flex-start;background:#fff;border-radius:12px;padding:10px 12px;display:inline-flex;gap:4px}
+.ia-typing i{width:6px;height:6px;border-radius:50%;background:#8a9490;animation:blink 1s infinite}
+.ia-typing i:nth-child(2){animation-delay:.15s}.ia-typing i:nth-child(3){animation-delay:.3s}
+@keyframes iaIn{from{opacity:0;transform:translateY(6px)}}
+@media (prefers-reduced-motion:reduce){.ia-msg{animation:none}}
+
+.ia-svcs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:40px}
+.ia-svc{display:grid;gap:14px;align-content:start;padding:28px;border-radius:20px;background:#fff;border:1px solid var(--line)}
+.ia-svc--hl{background:var(--ink);color:var(--ivory);border-color:var(--ink);--muted:rgba(247,244,235,.7);--line:rgba(247,244,235,.16)}
+.ia-svc h3{font-size:24px;letter-spacing:-.02em;line-height:1.1}
+.ia-svc p{color:var(--muted);font-size:16px}
+.ia-svc ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:15px}
+.ia-svc li{display:grid;grid-template-columns:18px 1fr;gap:6px}
+.ia-svc li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--petrol);margin-top:8px}
+.ia-svc--hl li::before{background:var(--lime)}
+.ia-price{margin-top:auto;padding-top:16px;border-top:1px solid var(--line);font:500 14px var(--f-mono);color:var(--muted)}
+.ia-price b{display:block;font:700 26px/1.1 var(--f-display);letter-spacing:-.02em;color:var(--fg);margin-bottom:4px}
+
+.ia-uses{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:40px}
+.ia-use{padding:22px;border-radius:16px;border:1px solid var(--line);display:grid;gap:12px;align-content:start}
+.ia-use b{font-size:18px;font-weight:600}
+.ia-use ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;color:var(--muted);font-size:15px}
+.ia-use li::before{content:"→ ";color:var(--lime)}
+
+.ia-steps{list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.ia-steps li{display:grid;gap:10px;padding-top:20px;border-top:1px solid var(--line)}
+.ia-steps span{font:500 13px var(--f-mono);color:var(--muted)}
+.ia-steps b{font:600 20px var(--f-display);letter-spacing:-.01em}
+.ia-steps p{color:var(--muted);font-size:16px}
+
+.ia-trust{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;margin-top:40px}
+.ia-trust div{display:grid;gap:8px}
+.ia-trust b{font-size:18px;font-weight:600}
+.ia-trust p{color:var(--muted);font-size:16px}
+
+.ia-faq{display:grid;margin-top:32px;max-width:760px;border-top:1px solid var(--line)}
+.ia-faq details{border-bottom:1px solid var(--line)}
+.ia-faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;padding:20px 0;font-weight:500;font-size:18px}
+.ia-faq summary::-webkit-details-marker{display:none}
+.ia-faq summary::after{content:"+";font-weight:400;font-size:22px;line-height:1;color:var(--muted)}
+.ia-faq details[open] summary::after{content:"–"}
+.ia-faq details p{color:var(--muted);padding-bottom:20px;max-width:62ch}
+
+.ia-contact .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:40px clamp(40px,6vw,96px);align-items:start}
+.ia-contact h2{font-size:clamp(36px,4.6vw,60px);line-height:1;letter-spacing:-.035em;max-width:12ch}
+.ia-contact .lede{color:rgba(247,244,235,.8);margin-top:20px}
+.ia-chips{display:flex;flex-wrap:wrap;gap:8px}
+.ia-chips button{border:1px solid rgba(247,244,235,.22);background:transparent;color:inherit;border-radius:999px;padding:8px 12px;font:inherit;font-size:14px;cursor:pointer}
+.ia-chips button:hover{border-color:var(--lime)}
+@media (max-width:980px){
+  .ia-hero-grid,.ia-contact .wrap{grid-template-columns:1fr}
+  .ia-svcs{grid-template-columns:1fr}
+  .ia-uses,.ia-trust{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .ia-uses,.ia-trust,.ia-steps{grid-template-columns:1fr}
+  .ia-phone-in{height:460px}
+}
+</style>
+</head>
+<body>
+{{SYMBOLS}}
+<header class="site-header" id="top"></header>
+
+<main>
+<section class="band ia-hero" aria-labelledby="ia-title">
+  <div class="wrap ia-hero-grid">
+    <div>
+      <h1 id="ia-title">Inteligencia artificial que atiende a tus clientes <span class="soft">y le quita trabajo a tu equipo.</span></h1>
+      <p class="lede">Empezamos por lo que más tiempo te quita: contestar WhatsApp, agendar citas y dar seguimiento. Tú apruebas lo que responde y decides cuándo pasa a una persona.</p>
+      <div class="ia-acts"><a class="btn btn-primary" href="#contacto">Agendar un diagnóstico <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-line" href="#servicios">Ver servicios y precios</a></div>
+      <p class="ia-note">Sin contratar página con nosotros: funciona con tu número de WhatsApp.</p>
+    </div>
+    <div class="ia-phone" aria-label="Ejemplo de conversación con el asistente de WhatsApp de una clínica">
+      <div class="ia-phone-in">
+        <div class="ia-wa-top"><span>A</span><div><b>Clínica Arrayán</b><small>Asistente · en línea</small></div></div>
+        <div class="ia-log" id="ia-log" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band--light section" id="servicios" aria-labelledby="svc-title">
+  <div class="wrap">
+    <h2 class="h2" id="svc-title">Qué hacemos con IA.</h2>
+    <p class="lede" style="margin-top:16px">Tres formas de empezar, según dónde se te va el tiempo.</p>
+    <div class="ia-svcs">
+      <article class="ia-svc ia-svc--hl">
+        <h3>Asistente de WhatsApp</h3>
+        <p>Contesta las preguntas de siempre con las respuestas que tú apruebas, anota los datos para la cita o la cotización y te pasa lo que necesita una persona.</p>
+        <ul><li>Funciona en WhatsApp y en tu página</li><li>Precios, horarios, ubicación y requisitos al momento</li><li>Aparta citas y te manda el resumen</li><li>Un número y una sucursal; piloto con hasta 300 conversaciones al mes</li></ul>
+        <p class="ia-price"><b>$3,990</b>de inicio + $1,490 al mes</p>
+      </article>
+      <article class="ia-svc">
+        <h3>Automatización a medida</h3>
+        <p>Para lo que tu equipo repite todos los días y se puede hacer solo.</p>
+        <ul><li>Recordatorios y confirmación de citas</li><li>Cotizaciones a partir de un mensaje o formulario</li><li>Seguimiento a clientes que no respondieron</li><li>Capturar datos en tu hoja de cálculo o sistema</li><li>Reportes semanales sin armarlos a mano</li></ul>
+        <p class="ia-price"><b>Desde $19,900</b>el piloto, cotizado a la medida</p>
+      </article>
+      <article class="ia-svc">
+        <h3>Diagnóstico de IA</h3>
+        <p>Revisamos tus procesos de atención, ventas u operación y te decimos qué conviene automatizar primero, cuánto tiempo te ahorra y cuánto cuesta.</p>
+        <ul><li>Entrevista con tu equipo</li><li>Mapa de tus procesos y dónde se pierde tiempo</li><li>Propuesta priorizada con costos</li></ul>
+        <p class="ia-price"><b>$3,900</b>se descuenta del proyecto si lo contratas</p>
+      </article>
+    </div>
+    <p class="hint" style="margin-top:18px;color:var(--muted)">Precios en pesos mexicanos. Es el precio final. Si aplican cargos de Meta por mensajes de WhatsApp, se confirman al conectar tu número.</p>
+  </div>
+</section>
+
+<section class="band section" aria-labelledby="uses-title">
+  <div class="wrap">
+    <h2 class="h2" id="uses-title">Lo que puede hacer en tu negocio.</h2>
+    <div class="ia-uses">
+      <div class="ia-use"><b>Clínicas y consultorios</b><ul><li>Responder precios y requisitos</li><li>Apartar y confirmar citas</li><li>Recordar la cita un día antes</li></ul></div>
+      <div class="ia-use"><b>Restaurantes y cafés</b><ul><li>Tomar reservaciones</li><li>Mandar el menú del día</li><li>Pedidos para llevar</li></ul></div>
+      <div class="ia-use"><b>Inmobiliarias</b><ul><li>Calificar a quien pregunta</li><li>Mandar fichas de propiedades</li><li>Agendar visitas</li></ul></div>
+      <div class="ia-use"><b>Despachos</b><ul><li>Recordar documentos pendientes</li><li>Agendar asesorías</li><li>Responder dudas frecuentes</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="band band--light section" aria-labelledby="how-title">
+  <div class="wrap">
+    <h2 class="h2" id="how-title">Cómo lo hacemos.</h2>
+    <ol class="ia-steps">
+      <li><span>1</span><b>Diagnóstico</b><p>Entendemos cómo atiendes hoy, qué preguntan tus clientes y dónde se le va el tiempo a tu equipo.</p></li>
+      <li><span>2</span><b>Piloto</b><p>Lo armamos con tus respuestas aprobadas y lo probamos con un caso real antes de abrirlo a todos.</p></li>
+      <li><span>3</span><b>Operación y mejora</b><p>Revisamos contigo qué preguntaron tus clientes y qué resolvió el asistente, y lo ajustamos.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="band section" aria-labelledby="trust-title">
+  <div class="wrap">
+    <h2 class="h2" id="trust-title">Tú tienes el control.</h2>
+    <div class="ia-trust">
+      <div><b>Responde lo que apruebas</b><p>Arma sus respuestas con tu información: precios, horarios, servicios y políticas. No inventa.</p></div>
+      <div><b>Pasa a una persona</b><p>Urgencias, quejas o casos especiales llegan a tu equipo con el resumen de la conversación.</p></div>
+      <div><b>En tu número</b><p>Tus clientes te escriben al WhatsApp de siempre. No cambian nada.</p></div>
+      <div><b>Ves qué pasa</b><p>Te mostramos qué preguntan tus clientes y qué resolvió el asistente.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band band--light section" aria-labelledby="faq-title">
+  <div class="wrap">
+    <h2 class="h2" id="faq-title">Preguntas frecuentes.</h2>
+    <div class="ia-faq">
+      <details><summary>¿Necesito tener mi página con Ceiba?</summary><p>No. El asistente funciona con tu número de WhatsApp. Si además tienes tu página con nosotros, también responde ahí.</p></details>
+      <details><summary>¿Qué pasa si le preguntan algo que no sabe?</summary><p>No inventa: avisa que una persona de tu equipo le responde y te pasa la conversación con un resumen.</p></details>
+      <details><summary>¿Funciona de noche y en fin de semana?</summary><p>Sí. Contesta a cualquier hora y deja apartadas las citas o solicitudes para que tu equipo las vea al llegar.</p></details>
+      <details><summary>¿Hay cargos de WhatsApp?</summary><p>Meta puede cobrar por algunos mensajes. Te lo confirmamos al conectar tu número y, si aplica, aparece desglosado.</p></details>
+      <details><summary>¿Cuánto tarda en estar listo?</summary><p>Depende de qué automaticemos. Te damos los tiempos en la propuesta del diagnóstico.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="band band--petrol section ia-contact" id="contacto" aria-labelledby="ct-title">
+  <div class="wrap">
+    <div>
+      <h2 id="ct-title">Cuéntanos qué te quita más tiempo.</h2>
+      <p class="lede">Te escribimos en 24 horas hábiles para agendar tu diagnóstico. Si no conviene automatizarlo, te lo decimos.</p>
+    </div>
+    <form class="form" id="ia-form" novalidate>
+      <div id="ia-fields" style="display:grid;gap:18px">
+        <div class="frow">
+          <div class="fld" data-f="name"><label for="i-name">Tu nombre</label><input id="i-name" autocomplete="name"><p class="err" hidden></p></div>
+          <div class="fld" data-f="biz"><label for="i-biz">Nombre del negocio</label><input id="i-biz" autocomplete="organization"><p class="err" hidden></p></div>
+        </div>
+        <div class="fld" data-f="contact"><label for="i-contact">Tu WhatsApp o correo</label><input id="i-contact" autocomplete="email" placeholder="+52 33 1234 5678 o tu@correo.com"><p class="err" hidden></p></div>
+        <div class="fld" data-f="message"><label for="i-msg">¿Qué te gustaría resolver?</label><textarea id="i-msg" maxlength="1500" placeholder="Por ejemplo: contestamos las mismas preguntas en WhatsApp todo el día y se nos van citas en la noche."></textarea><p class="err" hidden></p>
+          <div class="ia-chips" aria-label="Ideas"><button type="button">Contestar WhatsApp</button><button type="button">Agendar y confirmar citas</button><button type="button">Cotizaciones</button><button type="button">Seguimiento a clientes</button><button type="button">Reportes</button></div></div>
+        <div class="trap" aria-hidden="true" style="position:absolute;left:-9999px"><input id="i-trap" tabindex="-1" autocomplete="off"></div>
+        <p class="err" id="ia-err" role="alert" hidden></p>
+        <button class="btn btn-primary" type="submit" id="ia-btn">Quiero mi diagnóstico <span class="arrow" aria-hidden="true">→</span></button>
+      </div>
+      <div class="success" id="ia-ok" hidden tabindex="-1"><h3>Listo, recibimos tu solicitud.</h3><p class="done-when" id="ia-when" style="font:600 24px/1.25 var(--f-display);color:var(--ivory)"></p><p>Mientras, puedes ver cómo funciona una página con asistente: <a class="link" href="/vista/clinica-arrayan" target="_blank" rel="noopener">abrir el ejemplo ↗</a></p></div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="band footer"></footer>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* conversación de ejemplo que se repite */
+  const log = $('#ia-log');
+  const script = [
+    ['me', 'Hola, ¿cuánto cuesta una limpieza?'],
+    ['bot', 'Hola 👋 La limpieza dental cuesta $700 y dura unos 40 minutos. ¿Te aparto un horario?'],
+    ['me', 'Sí, ¿tienen mañana en la tarde?'],
+    ['bot', 'Mañana tenemos 16:00 y 17:30. ¿Cuál prefieres?'],
+    ['me', '17:30'],
+    ['bot', 'Listo, quedó apartada.<small>Cita: limpieza · mañana 17:30</small>'],
+    ['me', 'Gracias! Otra cosa, tengo un dolor fuerte en una muela'],
+    ['sys', 'Te paso con recepción para atenderte hoy mismo'],
+  ];
+  const wait = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
+  async function play() {
+    while (true) {
+      log.innerHTML = '';
+      for (const [who, text] of script) {
+        if (who === 'bot') { const t = document.createElement('span'); t.className = 'ia-typing'; t.innerHTML = '<i></i><i></i><i></i>'; log.appendChild(t); await wait(1100); t.remove(); }
+        else await wait(who === 'sys' ? 900 : 1200);
+        log.insertAdjacentHTML('beforeend', `<p class="ia-msg${who === 'me' ? ' me' : who === 'sys' ? ' sys' : ''}">${text}</p>`);
+        while (log.scrollHeight > log.clientHeight && log.children.length > 1) log.firstElementChild.remove();
+      }
+      if (reduce) return;
+      await wait(4500);
+    }
+  }
+  play();
+
+  /* formulario */
+  const rules = {
+    name: v => v.trim().length >= 2 || 'Escribe tu nombre.',
+    biz: v => v.trim().length >= 2 || 'Escribe el nombre de tu negocio.',
+    contact: v => { const s = v.trim(); if (s.includes('@')) return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s) || 'Revisa el correo.'; const d = s.replace(/\D/g, ''); return (d.length >= 8 && d.length <= 15) || 'Déjanos un WhatsApp con lada o un correo.'; },
+    message: v => v.trim().length >= 5 || 'Cuéntanos qué te gustaría resolver.',
+  };
+  const fld = n => document.querySelector(`[data-f="${n}"]`), inp = n => fld(n).querySelector('input,textarea');
+  const check = (n, msg) => { const r = msg ?? rules[n](inp(n).value), ok = r === true; fld(n).classList.toggle('invalid', !ok); const e = fld(n).querySelector('.err'); e.hidden = ok; e.textContent = ok ? '' : r; inp(n).setAttribute('aria-invalid', !ok); return ok; };
+  document.querySelectorAll('.ia-chips button').forEach(b => b.addEventListener('click', () => { const t = inp('message'); t.value = (t.value.trim() ? t.value.trim() + '. ' : '') + b.textContent; t.focus(); }));
+  $('#ia-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const bad = Object.keys(rules).filter(n => !check(n)); if (bad.length) { inp(bad[0]).focus(); return; }
+    const btn = $('#ia-btn'), err = $('#ia-err'); btn.disabled = true; err.hidden = true;
+    try {
+      const r = await fetch('/api/lead', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ source: 'ia', mode: 'ia', name: inp('name').value, biz: inp('biz').value, contact: inp('contact').value, message: inp('message').value, company_url: $('#i-trap').value }) });
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok) { if (d.fields) Object.entries(d.fields).forEach(([k, m]) => fld(k) && check(k, m)); throw new Error(d.error || 'No pudimos enviar tu solicitud.'); }
+      const first = inp('name').value.trim().split(/\s+/)[0];
+      $('#ia-when').innerHTML = d.dueDay ? `${esc(first)}, te escribimos <span style="color:var(--lime)">${esc(d.dueDay)}</span>, ${esc(d.dueTime.replace(/\.$/, ''))}, para agendar tu diagnóstico.` : '';
+      $('#ia-fields').hidden = true; $('#ia-ok').hidden = false; $('#ia-ok').focus();
+    } catch (x) { err.textContent = x.message; err.hidden = false; }
+    btn.disabled = false;
+  });
+})();
+</script>
+</body>
+</html>

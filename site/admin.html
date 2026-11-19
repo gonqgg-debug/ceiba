@@ -26,7 +26,7 @@
   --gut:max(20px, env(safe-area-inset-left,0px));
   --gut-r:max(20px, env(safe-area-inset-right,0px));
   --max:1240px;
-  --photo-room:url("img/room.jpg");--photo-doc:url("img/doc.jpg");--photo-facade:url("img/facade.jpg");--photo-reception:url("img/reception.jpg");
+  --photo-room:url("/img/room.jpg");--photo-doc:url("/img/doc.jpg");--photo-facade:url("/img/facade.jpg");--photo-reception:url("/img/reception.jpg");
   --ease:cubic-bezier(.2,.7,.1,1);
   color-scheme:dark;
 }
@@ -163,7 +163,7 @@ button{font:inherit;color:inherit}
 .mo-logo b span{display:block;color:#1BA8C9;font-size:20px;letter-spacing:1px}
 .mo-head nav{display:flex;gap:16px;font:bold 11px Arial;color:#2b3a42;letter-spacing:.6px}
 .mo-head nav .on{color:#1BA8C9;border-bottom:2px solid #1BA8C9;padding-bottom:3px}
-.mo-slider{position:relative;height:250px;background:url(img/old-stock.jpg) 70% center/cover #f2f2f2}
+.mo-slider{position:relative;height:250px;background:url(/img/old-stock.jpg) 70% center/cover #f2f2f2}
 .mo-cap{position:absolute;left:40px;top:46px;width:330px;background:rgba(27,168,201,.88);color:#fff;padding:18px 20px}
 .mo-cap b{display:block;font:bold 20px/1.2 Arial;margin-bottom:8px}
 .mo-cap span{display:block;font-size:12px;margin-bottom:12px}
@@ -826,7 +826,7 @@ textarea.json{width:100%;min-height:420px;font:400 12.5px/1.5 var(--f-mono);back
         <td><b>${esc(l.business)}</b><small>${esc(l.name)}</small></td>
         <td>${l.site_host ? esc(l.site_host) : '<small>Sin página</small>'}</td>
         <td>${esc(l.contact)}<small>${l.contact_type === 'email' ? 'correo' : 'WhatsApp'}</small></td>
-        <td><span class="st ${hot ? 'st--hot' : l.status === 'error' ? 'st--warn' : ''}">${LEAD[l.status] || l.status}</span>${l.notes && l.status === 'error' ? `<small>${esc(l.notes).slice(0, 80)}</small>` : ''}</td>
+        <td><span class="st ${hot ? 'st--hot' : l.status === 'error' ? 'st--warn' : ''}">${LEAD[l.status] || l.status}</span>${l.notes && (l.status === 'error' || l.notes.startsWith('IA:')) ? `<small>${esc(l.notes).slice(0, 140)}</small>` : ''}</td>
         <td class="${late ? 'late' : ''}">${['propuesta_enviada', 'descartado'].includes(l.status) ? '—' : fmt(l.due_at)}</td>
         <td>${p ? `<span class="st">${PROP[p.status] || p.status}</span>${p.change_status ? `<small>Ajustes: ${esc(p.change_status)}</small>` : ''}<small>${views} visita${views === 1 ? '' : 's'}${p.valid_until ? ` · vence ${esc(p.valid_until)}` : ''}</small>` : '<small>Sin borrador</small>'}</td></tr>`;
     }).join('');

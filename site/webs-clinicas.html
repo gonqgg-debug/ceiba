@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Páginas web para clínicas · Ceiba Labs</title>
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="icon" href="favicon.ico" sizes="32x32">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="/apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0B1514">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +28,7 @@
   --gut:max(20px, env(safe-area-inset-left,0px));
   --gut-r:max(20px, env(safe-area-inset-right,0px));
   --max:1240px;
-  --photo-room:url("img/room.jpg");--photo-doc:url("img/doc.jpg");--photo-facade:url("img/facade.jpg");--photo-reception:url("img/reception.jpg");
+  --photo-room:url("/img/room.jpg");--photo-doc:url("/img/doc.jpg");--photo-facade:url("/img/facade.jpg");--photo-reception:url("/img/reception.jpg");
   --ease:cubic-bezier(.2,.7,.1,1);
   color-scheme:dark;
 }
@@ -165,7 +165,7 @@ button{font:inherit;color:inherit}
 .mo-logo b span{display:block;color:#1BA8C9;font-size:20px;letter-spacing:1px}
 .mo-head nav{display:flex;gap:16px;font:bold 11px Arial;color:#2b3a42;letter-spacing:.6px}
 .mo-head nav .on{color:#1BA8C9;border-bottom:2px solid #1BA8C9;padding-bottom:3px}
-.mo-slider{position:relative;height:250px;background:url(img/old-stock.jpg) 70% center/cover #f2f2f2}
+.mo-slider{position:relative;height:250px;background:url(/img/old-stock.jpg) 70% center/cover #f2f2f2}
 .mo-cap{position:absolute;left:40px;top:46px;width:330px;background:rgba(27,168,201,.88);color:#fff;padding:18px 20px}
 .mo-cap b{display:block;font:bold 20px/1.2 Arial;margin-bottom:8px}
 .mo-cap span{display:block;font-size:12px;margin-bottom:12px}
@@ -711,7 +711,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 }
 
 /* ===================== INDUSTRY: CLÍNICAS ===================== */
-:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--photo-desk:url("img/desk.jpg")}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--photo-desk:url("/img/desk.jpg")}
 .ind-hero{padding-block:clamp(36px,5vw,72px) clamp(56px,7vw,104px);overflow:clip}
 .ih-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(40px,6vw,96px);align-items:center}
 .crumb{display:flex;flex-wrap:wrap;gap:8px;font-size:14px;color:var(--muted);margin:0 0 28px;list-style:none;padding:0}
@@ -802,20 +802,12 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 
 <header class="site-header" id="top">
   <div class="wrap nav">
-    <a class="brand" href="index.html" aria-label="Ceiba Labs, inicio"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
+    <a class="brand" href="/" aria-label="Ceiba Labs, inicio"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
     <ul class="nav-links" id="nav-links">
-      <li class="has-sub"><a href="index.html#suscripcion" aria-current="true">Páginas web</a><button class="sub-btn" type="button" aria-expanded="false" aria-controls="sub-webs" aria-label="Ver tipos de negocio"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
-        <ul class="nav-sub" id="sub-webs">
-          <li><a href="#top" aria-current="page">Clínicas</a></li>
-          <li><a href="#" data-route="/webs/restaurantes">Restaurantes</a></li>
-          <li><a href="#" data-route="/webs/inmobiliarias">Inmobiliarias</a></li>
-          <li><a href="#" data-route="/webs/hoteles">Hoteles</a></li>
-          <li><a href="#" data-route="/webs/despachos">Despachos</a></li>
-        </ul></li>
-      <li><a href="index.html#ia">Inteligencia artificial</a></li>
-      <li><a href="index.html#precios">Precios</a></li>
-      <li><a href="index.html#antes-despues">Trabajo</a></li>
-      <li><a href="#" data-route="/nosotros">Nosotros</a></li>
+      <li class="has-sub"><a href="/webs">Páginas web</a><button class="sub-btn" type="button" aria-expanded="false" aria-controls="sub-webs" aria-label="Ver tipos de negocio"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+        <ul class="nav-sub" id="sub-webs"><li><a href="/webs">Todas las páginas web</a></li><li><a href="/webs/clinicas" aria-current="true">Clínicas y consultorios</a></li><li><a href="#" data-soon="Restaurantes">Restaurantes <small>pronto</small></a></li><li><a href="#" data-soon="Inmobiliarias">Inmobiliarias <small>pronto</small></a></li><li><a href="#" data-soon="Hoteles">Hoteles <small>pronto</small></a></li><li><a href="#" data-soon="Despachos">Despachos <small>pronto</small></a></li></ul></li>
+      <li><a href="/ia">Inteligencia artificial</a></li>
+      <li><a href="/webs#precios">Precios</a></li>
       <li class="nav-cta"><a href="#diagnostico">Propuesta gratis</a></li>
     </ul>
     <a class="btn btn-primary" href="#diagnostico">Propuesta gratis</a>
@@ -828,7 +820,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   <div class="wrap ih-grid">
     <div class="ih-copy">
       <div>
-        <ol class="crumb" aria-label="Ruta"><li><a href="index.html">Inicio</a></li><li><a href="index.html#suscripcion">Páginas web</a></li><li aria-current="page">Clínicas</li></ol>
+        <ol class="crumb" aria-label="Ruta"><li><a href="/">Inicio</a></li><li><a href="index.html#suscripcion">Páginas web</a></li><li aria-current="page">Clínicas</li></ol>
         <h1 id="hero-title">Páginas web para <span class="soft">clínicas y consultorios.</span></h1>
       </div>
       <p class="lede">Para que tus pacientes vean tus tratamientos y agenden desde el celular, sin llamar. Y un asistente de WhatsApp que contesta cuando tu equipo está ocupado.</p>
@@ -844,7 +836,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
         </form>
       <div class="secondary-actions">
         <button class="link" type="button" id="no-web">No tengo página todavía <span class="arrow" aria-hidden="true">→</span></button>
-        <a class="link" href="propuesta-clinica-arrayan.html">Ver una propuesta para una clínica <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="link" href="/p/clinica-arrayan">Ver una propuesta para una clínica <span class="arrow" aria-hidden="true">→</span></a>
       </div>
     </div>
     <div class="ih-visual">
@@ -929,7 +921,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
           <p>Lo que gana la clínica</p>
           <strong>Más citas agendadas sin tener que contestar el teléfono.</strong>
         </div>
-        <div class="cmp-links"><a class="link" href="propuesta-clinica-arrayan.html">Ver la propuesta que recibiría esta clínica <span class="arrow" aria-hidden="true">→</span></a></div>
+        <div class="cmp-links"><a class="link" href="/p/clinica-arrayan">Ver la propuesta que recibiría esta clínica <span class="arrow" aria-hidden="true">→</span></a></div>
       </div>
     </div>
   </div>
@@ -1003,7 +995,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
           <div class="r tt" role="row"><span role="cell">Total</span><span role="cell">$9,480</span><span role="cell">$3,980</span></div>
         </div>
         <p class="fine">Precios de lanzamiento en pesos mexicanos. Es el precio final. El pago inicial se hace al aprobar la propuesta y la mensualidad empieza cuando publicamos. Si aplica algún cargo de Meta por mensajes, va desglosado en tu propuesta.</p>
-        <div class="pack-acts"><a class="btn btn-primary" href="#diagnostico">Quiero mi propuesta gratis <span class="arrow" aria-hidden="true">→</span></a><a class="link" href="propuesta-clinica-arrayan.html">Ver una propuesta con este plan</a></div>
+        <div class="pack-acts"><a class="btn btn-primary" href="#diagnostico">Quiero mi propuesta gratis <span class="arrow" aria-hidden="true">→</span></a><a class="link" href="/p/clinica-arrayan">Ver una propuesta con este plan</a></div>
       </div>
       <div class="alt">
         <h3>Otras combinaciones</h3>
@@ -1044,7 +1036,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
         <li><span>2</span>Preparamos tu propuesta en un enlace privado.</li>
         <li><span>3</span>Si te gusta, la activas ahí mismo o hablamos 15 minutos.</li>
       </ol>
-      <p class="close-alt"><a class="link" href="propuesta-clinica-arrayan.html">Ver una propuesta privada de ejemplo <span class="arrow" aria-hidden="true">→</span></a></p>
+      <p class="close-alt"><a class="link" href="/p/clinica-arrayan">Ver una propuesta privada de ejemplo <span class="arrow" aria-hidden="true">→</span></a></p>
     </div>
     <form class="form" id="lead-form" novalidate>
       <div id="lead-fields" style="display:grid;gap:18px">
@@ -1075,7 +1067,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
         <p class="done-when" id="lead-when"></p>
         <p id="lead-how"></p>
         <dl id="lead-summary"></dl>
-        <div style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn btn-line" href="propuesta-clinica-arrayan.html">Ver una propuesta de ejemplo</a><button class="btn btn-line" type="button" id="lead-reset">Corregir mis datos</button></div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn btn-line" href="/p/clinica-arrayan">Ver una propuesta de ejemplo</a><button class="btn btn-line" type="button" id="lead-reset">Corregir mis datos</button></div>
       </div>
     </form>
   </div>
@@ -1084,10 +1076,10 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 
 <footer class="band footer">
   <div class="wrap">
-    <a href="index.html" aria-label="Ceiba Labs, inicio" style="color:var(--ivory)"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
-    <nav aria-label="Pie de página"><a href="index.html#suscripcion">Páginas web</a><a href="index.html#ia">Inteligencia artificial</a><a href="index.html#precios">Precios</a><a href="index.html#antes-despues">Trabajo</a><a href="#" data-route="/nosotros">Nosotros</a><a href="#" data-route="/contacto">Contacto</a><a href="#diagnostico">Propuesta gratis</a></nav>
+    <a href="/" aria-label="Ceiba Labs, inicio" style="color:inherit"><svg viewBox="0 0 353.37 54" fill="currentColor" role="img" aria-label="Ceiba Labs"><use href="#ceiba-logo"/></svg></a>
+    <nav aria-label="Pie de página"><a href="/webs">Páginas web</a><a href="/webs/clinicas">Clínicas</a><a href="/ia">Inteligencia artificial</a><a href="/webs#precios">Precios</a><a href="/p/clinica-arrayan">Propuesta de ejemplo</a><a href="/diagnostico">Propuesta gratis</a></nav>
   </div>
-  <div class="wrap foot-legal"><span>© 2026 Ceiba Labs · Estudio digital para negocios de Latinoamérica</span><nav aria-label="Legal"><a href="#" data-route="/privacidad">Privacidad</a><a href="#" data-route="/terminos">Términos</a><a href="#" data-route="/baja">Darse de baja de correos</a></nav></div>
+  <div class="wrap foot-legal"><span>© 2026 Ceiba Labs · Estudio digital para negocios de Latinoamérica</span><nav aria-label="Legal"><a href="#" data-soon="Privacidad">Privacidad</a><a href="#" data-soon="Términos">Términos</a></nav></div>
 </footer>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
@@ -1147,7 +1139,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     </div>
     <ul class="mn-trust"><li><b>Más de 15 años</b>cuidando sonrisas en Providencia</li><li><b>Cédula profesional</b>4512378</li><li><b>Hasta 6 MSI</b>en tratamientos mayores a $1,200</li><li><b>Estacionamiento gratis</b>frente a la clínica</li></ul>
     <div class="mn-treat" data-mark="2"><div class="mn-treat-head"><h4>Nuestros tratamientos</h4><div class="mn-car-nav"><button type="button" data-car="prev" aria-label="Tratamiento anterior"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" data-car="next" aria-label="Siguiente tratamiento"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>
-      <ul class="mn-car" tabindex="0" aria-label="Tratamientos, desliza para ver más"><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-valoracion.jpg)" role="img" aria-label="La dentista le muestra una radiografía a una paciente"></div><div class="mn-tc-body"><b>Valoración dental</b><i>Sin costo</i><span>Revisamos dientes y encías, y te tomamos radiografía. Sales con tu presupuesto.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-limpieza.jpg)" role="img" aria-label="Limpieza dental a una paciente"></div><div class="mn-tc-body"><b>Limpieza dental</b><i>$700</i><span>Retira el sarro y la placa que no quita el cepillado. Se recomienda 2 veces al año.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-alineadores.jpg)" role="img" aria-label="Paciente con un alineador transparente"></div><div class="mn-tc-body"><b>Alineadores transparentes</b><i>Valoración sin costo</i><span>Casi no se notan y te los puedes quitar para comer.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-implantes.jpg)" role="img" aria-label="Paciente sonriendo después de su tratamiento"></div><div class="mn-tc-body"><b>Implantes dentales</b><i>Desde $14,500</i><span>Reemplaza el diente que te falta con una pieza fija.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-blanqueamiento.jpg)" role="img" aria-label="Paciente con una sonrisa blanca"></div><div class="mn-tc-body"><b>Blanqueamiento</b><i>$3,800</i><span>Dientes más blancos en dos sesiones.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-urgencias.jpg)" role="img" aria-label="La dentista atiende a un paciente con dolor de muela"></div><div class="mn-tc-body"><b>Urgencias</b><i>Hoy mismo</i><span>¿Dolor, golpe o un diente roto? Llámanos y te hacemos un espacio.</span><em>Llamar</em></div></li></ul>
+      <ul class="mn-car" tabindex="0" aria-label="Tratamientos, desliza para ver más"><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(/img/t-valoracion.jpg)" role="img" aria-label="La dentista le muestra una radiografía a una paciente"></div><div class="mn-tc-body"><b>Valoración dental</b><i>Sin costo</i><span>Revisamos dientes y encías, y te tomamos radiografía. Sales con tu presupuesto.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(/img/t-limpieza.jpg)" role="img" aria-label="Limpieza dental a una paciente"></div><div class="mn-tc-body"><b>Limpieza dental</b><i>$700</i><span>Retira el sarro y la placa que no quita el cepillado. Se recomienda 2 veces al año.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(/img/t-alineadores.jpg)" role="img" aria-label="Paciente con un alineador transparente"></div><div class="mn-tc-body"><b>Alineadores transparentes</b><i>Valoración sin costo</i><span>Casi no se notan y te los puedes quitar para comer.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(/img/t-implantes.jpg)" role="img" aria-label="Paciente sonriendo después de su tratamiento"></div><div class="mn-tc-body"><b>Implantes dentales</b><i>Desde $14,500</i><span>Reemplaza el diente que te falta con una pieza fija.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(/img/t-blanqueamiento.jpg)" role="img" aria-label="Paciente con una sonrisa blanca"></div><div class="mn-tc-body"><b>Blanqueamiento</b><i>$3,800</i><span>Dientes más blancos en dos sesiones.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(/img/t-urgencias.jpg)" role="img" aria-label="La dentista atiende a un paciente con dolor de muela"></div><div class="mn-tc-body"><b>Urgencias</b><i>Hoy mismo</i><span>¿Dolor, golpe o un diente roto? Llámanos y te hacemos un espacio.</span><em>Llamar</em></div></li></ul>
       <p class="mn-note">*Los precios pueden cambiar según tu caso y te los confirmamos en tu valoración. Aceptamos efectivo, tarjetas de débito y crédito.</p>
     </div>
     <div class="mn-team" data-mark="3"><div class="mn-portrait" role="img" aria-label="Consultorio de la clínica"></div><div class="mn-cred"><h4>Tu sonrisa en manos expertas</h4><p>La Dra. Valeria Ríos es cirujana dentista egresada de la Universidad de Guadalajara y especialista en rehabilitación oral. Lleva más de 15 años atendiendo a familias en Providencia.</p><ul><li>Cédula profesional 4512378</li><li>Cédula de especialidad 7718203</li><li>No trabajamos con pasantes: siempre te atiende una especialista</li></ul><small>Personaje ficticio del ejemplo</small></div></div>
@@ -1367,7 +1359,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     }
     auditInput.setAttribute('aria-describedby', 'audit-help');
     if (r.host === 'clinicaarrayan.mx') { auditOut.innerHTML = ''; openDiag(); return; }
-    location.href = 'diagnostico.html?url=' + encodeURIComponent(r.host);
+    location.href = '/diagnostico?url=' + encodeURIComponent(r.host);
   });
   $('#no-web').addEventListener('click', () => goToForm({ noweb: true }));
 
@@ -1557,5 +1549,21 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 <script src="/assets/prefs.js" defer>
 </script>
 <script src="/assets/prefs.js" defer></script>
+<script>window.__ceibaMenu = true;</script><script>
+(() => {
+  if (!window.__ceibaMenu) {
+  const h = document.querySelector('.site-header'), b = document.getElementById('menu-btn');
+  b?.addEventListener('click', () => { const o = !h.classList.contains('open'); h.classList.toggle('open', o); b.setAttribute('aria-expanded', o); });
+  const close = () => document.querySelectorAll('.has-sub.open').forEach(li => { li.classList.remove('open'); li.querySelector('.sub-btn').setAttribute('aria-expanded', 'false'); });
+  document.querySelectorAll('.sub-btn').forEach(x => x.addEventListener('click', () => { const li = x.closest('.has-sub'), o = !li.classList.contains('open'); close(); li.classList.toggle('open', o); x.setAttribute('aria-expanded', o); }));
+  document.addEventListener('click', e => { if (!e.target.closest('.has-sub')) close(); });
+  }
+  let t; document.addEventListener('click', e => {
+    const a = e.target.closest('[data-soon]'); if (!a) return; e.preventDefault();
+    let el = document.getElementById('soon-toast'); if (!el) { el = Object.assign(document.createElement('div'), { id: 'soon-toast', className: 'toast' }); el.setAttribute('role', 'status'); document.body.appendChild(el); }
+    el.textContent = a.dataset.soon + ': muy pronto.'; el.hidden = false; clearTimeout(t); t = setTimeout(() => el.hidden = true, 3200);
+  });
+})();
+</script>
 </body>
 </html>

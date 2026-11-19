@@ -10,7 +10,7 @@ import { readSite } from '../lib/site-reader.js';
 import { fireRoutine } from '../lib/routine.js';
 
 const INDUSTRIES = ['Clínica o consultorio', 'Restaurante o café', 'Inmobiliaria', 'Hotel u hospedaje', 'Despacho contable o legal', 'Otro'];
-const SOURCES = ['home', 'diagnostico', 'clinicas'];
+const SOURCES = ['home', 'diagnostico', 'clinicas', 'webs', 'ia'];
 const PREF = {
   style: ['moderno', 'elegante', 'calido', 'tecnologico'], mode: ['light', 'dark', 'any'], tone: ['tu', 'usted'],
   goals: ['citas', 'estetica', 'urgencias', 'google', 'zonas', 'confianza'],
@@ -37,6 +37,18 @@ const clean = (v, max = 200) => String(v ?? '').replace(/[\u0000-\u001f\u007f]/g
 
 function validate(b) {
   const errors = {};
+  // Solicitud de IA: sin página; basta con lo que quiere resolver
+  if (b.mode === 'ia') {
+    const name = clean(b.name, 120), business = clean(b.biz, 160), contact = clean(b.contact, 160), message = clean(b.message, 1500);
+    if (name.length < 2) errors.name = 'Escribe tu nombre.';
+    if (business.length < 2) errors.biz = 'Escribe el nombre de tu negocio.';
+    if (message.length < 5) errors.message = 'Cuéntanos qué te gustaría resolver.';
+    let contactType = null;
+    if (contact.includes('@')) { if (/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(contact)) contactType = 'email'; }
+    else { const d = contact.replace(/\D/g, ''); if (/^[+\d\s().-]+$/.test(contact) && d.length >= 8 && d.length <= 15) contactType = 'whatsapp'; }
+    if (!contactType) errors.contact = 'Revisa tu WhatsApp o correo.';
+    return { errors, row: { has_site: false, site_host: parseSite(b.site)?.host ?? null, industry: clean(b.industry, 60) || null, city: null, social: null, name, business, contact, contact_type: contactType, notes: `IA: ${message}`, status: 'en_revision' } };
+  }
   const hasSite = b.mode !== 'noweb';
   const site = hasSite ? parseSite(b.site) : null;
   if (hasSite && !site) errors.site = 'Revisa la dirección de tu página.';
@@ -69,6 +81,7 @@ function teamEmail(lead, due) {
     ['Página', lead.site_host ? `https://${lead.site_host}` : 'No tiene'],
     ...(lead.has_site ? [] : [['Rubro', lead.industry || '—'], ['Ciudad', lead.city], ['Perfil', lead.social]]),
     ...(lead.preferences ? [['Preferencias', prefsText(lead.preferences)]] : []),
+    ...(lead.notes ? [['Mensaje', lead.notes]] : []),
     ['Origen', lead.source], ['Entregar', `${due.day}, ${due.time} (${due.tz})`],
   ];
   const checks = lead.audit?.checks?.length
@@ -86,9 +99,9 @@ function clientEmail(lead, due) {
   const first = lead.name.split(/\s+/)[0];
   const text = `Hola, ${first}:
 
-Recibimos tu solicitud para ${lead.business}. Vamos a revisar ${lead.site_host ? `tu página (${lead.site_host})` : 'tu perfil'} y a preparar cómo quedaría tu nueva página web, el plan que te conviene y el precio.
+${lead.notes?.startsWith('IA:') ? `Recibimos tu solicitud para ${lead.business}. Vamos a revisar lo que nos contaste y te escribimos ${due.day}, ${due.time} (${due.tz}), a más tardar, para agendar tu diagnóstico de IA.` : `Recibimos tu solicitud para ${lead.business}. Vamos a revisar ${lead.site_host ? `tu página (${lead.site_host})` : 'tu perfil'} y a preparar cómo quedaría tu nueva página web, el plan que te conviene y el precio.
 
-Te mandamos el enlace privado a tu propuesta ${due.day}, ${due.time} (${due.tz}), a más tardar.
+Te mandamos el enlace privado a tu propuesta ${due.day}, ${due.time} (${due.tz}), a más tardar.`}
 
 Si quieres agregar algo, como fotos, servicios o lo que no te gusta de tu página actual, solo responde este correo.
 
@@ -109,7 +122,7 @@ export async function POST(request) {
   // Leemos la página del cliente para que la rutina tenga su contenido.
   // La revisión del servidor reemplaza a la que mandó el navegador.
   let snapshot = null, serverAudit = null;
-  if (row.has_site) {
+  if (row.has_site && b.mode !== 'ia') {
     try {
       const r = await readSite(parseSite(b.site).href);
       if (r.reachable) { snapshot = r.content; serverAudit = { reachable: true, title: r.review.title, seconds: +(r.page.total / 1000).toFixed(1), checks: r.review.checks.map(({ id, status, detail }) => ({ id, status, detail })) }; }
@@ -133,7 +146,7 @@ export async function POST(request) {
   } else console.warn('lead: Supabase no está configurado');
 
   if (mailReady() && process.env.CEIBA_NOTIFY_EMAIL) {
-    const tasks = [sendMail({ to: process.env.CEIBA_NOTIFY_EMAIL.split(','), subject: `Propuesta para ${lead.business}${lead.site_host ? ` (${lead.site_host})` : ''}`, ...teamEmail(lead, label), replyTo: lead.contact_type === 'email' ? lead.contact : undefined })];
+    const tasks = [sendMail({ to: process.env.CEIBA_NOTIFY_EMAIL.split(','), subject: b.mode === 'ia' ? `IA: ${lead.business}` : `Propuesta para ${lead.business}${lead.site_host ? ` (${lead.site_host})` : ''}`, ...teamEmail(lead, label), replyTo: lead.contact_type === 'email' ? lead.contact : undefined })];
     if (lead.contact_type === 'email') tasks.push(sendMail({ to: lead.contact, subject: `Recibimos tu solicitud, ${lead.name.split(/\s+/)[0]}`, ...clientEmail(lead, label), replyTo: process.env.CEIBA_REPLY_TO || process.env.CEIBA_NOTIFY_EMAIL.split(',')[0] }));
     const [team, client] = await Promise.allSettled(tasks);
     notified = team.status === 'fulfilled';
@@ -143,7 +156,8 @@ export async function POST(request) {
   } else console.warn('lead: correo no configurado');
 
   // Dispara la rutina de Claude que arma el borrador (si está configurada).
-  if (saved) await fireRoutine(lead).catch(err => console.error('lead: no se disparó la rutina', err.message));
+  // Las solicitudes de IA las atiende el equipo; no pasan por la rutina de propuestas de página.
+  if (saved && b.mode !== 'ia') await fireRoutine(lead).catch(err => console.error('lead: no se disparó la rutina', err.message));
 
   // Si no quedó registro en ningún lado, el cliente debe saberlo y escribirnos.
   if (!saved && !notified) return json({ error: 'No pudimos registrar tu solicitud. Intenta de nuevo o escríbenos por WhatsApp.' }, 502);

@@ -2,10 +2,12 @@
 
 Prototipo en alta fidelidad del sitio de Ceiba Labs, estudio digital para negocios de Latinoamérica. Son tres páginas estáticas en español, sin dependencias, que funcionan en escritorio y móvil.
 
-| Página | Archivo | Ruta prevista en el sitemap |
+| Página | Fuente | Ruta |
 |---|---|---|
-| Inicio | `site/index.html` | `/` |
-| Webs para clínicas | `site/webs-clinicas.html` | `/webs/clinicas` |
+| Inicio general (todos los servicios) | `src/inicio.html` | `/` |
+| Páginas web por suscripción | `src/home.html` | `/webs` |
+| Inteligencia artificial | `src/ia.html` | `/ia` |
+| Páginas web para clínicas | `src/webs-clinicas.html` | `/webs/clinicas` |
 | Propuesta privada de ejemplo | `site/propuesta-clinica-arrayan.html` | `/p/clinica-arrayan` |
 | Revisión de tu página | `site/diagnostico.html` | `/diagnostico` |
 
@@ -21,7 +23,7 @@ Después abre http://localhost:8000.
 
 ## Editar
 
-Las tres páginas comparten estilos, el logo, las maquetas de la clínica (Actual y Propuesta), el comparador y los formularios. La fuente de todo eso es `src/home.html`. Las otras plantillas reciben esos bloques con marcadores `{{...}}`.
+Las páginas comparten estilos, el logo, las maquetas de la clínica (Actual y Propuesta), el comparador y los formularios. La fuente de todo eso es `src/home.html` (el landing de páginas web). El encabezado y el pie de Inicio, Páginas web, IA y Clínicas los pone `build.py`, igual en todas, y también convierte los enlaces a rutas limpias. Las otras plantillas reciben esos bloques con marcadores `{{...}}`.
 
 1. Edita la plantilla que corresponda en `src/`.
 2. Ejecuta `python3 build.py`.
