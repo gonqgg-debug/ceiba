@@ -10,7 +10,7 @@
 // Es idempotente: si el cliente ya tiene su suscripción, la devuelve sin crear otra.
 import { timingSafeEqual } from 'node:crypto';
 import { json, stripe } from '../lib/stripe.js';
-import { PROPOSALS } from '../lib/proposals.js';
+import { getProposal } from '../lib/proposals.js';
 
 function authorized(request) {
   const expected = process.env.CEIBA_ADMIN_TOKEN;
@@ -45,10 +45,11 @@ export async function POST(request) {
   const { data: prices } = await s.prices.list({ lookup_keys: keys, active: true, limit: 10 });
   if (prices.length !== keys.length) return json({ error: 'Faltan precios mensuales en Stripe.' }, 500);
 
-  const business = PROPOSALS[meta.ceiba_proposal]?.business ?? customer.name ?? '';
+  const business = (await getProposal(meta.ceiba_proposal).catch(() => ({}))).proposal?.business ?? customer.name ?? '';
   const subscription = await s.subscriptions.create({
     customer: customerId,
     items: prices.map(p => ({ price: p.id })),
+    currency: meta.ceiba_currency || 'mxn', // misma moneda que el pago inicial
     default_payment_method: customer.invoice_settings?.default_payment_method || undefined,
     billing_mode: { type: 'flexible' },
     automatic_tax: { enabled: process.env.STRIPE_AUTOMATIC_TAX === 'true' },

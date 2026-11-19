@@ -34,16 +34,23 @@ async function ensureProduct(key, item, taxCode) {
 
 async function ensurePrice(p, productId) {
   const unit_amount = p.amount * 100; // centavos
-  const existing = (await s.prices.list({ lookup_keys: [p.lookupKey], limit: 1 })).data[0];
+  // Las demás monedas van en currency_options del mismo precio (Checkout y
+  // Suscripciones eligen la moneda con el parámetro `currency`).
+  const currency_options = Object.fromEntries(Object.entries(p.other || {}).map(([c, amt]) => [c, { unit_amount: amt * 100, tax_behavior: 'inclusive' }]));
+  const show = `${p.amount} MXN${Object.entries(p.other || {}).map(([c, a]) => ` / ${a} ${c.toUpperCase()}`).join('')}`;
+  const existing = (await s.prices.list({ lookup_keys: [p.lookupKey], limit: 1, expand: ['data.currency_options'] })).data[0];
+  const sameOptions = existing && Object.entries(currency_options).every(([c, o]) => existing.currency_options?.[c]?.unit_amount === o.unit_amount)
+    && Object.keys(existing.currency_options || {}).filter(c => c !== CURRENCY).length === Object.keys(currency_options).length;
   const same = existing && existing.unit_amount === unit_amount && existing.currency === CURRENCY &&
-    existing.product === productId && existing.tax_behavior === 'inclusive' &&
+    existing.product === productId && existing.tax_behavior === 'inclusive' && sameOptions &&
     (existing.recurring?.interval ?? null) === (p.recurring?.interval ?? null);
-  if (same) { console.log(`    precio ${p.lookupKey}: ${p.amount} MXN (sin cambios)`); return existing.id; }
+  if (same) { console.log(`    precio ${p.lookupKey}: ${show} (sin cambios)`); return existing.id; }
   const price = await s.prices.create({
     product: productId,
     currency: CURRENCY,
     unit_amount,
     tax_behavior: 'inclusive', // el monto es el precio final
+    ...(Object.keys(currency_options).length ? { currency_options } : {}),
     lookup_key: p.lookupKey,
     transfer_lookup_key: true,
     nickname: `${p.item.name} · ${p.phase}`,
@@ -51,7 +58,7 @@ async function ensurePrice(p, productId) {
     metadata: { ceiba_key: p.lookupKey },
   });
   if (existing) await s.prices.update(existing.id, { active: false });
-  console.log(`    precio ${p.lookupKey}: ${p.amount} MXN (${existing ? 'reemplazado' : 'creado'})`);
+  console.log(`    precio ${p.lookupKey}: ${show} (${existing ? 'reemplazado' : 'creado'})`);
   return price.id;
 }
 

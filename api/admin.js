@@ -11,7 +11,7 @@
 import { adminCookie, isAdmin } from '../lib/admin.js';
 import { dbReady, select, update } from '../lib/db.js';
 import { escHtml, mailReady, sendMail } from '../lib/notify.js';
-import { PLANS } from '../lib/catalog.js';
+import { PLANS, CURRENCIES, pricedCurrencies } from '../lib/catalog.js';
 import { json, siteUrl } from '../lib/stripe.js';
 import { validSlug } from '../lib/proposals.js';
 
@@ -38,7 +38,7 @@ export async function GET(request) {
       const slug = q.get('slug');
       if (!validSlug(slug)) return json({ error: 'Slug inválido.' }, 400);
       const p = await getBySlug(slug);
-      return p ? json({ proposal: p }) : json({ error: 'No existe.' }, 404);
+      return p ? json({ proposal: p, currencies: pricedCurrencies().map(c => ({ id: c, code: CURRENCIES[c].code, public: CURRENCIES[c].public })) }) : json({ error: 'No existe.' }, 404);
     }
     return json({ error: 'Acción desconocida.' }, 400);
   } catch (err) {
@@ -69,6 +69,7 @@ export async function POST(request) {
       if (!b.content || typeof b.content !== 'object' || !b.content.page?.hero?.title) return json({ error: 'El contenido debe tener al menos page.hero.title.' }, 400);
       const patch = { content: b.content };
       if (PLANS[b.plan]) patch.recommended_plan = b.plan;
+      if (pricedCurrencies().includes(b.currency)) patch.currency = b.currency;
       if (typeof b.whatsapp === 'boolean') patch.whatsapp_recommended = b.whatsapp;
       if (typeof b.business === 'string' && b.business.trim()) patch.business = b.business.trim().slice(0, 160);
       await update('proposals', `id=eq.${p.id}`, patch);

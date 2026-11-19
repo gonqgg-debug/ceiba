@@ -153,6 +153,14 @@ pages = {
 (SITE / "assets" / "prefs.js").write_text((SRC / "assets/prefs.js").read_text(encoding="utf-8"), encoding="utf-8")
 (SITE / "assets" / "tpl-clinica.js").write_text((ROOT / "lib/templates/clinica.js").read_text(encoding="utf-8"), encoding="utf-8")
 (SITE / "assets" / "vista.js").write_text((SRC / "assets/vista.js").read_text(encoding="utf-8"), encoding="utf-8")
+# Precios por moneda: el catálogo sale de lib/catalog.js (única fuente) y precios.js los pinta
+catalog_json = subprocess.run(["node", "--input-type=module", "-e",
+    "import { publicCatalog } from './lib/catalog.js'; process.stdout.write(JSON.stringify(publicCatalog()))"],
+    capture_output=True, text=True, cwd=ROOT, check=True).stdout
+(SITE / "assets" / "precios.js").write_text("window.CEIBA_CATALOG = " + catalog_json + ";\n" + (SRC / "assets/precios.js").read_text(encoding="utf-8"), encoding="utf-8")
+PRICES_TAG = '<script src="/assets/precios.js" defer></script>\n'
+for name in ("webs.html", "ia.html", "webs-clinicas.html"):
+    pages[name] = pages[name].replace("</body>", PRICES_TAG + "</body>", 1) if "</body>" in pages[name] else pages[name] + "\n" + PRICES_TAG
 (ROOT / "lib" / "generated").mkdir(exist_ok=True)
 import json
 # Propuesta privada: plantilla con marcadores {{P_...}} que llena lib/render-proposal.js

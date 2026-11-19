@@ -322,7 +322,7 @@ img{max-width:100%}
             <input type="checkbox" id="addon-wa"{{P_ADDON_CHECKED}}>
             <span class="sw" aria-hidden="true"></span>
             <span class="addon-txt"><b>Asistente de WhatsApp</b><span>Contesta las preguntas de siempre con las respuestas que tú apruebas, anota los datos de la cita o la cotización y le pasa a tu equipo lo que necesita una persona. Funciona en WhatsApp y en tu página, para un número y una sucursal.</span></span>
-            <span class="addon-price">$3,990<small>+ $1,490/mes</small></span>
+            <span class="addon-price">{{P_ADDON_PRICE}}</span>
           </label>
           <p class="addon-note">El piloto incluye hasta 300 conversaciones al mes. Te avisamos al acercarte al límite y, si se agota, las conversaciones nuevas pasan directo a tu equipo.</p>
         </div>
@@ -336,7 +336,7 @@ img{max-width:100%}
         </dl>
         <button class="btn btn-primary" type="button" data-activate>Activar y pagar <span data-total-act>$9,480</span></button>
         <button class="btn btn-primary renew" type="button" data-renew-btn>Pedir propuesta actualizada</button>
-        <p class="sum-foot">Precios de lanzamiento en pesos mexicanos. Es el precio final.</p>
+        <p class="sum-foot">Precios de lanzamiento en {{P_CUR_NAME}}. Es el precio final.</p>
       </aside>
     </div>
   </div>
@@ -458,9 +458,9 @@ img{max-width:100%}
   $$('[data-renew-btn]').forEach(b => b.addEventListener('click', () => showToast('En el sitio, esto le avisa a Ceiba para actualizar tu propuesta.')));
 
   /* ---------- plan + module selector, single total ---------- */
-  const PLANS = { esencial: ['Esencial', 3490, 1490], negocio: ['Negocio', 5490, 2490], avanzado: ['Avanzado', 8490, 3990] };
-  const WA = ['Asistente de WhatsApp', 3990, 1490];
-  const mxn = n => '$' + n.toLocaleString('en-US');
+  const PLANS = P.plans || { esencial: ['Esencial', 3490, 1490], negocio: ['Negocio', 5490, 2490], avanzado: ['Avanzado', 8490, 3990] };
+  const WA = ['Asistente de WhatsApp', P.wa?.activation ?? 3990, P.wa?.monthly ?? 1490];
+  const mxn = n => (P.currency?.symbol || '$') + n.toLocaleString('en-US');
   let plan = P.plan;
   const addon = $('#addon-wa');
   function renderTotals() {

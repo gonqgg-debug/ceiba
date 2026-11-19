@@ -1432,7 +1432,7 @@ img{max-width:100%}
 
 
   /* ---------- validity ---------- */
-  const P = {"slug":"clinica-arrayan","plan":"negocio","validUntil":"2026-12-02","validShort":"2 dic","changes":{"rounds":0,"max":1,"status":null,"note":"","demo":true},"wa":{"activation":3990,"monthly":1490}};
+  const P = {"slug":"clinica-arrayan","plan":"negocio","validUntil":"2026-12-02","validShort":"2 dic","changes":{"rounds":0,"max":1,"status":null,"note":"","demo":true},"wa":{"activation":3990,"monthly":1490},"currency":{"code":"MXN","symbol":"$"},"plans":{"esencial":["Esencial",3490,1490],"negocio":["Negocio",5490,2490],"avanzado":["Avanzado",8490,3990]}};
   const [vy, vm, vd] = P.validUntil.split('-').map(Number);
   const VALID_UNTIL = new Date(Date.UTC(vy, vm - 1, vd, 23, 59, 59) + 6 * 3600e3); // fin del día, hora del centro
   const now = new Date();
@@ -1455,9 +1455,9 @@ img{max-width:100%}
   $$('[data-renew-btn]').forEach(b => b.addEventListener('click', () => showToast('En el sitio, esto le avisa a Ceiba para actualizar tu propuesta.')));
 
   /* ---------- plan + module selector, single total ---------- */
-  const PLANS = { esencial: ['Esencial', 3490, 1490], negocio: ['Negocio', 5490, 2490], avanzado: ['Avanzado', 8490, 3990] };
-  const WA = ['Asistente de WhatsApp', 3990, 1490];
-  const mxn = n => '$' + n.toLocaleString('en-US');
+  const PLANS = P.plans || { esencial: ['Esencial', 3490, 1490], negocio: ['Negocio', 5490, 2490], avanzado: ['Avanzado', 8490, 3990] };
+  const WA = ['Asistente de WhatsApp', P.wa?.activation ?? 3990, P.wa?.monthly ?? 1490];
+  const mxn = n => (P.currency?.symbol || '$') + n.toLocaleString('en-US');
   let plan = P.plan;
   const addon = $('#addon-wa');
   function renderTotals() {

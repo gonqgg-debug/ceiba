@@ -908,6 +908,9 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 .ws-check input{flex:1;min-width:180px;height:52px;border-radius:12px;border:1px solid rgba(247,244,235,.25);background:rgba(11,21,20,.35);color:var(--ivory);padding:0 14px;font:400 16px var(--f-body)}
 .ws-check input::placeholder{color:rgba(247,244,235,.5)}
 .ws-check .err{flex-basis:100%;color:#FFC9B8;font-size:14px;margin:0}
+.cur-switch{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:18px 0 0;font-size:14px;color:var(--muted)}
+.cur-switch button{font:inherit;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid rgba(247,244,235,.3);background:transparent;color:inherit;cursor:pointer}
+.cur-switch button[aria-pressed="true"]{background:var(--lime);color:var(--ink);border-color:var(--lime)}
 .ws-tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
 .ws-tiers div{display:grid;gap:6px;align-content:start;padding:20px;border-radius:18px;background:#fff;border:1px solid var(--line)}
 .ws-tiers div.hl{background:var(--ink);color:var(--ivory);border-color:var(--ink);--muted:rgba(247,244,235,.72)}
@@ -990,29 +993,29 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   <div class="wrap">
     <div class="pricing-inner">
       <div class="price-head">
-        <div><h2 class="h2" id="price-title">Precios claros, en pesos mexicanos.</h2><p class="lede" style="margin-top:16px">Pagas un monto inicial cuando decides empezar y la mensualidad desde que tu página está publicada.</p></div>
+        <div><h2 class="h2" id="price-title">Precios claros, en <span data-cur-name>pesos mexicanos</span>.</h2><p class="lede" style="margin-top:16px">Pagas un monto inicial cuando decides empezar y la mensualidad desde que tu página está publicada.</p></div>
         <a class="btn btn-line" href="#" data-route="/precios">Comparar planes y extras <span class="arrow" aria-hidden="true">→</span></a>
       </div>
       <div class="plans" role="list">
         <div class="plan" role="listitem">
           <div><h3>Esencial</h3><p class="for">Para que te encuentren y te escriban</p></div>
           <ul><li>Hasta 3 páginas, pensadas para el celular</li><li>Formulario y botón de WhatsApp</li><li>SEO base y optimizada para IA, con 5 preguntas frecuentes para tu rubro</li><li>Hosting y mantenimiento</li><li>Hasta 30 minutos de cambios al mes</li></ul>
-          <div class="price-cell"><span class="k">Pago inicial</span><span class="v">$3,490<small>pago único</small></span></div>
-          <div class="price-cell"><span class="k">Mensualidad</span><span class="v">$1,490<small>al mes</small></span></div>
+          <div class="price-cell"><span class="k">Pago inicial</span><span class="v"><span data-price="web.esencial.activation">$3,490</span><small>pago único</small></span></div>
+          <div class="price-cell"><span class="k">Mensualidad</span><span class="v"><span data-price="web.esencial.monthly">$1,490</span><small>al mes</small></span></div>
           <a class="btn btn-line" href="#" data-route="/precios">Ver plan</a>
         </div>
         <div class="plan plan--mid" role="listitem">
           <div><h3>Negocio</h3><p class="for">Para recibir citas y reservas en línea</p></div>
           <ul><li>Hasta 7 páginas, con todo lo de Esencial</li><li>Conectada con la agenda que ya usas</li><li><b>Comprobamos que la IA te recomiende</b>: análisis avanzado al lanzar y prueba real en ChatGPT, Gemini y Perplexity cada 3 meses</li><li>15 preguntas frecuentes y hasta 4 páginas por servicio o zona</li><li>Te decimos cuántas personas te escribieron o llamaron desde la página</li><li>Hasta 60 minutos de cambios al mes, por ejemplo horarios, precios o fotos</li></ul>
-          <div class="price-cell"><span class="k">Pago inicial</span><span class="v">$5,490<small>pago único</small></span></div>
-          <div class="price-cell"><span class="k">Mensualidad</span><span class="v">$2,490<small>al mes</small></span></div>
+          <div class="price-cell"><span class="k">Pago inicial</span><span class="v"><span data-price="web.negocio.activation">$5,490</span><small>pago único</small></span></div>
+          <div class="price-cell"><span class="k">Mensualidad</span><span class="v"><span data-price="web.negocio.monthly">$2,490</span><small>al mes</small></span></div>
           <a class="btn btn-line" href="#" data-route="/precios">Ver plan</a>
         </div>
         <div class="plan" role="listitem">
           <div><h3>Avanzado</h3><p class="for">Para mostrar un catálogo que tú mismo actualizas</p></div>
           <ul><li>Hasta 12 páginas, con todo lo de Negocio</li><li><b>Visibilidad medida y mejorada cada mes</b>: reporte mensual de IA y Google, y una mejora de SEO aplicada al mes, aparte de tus minutos de cambios</li><li>Hasta 9 páginas por servicio o zona</li><li>Catálogo de propiedades, habitaciones o servicios que tú actualizas</li><li>Hasta 120 minutos de cambios al mes</li></ul>
-          <div class="price-cell"><span class="k">Pago inicial</span><span class="v">$8,490<small>pago único</small></span></div>
-          <div class="price-cell"><span class="k">Mensualidad</span><span class="v">$3,990<small>al mes</small></span></div>
+          <div class="price-cell"><span class="k">Pago inicial</span><span class="v"><span data-price="web.avanzado.activation">$8,490</span><small>pago único</small></span></div>
+          <div class="price-cell"><span class="k">Mensualidad</span><span class="v"><span data-price="web.avanzado.monthly">$3,990</span><small>al mes</small></span></div>
           <a class="btn btn-line" href="#" data-route="/precios">Ver plan</a>
         </div>
       </div>
@@ -1021,12 +1024,13 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
         <div class="plan plan--addon">
           <div><h3><span aria-hidden="true">+ </span>Asistente de WhatsApp</h3><p class="for">Se suma a cualquier plan, o a la página que ya tienes</p></div>
           <ul><li>Contesta en WhatsApp y en tu página las preguntas de siempre</li><li>Toma los datos para una cita o cotización</li><li>Te pasa con alguien del equipo cuando hace falta</li><li>Hasta 300 conversaciones al mes durante el piloto</li></ul>
-          <div class="price-cell"><span class="k">Pago inicial</span><span class="v">$3,990<small>pago único</small></span></div>
-          <div class="price-cell"><span class="k">Mensualidad</span><span class="v">$1,490<small>al mes</small></span></div>
+          <div class="price-cell"><span class="k">Pago inicial</span><span class="v"><span data-price="modulo.whatsapp.activation">$3,990</span><small>pago único</small></span></div>
+          <div class="price-cell"><span class="k">Mensualidad</span><span class="v"><span data-price="modulo.whatsapp.monthly">$1,490</span><small>al mes</small></span></div>
           <a class="btn btn-line" href="#ia">Ver cómo funciona</a>
         </div>
       </div>
-      <p class="price-foot">Precios de lanzamiento en pesos mexicanos. Es el precio final que pagas. Si aplica algún cargo de Meta o del proveedor de mensajería, lo desglosamos en tu propuesta.</p>
+      <p class="cur-switch" data-cur-switch hidden></p>
+      <p class="price-foot">Precios de lanzamiento en <span data-cur-name>pesos mexicanos</span>. Es el precio final que pagas. Si aplica algún cargo de Meta o del proveedor de mensajería, lo desglosamos en tu propuesta.</p>
     </div>
   </div>
 </section>

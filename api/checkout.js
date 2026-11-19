@@ -6,11 +6,10 @@
 //
 // Hoy se cobra solo la activación y se guarda la tarjeta. La mensualidad se crea
 // como suscripción al publicar la web (ver api/publish.js), con esa misma tarjeta.
-import { ADDONS, PLANS, lookupKey, packageTotals } from '../lib/catalog.js';
+import { ADDONS, CURRENCY, PLANS, formatMoney, isCurrency, lookupKey, packageTotals, pricedCurrencies } from '../lib/catalog.js';
 import { getProposal } from '../lib/proposals.js';
 import { json, siteUrl, stripe } from '../lib/stripe.js';
 
-const mxn = n => `$${n.toLocaleString('en-US')} MXN`;
 
 export async function POST(request) {
   let body;
@@ -21,6 +20,9 @@ export async function POST(request) {
   if (error) return json({ error }, status);
   if (!PLANS[plan] || !(proposal.allowedPlans || Object.keys(PLANS)).includes(plan)) return json({ error: 'Ese plan no está disponible en esta propuesta.' }, 400);
   const withWhatsapp = whatsapp === true;
+  // La moneda la fija la propuesta (en /admin), nunca el navegador.
+  const currency = isCurrency(proposal.currency) && pricedCurrencies().includes(proposal.currency) ? proposal.currency : CURRENCY;
+  const money = n => formatMoney(n, currency, { code: true });
 
   const activationKeys = [lookupKey('web', plan, 'activacion'), ...(withWhatsapp ? [lookupKey('modulo', 'whatsapp', 'activacion')] : [])];
   const monthlyKeys = [lookupKey('web', plan, 'mensual'), ...(withWhatsapp ? [lookupKey('modulo', 'whatsapp', 'mensual')] : [])];
@@ -35,17 +37,19 @@ export async function POST(request) {
       return json({ error: 'No pudimos preparar el pago. Escríbenos y lo resolvemos.' }, 500);
     }
 
-    const totals = packageTotals(plan, withWhatsapp);
+    const totals = packageTotals(plan, withWhatsapp, currency);
     const packageName = PLANS[plan].name + (withWhatsapp ? ` + ${ADDONS.whatsapp.name}` : '');
     const metadata = {
       ceiba_proposal: slug,
       ceiba_plan: plan,
       ceiba_whatsapp: String(withWhatsapp),
       ceiba_monthly_keys: monthlyKeys.join(','),
+      ceiba_currency: currency,
     };
 
     const session = await s.checkout.sessions.create({
       mode: 'payment',
+      currency, // usa currency_options del precio si no es la moneda base
       line_items: activationKeys.map(k => ({ price: byKey[k].id, quantity: 1 })),
       // Métodos de pago dinámicos (se eligen en el Dashboard). Como guardamos el
       // método para la mensualidad, Checkout solo muestra los reutilizables.
@@ -58,7 +62,7 @@ export async function POST(request) {
       invoice_creation: {
         enabled: true,
         invoice_data: {
-          description: `Pago inicial de ${packageName} para ${proposal.business}. La mensualidad de ${mxn(totals.monthly)} empieza el día que publicamos la página.`,
+          description: `Pago inicial de ${packageName} para ${proposal.business}. La mensualidad de ${money(totals.monthly)} empieza el día que publicamos la página.`,
           metadata,
           custom_fields: [{ name: 'Propuesta', value: slug }],
           footer: 'Ceiba Labs · Estudio digital para negocios de Latinoamérica · www.ceibalabs.io',
@@ -71,7 +75,7 @@ export async function POST(request) {
       locale: 'es-419',
       custom_text: {
         submit: {
-          message: `Hoy pagas solo el monto inicial. La mensualidad de ${mxn(totals.monthly)} se cobra con esta tarjeta desde el día que publiquemos tu página. Es el precio final.`,
+          message: `Hoy pagas solo el monto inicial. La mensualidad de ${money(totals.monthly)} se cobra con esta tarjeta desde el día que publiquemos tu página. Es el precio final.`,
         },
       },
       metadata,
