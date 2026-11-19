@@ -1326,6 +1326,18 @@ h1,h2,h3,.ix-h{font-weight:400!important}
 .cf{background:rgba(12,18,38,.55)!important;border-color:rgba(255,255,255,.18)!important}
 .cf::before{background:linear-gradient(90deg,#8FA4FF,var(--lime))!important}
 .cf-points svg{fill:var(--lime)}
+
+/* cajas del camino: azul noche con pasto, como las tarjetas de la maqueta */
+.ix-way .ix-ex{isolation:isolate;border-radius:8px!important;background:#14246B!important;border:0!important;min-height:420px}
+.ix-way .ix-ex::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(circle,rgba(255,255,255,.09) 1.2px,transparent 1.6px) 0 0/22px 22px}
+.ix-way .ix-ex::after{content:"";position:absolute;inset:auto 0 0;height:42%;z-index:-1;pointer-events:none;background:linear-gradient(180deg,transparent 20%,rgba(8,12,34,.55)),url(/img/campo.jpg) center bottom/cover no-repeat;-webkit-mask-image:linear-gradient(180deg,transparent,#000 45%);mask-image:linear-gradient(180deg,transparent,#000 45%)}
+.ix-way .ix-ex-note{color:rgba(255,255,255,.4)!important;z-index:1}
+.ix-way .ix-ex-steps li{color:rgba(255,255,255,.5)}
+.ix-way .ix-ex-steps li::before{border-color:rgba(255,255,255,.3)}
+@keyframes ixStepOn{0%{color:rgba(255,255,255,.5)}6%,30%{color:#fff}40%,100%{color:rgba(255,255,255,.5)}}
+.ix-req-tag{color:#2747E8!important;background:#E8ECFF!important}
+.ix-req-acts .ok{background:#2747E8!important;border-color:#2747E8!important}
+.ix-kpis em{color:#2747E8!important}.ix-kpis em.dn{color:#C8553D!important}
 </style>
 </head>
 <body>
