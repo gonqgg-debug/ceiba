@@ -247,5 +247,31 @@ export function renderClinica(c = {}, { mode = 'live', marks = {} } = {}) {
 
   if (kb) out.push(`<script type="application/json" class="cx-kb">${JSON.stringify(kb).replace(/</g, '\\u003c')}</script>`);
   out.push('</div>');
+  if (live) out.push(`<script type="application/ld+json">${JSON.stringify(schemaClinica(c)).replace(/</g, '\\u003c')}</script>`);
   return out.join('\n');
+}
+
+// Datos estructurados (schema.org) para que Google y los asistentes de IA entiendan
+// qué es la clínica, dónde está, qué ofrece, cuánto cuesta y qué preguntan sus pacientes.
+export function schemaClinica(c = {}) {
+  const brand = c.brand || {}, contact = c.contact || {};
+  const list = v => (Array.isArray(v) ? v : []);
+  const clean = o => Object.fromEntries(Object.entries(o).filter(([, v]) => v != null && v !== '' && !(Array.isArray(v) && !v.length)));
+  const biz = clean({
+    '@type': c.schemaType || 'Dentist',
+    name: brand.fullName || brand.name,
+    description: c.hero?.sub || c.meta?.description,
+    url: contact.website, logo: brand.logo, image: c.hero?.img || brand.logo,
+    telephone: contact.phone || contact.whatsapp, email: contact.email,
+    address: contact.address ? { '@type': 'PostalAddress', streetAddress: contact.address, addressCountry: 'MX' } : null,
+    hasMap: contact.mapsUrl,
+    areaServed: c.visit?.zones,
+    openingHours: list(c.visit?.rows).filter(r => /\d{1,2}:\d{2}/.test(r.dd || '')).map(r => `${r.dt}: ${r.dd}`),
+    aggregateRating: c.rating?.value ? { '@type': 'AggregateRating', ratingValue: String(c.rating.value), reviewCount: String(c.rating.count || '') } : null,
+    makesOffer: list(c.services?.items).map(s => clean({ '@type': 'Offer', itemOffered: clean({ '@type': 'Service', name: s.name, description: s.desc }), price: (String(s.price || '').match(/[\d,.]+/) || [''])[0].replace(/,/g, '') || null, priceCurrency: s.price ? 'MXN' : null })),
+  });
+  const faq = (list(c.faq).length ? list(c.faq) : list(c.chat?.faq)).filter(f => f.q && f.a);
+  const graph = [biz];
+  if (faq.length) graph.push({ '@type': 'FAQPage', mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) });
+  return { '@context': 'https://schema.org', '@graph': graph };
 }

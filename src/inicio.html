@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Ceiba Labs · Estudio digital: páginas web, procesos e inteligencia artificial</title>
-<meta name="description" content="Ceiba Labs es un estudio digital en México. Creamos páginas web por suscripción y mejoramos procesos de atención, ventas y operación con inteligencia artificial.">
+<title>Ceiba Labs · Prepara tu negocio para la era de la IA</title>
+<meta name="description" content="Ceiba Labs es un estudio digital en México. Páginas web listas para Google y la IA, asistentes de WhatsApp, agentes que hacen el trabajo repetitivo y análisis diario de tu negocio.">
 {{HEAD_TAGS}}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -283,6 +283,129 @@
 .ix-close h2{font-size:clamp(40px,5.4vw,76px);line-height:.98;letter-spacing:-.045em;max-width:15ch}
 .ix-close .acts{display:flex;flex-wrap:wrap;gap:10px}
 
+/* ---------- hero: etiqueta y tarjeta de IA ---------- */
+.ix-eyebrow{display:inline-flex;align-items:center;gap:10px;font:500 13px var(--f-mono);color:rgba(247,244,235,.8);padding:7px 12px;border-radius:999px;background:rgba(247,244,235,.06);border:1px solid rgba(247,244,235,.16);margin-bottom:22px}
+.ix-eyebrow span{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(214,250,82,.2);animation:blink 1.6s infinite}
+.ix-prop-a{font-size:12px;font-weight:600;color:#0F5C4B;margin-top:4px}
+.ix-close-p{color:rgba(247,244,235,.8);font-size:18px;max-width:52ch;margin-top:18px}
+
+/* ---------- lo que está cambiando ---------- */
+.ix-shift-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px clamp(40px,6vw,96px);align-items:center}
+.ix-urge{margin-top:24px;padding:16px 18px;border-left:3px solid var(--petrol);background:rgba(16,61,55,.05);border-radius:0 12px 12px 0;font-size:16px;line-height:1.6;max-width:54ch}
+.ix-ask{position:relative;background:#fff;border-radius:24px;padding:22px 22px 34px;box-shadow:0 50px 90px -50px rgba(11,21,20,.5),0 0 0 1px rgba(11,21,20,.06)}
+.ix-ask-q{display:flex;align-items:center;gap:10px;min-height:52px;padding:12px 16px;border-radius:14px;background:#F3F1EA;font-size:16px;font-weight:500}
+.ix-ask-ic{width:28px;height:28px;flex:none;border-radius:9px;display:grid;place-items:center;background:var(--ink);color:var(--lime);font-size:14px}
+.ix-caret{width:2px;height:20px;background:var(--ink);animation:blink 1s infinite}
+.ix-ask-a{display:grid;gap:12px;margin-top:16px}
+.ix-ask-a > p{font-size:15px;color:var(--muted);opacity:0;transition:opacity .5s}
+.ix-ask-a ol{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:ans}
+.ix-ask-a li{counter-increment:ans;display:grid;grid-template-columns:28px 1fr;gap:2px 10px;padding:12px 14px;border-radius:14px;border:1px solid var(--line);opacity:0;transform:translateY(10px);transition:opacity .5s,transform .5s cubic-bezier(.2,.7,.1,1)}
+.ix-ask-a li::before{content:counter(ans);grid-row:span 2;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:600 12px var(--f-mono);background:#F3F1EA}
+.ix-ask-a li b{font-size:16px}
+.ix-ask-a li span{font-size:13px;color:var(--muted)}
+.ix-ask-a li.top{border-color:var(--petrol);box-shadow:inset 0 0 0 1px var(--petrol);background:rgba(16,61,55,.03)}
+.ix-ask-a li.top::before{background:var(--petrol);color:var(--lime)}
+.ix-ask-you{display:grid;gap:2px;padding:12px 14px;border-radius:14px;border:1.5px dashed #E0A08C;background:#FFF7F3;opacity:0;transform:translateY(10px);transition:opacity .5s,transform .5s}
+.ix-ask-you b{font-size:16px;color:#9C3A1A}
+.ix-ask-you span{font-size:13px;color:#9C3A1A}
+.ix-ask.on .ix-ask-a > p,.ix-ask .show{opacity:1!important;transform:none!important}
+.ix-ask-note,.ix-ex-note{position:absolute;right:16px;bottom:12px;font:500 10px var(--f-mono);color:rgba(11,21,20,.35)}
+.ix-shifts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:clamp(48px,6vw,80px)}
+.ix-shifts div{display:grid;gap:8px;align-content:start;padding:24px;border-radius:20px;background:#fff;border:1px solid var(--line)}
+.ix-shifts span{font:500 13px var(--f-mono);color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(200,85,61,.6)}
+.ix-shifts b{font:600 22px/1.15 var(--f-display);letter-spacing:-.015em}
+.ix-shifts p{color:var(--muted);font-size:15px}
+
+/* ---------- el camino ---------- */
+.ix-way .ix-h{max-width:18ch}
+.ix-path{position:relative;margin-top:clamp(24px,4vw,48px);padding-left:64px}
+.ix-path::before,.ix-path::after{content:"";position:absolute;left:17px;top:60px;bottom:60px;width:2px;border-radius:2px;background:rgba(247,244,235,.12)}
+.ix-path::after{background:linear-gradient(180deg,#0E9F8A,var(--lime));transform:scaleY(var(--p,0));transform-origin:top;transition:transform .15s linear}
+.ix-ch{position:relative;display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:40px clamp(40px,5vw,80px);align-items:center;padding-block:clamp(40px,6vw,80px)}
+.ix-ch-dot{position:absolute;left:-64px;top:50%;translate:0 -50%;z-index:1;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font:600 14px var(--f-mono);background:var(--ink);color:rgba(247,244,235,.6);border:2px solid rgba(247,244,235,.22);transition:background .4s,color .4s,border-color .4s,box-shadow .4s}
+.ix-ch.on .ix-ch-dot{background:var(--lime);color:var(--ink);border-color:var(--lime);box-shadow:0 0 0 7px rgba(214,250,82,.14)}
+.ix-way .ix-num{color:var(--lime);background:rgba(214,250,82,.07);border-color:rgba(214,250,82,.25)}
+.ix-way .ix-copy h3{max-width:18ch}
+.ix-way .ix-copy p{color:rgba(247,244,235,.75)}
+.ix-ticks{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.ix-ticks li{display:inline-flex;align-items:center;gap:7px;font-size:14px;padding:7px 12px;border-radius:999px;background:rgba(247,244,235,.06);border:1px solid rgba(247,244,235,.12)}
+.ix-ticks li::before{content:"✓";color:var(--lime);font-weight:700;font-size:12px}
+.ix-ch-acts{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:4px}
+.ix-way .btn-line{color:var(--ivory);border-color:rgba(247,244,235,.4)}
+.ix-way .ix-ex--hand{border:1px solid rgba(247,244,235,.1)}
+.ix-ex--agents{background:linear-gradient(150deg,#14302A,#0E201C);border:1px solid rgba(247,244,235,.1)}
+.ix-ex--agents .ix-ex-note,.ix-way .ix-ex--hand .ix-ex-note{color:rgba(247,244,235,.35)}
+.ix-ag{width:100%;max-width:440px;display:grid;gap:8px}
+.ix-ag-top{display:flex;align-items:center;gap:10px;margin-bottom:6px;font-size:15px}
+.ix-ag-top .dot{width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(214,250,82,.22);animation:blink 1.4s infinite}
+.ix-ag-top small{margin-left:auto;font:500 12px var(--f-mono);color:rgba(247,244,235,.55)}
+.ix-ag-row{display:grid;grid-template-columns:36px 1fr auto;gap:12px;align-items:center;padding:12px 14px;border-radius:14px;background:rgba(247,244,235,.05);border:1px solid rgba(247,244,235,.08)}
+.ix-ag-row .ic{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:rgba(214,250,82,.12);color:var(--lime);font-weight:700}
+.ix-ag-row b{display:block;font-size:15px;font-weight:600}
+.ix-ag-row small{font-size:13px;color:rgba(247,244,235,.6)}
+.ix-ag-row em{font:700 24px var(--f-display);font-style:normal;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.ix-ag-ask{display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center;margin-top:4px;padding:12px 14px;border-radius:14px;background:#FFF5C4;color:#4D3E00;opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s}
+.ix-ag-ask.on{opacity:1;transform:none}
+.ix-ag-ask b{font-size:14px}
+.ix-ag-ask span{grid-row:2;font-size:13px}
+.ix-ag-ask i{grid-row:span 2;font-style:normal;font-size:13px;font-weight:600;padding:8px 12px;border-radius:999px;background:#0B1514;color:#FFF5C4}
+.ix-ex--data{background:radial-gradient(80% 90% at 90% 0%,#E8F7C8,transparent 60%),linear-gradient(160deg,#F2EFE6,#E8EEE9)}
+.ix-rep{width:100%;max-width:440px;background:#fff;color:#15211D;border-radius:18px;padding:18px;display:grid;gap:12px;box-shadow:0 30px 60px -36px rgba(11,21,20,.5)}
+.ix-rep-h{display:flex;justify-content:space-between;align-items:baseline}
+.ix-rep-h b{font:600 17px var(--f-display)}
+.ix-rep-h small{font:500 11px var(--f-mono);color:#6B7774}
+.ix-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ix-kpis div{border:1px solid #E3E7E5;border-radius:10px;padding:8px 10px;display:grid;gap:2px}
+.ix-kpis span{font-size:11px;color:#6B7774}
+.ix-kpis b{font:700 18px var(--f-display);letter-spacing:-.02em}
+.ix-kpis em{font-style:normal;font-size:11px;font-weight:600;color:#0B7A64}
+.ix-kpis em.dn{color:#C8553D}
+.ix-spark{width:100%;height:64px;display:block}
+.ix-spark .l{fill:none;stroke:#0F5C4B;stroke-width:2.2;stroke-dasharray:600;stroke-dashoffset:600;transition:stroke-dashoffset 2s ease}
+.ix-spark .a{fill:url(#ixSg);opacity:0;transition:opacity 1s .8s}
+.ix-rep.on .ix-spark .l{stroke-dashoffset:0}.ix-rep.on .ix-spark .a{opacity:1}
+.ix-finds{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.ix-finds li{display:grid;grid-template-columns:22px 1fr;gap:8px;font-size:13px;line-height:1.4;padding:9px 10px;border-radius:10px;background:#F5F3EC;opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s}
+.ix-rep.on .ix-finds li{opacity:1;transform:none}
+.ix-rep.on .ix-finds li:nth-child(1){transition-delay:1.2s}.ix-rep.on .ix-finds li:nth-child(2){transition-delay:1.9s}.ix-rep.on .ix-finds li:nth-child(3){transition-delay:2.6s}
+.ix-finds li span{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;font-size:12px;background:#0F5C4B;color:#D6FA52}
+
+/* ---------- ¿en qué etapa estás? ---------- */
+.ix-quiz{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:28px clamp(28px,4vw,56px);margin-top:44px;align-items:start}
+.ix-qs{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:q}
+.ix-qs li{counter-increment:q;display:grid;grid-template-columns:34px 1fr auto;gap:14px;align-items:center;padding:16px 18px;border-radius:16px;background:#fff;border:1px solid var(--line);transition:border-color .3s}
+.ix-qs li::before{content:counter(q);width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:600 13px var(--f-mono);background:var(--ivory);border:1px solid var(--line)}
+.ix-qs li.yes::before{content:"✓";background:var(--petrol);color:var(--lime);border-color:var(--petrol)}
+.ix-qs li.no::before{content:"!";background:#FFE9E1;color:#B3461E;border-color:#F1C2B2}
+.ix-qs p{font-size:16px;font-weight:500;line-height:1.4}
+.ix-qs li > div{display:flex;gap:6px}
+.ix-qs button{font:inherit;font-size:14px;font-weight:600;padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;color:inherit;cursor:pointer;white-space:nowrap;transition:background .2s,border-color .2s,color .2s}
+.ix-qs button:hover{border-color:var(--petrol)}
+.ix-qs button[aria-pressed="true"]{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
+.ix-res{position:sticky;top:96px;display:grid;gap:14px;padding:28px;border-radius:24px;background:var(--ink);color:var(--ivory)}
+.ix-res-meter{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;position:relative;height:8px}
+.ix-res-meter::before{content:"";grid-column:1/-1;grid-row:1;border-radius:9px;background:rgba(247,244,235,.12)}
+.ix-res-meter i{grid-column:1/-1;grid-row:1;width:0;border-radius:9px;background:linear-gradient(90deg,#0E9F8A,var(--lime));transition:width .6s cubic-bezier(.2,.7,.1,1)}
+.ix-res-k{font:500 13px var(--f-mono);color:var(--lime)}
+.ix-res b{font:600 clamp(22px,2.2vw,28px)/1.15 var(--f-display);letter-spacing:-.02em}
+.ix-res p{color:rgba(247,244,235,.75);font-size:16px;line-height:1.55}
+.ix-res .btn{justify-self:start}
+
+@media (max-width:980px){
+  .ix-shift-grid,.ix-ch,.ix-quiz{grid-template-columns:1fr}
+  .ix-shifts{grid-template-columns:1fr}
+  .ix-ch-dot{top:clamp(40px,6vw,80px);translate:0 0}
+  .ix-res{position:static}
+}
+@media (max-width:640px){
+  .ix-path{padding-left:44px}
+  .ix-path::before,.ix-path::after{left:13px}
+  .ix-ch-dot{left:-44px;width:28px;height:28px;font-size:12px}
+  .ix-qs li{grid-template-columns:28px 1fr;gap:10px 12px;padding:14px}
+  .ix-qs li::before{width:28px;height:28px}
+  .ix-qs li > div{grid-column:2}
+  .ix-kpis b{font-size:16px}
+}
 @media (max-width:1100px){.ix-ind{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:980px){
   .ix-hero-grid,.ix-services,.ix-roots .wrap,.ix-close .wrap{grid-template-columns:1fr}
@@ -316,15 +439,16 @@
   <canvas class="ix-grad" id="ix-grad" aria-hidden="true"></canvas>
   <div class="wrap ix-hero-grid">
     <div>
-      <h1 id="ix-title" class="ix-in">Diseñamos lo que tus clientes ven <span class="ix-shine">y cómo trabaja tu negocio.</span></h1>
-      <p class="lede ix-in d1">Somos un estudio digital en México. Creamos páginas web por suscripción y mejoramos procesos de atención, ventas y operación con inteligencia artificial.</p>
-      <div class="ix-ctas ix-in d2"><a class="btn btn-primary" href="#trabajo">Ver nuestro trabajo <span class="arrow" aria-hidden="true">↓</span></a><a class="btn btn-line ix-glass" href="/ia#contacto">Hablar de tu negocio</a></div>
-      <p class="ix-alt ix-in d3">¿Ya tienes página? <a class="link" href="/diagnostico">Revísala gratis y mira cómo quedaría <span class="arrow" aria-hidden="true">→</span></a></p>
+      <p class="ix-eyebrow ix-in"><span></span>Estudio digital · webs, procesos e IA</p>
+      <h1 id="ix-title" class="ix-in d1">Tus clientes ya le preguntan a la IA <span class="ix-shine">a quién elegir.</span></h1>
+      <p class="lede ix-in d1">¿Tu negocio aparece en la respuesta? Te ayudamos a que te encuentren, te escriban y te elijan, y a que tu operación trabaje sola. Empezamos por tu página web y crecemos con agentes y procesos a tu medida.</p>
+      <div class="ix-ctas ix-in d2"><a class="btn btn-primary" href="/diagnostico">Revisar mi negocio gratis <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-line ix-glass" href="#camino">Ver cómo lo hacemos <span class="arrow" aria-hidden="true">↓</span></a></div>
+      <p class="ix-alt ix-in d3">Sin costo: ves cómo quedaría tu página antes de decidir. ¿Sin página todavía? <a class="link" href="/ia#contacto">Hablemos de tu negocio <span class="arrow" aria-hidden="true">→</span></a></p>
     </div>
     <div class="ix-stage" id="ix-stage" aria-label="Ejemplo: la página de una clínica hecha por Ceiba y su asistente de WhatsApp">
       <div class="ix-layer ix-in d2"><div class="ix-frame"><div class="ix-bar"><i></i><i></i><i></i><span>clinicaarrayan.mx</span></div><div class="ix-vp" aria-hidden="true">{{ARRAYAN}}</div></div></div>
       <div class="ix-card ix-toast ix-in d4" aria-hidden="true"><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0B1514" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h16v13H4zM4 10h16M8.5 3.5v4M15.5 3.5v4"/></svg></span><div><b>Solicitud de cita</b><small>Lista para confirmar · Limpieza, mañana 10:00</small></div></div>
-      <div class="ix-card ix-prop ix-in d4" aria-hidden="true"><span>Cotización #128</span><b>Asignada a ventas · enviada</b><div class="bar"><i></i></div></div>
+      <div class="ix-card ix-prop ix-in d4" aria-hidden="true"><span>✦ Asistente de IA</span><b>«¿Qué dentista me recomiendas?»</b><div class="bar"><i></i></div><small class="ix-prop-a">1. Clínica Dental Arrayán · ★ 4.9</small></div>
       <div class="ix-card ix-chat ix-in d3" aria-hidden="true">
         <div class="ix-chat-top"><svg viewBox="0 0 24 24"><use href="#wa"/></svg><div><b>Clínica Arrayán</b><small>Asistente · responde al momento</small></div></div>
         <div class="ix-chat-log" id="ix-chat-log"></div>
@@ -335,66 +459,154 @@
 
 <div class="ix-marquee" aria-hidden="true"><div id="ix-marq"><span>Páginas web por suscripción</span><span>Asistentes de IA</span><span>Agentes que ocupan un puesto</span><span>Prospección automática</span><span>Pedidos por WhatsApp</span><span>Contabilidad con agentes</span><span>Análisis diario de ventas</span><span>Tableros de operación</span><span>Automatización de procesos</span><span>Integraciones con tus herramientas</span><span>Diagnóstico de operación</span><span>Citas y reservaciones</span><span>Cotizaciones a tiempo</span><span>Adopción de IA en tu equipo</span><span>Hecho en México</span></div></div>
 
-<section class="band band--light section ix-work" id="trabajo" aria-labelledby="work-title">
+<section class="band band--light section ix-shift" id="cambio" aria-labelledby="shift-title">
   <div class="wrap">
-    <p class="ix-kick" data-reveal>Lo que hacemos</p>
-    <h2 class="ix-h" id="work-title" data-reveal data-delay="1">Tres formas de mejorar tu negocio, que funcionan mejor juntas.</h2>
-
-    <article class="ix-row">
-      <div class="ix-copy" data-reveal>
-        <span class="ix-num">01 · Páginas web</span>
-        <h3>Una página que facilita el siguiente paso.</h3>
-        <p>Que reservar una mesa, pedir una cotización o agendar una cita sea fácil desde el celular. Diseñamos y mantenemos tu página por suscripción, y te mostramos cómo quedaría antes de que pagues.</p>
-        <a class="btn btn-line" href="/webs">Ver páginas web <span class="arrow" aria-hidden="true">→</span></a>
+    <div class="ix-shift-grid">
+      <div>
+        <p class="ix-kick" data-reveal>Lo que está cambiando</p>
+        <h2 class="ix-h" id="shift-title" data-reveal data-delay="1">Tus clientes ya no buscan. Preguntan.</h2>
+        <p class="ix-sub" data-reveal data-delay="2">Cada vez más personas le preguntan a Google o a un asistente de IA a quién acudir, y reciben nombres concretos. Si la información de tu negocio no está clara, la recomendación es para otro.</p>
+        <p class="ix-urge" data-reveal data-delay="3"><b>La ventaja es para quien se mueve primero.</b> Los negocios que hoy ordenan su información y automatizan lo repetitivo son los que mañana aparecen, responden y venden más con el mismo equipo.</p>
       </div>
-      <div class="ix-ex ix-ex--book" data-reveal data-delay="1" aria-label="Ejemplo: agendar una cita desde el celular en tres toques">
-        <div class="ix-ph"><div class="ix-ph-in">
-          <div class="ix-ph-top"><b>Arrayán</b><span>Clínica dental</span></div>
-          <p class="ix-ph-h">Agenda tu valoración dental sin costo</p>
-          <span class="ix-ph-btn s1">Agenda tu cita</span>
-          <div class="ix-ph-slots s2"><span>Hoy 18:30</span><span class="pick">Mañana 10:00</span><span>Mañana 12:30</span></div>
-          <div class="ix-ph-ok s3"><b>✓ Cita confirmada</b><span>Valoración · mañana 10:00</span></div>
-        </div></div>
-        <ol class="ix-ex-steps"><li class="s1">Toca «Agenda tu cita»</li><li class="s2">Elige un horario</li><li class="s3">Listo, sin llamar</li></ol>
-      </div>
-    </article>
-
-    <article class="ix-row ix-row--flip">
-      <div class="ix-copy" data-reveal>
-        <span class="ix-num">02 · Agentes de IA</span>
-        <h3>El trabajo repetitivo también se puede diseñar.</h3>
-        <p>Construimos asistentes que atienden y toman pedidos por WhatsApp, y agentes que ocupan puestos completos: buscan clientes y les dan seguimiento, procesan facturas o analizan tus ventas cada mañana. Tu equipo revisa, decide y aprueba lo importante.</p>
-        <a class="btn btn-line" href="/ia#sistemas">Ver lo que podemos hacer <span class="arrow" aria-hidden="true">→</span></a>
-      </div>
-      <div class="ix-ex ix-ex--hand" data-reveal data-delay="1" aria-label="Ejemplo: una conversación de WhatsApp se convierte en una solicitud de cita lista para confirmar">
-        <div class="ix-hand-chat">
-          <p class="me">Hola, ¿cuánto cuesta la limpieza?</p><p>$700 y dura 40 min. ¿Te aparto un horario?</p><p class="me">Mañana a las 10 porfa. Soy Mariana</p><p>Listo, se lo paso a recepción para confirmar.</p>
+      <div class="ix-ask" id="ix-ask" data-reveal data-delay="1" aria-label="Ejemplo: alguien le pide a un asistente de IA que le recomiende un dentista">
+        <div class="ix-ask-q"><span class="ix-ask-ic" aria-hidden="true">✦</span><span id="ix-ask-text"></span><i class="ix-caret" aria-hidden="true"></i></div>
+        <div class="ix-ask-a" id="ix-ask-a">
+          <p>Estas opciones cerca de Providencia tienen buenas reseñas:</p>
+          <ol>
+            <li class="top"><b>Clínica Dental Arrayán</b><span>★ 4.9 · precios publicados · agenda en línea · responde por WhatsApp</span></li>
+            <li><b>Dental Centro</b><span>★ 4.6 · horarios en su página</span></li>
+            <li><b>Sonrisa Colomos</b><span>★ 4.5 · atiende urgencias</span></li>
+          </ol>
+          <div class="ix-ask-you"><b>¿Y tu negocio?</b><span>No aparece: su información no está clara para la IA</span></div>
         </div>
-        <div class="ix-hand-arrow" aria-hidden="true"></div>
-        <div class="ix-req">
-          <span class="ix-req-tag">Para recepción</span>
-          <b>Solicitud de cita</b>
-          <dl><dt>Paciente</dt><dd>Mariana G.</dd><dt>Servicio</dt><dd>Limpieza · $700</dd><dt>Horario</dt><dd>Mañana 10:00</dd><dt>Canal</dt><dd>WhatsApp</dd></dl>
-          <div class="ix-req-acts"><span class="ok">Confirmar</span><span>Ver chat</span></div>
-        </div>
+        <span class="ix-ask-note">Ilustrativo</span>
       </div>
-    </article>
+    </div>
+    <div class="ix-shifts">
+      <div data-reveal><span>Antes buscaban</span><b>Ahora preguntan</b><p>Los buscadores y asistentes responden con recomendaciones. Eligen negocios con precios, horarios y reseñas que pueden leer.</p></div>
+      <div data-reveal data-delay="1"><span>Antes llamaban</span><b>Ahora escriben, a cualquier hora</b><p>Quien no responde en minutos pierde al cliente con el siguiente de la lista. También de noche y en fin de semana.</p></div>
+      <div data-reveal data-delay="2"><span>Antes contratabas más gente</span><b>Ahora también delegas en agentes</b><p>Prospectar, capturar, conciliar y dar seguimiento ya lo pueden hacer agentes de IA, con tu equipo aprobando.</p></div>
+    </div>
+  </div>
+</section>
 
-    <article class="ix-row">
-      <div class="ix-copy" data-reveal>
-        <span class="ix-num">03 · Procesos y operación</span>
-        <h3>Mejoremos cómo pasa el trabajo de una persona a otra.</h3>
-        <p>Revisamos dónde se quedan pendientes las cotizaciones, qué información se captura dos veces o qué solicitudes llegan sin responsable. Rediseñamos ese proceso, conectamos las herramientas que tu equipo ya usa y, si hace falta, le construimos un tablero para trabajar en un solo lugar.</p>
-        <a class="btn btn-line" href="/ia#operacion">Hablemos de tu operación <span class="arrow" aria-hidden="true">→</span></a>
+<section class="band section ix-way" id="camino" aria-labelledby="way-title">
+  <div class="wrap">
+    <p class="ix-kick" data-reveal>Cómo te ayudamos</p>
+    <h2 class="ix-h" id="way-title" data-reveal data-delay="1">De que te encuentren a que tu negocio trabaje solo.</h2>
+    <p class="ix-sub" data-reveal data-delay="2" style="color:rgba(247,244,235,.75)">Empezamos por tu página web y crecemos contigo, etapa por etapa, con asistentes, agentes y procesos hechos a tu medida. Puedes empezar por la que más te urge.</p>
+
+    <div class="ix-path" id="ix-path">
+      <article class="ix-ch">
+        <span class="ix-ch-dot" aria-hidden="true">1</span>
+        <div class="ix-copy" data-reveal>
+          <span class="ix-num">Etapa 1 · Que te encuentren</span>
+          <h3>Una página que Google y la IA entienden, y que convierte visitas en clientes.</h3>
+          <p>Tu página nueva, por suscripción: rápida en el celular, con precios, horarios y reseñas claros, y con los datos estructurados que buscadores y asistentes de IA usan para recomendar. Te la mostramos terminada antes de que pagues.</p>
+          <ul class="ix-ticks"><li>Lista para Google y asistentes de IA</li><li>Agendar o pedir en un toque</li><li>La ves antes de decidir</li></ul>
+          <div class="ix-ch-acts"><a class="btn btn-primary" href="/diagnostico">Revisar mi página gratis <span class="arrow" aria-hidden="true">→</span></a><a class="link" href="/webs">Ver páginas web</a></div>
+        </div>
+        <div class="ix-ex ix-ex--book" data-reveal data-delay="1" aria-label="Ejemplo: agendar una cita desde el celular en tres toques">
+          <div class="ix-ph"><div class="ix-ph-in">
+            <div class="ix-ph-top"><b>Arrayán</b><span>Clínica dental</span></div>
+            <p class="ix-ph-h">Agenda tu valoración dental sin costo</p>
+            <span class="ix-ph-btn s1">Agenda tu cita</span>
+            <div class="ix-ph-slots s2"><span>Hoy 18:30</span><span class="pick">Mañana 10:00</span><span>Mañana 12:30</span></div>
+            <div class="ix-ph-ok s3"><b>✓ Cita confirmada</b><span>Valoración · mañana 10:00</span></div>
+          </div></div>
+          <ol class="ix-ex-steps"><li class="s1">Toca «Agenda tu cita»</li><li class="s2">Elige un horario</li><li class="s3">Listo, sin llamar</li></ol>
+        </div>
+      </article>
+
+      <article class="ix-ch">
+        <span class="ix-ch-dot" aria-hidden="true">2</span>
+        <div class="ix-copy" data-reveal>
+          <span class="ix-num">Etapa 2 · Que te escriban y te elijan</span>
+          <h3>Respondes en segundos, de día y de noche.</h3>
+          <p>Un asistente en tu WhatsApp y en tu página contesta precios, horarios y dudas con la información que tú apruebas, aparta citas y toma pedidos con catálogo digital. Tu equipo recibe la solicitud lista para confirmar.</p>
+          <ul class="ix-ticks"><li>En tu mismo número</li><li>Citas, reservaciones y pedidos</li><li>Pasa a una persona lo delicado</li></ul>
+          <div class="ix-ch-acts"><a class="btn btn-line" href="/ia#demo">Ver la demo <span class="arrow" aria-hidden="true">→</span></a></div>
+        </div>
+        <div class="ix-ex ix-ex--hand" data-reveal data-delay="1" aria-label="Ejemplo: una conversación de WhatsApp se convierte en una solicitud de cita lista para confirmar">
+          <div class="ix-hand-chat">
+            <p class="me">Hola, ¿cuánto cuesta la limpieza?</p><p>$700 y dura 40 min. ¿Te aparto un horario?</p><p class="me">Mañana a las 10 porfa. Soy Mariana</p><p>Listo, se lo paso a recepción para confirmar.</p>
+          </div>
+          <div class="ix-hand-arrow" aria-hidden="true"></div>
+          <div class="ix-req">
+            <span class="ix-req-tag">Para recepción</span>
+            <b>Solicitud de cita</b>
+            <dl><dt>Paciente</dt><dd>Mariana G.</dd><dt>Servicio</dt><dd>Limpieza · $700</dd><dt>Horario</dt><dd>Mañana 10:00</dd><dt>Canal</dt><dd>WhatsApp</dd></dl>
+            <div class="ix-req-acts"><span class="ok">Confirmar</span><span>Ver chat</span></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="ix-ch">
+        <span class="ix-ch-dot" aria-hidden="true">3</span>
+        <div class="ix-copy" data-reveal>
+          <span class="ix-num">Etapa 3 · Que tu operación trabaje sola</span>
+          <h3>Agentes de IA que hacen el trabajo de un puesto completo.</h3>
+          <p>Un agente que cada mañana busca clientes nuevos, les escribe y les da seguimiento. Otro que procesa facturas y concilia pagos. Otro que captura pedidos. Rediseñamos el proceso, los conectamos a tus herramientas y tu equipo pasa de capturar a revisar y decidir.</p>
+          <ul class="ix-ticks"><li>Prospección y seguimiento de ventas</li><li>Facturas, compras y contabilidad</li><li>Tú apruebas lo importante</li></ul>
+          <div class="ix-ch-acts"><a class="btn btn-line" href="/ia#sistemas">Ver lo que pueden hacer <span class="arrow" aria-hidden="true">→</span></a></div>
+        </div>
+        <div class="ix-ex ix-ex--agents" data-reveal data-delay="1" aria-label="Ejemplo: tablero con agentes de IA trabajando">
+          <div class="ix-ag">
+            <div class="ix-ag-top"><span class="dot"></span><b>Tus agentes · hoy</b><small id="ix-ag-clock">09:12</small></div>
+            <div class="ix-ag-row"><span class="ic">↗</span><div><b>Prospección</b><small>Correos a prospectos nuevos</small></div><em data-to="21">0</em></div>
+            <div class="ix-ag-row"><span class="ic">≡</span><div><b>Facturas</b><small>Revisadas contra la compra</small></div><em data-to="34">0</em></div>
+            <div class="ix-ag-row"><span class="ic">↻</span><div><b>Seguimiento</b><small>Recordatorios enviados</small></div><em data-to="12">0</em></div>
+            <div class="ix-ag-row"><span class="ic">▣</span><div><b>Pedidos</b><small>Capturados desde WhatsApp</small></div><em data-to="8">0</em></div>
+            <div class="ix-ag-ask"><b>1 decisión para ti</b><span>Precio fuera de rango en factura F-2293</span><i>Revisar</i></div>
+          </div>
+          <span class="ix-ex-note">Ilustrativo</span>
+        </div>
+      </article>
+
+      <article class="ix-ch">
+        <span class="ix-ch-dot" aria-hidden="true">4</span>
+        <div class="ix-copy" data-reveal>
+          <span class="ix-num">Etapa 4 · Que decidas con datos</span>
+          <h3>Cada mañana sabes qué pasó y qué conviene hacer.</h3>
+          <p>Juntamos los datos de tus ventas, citas o pedidos, y un agente los analiza todos los días: qué subió, qué bajó, qué se vende junto y dónde pierdes margen. Con un tablero hecho para tu equipo y procesos a la medida para lo que tu negocio necesite.</p>
+          <ul class="ix-ticks"><li>Reporte diario en lenguaje claro</li><li>Tableros para tu equipo</li><li>Procesos hechos a tu medida</li></ul>
+          <div class="ix-ch-acts"><a class="btn btn-line" href="/ia#contacto">Hablar de tu operación <span class="arrow" aria-hidden="true">→</span></a></div>
+        </div>
+        <div class="ix-ex ix-ex--data" data-reveal data-delay="1" aria-label="Ejemplo: el reporte diario del analista de ventas">
+          <div class="ix-rep" id="ix-rep">
+            <div class="ix-rep-h"><b>Reporte de ayer</b><small>listo 07:30</small></div>
+            <div class="ix-kpis"><div><span>Ventas</span><b>+12%</b><em>vs. semana pasada</em></div><div><span>Ticket</span><b>+4%</b><em>más productos</em></div><div><span>Margen</span><b>−0.8</b><em class="dn">un proveedor</em></div></div>
+            <svg class="ix-spark" viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="ixSg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0F5C4B" stop-opacity=".25"/><stop offset="1" stop-color="#0F5C4B" stop-opacity="0"/></linearGradient></defs><path class="a" d="M0 48 L30 44 L60 46 L90 36 L120 40 L150 30 L180 34 L210 22 L240 26 L270 14 L300 10 L300 64 L0 64Z"/><path class="l" d="M0 48 L30 44 L60 46 L90 36 L120 40 L150 30 L180 34 L210 22 L240 26 L270 14 L300 10"/></svg>
+            <ul class="ix-finds"><li><span>↑</span>La tarde explica la mitad del aumento.</li><li><span>∞</span>4 de cada 10 clientes que compran A también llevan B.</li><li><span>!</span>Un proveedor subió precio: revisa tu margen.</li></ul>
+          </div>
+          <span class="ix-ex-note">Ilustrativo</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band band--light section ix-level" id="etapa" aria-labelledby="lvl-title">
+  <div class="wrap">
+    <p class="ix-kick" data-reveal>30 segundos</p>
+    <h2 class="ix-h" id="lvl-title" data-reveal data-delay="1">¿En qué etapa está tu negocio?</h2>
+    <p class="ix-sub" data-reveal data-delay="2">Contesta con honestidad. Te decimos qué estás dejando ir y por dónde conviene empezar.</p>
+    <div class="ix-quiz">
+      <ol class="ix-qs" id="ix-qs">
+        <li data-st="1"><p>¿Tus clientes pueden agendar, reservar o pedir desde tu página en un par de toques?</p><div><button type="button" data-a="1">Sí</button><button type="button" data-a="0">No</button></div></li>
+        <li data-st="1"><p>¿Tu página muestra precios, horarios y reseñas de forma que Google y la IA puedan leerlos?</p><div><button type="button" data-a="1">Sí</button><button type="button" data-a="0">No / no sé</button></div></li>
+        <li data-st="2"><p>¿Respondes los mensajes de WhatsApp en menos de 5 minutos, incluso de noche?</p><div><button type="button" data-a="1">Sí</button><button type="button" data-a="0">No</button></div></li>
+        <li data-st="3"><p>¿Las tareas repetitivas (capturar, dar seguimiento, conciliar) ya no dependen de que alguien se acuerde?</p><div><button type="button" data-a="1">Sí</button><button type="button" data-a="0">No</button></div></li>
+        <li data-st="4"><p>¿Sabes cada mañana qué vendiste ayer, qué cambió y por qué?</p><div><button type="button" data-a="1">Sí</button><button type="button" data-a="0">No</button></div></li>
+      </ol>
+      <div class="ix-res" id="ix-res" aria-live="polite">
+        <div class="ix-res-meter"><i id="ix-res-bar"></i></div>
+        <span class="ix-res-k" id="ix-res-k">0 de 5 respuestas</span>
+        <b id="ix-res-t">Contesta las preguntas para ver tu etapa.</b>
+        <p id="ix-res-p">Ubicamos a tu negocio en una de las cuatro etapas y te decimos cuál es el siguiente paso.</p>
+        <a class="btn btn-primary" id="ix-res-cta" href="/diagnostico" hidden>Revisar mi página gratis <span class="arrow" aria-hidden="true">→</span></a>
       </div>
-      <div class="ix-ex ix-ex--flow" data-reveal data-delay="1" aria-label="Ejemplo: una cotización que antes se atoraba ahora pasa sola de una etapa a otra">
-        <div class="ix-lane"><span class="lb">Antes</span>
-          <div class="ix-stages"><span>Solicitud</span><span class="stuck">Cotización<em>Sin responsable · 3 días</em></span><span class="off">Aprobación</span><span class="off">Seguimiento</span></div></div>
-        <div class="ix-lane ix-lane--after"><span class="lb">Después</span>
-          <div class="ix-stages"><span>Solicitud<i>IA</i></span><span>Cotización<i>Ventas</i></span><span>Aprobación<i>Dirección</i></span><span>Seguimiento<i>Auto</i></span><b class="ix-token" aria-hidden="true"></b></div></div>
-        <div class="ix-tools"><span>WhatsApp</span><span>Correo</span><span>Hoja de cálculo</span><span>CRM</span><span>Facturación</span></div>
-      </div>
-    </article>
+    </div>
   </div>
 </section>
 
@@ -402,8 +614,8 @@
   <div class="wrap">
     <div>
       <p class="ix-kick" data-reveal>Por qué nos llamamos así</p>
-      <h2 class="ix-h" id="roots-title" data-reveal data-delay="1">Todo conectado, como las raíces de una ceiba.</h2>
-      <p class="ix-sub" data-reveal data-delay="2" style="color:rgba(247,244,235,.75)">Diseñamos la página, el asistente y el proceso como un solo sistema. El cliente que llega por Google agenda en un toque, la solicitud llega a quien le toca y nadie captura lo mismo dos veces.</p>
+      <h2 class="ix-h" id="roots-title" data-reveal data-delay="1">Diseñamos lo que tus clientes ven y cómo trabaja tu negocio.</h2>
+      <p class="ix-sub" data-reveal data-delay="2" style="color:rgba(247,244,235,.75)">Página, asistente, agentes y datos como un solo sistema, conectado como las raíces de una ceiba. El cliente que te encuentra agenda en un toque, la solicitud llega a quien le toca, los agentes hacen lo repetitivo y tú ves todo cada mañana.</p>
       <p class="ix-story" data-reveal data-delay="3">La ceiba es el árbol sagrado de los mayas: sus raíces y sus ramas unían todo. Así queremos que funcione tu negocio en internet.</p>
       <div class="ix-nums" id="ix-nums">
         <div data-reveal><b data-count="24">0</b><span>horas hábiles para tener tu propuesta</span></div>
@@ -411,7 +623,7 @@
         <div data-reveal data-delay="2"><b>24/7</b><span>responde tu asistente de WhatsApp</span></div>
       </div>
     </div>
-    <svg class="ix-net" viewBox="0 0 560 520" role="img" aria-label="Tu página, WhatsApp, tu agenda, tu equipo y los reportes, conectados a Ceiba" data-reveal data-delay="1">
+    <svg class="ix-net" viewBox="0 0 560 520" role="img" aria-label="Tu página, WhatsApp, agentes, tu equipo y tus datos, conectados a Ceiba" data-reveal data-delay="1">
       <defs><linearGradient id="ixLine" x1="0" x2="1"><stop offset="0" stop-color="#0E9F8A"/><stop offset="1" stop-color="#D6FA52"/></linearGradient></defs>
       <g id="ix-paths">
         <path id="p1" class="ln" d="M280 260 C 230 200, 160 150, 110 92"/>
@@ -426,11 +638,11 @@
       <circle r="5" class="pulse"><animateMotion dur="2.4s" begin="1.1s" repeatCount="indefinite"><mpath href="#p3"/></animateMotion></circle>
       <circle r="5" class="pulse"><animateMotion dur="2.9s" begin=".3s" repeatCount="indefinite"><mpath href="#p4"/></animateMotion></circle>
       <circle r="5" class="pulse"><animateMotion dur="2.2s" begin="1.4s" repeatCount="indefinite"><mpath href="#p5"/></animateMotion></circle>
-      <g class="node" transform="translate(30 56)"><rect width="160" height="64" rx="16"/><text x="18" y="29">Tu página</text><text class="sub" x="18" y="47">Te encuentran en Google</text></g>
+      <g class="node" transform="translate(30 56)"><rect width="160" height="64" rx="16"/><text x="18" y="29">Tu página</text><text class="sub" x="18" y="47">Google y la IA te encuentran</text></g>
       <g class="node" transform="translate(370 56)"><rect width="160" height="64" rx="16"/><text x="18" y="29">WhatsApp</text><text class="sub" x="18" y="47">Responde a cualquier hora</text></g>
-      <g class="node" transform="translate(10 268)"><rect width="150" height="64" rx="16"/><text x="18" y="29">Tu agenda</text><text class="sub" x="18" y="47">Citas sin llamadas</text></g>
+      <g class="node" transform="translate(10 268)"><rect width="150" height="64" rx="16"/><text x="18" y="29">Agentes</text><text class="sub" x="18" y="47">Hacen lo repetitivo</text></g>
       <g class="node" transform="translate(400 268)"><rect width="150" height="64" rx="16"/><text x="18" y="29">Tu equipo</text><text class="sub" x="18" y="47">Recibe lo importante</text></g>
-      <g class="node" transform="translate(200 440)"><rect width="160" height="64" rx="16"/><text x="18" y="29">Reportes</text><text class="sub" x="18" y="47">Cuántos te contactaron</text></g>
+      <g class="node" transform="translate(200 440)"><rect width="160" height="64" rx="16"/><text x="18" y="29">Tus datos</text><text class="sub" x="18" y="47">Te dicen qué hacer</text></g>
       <g class="core" transform="translate(280 260)"><circle r="38" class="halo"/><circle r="38"/><g transform="translate(-22 -12) scale(.44)" fill="#0B1514"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></g></g>
     </svg>
   </div>
@@ -475,7 +687,9 @@
     </div>
     <h2 class="ix-h" id="faq-title" data-reveal style="font-size:clamp(30px,3.4vw,44px);margin-top:96px">Preguntas frecuentes.</h2>
     <div class="ix-faq" data-reveal data-delay="1">
-      <details><summary>¿Con qué tipo de negocios trabajan?</summary><p>Con negocios que atienden clientes: clínicas, restaurantes, inmobiliarias, hoteles, despachos y empresas de servicios. Empezamos en México.</p></details>
+      <details><summary>¿Qué significa aparecer en la IA?</summary><p>Cada vez más personas le preguntan a Google o a asistentes como ChatGPT a quién acudir. Esos sistemas recomiendan negocios cuya información encuentran clara y confiable: qué hacen, dónde están, precios, horarios y reseñas. Tu página nueva sale con esa información ordenada y con datos estructurados. Nadie puede garantizar un lugar en sus respuestas, pero sí ponerte en la mejor posición.</p></details>
+      <details><summary>¿Con qué tipo de negocios trabajan?</summary><p>Con negocios que atienden y venden: clínicas, restaurantes, inmobiliarias, hoteles, tiendas, distribuidores, despachos y empresas de servicios. Empezamos en México.</p></details>
+      <details><summary>¿Tengo que pasar por las cuatro etapas?</summary><p>No. Puedes empezar por la que más te urge: una página nueva, un asistente de WhatsApp o un agente para tu operación. Cada etapa hace más fuerte a la siguiente, pero se contratan por separado.</p></details>
       <details><summary>¿Puedo contratar solo la parte de IA o de procesos?</summary><p>Sí. Las páginas, los asistentes y los proyectos de procesos se contratan por separado. Si tu página no es de Ceiba, revisamos cómo conectarla en el diagnóstico.</p></details>
       <details><summary>¿Cómo empezamos si no sé qué necesito?</summary><p>Escríbenos cómo funciona hoy tu negocio y qué te quita más tiempo. Te decimos si conviene empezar por la página, por un asistente o por revisar un proceso.</p></details>
       <details><summary>¿Qué pasa si no me gusta la propuesta?</summary><p>No pagas nada. En páginas web, tu propuesta incluye además una ronda de ajustes antes de activar.</p></details>
@@ -486,8 +700,8 @@
 
 <section class="band ix-close" aria-labelledby="close-title">
   <div class="wrap">
-    <h2 id="close-title" data-reveal>Cuéntanos cómo funciona hoy tu negocio.</h2>
-    <div class="acts" data-reveal data-delay="1"><a class="btn btn-primary" href="/ia#contacto">Hablar de tu negocio <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-line" href="/diagnostico" style="border-color:rgba(247,244,235,.5)">Revisar mi página gratis</a></div>
+    <div><h2 id="close-title" data-reveal>Que la próxima recomendación sea tu negocio.</h2><p class="ix-close-p" data-reveal data-delay="1">Revisamos tu página gratis y te mostramos cómo quedaría. O cuéntanos cómo funciona hoy tu operación y te decimos qué conviene automatizar primero.</p></div>
+    <div class="acts" data-reveal data-delay="1"><a class="btn btn-primary" href="/diagnostico">Revisar mi negocio gratis <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-line" href="/ia#contacto" style="border-color:rgba(247,244,235,.5)">Hablar de tu operación</a></div>
   </div>
 </section>
 </main>
@@ -577,6 +791,86 @@
     items.forEach((li, i) => li.classList.toggle('on', p >= i / items.length + .05));
   };
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  /* ---------- la pregunta a la IA: se escribe y aparece la respuesta ---------- */
+  const ask = document.getElementById('ix-ask'), askText = document.getElementById('ix-ask-text');
+  const askQ = '¿Qué dentista me recomiendas cerca de Providencia?';
+  const askItems = [...ask.querySelectorAll('.ix-ask-a li, .ix-ask-you')];
+  let asking = false;
+  async function playAsk() {
+    if (asking) return; asking = true;
+    while (true) {
+      ask.classList.remove('on'); askItems.forEach(x => x.classList.remove('show')); askText.textContent = '';
+      await wait(500);
+      for (const ch of askQ) { askText.textContent += ch; await wait(38); }
+      await wait(600); ask.classList.add('on');
+      for (const x of askItems) { await wait(x.classList.contains('ix-ask-you') ? 1100 : 550); x.classList.add('show'); }
+      if (reduce) return; await wait(6500);
+    }
+  }
+
+  /* ---------- agentes trabajando: contadores y una decisión para ti ---------- */
+  const agEls = [...document.querySelectorAll('.ix-ag-row em')], agAsk = document.querySelector('.ix-ag-ask'), agClock = document.getElementById('ix-ag-clock');
+  let agOn = false;
+  async function playAgents() {
+    if (agOn) return; agOn = true;
+    while (true) {
+      agEls.forEach(e => e.textContent = '0'); agAsk.classList.remove('on');
+      const ends = agEls.map(e => +e.dataset.to), steps = 24;
+      for (let i = 1; i <= steps; i++) {
+        agEls.forEach((e, k) => e.textContent = Math.round(ends[k] * i / steps));
+        const m = 12 + Math.round(i * 2.2); agClock.textContent = `${String(9 + Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
+        await wait(110);
+        if (i === 16) agAsk.classList.add('on');
+      }
+      if (reduce) return; await wait(5000);
+    }
+  }
+  const rep = document.getElementById('ix-rep');
+  const sio = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    if (e.target === ask) playAsk();
+    if (e.target.classList.contains('ix-ex--agents')) playAgents();
+    if (e.target === rep) { rep.classList.add('on'); sio.unobserve(rep); }
+  }), { threshold: .4 });
+  [ask, document.querySelector('.ix-ex--agents'), rep].forEach(el => el && sio.observe(el));
+
+  /* ---------- el camino se ilumina con el scroll ---------- */
+  const path = document.getElementById('ix-path'), chs = [...path.querySelectorAll('.ix-ch')];
+  const onPath = () => {
+    const r = path.getBoundingClientRect(), mid = innerHeight * .6;
+    path.style.setProperty('--p', Math.max(0, Math.min(1, (mid - r.top - 60) / (r.height - 120))).toFixed(3));
+    chs.forEach(c => { const d = c.querySelector('.ix-ch-dot').getBoundingClientRect(); c.classList.toggle('on', d.top + d.height / 2 < mid); });
+  };
+  addEventListener('scroll', onPath, { passive: true }); addEventListener('resize', onPath); onPath();
+
+  /* ---------- ¿en qué etapa está tu negocio? ---------- */
+  const qs = [...document.querySelectorAll('#ix-qs li')];
+  const RES = {
+    1: ['Etapa 1: que te encuentren', 'Hoy hay clientes buscando un negocio como el tuyo que terminan con otro. Lo primero es una página clara, lista para Google y la IA, donde agendar o pedir sea fácil.', '/diagnostico', 'Revisar mi página gratis'],
+    2: ['Etapa 2: que te escriban y te elijan', 'Ya te encuentran, pero cada mensaje que tarda en responderse es una venta que se va con la competencia. Un asistente de WhatsApp responde y aparta en segundos, a cualquier hora.', '/ia#contacto', 'Quiero un asistente'],
+    3: ['Etapa 3: que tu operación trabaje sola', 'Tu equipo sigue haciendo a mano trabajo que un agente puede hacer todos los días: capturar, dar seguimiento, conciliar. Ahí están tus horas y tus ventas perdidas.', '/ia#contacto', 'Hablar de mi operación'],
+    4: ['Etapa 4: que decidas con datos', 'Tu negocio ya funciona bien. Lo siguiente es entenderlo a fondo: un analista que cada mañana te diga qué cambió y qué hacer.', '/ia#contacto', 'Quiero mi analista diario'],
+    5: ['Vas adelante', 'Tu negocio ya hace lo que muchos apenas empiezan. Hablemos de procesos y agentes a la medida para crecer sin crecer el equipo.', '/ia#contacto', 'Hablar de lo siguiente'],
+  };
+  const resK = document.getElementById('ix-res-k'), resT = document.getElementById('ix-res-t'), resP = document.getElementById('ix-res-p'), resCta = document.getElementById('ix-res-cta'), resBar = document.getElementById('ix-res-bar');
+  const score = () => {
+    const ans = qs.map(li => li.dataset.v), n = ans.filter(Boolean).length;
+    resK.textContent = `${n} de ${qs.length} respuestas`;
+    if (n < qs.length) { resBar.style.width = `${n / qs.length * 100}%`; return; }
+    const miss = qs.find(li => li.dataset.v === '0'), st = miss ? +miss.dataset.st : 5;
+    const [t, p, href, cta] = RES[st];
+    resK.textContent = st === 5 ? 'Las cuatro etapas' : `Tu siguiente paso · etapa ${st} de 4`;
+    resBar.style.width = `${Math.min(100, (st - 1) / 4 * 100 + 6)}%`;
+    resT.textContent = t; resP.textContent = p; resCta.href = href; resCta.firstChild.textContent = cta + ' '; resCta.hidden = false;
+  };
+  qs.forEach(li => li.addEventListener('click', e => {
+    const b = e.target.closest('button[data-a]'); if (!b) return;
+    li.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    li.dataset.v = b.dataset.a; li.classList.toggle('yes', b.dataset.a === '1'); li.classList.toggle('no', b.dataset.a === '0');
+    score();
+  }));
+  qs.forEach(li => li.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', 'false')));
 
   /* ---------- luz que sigue al cursor en las tarjetas de rubros ---------- */
   document.querySelectorAll('#ix-ind > *').forEach(c => c.addEventListener('pointermove', e => {
