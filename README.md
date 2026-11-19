@@ -90,6 +90,8 @@ Son precios de lanzamiento para probar en México, en MXN. Son el precio final: 
 
 - **Propuesta de ejemplo:** `clinica-arrayan` vive en `lib/demos/clinica-arrayan.js` y siempre está disponible. Las reales salen de Supabase; mientras son borrador solo las ve el equipo (cookie del panel).
 - **Plantilla:** `lib/templates/clinica.js` arma la portada a partir del JSON descrito en `ops/esquema-propuesta.md`. Sirve en el servidor (vista previa) y en el comparador. Por ahora es la única plantilla y la rutina la adapta a cualquier rubro.
+- **Ronda de ajustes:** el cliente tiene una ronda para pedir cambios desde su propuesta («Pedir cambios»). Claude la aplica directo, sin revisión, y la propuesta se actualiza sola. Se guarda la versión anterior; en `/admin` se puede deshacer o darle otra ronda. Te llega un correo con lo que pidió.
+- **Temas de diseño:** modo claro u oscuro, forma de la foto principal, 6 pares de tipografía, esquinas y estilo de botones (`page.theme`). Se cambian con selectores en `/admin` o con la ronda de ajustes.
 - **Lado «Antes» del comparador:** captura real de la página actual del cliente, hecha con Microlink (plan gratuito, con límite diario).
 - **24 horas hábiles:** de lunes a viernes, sin feriados de México, en hora del centro. Si la solicitud llega fuera de 9:00 a 19:00, se cuenta desde las 9:00 del siguiente día hábil (`lib/business-hours.js`; actualizar los feriados cada año).
 - **Base de datos:** proyecto de Supabase `ceiba`, migraciones en `supabase/migrations/`. RLS activado sin políticas: solo el servidor, con la service_role key, lee y escribe.

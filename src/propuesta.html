@@ -12,10 +12,24 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Red+Hat+Display:wght@500;600;700&family=Red+Hat+Text:wght@400;500;600&display=swap">
+{{P_FONTS}}
 <link rel="stylesheet" href="/assets/clinica.css">
 <style>
 {{BASE_CSS}}
 /* ===================== PRIVATE PROPOSAL ===================== */
+.p-changes{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;margin-top:18px;padding:16px 18px;border-radius:14px;background:#fff;border:1px solid var(--line)}
+.p-changes > div{display:grid;gap:2px;max-width:52ch}
+.p-changes b{font-weight:600}
+.p-changes span{color:var(--muted);font-size:15px}
+.p-changes .btn{height:44px;font-size:15px}
+.p-changes.is-busy{border-color:var(--petrol);background:#F1F6F4}
+.p-changes .spin{display:inline-block;width:14px;height:14px;border:2px solid var(--petrol);border-right-color:transparent;border-radius:50%;animation:pspin .8s linear infinite;vertical-align:-2px;margin-right:8px}
+@keyframes pspin{to{transform:rotate(360deg)}}
+.chg-chips{display:flex;flex-wrap:wrap;gap:8px}
+.chg-chips button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 12px;font-size:14px;cursor:pointer;color:var(--ink)}
+.chg-chips button:hover{border-color:var(--ink)}
+#chg textarea{width:100%;min-height:140px;border-radius:10px;border:1px solid var(--line);padding:12px 14px;font:400 16px/1.5 var(--f-body);resize:vertical;color:var(--ink);background:#fff}
+#chg textarea:focus{outline:2px solid var(--petrol);outline-offset:1px}
 .cmp .cx [data-mark]::after{right:auto;left:10px;top:10px}
 .cmp .cx .cx-top [data-mark]::after,.cmp .cx .cx-chat-btn[data-mark]::after{left:-10px;top:-10px}
 .cmp .cx-top{position:sticky}
@@ -247,6 +261,7 @@ img{max-width:100%}
             <div class="wipe" id="cmp-wipe"></div>
           </div>
         </div>
+        <div class="p-changes" id="p-changes" aria-live="polite"></div>
         <div class="cmp-label"><span><strong>Portada</strong> · <a class="link" href="{{P_VISTA}}" target="_blank" rel="noopener">Abrir en pantalla completa ↗</a></span><span id="cmp-status" aria-live="polite">Viendo cómo quedaría</span></div>
       </div>
       <div>
@@ -357,6 +372,22 @@ img{max-width:100%}
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<dialog class="diag" id="chg" aria-labelledby="chg-title">
+  <div class="diag-in">
+    <div class="diag-top"><div><h2 id="chg-title">Pedir cambios</h2><p>Una ronda de ajustes a tu portada, incluida antes de activar.</p></div><button class="x" type="button" data-chg-close aria-label="Cerrar">×</button></div>
+    <div class="diag-body" style="display:grid;gap:14px">
+      <label for="chg-text" style="font-weight:500">¿Qué te gustaría cambiar?</label>
+      <textarea id="chg-text" maxlength="1500" placeholder="Por ejemplo: la quiero con fondo oscuro, la foto principal rectangular y otra tipografía más elegante. También cambien el título por…"></textarea>
+      <div class="chg-chips" aria-label="Ideas">
+        <button type="button">Fondo oscuro</button><button type="button">Foto principal rectangular</button><button type="button">Tipografía más elegante</button><button type="button">Botones rectangulares</button><button type="button">Usar otro color de marca</button><button type="button">Cambiar el título principal</button>
+      </div>
+      <p style="font-size:14px;color:var(--muted)">Puedes pedir colores, tipografía, formas, textos y fotos (pega el enlace). Lo aplicamos en unos minutos y esta misma página se actualiza. Los demás cambios los vemos juntos cuando actives tu página.</p>
+      <p class="err" id="chg-err" role="alert" hidden></p>
+    </div>
+    <div class="diag-foot"><button class="btn btn-line" type="button" data-chg-close>Cancelar</button><button class="btn btn-primary" type="button" id="chg-send">Enviar cambios</button></div>
+  </div>
+</dialog>
 
 <dialog class="diag" id="act" aria-labelledby="act-title">
   <div class="diag-in">
@@ -488,6 +519,53 @@ img{max-width:100%}
     callOk.hidden = false; callOk.focus();
   });
   $$('[data-call-link]').forEach(a => a.addEventListener('click', () => setTimeout(() => $('button', dayChips).focus({ preventScroll: true }), reduce.matches ? 0 : 600)));
+
+  /* ---------- ronda de ajustes: el cliente pide cambios y Claude los aplica ---------- */
+  const CH = P.changes, chBox = $('#p-changes'), chDlg = $('#chg'), chText = $('#chg-text'), chErr = $('#chg-err'), chSend = $('#chg-send');
+  let chPoll;
+  function renderChanges(st = CH) {
+    chBox.classList.toggle('is-busy', ['pendiente', 'aplicando'].includes(st.status));
+    if (['pendiente', 'aplicando'].includes(st.status)) {
+      chBox.innerHTML = '<div><b><span class="spin" aria-hidden="true"></span>Estamos aplicando tus cambios</b><span>Tarda unos minutos. Esta página se actualiza sola cuando estén listos.</span></div>';
+      clearInterval(chPoll); chPoll = setInterval(checkChanges, 12000);
+    } else if (st.status === 'aplicado') {
+      chBox.innerHTML = `<div><b>Ya aplicamos tus cambios</b><span>${esc(st.note || 'Tu portada está actualizada.')} Los demás ajustes los vemos juntos cuando actives tu página.</span></div><a class="btn btn-line" href="/vista/${esc(P.slug)}" target="_blank" rel="noopener">Ver en pantalla completa ↗</a>`;
+    } else if (st.status === 'error') {
+      chBox.innerHTML = `<div><b>No pudimos aplicar todos tus cambios en automático</b><span>${esc(st.note || 'Te escribimos en breve para terminarlos.')}</span></div>`;
+    } else if (st.rounds >= st.max) {
+      chBox.innerHTML = '<div><b>Ya usaste tu ronda de ajustes</b><span>Los demás cambios los vemos juntos cuando actives tu página.</span></div>';
+    } else {
+      chBox.innerHTML = '<div><b>¿Quieres algún cambio?</b><span>Incluye una ronda de ajustes a tu portada antes de activar: colores, tipografía, formas, textos o fotos.</span></div><button class="btn btn-line" type="button" data-chg-open>Pedir cambios</button>';
+    }
+  }
+  async function checkChanges() {
+    try {
+      const r = await fetch(`/api/changes?slug=${encodeURIComponent(P.slug)}`); if (!r.ok) return;
+      const st = await r.json();
+      if (st.status === 'aplicado' || st.status === 'error') { clearInterval(chPoll); location.reload(); }
+    } catch { /* se reintenta en el siguiente ciclo */ }
+  }
+  document.addEventListener('click', e => {
+    if (e.target.closest('[data-chg-open]')) { chErr.hidden = true; chDlg.showModal(); chText.focus(); }
+    if (e.target.closest('[data-chg-close]')) chDlg.close();
+    const chip = e.target.closest('.chg-chips button');
+    if (chip) { chText.value = (chText.value.trim() ? chText.value.trim() + '. ' : '') + chip.textContent; chText.focus(); }
+  });
+  chDlg.addEventListener('click', e => { if (e.target === chDlg) chDlg.close(); });
+  chSend.addEventListener('click', async () => {
+    const text = chText.value.trim();
+    if (text.length < 5) { chErr.textContent = 'Cuéntanos qué te gustaría cambiar.'; chErr.hidden = false; chText.focus(); return; }
+    chSend.disabled = true; chSend.textContent = 'Enviando…'; chErr.hidden = true;
+    try {
+      const r = await fetch('/api/changes', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ slug: P.slug, text }) });
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(d.error || 'No pudimos enviar tus cambios. Intenta de nuevo.');
+      chDlg.close(); renderChanges({ ...CH, status: 'pendiente', rounds: CH.rounds + 1 });
+      chBox.scrollIntoView({ block: 'center', behavior: reduce.matches ? 'auto' : 'smooth' });
+    } catch (err) { chErr.textContent = err.message; chErr.hidden = false; }
+    chSend.disabled = false; chSend.textContent = 'Enviar cambios';
+  });
+  renderChanges();
 
   /* ---------- activation → Stripe Checkout ---------- */
   const act = $('#act'), next = $('#act-next'), errBox = $('#act-error'), terms = $('#a-terms');

@@ -6,6 +6,8 @@
 //   POST {action:'save', slug, content, plan, whatsapp}
 //   POST {action:'approve', slug, validDays}   → publica y avisa al cliente
 //   POST {action:'discard', slug}
+//   POST {action:'undo_changes', slug}    → vuelve al contenido antes de la ronda de ajustes
+//   POST {action:'grant_round', slug}     → le da otra ronda de ajustes al cliente
 import { adminCookie, isAdmin } from '../lib/admin.js';
 import { dbReady, select, update } from '../lib/db.js';
 import { escHtml, mailReady, sendMail } from '../lib/notify.js';
@@ -29,7 +31,7 @@ export async function GET(request) {
   const q = new URL(request.url).searchParams;
   try {
     if (q.get('action') === 'list') {
-      const leads = await select('leads', 'select=id,created_at,due_at,status,business,name,contact,contact_type,site_host,has_site,source,notes,proposal:proposals!leads_proposal_id_fkey(slug,status,recommended_plan,whatsapp_recommended,sent_at,first_viewed_at,activated_at,valid_until,views:proposal_views(count))&order=created_at.desc&limit=100');
+      const leads = await select('leads', 'select=id,created_at,due_at,status,business,name,contact,contact_type,site_host,has_site,source,notes,proposal:proposals!leads_proposal_id_fkey(slug,status,change_status,recommended_plan,whatsapp_recommended,sent_at,first_viewed_at,activated_at,valid_until,views:proposal_views(count))&order=created_at.desc&limit=100');
       return json({ leads });
     }
     if (q.get('action') === 'get') {
@@ -70,6 +72,16 @@ export async function POST(request) {
       if (typeof b.whatsapp === 'boolean') patch.whatsapp_recommended = b.whatsapp;
       if (typeof b.business === 'string' && b.business.trim()) patch.business = b.business.trim().slice(0, 160);
       await update('proposals', `id=eq.${p.id}`, patch);
+      return json({ ok: true });
+    }
+
+    if (b.action === 'undo_changes') {
+      if (!p.content_prev) return json({ error: 'No hay una versión anterior guardada.' }, 400);
+      await update('proposals', `id=eq.${p.id}`, { content: p.content_prev, content_prev: null, change_status: null, change_note: null });
+      return json({ ok: true });
+    }
+    if (b.action === 'grant_round') {
+      await update('proposals', `id=eq.${p.id}`, { change_rounds: 0, change_status: null });
       return json({ ok: true });
     }
 

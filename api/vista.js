@@ -3,13 +3,13 @@
 import { SYMBOLS } from '../lib/generated/shared.js';
 import { isAdmin } from '../lib/admin.js';
 import { loadProposal, trackView } from '../lib/proposals.js';
-import { renderClinica } from '../lib/templates/clinica.js';
+import { fontHref, renderClinica } from '../lib/templates/clinica.js';
 
 const TEMPLATES = { clinica: renderClinica };
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const html = (body, status = 200) => new Response(body, { status, headers: { 'content-type': 'text/html; charset=utf-8', 'x-robots-tag': 'noindex, nofollow', 'cache-control': 'private, no-store' } });
 
-const HEAD = title => `<!doctype html>
+const HEAD = (title, fonts = '') => `<!doctype html>
 <html lang="es"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
@@ -17,6 +17,7 @@ const HEAD = title => `<!doctype html>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Red+Hat+Display:wght@500;600;700&family=Red+Hat+Text:wght@400;500;600&display=swap">
+${fonts ? `<link rel="stylesheet" href="${fonts}">` : ''}
 <link rel="stylesheet" href="/assets/clinica.css">
 <style>
 body{margin:0;background:#fff;-webkit-font-smoothing:antialiased;overflow-x:clip}
@@ -39,7 +40,7 @@ body{margin:0;background:#fff;-webkit-font-smoothing:antialiased;overflow-x:clip
 function page(p, { admin }) {
   const render = TEMPLATES[p.template || 'clinica'] || renderClinica;
   const draft = admin && !['enviada', 'vista', 'activada'].includes(p.status);
-  return html(`${HEAD(`${p.business} · Vista previa de Ceiba Labs`)}
+  return html(`${HEAD(`${p.business} · Vista previa de Ceiba Labs`, fontHref(p.page))}
 <body>
 ${SYMBOLS}
 <div class="vp-bar" id="vp-bar" role="region" aria-label="Vista previa">

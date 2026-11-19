@@ -24,7 +24,10 @@ Las columnas de la tabla mandan sobre el JSON para `slug`, `business`, `recommen
   // El número del cambio se dibuja sobre esa sección de la portada nueva.
 
   "page": {
-    "brand":   { "name": "Arrayán", "tagline": "Clínica dental", "fullName": "Clínica Dental Arrayán", "accent": "#1F4FD1", "logo": "https://…", "logoWide": true },
+    "theme":   { "mode": "light", "hero": "organic", "font": "moderna", "corners": "soft", "buttons": "pill" },
+    // mode: light|dark · hero: organic|rounded|square · font: moderna|elegante|geometrica|clasica|amable|sobria
+    // corners: soft|sharp · buttons: pill|square|outline. Se cambia en /admin o con la ronda de ajustes del cliente.
+    "brand":   { "name": "Arrayán", "tagline": "Clínica dental", "fullName": "Clínica Dental Arrayán", "accent": "#1F4FD1", "logo": "https://…", "logoWide": true, "logoDark": "https://… (opcional, versión clara para fondo oscuro)" },
     "contact": { "phone": "33 0000 0000", "whatsapp": "523300000000", "email": "…", "address": "…", "mapsUrl": "https://…", "bookingUrl": "https://…" },
     "util":    { "note": "¿Urgencia? Te atendemos hoy", "hours": "Lunes a viernes de 9 a 20 h" },
     "nav":     ["Tratamientos", "Opiniones", "Ubicación"],

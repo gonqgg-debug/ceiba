@@ -2,19 +2,20 @@
    contenedor (container queries): pantalla completa en /vista y miniatura en
    el comparador de la propuesta. El color de marca llega en --a. */
 .cx{
-  --ink:#15211D;--muted:#5C6865;--line:#E4E7E6;--paper:#fff;--soft:color-mix(in srgb,var(--a) 7%,#fff);--tint:color-mix(in srgb,var(--a) 14%,#fff);
-  --a2:color-mix(in srgb,var(--a) 72%,#fff);--r:1.6em;--pad:4.5em;
-  font:400 clamp(10px,1.12cqi,16px)/1.55 "Red Hat Text",ui-sans-serif,system-ui,sans-serif;color:var(--ink);background:var(--paper);position:relative;-webkit-font-smoothing:antialiased;text-align:left
+  --ink:#15211D;--fg:#15211D;--muted:#5C6865;--line:#E4E7E6;--bg:#fff;--card:#fff;
+  --fh:"Red Hat Display",ui-sans-serif,system-ui,sans-serif;--fb:"Red Hat Text",ui-sans-serif,system-ui,sans-serif;--soft:color-mix(in srgb,var(--a) 7%,var(--bg));--tint:color-mix(in srgb,var(--a) 14%,var(--bg));
+  --a2:color-mix(in srgb,var(--a) 72%,var(--bg));--r:1.6em;--pad:4.5em;
+  font:400 clamp(10px,1.12cqi,16px)/1.55 var(--fb);color:var(--fg);background:var(--bg);position:relative;-webkit-font-smoothing:antialiased;text-align:left
 }
 .cx *,.cx *::before,.cx *::after{box-sizing:border-box}
-.cx h1,.cx h2,.cx h3{font-family:"Red Hat Display",ui-sans-serif,system-ui,sans-serif;color:var(--ink);margin:0;text-wrap:balance;letter-spacing:-.02em}
+.cx h1,.cx h2,.cx h3{font-family:var(--fh);color:var(--fg);margin:0;text-wrap:balance;letter-spacing:-.02em}
 .cx p{margin:0}
 .cx a{color:inherit;text-decoration:none}
 .cx button{font:inherit;color:inherit}
 .cx [hidden]{display:none!important}
 .cx-ico{width:1.5em;height:1.5em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .cx-ico-s{width:1.1em;height:1.1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
-.cx-ico-c{width:1.25em;height:1.25em;fill:none;stroke:var(--a);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none;padding:.35em;box-sizing:content-box;background:#fff;border-radius:50%;box-shadow:0 0 0 1px var(--tint)}
+.cx-ico-c{width:1.25em;height:1.25em;fill:none;stroke:var(--a);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none;padding:.35em;box-sizing:content-box;background:var(--card);border-radius:50%;box-shadow:0 0 0 1px var(--tint)}
 .cx-flip{transform:scaleX(-1)}
 .cx-wa{width:1.2em;height:1.2em;color:#25D366;flex:none}
 .cx-noimg{background:linear-gradient(135deg,var(--tint),var(--soft))}
@@ -23,7 +24,7 @@
 .cx-btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;height:2.9em;padding:0 1.3em;border-radius:999px;background:var(--a);background-image:linear-gradient(120deg,var(--a),color-mix(in srgb,var(--a) 78%,#7c4dff));color:#fff!important;font-weight:600;white-space:nowrap;border:0;cursor:pointer;box-shadow:0 .6em 1.4em -.8em color-mix(in srgb,var(--a) 70%,transparent);transition:transform .15s,box-shadow .15s}
 .cx-btn:hover{transform:translateY(-1px);box-shadow:0 .9em 1.6em -.8em color-mix(in srgb,var(--a) 80%,transparent)}
 .cx-btn--lg{height:3.4em;padding:0 1.6em;font-size:1.05em}
-.cx-btn--ghost,.cx-btn--line{background:#fff;background-image:none;color:var(--ink)!important;box-shadow:inset 0 0 0 1px var(--line)}
+.cx-btn--ghost,.cx-btn--line{background:var(--card);background-image:none;color:var(--fg)!important;box-shadow:inset 0 0 0 1px var(--line)}
 .cx-btn--ghost:hover,.cx-btn--line:hover{box-shadow:inset 0 0 0 1px var(--ink)}
 .cx-link{display:inline-flex;align-items:center;gap:.4em;color:var(--a)!important;font-weight:600;margin-top:.8em}
 
@@ -31,41 +32,41 @@
 .cx-util{display:flex;align-items:center;gap:2em;padding:.6em var(--pad);background:var(--ink);color:#E8EEEB;font-size:.82em}
 .cx-util span,.cx-util a{display:inline-flex;align-items:center;gap:.5em}
 .cx-util-tel{margin-left:auto;font-weight:600}
-.cx-top{display:flex;align-items:center;gap:2em;padding:1.1em var(--pad);background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.cx-top{display:flex;align-items:center;gap:2em;padding:1.1em var(--pad);background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
 .cx-brand{display:flex;flex-direction:column;line-height:1.1}
-.cx-brand b{font:700 1.45em/1 "Red Hat Display",sans-serif;letter-spacing:-.02em}
+.cx-brand b{font:700 1.45em/1 var(--fh);letter-spacing:-.02em}
 .cx-brand span{font-size:.8em;color:var(--muted);margin-top:.25em}
 .cx-brand img{height:2.6em;width:auto;display:block}
 .cx-nav{display:flex;gap:1.8em;margin-left:auto;color:var(--muted);font-size:.95em}
-.cx-nav a:hover{color:var(--ink)}
+.cx-nav a:hover{color:var(--fg)}
 .cx-top-acts{display:flex;gap:.6em}
 
 /* hero */
 .cx-hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:3em;align-items:center;padding:4em var(--pad) 4.5em;max-width:84em;margin:0 auto}
 .cx-rating{display:inline-flex;align-items:center;gap:.5em;font-size:.92em;color:var(--muted);margin-bottom:1.2em;background:var(--soft);padding:.45em .9em;border-radius:999px}
-.cx-rating b{color:var(--ink)}
+.cx-rating b{color:var(--fg)}
 .cx-stars{color:#F2A516;letter-spacing:.05em}
 .cx-hero h1{font-size:3.6em;line-height:1.02;font-weight:700;margin-bottom:.4em}
 .cx-lede{font-size:1.18em;color:var(--muted);max-width:32em;margin-bottom:1.8em}
 .cx-ctas{display:flex;flex-wrap:wrap;gap:.7em}
 .cx-call{margin-top:1.2em;color:var(--muted);font-size:.95em}
-.cx-call b{color:var(--ink)}
+.cx-call b{color:var(--fg)}
 .cx-hero-media{position:relative;min-width:0}
-.cx-hero-img{aspect-ratio:1/1.02;border-radius:46% 54% 42% 58% / 52% 44% 56% 48%;background:center 22%/cover no-repeat;box-shadow:0 0 0 1.2em var(--soft),0 0 0 2.4em color-mix(in srgb,var(--a) 4%,#fff)}
-.cx-float{position:absolute;background:#fff;border-radius:1em;padding:.9em 1.1em;box-shadow:0 1.2em 2.4em -1.2em rgba(15,30,25,.35),0 0 0 1px var(--line)}
+.cx-hero-img{aspect-ratio:1/1.02;border-radius:46% 54% 42% 58% / 52% 44% 56% 48%;background:center 22%/cover no-repeat;box-shadow:0 0 0 1.2em var(--soft),0 0 0 2.4em color-mix(in srgb,var(--a) 4%,var(--bg))}
+.cx-float{position:absolute;background:var(--card);border-radius:1em;padding:.9em 1.1em;box-shadow:0 1.2em 2.4em -1.2em rgba(15,30,25,.35),0 0 0 1px var(--line)}
 .cx-slots{left:-1.5em;bottom:1em;display:grid;gap:.6em}
 .cx-slots b{display:flex;align-items:center;gap:.45em;font-size:.88em}
 .cx-slots div{display:flex;gap:.4em}
 .cx-slots span{border:1px solid var(--line);border-radius:.6em;padding:.35em .65em;font-size:.86em;font-weight:500;white-space:nowrap}
 .cx-slots span:first-child{background:var(--a);color:#fff;border-color:var(--a)}
 .cx-rate-card{right:-.5em;top:1.5em;display:grid;gap:.1em;text-align:center}
-.cx-rate-card b{font:700 1.4em/1.1 "Red Hat Display",sans-serif}
+.cx-rate-card b{font:700 1.4em/1.1 var(--fh)}
 .cx-rate-card small{color:var(--muted)}
 
 /* beneficios */
 .cx-benefits{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1em;padding:0 var(--pad);max-width:84em;margin:0 auto 1em}
 .cx-benefit{display:grid;gap:.35em;align-content:start;background:var(--soft);border-radius:var(--r);padding:1.4em 1.4em 1.5em;position:relative}
-.cx-benefit .cx-ico{color:var(--a);background:#fff;border-radius:50%;padding:.5em;box-sizing:content-box;margin-bottom:.6em}
+.cx-benefit .cx-ico{color:var(--a);background:var(--card);border-radius:50%;padding:.5em;box-sizing:content-box;margin-bottom:.6em}
 .cx-benefit b{font-weight:600;font-size:1.05em}
 .cx-benefit span{color:var(--muted);font-size:.92em}
 
@@ -88,16 +89,16 @@
 
 /* servicios */
 .cx-car-nav{display:flex;gap:.5em}
-.cx-car-nav button{width:2.8em;height:2.8em;border-radius:50%;border:1px solid var(--line);background:#fff;display:grid;place-items:center;cursor:pointer}
+.cx-car-nav button{width:2.8em;height:2.8em;border-radius:50%;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;cursor:pointer}
 .cx-car-nav button:disabled{opacity:.35;cursor:default}
 .cx-car{list-style:none;margin:0;padding:.2em .2em 1em;display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 3em) / 3.4);gap:1.5em;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
 .cx-car::-webkit-scrollbar{display:none}
-.cx-card{scroll-snap-align:start;border-radius:var(--r);overflow:hidden;background:#fff;box-shadow:0 0 0 1px var(--line);display:grid;grid-template-rows:auto 1fr;transition:box-shadow .2s,transform .2s}
+.cx-card{scroll-snap-align:start;border-radius:var(--r);overflow:hidden;background:var(--card);box-shadow:0 0 0 1px var(--line);display:grid;grid-template-rows:auto 1fr;transition:box-shadow .2s,transform .2s}
 .cx-card:hover{box-shadow:0 0 0 1px var(--tint),0 1.4em 2.4em -1.6em rgba(15,30,25,.4);transform:translateY(-2px)}
 .cx-card-img{aspect-ratio:4/3;background:center/cover no-repeat}
 .cx-card-body{padding:1.2em 1.3em 1.4em;display:grid;align-content:start}
 .cx-card-t{display:flex;justify-content:space-between;gap:1em;align-items:baseline}
-.cx-card-t b{font:600 1.12em/1.25 "Red Hat Display",sans-serif}
+.cx-card-t b{font:600 1.12em/1.25 var(--fh)}
 .cx-card-t i{font-style:normal;font-weight:600;color:var(--a);white-space:nowrap;font-size:.95em}
 .cx-card-body p{color:var(--muted);font-size:.93em;margin-top:.5em}
 .cx-pills{display:flex;flex-wrap:wrap;gap:.5em;align-items:center;margin-top:1.4em}
@@ -105,21 +106,21 @@
 .cx-pills em{font-style:normal;font-size:.9em;padding:.45em .9em;border-radius:999px;background:var(--soft);box-shadow:inset 0 0 0 1px var(--tint)}
 
 /* ayuda para elegir */
-.cx-finder-in{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:1.6em 3em;align-items:start;background:linear-gradient(135deg,var(--soft),color-mix(in srgb,var(--a) 12%,#fff))}
+.cx-finder-in{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:1.6em 3em;align-items:start;background:linear-gradient(135deg,var(--soft),color-mix(in srgb,var(--a) 12%,var(--bg)))}
 .cx-finder-in > div:first-child p{color:var(--muted);margin-top:.6em}
 .cx-finder-opts{display:flex;flex-wrap:wrap;gap:.5em;grid-row:span 2;align-content:start}
-.cx-finder-opts button{border:0;border-radius:999px;padding:.7em 1.1em;background:#fff;cursor:pointer;font-weight:500;box-shadow:inset 0 0 0 1px var(--line)}
+.cx-finder-opts button{border:0;border-radius:999px;padding:.7em 1.1em;background:var(--card);cursor:pointer;font-weight:500;box-shadow:inset 0 0 0 1px var(--line)}
 .cx-finder-opts button[aria-checked="true"]{background:var(--ink);color:#fff;box-shadow:none}
-.cx-finder-out > div{background:#fff;border-radius:1.2em;padding:1.3em 1.4em;display:grid;gap:.4em;justify-items:start;box-shadow:0 1em 2em -1.6em rgba(15,30,25,.4)}
-.cx-finder-out b{font:600 1.2em "Red Hat Display",sans-serif}
+.cx-finder-out > div{background:var(--card);border-radius:1.2em;padding:1.3em 1.4em;display:grid;gap:.4em;justify-items:start;box-shadow:0 1em 2em -1.6em rgba(15,30,25,.4)}
+.cx-finder-out b{font:600 1.2em var(--fh)}
 .cx-finder-out i{font-style:normal;color:var(--a);font-weight:600}
 .cx-finder-out p{color:var(--muted);font-size:.95em;margin-bottom:.6em}
 
 /* proceso */
 .cx-process ol{list-style:none;margin:0;padding:0;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:1.2em;counter-reset:s}
-.cx-process li{position:relative;padding:1.6em 1.4em;border-radius:var(--r);background:#fff;box-shadow:0 0 0 1px var(--line)}
+.cx-process li{position:relative;padding:1.6em 1.4em;border-radius:var(--r);background:var(--card);box-shadow:0 0 0 1px var(--line)}
 .cx-num{display:grid;place-items:center;width:2.4em;height:2.4em;border-radius:50%;background:var(--tint);color:var(--a);font-weight:700;margin-bottom:1em}
-.cx-process b{display:block;font:600 1.1em/1.25 "Red Hat Display",sans-serif;margin-bottom:.4em}
+.cx-process b{display:block;font:600 1.1em/1.25 var(--fh);margin-bottom:.4em}
 .cx-process p{color:var(--muted);font-size:.93em}
 
 /* equipo */
@@ -127,7 +128,7 @@
 .cx-people li{border-radius:var(--r);overflow:hidden;position:relative;aspect-ratio:4/4.6;max-height:30em;background:var(--soft)}
 .cx-person-img{position:absolute;inset:0;background:center 18%/cover no-repeat}
 .cx-person-t{position:absolute;inset:auto 0 0;padding:3.5em 1.3em 1.2em;background:linear-gradient(transparent,rgba(10,20,18,.82));color:#fff;display:grid;gap:.15em}
-.cx-person-t b{font:600 1.15em "Red Hat Display",sans-serif;color:#fff}
+.cx-person-t b{font:600 1.15em var(--fh);color:#fff}
 .cx-person-t span{font-size:.9em;opacity:.9}
 .cx-person-t small{font-size:.78em;opacity:.75}
 .cx-team-solo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2.5em;align-items:center}
@@ -154,7 +155,7 @@
 
 /* preguntas */
 .cx-faq-list{display:grid;gap:.7em;max-width:52em}
-.cx-faq details{background:#fff;border-radius:1.1em;box-shadow:0 0 0 1px var(--line);padding:0 1.4em}
+.cx-faq details{background:var(--card);border-radius:1.1em;box-shadow:0 0 0 1px var(--line);padding:0 1.4em}
 .cx-faq details[open]{background:var(--soft);box-shadow:none}
 .cx-faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:1em;padding:1.15em 0;font-weight:600}
 .cx-faq summary::-webkit-details-marker{display:none}
@@ -191,7 +192,7 @@
 .cx-foot-cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2em;max-width:84em;margin:0 auto}
 .cx-foot-cols div{display:grid;gap:.5em;align-content:start}
 .cx-foot-cols b{color:#fff;font-weight:600}
-.cx-foot-name{font:700 1.3em "Red Hat Display",sans-serif;color:#fff}
+.cx-foot-name{font:700 1.3em var(--fh);color:#fff}
 .cx-foot-legal{display:flex;flex-wrap:wrap;gap:.5em 1.8em;max-width:84em;margin:2.5em auto 0;padding-top:1.4em;border-top:1px solid rgba(255,255,255,.1);font-size:.85em;opacity:.7}
 
 /* flotantes */
@@ -200,7 +201,7 @@
 .cx-wa-fab{position:absolute;right:1.4em;bottom:0;width:3.6em;height:3.6em;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 .8em 1.6em -.6em rgba(0,0,0,.4)}
 .cx-wa-fab .cx-wa{color:#fff;width:1.8em;height:1.8em}
 .cx-chat-btn{position:absolute;right:6em;bottom:.3em;display:inline-flex;align-items:center;gap:.5em;height:3em;padding:0 1.2em;border:0;border-radius:999px;background:var(--ink);color:#fff!important;font-weight:600;cursor:pointer;box-shadow:0 .8em 1.6em -.6em rgba(0,0,0,.4)}
-.cx-chat{position:absolute;right:1.4em;bottom:4.4em;width:min(23em,calc(100cqi - 2.8em));background:#fff;border-radius:1.2em;overflow:hidden;box-shadow:0 1.6em 3em -1em rgba(0,0,0,.35),0 0 0 1px var(--line);display:none}
+.cx-chat{position:absolute;right:1.4em;bottom:4.4em;width:min(23em,calc(100cqi - 2.8em));background:var(--card);border-radius:1.2em;overflow:hidden;box-shadow:0 1.6em 3em -1em rgba(0,0,0,.35),0 0 0 1px var(--line);display:none}
 .cx-fab.open .cx-chat{display:grid}
 .cx-chat-top{display:flex;justify-content:space-between;gap:1em;padding:1em 1.1em;background:var(--a);color:#fff}
 .cx-chat-top b{display:block}
@@ -211,7 +212,7 @@
 .cx-msg.me{background:var(--a);color:#fff;justify-self:end}
 .cx-msg a,.cx-msg span{display:flex;align-items:center;gap:.4em;margin-top:.5em;font-weight:600;color:var(--a)}
 .cx-chat-sug{display:flex;flex-wrap:wrap;gap:.4em;padding:0 1.1em 1.1em}
-.cx-chat-sug button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:.5em .85em;font-size:.88em;cursor:pointer}
+.cx-chat-sug button{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:.5em .85em;font-size:.88em;cursor:pointer}
 .cx-typing{display:inline-flex;gap:.3em;padding:.8em .9em;background:var(--soft);border-radius:1em;justify-self:start}
 .cx-typing i{width:.4em;height:.4em;border-radius:50%;background:var(--muted);animation:cx-blink 1s infinite}
 .cx-typing i:nth-child(2){animation-delay:.15s}.cx-typing i:nth-child(3){animation-delay:.3s}
@@ -232,7 +233,7 @@
 .cx-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));max-width:84em;margin:2.5em auto 0;padding:0 var(--pad)}
 .cx-stats div{display:grid;gap:.2em;padding:.4em 1.6em;border-left:1px solid var(--line)}
 .cx-stats div:first-child{border-left:0;padding-left:0}
-.cx-stats b{font:700 2.6em/1 "Red Hat Display",sans-serif;letter-spacing:-.03em;color:var(--a)}
+.cx-stats b{font:700 2.6em/1 var(--fh);letter-spacing:-.03em;color:var(--a)}
 .cx-stats span{color:var(--muted);font-size:.95em}
 
 /* precios */
@@ -248,44 +249,44 @@
 
 /* paquetes */
 .cx-offer-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(16em,1fr));gap:1.2em;align-items:stretch}
-.cx-offer{position:relative;display:grid;gap:.7em;align-content:start;padding:1.8em;border-radius:var(--r);background:#fff;box-shadow:0 0 0 1px var(--line)}
+.cx-offer{position:relative;display:grid;gap:.7em;align-content:start;padding:1.8em;border-radius:var(--r);background:var(--card);box-shadow:0 0 0 1px var(--line)}
 .cx-offer--hl{background:linear-gradient(160deg,var(--soft),var(--tint));box-shadow:0 0 0 2px var(--a)}
-.cx-offer em{justify-self:start;font-style:normal;font-size:.78em;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--a);background:#fff;padding:.35em .7em;border-radius:999px;box-shadow:inset 0 0 0 1px var(--tint)}
-.cx-offer b{font:600 1.3em/1.2 "Red Hat Display",sans-serif}
+.cx-offer em{justify-self:start;font-style:normal;font-size:.78em;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--a);background:var(--card);padding:.35em .7em;border-radius:999px;box-shadow:inset 0 0 0 1px var(--tint)}
+.cx-offer b{font:600 1.3em/1.2 var(--fh)}
 .cx-offer p{color:var(--muted);font-size:.95em}
 .cx-offer-p{display:flex;align-items:baseline;gap:.6em;margin:.4em 0 .6em}
 .cx-offer-p s{color:var(--muted)}
-.cx-offer-p strong{font:700 2em/1 "Red Hat Display",sans-serif}
+.cx-offer-p strong{font:700 2em/1 var(--fh)}
 .cx-offer .cx-btn{justify-self:start;margin-top:auto}
 
 /* asistente con IA */
-.cx-ai-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:3em;align-items:center;padding:3em;border-radius:2.2em;background:radial-gradient(120% 140% at 100% 0%,var(--tint),var(--soft) 55%,#fff)}
-.cx-kicker{display:inline-flex;align-items:center;gap:.45em;font-size:.82em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--a);background:#fff;padding:.45em .85em;border-radius:999px;box-shadow:inset 0 0 0 1px var(--tint);margin-bottom:1em}
+.cx-ai-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:3em;align-items:center;padding:3em;border-radius:2.2em;background:radial-gradient(120% 140% at 100% 0%,var(--tint),var(--soft) 55%,var(--bg))}
+.cx-kicker{display:inline-flex;align-items:center;gap:.45em;font-size:.82em;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--a);background:var(--card);padding:.45em .85em;border-radius:999px;box-shadow:inset 0 0 0 1px var(--tint);margin-bottom:1em}
 .cx-ai h2{font-size:2.3em;line-height:1.08;font-weight:700}
 .cx-ai-copy > p{color:var(--muted);margin:.8em 0 1.6em;font-size:1.05em}
 .cx-ai-try{display:flex;align-items:center;gap:.5em;color:var(--a);font-weight:600;font-size:.95em;margin-top:-.4em}
-.cx-phone{background:#fff;border-radius:1.8em;box-shadow:0 2em 4em -2em rgba(15,30,25,.45),0 0 0 1px var(--line);overflow:hidden;display:grid;grid-template-rows:auto 1fr auto;height:28em}
+.cx-phone{background:var(--card);border-radius:1.8em;box-shadow:0 2em 4em -2em rgba(15,30,25,.45),0 0 0 1px var(--line);overflow:hidden;display:grid;grid-template-rows:auto 1fr auto;height:28em}
 .cx-phone-top{display:flex;align-items:center;gap:.8em;padding:1em 1.2em;border-bottom:1px solid var(--line)}
 .cx-phone-top .cx-avatar{grid-row:auto;background:linear-gradient(135deg,var(--a),color-mix(in srgb,var(--a) 60%,#7c4dff))}
 .cx-phone-top b{display:block;font-size:.98em}
 .cx-phone-top small{color:var(--muted);font-size:.8em}
-.cx-phone-log{display:flex;flex-direction:column;gap:.6em;padding:1.1em;overflow-y:auto;scroll-behavior:smooth;background:linear-gradient(#fff,var(--soft))}
+.cx-phone-log{display:flex;flex-direction:column;gap:.6em;padding:1.1em;overflow-y:auto;scroll-behavior:smooth;background:linear-gradient(var(--card),var(--soft))}
 .cx-phone-log .cx-msg,.cx-chat-log .cx-msg{max-width:85%;line-height:1.45}
 .cx-msg.me{align-self:flex-end}
-.cx-msg:not(.me){align-self:flex-start;background:#fff;box-shadow:0 0 0 1px var(--line)}
+.cx-msg:not(.me){align-self:flex-start;background:var(--card);box-shadow:0 0 0 1px var(--line)}
 .cx-slots-chat{display:flex;flex-wrap:wrap;gap:.4em;margin-top:.6em}
-.cx-slots-chat button{border:1px solid var(--a);background:#fff;color:var(--a);border-radius:.6em;padding:.4em .7em;font-weight:600;font-size:.88em;cursor:pointer}
+.cx-slots-chat button{border:1px solid var(--a);background:var(--card);color:var(--a);border-radius:.6em;padding:.4em .7em;font-weight:600;font-size:.88em;cursor:pointer}
 .cx-slots-chat button:hover,.cx-slots-chat button.on{background:var(--a);color:#fff}
-.cx-msg .cx-ok{display:grid;gap:.15em;margin-top:.1em;padding:.7em .85em;border-radius:.8em;background:var(--soft);border:1px solid var(--tint);color:var(--ink);font-weight:500}
+.cx-msg .cx-ok{display:grid;gap:.15em;margin-top:.1em;padding:.7em .85em;border-radius:.8em;background:var(--soft);border:1px solid var(--tint);color:var(--fg);font-weight:500}
 .cx-ok small{color:var(--muted);font-weight:400;font-size:.85em}
 .cx-ok b{display:flex;align-items:center;gap:.4em;color:var(--a)}
 .cx-ok .cx-ico-s{stroke:var(--a)}
-.cx-ask{display:flex;gap:.5em;padding:.8em;border-top:1px solid var(--line);background:#fff}
+.cx-ask{display:flex;gap:.5em;padding:.8em;border-top:1px solid var(--line);background:var(--card)}
 .cx-ask input{flex:1;min-width:0;height:2.8em;border-radius:999px;border:1px solid var(--line);padding:0 1.1em;font:inherit;outline:none;background:var(--soft)}
 .cx-ask input:focus{border-color:var(--a)}
 .cx-ask button{width:2.8em;height:2.8em;border-radius:50%;border:0;background:var(--a);color:#fff;display:grid;place-items:center;cursor:pointer;flex:none}
 .cx-ask--chat{padding:.7em .9em}
-.cx-teaser{position:absolute;right:1.4em;bottom:4.6em;background:#fff;border-radius:1em 1em .3em 1em;padding:.8em 1em;box-shadow:0 1em 2em -1em rgba(0,0,0,.35),0 0 0 1px var(--line);font-weight:500;max-width:16em;cursor:pointer;animation:cx-pop .35s ease-out}
+.cx-teaser{position:absolute;right:1.4em;bottom:4.6em;background:var(--card);border-radius:1em 1em .3em 1em;padding:.8em 1em;box-shadow:0 1em 2em -1em rgba(0,0,0,.35),0 0 0 1px var(--line);font-weight:500;max-width:16em;cursor:pointer;animation:cx-pop .35s ease-out}
 @keyframes cx-pop{from{opacity:0;transform:translateY(.6em) scale(.96)}}
 
 /* tecnología */
@@ -331,6 +332,26 @@
   .cx-chat-btn .cx-ico-s{width:1.35em;height:1.35em}
   .cx-chat-l{display:none}
 }
+
+
+/* ---------- temas (page.theme) ---------- */
+.cx--dark{--fg:#ECF1EF;--muted:#A3AFAB;--line:#27332F;--bg:#0D1412;--card:#151F1C;--ink:#1B2724;color-scheme:dark}
+.cx--dark .cx-util{background:#060A09}
+.cx--dark .cx-brand img:not(.cx-logo-dark){background:#fff;border-radius:.5em;padding:.3em .55em;box-sizing:content-box}
+.cx--dark .cx-foot{background:#080D0C}
+.cx--dark .cx-stars{color:#F5B83A}
+.cx--dark .cx-btn--ghost,.cx--dark .cx-btn--line{background:transparent}
+.cx--dark .cx-chat-btn{background:var(--a)}
+.cx--dark .cx-msg.me{color:#fff}
+.cx--hero-rounded .cx-hero-img{border-radius:2em;aspect-ratio:4/4.3;box-shadow:1.2em 1.2em 0 var(--soft)}
+.cx--hero-square .cx-hero-img{border-radius:.35em;aspect-ratio:4/4.3;box-shadow:1.2em 1.2em 0 var(--tint)}
+.cx--sharp{--r:.5em}
+.cx--sharp .cx-panel,.cx--sharp .cx-prices-in,.cx--sharp .cx-ai-in,.cx--sharp .cx-visit-card,.cx--sharp .cx-map,.cx--sharp .cx-tech-img,.cx--sharp .cx-pay-in,.cx--sharp .cx-phone,.cx--sharp .cx-finder-out > div,.cx--sharp .cx-faq details{border-radius:.6em}
+.cx--sharp .cx-rating,.cx--sharp .cx-kicker,.cx--sharp .cx-pills em,.cx--sharp .cx-finder-opts button,.cx--sharp .cx-chips span,.cx--sharp .cx-ask input,.cx--sharp .cx-offer em{border-radius:.35em}
+.cx--btn-square .cx-btn,.cx--btn-square .cx-chat-btn,.cx--btn-square .cx-ask button{border-radius:.5em}
+.cx--btn-outline .cx-btn:not(.cx-btn--ghost):not(.cx-btn--line){background:transparent;background-image:none;color:var(--a)!important;box-shadow:inset 0 0 0 2px var(--a)}
+.cx--btn-outline .cx-btn:not(.cx-btn--ghost):not(.cx-btn--line):hover{background:var(--a);color:#fff!important}
+.cx--btn-outline .cx-book-in .cx-btn,.cx--btn-outline .cx-prices-in .cx-btn{color:#fff!important;box-shadow:inset 0 0 0 2px var(--a2)}
 
 /* tabletas */
 @container (max-width:980px){
@@ -381,6 +402,6 @@
   .cx-wa-fab{right:1em;width:3.2em;height:3.2em}
   .cx-chat-btn{right:5em}
   .cx-chat{right:1em}
-  .cx-sticky{display:flex;position:sticky;bottom:0;z-index:5;gap:.6em;padding:.8em var(--pad);background:rgba(255,255,255,.96);border-top:1px solid var(--line)}
+  .cx-sticky{display:flex;position:sticky;bottom:0;z-index:5;gap:.6em;padding:.8em var(--pad);background:color-mix(in srgb,var(--bg) 96%,transparent);border-top:1px solid var(--line)}
   .cx-sticky .cx-btn{flex:1}
 }
