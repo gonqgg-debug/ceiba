@@ -1310,7 +1310,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     // «Analizar mi página».
     goToForm({ site: r.host });
   });
-  radiogroup($('#ba-toggle'), b => { $('#hero-ba').dataset.show = b.dataset.v; });
+  if ($('#ba-toggle')) radiogroup($('#ba-toggle'), b => { $('#hero-ba').dataset.show = b.dataset.v; });
   $('#no-web').addEventListener('click', () => goToForm({ noweb: true }));
 
   /* ---------- example diagnostic ---------- */
