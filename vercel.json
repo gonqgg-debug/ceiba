@@ -39,6 +39,10 @@
     {
       "source": "/cuenta",
       "destination": "/cuenta.html"
+    },
+    {
+      "source": "/maqueta",
+      "destination": "/maqueta.html"
     }
   ],
   "redirects": [

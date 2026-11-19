@@ -139,6 +139,7 @@ pages = {
     "admin.html": fill("admin.html", {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBOLS}}"]}),
     "gracias.html": fill("gracias.html", {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBOLS}}"]}),
     "cuenta.html": fill("cuenta.html", {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBOLS}}"]}),
+    "maqueta.html": fill("maqueta.html", {"{{SYMBOLS}}": shared["{{SYMBOLS}}"]}),
 }
 # Vista previa en pantalla completa (/vista/[slug]): CSS de la portada nueva,
 # la plantilla como módulo para el navegador y los símbolos para el servidor.

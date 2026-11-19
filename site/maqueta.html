@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Maqueta · Ceiba Labs</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
+<style>
+:root{--ink:#0B1514;--ink-2:#13211F;--petrol:#103D37;--deep:#0C2E2A;--ivory:#F7F4EB;--paper:#FBFAF6;--lime:#D6FA52;--muted:#5C6865;--line:rgba(11,21,20,.1);--serif:"Instrument Serif",Georgia,serif;--sans:Geist,system-ui,sans-serif}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font:400 17px/1.55 var(--sans);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit}
+.wrap{width:min(1240px,100% - 32px);margin-inline:auto}
+.btn{display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 22px;border-radius:12px;font:500 16px var(--sans);text-decoration:none;cursor:pointer;border:0;transition:transform .2s,background .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn-ink{background:var(--ink);color:var(--ivory)}
+.btn-lime{background:var(--lime);color:var(--ink)}
+.btn-ghost{background:rgba(247,244,235,.08);color:var(--ivory);border:1px solid rgba(247,244,235,.35);backdrop-filter:blur(8px)}
+.link{display:inline-flex;align-items:center;gap:8px;font-weight:500;text-decoration:none;color:var(--ivory);height:50px;padding:0 18px;border-radius:12px;background:rgba(6,34,32,.35);backdrop-filter:blur(8px);border:1px solid rgba(247,244,235,.3)}
+.link span{transition:transform .2s}.link:hover span{transform:translateX(3px)}
+
+/* ---------- encabezado ---------- */
+.top{position:absolute;inset:0 0 auto;z-index:10}
+.top .wrap{display:flex;align-items:center;gap:36px;height:84px}
+.logo svg{height:24px;width:auto;display:block;color:var(--ivory);--logo-tree:var(--lime)}
+.nav{display:flex;gap:28px;font-size:15px;font-weight:500;color:rgba(247,244,235,.88)}
+.nav a{text-decoration:none}.nav a:hover{color:#fff}
+.top .acts{margin-left:auto;display:flex;gap:10px}
+.top .btn{height:42px;padding:0 18px;font-size:15px}
+
+/* ---------- hero ---------- */
+.hero{position:relative;isolation:isolate;min-height:max(900px,100svh);overflow:hidden;color:var(--ivory);background:#0E3A39}
+.hero-bg,.hero-front{position:absolute;inset:0;background:url(/img/maqueta-hero.jpg) 62% 72%/cover no-repeat}
+.hero-bg{z-index:-2}
+.hero-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 45% at 50% 30%,rgba(6,34,32,.55),transparent 75%),linear-gradient(180deg,rgba(8,40,38,.6),rgba(8,40,38,.25) 45%,transparent 62%)}
+.hero-front{z-index:2;pointer-events:none;-webkit-mask-image:linear-gradient(180deg,transparent 84%,#000 93%);mask-image:linear-gradient(180deg,transparent 84%,#000 93%)}
+.hero-copy{position:relative;z-index:3;text-align:center;padding-top:140px;display:grid;justify-items:center;gap:20px}
+.hero h1{margin:0;font:400 clamp(50px,6.6vw,96px)/.95 var(--serif);letter-spacing:-.025em;max-width:14ch;text-wrap:balance;text-shadow:0 2px 30px rgba(4,24,22,.35)}
+.hero h1 em{font-style:italic;color:var(--lime)}
+.hero .sub{margin:0;font-size:clamp(17px,1.5vw,20px);color:var(--ivory);max-width:44ch;text-shadow:0 1px 16px rgba(4,24,22,.6)}
+.hero .ctas{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:22px;margin-top:10px}
+/* panel del producto que sale del pasto */
+.stage{position:relative;z-index:1;width:min(980px,100% - 32px);margin:52px auto 0}
+.panel{border-radius:18px;background:var(--paper);color:var(--ink);box-shadow:0 60px 120px -40px rgba(4,24,22,.75),0 0 0 1px rgba(255,255,255,.4);overflow:hidden}
+.p-top{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);font-size:14px}
+.p-top .dots{display:flex;gap:6px}.p-top .dots i{width:9px;height:9px;border-radius:50%;background:#D7D3C8}
+.p-top small{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font:500 11px var(--sans);color:#0F5C4B}
+.p-top small::before{content:"";width:7px;height:7px;border-radius:50%;background:#1FAF7A;box-shadow:0 0 0 3px rgba(31,175,122,.2)}
+.p-body{display:grid;grid-template-columns:200px 1fr 260px;min-height:400px}
+.p-side{border-right:1px solid var(--line);padding:16px 12px;display:grid;align-content:start;gap:2px;font-size:14px;color:var(--muted)}
+.p-side b{font:500 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:#98A19E;padding:8px 10px 6px}
+.p-side span{padding:8px 10px;border-radius:8px}
+.p-side span.on{background:#EEF3EF;color:var(--ink);font-weight:500}
+.p-main{padding:18px 20px;display:grid;gap:12px;align-content:start;background:radial-gradient(circle,#E6E3DA 1px,transparent 1.4px) 0 0/18px 18px}
+.p-head{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:#fff;border:1px solid var(--line);font-size:14px}
+.p-head b{font-weight:600}.p-head em{font-style:normal;font:500 10px var(--sans);letter-spacing:.06em;color:#7A8582;background:#F1EFE8;padding:3px 6px;border-radius:5px}
+.p-head .pub{margin-left:auto;font-size:12px;font-weight:600;color:#fff;background:var(--ink);border-radius:8px;padding:6px 12px}
+.flow{display:grid;grid-template-columns:1fr 34px 1fr 34px 1fr;align-items:center;margin-top:16px}
+.node{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:grid;gap:4px;font-size:13px;box-shadow:0 10px 20px -16px rgba(11,21,20,.35)}
+.node b{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600}
+.node b i{width:18px;height:18px;border-radius:6px;display:grid;place-items:center;font-style:normal;font-size:10px;background:var(--ink);color:var(--lime)}
+.node span{color:var(--muted)}
+.flow hr{border:0;height:2px;background:repeating-linear-gradient(90deg,#B9C4C0 0 6px,transparent 6px 11px);margin:0}
+.node.hot{border-color:#0F5C4B;box-shadow:0 0 0 3px rgba(15,92,75,.12)}
+.chat-mini{margin-top:6px;display:grid;gap:6px;max-width:330px}
+.chat-mini p{margin:0;padding:8px 11px;border-radius:12px;font-size:13px;background:#fff;border:1px solid var(--line);justify-self:start}
+.chat-mini p.me{background:#E7F8D6;border-color:#CDEBB2;justify-self:end}
+.p-insp{border-left:1px solid var(--line);padding:16px;display:grid;gap:12px;align-content:start;font-size:13px}
+.p-insp h4{margin:0;display:flex;align-items:center;gap:8px;font-size:14px}
+.p-insp h4 i{width:22px;height:22px;border-radius:7px;background:#F6B740;display:grid;place-items:center;font-style:normal;font-size:11px}
+.field{border:1px solid var(--line);border-radius:10px;padding:9px 10px;color:var(--muted)}
+.kpi{display:grid;gap:2px;padding:10px;border-radius:10px;background:#F4F2EB}
+.kpi span{font-size:11px;color:var(--muted)}.kpi b{font:400 26px/1 var(--serif)}
+.tag-ok{justify-self:start;font-size:11px;font-weight:600;color:#0F5C4B;background:#E4F5EC;padding:4px 8px;border-radius:999px}
+/* rubros */
+.rubros{position:absolute;left:0;right:0;bottom:42px;z-index:4;display:flex;justify-content:center;flex-wrap:wrap;gap:12px 44px;font:400 26px var(--serif);color:rgba(247,244,235,.92);text-shadow:0 2px 20px rgba(0,0,0,.35)}
+.rubros span{display:inline-flex;align-items:center;gap:10px}
+.rubros svg{width:18px;fill:var(--lime)}
+
+/* ---------- servicios ---------- */
+.svc{padding:120px 0 140px}
+.k{display:inline-flex;align-items:center;gap:10px;font:500 14px var(--sans);color:var(--petrol)}
+.k::before{content:"";width:22px;height:2px;background:var(--lime);box-shadow:0 0 0 1px rgba(16,61,55,.15)}
+.svc-head{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:end;margin-top:22px}
+.svc h2{margin:0;font:400 clamp(44px,5.6vw,80px)/.98 var(--serif);letter-spacing:-.025em;max-width:12ch}
+.svc h2 em{font-style:italic;color:var(--petrol)}
+.svc-head p{margin:0;font-size:20px;line-height:1.5;color:#3E4A47;max-width:40ch;justify-self:end}
+.cards{display:grid;grid-template-columns:.75fr 1.25fr;gap:20px;margin-top:64px}
+.card{position:relative;isolation:isolate;overflow:hidden;border-radius:6px;min-height:520px;color:var(--ivory);background:var(--deep);display:grid;align-content:space-between}
+.card::before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(circle,rgba(247,244,235,.08) 1.2px,transparent 1.6px) 0 0/22px 22px}
+.card .grass{position:absolute;inset:auto 0 0;height:62%;z-index:-1;background:url(/img/maqueta-pasto.jpg) center bottom/cover no-repeat;-webkit-mask-image:linear-gradient(180deg,transparent,#000 45%);mask-image:linear-gradient(180deg,transparent,#000 45%)}
+.card .grass::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 15%,rgba(6,26,24,.5) 55%,rgba(6,26,24,.82))}
+.card .viz{padding:44px 40px 0;display:grid;place-items:center;min-height:260px}
+.card .txt{padding:0 40px 40px;text-align:center}
+.card h3{margin:0;font:400 40px/1.05 var(--serif);letter-spacing:-.015em;text-shadow:0 2px 20px rgba(0,0,0,.4)}
+.card p{margin:10px auto 0;font-size:16px;color:var(--ivory);max-width:40ch;text-shadow:0 1px 12px rgba(0,0,0,.5)}
+.card.wide{grid-column:1/-1;min-height:460px;grid-template-columns:1fr 1.2fr;align-content:stretch}
+.card.wide .txt{text-align:left;align-self:end;padding:40px}
+.card.wide .viz{align-self:center;padding:40px}
+/* visuales de las tarjetas */
+.orb{position:relative;width:240px;height:200px}
+.orb i{position:absolute;border-radius:50%;background:var(--paper);display:grid;place-items:center;box-shadow:0 20px 40px -20px rgba(0,0,0,.6)}
+.orb i:nth-of-type(1){width:104px;height:104px;left:20px;top:10px}
+.orb i:nth-of-type(2){width:78px;height:78px;right:30px;bottom:6px}
+.orb svg{width:40px;height:40px;stroke:var(--ink);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.orb i:nth-of-type(2) svg{width:30px;height:30px}
+.orb b{position:absolute;left:104px;top:96px;width:76px;height:3px;background:var(--paper);transform:rotate(38deg);transform-origin:left}
+.nodes{display:flex;align-items:center;gap:18px;width:100%}
+.nodes .n{flex:1;border:1px solid rgba(247,244,235,.22);border-radius:12px;background:rgba(9,30,28,.55);padding:12px 14px;display:grid;gap:6px;font-size:14px}
+.nodes .n b{display:flex;align-items:center;gap:8px;font-weight:600}
+.nodes .n b i{width:20px;height:20px;border-radius:6px;display:grid;place-items:center;font-style:normal;font-size:11px;background:var(--lime);color:var(--ink)}
+.nodes .n span{color:rgba(247,244,235,.75)}
+.nodes hr{flex:none;width:26px;border:0;height:2px;background:rgba(247,244,235,.4);margin:0}
+.nodes .n.cur{position:relative}
+.nodes .n.cur::after{content:"aprobado";position:absolute;right:-10px;bottom:-14px;font-size:12px;font-weight:600;color:var(--ink);background:var(--lime);padding:4px 10px;border-radius:999px}
+.chart{width:100%;display:grid;gap:10px}
+.chart b{font:400 30px var(--serif)}
+.chart small{font-size:14px;color:#9BE3B5}
+.chart svg{width:100%;height:150px;display:block;overflow:visible}
+.pin{font:600 13px var(--sans);fill:var(--ink)}
+@media (max-width:980px){
+  .nav{display:none}
+  .p-body{grid-template-columns:1fr}.p-side,.p-insp{display:none}
+  .svc-head,.cards,.card.wide{grid-template-columns:1fr}.svc-head p{justify-self:start}
+  .card.wide .txt{text-align:center}
+}
+@media (max-width:640px){
+  .top .acts .btn-ghost{display:none}
+  .hero{min-height:860px}.hero-copy{padding-top:130px}
+  .flow{grid-template-columns:1fr;gap:8px}.flow hr{display:none}
+  .rubros{font-size:17px;gap:6px 16px;bottom:22px;padding:0 16px}
+  .rubros svg{width:13px}
+  .top .btn{white-space:nowrap;padding:0 14px;font-size:14px}
+  .nodes{flex-direction:column;align-items:stretch}.nodes hr{display:none}
+  .card .viz,.card .txt,.card.wide .txt,.card.wide .viz{padding-inline:24px}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ceiba-logo" viewBox="0 0 353.37 54"><g transform="translate(0 0) scale(.68)" style="fill:var(--logo-tree,currentColor)"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></g><g transform="translate(80 42) scale(.054 -.054)"><path transform="translate(0 0)" d="M393 598Q306 598 260.0 533.0Q214 468 214 355Q214 241 256.5 178.5Q299 116 393 116Q437 116 480.5 126.0Q524 136 575 154V27Q528 8 482.0 -1.0Q436 -10 379 -10Q269 -10 197.5 35.5Q126 81 92.0 163.5Q58 246 58 356Q58 464 97.0 547.0Q136 630 210.5 677.0Q285 724 393 724Q446 724 499.5 710.5Q553 697 602 674L553 551Q513 570 472.5 584.0Q432 598 393 598Z"/><path transform="translate(622 0)" d="M303 556Q416 556 482.0 491.5Q548 427 548 308V236H196Q198 173 233.5 137.0Q269 101 332 101Q385 101 428.0 111.5Q471 122 517 144V29Q477 9 432.5 -0.5Q388 -10 325 -10Q243 -10 180.0 20.5Q117 51 81.0 113.0Q45 175 45 269Q45 365 77.5 428.5Q110 492 168.0 524.0Q226 556 303 556ZM304 450Q261 450 232.5 422.0Q204 394 199 335H408Q407 385 382.0 417.5Q357 450 304 450Z"/><path transform="translate(1198 0)" d="M153 760Q186 760 210.0 744.5Q234 729 234 687Q234 646 210.0 630.0Q186 614 153 614Q119 614 95.5 630.0Q72 646 72 687Q72 729 95.5 744.5Q119 760 153 760ZM227 546V0H78V546Z"/><path transform="translate(1488 0)" d="M227 583Q227 552 225.0 522.0Q223 492 221 475H227Q249 509 286.0 532.5Q323 556 382 556Q474 556 531.0 484.5Q588 413 588 274Q588 134 530.0 62.0Q472 -10 378 -10Q318 -10 283.5 11.5Q249 33 227 60H217L192 0H78V760H227ZM334 437Q276 437 252.5 401.0Q229 365 227 291V275Q227 196 250.5 153.5Q274 111 336 111Q382 111 409.0 153.5Q436 196 436 276Q436 356 408.5 396.5Q381 437 334 437Z"/><path transform="translate(2106 0)" d="M302 557Q412 557 470.5 509.5Q529 462 529 364V0H425L396 74H392Q357 30 318.0 10.0Q279 -10 211 -10Q138 -10 90.0 32.5Q42 75 42 163Q42 250 103.0 291.5Q164 333 286 337L381 340V364Q381 407 358.5 427.0Q336 447 296 447Q256 447 218.0 435.5Q180 424 142 407L93 508Q137 531 190.5 544.0Q244 557 302 557ZM323 251Q251 249 223.0 225.0Q195 201 195 162Q195 128 215.0 113.5Q235 99 267 99Q315 99 348.0 127.5Q381 156 381 208V253Z"/><path transform="translate(2942 0)" d="M97 0V714H187V80H499V0Z"/><path transform="translate(3451 0)" d="M288 545Q386 545 433.0 502.0Q480 459 480 365V0H416L399 76H395Q360 32 321.5 11.0Q283 -10 215 -10Q142 -10 94.0 28.5Q46 67 46 149Q46 229 109.0 272.5Q172 316 303 320L394 323V355Q394 422 365.0 448.0Q336 474 283 474Q241 474 203.0 461.5Q165 449 132 433L105 499Q140 518 188.0 531.5Q236 545 288 545ZM314 259Q214 255 175.5 227.0Q137 199 137 148Q137 103 164.5 82.0Q192 61 235 61Q303 61 348.0 98.5Q393 136 393 214V262Z"/><path transform="translate(3997 0)" d="M173 575Q173 541 171.5 511.5Q170 482 168 465H173Q196 499 236.0 522.0Q276 545 339 545Q439 545 499.5 475.5Q560 406 560 268Q560 130 499.0 60.0Q438 -10 339 -10Q276 -10 236.0 13.0Q196 36 173 68H166L148 0H85V760H173ZM324 472Q239 472 206.0 423.0Q173 374 173 271V267Q173 168 205.5 115.5Q238 63 326 63Q398 63 433.5 116.0Q469 169 469 269Q469 472 324 472Z"/><path transform="translate(4597 0)" d="M434 148Q434 70 376.0 30.0Q318 -10 220 -10Q164 -10 123.5 -1.0Q83 8 52 24V104Q84 88 129.5 74.5Q175 61 222 61Q289 61 319.0 82.5Q349 104 349 140Q349 160 338.0 176.0Q327 192 298.5 208.0Q270 224 217 244Q165 264 128.0 284.0Q91 304 71.0 332.0Q51 360 51 404Q51 472 106.5 509.0Q162 546 252 546Q301 546 343.5 536.5Q386 527 423 510L393 440Q359 454 322.0 464.0Q285 474 246 474Q192 474 163.5 456.5Q135 439 135 409Q135 387 148.0 371.5Q161 356 191.5 341.5Q222 327 273 307Q324 288 360.0 268.0Q396 248 415.0 219.5Q434 191 434 148Z"/></g></symbol>
+  <symbol id="wa" viewBox="0 0 24 24"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.9L2.3 21.8l4.8-1.3A9.8 9.8 0 1 0 12 2.2Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.7 7.2c.2-.4.4-.4.7-.4h.6c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .6l-.5.7c-.1.2-.2.4 0 .6.6 1.1 1.5 2 2.6 2.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.4 0 .5-.1 1.2-.6 1.6-.6.5-1.4.8-2.2.6-1.2-.3-2.6-.9-4-2.3s-2.1-2.9-2.3-4c-.2-.9.1-1.7.6-2.1Z" fill="currentColor"/></symbol>
+  <symbol id="lock" viewBox="0 0 12 12"><rect x="2" y="5" width="8" height="6" rx="1.5" fill="currentColor"/><path d="M4 5V3.6a2 2 0 0 1 4 0V5" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
+</svg>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Ceiba Labs"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
+    <nav class="nav"><a href="/webs">Páginas web</a><a href="/ia">Inteligencia artificial</a><a href="/webs#precios">Precios</a></nav>
+    <div class="acts"><a class="btn btn-ghost" href="/cuenta">Mi cuenta</a><a class="btn btn-lime" href="/#consultoria">Agendar consultoría</a></div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-copy wrap">
+    <h1>Implementamos la tecnología que hace <em>crecer</em> tu negocio.</h1>
+    <p class="sub">De tu página web a tu operación: lo construimos y lo dejamos funcionando.</p>
+    <div class="ctas"><a class="btn btn-ink" href="/#consultoria">Agendar una consultoría</a><a class="link" href="/webs">Revisar mi página web <span aria-hidden="true">→</span></a></div>
+  </div>
+  <div class="stage" aria-hidden="true">
+    <div class="panel">
+      <div class="p-top"><span class="dots"><i></i><i></i><i></i></span><b>Ceiba</b><span style="color:#98A19E">/ Tu negocio / Operación</span><small>En vivo</small></div>
+      <div class="p-body">
+        <div class="p-side"><b>Resumen</b><span class="on">Inicio</span><span>Página web</span><span>WhatsApp</span><span>Agentes</span><span>Reportes</span></div>
+        <div class="p-main">
+          <div class="p-head"><span>←</span><b>Nueva solicitud de cotización</b><em>AUTOMÁTICO</em><span class="pub">Aprobar</span></div>
+          <div class="flow">
+            <div class="node"><b><i>↘</i>Llega</b><span>Mensaje por WhatsApp</span></div><hr>
+            <div class="node hot"><b><i>✦</i>Agente de IA</b><span>Arma la cotización</span></div><hr>
+            <div class="node"><b><i>✓</i>Tu equipo</b><span>Revisa y aprueba</span></div>
+          </div>
+          <div class="chat-mini"><p class="me">¿Me cotizas 40 m² de piso para el sábado?</p><p>Claro. Te mando la cotización en un momento ✓</p></div>
+        </div>
+        <div class="p-insp"><h4><i>✦</i>Agente de cotizaciones</h4><div class="field">Lista de precios 2026 · Flete Zapopan</div><span class="tag-ok">Listo para aprobar</span><div class="kpi"><span>Cotizaciones esta semana</span><b>38</b></div><div class="kpi"><span>Tiempo de respuesta</span><b>2 min</b></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-front" aria-hidden="true"></div>
+  <div class="rubros" aria-label="Rubros">
+    <span><svg viewBox="0 0 100 72"><use href="#tree"/></svg>Clínicas</span><span><svg viewBox="0 0 100 72"><use href="#tree"/></svg>Restaurantes</span><span><svg viewBox="0 0 100 72"><use href="#tree"/></svg>Inmobiliarias</span><span><svg viewBox="0 0 100 72"><use href="#tree"/></svg>Tiendas</span><span><svg viewBox="0 0 100 72"><use href="#tree"/></svg>Despachos</span>
+  </div>
+</section>
+
+<section class="svc">
+  <div class="wrap">
+    <p class="k">Lo que hacemos</p>
+    <div class="svc-head">
+      <h2>Del sitio web a la operación, <em>todo conectado.</em></h2>
+      <p>Diseñamos lo que tus clientes ven y automatizamos cómo trabaja tu equipo, como un solo sistema.</p>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <div class="viz"><div class="orb"><i><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18M7 7h.01M10 7h.01"/></svg></i><b></b><i><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18ZM3.6 9h16.8M3.6 15h16.8M12 3c2.5 2.8 2.5 15.2 0 18M12 3c-2.5 2.8-2.5 15.2 0 18"/></svg></i></div></div>
+        <div class="grass" aria-hidden="true"></div>
+        <div class="txt"><h3>Páginas web</h3><p>Listas para Google y la IA, hechas para que agendar o pedir sea fácil desde el celular.</p></div>
+      </article>
+      <article class="card">
+        <div class="viz"><div class="nodes"><div class="n"><b><i>↘</i>Llega</b><span>Nuevo prospecto</span></div><hr><div class="n"><b><i>✦</i>Agente</b><span>Investiga y escribe</span></div><hr><div class="n cur"><b><i>✓</i>CRM</b><span>Seguimiento en 3 días</span></div></div></div>
+        <div class="grass" aria-hidden="true"></div>
+        <div class="txt"><h3>Agentes de IA</h3><p>Hacen el trabajo de un puesto completo: prospectan, procesan facturas y dan seguimiento. Tu equipo aprueba lo importante.</p></div>
+      </article>
+      <article class="card wide">
+        <div class="txt"><h3>Datos que te dicen qué hacer</h3><p style="margin-left:0">Cada mañana, un analista de IA te explica qué pasó en tu negocio y dónde está la oportunidad.</p></div>
+        <div class="viz"><div class="chart"><b>Ventas de la semana</b><small>+18% vs. la semana pasada</small>
+          <svg viewBox="0 0 600 150" preserveAspectRatio="none" aria-hidden="true"><path d="M0 120 C 80 112, 120 118, 180 100 S 300 92, 360 70 S 480 50, 600 22" fill="none" stroke="#F7F4EB" stroke-width="2.5"/><circle cx="430" cy="58" r="7" fill="#D6FA52"/><rect x="330" y="10" width="92" height="30" rx="15" fill="#F7F4EB"/><text x="376" y="30" text-anchor="middle" class="pin">$48,200</text></svg></div></div>
+        <div class="grass" aria-hidden="true" style="height:70%"></div>
+      </article>
+    </div>
+  </div>
+</section>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="tree" viewBox="0 0 100 72"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></symbol></svg>
+</body>
+</html>
