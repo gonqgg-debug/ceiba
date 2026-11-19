@@ -34,7 +34,7 @@ src/propuesta.html       Propuesta privada (plan + módulo, total, activar, agen
 src/webs-clinicas.html   Página de industria: Clínicas
 site/                    Sitio generado, listo para publicar
 site/img/                Fotos del concepto, generadas con Gamma
-brand/                   Logo y símbolo de Ceiba (petróleo, negro y lima)
+brand/                   Logo, símbolo y favicon de Ceiba (petróleo, negro y lima)
 build.py                 Arma site/ a partir de src/
 ```
 
@@ -42,6 +42,7 @@ build.py                 Arma site/ a partir de src/
 
 - Colores: verde casi negro `#0B1514`, petróleo `#103D37`, marfil `#F7F4EB` y lima `#D6FA52`. El lima se reserva para la acción principal y los estados interactivos.
 - Tipografías (Google Fonts): Funnel Display para titulares, Geist para el texto y Geist Mono para datos. La clínica del concepto usa Instrument Serif.
+- Favicon: `brand/ceiba-favicon.svg` (símbolo simplificado en lima sobre petróleo). En `site/` están `favicon.svg`, `favicon.ico` y `apple-touch-icon.png`, generados a partir de él; `brand/ceiba-icon-512.png` sirve para redes o el Dashboard de Stripe.
 - El logo se usa con su forma y proporciones originales. En el sitio va en línea con `fill="currentColor"`, para usarlo en marfil sobre fondo oscuro.
 
 ## Precios

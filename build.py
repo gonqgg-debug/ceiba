@@ -56,7 +56,11 @@ def fill(template, values):
 # src/home.html no trae <html>/<head> porque también se publica como Artifact,
 # que agrega su propio esqueleto. Para el sitio estático se lo ponemos aquí.
 index = ('<!doctype html>\n<html lang="es">\n<meta charset="utf-8">\n'
-         '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n' + home)
+         '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
+         '<link rel="icon" href="favicon.svg" type="image/svg+xml">\n'
+         '<link rel="icon" href="favicon.ico" sizes="32x32">\n'
+         '<link rel="apple-touch-icon" href="apple-touch-icon.png">\n'
+         '<meta name="theme-color" content="#0B1514">\n' + home)
 
 pages = {
     "index.html": index,
