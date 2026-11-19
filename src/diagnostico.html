@@ -224,7 +224,7 @@
       const list = checks.filter(c => (c.group || 'basico') === id);
       if (!list.length) return '';
       const miss = list.filter(c => c.status !== 'ok').length;
-      const meter = id === 'visibilidad' && d.seoScore != null ? `<div class="dg-score" style="--s:${d.seoScore}"><div><b>${d.seoScore}</b><span>/100</span></div><p>${d.seoScore >= 80 ? 'Buena base. Lo siguiente es contenido y reseñas.' : d.seoScore >= 50 ? 'Te encuentran a medias: hay datos que Google y la IA no pueden leer.' : 'Hoy es difícil que Google o la IA te recomienden.'} Todas nuestras páginas salen con esta base completa. Los planes Negocio y Avanzado incluyen además el análisis avanzado: probamos si ChatGPT, Gemini y Google te recomiendan.</p></div>` : '';
+      const meter = id === 'visibilidad' && d.seoScore != null ? `<div class="dg-score" style="--s:${d.seoScore}"><div><b>${d.seoScore}</b><span>/100</span></div><p>${d.seoScore >= 80 ? 'Buena base. Lo siguiente es contenido y reseñas.' : d.seoScore >= 50 ? 'Te encuentran a medias: hay datos que Google y la IA no pueden leer.' : 'Hoy es difícil que Google o la IA te recomienden.'} Todas nuestras páginas salen con esta base completa. El plan Negocio incluye además el análisis avanzado y una prueba real cada 3 meses de si ChatGPT, Gemini y Perplexity te recomiendan; el plan Avanzado lo mide y mejora cada mes.</p></div>` : '';
       return `<section aria-labelledby="g-${id}"><div class="dg-ghead"><h2 id="g-${id}">${title}</h2><span>${miss ? `${miss} de ${list.length} por mejorar` : 'Todo bien'}</span></div><p class="dg-gsub">${sub}</p>${meter}<ul class="dg-list">${list.map(item).join('')}</ul></section>`;
     }).join('');
     show('done'); openAsk();
