@@ -862,16 +862,14 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 }
 
 /* ---------- cinta ---------- */
-.ix-ticker{position:relative;z-index:2;margin-top:-5vw;padding:28px 0 clamp(40px,5vw,64px);display:grid;gap:6px;overflow:hidden;background:linear-gradient(180deg,transparent,var(--ink) 38%);-webkit-mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.ix-ticker{position:relative;z-index:2;margin-top:-4vw;padding:22px 0 clamp(32px,4vw,52px);overflow:hidden;background:linear-gradient(180deg,transparent,var(--ink) 40%);-webkit-mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
 .ix-ticker-row{overflow:hidden}
-.ix-ticker-row > div{display:flex;align-items:center;gap:clamp(18px,2.4vw,36px);width:max-content;padding-right:clamp(18px,2.4vw,36px);animation:ixMarq 60s linear infinite}
-.ix-ticker-row--out > div{animation-direction:reverse;animation-duration:70s}
+.ix-ticker-row > div{display:flex;align-items:center;gap:clamp(14px,1.8vw,26px);width:max-content;padding-right:clamp(14px,1.8vw,26px);animation:ixMarq 55s linear infinite}
 .ix-ticker:hover .ix-ticker-row > div{animation-play-state:paused}
-.ix-ticker span{font:700 clamp(34px,5.2vw,78px)/1.05 var(--f-display);letter-spacing:-.04em;white-space:nowrap;color:var(--ivory)}
-.ix-ticker-row--out span{color:transparent;-webkit-text-stroke:1.4px rgba(247,244,235,.55)}
-.ix-ticker-row--out span:hover{color:var(--lime);-webkit-text-stroke-color:var(--lime)}
-.ix-tree{flex:none;width:clamp(30px,3.6vw,54px);height:auto;fill:var(--lime);transform:translateY(4%)}
-.ix-ticker-row--out .ix-tree{fill:none;stroke:var(--lime);stroke-width:4;opacity:.8}
+.ix-ticker span{font:700 clamp(24px,3.1vw,44px)/1.1 var(--f-display);letter-spacing:-.035em;white-space:nowrap;color:var(--ivory);transition:color .25s,opacity .25s;cursor:default}
+.ix-ticker:hover span{opacity:.45}
+.ix-ticker span:hover{color:var(--lime);opacity:1}
+.ix-tree{flex:none;width:clamp(22px,2.3vw,34px);height:auto;fill:var(--lime);transform:translateY(4%)}
 @keyframes ixMarq{to{transform:translateX(-50%)}}
 
 /* ---------- aparición al hacer scroll ---------- */
@@ -1326,9 +1324,8 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   </div>
 </section>
 
-<div class="ix-ticker" aria-label="Lo que hacemos: Páginas web, Asistentes de WhatsApp, Agentes de IA, Automatización, Tableros, Análisis diario, SEO para la IA. Lo que cambia: Más clientes, Respuestas al momento, Menos captura a mano, Seguimiento sin olvidos, Decisiones con datos, Equipos que adoptan la IA.">
+<div class="ix-ticker" aria-label="Lo que hacemos: Páginas web, Asistentes de WhatsApp, Agentes de IA, Automatización, Tableros, Análisis diario, SEO para la IA.">
   <div class="ix-ticker-row" aria-hidden="true"><div><span>Páginas web</span><svg class="ix-tree" viewBox="0 0 100 72" aria-hidden="true"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></svg><span>Asistentes de WhatsApp</span><svg class="ix-tree" viewBox="0 0 100 72" aria-hidden="true"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></svg><span>Agentes de IA</span><svg class="ix-tree" viewBox="0 0 100 72" aria-hidden="true"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></svg><span>Automatización</span><svg class="ix-tree" viewBox="0 0 100 72" aria-hidden="true"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></svg><span>Tableros</span><svg class="ix-tree" viewBox="0 0 100 72" aria-hidden="true"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></svg><span>Análisis diario</span><svg class="ix-tree" viewBox="0 0 100 72" aria-hidden="true"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></svg><span>SEO para la IA</span><svg class="ix-tree" viewBox="0 0 100 72" aria-hidden="true"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></svg></div></div>
-  <div class="ix-ticker-row ix-ticker-row--out" aria-hidden="true"><div><span>Más clientes</span><svg class="ix-tree" viewBox="0 0 100 72" aria-hidden="true"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></svg><span>Respuestas al momento</span><svg class="ix-tree" viewBox="0 0 100 72" aria-hidden="true"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></svg><span>Menos captura a mano</span><svg class="ix-tree" viewBox="0 0 100 72" aria-hidden="true"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></svg><span>Seguimiento sin olvidos</span><svg class="ix-tree" viewBox="0 0 100 72" aria-hidden="true"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></svg><span>Decisiones con datos</span><svg class="ix-tree" viewBox="0 0 100 72" aria-hidden="true"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></svg><span>Equipos que adoptan la IA</span><svg class="ix-tree" viewBox="0 0 100 72" aria-hidden="true"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></svg></div></div>
 </div>
 
 <section class="band band--light section ix-shift" id="cambio" aria-labelledby="shift-title">
