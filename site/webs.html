@@ -740,19 +740,14 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       <div class="hero-copy">
         <p class="lede">Diseñamos, publicamos y mantenemos tu página por una mensualidad fija. Sale optimizada para Google y para la IA desde el primer día.</p>
         <ul class="ws-badges"><li>Optimizada para IA</li><li>SEO base incluido</li><li>Análisis de tu SEO gratis</li></ul>
-        <form class="audit" id="audit-form" novalidate>
-          <label for="audit-url" id="revisar">¿Ya tienes página? Analiza su SEO y su visibilidad en la IA</label>
+        <form class="audit" id="audit-form" novalidate aria-label="Analiza el SEO y la visibilidad en IA de tu página">
           <div class="field-url" id="audit-field">
             <div class="row"><span class="prefix" aria-hidden="true">https://</span>
-            <input id="audit-url" name="url" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com" aria-describedby="audit-help"></div>
+            <input id="audit-url" name="url" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com" aria-label="Dirección de tu página"></div>
             <button class="btn btn-primary" type="submit">Analizar gratis <span class="arrow" aria-hidden="true">→</span></button>
           </div>
-          <p class="hint" id="audit-help">Te damos un puntaje de 0 a 100, lo que falta y cómo quedaría tu página nueva. No te pedimos tu correo para empezar.</p>
           <div id="audit-out" aria-live="polite"></div>
         </form>
-        <div class="secondary-actions">
-          <button class="link" type="button" id="no-web">No tengo página todavía <span class="arrow" aria-hidden="true">→</span></button>
-        </div>
       </div>
       <div class="hero-visual">
         <div class="frame" aria-label="Ejemplo de rediseño de la página de una clínica dental ficticia">
@@ -944,7 +939,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       </ol>
     </div>
     <div class="ws-tiers">
-      <div><span>Gratis · todos los planes</span><b>SEO base y análisis rápido</b><p>Toda página sale optimizada para Google y la IA. Y cualquiera puede <a class="link" href="#revisar">analizar su portada gratis</a>: puntaje de 0 a 100, con lo que falta.</p></div>
+      <div><span>Gratis · todos los planes</span><b>SEO base y análisis rápido</b><p>Toda página sale optimizada para Google y la IA. Y cualquiera puede <a class="link" href="#audit-form">analizar su portada gratis</a>: puntaje de 0 a 100, con lo que falta.</p></div>
       <div><span>Plan Negocio</span><b>Análisis avanzado y prueba trimestral</b><p>Al lanzar revisamos todo tu sitio, la velocidad real en celular y tus datos en Google. Y cada 3 meses le hacemos 10 preguntas reales a ChatGPT, Gemini y Perplexity sobre negocios como el tuyo para ver si te recomiendan.</p></div>
       <div class="hl"><span>Plan Avanzado</span><b>Reporte y mejora cada mes</b><p>Cada mes: 20 preguntas a la IA (también a Claude), tus búsquedas en Google, clics, posiciones y competidores. Y aplicamos una mejora de SEO al mes, aparte de tus minutos de cambios.</p></div>
     </div>
@@ -1355,13 +1350,13 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     if (r.error) {
       auditField.classList.add('invalid'); auditInput.setAttribute('aria-invalid', 'true');
       auditOut.innerHTML = `<p class="err" id="audit-err"><span aria-hidden="true">!</span>${r.error}</p>`;
-      auditInput.setAttribute('aria-describedby', 'audit-err audit-help'); auditInput.focus(); return;
+      auditInput.setAttribute('aria-describedby', 'audit-err'); auditInput.focus(); return;
     }
-    auditInput.setAttribute('aria-describedby', 'audit-help');
+    auditInput.removeAttribute('aria-describedby');
     if (r.host === 'clinicaarrayan.mx') { auditOut.innerHTML = ''; openDiag(); return; }
     location.href = '/diagnostico?url=' + encodeURIComponent(r.host);
   });
-  $('#no-web').addEventListener('click', () => goToForm({ noweb: true }));
+  $('#no-web')?.addEventListener('click', () => goToForm({ noweb: true }));
 
   /* ---------- example diagnostic ---------- */
   const steps = [

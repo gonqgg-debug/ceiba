@@ -824,14 +824,12 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
         <h1 id="hero-title">Páginas web para <span class="soft">clínicas y consultorios.</span></h1>
       </div>
       <p class="lede">Para que tus pacientes vean tus tratamientos y agenden desde el celular, sin llamar. Y un asistente de WhatsApp que contesta cuando tu equipo está ocupado.</p>
-      <form class="audit" id="audit-form" novalidate>
-          <label for="audit-url" id="revisar">¿Ya tienes página? Analiza su SEO y su visibilidad en la IA</label>
+      <form class="audit" id="audit-form" novalidate aria-label="Analiza el SEO y la visibilidad en IA de tu página">
           <div class="field-url" id="audit-field">
             <div class="row"><span class="prefix" aria-hidden="true">https://</span>
-            <input id="audit-url" name="url" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com" aria-describedby="audit-help"></div>
+            <input id="audit-url" name="url" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com" aria-label="Dirección de tu página"></div>
             <button class="btn btn-primary" type="submit">Analizar gratis <span class="arrow" aria-hidden="true">→</span></button>
           </div>
-          <p class="hint" id="audit-help">Te damos un puntaje de 0 a 100, lo que falta y cómo quedaría tu página nueva. No te pedimos tu correo para empezar.</p>
           <div id="audit-out" aria-live="polite"></div>
         </form>
       <div class="secondary-actions">
@@ -1352,13 +1350,13 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     if (r.error) {
       auditField.classList.add('invalid'); auditInput.setAttribute('aria-invalid', 'true');
       auditOut.innerHTML = `<p class="err" id="audit-err"><span aria-hidden="true">!</span>${r.error}</p>`;
-      auditInput.setAttribute('aria-describedby', 'audit-err audit-help'); auditInput.focus(); return;
+      auditInput.setAttribute('aria-describedby', 'audit-err'); auditInput.focus(); return;
     }
-    auditInput.setAttribute('aria-describedby', 'audit-help');
+    auditInput.removeAttribute('aria-describedby');
     if (r.host === 'clinicaarrayan.mx') { auditOut.innerHTML = ''; openDiag(); return; }
     location.href = '/diagnostico?url=' + encodeURIComponent(r.host);
   });
-  $('#no-web').addEventListener('click', () => goToForm({ noweb: true }));
+  $('#no-web')?.addEventListener('click', () => goToForm({ noweb: true }));
 
   /* ---------- example diagnostic ---------- */
   const steps = [
