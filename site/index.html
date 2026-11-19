@@ -618,6 +618,10 @@ button{font:inherit;color:inherit}
 .success dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:15px;border-top:1px solid var(--line);padding-top:14px}
 .success dt{color:var(--muted)}
 .success dd{margin:0;word-break:break-word}
+.trap{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.form-err{font-size:15px;color:var(--error-d)}
+.done-when{font:600 clamp(22px,2.6vw,28px)/1.25 var(--f-display);letter-spacing:-.02em;color:var(--fg)!important}
+.done-when span{color:var(--lime)}
 
 /* footer */
 .footer{padding-block:48px;border-top:1px solid rgba(247,244,235,.1);font-size:14px;color:rgba(247,244,235,.6)}
@@ -1006,7 +1010,6 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       <p class="close-alt">¿Prefieres conversar primero? <a class="link" href="#" data-route="/contacto">Agendar una llamada</a></p>
     </div>
     <form class="form" id="lead-form" novalidate>
-      <p class="form-note"><b>Prototipo</b><span>Este formulario valida los datos, pero no los envía ni los guarda.</span></p>
       <div id="lead-fields" style="display:grid;gap:18px">
         <div class="seg seg--dark" role="radiogroup" aria-label="¿Tienes página web?" id="seg-mode">
           <button type="button" role="radio" data-v="web" aria-checked="true" tabindex="0">Ya tengo página</button>
@@ -1026,13 +1029,16 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
           <div class="fld" data-f="biz"><label for="f-biz">Nombre del negocio</label><input id="f-biz" name="biz" autocomplete="organization" aria-describedby="e-biz"><p class="err" id="e-biz" hidden></p></div>
         </div>
         <div class="fld" data-f="contact"><label for="f-contact">Tu WhatsApp o correo</label><input id="f-contact" name="contact" autocomplete="email" placeholder="+52 33 1234 5678 o tu@correo.com" aria-describedby="e-contact"><p class="err" id="e-contact" hidden></p></div>
-        <button class="btn btn-primary" type="submit">Quiero mi propuesta gratis <span class="arrow" aria-hidden="true">→</span></button>
+        <div class="trap" aria-hidden="true"><label for="f-company-url">No llenar</label><input id="f-company-url" name="company_url" tabindex="-1" autocomplete="off"></div>
+        <p class="form-err" id="lead-err" role="alert" hidden></p>
+        <button class="btn btn-primary" type="submit" id="lead-btn">Quiero mi propuesta gratis <span class="arrow" aria-hidden="true">→</span></button>
       </div>
       <div class="success" id="lead-success" hidden tabindex="-1">
-        <h3>Recibimos tus datos. (Es una prueba: no se envió.)</h3>
-        <p>En el sitio publicado, aquí te confirmaríamos que recibimos tus datos y te enviaríamos la propuesta. En esta prueba no se guarda nada.</p>
+        <h3>Listo, recibimos tu solicitud.</h3>
+        <p class="done-when" id="lead-when"></p>
+        <p id="lead-how"></p>
         <dl id="lead-summary"></dl>
-        <div style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn btn-primary" href="propuesta-clinica-arrayan.html">Ver cómo llega una propuesta <span class="arrow" aria-hidden="true">→</span></a><button class="btn btn-line" type="button" id="lead-reset">Editar los datos</button></div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px"><a class="btn btn-line" href="propuesta-clinica-arrayan.html">Ver una propuesta de ejemplo</a><button class="btn btn-line" type="button" id="lead-reset">Corregir mis datos</button></div>
       </div>
     </form>
   </div>
@@ -1327,12 +1333,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     }
     auditInput.setAttribute('aria-describedby', 'audit-help');
     if (r.host === 'clinicaarrayan.mx') { auditOut.innerHTML = ''; openDiag(); return; }
-    auditOut.innerHTML = `<div class="audit-result">
-      <h3>Recibimos <code>${esc(r.host)}</code></h3>
-      <p>El servicio de revisión automática no está conectado en este prototipo, así que no analizamos tu página ni mostramos resultados. En el sitio, este botón abre <code>/diagnostico</code> con tu resultado.</p>
-      <div class="actions"><button class="btn btn-primary" type="button" data-act="ask">Pedir la propuesta para ${esc(r.host)}</button><button class="btn btn-line" type="button" data-act="demo">Ver una revisión de ejemplo</button></div></div>`;
-    $('[data-act="ask"]', auditOut).addEventListener('click', () => goToForm({ site: r.host }));
-    $('[data-act="demo"]', auditOut).addEventListener('click', openDiag);
+    location.href = 'diagnostico.html?url=' + encodeURIComponent(r.host);
   });
   $('#no-web').addEventListener('click', () => goToForm({ noweb: true }));
 
@@ -1455,17 +1456,35 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     ['site', 'industry', 'city', 'social'].forEach(clearFld);
   }
   const modeGroup = radiogroup($('#seg-mode'), b => setMode(b.dataset.v));
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     const bad = activeFields().filter(n => !check(n));
     if (bad.length) { inputOf(bad[0]).focus(); return; }
     const v = id => $(id).value.trim();
-    const rows = mode === 'web'
-      ? [['Página', parseUrl(v('#f-site')).host]]
-      : [['Página', 'No tiene'], ['Rubro', v('#f-industry')], ['Ciudad', v('#f-city')], ['Perfil', v('#f-social')]];
-    rows.push(['Nombre', v('#f-name')], ['Negocio', v('#f-biz')], ['Contacto', v('#f-contact')]);
-    $('#lead-summary').innerHTML = rows.map(([k, val]) => `<dt>${k}</dt><dd>${esc(val)}</dd>`).join('');
-    $('#lead-fields').hidden = true; const ok = $('#lead-success'); ok.hidden = false; ok.focus();
+    const btn = $('#lead-btn'), ferr = $('#lead-err'), label = btn.firstChild.textContent;
+    btn.disabled = true; btn.firstChild.textContent = 'Enviando… '; ferr.hidden = true;
+    try {
+      const res = await fetch('/api/lead', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({
+        source: /clinicas/.test(location.pathname) ? 'clinicas' : 'home', mode,
+        site: v('#f-site'), industry: v('#f-industry'), city: v('#f-city'), social: v('#f-social'),
+        name: v('#f-name'), biz: v('#f-biz'), contact: v('#f-contact'), company_url: v('#f-company-url'),
+        utm: Object.fromEntries([...new URLSearchParams(location.search)].filter(([k]) => k.startsWith('utm_'))),
+      }) });
+      const d = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(d.error || '');
+      const rows = mode === 'web'
+        ? [['Página', parseUrl(v('#f-site')).host]]
+        : [['Página', 'No tiene'], ['Rubro', v('#f-industry')], ['Ciudad', v('#f-city')], ['Perfil', v('#f-social')]];
+      rows.push(['Nombre', v('#f-name')], ['Negocio', v('#f-biz')], ['Contacto', v('#f-contact')]);
+      $('#lead-summary').innerHTML = rows.map(([k, val]) => `<dt>${k}</dt><dd>${esc(val)}</dd>`).join('');
+      const first = v('#f-name').split(/\s+/)[0];
+      $('#lead-when').innerHTML = d.dueDay ? `${esc(first)}, te mandamos tu propuesta <span>${esc(d.dueDay)}</span>, ${esc(d.dueTime.replace(/\.$/, ''))}.` : '';
+      $('#lead-how').textContent = d.emailed ? 'Te enviamos un correo de confirmación. El enlace a tu propuesta llega a ese mismo correo.' : d.channel === 'email' ? 'Te mandamos el enlace a tu propuesta al correo que nos dejaste.' : 'Te mandamos el enlace a tu propuesta por WhatsApp, al número que nos dejaste.';
+      $('#lead-fields').hidden = true; const ok = $('#lead-success'); ok.hidden = false; ok.focus();
+    } catch (err) {
+      ferr.textContent = err.message || 'No pudimos enviar tu solicitud. Revisa tu conexión e intenta de nuevo.';
+      ferr.hidden = false;
+    } finally { btn.disabled = false; btn.firstChild.textContent = label; }
   });
   $('#lead-reset').addEventListener('click', () => { $('#lead-success').hidden = true; $('#lead-fields').hidden = false; inputOf(mode === 'web' ? 'site' : 'industry').focus(); });
 

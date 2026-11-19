@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Revisión de tu página · Ceiba Labs</title>
+<meta name="description" content="Revisamos tu página en segundos: celular, WhatsApp, botón para agendar, velocidad y cómo te ve Google.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0B1514">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+{{BASE_CSS}}
+.dg-head{padding-block:22px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.dg-head svg{height:24px;width:auto;color:var(--ivory);display:block}
+.dg-head .link{font-size:15px}
+.dg-top{padding-block:clamp(32px,6vw,72px) clamp(40px,6vw,72px);display:grid;gap:28px;max-width:860px}
+.dg-top h1{font-size:clamp(36px,5.4vw,64px);line-height:1;letter-spacing:-.035em;font-weight:700;overflow-wrap:anywhere}
+.dg-top h1:focus{outline:none}
+.dg-top h1 .soft{color:rgba(247,244,235,.55)}
+.dg-again{max-width:560px}
+.dg-wait{display:grid;gap:10px;list-style:none;margin:0;padding:0;font-size:16px;color:var(--muted)}
+.dg-wait li{display:grid;grid-template-columns:28px 1fr;align-items:center;transition:color .3s}
+.dg-wait li::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid rgba(247,244,235,.25)}
+.dg-wait li.on{color:var(--ivory)}
+.dg-wait li.on::before{border-color:var(--lime);border-right-color:transparent;animation:spin .8s linear infinite}
+.dg-wait li.done{color:var(--ivory)}
+.dg-wait li.done::before{border:0;background:var(--lime);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 7.5 5.5 11 12 3.5' fill='none' stroke='black' stroke-width='2.2'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M2 7.5 5.5 11 12 3.5' fill='none' stroke='black' stroke-width='2.2'/%3E%3C/svg%3E") center/contain no-repeat}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.dg-wait li.on::before{animation:none}}
+.dg-sum{display:flex;flex-wrap:wrap;gap:8px 28px;font:500 14px var(--f-mono);color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+.dg-sum b{color:var(--ivory);font-weight:500}
+.dg-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.dg-list li{display:grid;grid-template-columns:112px minmax(0,1fr);gap:4px 20px;padding:18px 0;border-bottom:1px solid var(--line)}
+.dg-list h3{font:600 17px/1.35 var(--f-body);grid-column:2}
+.dg-list p{grid-column:2;color:var(--muted);font-size:15px;max-width:64ch}
+.tag{grid-row:span 2;align-self:start;justify-self:start;font:500 12px/1 var(--f-mono);letter-spacing:.02em;padding:7px 9px;border-radius:6px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.tag--bad{color:var(--ink);background:var(--ivory);border-color:var(--ivory)}
+.tag--warn{color:var(--ivory);border-color:rgba(247,244,235,.5)}
+.dg-note{font-size:14px;color:var(--muted);max-width:64ch}
+.dg-off{border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:8px;background:var(--ink-2)}
+.dg-off p{color:var(--muted);font-size:15px}
+.dg-ask{padding-block:clamp(48px,7vw,96px)}
+.dg-ask-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:40px clamp(40px,6vw,96px);align-items:start}
+.dg-ask h2{font-size:clamp(34px,4.6vw,60px);line-height:1;letter-spacing:-.03em;font-weight:700;max-width:13ch}
+.dg-ask .lede{color:rgba(247,244,235,.82);margin-top:20px}
+.dg-get{margin:28px 0 0;padding:0;list-style:none;display:grid;gap:10px;color:rgba(247,244,235,.82);font-size:16px}
+.dg-get li{display:grid;grid-template-columns:28px 1fr}
+.dg-get span{font:500 13px/1.7 var(--f-mono);color:rgba(247,244,235,.5)}
+.trap{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.form-err{font-size:15px;color:var(--error-d)}
+.done-when{font:600 clamp(22px,2.6vw,28px)/1.25 var(--f-display);letter-spacing:-.02em}
+.done-when span{color:var(--lime)}
+.dg-foot{padding-block:24px;font-size:14px;color:rgba(247,244,235,.55);border-top:1px solid rgba(247,244,235,.1)}
+@media (max-width:820px){
+  .dg-ask-grid{grid-template-columns:1fr}
+  .dg-list li{grid-template-columns:1fr}
+  .dg-list h3,.dg-list p{grid-column:1}
+  .tag{grid-row:auto;margin-bottom:6px}
+  .frow{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body class="band">
+{{SYMBOLS}}
+<header class="wrap dg-head">
+  <a href="index.html" aria-label="Ceiba Labs, ir a Inicio"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
+  <a class="link" href="index.html#precios">Ver precios</a>
+</header>
+
+<main>
+  <section class="wrap dg-top" aria-live="polite" id="dg-top">
+    <!-- estado: pedir dirección -->
+    <div id="st-ask" hidden style="display:grid;gap:24px">
+      <h1>Revisamos tu página <span class="soft">en unos segundos.</span></h1>
+      <form class="audit dg-again" id="audit-form" novalidate>
+        <label for="audit-url">Escribe la dirección de tu página</label>
+        <div class="field-url" id="audit-field">
+          <div class="row"><span class="prefix" aria-hidden="true">https://</span>
+          <input id="audit-url" name="url" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com" aria-describedby="audit-help"></div>
+          <button class="btn btn-primary" type="submit">Revisar mi página <span class="arrow" aria-hidden="true">→</span></button>
+        </div>
+        <p class="hint" id="audit-help">Es gratis y no te pedimos tu correo para empezar.</p>
+        <p class="err" id="audit-err" hidden></p>
+      </form>
+    </div>
+
+    <!-- estado: revisando -->
+    <div id="st-wait" hidden style="display:grid;gap:24px">
+      <h1>Revisando <span class="soft" data-host></span></h1>
+      <ol class="dg-wait" id="wait-steps">
+        <li>Abrimos tu página como si fuéramos un cliente desde el celular</li>
+        <li>Buscamos cómo te pueden escribir, llamar o agendar</li>
+        <li>Medimos cuánto tarda en cargar</li>
+        <li>Vemos cómo te muestra Google</li>
+      </ol>
+    </div>
+
+    <!-- estado: resultado -->
+    <div id="st-done" hidden style="display:grid;gap:24px">
+      <h1 id="done-title"></h1>
+      <div class="dg-sum" id="done-sum"></div>
+      <ul class="dg-list" id="done-list"></ul>
+      <p class="dg-note">Es una revisión automática de la portada. En tu propuesta, una persona del equipo revisa tu página completa y te muestra cómo quedaría la nueva.</p>
+    </div>
+
+    <!-- estado: no se pudo abrir -->
+    <div id="st-off" hidden style="display:grid;gap:20px">
+      <h1>No pudimos revisar <span class="soft" data-host></span></h1>
+      <div class="dg-off"><b id="off-reason"></b><p>No pasa nada: igual podemos preparar tu propuesta. La revisamos a mano.</p></div>
+      <p><a class="link" href="diagnostico.html" id="off-retry">Probar con otra dirección</a></p>
+    </div>
+  </section>
+
+  <section class="band band--petrol dg-ask" id="pedir" aria-labelledby="ask-title" hidden>
+    <div class="wrap dg-ask-grid">
+      <div>
+        <h2 id="ask-title">Mira cómo quedaría tu nueva página.</h2>
+        <p class="lede">Te mandamos tu propuesta en <b>24 horas hábiles</b>, en un enlace privado. No tienes que pagar nada para verla.</p>
+        <ol class="dg-get">
+          <li><span>1</span>Tu portada nueva, en computadora y en celular.</li>
+          <li><span>2</span>Qué cambiamos y por qué, punto por punto.</li>
+          <li><span>3</span>El plan que te conviene, con el precio final en pesos.</li>
+        </ol>
+      </div>
+      <form class="form" id="ask-form" novalidate>
+        <div id="ask-fields" style="display:grid;gap:18px">
+          <div class="frow">
+            <div class="fld" data-f="name"><label for="f-name">Tu nombre</label><input id="f-name" name="name" autocomplete="name" aria-describedby="e-name"><p class="err" id="e-name" hidden></p></div>
+            <div class="fld" data-f="biz"><label for="f-biz">Nombre del negocio</label><input id="f-biz" name="biz" autocomplete="organization" aria-describedby="e-biz"><p class="err" id="e-biz" hidden></p></div>
+          </div>
+          <div class="fld" data-f="contact"><label for="f-contact">Tu WhatsApp o correo</label><input id="f-contact" name="contact" autocomplete="email" placeholder="+52 33 1234 5678 o tu@correo.com" aria-describedby="h-contact e-contact"><p class="hint" id="h-contact">Ahí te mandamos el enlace a tu propuesta.</p><p class="err" id="e-contact" hidden></p></div>
+          <div class="trap" aria-hidden="true"><label for="f-company-url">No llenar</label><input id="f-company-url" name="company_url" tabindex="-1" autocomplete="off"></div>
+          <p class="form-err" id="ask-err" role="alert" hidden></p>
+          <button class="btn btn-primary" type="submit" id="ask-btn">Quiero ver mi propuesta <span class="arrow" aria-hidden="true">→</span></button>
+        </div>
+        <div class="success" id="ask-ok" hidden tabindex="-1">
+          <h3>Listo, recibimos tu solicitud.</h3>
+          <p class="done-when" id="ok-when"></p>
+          <p id="ok-how"></p>
+          <p>Si quieres contarnos algo más, como qué no te gusta de tu página actual o qué servicios te importan más, escríbenos por WhatsApp y lo sumamos a tu propuesta.</p>
+          <div><a class="btn btn-line" href="propuesta-clinica-arrayan.html">Ver una propuesta de ejemplo</a></div>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+<footer class="wrap dg-foot">Ceiba Labs · Estudio digital para negocios de Latinoamérica</footer>
+
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const states = ['ask', 'wait', 'done', 'off'];
+  const show = s => states.forEach(k => $('#st-' + k).hidden = k !== s);
+  const params = new URLSearchParams(location.search);
+  const utm = Object.fromEntries([...params].filter(([k]) => k.startsWith('utm_')));
+  let audit = null, host = null;
+
+  function parseUrl(raw) {
+    let s = raw.trim();
+    if (!s) return { error: 'Escribe la dirección de tu página, por ejemplo tunegocio.com' };
+    if (/\s/.test(s)) return { error: 'La dirección no puede tener espacios. Revisa cómo la escribiste.' };
+    if (!/^https?:\/\//i.test(s)) s = 'https://' + s;
+    let u; try { u = new URL(s); } catch { return { error: 'Esa dirección no parece válida. Debe verse como tunegocio.com' }; }
+    const h = u.hostname.toLowerCase();
+    if (!/^([a-z0-9-]+\.)+[a-z]{2,}$/i.test(h)) return { error: 'Le falta el final, como .com o .com.mx' };
+    return { host: h.replace(/^www\./, '') };
+  }
+
+  /* ---------- revisión ---------- */
+  async function run(h) {
+    host = h; $$('[data-host]').forEach(el => el.textContent = h);
+    history.replaceState(null, '', '?url=' + encodeURIComponent(h) + location.hash);
+    show('wait'); $('#pedir').hidden = true;
+    const items = $$('#wait-steps li'); items.forEach(li => li.className = '');
+    let i = 0; const tick = () => { if (i > 0) items[i - 1].className = 'done'; if (i < items.length) items[i].className = 'on'; i++; };
+    tick(); const timer = setInterval(() => { if (i < items.length) tick(); }, reduce ? 400 : 1100);
+    const minWait = new Promise(r => setTimeout(r, reduce ? 300 : 2600)); // que se alcance a leer
+    let data;
+    try {
+      const res = await fetch('/api/analyze', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ url: h }) });
+      data = await res.json();
+      if (!res.ok) data = { reachable: false, reason: data.error || 'No pudimos revisar esa dirección.' };
+    } catch { data = { reachable: false, reason: 'La revisión automática no está disponible en este momento.' }; }
+    await minWait; clearInterval(timer);
+    audit = data; render(data);
+  }
+
+  const LABEL = { ok: 'Bien', warn: 'Mejorable', bad: 'Falta' };
+  function render(d) {
+    if (!d.reachable) { $('#off-reason').textContent = d.reason; show('off'); openAsk(); return; }
+    const order = { bad: 0, warn: 1, ok: 2 };
+    const checks = [...d.checks].sort((a, b) => order[a.status] - order[b.status]);
+    const fix = d.counts.bad + d.counts.warn;
+    $('#done-title').innerHTML = fix
+      ? `Encontramos ${fix} ${fix === 1 ? 'cosa' : 'cosas'} que te pueden estar costando clientes <span class="soft">en ${esc(d.host)}.</span>`
+      : `${esc(d.host)} cumple lo básico. <span class="soft">Ahora toca que te traiga más clientes.</span>`;
+    $('#done-sum').innerHTML = `<span><b>${d.counts.bad}</b> faltan</span><span><b>${d.counts.warn}</b> mejorables</span><span><b>${d.counts.ok}</b> bien</span><span>Tardó <b>${d.seconds}</b> s</span>`;
+    $('#done-list').innerHTML = checks.map(c => `<li><span class="tag tag--${c.status}">${LABEL[c.status]}</span><h3>${esc(c.label)}</h3><p>${esc(c.detail)}</p></li>`).join('');
+    show('done'); openAsk();
+    $('#done-title').setAttribute('tabindex', '-1'); $('#done-title').focus({ preventScroll: true });
+  }
+  function openAsk() {
+    $('#pedir').hidden = false;
+    $('#ask-title').textContent = host ? `Mira cómo quedaría la nueva página de ${host}.` : 'Mira cómo quedaría tu nueva página.';
+  }
+
+  /* ---------- pedir otra dirección ---------- */
+  const form = $('#audit-form'), input = $('#audit-url'), err = $('#audit-err');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const r = parseUrl(input.value);
+    if (r.error) { err.innerHTML = `<span aria-hidden="true">!</span>${esc(r.error)}`; err.hidden = false; $('#audit-field').classList.add('invalid'); input.setAttribute('aria-invalid', 'true'); input.focus(); return; }
+    err.hidden = true; $('#audit-field').classList.remove('invalid'); input.removeAttribute('aria-invalid');
+    run(r.host);
+  });
+  $('#off-retry').addEventListener('click', e => { e.preventDefault(); show('ask'); $('#pedir').hidden = true; input.value = ''; input.focus(); });
+
+  /* ---------- solicitud de propuesta ---------- */
+  const rules = {
+    name: v => v.trim().length >= 2 || 'Escribe tu nombre para saber a quién contactar.',
+    biz: v => v.trim().length >= 2 || 'Escribe el nombre de tu negocio.',
+    contact: v => {
+      const s = v.trim();
+      if (!s) return 'Déjanos un WhatsApp o un correo para enviarte la propuesta.';
+      if (s.includes('@')) return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s) || 'Revisa el correo: debe verse como nombre@dominio.com.';
+      const d = s.replace(/\D/g, '');
+      return (/^[+\d\s().-]+$/.test(s) && d.length >= 8 && d.length <= 15) || 'Revisa el número. Escríbelo con lada, por ejemplo 33 1234 5678';
+    }
+  };
+  const fld = n => $(`[data-f="${n}"]`), inp = n => $('input', fld(n));
+  function check(n, msg) {
+    const res = msg ?? rules[n](inp(n).value), ok = res === true;
+    fld(n).classList.toggle('invalid', !ok); fld(n).classList.toggle('valid', ok);
+    inp(n).setAttribute('aria-invalid', !ok); const e = $('.err', fld(n)); e.hidden = ok; e.textContent = ok ? '' : res;
+    return ok;
+  }
+  Object.keys(rules).forEach(n => {
+    inp(n).addEventListener('blur', () => { if (inp(n).value.trim()) check(n); });
+    inp(n).addEventListener('input', () => { if (fld(n).classList.contains('invalid')) check(n); });
+  });
+  $('#ask-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const bad = Object.keys(rules).filter(n => !check(n));
+    if (bad.length) { inp(bad[0]).focus(); return; }
+    const btn = $('#ask-btn'), ferr = $('#ask-err');
+    btn.disabled = true; btn.firstChild.textContent = 'Enviando… '; ferr.hidden = true;
+    try {
+      const res = await fetch('/api/lead', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({
+        source: 'diagnostico', mode: 'web', site: host, name: inp('name').value, biz: inp('biz').value, contact: inp('contact').value,
+        company_url: $('#f-company-url').value, audit, utm,
+      }) });
+      const d = await res.json();
+      if (!res.ok) {
+        if (d.fields) Object.entries(d.fields).forEach(([k, m]) => fld(k) && check(k, m));
+        throw new Error(d.error);
+      }
+      const first = inp('name').value.trim().split(/\s+/)[0];
+      $('#ok-when').innerHTML = d.dueDay ? `${esc(first)}, te mandamos tu propuesta <span>${esc(d.dueDay)}</span>, ${esc(d.dueTime.replace(/\.$/, ''))}.` : '';
+      $('#ok-how').textContent = d.emailed ? 'Te enviamos un correo de confirmación. El enlace a tu propuesta llega a ese mismo correo.' : d.channel === 'email' ? 'Te mandamos el enlace a tu propuesta al correo que nos dejaste.' : 'Te mandamos el enlace a tu propuesta por WhatsApp, al número que nos dejaste.';
+      $('#ask-fields').hidden = true; const ok = $('#ask-ok'); ok.hidden = false; ok.focus();
+    } catch (err) {
+      ferr.textContent = err.message && !/fetch|JSON/i.test(err.message) ? err.message : 'No pudimos enviar tu solicitud. Revisa tu conexión e intenta de nuevo.';
+      ferr.hidden = false;
+    } finally { btn.disabled = false; btn.firstChild.textContent = 'Quiero ver mi propuesta '; }
+  });
+
+  /* ---------- inicio ---------- */
+  const start = parseUrl(params.get('url') || '');
+  if (start.host) run(start.host); else { show('ask'); input.focus(); }
+})();
+</script>
+</body>
+</html>

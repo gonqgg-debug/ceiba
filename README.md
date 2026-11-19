@@ -7,6 +7,7 @@ Prototipo en alta fidelidad del sitio de Ceiba Labs, estudio digital para negoci
 | Inicio | `site/index.html` | `/` |
 | Webs para clínicas | `site/webs-clinicas.html` | `/webs/clinicas` |
 | Propuesta privada de ejemplo | `site/propuesta-clinica-arrayan.html` | `/p/[negocio]` |
+| Revisión de tu página | `site/diagnostico.html` | `/diagnostico` |
 
 Clínica Dental Arrayán y la Dra. Valeria Ríos son ficticias. Sirven como concepto de rediseño y la página lo indica.
 
@@ -59,11 +60,36 @@ Son precios de lanzamiento para probar en México, en MXN. Son el precio final: 
 
 ## Qué es prototipo y qué no
 
-- **Revisión de URL:** valida la dirección, pero el servicio de auditoría no está conectado. No muestra resultados para URLs reales. Si escribes `clinicaarrayan.mx`, abre el diagnóstico de ejemplo.
-- **Formularios:** el de diagnóstico y la agenda de 15 minutos validan los datos, pero no envían nada.
+- **Revisión de URL:** funciona (ver «Embudo»). `clinicaarrayan.mx` sigue abriendo la revisión de ejemplo.
+- **Formularios:** el de propuesta gratis guarda en Supabase y avisa por correo. La agenda de 15 minutos de la propuesta todavía no envía nada.
 - **Activación:** con el servidor (`api/`) corriendo, «Activar mi web» abre Stripe Checkout (ver «Pagos con Stripe»). En una vista estática sin servidor muestra un aviso y no cobra.
 - **Páginas del sitemap sin construir:** `/ia`, `/precios`, `/trabajo`, `/nosotros`, `/contacto`, las demás industrias y las páginas legales. Sus enlaces muestran un aviso con la ruta.
 - **Archivos planos:** las páginas están en archivos planos dentro de `site/`. Para usar las rutas definitivas (`/webs/clinicas`, `/p/[negocio]`), hay que ajustar los enlaces relativos y las rutas de `img/`.
+
+## Embudo: de la dirección a la propuesta
+
+```
+Cliente escribe su dirección en Inicio
+  └─ /diagnostico?url=… → POST /api/analyze (revisión automática, no guarda nada)
+        celular, WhatsApp, llamar, agendar, velocidad, Google, mapa, año del pie, reseñas
+  └─ «Quiero ver mi propuesta» → POST /api/lead
+        guarda en Supabase (tabla leads) con fecha de entrega = 24 horas hábiles
+        avisa al equipo por correo y confirma al cliente si dejó correo
+Equipo arma la propuesta (borrador con IA + revisión) → /p/[negocio]
+```
+
+- **24 horas hábiles:** de lunes a viernes, sin feriados de México, en hora del centro. Si la solicitud llega fuera de 9:00 a 19:00, se cuenta desde las 9:00 del siguiente día hábil (`lib/business-hours.js`; actualizar los feriados cada año).
+- **Base de datos:** proyecto de Supabase `ceiba`, esquema en `supabase/migrations/0001_embudo.sql` (`leads`, `proposals`, `proposal_views`). RLS activado sin políticas: solo el servidor, con la service_role key, lee y escribe.
+- **Si falla algo:** si no se guarda en Supabase pero sale el correo (o al revés), la solicitud cuenta como recibida. Si fallan los dos, el cliente ve un error y se le pide escribir por WhatsApp.
+- **Seguridad de la revisión:** solo abre direcciones públicas (bloquea IPs privadas y redirecciones a ellas), máximo 2 MB y 9 segundos.
+
+| Archivo | Qué hace |
+|---|---|
+| `api/analyze.js` | Revisión automática de la portada |
+| `api/lead.js` | Valida, guarda y avisa |
+| `lib/db.js` | Supabase por REST |
+| `lib/notify.js` | Correos con Resend |
+| `lib/business-hours.js` | Fecha de entrega |
 
 ## Pagos con Stripe
 
