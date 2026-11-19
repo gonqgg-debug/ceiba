@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Panel · Ceiba Labs</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+{{BASE_CSS}}
+body{font-size:15px}
+.a-head{display:flex;align-items:center;gap:16px;padding:16px var(--gut);border-bottom:1px solid rgba(247,244,235,.1)}
+.a-head svg{height:20px;width:auto;color:var(--ivory)}
+.a-head .crumb{color:var(--muted);font-size:14px}
+.a-head .sp{flex:1}
+.a-main{padding:24px var(--gut) 64px;max-width:1500px;margin:0 auto}
+.a-main h1{font-size:28px;letter-spacing:-.02em;margin-bottom:16px}
+.a-login{max-width:420px;margin:12vh auto;display:grid;gap:14px}
+.btn-s{height:38px;padding:0 14px;font-size:14px;border-radius:8px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font:500 12px var(--f-mono);color:var(--muted);padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:12px 10px;border-bottom:1px solid rgba(247,244,235,.08);vertical-align:top}
+tr.row{cursor:pointer}
+tr.row:hover td{background:rgba(247,244,235,.03)}
+td small{display:block;color:var(--muted);font-size:13px}
+.st{display:inline-block;font:500 12px/1 var(--f-mono);padding:6px 8px;border-radius:6px;border:1px solid var(--line);white-space:nowrap}
+.st--hot{background:var(--lime);color:var(--ink);border-color:var(--lime)}
+.st--warn{border-color:var(--error-d);color:var(--error-d)}
+.late{color:var(--error-d)}
+.empty{color:var(--muted);padding:40px 0}
+.d-top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-bottom:18px}
+.d-top h1{margin:0}
+.d-grid{display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);gap:24px;align-items:start}
+.panel{background:var(--ink-2);border:1px solid rgba(247,244,235,.1);border-radius:14px;padding:18px;display:grid;gap:14px}
+.panel h2{font-size:16px;font-family:var(--f-body);font-weight:600}
+.kv{display:grid;grid-template-columns:110px 1fr;gap:6px 12px;font-size:14px}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;overflow-wrap:anywhere}
+.notes{white-space:pre-wrap;font-size:14px;color:rgba(247,244,235,.85);background:rgba(214,250,82,.06);border:1px solid rgba(214,250,82,.2);border-radius:10px;padding:12px;max-height:260px;overflow:auto}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+textarea.json{width:100%;min-height:420px;font:400 12.5px/1.5 var(--f-mono);background:var(--ink);color:var(--ivory);border:1px solid rgba(247,244,235,.18);border-radius:10px;padding:12px;resize:vertical;tab-size:2}
+.acts{display:flex;flex-wrap:wrap;gap:8px}
+.msg{font-size:14px}
+.msg.err{color:var(--error-d)}
+.msg.ok{color:var(--lime)}
+.prev{position:sticky;top:16px;display:grid;gap:10px}
+.prev-bar{display:flex;gap:8px;align-items:center}
+.prev-bar .sp{flex:1}
+.frame-wrap{background:#fff;border-radius:12px;overflow:hidden;height:calc(100vh - 140px);display:flex;justify-content:center;border:1px solid rgba(247,244,235,.1)}
+.frame-wrap iframe{border:0;width:100%;height:100%;background:#fff;transition:width .3s}
+.frame-wrap.mob iframe{width:390px;border-left:1px solid #ddd;border-right:1px solid #ddd}
+.sent{border:1px solid rgba(214,250,82,.4);background:rgba(214,250,82,.06);border-radius:12px;padding:14px;display:grid;gap:10px;font-size:14px}
+.sent textarea{width:100%;min-height:110px;background:var(--ink);color:var(--ivory);border:1px solid var(--line);border-radius:8px;padding:10px;font:14px/1.5 var(--f-body)}
+@media (max-width:1000px){.d-grid{grid-template-columns:1fr}.prev{position:static}.frame-wrap{height:80vh}}
+</style>
+</head>
+<body class="band">
+{{SYMBOLS}}
+<header class="a-head">
+  <a href="/" aria-label="Ceiba Labs"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
+  <span class="crumb">Panel de propuestas</span><span class="sp"></span>
+  <button class="btn btn-line btn-s" type="button" id="logout" hidden>Salir</button>
+</header>
+<main class="a-main" id="app" aria-live="polite"></main>
+
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const app = $('#app');
+  const api = async (method, body, qs = '') => {
+    const res = await fetch('/api/admin' + qs, { method, headers: body ? { 'content-type': 'application/json' } : {}, body: body ? JSON.stringify(body) : undefined });
+    const d = await res.json().catch(() => ({ error: 'Respuesta inválida del servidor.' }));
+    if (res.status === 401 && body?.action !== 'login') { login(); throw new Error('Sesión vencida'); }
+    if (!res.ok) throw new Error(d.error || 'Error');
+    return d;
+  };
+  const fmt = iso => iso ? new Intl.DateTimeFormat('es-MX', { timeZone: 'America/Mexico_City', day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' }).format(new Date(iso)) : '—';
+  const LEAD = { nuevo: 'Nueva', generando: 'Armando borrador', en_revision: 'Por revisar', propuesta_enviada: 'Enviada', descartado: 'Descartada', error: 'Error' };
+  const PROP = { borrador: 'Borrador', enviada: 'Enviada', vista: 'La vio', activada: 'Pagó', vencida: 'Vencida', descartada: 'Descartada' };
+
+  function login() {
+    $('#logout').hidden = true;
+    app.innerHTML = `<form class="a-login form" id="lf"><h1>Entrar al panel</h1>
+      <div class="fld"><label for="tk">Token del equipo</label><input id="tk" type="password" autocomplete="current-password" required></div>
+      <p class="msg err" id="lerr" hidden></p><button class="btn btn-primary" type="submit">Entrar</button>
+      <p class="hint">Es el valor de CEIBA_ADMIN_TOKEN en Vercel.</p></form>`;
+    $('#tk').focus();
+    $('#lf').addEventListener('submit', async e => {
+      e.preventDefault();
+      try { await api('POST', { action: 'login', token: $('#tk').value }); route(); }
+      catch (err) { $('#lerr').textContent = err.message; $('#lerr').hidden = false; }
+    });
+  }
+
+  async function list() {
+    app.innerHTML = '<p class="empty">Cargando…</p>';
+    const { leads } = await api('GET', null, '?action=list');
+    $('#logout').hidden = false;
+    const now = Date.now();
+    const rows = leads.map(l => {
+      const p = l.proposal, views = p?.views?.[0]?.count || 0;
+      const late = ['nuevo', 'generando', 'en_revision', 'error'].includes(l.status) && Date.parse(l.due_at) < now;
+      const hot = l.status === 'en_revision';
+      return `<tr class="row" data-slug="${esc(p?.slug || '')}" tabindex="0">
+        <td>${fmt(l.created_at)}<small>${esc(l.source)}</small></td>
+        <td><b>${esc(l.business)}</b><small>${esc(l.name)}</small></td>
+        <td>${l.site_host ? esc(l.site_host) : '<small>Sin página</small>'}</td>
+        <td>${esc(l.contact)}<small>${l.contact_type === 'email' ? 'correo' : 'WhatsApp'}</small></td>
+        <td><span class="st ${hot ? 'st--hot' : l.status === 'error' ? 'st--warn' : ''}">${LEAD[l.status] || l.status}</span>${l.notes && l.status === 'error' ? `<small>${esc(l.notes).slice(0, 80)}</small>` : ''}</td>
+        <td class="${late ? 'late' : ''}">${['propuesta_enviada', 'descartado'].includes(l.status) ? '—' : fmt(l.due_at)}</td>
+        <td>${p ? `<span class="st">${PROP[p.status] || p.status}</span><small>${views} visita${views === 1 ? '' : 's'}${p.valid_until ? ` · vence ${esc(p.valid_until)}` : ''}</small>` : '<small>Sin borrador</small>'}</td></tr>`;
+    }).join('');
+    app.innerHTML = `<h1>Solicitudes</h1>${leads.length ? `<div style="overflow-x:auto"><table><thead><tr><th>Llegó</th><th>Negocio</th><th>Página</th><th>Contacto</th><th>Estado</th><th>Entregar antes de</th><th>Propuesta</th></tr></thead><tbody>${rows}</tbody></table></div>` : '<p class="empty">Todavía no hay solicitudes.</p>'}`;
+    app.querySelectorAll('tr.row').forEach(tr => {
+      const go = () => { if (tr.dataset.slug) location.hash = tr.dataset.slug; };
+      tr.addEventListener('click', go); tr.addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
+    });
+  }
+
+  async function detail(slug) {
+    app.innerHTML = '<p class="empty">Cargando…</p>';
+    const { proposal: p } = await api('GET', null, `?action=get&slug=${encodeURIComponent(slug)}`);
+    $('#logout').hidden = false;
+    const lead = p.leads?.[0] || {};
+    const content = p.content || p.ai_draft || {};
+    const sent = ['enviada', 'vista', 'activada'].includes(p.status);
+    app.innerHTML = `
+      <div class="d-top"><a class="link" href="#">← Solicitudes</a><h1>${esc(p.business)}</h1><span class="st ${p.status === 'borrador' ? 'st--hot' : ''}">${PROP[p.status] || p.status}</span>${p.content ? '' : '<span class="st">Sin revisar</span>'}</div>
+      <div class="d-grid">
+        <div style="display:grid;gap:16px">
+          <section class="panel"><h2>Solicitud</h2><dl class="kv">
+            <dt>Contacto</dt><dd>${esc(lead.name)} · ${esc(lead.contact)}</dd>
+            <dt>Página</dt><dd>${lead.site_host ? `<a class="link" href="https://${esc(lead.site_host)}" target="_blank" rel="noopener">${esc(lead.site_host)}</a>` : 'No tiene'}</dd>
+            ${lead.industry ? `<dt>Rubro</dt><dd>${esc(lead.industry)} · ${esc(lead.city)}</dd>` : ''}${lead.social ? `<dt>Perfil</dt><dd>${esc(lead.social)}</dd>` : ''}
+            <dt>Entregar</dt><dd>${fmt(lead.due_at)}</dd>
+            ${p.valid_until ? `<dt>Vigencia</dt><dd>hasta ${esc(p.valid_until)}</dd>` : ''}
+          </dl></section>
+          ${p.notes ? `<section class="panel"><h2>Notas del borrador</h2><div class="notes">${esc(p.notes)}</div></section>` : ''}
+          <section class="panel"><h2>Ajustes</h2>
+            <div class="fld"><label for="f-biz">Nombre del negocio</label><input id="f-biz" value="${esc(p.business)}"></div>
+            <div class="row2">
+              <div class="fld"><label for="f-plan">Plan recomendado</label><select id="f-plan">${['esencial', 'negocio', 'avanzado'].map(x => `<option value="${x}"${x === p.recommended_plan ? ' selected' : ''}>${x[0].toUpperCase() + x.slice(1)}</option>`).join('')}</select></div>
+              <div class="fld"><label for="f-days">Vigencia (días)</label><input id="f-days" type="number" min="3" max="30" value="14"></div>
+            </div>
+            <label class="check"><input type="checkbox" id="f-wa"${p.whatsapp_recommended ? ' checked' : ''}>Recomendar el Asistente de WhatsApp</label>
+            <div class="fld"><label for="f-json">Contenido (JSON) <span>· textos, fotos y cambios. Esquema en ops/esquema-propuesta.md</span></label><textarea class="json" id="f-json" spellcheck="false">${esc(JSON.stringify(content, null, 2))}</textarea></div>
+            <p class="msg" id="msg" role="status"></p>
+            <div class="acts">
+              <button class="btn btn-line btn-s" type="button" id="save">Guardar y actualizar vista</button>
+              <button class="btn btn-primary btn-s" type="button" id="approve">${sent ? 'Reenviar con estos cambios' : 'Aprobar y enviar'}</button>
+              <button class="btn btn-line btn-s" type="button" id="discard">Descartar</button>
+            </div>
+            <div id="sent"></div>
+          </section>
+        </div>
+        <div class="prev">
+          <div class="prev-bar"><div class="seg seg--dark" role="radiogroup" aria-label="Pantalla"><button type="button" role="radio" aria-checked="true" data-w="desk">Computadora</button><button type="button" role="radio" aria-checked="false" data-w="mob">Celular</button></div><span class="sp"></span>
+            <a class="btn btn-line btn-s" href="/vista/${esc(p.slug)}" target="_blank" rel="noopener">Vista previa ↗</a><a class="btn btn-line btn-s" href="/p/${esc(p.slug)}" target="_blank" rel="noopener">Propuesta ↗</a></div>
+          <div class="frame-wrap" id="fw"><iframe id="frame" src="/vista/${esc(p.slug)}" title="Vista previa de ${esc(p.business)}"></iframe></div>
+        </div>
+      </div>`;
+    const msg = (t, cls = '') => { const m = $('#msg'); m.textContent = t; m.className = 'msg ' + cls; };
+    app.querySelectorAll('[data-w]').forEach(b => b.addEventListener('click', () => {
+      app.querySelectorAll('[data-w]').forEach(x => x.setAttribute('aria-checked', x === b));
+      $('#fw').classList.toggle('mob', b.dataset.w === 'mob');
+    }));
+    const save = async () => {
+      let content;
+      try { content = JSON.parse($('#f-json').value); } catch (e) { msg('El JSON tiene un error: ' + e.message, 'err'); throw e; }
+      await api('POST', { action: 'save', slug, content, plan: $('#f-plan').value, whatsapp: $('#f-wa').checked, business: $('#f-biz').value });
+      $('#frame').src = $('#frame').src; msg('Guardado.', 'ok');
+    };
+    $('#save').addEventListener('click', () => save().catch(e => msg(e.message, 'err')));
+    $('#approve').addEventListener('click', async () => {
+      if (!confirm(`¿Enviar la propuesta de ${p.business}? Quedará visible para el cliente.`)) return;
+      try {
+        await save();
+        const r = await api('POST', { action: 'approve', slug, validDays: Number($('#f-days').value) });
+        $('#sent').innerHTML = `<div class="sent"><b>Propuesta publicada. Vence el ${esc(r.validUntil)}.</b>
+          <span>Enlace: <a class="link" href="${esc(r.link)}" target="_blank" rel="noopener">${esc(r.link)}</a></span>
+          ${r.emailed ? '<span>Le enviamos el correo al cliente.</span>' : r.emailError ? `<span class="msg err">No salió el correo: ${esc(r.emailError)}</span>` : ''}
+          ${r.waLink ? `<a class="btn btn-primary btn-s" href="${esc(r.waLink)}" target="_blank" rel="noopener">Enviar por WhatsApp</a>` : ''}
+          ${!r.emailed ? `<label for="wa-msg" class="hint">Mensaje para copiar</label><textarea id="wa-msg" readonly>${esc(r.message)}</textarea>` : ''}</div>`;
+        msg('');
+      } catch (e) { msg(e.message, 'err'); }
+    });
+    $('#discard').addEventListener('click', async () => {
+      if (!confirm('¿Descartar esta propuesta?')) return;
+      try { await api('POST', { action: 'discard', slug }); location.hash = ''; } catch (e) { msg(e.message, 'err'); }
+    });
+  }
+
+  const route = () => {
+    const slug = decodeURIComponent(location.hash.slice(1));
+    (slug ? detail(slug) : list()).catch(err => { if (err.message !== 'Sesión vencida') app.innerHTML = `<p class="msg err">${esc(err.message)}</p>`; });
+  };
+  addEventListener('hashchange', route);
+  $('#logout').addEventListener('click', async () => { await api('POST', { action: 'logout' }).catch(() => {}); login(); });
+  route();
+})();
+</script>
+</body>
+</html>

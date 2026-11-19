@@ -6,7 +6,7 @@ Prototipo en alta fidelidad del sitio de Ceiba Labs, estudio digital para negoci
 |---|---|---|
 | Inicio | `site/index.html` | `/` |
 | Webs para clínicas | `site/webs-clinicas.html` | `/webs/clinicas` |
-| Propuesta privada de ejemplo | `site/propuesta-clinica-arrayan.html` | `/p/[negocio]` |
+| Propuesta privada de ejemplo | `site/propuesta-clinica-arrayan.html` | `/p/clinica-arrayan` |
 | Revisión de tu página | `site/diagnostico.html` | `/diagnostico` |
 
 Clínica Dental Arrayán y la Dra. Valeria Ríos son ficticias. Sirven como concepto de rediseño y la página lo indica.
@@ -69,27 +69,34 @@ Son precios de lanzamiento para probar en México, en MXN. Son el precio final: 
 ## Embudo: de la dirección a la propuesta
 
 ```
-Cliente escribe su dirección en Inicio
-  └─ /diagnostico?url=… → POST /api/analyze (revisión automática, no guarda nada)
-        celular, WhatsApp, llamar, agendar, velocidad, Google, mapa, año del pie, reseñas
-  └─ «Quiero ver mi propuesta» → POST /api/lead
-        guarda en Supabase (tabla leads) con fecha de entrega = 24 horas hábiles
-        avisa al equipo por correo y confirma al cliente si dejó correo
-Equipo arma la propuesta (borrador con IA + revisión) → /p/[negocio]
+1. Cliente escribe su dirección → /diagnostico → POST /api/analyze (revisión, no guarda)
+2. «Quiero ver mi propuesta» → POST /api/lead
+     lee su página (lib/site-reader.js) y guarda todo en Supabase (leads + page_snapshot)
+     avisa al equipo por correo, confirma al cliente y dispara la rutina de Claude
+3. Rutina «Armar propuesta» (ops/rutina-propuesta.md) → borrador en proposals (estado borrador)
+4. Equipo en /admin: revisa la vista previa, corrige el JSON, ajusta plan y vigencia
+     «Aprobar y enviar» → publica /p/[slug] y /vista/[slug], manda correo o arma el WhatsApp
+5. Cliente abre su propuesta (se registra cada visita) → activa y paga con Stripe
+     webhook → propuesta «activada» y aviso al equipo
+6. Equipo publica la página → POST /api/publish crea la mensualidad
 ```
 
-- **24 horas hábiles:** de lunes a viernes, sin feriados de México, en hora del centro. Si la solicitud llega fuera de 9:00 a 19:00, se cuenta desde las 9:00 del siguiente día hábil (`lib/business-hours.js`; actualizar los feriados cada año).
-- **Base de datos:** proyecto de Supabase `ceiba`, esquema en `supabase/migrations/0001_embudo.sql` (`leads`, `proposals`, `proposal_views`). RLS activado sin políticas: solo el servidor, con la service_role key, lee y escribe.
-- **Si falla algo:** si no se guarda en Supabase pero sale el correo (o al revés), la solicitud cuenta como recibida. Si fallan los dos, el cliente ve un error y se le pide escribir por WhatsApp.
-- **Seguridad de la revisión:** solo abre direcciones públicas (bloquea IPs privadas y redirecciones a ellas), máximo 2 MB y 9 segundos.
-
-| Archivo | Qué hace |
+| Ruta | Qué es |
 |---|---|
-| `api/analyze.js` | Revisión automática de la portada |
-| `api/lead.js` | Valida, guarda y avisa |
-| `lib/db.js` | Supabase por REST |
-| `lib/notify.js` | Correos con Resend |
-| `lib/business-hours.js` | Fecha de entrega |
+| `/diagnostico` | Revisión automática y formulario de solicitud |
+| `/p/[slug]` | Propuesta privada (`api/p.js` + `lib/render-proposal.js`) |
+| `/vista/[slug]` | Portada nueva en pantalla completa (`api/vista.js` + `lib/templates/clinica.js`) |
+| `/admin` | Panel del equipo (`src/admin.html` + `api/admin.js`), entra con `CEIBA_ADMIN_TOKEN` |
+
+- **Propuesta de ejemplo:** `clinica-arrayan` vive en `lib/demos/clinica-arrayan.js` y siempre está disponible. Las reales salen de Supabase; mientras son borrador solo las ve el equipo (cookie del panel).
+- **Plantilla:** `lib/templates/clinica.js` arma la portada a partir del JSON descrito en `ops/esquema-propuesta.md`. Sirve en el servidor (vista previa) y en el comparador. Por ahora es la única plantilla y la rutina la adapta a cualquier rubro.
+- **Lado «Antes» del comparador:** captura real de la página actual del cliente, hecha con Microlink (plan gratuito, con límite diario).
+- **24 horas hábiles:** de lunes a viernes, sin feriados de México, en hora del centro. Si la solicitud llega fuera de 9:00 a 19:00, se cuenta desde las 9:00 del siguiente día hábil (`lib/business-hours.js`; actualizar los feriados cada año).
+- **Base de datos:** proyecto de Supabase `ceiba`, migraciones en `supabase/migrations/`. RLS activado sin políticas: solo el servidor, con la service_role key, lee y escribe.
+- **Si falla algo:** si no se guarda en Supabase pero sale el correo (o al revés), la solicitud cuenta como recibida. Si la rutina no se dispara, su horario de respaldo (lunes a viernes cada 2 horas) toma lo pendiente.
+- **Seguridad de la lectura:** solo abre direcciones públicas (bloquea IPs privadas y redirecciones a ellas), máximo 2 MB y 9 segundos. El contenido leído se trata como datos, nunca como instrucciones.
+
+`build.py` también genera `site/assets/` (CSS de la portada, plantilla y JS de la vista previa) y `lib/generated/shared.js` (símbolos y plantilla de la propuesta para el servidor). Haz commit de esos archivos junto con `src/`.
 
 ## Pagos con Stripe
 

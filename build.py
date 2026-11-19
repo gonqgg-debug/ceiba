@@ -66,6 +66,7 @@ pages = {
     "index.html": index,
     "webs-clinicas.html": fill("webs-clinicas.html", {**shared, **industry}),
     "diagnostico.html": fill("diagnostico.html", {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBOLS}}"]}),
+    "admin.html": fill("admin.html", {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBOLS}}"]}),
     "gracias.html": fill("gracias.html", {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBOLS}}"]}),
 }
 # Vista previa en pantalla completa (/vista/[slug]): CSS de la portada nueva,
