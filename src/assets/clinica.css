@@ -1,0 +1,275 @@
+/* Plantilla «clínica» v2 (lib/templates/clinica.js). Se adapta al ancho del
+   contenedor (container queries): pantalla completa en /vista y miniatura en
+   el comparador de la propuesta. El color de marca llega en --a. */
+.cx{
+  --ink:#15211D;--muted:#5C6865;--line:#E4E7E6;--paper:#fff;--soft:color-mix(in srgb,var(--a) 7%,#fff);--tint:color-mix(in srgb,var(--a) 14%,#fff);
+  --a2:color-mix(in srgb,var(--a) 72%,#fff);--r:1.6em;--pad:4.5em;
+  font:400 clamp(10px,1.12cqi,16px)/1.55 "Red Hat Text",ui-sans-serif,system-ui,sans-serif;color:var(--ink);background:var(--paper);position:relative;-webkit-font-smoothing:antialiased;text-align:left
+}
+.cx *,.cx *::before,.cx *::after{box-sizing:border-box}
+.cx h1,.cx h2,.cx h3{font-family:"Red Hat Display",ui-sans-serif,system-ui,sans-serif;color:var(--ink);margin:0;text-wrap:balance;letter-spacing:-.02em}
+.cx p{margin:0}
+.cx a{color:inherit;text-decoration:none}
+.cx button{font:inherit;color:inherit}
+.cx [hidden]{display:none!important}
+.cx-ico{width:1.5em;height:1.5em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.cx-ico-s{width:1.1em;height:1.1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.cx-ico-c{width:1.25em;height:1.25em;fill:none;stroke:var(--a);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none;padding:.35em;box-sizing:content-box;background:#fff;border-radius:50%;box-shadow:0 0 0 1px var(--tint)}
+.cx-flip{transform:scaleX(-1)}
+.cx-wa{width:1.2em;height:1.2em;color:#25D366;flex:none}
+.cx-noimg{background:linear-gradient(135deg,var(--tint),var(--soft))}
+
+/* botones */
+.cx-btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;height:2.9em;padding:0 1.3em;border-radius:999px;background:var(--a);background-image:linear-gradient(120deg,var(--a),color-mix(in srgb,var(--a) 78%,#7c4dff));color:#fff!important;font-weight:600;white-space:nowrap;border:0;cursor:pointer;box-shadow:0 .6em 1.4em -.8em color-mix(in srgb,var(--a) 70%,transparent);transition:transform .15s,box-shadow .15s}
+.cx-btn:hover{transform:translateY(-1px);box-shadow:0 .9em 1.6em -.8em color-mix(in srgb,var(--a) 80%,transparent)}
+.cx-btn--lg{height:3.4em;padding:0 1.6em;font-size:1.05em}
+.cx-btn--ghost,.cx-btn--line{background:#fff;background-image:none;color:var(--ink)!important;box-shadow:inset 0 0 0 1px var(--line)}
+.cx-btn--ghost:hover,.cx-btn--line:hover{box-shadow:inset 0 0 0 1px var(--ink)}
+.cx-link{display:inline-flex;align-items:center;gap:.4em;color:var(--a)!important;font-weight:600;margin-top:.8em}
+
+/* barra superior y encabezado */
+.cx-util{display:flex;align-items:center;gap:2em;padding:.6em var(--pad);background:var(--ink);color:#E8EEEB;font-size:.82em}
+.cx-util span,.cx-util a{display:inline-flex;align-items:center;gap:.5em}
+.cx-util-tel{margin-left:auto;font-weight:600}
+.cx-top{display:flex;align-items:center;gap:2em;padding:1.1em var(--pad);background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.cx-brand{display:flex;flex-direction:column;line-height:1.1}
+.cx-brand b{font:700 1.45em/1 "Red Hat Display",sans-serif;letter-spacing:-.02em}
+.cx-brand span{font-size:.8em;color:var(--muted);margin-top:.25em}
+.cx-brand img{height:2.6em;width:auto;display:block}
+.cx-nav{display:flex;gap:1.8em;margin-left:auto;color:var(--muted);font-size:.95em}
+.cx-nav a:hover{color:var(--ink)}
+.cx-top-acts{display:flex;gap:.6em}
+
+/* hero */
+.cx-hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:3em;align-items:center;padding:4em var(--pad) 4.5em;max-width:84em;margin:0 auto}
+.cx-rating{display:inline-flex;align-items:center;gap:.5em;font-size:.92em;color:var(--muted);margin-bottom:1.2em;background:var(--soft);padding:.45em .9em;border-radius:999px}
+.cx-rating b{color:var(--ink)}
+.cx-stars{color:#F2A516;letter-spacing:.05em}
+.cx-hero h1{font-size:3.6em;line-height:1.02;font-weight:700;margin-bottom:.4em}
+.cx-lede{font-size:1.18em;color:var(--muted);max-width:32em;margin-bottom:1.8em}
+.cx-ctas{display:flex;flex-wrap:wrap;gap:.7em}
+.cx-call{margin-top:1.2em;color:var(--muted);font-size:.95em}
+.cx-call b{color:var(--ink)}
+.cx-hero-media{position:relative;min-width:0}
+.cx-hero-img{aspect-ratio:1/1.02;border-radius:46% 54% 42% 58% / 52% 44% 56% 48%;background:center 22%/cover no-repeat;box-shadow:0 0 0 1.2em var(--soft),0 0 0 2.4em color-mix(in srgb,var(--a) 4%,#fff)}
+.cx-float{position:absolute;background:#fff;border-radius:1em;padding:.9em 1.1em;box-shadow:0 1.2em 2.4em -1.2em rgba(15,30,25,.35),0 0 0 1px var(--line)}
+.cx-slots{left:-1.5em;bottom:1em;display:grid;gap:.6em}
+.cx-slots b{display:flex;align-items:center;gap:.45em;font-size:.88em}
+.cx-slots div{display:flex;gap:.4em}
+.cx-slots span{border:1px solid var(--line);border-radius:.6em;padding:.35em .65em;font-size:.86em;font-weight:500;white-space:nowrap}
+.cx-slots span:first-child{background:var(--a);color:#fff;border-color:var(--a)}
+.cx-rate-card{right:-.5em;top:1.5em;display:grid;gap:.1em;text-align:center}
+.cx-rate-card b{font:700 1.4em/1.1 "Red Hat Display",sans-serif}
+.cx-rate-card small{color:var(--muted)}
+
+/* beneficios */
+.cx-benefits{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1em;padding:0 var(--pad);max-width:84em;margin:0 auto 1em}
+.cx-benefit{display:grid;gap:.35em;align-content:start;background:var(--soft);border-radius:var(--r);padding:1.4em 1.4em 1.5em;position:relative}
+.cx-benefit .cx-ico{color:var(--a);background:#fff;border-radius:50%;padding:.5em;box-sizing:content-box;margin-bottom:.6em}
+.cx-benefit b{font-weight:600;font-size:1.05em}
+.cx-benefit span{color:var(--muted);font-size:.92em}
+
+/* secciones */
+.cx-sec{padding:4.5em var(--pad);max-width:84em;margin:0 auto}
+.cx-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2em;margin-bottom:2em}
+.cx-head h2,.cx-today h2,.cx-finder h2,.cx-book h2,.cx-visit h2{font-size:2.3em;line-height:1.08;font-weight:700}
+.cx-head p{color:var(--muted);margin-top:.6em;max-width:40em;font-size:1.05em}
+.cx-note{margin-top:1.4em;color:var(--muted);font-size:.88em}
+.cx-panel{background:var(--soft);border-radius:2em;padding:2.4em;position:relative}
+
+/* atención de hoy */
+.cx-today{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:3em;align-items:center}
+.cx-today-copy p{color:var(--muted);margin-top:.9em;font-size:1.05em;max-width:30em}
+.cx-hours{display:grid;grid-template-columns:auto 1fr;gap:.45em 1.4em;margin:1.4em 0 0}
+.cx-hours dt{color:var(--muted)}
+.cx-hours dd{margin:0;font-weight:600}
+.cx-checks{list-style:none;margin:0 0 1.6em;padding:0;display:grid;gap:1em}
+.cx-checks li{display:flex;gap:.9em;align-items:center;font-weight:500}
+
+/* servicios */
+.cx-car-nav{display:flex;gap:.5em}
+.cx-car-nav button{width:2.8em;height:2.8em;border-radius:50%;border:1px solid var(--line);background:#fff;display:grid;place-items:center;cursor:pointer}
+.cx-car-nav button:disabled{opacity:.35;cursor:default}
+.cx-car{list-style:none;margin:0;padding:.2em .2em 1em;display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 3em) / 3.4);gap:1.5em;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.cx-car::-webkit-scrollbar{display:none}
+.cx-card{scroll-snap-align:start;border-radius:var(--r);overflow:hidden;background:#fff;box-shadow:0 0 0 1px var(--line);display:grid;grid-template-rows:auto 1fr;transition:box-shadow .2s,transform .2s}
+.cx-card:hover{box-shadow:0 0 0 1px var(--tint),0 1.4em 2.4em -1.6em rgba(15,30,25,.4);transform:translateY(-2px)}
+.cx-card-img{aspect-ratio:4/3;background:center/cover no-repeat}
+.cx-card-body{padding:1.2em 1.3em 1.4em;display:grid;align-content:start}
+.cx-card-t{display:flex;justify-content:space-between;gap:1em;align-items:baseline}
+.cx-card-t b{font:600 1.12em/1.25 "Red Hat Display",sans-serif}
+.cx-card-t i{font-style:normal;font-weight:600;color:var(--a);white-space:nowrap;font-size:.95em}
+.cx-card-body p{color:var(--muted);font-size:.93em;margin-top:.5em}
+.cx-pills{display:flex;flex-wrap:wrap;gap:.5em;align-items:center;margin-top:1.4em}
+.cx-pills span{color:var(--muted);font-size:.92em;margin-right:.3em}
+.cx-pills em{font-style:normal;font-size:.9em;padding:.45em .9em;border-radius:999px;background:var(--soft);box-shadow:inset 0 0 0 1px var(--tint)}
+
+/* ayuda para elegir */
+.cx-finder-in{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:1.6em 3em;align-items:start;background:linear-gradient(135deg,var(--soft),color-mix(in srgb,var(--a) 12%,#fff))}
+.cx-finder-in > div:first-child p{color:var(--muted);margin-top:.6em}
+.cx-finder-opts{display:flex;flex-wrap:wrap;gap:.5em;grid-row:span 2;align-content:start}
+.cx-finder-opts button{border:0;border-radius:999px;padding:.7em 1.1em;background:#fff;cursor:pointer;font-weight:500;box-shadow:inset 0 0 0 1px var(--line)}
+.cx-finder-opts button[aria-checked="true"]{background:var(--ink);color:#fff;box-shadow:none}
+.cx-finder-out > div{background:#fff;border-radius:1.2em;padding:1.3em 1.4em;display:grid;gap:.4em;justify-items:start;box-shadow:0 1em 2em -1.6em rgba(15,30,25,.4)}
+.cx-finder-out b{font:600 1.2em "Red Hat Display",sans-serif}
+.cx-finder-out i{font-style:normal;color:var(--a);font-weight:600}
+.cx-finder-out p{color:var(--muted);font-size:.95em;margin-bottom:.6em}
+
+/* proceso */
+.cx-process ol{list-style:none;margin:0;padding:0;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:1.2em;counter-reset:s}
+.cx-process li{position:relative;padding:1.6em 1.4em;border-radius:var(--r);background:#fff;box-shadow:0 0 0 1px var(--line)}
+.cx-num{display:grid;place-items:center;width:2.4em;height:2.4em;border-radius:50%;background:var(--tint);color:var(--a);font-weight:700;margin-bottom:1em}
+.cx-process b{display:block;font:600 1.1em/1.25 "Red Hat Display",sans-serif;margin-bottom:.4em}
+.cx-process p{color:var(--muted);font-size:.93em}
+
+/* equipo */
+.cx-people{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(14em,1fr));gap:1.4em}
+.cx-people li{border-radius:var(--r);overflow:hidden;position:relative;aspect-ratio:4/4.6;max-height:30em;background:var(--soft)}
+.cx-person-img{position:absolute;inset:0;background:center 18%/cover no-repeat}
+.cx-person-t{position:absolute;inset:auto 0 0;padding:3.5em 1.3em 1.2em;background:linear-gradient(transparent,rgba(10,20,18,.82));color:#fff;display:grid;gap:.15em}
+.cx-person-t b{font:600 1.15em "Red Hat Display",sans-serif;color:#fff}
+.cx-person-t span{font-size:.9em;opacity:.9}
+.cx-person-t small{font-size:.78em;opacity:.75}
+.cx-team-solo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2.5em;align-items:center}
+.cx-team-img{aspect-ratio:4/3;border-radius:var(--r);background:center/cover no-repeat}
+
+/* galería */
+.cx-mosaic{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:10.5em;gap:1em;grid-auto-flow:dense}
+.cx-tile{background:center/cover no-repeat;border-radius:var(--r)}
+.cx-tile--0{grid-column:span 2;grid-row:span 2}
+.cx-tile--2{grid-row:span 2}
+.cx-tile--1{border-radius:var(--r) var(--r) var(--r) 6em}
+.cx-tile--4,.cx-tile--5{grid-column:span 2}
+.cx-tile--5{border-radius:var(--r) 6em var(--r) var(--r)}
+
+/* reseñas */
+.cx-reviews .cx-rating{margin:.8em 0 0}
+.cx-rev-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2em}
+.cx-rev{margin:0;background:var(--soft);border-radius:var(--r);padding:1.5em;display:grid;gap:.9em;align-content:start}
+.cx-rev blockquote{margin:0;font-size:1em;line-height:1.55}
+.cx-rev figcaption{display:grid;grid-template-columns:auto 1fr;gap:0 .7em;align-items:center}
+.cx-rev figcaption b{font-size:.95em}
+.cx-rev figcaption small{grid-column:2;color:var(--muted);font-size:.85em}
+.cx-avatar{grid-row:span 2;width:2.4em;height:2.4em;border-radius:50%;display:grid;place-items:center;background:var(--a);color:#fff;font-weight:700}
+
+/* preguntas */
+.cx-faq-list{display:grid;gap:.7em;max-width:52em}
+.cx-faq details{background:#fff;border-radius:1.1em;box-shadow:0 0 0 1px var(--line);padding:0 1.4em}
+.cx-faq details[open]{background:var(--soft);box-shadow:none}
+.cx-faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:1em;padding:1.15em 0;font-weight:600}
+.cx-faq summary::-webkit-details-marker{display:none}
+.cx-faq summary span{width:1.6em;height:1.6em;border-radius:50%;background:var(--tint);position:relative;flex:none}
+.cx-faq summary span::before,.cx-faq summary span::after{content:"";position:absolute;left:50%;top:50%;width:.7em;height:2px;background:var(--a);transform:translate(-50%,-50%)}
+.cx-faq summary span::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .2s}
+.cx-faq details[open] summary span::after{transform:translate(-50%,-50%) rotate(0)}
+.cx-faq details p{color:var(--muted);padding-bottom:1.2em;max-width:44em}
+
+/* ubicación */
+.cx-visit-card{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);border-radius:2em;overflow:hidden;background:var(--soft)}
+.cx-visit-img{min-height:24em;background:center/cover no-repeat}
+.cx-visit-info{padding:2.6em;display:grid;gap:1em;align-content:center}
+.cx-addr{display:flex;gap:.6em;font-weight:500;font-size:1.05em}
+.cx-addr .cx-ico-s{color:var(--a);margin-top:.25em}
+.cx-zones{color:var(--muted);font-size:.95em}
+.cx-visit .cx-hours{margin:0}
+
+/* formulario */
+.cx-book-in{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:2em 3em;align-items:start;background:var(--ink);color:#fff}
+.cx-book-in h2{color:#fff}
+.cx-book-copy p{opacity:.75;margin-top:.7em}
+.cx-form{display:grid;grid-template-columns:1fr 1fr;gap:.9em}
+.cx-form label{display:grid;gap:.35em;font-size:.86em}
+.cx-form label span{opacity:.75}
+.cx-form input,.cx-form select{height:3em;border-radius:.8em;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);color:#fff;padding:0 1em;font:inherit;font-size:1.05em;outline:none}
+.cx-form input:focus,.cx-form select:focus{border-color:var(--a2)}
+.cx-form select option{color:#15211D}
+.cx-wide{grid-column:1/-1}
+.cx-form small{opacity:.6;font-size:.8em}
+
+/* pie */
+.cx-foot{background:#0F1815;color:#C9D2CE;padding:3.5em var(--pad) 2em;font-size:.92em}
+.cx-foot-cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2em;max-width:84em;margin:0 auto}
+.cx-foot-cols div{display:grid;gap:.5em;align-content:start}
+.cx-foot-cols b{color:#fff;font-weight:600}
+.cx-foot-name{font:700 1.3em "Red Hat Display",sans-serif;color:#fff}
+.cx-foot-legal{display:flex;flex-wrap:wrap;gap:.5em 1.8em;max-width:84em;margin:2.5em auto 0;padding-top:1.4em;border-top:1px solid rgba(255,255,255,.1);font-size:.85em;opacity:.7}
+
+/* flotantes */
+.cx-fab{position:sticky;bottom:1.4em;height:0;z-index:6;display:flex;justify-content:flex-end;pointer-events:none;padding-right:1.4em}
+.cx-fab > *{pointer-events:auto}
+.cx-wa-fab{position:absolute;right:1.4em;bottom:0;width:3.6em;height:3.6em;border-radius:50%;background:#25D366;display:grid;place-items:center;box-shadow:0 .8em 1.6em -.6em rgba(0,0,0,.4)}
+.cx-wa-fab .cx-wa{color:#fff;width:1.8em;height:1.8em}
+.cx-chat-btn{position:absolute;right:6em;bottom:.3em;display:inline-flex;align-items:center;gap:.5em;height:3em;padding:0 1.2em;border:0;border-radius:999px;background:var(--ink);color:#fff!important;font-weight:600;cursor:pointer;box-shadow:0 .8em 1.6em -.6em rgba(0,0,0,.4)}
+.cx-chat{position:absolute;right:1.4em;bottom:4.4em;width:min(23em,calc(100cqi - 2.8em));background:#fff;border-radius:1.2em;overflow:hidden;box-shadow:0 1.6em 3em -1em rgba(0,0,0,.35),0 0 0 1px var(--line);display:none}
+.cx-fab.open .cx-chat{display:grid}
+.cx-chat-top{display:flex;justify-content:space-between;gap:1em;padding:1em 1.1em;background:var(--a);color:#fff}
+.cx-chat-top b{display:block}
+.cx-chat-top span{font-size:.82em;opacity:.85}
+.cx-chat-top button{background:none;border:0;color:#fff;font-size:1.5em;line-height:1;cursor:pointer}
+.cx-chat-log{display:grid;gap:.6em;padding:1em 1.1em;max-height:16em;overflow:auto;align-content:start}
+.cx-msg{padding:.65em .9em;border-radius:1em;background:var(--soft);font-size:.95em;max-width:90%;justify-self:start}
+.cx-msg.me{background:var(--a);color:#fff;justify-self:end}
+.cx-msg a,.cx-msg span{display:flex;align-items:center;gap:.4em;margin-top:.5em;font-weight:600;color:var(--a)}
+.cx-chat-sug{display:flex;flex-wrap:wrap;gap:.4em;padding:0 1.1em 1.1em}
+.cx-chat-sug button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:.5em .85em;font-size:.88em;cursor:pointer}
+.cx-typing{display:inline-flex;gap:.3em;padding:.8em .9em;background:var(--soft);border-radius:1em;justify-self:start}
+.cx-typing i{width:.4em;height:.4em;border-radius:50%;background:var(--muted);animation:cx-blink 1s infinite}
+.cx-typing i:nth-child(2){animation-delay:.15s}.cx-typing i:nth-child(3){animation-delay:.3s}
+@keyframes cx-blink{50%{opacity:.25}}
+.cx-sticky{display:none}
+
+/* comparador: números sobre las secciones */
+.cx [data-mark]{position:relative}
+
+/* tabletas */
+@container (max-width:980px){
+  .cx{--pad:2.4em}
+  .cx-nav{display:none}
+  .cx-top-acts{margin-left:auto}
+  .cx-car{grid-auto-columns:calc((100% - 1.5em) / 2.3)}
+  .cx-process ol{grid-auto-flow:row;grid-template-columns:1fr 1fr}
+}
+/* celular */
+@container (max-width:640px){
+  .cx{font-size:clamp(13px,3.9cqi,16px);--pad:1.25em;--r:1.3em}
+  .cx-util{gap:1em}
+  .cx-util span{display:none}
+  .cx-util .cx-util-tel{margin:0 auto}
+  .cx-top{padding:.85em var(--pad)}
+  .cx-hide-s{display:none!important}
+  .cx-top .cx-btn{height:2.6em;padding:0 1em;font-size:.9em}
+  .cx-hero{grid-template-columns:1fr;padding:1.6em var(--pad) 2.5em;gap:2.2em}
+  .cx-hero-media{order:-1;padding:0 1.2em}
+  .cx-hero-img{aspect-ratio:1/.95;box-shadow:0 0 0 .7em var(--soft)}
+  .cx-hero h1{font-size:2.25em}
+  .cx-lede{font-size:1.05em;margin-bottom:1.4em}
+  .cx-ctas .cx-btn{flex:1 1 100%}
+  .cx-slots{left:0;bottom:-1em}
+  .cx-rate-card{right:0;top:.5em}
+  .cx-benefits{grid-template-columns:1fr 1fr;gap:.7em}
+  .cx-benefit{padding:1.1em}
+  .cx-sec{padding:3em var(--pad)}
+  .cx-head{flex-direction:column;align-items:flex-start;gap:1em;margin-bottom:1.4em}
+  .cx-head h2,.cx-today h2,.cx-finder h2,.cx-book h2,.cx-visit h2{font-size:1.75em}
+  .cx-today,.cx-finder-in,.cx-team-solo,.cx-visit-card,.cx-book-in{grid-template-columns:1fr}
+  .cx-panel{padding:1.6em;border-radius:1.5em}
+  .cx-car{grid-auto-columns:84%}
+  .cx-car-nav{display:none}
+  .cx-process ol{grid-template-columns:1fr}
+  .cx-people{grid-template-columns:repeat(2,minmax(0,1fr));gap:.8em}
+  .cx-mosaic{grid-template-columns:1fr 1fr;grid-auto-rows:7.5em}
+  .cx-tile--2{grid-row:span 1}
+  .cx-rev-list{grid-template-columns:repeat(3,86%);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:.4em}
+  .cx-rev{scroll-snap-align:start}
+  .cx-visit-img{min-height:14em}
+  .cx-visit-info{padding:1.6em}
+  .cx-form{grid-template-columns:1fr}
+  .cx-foot{padding:2.5em var(--pad) 6em}
+  .cx-foot-cols{grid-template-columns:1fr}
+  .cx-fab{bottom:5.4em;padding-right:0}
+  .cx-wa-fab{right:1em;width:3.2em;height:3.2em}
+  .cx-chat-btn{right:5em}
+  .cx-chat{right:1em}
+  .cx-sticky{display:flex;position:sticky;bottom:0;z-index:5;gap:.6em;padding:.8em var(--pad);background:rgba(255,255,255,.96);border-top:1px solid var(--line)}
+  .cx-sticky .cx-btn{flex:1}
+}

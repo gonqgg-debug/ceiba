@@ -12,9 +12,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Red+Hat+Display:wght@500;600;700&family=Red+Hat+Text:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/clinica.css">
 <style>
 {{BASE_CSS}}
 /* ===================== PRIVATE PROPOSAL ===================== */
+.cmp .cx [data-mark]::after{right:auto;left:10px;top:10px}
+.cmp .cx .cx-top [data-mark]::after,.cmp .cx .cx-chat-btn[data-mark]::after{left:-10px;top:-10px}
+.cmp .cx-top{position:sticky}
 .shot{min-height:100%;background:#F3F1EA url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='40'%3E%3Ctext x='0' y='24' font-family='sans-serif' font-size='14' fill='%235E6A64'%3ECargando tu página actual…%3C/text%3E%3C/svg%3E") 50% 120px no-repeat}
 .shot img{display:block;width:100%;height:auto;min-height:200px}
 .shot-mob{display:none!important}
@@ -537,5 +541,6 @@ img{max-width:100%}
   }
 })();
 </script>
+<script src="/assets/clinica.js" defer></script>
 </body>
 </html>

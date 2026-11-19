@@ -19,13 +19,9 @@ const HEAD = title => `<!doctype html>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Red+Hat+Display:wght@500;600;700&family=Red+Hat+Text:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="/assets/clinica.css">
 <style>
-body{margin:0;background:#FBFAF6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+body{margin:0;background:#fff;-webkit-font-smoothing:antialiased;overflow-x:clip}
 [hidden]{display:none!important}
 .vista{container-type:inline-size}
-.vista a{color:inherit;text-decoration:none}
-.vista a.mn-btn{color:#fff}
-.vista a.mn-ai-act{color:#0E7A43}
-.vista .mn-top{top:0}
 .vp-bar{position:relative;z-index:10;display:flex;align-items:center;gap:12px 20px;padding:10px max(16px,env(safe-area-inset-left));background:#0B1514;color:#F7F4EB;font:400 14px/1.35 Geist,system-ui,sans-serif}
 .vp-bar p{margin:0;flex:1;min-width:0}
 .vp-bar b{font-weight:600}
@@ -53,6 +49,7 @@ ${SYMBOLS}
 <button class="vp-pill" id="vp-pill" type="button" hidden>Vista previa · Ceiba Labs</button>
 <main class="vista">${render(p.page || {}, { mode: 'live' })}</main>
 <div class="vp-toast" id="vp-toast" role="status" aria-live="polite" hidden></div>
+<script src="/assets/clinica.js" defer></script>
 <script src="/assets/vista.js" defer></script>
 </body></html>`);
 }

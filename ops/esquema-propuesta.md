@@ -24,19 +24,26 @@ Las columnas de la tabla mandan sobre el JSON para `slug`, `business`, `recommen
   // El número del cambio se dibuja sobre esa sección de la portada nueva.
 
   "page": {
-    "brand":   { "name": "Arrayán", "tagline": "Clínica dental", "fullName": "Clínica Dental Arrayán", "accent": "#1F4FD1" },
-    "contact": { "phone": "33 0000 0000", "whatsapp": "523300000000", "address": "…", "mapsUrl": "https://…", "bookingUrl": "https://…" },
+    "brand":   { "name": "Arrayán", "tagline": "Clínica dental", "fullName": "Clínica Dental Arrayán", "accent": "#1F4FD1", "logo": "https://…" },
+    "contact": { "phone": "33 0000 0000", "whatsapp": "523300000000", "email": "…", "address": "…", "mapsUrl": "https://…", "bookingUrl": "https://…" },
     "util":    { "note": "¿Urgencia? Te atendemos hoy", "hours": "Lunes a viernes de 9 a 20 h" },
     "nav":     ["Tratamientos", "Opiniones", "Ubicación"],
     "hero":    { "title": "…", "sub": "…", "ctaTop": "Agenda tu cita", "cta": "Agenda gratis", "ctaWhatsapp": "Agendar por WhatsApp",
                  "callLabel": "Llamar para agendar", "photo": "https://…", "photoAlt": "…", "slots": [] },
     "rating":  { "value": "4.9", "count": 186, "source": "Google" },     // null si no hay dato real
-    "trust":   [ { "b": "Más de 15 años", "t": "cuidando sonrisas en Providencia" } ],   // 4
-    "services":{ "title": "Nuestros tratamientos", "note": "…",
+    "trust":   [ { "icon": "award", "b": "Más de 15 años", "t": "cuidando sonrisas en Providencia" } ],   // 4; icon opcional
+    // icon: tooth calendar clock card shield star chat map car scan sparkle child phone check heart user award bolt globe
+    "today":   { "title": "Te atendemos hoy mismo", "text": "…", "bullets": [ { "icon": "bolt", "t": "Urgencias el mismo día" } ] }, // promesas reales; null si no hay
+    "services":{ "title": "Nuestros tratamientos", "sub": "…", "note": "…", "more": ["Resinas", "Endodoncia"],
                  "items": [ { "name": "…", "price": "Desde $700", "desc": "…", "img": "https://…", "imgAlt": "…", "action": "Agendar" } ] },
-    "team":    { "title": "…", "text": "…", "bullets": ["…"], "photo": "https://…", "photoAlt": "…" },          // null si no hay datos
+    "process": { "title": "Cómo es tu primera visita", "sub": "…", "steps": [ { "t": "Valoración", "d": "…" } ] },   // 3 a 4 pasos
+    "team":    { "title": "…", "text": "…", "bullets": ["…"], "photo": "https://…", "photoAlt": "…",
+                 "members": [ { "name": "Dra. …", "role": "Ortodoncia", "cedula": "1234567", "photo": "https://…" } ] }, // null si no hay datos
+    "gallery": { "title": "Conoce la clínica", "text": "…", "images": [ { "img": "https://…", "alt": "…" } ] },      // 3 a 6 fotos reales; si no, null
+    "faq":     [ { "q": "…", "a": "…" } ],                                    // 4 a 6
     "reviews": { "title": "…", "items": [ { "name": "Mariana G.", "meta": "hace 2 semanas", "text": "…", "stars": 5 } ], "moreUrl": "https://…" }, // null si no hay reseñas reales
-    "visit":   { "title": "Visítanos", "photo": "https://…", "rows": [ { "dt": "Lunes a viernes", "dd": "9:00 a 20:00" } ] },
+    "visit":   { "title": "Visítanos", "photo": "https://…", "zones": "Nos visitan de …", "rows": [ { "dt": "Lunes a viernes", "dd": "9:00 a 20:00" } ] },
+    "legal":   { "cofepris": "…", "responsable": "Dra. …, cédula …" },   // solo si aparece en su página
     "chat":    { "title": "…", "subtitle": "…", "greeting": "…", "button": "¿Dudas? Pregúntanos",
                  "faq": [ { "q": "…", "a": "…", "action": "wa" } ] },                 // action: wa | book
     "footer":  { "note": "Propuesta de rediseño de Ceiba Labs" }
@@ -48,3 +55,5 @@ Reglas de datos:
 - `whatsapp` va solo con dígitos y lada de país (52…).
 - Las imágenes son URLs `https://` (de la página del cliente) o rutas del sitio de Ceiba (`/img/...`).
 - Si un dato no existe en la página del cliente, la sección se omite (`null`) o se deja en `notes` como pendiente. No se inventa.
+
+La sección «¿Qué necesitas?» y el formulario de cita se arman solos con `services` y el WhatsApp; no llevan datos propios.

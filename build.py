@@ -71,12 +71,9 @@ pages = {
 }
 # Vista previa en pantalla completa (/vista/[slug]): CSS de la portada nueva,
 # la plantilla como módulo para el navegador y los símbolos para el servidor.
-mock_css = home[home.index("/* ===================== MOCK: PROPUESTA"):home.index("/* markers on the mock")]
-root_vars = home[home.index(":root{"):home.index("}", home.index(":root{")) + 1]
 (SITE / "assets").mkdir(exist_ok=True)
-(SITE / "assets" / "clinica.css").write_text(
-    "/* Generado por build.py a partir de src/home.html. No editar. */\n" + root_vars +
-    "\n*,*::before,*::after{box-sizing:border-box}\n@keyframes blink{50%{opacity:.25}}\n" + mock_css, encoding="utf-8")
+(SITE / "assets" / "clinica.css").write_text((SRC / "assets/clinica.css").read_text(encoding="utf-8"), encoding="utf-8")
+(SITE / "assets" / "clinica.js").write_text((SRC / "assets/clinica.js").read_text(encoding="utf-8"), encoding="utf-8")
 (SITE / "assets" / "tpl-clinica.js").write_text((ROOT / "lib/templates/clinica.js").read_text(encoding="utf-8"), encoding="utf-8")
 (SITE / "assets" / "vista.js").write_text((SRC / "assets/vista.js").read_text(encoding="utf-8"), encoding="utf-8")
 (ROOT / "lib" / "generated").mkdir(exist_ok=True)
