@@ -908,6 +908,14 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 .ws-check input{flex:1;min-width:180px;height:52px;border-radius:12px;border:1px solid rgba(247,244,235,.25);background:rgba(11,21,20,.35);color:var(--ivory);padding:0 14px;font:400 16px var(--f-body)}
 .ws-check input::placeholder{color:rgba(247,244,235,.5)}
 .ws-check .err{flex-basis:100%;color:#FFC9B8;font-size:14px;margin:0}
+.ws-tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.ws-tiers div{display:grid;gap:6px;align-content:start;padding:20px;border-radius:18px;background:#fff;border:1px solid var(--line)}
+.ws-tiers div.hl{background:var(--ink);color:var(--ivory);border-color:var(--ink);--muted:rgba(247,244,235,.72)}
+.ws-tiers span{font:500 12px var(--f-mono);color:var(--petrol)}
+.ws-tiers .hl span{color:var(--lime)}
+.ws-tiers b{font-size:18px;font-weight:600}
+.ws-tiers p{color:var(--muted);font-size:15px;line-height:1.5}
+@media (max-width:860px){.ws-tiers{grid-template-columns:1fr}}
 @property --s{syntax:'<number>';inherits:true;initial-value:0}
 @media (max-width:980px){.ws-ai-grid{grid-template-columns:1fr}.ws-read{position:static}.ws-check{grid-template-columns:auto 1fr}.ws-check form{grid-column:1/-1}}
 @media (max-width:520px){.ws-read dl div{grid-template-columns:1fr;gap:2px}.ws-check{grid-template-columns:1fr}}
@@ -944,6 +952,11 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       <div class="ws-gauge" id="ws-gauge" aria-hidden="true"><b id="ws-gauge-n">0</b><span>/100</span></div>
       <div><h3>¿Cómo está tu página hoy?</h3><p>Analizamos tu SEO actual y tu visibilidad en la IA: te damos un puntaje de 0 a 100 y te explicamos qué falta, gratis y en segundos.</p></div>
       <form id="ws-check-form" novalidate><input id="ws-check-url" type="text" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com" aria-label="Dirección de tu página"><button class="btn btn-primary" type="submit">Analizar mi SEO <span class="arrow" aria-hidden="true">→</span></button><p class="err" id="ws-check-err" hidden></p></form>
+    </div>
+    <div class="ws-tiers">
+      <div><span>Gratis · todos</span><b>Análisis rápido</b><p>Tu portada en segundos: puntaje de 0 a 100 de SEO y visibilidad en IA, con lo que falta.</p></div>
+      <div><span>Planes Negocio y Avanzado</span><b>Análisis avanzado</b><p>Todo tu sitio, velocidad real en celular, tus datos en Google y una prueba real: le preguntamos a ChatGPT, Gemini y Perplexity por negocios como el tuyo y vemos si te recomiendan.</p></div>
+      <div class="hl"><span>Plan Avanzado</span><b>Reporte mensual</b><p>Cada mes: si la IA te recomienda, en qué búsquedas apareces, frente a qué competidores y qué mejorar.</p></div>
     </div>
   </div>
 </section>
@@ -983,21 +996,21 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       <div class="plans" role="list">
         <div class="plan" role="listitem">
           <div><h3>Esencial</h3><p class="for">Para que te encuentren y te escriban</p></div>
-          <ul><li>Hasta 3 páginas, pensadas para el celular</li><li>Formulario y botón de WhatsApp</li><li>SEO básico, hosting y mantenimiento</li><li>Hasta 30 minutos de cambios al mes</li></ul>
+          <ul><li>Hasta 3 páginas, pensadas para el celular</li><li>Formulario y botón de WhatsApp</li><li>SEO base y optimizada para IA</li><li>Hosting y mantenimiento</li><li>Hasta 30 minutos de cambios al mes</li></ul>
           <div class="price-cell"><span class="k">Pago inicial</span><span class="v">$3,490<small>pago único</small></span></div>
           <div class="price-cell"><span class="k">Mensualidad</span><span class="v">$1,490<small>al mes</small></span></div>
           <a class="btn btn-line" href="#" data-route="/precios">Ver plan</a>
         </div>
         <div class="plan plan--mid" role="listitem">
           <div><h3>Negocio</h3><p class="for">Para recibir citas y reservas en línea</p></div>
-          <ul><li>Hasta 7 páginas, con todo lo de Esencial</li><li>Conectada con la agenda que ya usas</li><li>Te decimos cuántas personas te escribieron o llamaron desde la página</li><li>Hasta 60 minutos de cambios al mes, por ejemplo horarios, precios o fotos</li></ul>
+          <ul><li>Hasta 7 páginas, con todo lo de Esencial</li><li>Conectada con la agenda que ya usas</li><li><b>Análisis avanzado de SEO y visibilidad en IA</b>: probamos si ChatGPT, Gemini y Google te recomiendan, y corregimos lo que falte</li><li>Te decimos cuántas personas te escribieron o llamaron desde la página</li><li>Hasta 60 minutos de cambios al mes, por ejemplo horarios, precios o fotos</li></ul>
           <div class="price-cell"><span class="k">Pago inicial</span><span class="v">$5,490<small>pago único</small></span></div>
           <div class="price-cell"><span class="k">Mensualidad</span><span class="v">$2,490<small>al mes</small></span></div>
           <a class="btn btn-line" href="#" data-route="/precios">Ver plan</a>
         </div>
         <div class="plan" role="listitem">
           <div><h3>Avanzado</h3><p class="for">Para mostrar un catálogo que tú mismo actualizas</p></div>
-          <ul><li>Hasta 12 páginas, con todo lo de Negocio</li><li>Catálogo de propiedades, habitaciones o servicios que tú actualizas</li><li>Hasta 120 minutos de cambios al mes</li></ul>
+          <ul><li>Hasta 12 páginas, con todo lo de Negocio</li><li><b>Reporte mensual de visibilidad en IA y Google</b>: si te recomiendan, en qué búsquedas apareces y frente a qué competidores</li><li>Catálogo de propiedades, habitaciones o servicios que tú actualizas</li><li>Hasta 120 minutos de cambios al mes</li></ul>
           <div class="price-cell"><span class="k">Pago inicial</span><span class="v">$8,490<small>pago único</small></span></div>
           <div class="price-cell"><span class="k">Mensualidad</span><span class="v">$3,990<small>al mes</small></span></div>
           <a class="btn btn-line" href="#" data-route="/precios">Ver plan</a>
@@ -1084,7 +1097,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa9" id="fq9">¿Qué pasa si el asistente de WhatsApp llega a 300 conversaciones?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa9" role="region" aria-labelledby="fq9"><div><p>Te avisamos cuando te acercas al cupo del mes. Si se agota, las conversaciones nuevas pasan directo a tu equipo, sin respuestas automáticas, hasta el mes siguiente. Si aplica algún cargo de Meta por mensajes, aparece desglosado en tu propuesta.</p></div></div></div>
       <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa8" id="fq8">¿Tengo que contratar el asistente de WhatsApp para tener mi página?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa8" role="region" aria-labelledby="fq8"><div><p>No. Es opcional. Puedes sumarlo después, cuando tu página ya esté funcionando.</p></div></div></div>
       <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa10" id="fq10">¿Qué significa que esté optimizada para IA?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa10" role="region" aria-labelledby="fq10"><div><p>Que tu página está hecha para que Google y asistentes como ChatGPT, Gemini o Perplexity entiendan tu negocio: qué haces, dónde estás, tu horario, tus servicios y precios, tus reseñas y las respuestas a lo que más te preguntan, en texto y en datos estructurados. Nadie puede garantizar un lugar en sus respuestas, pero sí darte la mejor base para que te recomienden.</p></div></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa11" id="fq11">¿Qué revisa el análisis de SEO gratis?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa11" role="region" aria-labelledby="fq11"><div><p>Revisa tu página como lo haría un buscador: título y descripción, encabezados, fotos, mapa del sitio, datos estructurados, si bloqueas a los buscadores de IA, cuánto texto se puede leer, preguntas frecuentes, precios y reseñas. Te da un puntaje de 0 a 100 y te explica cada punto en lenguaje simple.</p></div></div></div>
+      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa11" id="fq11">¿Qué revisa el análisis de SEO gratis?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa11" role="region" aria-labelledby="fq11"><div><p>Revisa tu página como lo haría un buscador: título y descripción, encabezados, fotos, mapa del sitio, datos estructurados, si bloqueas a los buscadores de IA, cuánto texto se puede leer, preguntas frecuentes, precios y reseñas. Te da un puntaje de 0 a 100 y te explica cada punto en lenguaje simple. Es el análisis rápido. Los planes Negocio y Avanzado incluyen el análisis avanzado: revisamos todo tu sitio, la velocidad real en celular, tus datos en Google y hacemos preguntas reales a ChatGPT, Gemini y Perplexity para ver si te recomiendan y a quién recomiendan en tu lugar. El plan Avanzado lo repite cada mes con un reporte.</p></div></div></div>
       <p class="faq-more"><a class="link" href="#" data-route="/precios">Ver todas las preguntas en Precios</a></p>
     </div>
   </div>
