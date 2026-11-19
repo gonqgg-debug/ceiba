@@ -926,7 +926,8 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 .ix-row{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:40px clamp(40px,6vw,96px);align-items:center;margin-top:clamp(56px,8vw,110px)}
 .ix-row--flip .ix-copy{order:2}
 .ix-copy{display:grid;gap:18px;justify-items:start}
-.ix-num{font:500 13px var(--f-mono);color:var(--petrol);padding:6px 11px;border-radius:999px;background:rgba(16,61,55,.07);border:1px solid rgba(16,61,55,.14)}
+.ix-num{display:inline-flex;align-items:baseline;gap:14px;font:600 16px var(--f-body);letter-spacing:-.005em;color:var(--petrol)}
+.ix-num em{font:700 clamp(30px,2.6vw,40px)/1 var(--f-display);font-style:normal;letter-spacing:-.04em;padding-right:14px;border-right:1px solid currentColor}
 .ix-copy h3{font-size:clamp(30px,3.2vw,46px);line-height:1.02;letter-spacing:-.035em;max-width:15ch}
 .ix-copy p{color:var(--muted);font-size:18px;line-height:1.6;max-width:48ch}
 .ix-ex{position:relative;border-radius:26px;min-height:380px;padding:clamp(22px,3vw,36px);overflow:hidden;display:grid;place-items:center}
@@ -1144,13 +1145,15 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 .ix-path::after{background:linear-gradient(180deg,#0E9F8A,var(--lime));transform:scaleY(var(--p,0));transform-origin:top;transition:transform .15s linear}
 .ix-ch{position:relative;display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:40px clamp(40px,5vw,80px);align-items:center;padding-block:clamp(40px,6vw,80px)}
 .ix-ch-dot{position:absolute;left:-64px;top:50%;translate:0 -50%;z-index:1;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font:600 14px var(--f-mono);background:var(--ink);color:rgba(247,244,235,.6);border:2px solid rgba(247,244,235,.22);transition:background .4s,color .4s,border-color .4s,box-shadow .4s}
+.ix-ch-dot{width:16px!important;height:16px!important;left:-54px!important;font-size:0!important}
 .ix-ch.on .ix-ch-dot{background:var(--lime);color:var(--ink);border-color:var(--lime);box-shadow:0 0 0 7px rgba(214,250,82,.14)}
-.ix-way .ix-num{color:var(--lime);background:rgba(214,250,82,.07);border-color:rgba(214,250,82,.25)}
+.ix-way .ix-num{color:var(--lime)}
+.ix-way .ix-num em{border-color:rgba(214,250,82,.35)}
 .ix-way .ix-copy h3{max-width:18ch}
 .ix-way .ix-copy p{color:rgba(247,244,235,.75)}
-.ix-ticks{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.ix-ticks li{display:inline-flex;align-items:center;gap:7px;font-size:14px;padding:7px 12px;border-radius:999px;background:rgba(247,244,235,.06);border:1px solid rgba(247,244,235,.12)}
-.ix-ticks li::before{content:"✓";color:var(--lime);font-weight:700;font-size:12px}
+.ix-ticks{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.ix-ticks li{display:grid;grid-template-columns:20px 1fr;gap:8px;font-size:15px;color:rgba(247,244,235,.85)}
+.ix-ticks li::before{content:"";width:12px;height:2px;margin-top:11px;background:var(--lime)}
 .ix-ch-acts{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:4px}
 .ix-way .btn-line{color:var(--ivory);border-color:rgba(247,244,235,.4)}
 .ix-way .ix-ex--hand{border:1px solid rgba(247,244,235,.1)}
@@ -1221,7 +1224,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 @media (max-width:640px){
   .ix-path{padding-left:44px}
   .ix-path::before,.ix-path::after{left:13px}
-  .ix-ch-dot{left:-44px;width:28px;height:28px;font-size:12px}
+  .ix-ch-dot{left:-38px!important}
   .ix-qs li{grid-template-columns:28px 1fr;gap:10px 12px;padding:14px}
   .ix-qs li::before{width:28px;height:28px}
   .ix-qs li > div{grid-column:2}
@@ -1369,7 +1372,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       <article class="ix-ch">
         <span class="ix-ch-dot" aria-hidden="true">1</span>
         <div class="ix-copy" data-reveal>
-          <span class="ix-num">Etapa 1 · Que te encuentren</span>
+          <span class="ix-num"><em>01</em>Que te encuentren</span>
           <h3>Una página que Google y la IA entienden, y que convierte visitas en clientes.</h3>
           <p>Tu página nueva, por suscripción: rápida en el celular, con precios, horarios y reseñas claros, y con los datos estructurados que buscadores y asistentes de IA usan para recomendar. Te la mostramos terminada antes de que pagues.</p>
           <ul class="ix-ticks"><li>Lista para Google y asistentes de IA</li><li>Agendar o pedir en un toque</li><li>La ves antes de decidir</li></ul>
@@ -1390,7 +1393,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       <article class="ix-ch">
         <span class="ix-ch-dot" aria-hidden="true">2</span>
         <div class="ix-copy" data-reveal>
-          <span class="ix-num">Etapa 2 · Que te escriban y te elijan</span>
+          <span class="ix-num"><em>02</em>Que te escriban y te elijan</span>
           <h3>Respondes en segundos, de día y de noche.</h3>
           <p>Un asistente en tu WhatsApp y en tu página contesta precios, horarios y dudas con la información que tú apruebas, aparta citas y toma pedidos con catálogo digital. Tu equipo recibe la solicitud lista para confirmar.</p>
           <ul class="ix-ticks"><li>En tu mismo número</li><li>Citas, reservaciones y pedidos</li><li>Pasa a una persona lo delicado</li></ul>
@@ -1413,7 +1416,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       <article class="ix-ch">
         <span class="ix-ch-dot" aria-hidden="true">3</span>
         <div class="ix-copy" data-reveal>
-          <span class="ix-num">Etapa 3 · Que tu operación trabaje sola</span>
+          <span class="ix-num"><em>03</em>Que tu operación trabaje sola</span>
           <h3>Agentes de IA que hacen el trabajo de un puesto completo.</h3>
           <p>Un agente que cada mañana busca clientes nuevos, les escribe y les da seguimiento. Otro que procesa facturas y concilia pagos. Otro que captura pedidos. Rediseñamos el proceso, los conectamos a tus herramientas y tu equipo pasa de capturar a revisar y decidir.</p>
           <ul class="ix-ticks"><li>Prospección y seguimiento de ventas</li><li>Facturas, compras y contabilidad</li><li>Tú apruebas lo importante</li></ul>
@@ -1435,7 +1438,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       <article class="ix-ch">
         <span class="ix-ch-dot" aria-hidden="true">4</span>
         <div class="ix-copy" data-reveal>
-          <span class="ix-num">Etapa 4 · Que decidas con datos</span>
+          <span class="ix-num"><em>04</em>Que decidas con datos</span>
           <h3>Cada mañana sabes qué pasó y qué conviene hacer.</h3>
           <p>Juntamos los datos de tus ventas, citas o pedidos, y un agente los analiza todos los días: qué subió, qué bajó, qué se vende junto y dónde pierdes margen. Con un tablero hecho para tu equipo y procesos a la medida para lo que tu negocio necesite.</p>
           <ul class="ix-ticks"><li>Reporte diario en lenguaje claro</li><li>Tableros para tu equipo</li><li>Procesos hechos a tu medida</li></ul>

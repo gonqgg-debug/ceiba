@@ -163,9 +163,10 @@
 .ia-case h3{font-size:clamp(28px,3vw,40px);line-height:1.05;letter-spacing:-.03em;font-weight:700;max-width:16ch;margin-top:10px}
 .ia-case .ia-sub{color:rgba(247,244,235,.75)}
 .ia-case .ia-list{margin-top:20px}
-.ia-for{display:flex;flex-wrap:wrap;gap:6px;margin-top:22px;align-items:center}
-.ia-for small{font:500 12px var(--f-mono);color:rgba(247,244,235,.55);margin-right:4px}
-.ia-for span{font-size:13px;padding:6px 10px;border-radius:999px;border:1px solid rgba(214,250,82,.3);color:var(--lime)}
+.ia-for{display:flex;flex-wrap:wrap;gap:4px 0;margin-top:22px;align-items:baseline;font-size:15px}
+.ia-for small{font-size:15px;font-weight:600;color:var(--lime);margin-right:10px}
+.ia-for span{color:rgba(247,244,235,.8)}
+.ia-for span + span::before{content:"·";margin:0 9px;color:rgba(247,244,235,.4)}
 .ia-viz{position:relative;border-radius:22px;background:linear-gradient(155deg,#14302A,#0E201C);border:1px solid rgba(247,244,235,.1);padding:20px 20px 34px;box-shadow:0 40px 80px -40px rgba(0,0,0,.8);min-height:360px;overflow:hidden}
 .ia-viz-top{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:14px}
 .ia-viz-top .dot{width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(214,250,82,.22);animation:blink 1.4s infinite}
