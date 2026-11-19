@@ -11,7 +11,7 @@
 <meta name="theme-color" content="#0B1514">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700;800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Red+Hat+Display:wght@500;600;700&family=Red+Hat+Text:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Funnel+Display:wght@400;500;600;700;800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Red+Hat+Display:wght@500;600;700&family=Red+Hat+Text:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="/assets/clinica.css">
 <style>
 
@@ -1270,6 +1270,62 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   *,*::before,*::after{animation:none!important;transition:none!important}
   [data-reveal],.ix-in{opacity:1;translate:none}
 }
+
+/* ===================== estilo «cielo y campo» ===================== */
+:root{--ink:#0C1226;--ink-2:#1B2A72;--ink-3:#24358A;--petrol:#2747E8;--petrol-2:#1F3BCB;--ivory:#F7F5EF;--ivory-2:#ECE9DF;--navy:#14246B;--sky:#2747E8;--f-display:"Instrument Serif",Georgia,serif}
+body{font-synthesis:none}
+.band{background:var(--navy);--muted:rgba(247,245,239,.74)}
+.band--light{background:var(--ivory);--muted:rgba(12,18,38,.66)}
+h1,h2,h3,.ix-h{font-weight:400!important}
+.ix-h{font-size:clamp(46px,5.6vw,80px)!important;line-height:.98!important;letter-spacing:-.02em!important}
+.site-header{background:var(--navy)!important;border-bottom-color:rgba(255,255,255,.12)!important}
+/* hero */
+.ix-hero{clip-path:none!important;padding:0 0 150px!important;background:#1D3ED6!important}
+.ix-hero::after{display:none!important}
+.hx-bg,.hx-front{position:absolute;inset:0;background:url(/img/hero-cielo.jpg) 18% 82%/cover no-repeat}
+.hx-bg{z-index:-2}
+.hx-front{z-index:3;pointer-events:none;-webkit-mask-image:linear-gradient(180deg,transparent 86%,#000 94%);mask-image:linear-gradient(180deg,transparent 86%,#000 94%)}
+.ix-hero-grid{grid-template-columns:1fr!important;justify-items:center;text-align:center;padding-top:clamp(110px,11vw,150px);gap:56px!important}
+.ix-hero h1{font-size:clamp(50px,6.6vw,96px)!important;line-height:.95!important;letter-spacing:-.025em!important;max-width:14ch!important;margin-inline:auto;text-shadow:0 2px 30px rgba(10,20,80,.25)}
+.ix-hero .lede{color:#fff!important;margin-inline:auto;max-width:44ch;text-shadow:0 1px 16px rgba(10,20,80,.35)}
+.ix-hero .ix-ctas{justify-content:center}
+.ix-hero .btn-primary{background:#fff;color:var(--ink)}
+.ix-hero .btn-primary:hover{background:#EEF1FF}
+.ix-glass{background:rgba(255,255,255,.1)!important;border-color:rgba(255,255,255,.45)!important;color:#fff!important}
+.ix-stage{width:min(980px,100%);z-index:1}
+.hx-panel{transform:none!important}
+.hx-tabs i,.hx-site-hero em{background:var(--sky)}
+.hx-site-hero em{color:#fff}
+.hx-stat.ok{background:var(--navy);border-color:var(--navy)}
+.hx-stat.ok b{color:var(--lime)}
+.hx-req span{color:var(--sky);background:#E8ECFF}
+.hx-req em{background:var(--sky)}
+.hx-insight{background:var(--navy)}
+.hx-kpis b{color:var(--sky)}
+.hx-bars i{background:#D5DCFB}
+.hx-bars i.hi{background:linear-gradient(#D6FA52,#2747E8)}
+.hx-live{background:#2BB673}
+/* franja de servicios sobre el pasto */
+.ix-ticker{margin-top:-130px!important;padding-top:40px!important;background:linear-gradient(180deg,transparent,rgba(20,36,107,.7) 45%,var(--navy) 80%)!important}
+.ix-ticker span{text-shadow:0 2px 18px rgba(0,0,0,.35)}
+/* camino */
+.ix-ex--hand,.ix-ex--agents{background:linear-gradient(150deg,#1F318A,#101A4D)!important;border:1px solid rgba(255,255,255,.12)!important}
+.ix-ex--data{background:radial-gradient(80% 90% at 90% 0%,#E8ECFF,transparent 60%),linear-gradient(160deg,#F2F0E9,#E6EAF6)!important}
+.ix-ex--book{background:radial-gradient(90% 90% at 80% 10%,#DCE3FF,transparent 60%),linear-gradient(160deg,#F1EFE7,#E4E9F7)!important}
+.ix-path::after{background:linear-gradient(180deg,#5B78FF,var(--lime))!important}
+.ix-ch-dot{background:var(--navy)!important}
+.ix-ch.on .ix-ch-dot{background:var(--lime)!important}
+.ix-rep .ix-finds li span,.ix-ag-row .ic{background:var(--sky)!important;color:#fff!important}
+.ix-spark .l{stroke:var(--sky)!important}
+/* cuestionario */
+.ix-res{background:var(--navy)!important}
+.ix-res-meter i{background:linear-gradient(90deg,#5B78FF,var(--lime))!important}
+/* consultoría: cielo con pasto abajo */
+.ix-close{background:#1D3ED6!important;animation:none!important;clip-path:none!important;padding-bottom:clamp(140px,14vw,220px)!important}
+.ix-close::after{inset:auto 0 0 0!important;width:auto!important;height:46%!important;border-radius:0!important;background:url(/img/campo.jpg) center bottom/cover no-repeat!important;-webkit-mask-image:linear-gradient(180deg,transparent,#000 55%);mask-image:linear-gradient(180deg,transparent,#000 55%);animation:none!important;transform:none!important}
+.cf{background:rgba(12,18,38,.55)!important;border-color:rgba(255,255,255,.18)!important}
+.cf::before{background:linear-gradient(90deg,#8FA4FF,var(--lime))!important}
+.cf-points svg{fill:var(--lime)}
 </style>
 </head>
 <body>
@@ -1295,10 +1351,10 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 
 <main>
 <section class="band ix-hero" aria-labelledby="ix-title">
-  <canvas class="ix-grad" id="ix-grad" aria-hidden="true"></canvas>
+  <div class="hx-bg" aria-hidden="true"></div>
   <div class="wrap ix-hero-grid">
     <div>
-      <h1 id="ix-title" class="ix-in">Implementamos la tecnología <span class="ix-shine">que hace crecer tu negocio.</span></h1>
+      <h1 id="ix-title" class="ix-in">Implementamos la tecnología que hace crecer tu negocio.</h1>
       <p class="lede ix-in d1">De tu página web a tu operación: lo construimos y lo dejamos funcionando.</p>
       <div class="ix-ctas ix-in d2"><a class="btn btn-primary" href="#consultoria">Agendar una consultoría <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-line ix-glass" href="/webs">Revisar mi página web</a></div>
     </div>
@@ -1343,6 +1399,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       <div class="hx-toast hx-toast--b ix-in d4" id="hx-toast-b" aria-hidden="true"><span class="ic">✓</span><div><b>Factura conciliada</b><small>Contabilidad · sin intervención</small></div></div>
     </div>
   </div>
+  <div class="hx-front" aria-hidden="true"></div>
 </section>
 
 <div class="ix-ticker" aria-label="Lo que hacemos: Páginas web, Asistentes de WhatsApp, Agentes de IA, Automatización, Tableros, Análisis diario, SEO para la IA.">
@@ -1353,7 +1410,6 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   <div class="wrap">
     <div class="ix-shift-grid">
       <div>
-        <p class="ix-kick" data-reveal>Lo que está cambiando</p>
         <h2 class="ix-h" id="shift-title" data-reveal data-delay="1">Tus clientes ya no buscan. Preguntan.</h2>
         <p class="ix-sub" data-reveal data-delay="2">Cada vez más personas le preguntan a Google o a un asistente de IA a quién acudir, y reciben nombres concretos. Si la información de tu negocio no está clara, la recomendación es para otro.</p>
         <p class="ix-urge" data-reveal data-delay="3"><b>La ventaja es para quien se mueve primero.</b> Los negocios que hoy ordenan su información y automatizan lo repetitivo son los que mañana aparecen, responden y venden más con el mismo equipo.</p>
@@ -1382,7 +1438,6 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 
 <section class="band section ix-way" id="camino" aria-labelledby="way-title">
   <div class="wrap">
-    <p class="ix-kick" data-reveal>Cómo te ayudamos</p>
     <h2 class="ix-h" id="way-title" data-reveal data-delay="1">De que te encuentren a que tu negocio trabaje solo.</h2>
     <p class="ix-sub" data-reveal data-delay="2" style="color:rgba(247,244,235,.75)">Empezamos por tu página web y crecemos contigo, etapa por etapa, con asistentes, agentes y procesos hechos a tu medida. Puedes empezar por la que más te urge.</p>
 
@@ -1478,7 +1533,6 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 
 <section class="band band--light section ix-level" id="etapa" aria-labelledby="lvl-title">
   <div class="wrap">
-    <p class="ix-kick" data-reveal>30 segundos</p>
     <h2 class="ix-h" id="lvl-title" data-reveal data-delay="1">¿En qué etapa está tu negocio?</h2>
     <p class="ix-sub" data-reveal data-delay="2">Contesta con honestidad. Te decimos qué estás dejando ir y por dónde conviene empezar.</p>
     <div class="ix-quiz">
@@ -1510,7 +1564,6 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 <section class="band ix-close ix-close--form" id="consultoria" aria-labelledby="close-title">
   <div class="wrap">
     <div class="cf-intro">
-      <p class="ix-kick" data-reveal style="color:var(--lime)">Consultoría</p>
       <h2 id="close-title" data-reveal>Que la próxima recomendación sea tu negocio.</h2>
       <p class="ix-close-p" data-reveal data-delay="1">Una sesión para revisar tu negocio completo: cómo te encuentran, cómo atiendes, qué trabajo se repite y qué datos no usas. Sales con un plan por etapas.</p>
       <ul class="cf-points" data-reveal data-delay="2">
@@ -1563,6 +1616,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   requestAnimationFrame(() => document.body.classList.add('loaded'));
 
+  if (document.getElementById('ix-grad')) {
   /* ---------- degradado vivo del hero (canvas 2D, se pausa fuera de pantalla) ---------- */
   const cv = document.getElementById('ix-grad'), ctx = cv.getContext('2d');
   const blobs = [
@@ -1591,6 +1645,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   size(); draw(0); addEventListener('resize', () => { size(); draw(performance.now() - t0); });
   if (!reduce) {
     new IntersectionObserver(([e]) => { run = e.isIntersecting; if (run) requestAnimationFrame(loop); }).observe(cv);
+  }
   }
 
   /* ---------- profundidad con el mouse ---------- */
