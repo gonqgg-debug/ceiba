@@ -59,7 +59,7 @@ Son precios de lanzamiento para probar en México, en MXN y con IVA incluido. Fa
 
 ## Qué es prototipo y qué no
 
-- **Revisión de URL:** valida la dirección, pero el servicio de auditoría no está conectado. No muestra resultados para URLs reales. Si escribes `clinicaarrayan.mx`, abre el diagnóstico de ejemplo.
+- **Campo de la portada:** el botón «Pedir mi propuesta gratis» lleva al formulario con la dirección ya cargada. Cuando el diagnóstico automático entregue resultados inmediatos, tendrá su propia acción: «Analizar mi página».
 - **Formularios:** el de diagnóstico y la agenda de 15 minutos validan los datos, pero no envían nada.
 - **Activación:** con el servidor (`api/`) corriendo, «Activar mi web» abre Stripe Checkout (ver «Pagos con Stripe»). En una vista estática sin servidor muestra un aviso y no cobra.
 - **Páginas del sitemap sin construir:** `/ia`, `/precios`, `/trabajo`, `/nosotros`, `/contacto`, las demás industrias y las páginas legales. Sus enlaces muestran un aviso con la ruta.

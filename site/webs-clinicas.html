@@ -104,11 +104,11 @@ button{font:inherit;color:inherit}
 .toast code{font-family:var(--f-mono);font-size:13px}
 
 /* hero */
-.hero{padding-block:clamp(48px,7vw,96px) 0;overflow:clip}
-.hero h1{font-size:clamp(42px,6.6vw,100px);line-height:.95;letter-spacing:-.04em;font-weight:700;max-width:15em}
-.hero h1 .soft{font-weight:400;color:rgba(247,244,235,.58)}
-.hero-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,5vw,72px);margin-top:clamp(36px,4.5vw,64px);align-items:start}
-.hero-copy{display:grid;gap:28px;padding-bottom:clamp(40px,6vw,96px)}
+.hero{padding-block:clamp(36px,4.5vw,64px) 0;overflow:clip}
+.hero h1{font-size:clamp(40px,5.8vw,86px);line-height:.95;letter-spacing:-.04em;font-weight:700;max-width:15em}
+.hero h1 .soft{font-weight:400;color:var(--ivory)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(32px,5vw,72px);margin-top:clamp(32px,4vw,56px);align-items:start}
+.hero-copy{display:grid;gap:24px;padding-bottom:clamp(32px,5vw,80px)}
 .hero-copy .lede{color:var(--ivory);font-size:clamp(19px,1.7vw,23px);max-width:28ch;line-height:1.35}
 .audit{display:grid;gap:10px}
 .audit label{font-weight:500;font-size:15px}
@@ -137,7 +137,18 @@ button{font:inherit;color:inherit}
 .audit-result .btn{height:44px;font-size:15px}
 .audit-result code{font-family:var(--f-mono);color:var(--ivory);font-size:14px;word-break:break-all}
 
-.hero-visual{position:relative;margin-right:calc(-1 * var(--gut-r) - max(0px, (100vw - var(--max) - 40px) / 2) - 1px)}
+.hero-visual{position:relative;min-width:0;padding-bottom:clamp(32px,5vw,80px)}
+.ba{display:grid;gap:12px}
+.ba .ba-toggle{display:none}
+.ba-toggle button[aria-checked="true"],.ba-toggle button[aria-checked="true"][data-v="new"]{background:var(--ivory);color:var(--ink);box-shadow:none}
+.ba-panels{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ba-panel{margin:0;display:grid;gap:8px;min-width:0}
+.ba-panel figcaption{font:500 14px var(--f-body);color:rgba(247,244,235,.72)}
+.ba-new figcaption{color:var(--ivory)}
+.ba-screen{border-radius:14px;overflow:hidden;border:1px solid rgba(247,244,235,.16);background:#fff;box-shadow:0 30px 60px -32px rgba(0,0,0,.65)}
+.ba-screen .viewport{height:clamp(380px,33vw,440px);overflow:hidden}
+.ba .mn-float{display:none}
+.ba-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 16px;font-size:14px;color:var(--muted);padding-top:2px}
 .hero-caption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;padding:14px 0 0;font-size:14px;color:var(--muted);padding-right:var(--gut-r)}
 .hero-caption strong{color:var(--ivory);font-weight:600}
 
@@ -407,6 +418,12 @@ button{font:inherit;color:inherit}
 .changes .before span,.changes .after span{font:500 12px/1.9 var(--f-mono);color:var(--muted)}
 [data-view="old"] .changes .after,[data-view="new"] .changes .before{opacity:.42}
 .cmp-links{display:grid;gap:14px;margin-top:24px;justify-items:start}
+.more-changes{border-bottom:1px solid var(--line)}
+.more-changes summary{cursor:pointer;padding:16px 0;font-size:15px;font-weight:500;color:var(--muted);list-style:none}
+.more-changes summary::-webkit-details-marker{display:none}
+.more-changes summary::before{content:"+";display:inline-block;width:28px;font:500 16px var(--f-mono)}
+.more-changes[open] summary::before{content:"–"}
+.more-changes .changes{border-top:0}
 .task{margin-top:22px;padding:18px 20px;border-radius:12px;background:var(--ink);color:var(--ivory);display:grid;gap:6px}
 .task p{font-size:15px;color:rgba(247,244,235,.72)}
 .task strong{font:600 20px/1.2 var(--f-display);letter-spacing:-.01em}
@@ -448,7 +465,9 @@ button{font:inherit;color:inherit}
 .plan .btn{height:44px;font-size:15px}
 .price-cell .v{font-size:24px;font-variant-numeric:tabular-nums}
 .price-foot{margin-top:20px;font-size:14px;color:var(--muted);max-width:70ch}
-.plan--addon{border-top:1px dashed rgba(247,244,235,.3)}
+.addon-block{margin-top:28px;border:1px solid var(--line);border-radius:14px;padding:0 20px;background:var(--ink-2)}
+.addon-k{font:500 13px var(--f-mono);color:rgba(247,244,235,.6);padding-top:18px}
+.plan--addon{border-bottom:0;padding-top:14px}
 .plan--addon h3{font-size:24px}
 .plan--mid{background:linear-gradient(90deg,transparent,rgba(16,61,55,.55) 12%,rgba(16,61,55,.55) 88%,transparent)}
 .proto-note{margin-top:20px;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;font:400 13px/1.5 var(--f-mono);color:rgba(247,244,235,.6)}
@@ -637,6 +656,13 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 }
 @media (max-width:720px){
   body{font-size:16px}
+  .field-url{flex-direction:column}
+  .field-url .btn{width:100%}
+  .ba .ba-toggle{display:flex}
+  .ba-panels{grid-template-columns:1fr}
+  .ba[data-show="new"] .ba-old,.ba[data-show="old"] .ba-new{display:none}
+  .ba-panel figcaption{display:none}
+  .ba-screen .viewport{height:min(520px,128vw)}
   .steps{grid-template-columns:1fr;gap:32px}
   .steps::before{left:19px;right:auto;top:0;bottom:0;width:1px;height:auto}
   .steps li{grid-template-columns:40px 1fr;gap:4px 18px;padding-right:0}
@@ -783,13 +809,13 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       </div>
       <p class="lede">Para que tus pacientes vean tus tratamientos y agenden desde el celular, sin llamar. Y un asistente de WhatsApp que contesta cuando tu equipo está ocupado.</p>
       <form class="audit" id="audit-form" novalidate>
-          <label for="audit-url">¿Ya tienes página? Escribe la dirección</label>
+          <label for="audit-url">Pega la dirección de tu página</label>
           <div class="field-url" id="audit-field">
             <div class="row"><span class="prefix" aria-hidden="true">https://</span>
             <input id="audit-url" name="url" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com" aria-describedby="audit-help"></div>
-            <button class="btn btn-primary" type="submit">Ver cómo quedaría <span class="arrow" aria-hidden="true">→</span></button>
+            <button class="btn btn-primary" type="submit">Pedir mi propuesta gratis</button>
           </div>
-          <p class="hint" id="audit-help">Es gratis y no te pedimos tu correo para empezar.</p>
+          <p class="hint" id="audit-help">Te enviamos un enlace privado con una vista previa del rediseño y el precio.</p>
           <div id="audit-out" aria-live="polite"></div>
         </form>
       <div class="secondary-actions">
@@ -857,6 +883,10 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
             <span class="n" aria-hidden="true">3</span><h3>Quién te atiende</h3>
             <span class="txt"><span class="before"><span>Antes</span>Una promoción ocupa toda la pantalla y no aparece nadie del equipo.</span><span class="after"><span>Después</span>Fotos reales del consultorio y de la dentista, con su especialidad.</span></span>
           </button></li>
+        </ol>
+        <details class="more-changes">
+          <summary>3 mejoras más en esta demo: ubicación, opiniones y respuestas de noche</summary>
+          <ol class="changes" start="4">
           <li data-change="4"><button type="button" aria-label="Cambio 4: cómo llegar. Mostrar en la página">
             <span class="n" aria-hidden="true">4</span><h3>Cómo llegar</h3>
             <span class="txt"><span class="before"><span>Antes</span>La dirección está en una imagen que no se puede copiar ni abrir en el mapa.</span><span class="after"><span>Después</span>El horario de hoy arriba, la dirección escrita y un botón para abrir el mapa.</span></span>
@@ -869,12 +899,13 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
             <span class="n" aria-hidden="true">6</span><h3>Respuestas de noche y en fin de semana</h3>
             <span class="txt"><span class="before"><span>Antes</span>Un formulario que promete contestar «a la brevedad».</span><span class="after"><span>Después</span>Un asistente contesta al momento y pasa a WhatsApp lo que necesita una persona.</span></span>
           </button></li>
-        </ol>
+          </ol>
+        </details>
         <div class="task">
           <p>Lo que gana la clínica</p>
           <strong>Más citas agendadas sin tener que contestar el teléfono.</strong>
         </div>
-        <div class="cmp-links"><a class="link" href="propuesta-clinica-arrayan.html">Ver cómo le llega la propuesta a la clínica <span class="arrow" aria-hidden="true">→</span></a><a class="link" href="#" data-route="/trabajo">Ver más ejemplos de rediseño</a></div>
+        <div class="cmp-links"><a class="link" href="propuesta-clinica-arrayan.html">Ver la propuesta que recibiría esta clínica <span class="arrow" aria-hidden="true">→</span></a></div>
       </div>
     </div>
   </div>
@@ -1123,7 +1154,8 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   const fitOld = () => $$('.viewport').forEach(vp => {
     const w = vp.clientWidth; const old = $('.mk-old', vp);
     if (!old) return;
-    old.style.width = Math.max(760, w) + 'px'; old.style.zoom = Math.min(1, w / 760);
+    old.style.width = Math.max(760, w) + 'px';
+    old.style.zoom = vp.closest('.ba') ? Math.max(w / 760, 0.58) : Math.min(1, w / 760);
   });
   fitOld(); new ResizeObserver(fitOld).observe(document.body);
   $$('.viewport').forEach(v => new ResizeObserver(fitOld).observe(v));
@@ -1233,7 +1265,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 
   // change list ↔ markers
   const marks = n => $$(`[data-mark="${n}"]`, vp);
-  $$('#changes li').forEach(li => {
+  $$('.changes li[data-change]').forEach(li => {
     const n = li.dataset.change, btn = $('button', li);
     const on = () => { li.classList.add('hl'); marks(n).forEach(m => m.classList.add('hl')); };
     const off = () => { li.classList.remove('hl'); marks(n).forEach(m => m.classList.remove('hl')); };
@@ -1272,15 +1304,13 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       auditOut.innerHTML = `<p class="err" id="audit-err"><span aria-hidden="true">!</span>${r.error}</p>`;
       auditInput.setAttribute('aria-describedby', 'audit-err audit-help'); auditInput.focus(); return;
     }
-    auditInput.setAttribute('aria-describedby', 'audit-help');
-    if (r.host === 'clinicaarrayan.mx') { auditOut.innerHTML = ''; openDiag(); return; }
-    auditOut.innerHTML = `<div class="audit-result">
-      <h3>Recibimos <code>${esc(r.host)}</code></h3>
-      <p>El servicio de revisión automática no está conectado en este prototipo, así que no analizamos tu página ni mostramos resultados. En el sitio, este botón abre <code>/diagnostico</code> con tu resultado.</p>
-      <div class="actions"><button class="btn btn-primary" type="button" data-act="ask">Pedir la propuesta para ${esc(r.host)}</button><button class="btn btn-line" type="button" data-act="demo">Ver una revisión de ejemplo</button></div></div>`;
-    $('[data-act="ask"]', auditOut).addEventListener('click', () => goToForm({ site: r.host }));
-    $('[data-act="demo"]', auditOut).addEventListener('click', openDiag);
+    auditInput.setAttribute('aria-describedby', 'audit-help'); auditOut.innerHTML = '';
+    // Hoy el botón lleva al formulario con la dirección cargada. Cuando el
+    // diagnóstico entregue resultados inmediatos, tendrá su propia acción:
+    // «Analizar mi página».
+    goToForm({ site: r.host });
   });
+  radiogroup($('#ba-toggle'), b => { $('#hero-ba').dataset.show = b.dataset.v; });
   $('#no-web').addEventListener('click', () => goToForm({ noweb: true }));
 
   /* ---------- example diagnostic ---------- */
@@ -1332,7 +1362,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   indBtns.forEach(b => { b.addEventListener('click', () => selectInd(b)); b.addEventListener('mouseenter', () => { if (matchMedia('(hover:hover)').matches) selectInd(b); }); b.addEventListener('focus', () => selectInd(b)); });
 
   /* ---------- chat replay ---------- */
-  const chat = $('#chat-body'), items = [...chat.children];
+  const chat = $('#chat-body'), handoff = $('.handoff', chat), items = [...chat.children].filter(el => el !== handoff);
   let chatTimers = [];
   $('#chat-replay').addEventListener('click', () => {
     chatTimers.forEach(clearTimeout); chatTimers = [];
@@ -1342,8 +1372,8 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     let t = 200;
     items.forEach(el => {
       const isBot = el.classList.contains('in');
-      if (isBot) { chatTimers.push(setTimeout(() => chat.appendChild(typing), t)); t += 900; }
-      chatTimers.push(setTimeout(() => { typing.remove(); el.hidden = false; el.classList.add('reveal'); chat.appendChild(el); }, t));
+      if (isBot) { chatTimers.push(setTimeout(() => chat.insertBefore(typing, handoff), t)); t += 900; }
+      chatTimers.push(setTimeout(() => { typing.remove(); el.hidden = false; el.classList.add('reveal'); chat.insertBefore(el, handoff); }, t));
       t += isBot ? 700 : 900;
     });
   });
