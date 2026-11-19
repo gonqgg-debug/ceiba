@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Inteligencia artificial para negocios · Ceiba Labs</title>
-<meta name="description" content="Asistente de WhatsApp con IA, automatizaciones a medida y diagnóstico de procesos para negocios de México. Tú apruebas lo que responde y decides cuándo pasa a una persona.">
+<title>Inteligencia artificial y procesos para negocios · Ceiba Labs</title>
+<meta name="description" content="Asistentes de IA, agentes que ejecutan tareas, automatización de procesos y rediseño de operación para negocios de México. Empezamos por un problema concreto y lo medimos.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="/apple-touch-icon" href="/apple-touch-icon.png">
@@ -779,6 +779,87 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 .ia-chips{display:flex;flex-wrap:wrap;gap:8px}
 .ia-chips button{border:1px solid rgba(247,244,235,.22);background:transparent;color:inherit;border-radius:999px;padding:8px 12px;font:inherit;font-size:14px;cursor:pointer}
 .ia-chips button:hover{border-color:var(--lime)}
+
+/* ---------- IA v2 ---------- */
+.ia-hero{position:relative;isolation:isolate;overflow:hidden;clip-path:polygon(0 0,100% 0,100% 90%,0 100%);padding-bottom:clamp(90px,10vw,150px)!important;background:#0B1514}
+.ia-hero::before{content:"";position:absolute;inset:-20%;z-index:-1;background:radial-gradient(40% 50% at 75% 30%,rgba(14,159,138,.55),transparent 70%),radial-gradient(35% 45% at 90% 85%,rgba(214,250,82,.35),transparent 70%),radial-gradient(45% 55% at 20% 80%,rgba(16,61,55,.9),transparent 70%),radial-gradient(30% 40% at 55% 60%,rgba(31,79,209,.25),transparent 70%);animation:iaDrift 18s ease-in-out infinite alternate}
+.ia-hero::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 70% at 18% 45%,rgba(11,21,20,.75),transparent 72%)}
+@keyframes iaDrift{to{transform:translate(-6%,4%) rotate(6deg) scale(1.08)}}
+.ia-shine{background:linear-gradient(100deg,#D6FA52,#7EE8C6 40%,#F7F4EB 55%,#7EE8C6 70%,#D6FA52);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:iaShine 7s linear infinite}
+@keyframes iaShine{to{background-position:-220% 0}}
+.ia-kick{font:500 13px var(--f-mono);color:var(--petrol)}
+.band:not(.band--light) .ia-kick{color:var(--lime)}
+.ia-h{font-size:clamp(34px,4.2vw,58px);line-height:1.02;letter-spacing:-.04em;font-weight:700;max-width:18ch;margin-top:12px}
+.ia-sub{margin-top:18px;font-size:clamp(17px,1.35vw,19px);line-height:1.6;color:var(--muted);max-width:58ch}
+[data-reveal]{opacity:0;translate:0 28px;transition:opacity .9s cubic-bezier(.2,.7,.1,1),translate .9s cubic-bezier(.2,.7,.1,1)}
+[data-reveal].in{opacity:1;translate:0 0}
+.ia-ways{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:44px}
+.ia-way{position:relative;display:grid;gap:10px;align-content:start;padding:24px;border-radius:20px;background:#fff;border:1px solid var(--line);text-decoration:none;color:inherit;transition:transform .35s cubic-bezier(.2,.7,.1,1),box-shadow .35s,border-color .35s}
+.ia-way:hover{transform:translateY(-5px);box-shadow:0 30px 60px -36px rgba(11,21,20,.45);border-color:rgba(16,61,55,.35)}
+.ia-way-n{font:500 13px var(--f-mono);color:var(--petrol)}
+.ia-way b{font:600 21px/1.15 var(--f-display);letter-spacing:-.015em}
+.ia-way p{color:var(--muted);font-size:15px}
+.ia-way em{font-style:normal;font-weight:600;font-size:14px;color:var(--petrol);margin-top:auto;padding-top:8px}
+.ia-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px clamp(40px,6vw,96px);align-items:center}
+.ia-split--flip > :first-child{order:0}
+.ia-list{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:10px}
+.ia-list li{display:grid;grid-template-columns:22px 1fr;gap:8px;color:rgba(247,244,235,.85)}
+.ia-list li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--lime);margin-top:9px}
+.ia-demo{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:end;padding:22px;border-radius:24px;background:linear-gradient(150deg,#13302A,#0F2420);border:1px solid rgba(247,244,235,.08);min-height:400px}
+.ia-demo-chat{display:flex;flex-direction:column;justify-content:flex-end;gap:7px;padding:12px;border-radius:16px;background:#EFEAE2;min-height:340px;overflow:hidden}
+.ia-demo-card{background:#fff;color:#15211D;border-radius:18px;padding:16px;display:grid;gap:8px;box-shadow:0 30px 60px -30px rgba(0,0,0,.7);opacity:0;transform:translateY(14px) scale(.97);transition:opacity .6s,transform .6s cubic-bezier(.2,.8,.2,1)}
+.ia-demo-card.on{opacity:1;transform:none}
+.ia-demo-card .tag{justify-self:start;font:500 11px var(--f-mono);color:#0F5C4B;background:#E4F5EC;padding:4px 8px;border-radius:999px}
+.ia-demo-card b{font:600 18px var(--f-display)}
+.ia-demo-card dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:5px 12px;font-size:13px}
+.ia-demo-card dt{color:#6B7774}
+.ia-demo-card dd{margin:0;font-weight:500}
+.ia-demo-card .acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.ia-demo-card .acts span{font-size:12px;font-weight:600;padding:7px 11px;border-radius:999px;border:1px solid #DDE1DF}
+.ia-demo-card .acts .ok{background:#0F5C4B;color:#fff;border-color:#0F5C4B}
+.ia-agent{border-radius:24px;background:#fff;border:1px solid var(--line);box-shadow:0 40px 80px -50px rgba(11,21,20,.5);overflow:hidden}
+.ia-agent-top{display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid var(--line)}
+.ia-agent-top .dot{width:10px;height:10px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(214,250,82,.3);animation:blink 1.4s infinite}
+.ia-agent-top b{font-weight:600}
+.ia-agent-top small{margin-left:auto;font:500 12px var(--f-mono);color:var(--muted)}
+.ia-agent-steps{list-style:none;margin:0;padding:10px 20px 20px;display:grid;gap:4px;counter-reset:ag}
+.ia-agent-steps li{counter-increment:ag;display:grid;grid-template-columns:30px 1fr;gap:2px 12px;padding:10px 0;opacity:.35;transition:opacity .4s}
+.ia-agent-steps li::before{content:counter(ag);grid-row:span 2;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:600 12px var(--f-mono);border:1.5px solid var(--line);transition:background .4s,border-color .4s,color .4s}
+.ia-agent-steps li b{font-weight:600;font-size:15px}
+.ia-agent-steps li span{color:var(--muted);font-size:13px}
+.ia-agent-steps li.on{opacity:1}
+.ia-agent-steps li.done::before{content:"✓";background:var(--petrol);border-color:var(--petrol);color:var(--ivory)}
+.ia-agent-steps li.human.on::before{background:var(--lime);border-color:var(--lime);color:var(--ink);content:"!"}
+.ia-agent-steps li.human.on b::after{content:" · esperando aprobación";font:500 11px var(--f-mono);color:#7a6400;background:#FFF5C4;padding:2px 6px;border-radius:6px;margin-left:6px}
+.ia-agent-steps li.human.done b::after{content:" · aprobada";color:#0F5C4B;background:#E4F5EC}
+.ia-examples{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.ia-examples span{font-size:14px;font-weight:500;padding:9px 13px;border-radius:12px;background:#fff;border:1px solid var(--line)}
+.ia-autos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:44px}
+.ia-auto{display:grid;gap:10px;align-content:start;padding:22px;border-radius:20px;border:1px solid rgba(247,244,235,.12);background:rgba(247,244,235,.03)}
+.ia-auto .flow{display:grid;gap:6px;margin-bottom:8px}
+.ia-auto .flow i{font-style:normal;font-size:13px;font-weight:500;padding:8px 10px;border-radius:10px;background:rgba(247,244,235,.07);border:1px solid rgba(247,244,235,.12)}
+.ia-auto .flow i:last-child{background:rgba(214,250,82,.12);border-color:rgba(214,250,82,.35);color:var(--lime)}
+.ia-auto .flow span{justify-self:center;width:2px;height:14px;background:linear-gradient(var(--lime),transparent);position:relative;overflow:hidden}
+.ia-auto .flow span::after{content:"";position:absolute;left:0;top:-6px;width:2px;height:6px;background:var(--lime);animation:iaDrop 1.6s linear infinite}
+@keyframes iaDrop{to{top:16px}}
+.ia-auto b{font-size:17px;font-weight:600}
+.ia-auto p{color:rgba(247,244,235,.7);font-size:15px}
+.ia-stuck-t{margin-top:26px;font:500 13px var(--f-mono);color:var(--muted)}
+.ia-stuck{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px}
+.ia-stuck li{display:grid;grid-template-columns:22px 1fr;gap:8px;font-size:16px}
+.ia-stuck li::before{content:"";width:9px;height:9px;border-radius:3px;border:2px solid #C8553D;margin-top:7px}
+.ia-adopt{display:grid;gap:12px;padding:24px;border-radius:24px;background:#fff;border:1px solid var(--line)}
+.ia-adopt-step{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start;padding:12px 0;border-bottom:1px solid var(--line)}
+.ia-adopt-step span{width:40px;height:40px;border-radius:12px;background:var(--ink);color:var(--lime);display:grid;place-items:center;font:600 15px var(--f-mono)}
+.ia-adopt-step b{font-weight:600;font-size:17px}
+.ia-adopt-step p{color:var(--muted);font-size:15px}
+.ia-tools{display:flex;flex-wrap:wrap;gap:6px;padding-top:6px}
+.ia-tools span{font-size:12px;font-weight:500;padding:6px 10px;border-radius:999px;background:var(--ivory);border:1px solid var(--line)}
+@media (max-width:1100px){.ia-ways,.ia-autos{grid-template-columns:1fr 1fr}}
+@media (max-width:980px){.ia-split{grid-template-columns:1fr}.ia-split--flip .ia-agent{order:2}}
+@media (max-width:640px){.ia-ways,.ia-autos{grid-template-columns:1fr}.ia-demo{grid-template-columns:1fr}.ia-demo-chat{min-height:260px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}[data-reveal]{opacity:1;translate:none}}
+
 @media (max-width:980px){
   .ia-hero-grid,.ia-contact .wrap{grid-template-columns:1fr}
   .ia-svcs{grid-template-columns:1fr}
@@ -815,10 +896,10 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 <section class="band ia-hero" aria-labelledby="ia-title">
   <div class="wrap ia-hero-grid">
     <div>
-      <h1 id="ia-title">Inteligencia artificial que atiende a tus clientes <span class="soft">y le quita trabajo a tu equipo.</span></h1>
-      <p class="lede">Empezamos por lo que más tiempo te quita: contestar WhatsApp, agendar citas y dar seguimiento. Tú apruebas lo que responde y decides cuándo pasa a una persona.</p>
-      <div class="ia-acts"><a class="btn btn-primary" href="#contacto">Agendar un diagnóstico <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-line" href="#servicios">Ver servicios y precios</a></div>
-      <p class="ia-note">Sin contratar página con nosotros: funciona con tu número de WhatsApp.</p>
+      <h1 id="ia-title">Inteligencia artificial aplicada a <span class="ia-shine">cómo trabaja tu negocio.</span></h1>
+      <p class="lede">Diseñamos asistentes, agentes y automatizaciones a partir de tus procesos reales de atención, ventas y operación. Empezamos por un problema concreto, lo medimos y acompañamos a tu equipo mientras lo adopta.</p>
+      <div class="ia-acts"><a class="btn btn-primary" href="#contacto">Hablemos de tu operación <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-line" href="#demo">Ver la demo de WhatsApp</a></div>
+      <p class="ia-note">Trabajamos con las herramientas que tu equipo ya usa. No necesitas tener tu página con nosotros.</p>
     </div>
     <div class="ia-phone" aria-label="Ejemplo de conversación con el asistente de WhatsApp de una clínica">
       <div class="ia-phone-in">
@@ -829,10 +910,101 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   </div>
 </section>
 
+<section class="band band--light section" id="formas" aria-labelledby="formas-title">
+  <div class="wrap">
+    <p class="ia-kick" data-reveal>Cómo usamos la IA</p>
+    <h2 class="ia-h" id="formas-title" data-reveal>Cuatro formas de poner la IA a trabajar en tu negocio.</h2>
+    <p class="ia-sub" data-reveal>No todo se resuelve con un chatbot. Elegimos la herramienta según el problema: a veces es un asistente, a veces un agente que hace el trabajo completo y a veces basta con quitar pasos del proceso.</p>
+    <div class="ia-ways">
+      <a class="ia-way" href="#demo" data-reveal><span class="ia-way-n">01</span><b>Asistentes de atención</b><p>Responden en WhatsApp y en tu página, recogen solicitudes y pasan al equipo lo que necesita a una persona.</p><em>Ver la demo →</em></a>
+      <a class="ia-way" href="#agentes" data-reveal><span class="ia-way-n">02</span><b>Agentes de IA para operación</b><p>Hacen tareas de varios pasos: leen una solicitud, consultan tus sistemas, preparan el documento y te piden aprobación.</p><em>Ver cómo trabaja un agente →</em></a>
+      <a class="ia-way" href="#automatizacion" data-reveal><span class="ia-way-n">03</span><b>Automatización de procesos</b><p>Conectamos tus herramientas para que la información pase sola: recordatorios, seguimiento, captura y reportes.</p><em>Ver ejemplos →</em></a>
+      <a class="ia-way" href="#operacion" data-reveal><span class="ia-way-n">04</span><b>Rediseño de procesos y adopción</b><p>Revisamos cómo pasa el trabajo de una persona a otra, quitamos pasos y acompañamos a tu equipo con lo nuevo.</p><em>Ver cómo lo hacemos →</em></a>
+    </div>
+  </div>
+</section>
+
+<section class="band section" id="demo" aria-labelledby="demo-title">
+  <div class="wrap ia-split">
+    <div>
+      <p class="ia-kick" data-reveal>01 · Asistentes de atención</p>
+      <h2 class="ia-h" id="demo-title" data-reveal>Tu cliente conversa. Tu equipo recibe la solicitud lista.</h2>
+      <p class="ia-sub" data-reveal style="color:rgba(247,244,235,.75)">El asistente contesta precios, horarios, ubicación y requisitos con la información que tú apruebas. Cuando el cliente quiere agendar o cotizar, arma la solicitud con lo necesario y se la pasa a quien le toca. Si algo requiere a una persona, avisa y no inventa.</p>
+      <ul class="ia-list" data-reveal><li>WhatsApp y el chat de tu página, en tu mismo número</li><li>Aparta citas o reservaciones y manda recordatorios</li><li>Urgencias y quejas pasan directo a tu equipo, con resumen</li><li>Responde de noche y en fin de semana</li></ul>
+    </div>
+    <div class="ia-demo" data-reveal aria-label="Ejemplo: la conversación y la solicitud que recibe recepción">
+      <div class="ia-demo-chat" id="ia-demo-chat"></div>
+      <div class="ia-demo-card" id="ia-demo-card">
+        <span class="tag">Para recepción · 18:42</span>
+        <b>Solicitud de cita</b>
+        <dl><dt>Paciente</dt><dd>Mariana G.</dd><dt>Servicio</dt><dd>Limpieza · $700</dd><dt>Horario</dt><dd>Mañana 10:00</dd><dt>Nota</dt><dd>Primera vez en la clínica</dd></dl>
+        <div class="acts"><span class="ok">Confirmar</span><span>Proponer otro horario</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band band--light section" id="agentes" aria-labelledby="ag-title">
+  <div class="wrap ia-split ia-split--flip">
+    <div class="ia-agent" data-reveal aria-label="Ejemplo: un agente prepara una cotización y pide aprobación">
+      <div class="ia-agent-top"><span class="dot"></span><b>Agente de cotizaciones</b><small id="ia-agent-time">trabajando…</small></div>
+      <ol class="ia-agent-steps" id="ia-agent-steps">
+        <li><b>Lee la solicitud</b><span>Correo de Constructora Delta: 40 m² de piso, entrega en Zapopan</span></li>
+        <li><b>Busca al cliente</b><span>Cliente frecuente · precio preferente en tu CRM</span></li>
+        <li><b>Calcula con tu lista de precios</b><span>Material, instalación y flete: $38,600 + IVA</span></li>
+        <li><b>Prepara la cotización</b><span>PDF con tu formato y condiciones</span></li>
+        <li class="human"><b>Te pide aprobación</b><span>Ventas revisa y aprueba en un clic</span></li>
+        <li><b>Envía y agenda seguimiento</b><span>Recordatorio en 3 días si no hay respuesta</span></li>
+      </ol>
+    </div>
+    <div>
+      <p class="ia-kick" data-reveal>02 · Agentes de IA para operación</p>
+      <h2 class="ia-h" id="ag-title" data-reveal>Un agente no solo contesta: hace el trabajo completo.</h2>
+      <p class="ia-sub" data-reveal>Un agente de IA sigue los pasos que hoy hace una persona: lee, consulta tus sistemas, prepara y entrega. Lo diseñamos para que se detenga y te pida aprobación en lo importante, como un precio o un pago.</p>
+      <div class="ia-examples" data-reveal>
+        <span>Preparar cotizaciones con tu lista de precios</span><span>Clasificar y asignar solicitudes que llegan por correo</span><span>Conciliar pagos con facturas</span><span>Resumir expedientes o historiales antes de una cita</span><span>Capturar pedidos en tu sistema desde un mensaje</span><span>Revisar documentos y avisar qué falta</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band section" id="automatizacion" aria-labelledby="au-title">
+  <div class="wrap">
+    <p class="ia-kick" data-reveal>03 · Automatización de procesos</p>
+    <h2 class="ia-h" id="au-title" data-reveal>Que la información pase sola de una herramienta a otra.</h2>
+    <p class="ia-sub" data-reveal style="color:rgba(247,244,235,.75)">Conectamos lo que ya usas para que nadie copie y pegue datos, ni se le olvide un seguimiento.</p>
+    <div class="ia-autos">
+      <div class="ia-auto" data-reveal><div class="flow"><i>Cita agendada</i><span></span><i>Recordatorio 24 h antes</i><span></span><i>Confirma o reagenda</i></div><b>Recordatorios y confirmaciones</b><p>Menos citas perdidas sin que recepción llame uno por uno.</p></div>
+      <div class="ia-auto" data-reveal><div class="flow"><i>Cotización enviada</i><span></span><i>3 días sin respuesta</i><span></span><i>Seguimiento automático</i></div><b>Seguimiento de ventas</b><p>Ninguna cotización se queda olvidada en una bandeja.</p></div>
+      <div class="ia-auto" data-reveal><div class="flow"><i>Formulario o WhatsApp</i><span></span><i>Tu CRM u hoja de cálculo</i><span></span><i>Aviso al responsable</i></div><b>Captura sin duplicar</b><p>Los datos se escriben una vez y llegan a donde se necesitan.</p></div>
+      <div class="ia-auto" data-reveal><div class="flow"><i>Ventas, citas y pagos</i><span></span><i>Reporte semanal</i><span></span><i>A tu correo los lunes</i></div><b>Reportes sin armarlos a mano</b><p>Los números de la semana, listos antes de tu junta.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band band--light section" id="operacion" aria-labelledby="op-title">
+  <div class="wrap ia-split">
+    <div>
+      <p class="ia-kick" data-reveal>04 · Rediseño de procesos y adopción</p>
+      <h2 class="ia-h" id="op-title" data-reveal>Mejoremos cómo pasa el trabajo de una persona a otra.</h2>
+      <p class="ia-sub" data-reveal>Antes de automatizar, revisamos el proceso completo con quien lo hace todos los días. Muchas veces lo que más ahorra es quitar un paso, definir un responsable o capturar el dato una sola vez. Después conectamos las herramientas y acompañamos a tu equipo hasta que lo nuevo se vuelve costumbre.</p>
+      <p class="ia-stuck-t" data-reveal>Dónde solemos encontrar trabajo atorado</p>
+      <ul class="ia-stuck" data-reveal><li>Cotizaciones que nadie le da seguimiento</li><li>Información que se captura dos veces</li><li>Solicitudes que llegan sin responsable</li><li>Aprobaciones que viven en chats y se pierden</li><li>Reportes que alguien arma a mano cada semana</li></ul>
+    </div>
+    <div class="ia-adopt" data-reveal>
+      <div class="ia-adopt-step"><span>1</span><div><b>Mapeamos el proceso</b><p>Quién hace qué, con qué herramienta y dónde se espera.</p></div></div>
+      <div class="ia-adopt-step"><span>2</span><div><b>Lo rediseñamos</b><p>Menos pasos, un responsable por etapa y datos que se capturan una vez.</p></div></div>
+      <div class="ia-adopt-step"><span>3</span><div><b>Conectamos y automatizamos</b><p>Agentes y automatizaciones donde de verdad ahorran tiempo.</p></div></div>
+      <div class="ia-adopt-step"><span>4</span><div><b>Capacitamos y medimos</b><p>Tu equipo aprende a usarlo y medimos tiempos antes y después.</p></div></div>
+      <div class="ia-tools"><span>WhatsApp Business</span><span>Gmail y Outlook</span><span>Google Sheets y Excel</span><span>Tu CRM</span><span>Facturación</span><span>Tu sistema interno</span></div>
+    </div>
+  </div>
+</section>
+
 <section class="band band--light section" id="servicios" aria-labelledby="svc-title">
   <div class="wrap">
-    <h2 class="h2" id="svc-title">Qué hacemos con IA.</h2>
-    <p class="lede" style="margin-top:16px">Tres formas de empezar, según dónde se te va el tiempo.</p>
+    <p class="ia-kick" data-reveal>Cómo empezar</p>
+    <h2 class="ia-h" id="svc-title" data-reveal>Tres formas de empezar, con precio claro.</h2>
     <div class="ia-svcs">
       <article class="ia-svc ia-svc--hl">
         <h3>Asistente de WhatsApp</h3>
@@ -841,9 +1013,9 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
         <p class="ia-price"><b>$3,990</b>de inicio + $1,490 al mes</p>
       </article>
       <article class="ia-svc">
-        <h3>Automatización a medida</h3>
-        <p>Para lo que tu equipo repite todos los días y se puede hacer solo.</p>
-        <ul><li>Recordatorios y confirmación de citas</li><li>Cotizaciones a partir de un mensaje o formulario</li><li>Seguimiento a clientes que no respondieron</li><li>Capturar datos en tu hoja de cálculo o sistema</li><li>Reportes semanales sin armarlos a mano</li></ul>
+        <h3>Agentes y automatización a medida</h3>
+        <p>Para lo que tu equipo repite todos los días: lo diseñamos, lo conectamos a tus herramientas y lo probamos con un caso real.</p>
+        <ul><li>Agentes que preparan cotizaciones, capturan pedidos o revisan documentos</li><li>Recordatorios, seguimiento y reportes automáticos</li><li>Integración con tu CRM, hojas de cálculo o sistema</li><li>Capacitación a tu equipo</li></ul>
         <p class="ia-price"><b>Desde $19,900</b>el piloto, cotizado a la medida</p>
       </article>
       <article class="ia-svc">
@@ -859,43 +1031,48 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 
 <section class="band section" aria-labelledby="uses-title">
   <div class="wrap">
-    <h2 class="h2" id="uses-title">Lo que puede hacer en tu negocio.</h2>
+    <p class="ia-kick" data-reveal>Por tipo de negocio</p>
+    <h2 class="ia-h" id="uses-title" data-reveal>Lo que puede hacer en tu negocio.</h2>
     <div class="ia-uses">
-      <div class="ia-use"><b>Clínicas y consultorios</b><ul><li>Responder precios y requisitos</li><li>Apartar y confirmar citas</li><li>Recordar la cita un día antes</li></ul></div>
-      <div class="ia-use"><b>Restaurantes y cafés</b><ul><li>Tomar reservaciones</li><li>Mandar el menú del día</li><li>Pedidos para llevar</li></ul></div>
-      <div class="ia-use"><b>Inmobiliarias</b><ul><li>Calificar a quien pregunta</li><li>Mandar fichas de propiedades</li><li>Agendar visitas</li></ul></div>
-      <div class="ia-use"><b>Despachos</b><ul><li>Recordar documentos pendientes</li><li>Agendar asesorías</li><li>Responder dudas frecuentes</li></ul></div>
+      <div class="ia-use" data-reveal><b>Clínicas y consultorios</b><ul><li>Responder precios y requisitos</li><li>Apartar, confirmar y recordar citas</li><li>Resumir el historial antes de la consulta</li><li>Seguimiento de presupuestos de tratamiento</li></ul></div>
+      <div class="ia-use" data-reveal><b>Restaurantes y cafés</b><ul><li>Tomar reservaciones y pedidos</li><li>Mandar el menú del día</li><li>Inventario y pedidos a proveedores</li><li>Cotizar eventos privados</li></ul></div>
+      <div class="ia-use" data-reveal><b>Inmobiliarias</b><ul><li>Calificar a quien pregunta</li><li>Mandar fichas y agendar visitas</li><li>Asignar prospectos al asesor</li><li>Dar seguimiento hasta el cierre</li></ul></div>
+      <div class="ia-use" data-reveal><b>Despachos y empresas de servicios</b><ul><li>Pedir y revisar documentos pendientes</li><li>Clasificar solicitudes por correo</li><li>Conciliar pagos con facturas</li><li>Reportes para la dirección</li></ul></div>
     </div>
   </div>
 </section>
 
 <section class="band band--light section" aria-labelledby="how-title">
   <div class="wrap">
-    <h2 class="h2" id="how-title">Cómo lo hacemos.</h2>
+    <p class="ia-kick" data-reveal>Método</p>
+    <h2 class="ia-h" id="how-title" data-reveal>Cómo lo hacemos.</h2>
     <ol class="ia-steps">
       <li><span>1</span><b>Diagnóstico</b><p>Entendemos cómo atiendes hoy, qué preguntan tus clientes y dónde se le va el tiempo a tu equipo.</p></li>
       <li><span>2</span><b>Piloto</b><p>Lo armamos con tus respuestas aprobadas y lo probamos con un caso real antes de abrirlo a todos.</p></li>
-      <li><span>3</span><b>Operación y mejora</b><p>Revisamos contigo qué preguntaron tus clientes y qué resolvió el asistente, y lo ajustamos.</p></li>
+      <li><span>3</span><b>Adopción y mejora</b><p>Capacitamos a tu equipo, medimos tiempos antes y después, y ajustamos cada mes lo que no funciona.</p></li>
     </ol>
   </div>
 </section>
 
 <section class="band section" aria-labelledby="trust-title">
   <div class="wrap">
-    <h2 class="h2" id="trust-title">Tú tienes el control.</h2>
+    <p class="ia-kick" data-reveal>Control</p>
+    <h2 class="ia-h" id="trust-title" data-reveal>Tú decides qué hace la IA.</h2>
     <div class="ia-trust">
       <div><b>Responde lo que apruebas</b><p>Arma sus respuestas con tu información: precios, horarios, servicios y políticas. No inventa.</p></div>
       <div><b>Pasa a una persona</b><p>Urgencias, quejas o casos especiales llegan a tu equipo con el resumen de la conversación.</p></div>
       <div><b>En tu número</b><p>Tus clientes te escriben al WhatsApp de siempre. No cambian nada.</p></div>
-      <div><b>Ves qué pasa</b><p>Te mostramos qué preguntan tus clientes y qué resolvió el asistente.</p></div>
+      <div><b>Aprobación en lo importante</b><p>Precios, pagos y decisiones delicadas pasan por una persona antes de salir.</p></div>
     </div>
   </div>
 </section>
 
 <section class="band band--light section" aria-labelledby="faq-title">
   <div class="wrap">
-    <h2 class="h2" id="faq-title">Preguntas frecuentes.</h2>
+    <h2 class="ia-h" id="faq-title" data-reveal style="font-size:clamp(30px,3.4vw,44px)">Preguntas frecuentes.</h2>
     <div class="ia-faq">
+      <details><summary>¿Qué diferencia hay entre un asistente y un agente?</summary><p>El asistente conversa: responde y recoge datos. El agente además ejecuta: consulta tus sistemas, prepara documentos y completa tareas de varios pasos, pidiendo tu aprobación cuando hace falta.</p></details>
+      <details><summary>¿Con qué herramientas trabajan?</summary><p>Con las que ya usas: WhatsApp Business, correo, hojas de cálculo, tu CRM o tu sistema de facturación. En el diagnóstico revisamos qué se puede conectar y cómo.</p></details>
       <details><summary>¿Necesito tener mi página con Ceiba?</summary><p>No. El asistente funciona con tu número de WhatsApp. Si además tienes tu página con nosotros, también responde ahí.</p></details>
       <details><summary>¿Qué pasa si le preguntan algo que no sabe?</summary><p>No inventa: avisa que una persona de tu equipo le responde y te pasa la conversación con un resumen.</p></details>
       <details><summary>¿Funciona de noche y en fin de semana?</summary><p>Sí. Contesta a cualquier hora y deja apartadas las citas o solicitudes para que tu equipo las vea al llegar.</p></details>
@@ -908,7 +1085,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 <section class="band band--petrol section ia-contact" id="contacto" aria-labelledby="ct-title">
   <div class="wrap">
     <div>
-      <h2 id="ct-title">Cuéntanos qué te quita más tiempo.</h2>
+      <h2 id="ct-title">Cuéntanos cómo funciona hoy tu operación.</h2>
       <p class="lede">Te escribimos en 24 horas hábiles para agendar tu diagnóstico. Si no conviene automatizarlo, te lo decimos.</p>
     </div>
     <form class="form" id="ia-form" novalidate>
@@ -918,8 +1095,8 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
           <div class="fld" data-f="biz"><label for="i-biz">Nombre del negocio</label><input id="i-biz" autocomplete="organization"><p class="err" hidden></p></div>
         </div>
         <div class="fld" data-f="contact"><label for="i-contact">Tu WhatsApp o correo</label><input id="i-contact" autocomplete="email" placeholder="+52 33 1234 5678 o tu@correo.com"><p class="err" hidden></p></div>
-        <div class="fld" data-f="message"><label for="i-msg">¿Qué te gustaría resolver?</label><textarea id="i-msg" maxlength="1500" placeholder="Por ejemplo: contestamos las mismas preguntas en WhatsApp todo el día y se nos van citas en la noche."></textarea><p class="err" hidden></p>
-          <div class="ia-chips" aria-label="Ideas"><button type="button">Contestar WhatsApp</button><button type="button">Agendar y confirmar citas</button><button type="button">Cotizaciones</button><button type="button">Seguimiento a clientes</button><button type="button">Reportes</button></div></div>
+        <div class="fld" data-f="message"><label for="i-msg">¿Qué te gustaría resolver?</label><textarea id="i-msg" maxlength="1500" placeholder="Por ejemplo: las cotizaciones llegan por correo y WhatsApp, las hace una sola persona y muchas se quedan sin seguimiento."></textarea><p class="err" hidden></p>
+          <div class="ia-chips" aria-label="Ideas"><button type="button">Asistente de WhatsApp</button><button type="button">Un agente que haga cotizaciones</button><button type="button">Automatizar seguimiento</button><button type="button">Revisar un proceso que se atora</button><button type="button">Conectar mis herramientas</button><button type="button">Reportes automáticos</button></div></div>
         <div class="trap" aria-hidden="true" style="position:absolute;left:-9999px"><input id="i-trap" tabindex="-1" autocomplete="off"></div>
         <p class="err" id="ia-err" role="alert" hidden></p>
         <button class="btn btn-primary" type="submit" id="ia-btn">Quiero mi diagnóstico <span class="arrow" aria-hidden="true">→</span></button>
@@ -971,6 +1148,44 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     }
   }
   play();
+
+  /* aparición al hacer scroll */
+  const rio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rio.unobserve(e.target); } }), { threshold: .15 });
+  document.querySelectorAll('[data-reveal]').forEach(el => rio.observe(el));
+
+  /* demo: conversación que termina en solicitud para recepción */
+  const dchat = $('#ia-demo-chat'), dcard = $('#ia-demo-card');
+  const dscript = [['me', 'Hola, ¿cuánto cuesta una limpieza?'], ['bot', '$700 y dura unos 40 minutos. ¿Te aparto un horario?'], ['me', 'Mañana a las 10, soy Mariana. Es mi primera vez'], ['bot', '¡Bienvenida! Le paso tu solicitud a recepción para confirmarla.']];
+  let dplaying = false;
+  async function demo() {
+    if (dplaying) return; dplaying = true;
+    while (true) {
+      dchat.innerHTML = ''; dcard.classList.remove('on'); await wait(700);
+      for (const [w, t] of dscript) {
+        if (w === 'bot') { const d = document.createElement('span'); d.className = 'ia-typing'; d.innerHTML = '<i></i><i></i><i></i>'; dchat.appendChild(d); await wait(900); d.remove(); } else await wait(1000);
+        dchat.insertAdjacentHTML('beforeend', `<p class="ia-msg${w === 'me' ? ' me' : ''}">${t}</p>`);
+      }
+      await wait(500); dcard.classList.add('on');
+      if (reduce) return; await wait(5000);
+    }
+  }
+  /* agente: avanza paso a paso y se detiene a pedir aprobación */
+  const steps = [...document.querySelectorAll('#ia-agent-steps li')], atime = $('#ia-agent-time');
+  let aplaying = false;
+  async function agent() {
+    if (aplaying) return; aplaying = true;
+    while (true) {
+      steps.forEach(li => li.className = li.classList.contains('human') ? 'human' : ''); atime.textContent = 'trabajando…';
+      for (const li of steps) {
+        li.classList.add('on');
+        if (li.classList.contains('human')) { atime.textContent = 'esperando aprobación'; await wait(2200); atime.textContent = 'trabajando…'; } else await wait(1000);
+        li.classList.add('done');
+      }
+      atime.textContent = 'listo en 2 min'; if (reduce) return; await wait(4000);
+    }
+  }
+  const sio = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; if (e.target.id === 'demo') demo(); if (e.target.id === 'agentes') agent(); }), { threshold: .3 });
+  ['demo', 'agentes'].forEach(id => document.getElementById(id) && sio.observe(document.getElementById(id)));
 
   /* formulario */
   const rules = {

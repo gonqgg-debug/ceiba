@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Ceiba Labs · Páginas web e inteligencia artificial para negocios</title>
-<meta name="description" content="Diseñamos, publicamos y mantenemos tu página web por una mensualidad fija, y ponemos asistentes con IA que contestan WhatsApp y automatizan lo repetitivo. Precios en pesos mexicanos.">
+<title>Ceiba Labs · Estudio digital: páginas web, procesos e inteligencia artificial</title>
+<meta name="description" content="Ceiba Labs es un estudio digital en México. Creamos páginas web por suscripción y mejoramos procesos de atención, ventas y operación con inteligencia artificial.">
 {{HEAD_TAGS}}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -121,6 +121,97 @@
 .ix-mini--ia p:nth-child(1){animation-delay:.2s}.ix-mini--ia p:nth-child(2){animation-delay:1.2s}.ix-mini--ia p:nth-child(3){animation-delay:2.2s}
 @keyframes ixChat{0%{opacity:0;transform:translateY(8px)}8%,80%{opacity:1;transform:none}92%,100%{opacity:0}}
 
+
+/* ---------- hero: botones ---------- */
+.ix-ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:36px}
+.ix-ctas .btn{height:54px;padding:0 24px;font-size:16px}
+.ix-glass{background:rgba(247,244,235,.06);backdrop-filter:blur(8px);border-color:rgba(247,244,235,.35)!important}
+
+/* ---------- trabajo: tres bloques con ejemplo ---------- */
+.ix-work .ix-h{max-width:19ch}
+.ix-row{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:40px clamp(40px,6vw,96px);align-items:center;margin-top:clamp(56px,8vw,110px)}
+.ix-row--flip .ix-copy{order:2}
+.ix-copy{display:grid;gap:18px;justify-items:start}
+.ix-num{font:500 13px var(--f-mono);color:var(--petrol);padding:6px 11px;border-radius:999px;background:rgba(16,61,55,.07);border:1px solid rgba(16,61,55,.14)}
+.ix-copy h3{font-size:clamp(30px,3.2vw,46px);line-height:1.02;letter-spacing:-.035em;max-width:15ch}
+.ix-copy p{color:var(--muted);font-size:18px;line-height:1.6;max-width:48ch}
+.ix-ex{position:relative;border-radius:26px;min-height:380px;padding:clamp(22px,3vw,36px);overflow:hidden;display:grid;place-items:center}
+.ix-ex--book{background:radial-gradient(90% 90% at 80% 10%,#D9F2E8,transparent 60%),linear-gradient(160deg,#EFEBE0,#E3EEE8);grid-template-columns:auto auto;gap:32px}
+.ix-ex--hand{background:linear-gradient(150deg,#0F2420,#16302B 60%,#103D37);grid-template-columns:1fr auto 1.1fr;gap:18px;align-items:center}
+.ix-ex--flow{background:radial-gradient(80% 90% at 10% 0%,#E8F7C8,transparent 60%),linear-gradient(160deg,#F2EFE6,#E8EEE9);display:grid;gap:18px;place-items:stretch;align-content:center}
+
+/* 01: agendar desde el celular */
+.ix-ph{width:230px;border-radius:34px;background:#0B1514;padding:9px;box-shadow:0 40px 70px -36px rgba(11,21,20,.6)}
+.ix-ph-in{height:410px;border-radius:26px;background:#FBFAF6;padding:16px 14px;display:flex;flex-direction:column;gap:12px;overflow:hidden;font-family:"Red Hat Text",sans-serif;color:#15211D}
+.ix-ph-top{display:flex;align-items:baseline;gap:6px;padding-bottom:10px;border-bottom:1px solid #E4E7E6}
+.ix-ph-top b{font:700 17px "Red Hat Display",sans-serif}
+.ix-ph-top span{font-size:11px;color:#5C6865}
+.ix-ph-h{font:700 22px/1.08 "Red Hat Display",sans-serif;letter-spacing:-.02em;margin-top:6px}
+.ix-ph-btn{align-self:flex-start;background:#1F4FD1;color:#fff;border-radius:999px;padding:9px 16px;font-weight:600;font-size:13px;animation:ixTap 9s infinite}
+.ix-ph-slots{display:flex;flex-wrap:wrap;gap:6px;opacity:0;animation:ixShow2 9s infinite}
+.ix-ph-slots span{border:1px solid #D9DDDB;border-radius:8px;padding:6px 9px;font-size:12px;font-weight:500;background:#fff}
+.ix-ph-slots .pick{animation:ixPick 9s infinite}
+.ix-ph-ok{margin-top:auto;display:grid;gap:2px;padding:12px;border-radius:14px;background:#E9F6EE;border:1px solid #BFE3CC;font-size:12px;color:#33524A;opacity:0;transform:translateY(10px);animation:ixShow3 9s infinite}
+.ix-ph-ok b{font-size:14px;color:#0F5C4B}
+@keyframes ixTap{0%,10%{transform:none;box-shadow:none}14%{transform:scale(.94);box-shadow:0 0 0 8px rgba(31,79,209,.18)}18%,100%{transform:none;box-shadow:none}}
+@keyframes ixShow2{0%,18%{opacity:0;transform:translateY(6px)}24%,92%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes ixPick{0%,40%{background:#fff;color:inherit;border-color:#D9DDDB}46%,92%{background:#1F4FD1;color:#fff;border-color:#1F4FD1}100%{background:#fff;color:inherit}}
+@keyframes ixShow3{0%,52%{opacity:0;transform:translateY(10px)}60%,92%{opacity:1;transform:none}100%{opacity:0}}
+.ix-ex-steps{list-style:none;margin:0;padding:0;display:grid;gap:14px;counter-reset:st}
+.ix-ex-steps li{counter-increment:st;display:grid;grid-template-columns:30px 1fr;align-items:center;gap:10px;font-weight:500;color:rgba(11,21,20,.45);transition:color .3s}
+.ix-ex-steps li::before{content:counter(st);width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:600 13px var(--f-mono);border:1.5px solid rgba(11,21,20,.2)}
+.ix-ex-steps .s1{animation:ixStepOn 9s infinite}.ix-ex-steps .s2{animation:ixStepOn 9s 2.6s infinite}.ix-ex-steps .s3{animation:ixStepOn 9s 5s infinite}
+@keyframes ixStepOn{0%{color:rgba(11,21,20,.45)}6%,30%{color:#0B1514}40%,100%{color:rgba(11,21,20,.45)}}
+
+/* 02: de la conversación a la solicitud */
+.ix-hand-chat{display:grid;gap:7px;align-content:center}
+.ix-hand-chat p{max-width:94%;padding:8px 10px;border-radius:12px;font-size:13px;line-height:1.35;background:#fff;color:#15211D;justify-self:start;opacity:0;animation:ixChatIn 10s infinite}
+.ix-hand-chat p.me{background:#D9FDD3;justify-self:end}
+.ix-hand-chat p:nth-child(2){animation-delay:.8s}.ix-hand-chat p:nth-child(3){animation-delay:1.6s}.ix-hand-chat p:nth-child(4){animation-delay:2.4s}
+@keyframes ixChatIn{0%{opacity:0;transform:translateY(6px)}5%,75%{opacity:1;transform:none}82%,100%{opacity:.25}}
+.ix-hand-arrow{width:42px;height:42px;border-radius:50%;background:#D6FA52;position:relative;box-shadow:0 0 0 8px rgba(214,250,82,.12);animation:ixPulseA 10s infinite}
+.ix-hand-arrow::after{content:"";position:absolute;inset:0;margin:auto;width:12px;height:12px;border-top:2.5px solid #0B1514;border-right:2.5px solid #0B1514;transform:translateX(-2px) rotate(45deg)}
+@keyframes ixPulseA{0%,30%{transform:scale(.8);opacity:.4}36%,90%{transform:scale(1);opacity:1}100%{opacity:.4}}
+.ix-req{background:#fff;color:#15211D;border-radius:18px;padding:16px;display:grid;gap:8px;box-shadow:0 30px 60px -30px rgba(0,0,0,.7);opacity:0;transform:translateX(16px) scale(.97);animation:ixReq 10s infinite}
+@keyframes ixReq{0%,34%{opacity:0;transform:translateX(16px) scale(.97)}42%,92%{opacity:1;transform:none}100%{opacity:0}}
+.ix-req-tag{justify-self:start;font:500 11px var(--f-mono);color:#0F5C4B;background:#E4F5EC;padding:4px 8px;border-radius:999px}
+.ix-req b{font:600 17px var(--f-display)}
+.ix-req dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:13px}
+.ix-req dt{color:#6B7774}
+.ix-req dd{margin:0;font-weight:500}
+.ix-req-acts{display:flex;gap:6px;margin-top:4px}
+.ix-req-acts span{font-size:12px;font-weight:600;padding:7px 12px;border-radius:999px;border:1px solid #DDE1DF}
+.ix-req-acts .ok{background:#0F5C4B;color:#fff;border-color:#0F5C4B;animation:ixOk 10s infinite}
+@keyframes ixOk{0%,62%{box-shadow:none}68%{box-shadow:0 0 0 6px rgba(15,92,75,.2)}74%,100%{box-shadow:none}}
+
+/* 03: el trabajo pasa de una persona a otra */
+.ix-lane{display:grid;gap:8px}
+.ix-lane .lb{font:500 12px var(--f-mono);color:rgba(11,21,20,.55)}
+.ix-stages{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.ix-stages span{position:relative;display:grid;gap:2px;padding:12px 10px;border-radius:12px;background:#fff;border:1px solid rgba(11,21,20,.08);font-size:13px;font-weight:600;color:#15211D}
+.ix-stages span i{font:500 11px var(--f-mono);font-style:normal;color:#0F5C4B}
+.ix-stages .off{opacity:.4}
+.ix-stages .stuck{border-color:#E7B4A6;background:#FFF5F1}
+.ix-stages .stuck em{font:500 11px var(--f-mono);font-style:normal;color:#B3461E;animation:blink 1.6s infinite}
+.ix-lane--after .ix-stages span{border-color:rgba(16,61,55,.22)}
+.ix-token{position:absolute;top:-6px;left:0;width:12px;height:12px;border-radius:50%;background:#D6FA52;box-shadow:0 0 0 4px rgba(214,250,82,.35),0 0 14px #D6FA52;animation:ixToken 6s cubic-bezier(.6,0,.3,1) infinite}
+@keyframes ixToken{0%{left:4%}22%,30%{left:29%}52%,60%{left:54%}82%,100%{left:80%}}
+.ix-tools{display:flex;flex-wrap:wrap;gap:6px;padding-top:6px;border-top:1px dashed rgba(11,21,20,.15)}
+.ix-tools span{font-size:12px;font-weight:500;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.75);border:1px solid rgba(11,21,20,.08)}
+@media (max-width:980px){
+  .ix-row,.ix-row--flip{grid-template-columns:1fr}
+  .ix-row--flip .ix-copy{order:0}
+}
+@media (max-width:640px){
+  .ix-ex{min-height:0;padding:20px;border-radius:20px}
+  .ix-ex--book{grid-template-columns:1fr;justify-items:center}
+  .ix-ex-steps{display:none}
+  .ix-ex--hand{grid-template-columns:1fr}
+  .ix-hand-arrow{justify-self:center;transform:rotate(90deg)!important}
+  .ix-stages{grid-template-columns:1fr 1fr}
+  .ix-token{display:none}
+}
+
 /* ---------- cifras ---------- */
 .ix-nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin-top:52px;border-top:1px solid var(--line)}
 .ix-nums div{padding:28px 24px 0 0;display:grid;gap:8px}
@@ -225,24 +316,15 @@
   <canvas class="ix-grad" id="ix-grad" aria-hidden="true"></canvas>
   <div class="wrap ix-hero-grid">
     <div>
-      <h1 id="ix-title" class="ix-in">Páginas web e <span class="ix-shine">inteligencia artificial</span> para negocios que atienden clientes.</h1>
-      <p class="lede ix-in d1">Diseñamos, publicamos y mantenemos tu página por una mensualidad fija. Y ponemos asistentes que contestan tu WhatsApp, agendan y te pasan lo que necesita una persona.</p>
-      <form class="audit ix-audit ix-in d2" id="ix-audit" novalidate>
-        <label for="ix-url">¿Tienes página? Revísala gratis</label>
-        <div class="field-url" id="ix-field">
-          <div class="row"><span class="prefix" aria-hidden="true">https://</span>
-          <input id="ix-url" type="text" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com" aria-describedby="ix-help"></div>
-          <button class="btn btn-primary" type="submit">Revisar mi página <span class="arrow" aria-hidden="true">→</span></button>
-        </div>
-        <p class="hint" id="ix-help">Te mostramos cómo quedaría tu página nueva antes de que pagues un peso.</p>
-        <p class="err" id="ix-err" hidden></p>
-      </form>
-      <p class="ix-alt ix-in d3">¿Buscas automatizar tu atención? <a class="link" href="/ia">Conoce los servicios de IA <span class="arrow" aria-hidden="true">→</span></a></p>
+      <h1 id="ix-title" class="ix-in">Diseñamos lo que tus clientes ven <span class="ix-shine">y cómo trabaja tu negocio.</span></h1>
+      <p class="lede ix-in d1">Somos un estudio digital en México. Creamos páginas web por suscripción y mejoramos procesos de atención, ventas y operación con inteligencia artificial.</p>
+      <div class="ix-ctas ix-in d2"><a class="btn btn-primary" href="#trabajo">Ver nuestro trabajo <span class="arrow" aria-hidden="true">↓</span></a><a class="btn btn-line ix-glass" href="/ia#contacto">Hablar de tu negocio</a></div>
+      <p class="ix-alt ix-in d3">¿Ya tienes página? <a class="link" href="/diagnostico">Revísala gratis y mira cómo quedaría <span class="arrow" aria-hidden="true">→</span></a></p>
     </div>
     <div class="ix-stage" id="ix-stage" aria-label="Ejemplo: la página de una clínica hecha por Ceiba y su asistente de WhatsApp">
       <div class="ix-layer ix-in d2"><div class="ix-frame"><div class="ix-bar"><i></i><i></i><i></i><span>clinicaarrayan.mx</span></div><div class="ix-vp" aria-hidden="true">{{ARRAYAN}}</div></div></div>
-      <div class="ix-card ix-toast ix-in d4" aria-hidden="true"><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0B1514" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h16v13H4zM4 10h16M8.5 3.5v4M15.5 3.5v4"/></svg></span><div><b>Nueva cita</b><small>Limpieza · mañana 10:00</small></div></div>
-      <div class="ix-card ix-prop ix-in d4" aria-hidden="true"><span>Propuesta</span><b>Lista para Clínica Arrayán</b><div class="bar"><i></i></div></div>
+      <div class="ix-card ix-toast ix-in d4" aria-hidden="true"><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0B1514" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h16v13H4zM4 10h16M8.5 3.5v4M15.5 3.5v4"/></svg></span><div><b>Solicitud de cita</b><small>Lista para confirmar · Limpieza, mañana 10:00</small></div></div>
+      <div class="ix-card ix-prop ix-in d4" aria-hidden="true"><span>Cotización #128</span><b>Asignada a ventas · enviada</b><div class="bar"><i></i></div></div>
       <div class="ix-card ix-chat ix-in d3" aria-hidden="true">
         <div class="ix-chat-top"><svg viewBox="0 0 24 24"><use href="#wa"/></svg><div><b>Clínica Arrayán</b><small>Asistente · responde al momento</small></div></div>
         <div class="ix-chat-log" id="ix-chat-log"></div>
@@ -251,31 +333,68 @@
   </div>
 </section>
 
-<div class="ix-marquee" aria-hidden="true"><div id="ix-marq"><span>Diseño a la medida de tu rubro</span><span>Asistente de WhatsApp</span><span>Citas en línea</span><span>Hosting y seguridad</span><span>Cambios cada mes</span><span>SEO para tu colonia</span><span>Meses sin intereses</span><span>Aviso de privacidad</span><span>Respuestas a cualquier hora</span><span>Precios en pesos</span></div></div>
+<div class="ix-marquee" aria-hidden="true"><div id="ix-marq"><span>Páginas web por suscripción</span><span>Asistentes de IA</span><span>Agentes que ejecutan tareas</span><span>Automatización de procesos</span><span>Integraciones con tus herramientas</span><span>Diagnóstico de operación</span><span>Citas y reservaciones</span><span>Cotizaciones a tiempo</span><span>Adopción de IA en tu equipo</span><span>Hecho en México</span></div></div>
 
-<section class="band band--light section" aria-labelledby="svc-title">
+<section class="band band--light section ix-work" id="trabajo" aria-labelledby="work-title">
   <div class="wrap">
-    <p class="ix-kick" data-reveal>Qué hacemos</p>
-    <h2 class="ix-h" id="svc-title" data-reveal data-delay="1">Dos servicios, un mismo equipo.</h2>
-    <p class="ix-sub" data-reveal data-delay="2">Contrata uno o los dos. Juntos funcionan mejor: la página atrae al cliente y el asistente lo atiende.</p>
-    <div class="ix-services">
-      <article class="ix-svc" data-reveal>
-        <div class="ix-mini ix-mini--web" aria-hidden="true"><div class="w"><i class="t"></i><div class="h"><b></b><b></b><em></em></div><i class="p"></i></div></div>
-        <h3>Páginas web por suscripción</h3>
-        <p>Te la diseñamos, la publicamos y la mantenemos. Pagas un inicio y una mensualidad fija, con cambios incluidos cada mes.</p>
-        <ul><li>Pensada para tu tipo de negocio y para el celular</li><li>Botón para agendar o cotizar y WhatsApp a la vista</li><li>Hosting, seguridad, respaldos y cambios cada mes</li><li>Ves tu propuesta antes de pagar</li></ul>
-        <p class="ix-price">Desde <b>$3,490</b> de inicio y <b>$1,490 al mes</b></p>
+    <p class="ix-kick" data-reveal>Lo que hacemos</p>
+    <h2 class="ix-h" id="work-title" data-reveal data-delay="1">Tres formas de mejorar tu negocio, que funcionan mejor juntas.</h2>
+
+    <article class="ix-row">
+      <div class="ix-copy" data-reveal>
+        <span class="ix-num">01 · Páginas web</span>
+        <h3>Una página que facilita el siguiente paso.</h3>
+        <p>Que reservar una mesa, pedir una cotización o agendar una cita sea fácil desde el celular. Diseñamos y mantenemos tu página por suscripción, y te mostramos cómo quedaría antes de que pagues.</p>
         <a class="btn btn-line" href="/webs">Ver páginas web <span class="arrow" aria-hidden="true">→</span></a>
-      </article>
-      <article class="ix-svc ix-svc--dark" data-reveal data-delay="1">
-        <div class="ix-mini ix-mini--ia" aria-hidden="true"><p class="me">¿Tienen cita hoy?</p><p>Sí, a las 18:30. ¿Te la aparto?</p><p class="me">Sí, gracias</p></div>
-        <h3>Inteligencia artificial</h3>
-        <p>Asistentes que contestan WhatsApp con las respuestas que tú apruebas, y automatizaciones para lo que tu equipo repite todos los días.</p>
-        <ul><li>Asistente de WhatsApp y de tu página</li><li>Aparta citas y toma los datos de cada cliente</li><li>Recordatorios, cotizaciones y seguimiento automáticos</li><li>Empezamos con un diagnóstico de tus procesos</li></ul>
-        <p class="ix-price">Asistente desde <b>$3,990</b> + <b>$1,490 al mes</b> · Diagnóstico <b>$3,900</b></p>
-        <a class="btn btn-primary" href="/ia">Ver inteligencia artificial <span class="arrow" aria-hidden="true">→</span></a>
-      </article>
-    </div>
+      </div>
+      <div class="ix-ex ix-ex--book" data-reveal data-delay="1" aria-label="Ejemplo: agendar una cita desde el celular en tres toques">
+        <div class="ix-ph"><div class="ix-ph-in">
+          <div class="ix-ph-top"><b>Arrayán</b><span>Clínica dental</span></div>
+          <p class="ix-ph-h">Agenda tu valoración dental sin costo</p>
+          <span class="ix-ph-btn s1">Agenda tu cita</span>
+          <div class="ix-ph-slots s2"><span>Hoy 18:30</span><span class="pick">Mañana 10:00</span><span>Mañana 12:30</span></div>
+          <div class="ix-ph-ok s3"><b>✓ Cita confirmada</b><span>Valoración · mañana 10:00</span></div>
+        </div></div>
+        <ol class="ix-ex-steps"><li class="s1">Toca «Agenda tu cita»</li><li class="s2">Elige un horario</li><li class="s3">Listo, sin llamar</li></ol>
+      </div>
+    </article>
+
+    <article class="ix-row ix-row--flip">
+      <div class="ix-copy" data-reveal>
+        <span class="ix-num">02 · Asistentes de IA</span>
+        <h3>El trabajo repetitivo también se puede diseñar.</h3>
+        <p>Implementamos asistentes de IA que responden preguntas, recogen solicitudes y pasan al equipo lo que necesita atención personal. Por ejemplo, recepción recibe una solicitud de cita lista para confirmar en vez de revisar toda la conversación.</p>
+        <a class="btn btn-line" href="/ia#demo">Ver la demo de WhatsApp <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <div class="ix-ex ix-ex--hand" data-reveal data-delay="1" aria-label="Ejemplo: una conversación de WhatsApp se convierte en una solicitud de cita lista para confirmar">
+        <div class="ix-hand-chat">
+          <p class="me">Hola, ¿cuánto cuesta la limpieza?</p><p>$700 y dura 40 min. ¿Te aparto un horario?</p><p class="me">Mañana a las 10 porfa. Soy Mariana</p><p>Listo, se lo paso a recepción para confirmar.</p>
+        </div>
+        <div class="ix-hand-arrow" aria-hidden="true"></div>
+        <div class="ix-req">
+          <span class="ix-req-tag">Para recepción</span>
+          <b>Solicitud de cita</b>
+          <dl><dt>Paciente</dt><dd>Mariana G.</dd><dt>Servicio</dt><dd>Limpieza · $700</dd><dt>Horario</dt><dd>Mañana 10:00</dd><dt>Canal</dt><dd>WhatsApp</dd></dl>
+          <div class="ix-req-acts"><span class="ok">Confirmar</span><span>Ver chat</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="ix-row">
+      <div class="ix-copy" data-reveal>
+        <span class="ix-num">03 · Procesos y operación</span>
+        <h3>Mejoremos cómo pasa el trabajo de una persona a otra.</h3>
+        <p>Revisamos dónde se quedan pendientes las cotizaciones, qué información se captura dos veces o qué solicitudes llegan sin responsable. Rediseñamos ese proceso y conectamos las herramientas que tu equipo ya usa.</p>
+        <a class="btn btn-line" href="/ia#operacion">Hablemos de tu operación <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <div class="ix-ex ix-ex--flow" data-reveal data-delay="1" aria-label="Ejemplo: una cotización que antes se atoraba ahora pasa sola de una etapa a otra">
+        <div class="ix-lane"><span class="lb">Antes</span>
+          <div class="ix-stages"><span>Solicitud</span><span class="stuck">Cotización<em>Sin responsable · 3 días</em></span><span class="off">Aprobación</span><span class="off">Seguimiento</span></div></div>
+        <div class="ix-lane ix-lane--after"><span class="lb">Después</span>
+          <div class="ix-stages"><span>Solicitud<i>IA</i></span><span>Cotización<i>Ventas</i></span><span>Aprobación<i>Dirección</i></span><span>Seguimiento<i>Auto</i></span><b class="ix-token" aria-hidden="true"></b></div></div>
+        <div class="ix-tools"><span>WhatsApp</span><span>Correo</span><span>Hoja de cálculo</span><span>CRM</span><span>Facturación</span></div>
+      </div>
+    </article>
   </div>
 </section>
 
@@ -284,7 +403,7 @@
     <div>
       <p class="ix-kick" data-reveal>Por qué nos llamamos así</p>
       <h2 class="ix-h" id="roots-title" data-reveal data-delay="1">Todo conectado, como las raíces de una ceiba.</h2>
-      <p class="ix-sub" data-reveal data-delay="2" style="color:rgba(247,244,235,.75)">Tu página, tu WhatsApp y tu agenda trabajan juntos. El cliente que llega por Google agenda en un toque, y el que escribe de noche recibe respuesta.</p>
+      <p class="ix-sub" data-reveal data-delay="2" style="color:rgba(247,244,235,.75)">Diseñamos la página, el asistente y el proceso como un solo sistema. El cliente que llega por Google agenda en un toque, la solicitud llega a quien le toca y nadie captura lo mismo dos veces.</p>
       <p class="ix-story" data-reveal data-delay="3">La ceiba es el árbol sagrado de los mayas: sus raíces y sus ramas unían todo. Así queremos que funcione tu negocio en internet.</p>
       <div class="ix-nums" id="ix-nums">
         <div data-reveal><b data-count="24">0</b><span>horas hábiles para tener tu propuesta</span></div>
@@ -319,12 +438,12 @@
 
 <section class="band band--light section" aria-labelledby="how-title">
   <div class="wrap">
-    <p class="ix-kick" data-reveal>Cómo empezamos</p>
-    <h2 class="ix-h" id="how-title" data-reveal data-delay="1">De tu página de hoy a la nueva, en tres pasos.</h2>
+    <p class="ix-kick" data-reveal>Cómo trabajamos</p>
+    <h2 class="ix-h" id="how-title" data-reveal data-delay="1">Primero entendemos tu negocio. Después diseñamos.</h2>
     <ol class="ix-steps" id="ix-steps">
-      <li><span class="n">1</span><b>Revisamos tu negocio gratis</b><p>Nos mandas tu página, tu Instagram o tu perfil de Google y nos cuentas qué te gustaría resolver.</p></li>
-      <li><span class="n">2</span><b>Te mandamos una propuesta</b><p>En 24 horas hábiles recibes un enlace privado: tu página nueva en pantalla completa, qué automatizaríamos y el precio.</p></li>
-      <li><span class="n">3</span><b>Lo publicamos y lo mantenemos</b><p>Si te gusta, lo activas ahí mismo. Nosotros lo publicamos, lo cuidamos y lo mejoramos cada mes.</p></li>
+      <li><span class="n">1</span><b>Entendemos cómo trabajas hoy</b><p>Revisamos tu página, cómo llegan tus clientes y qué pasa con cada solicitud. Para procesos, hablamos con quien los hace todos los días.</p></li>
+      <li><span class="n">2</span><b>Te proponemos algo concreto</b><p>Tu página nueva para que la veas antes de pagar, o un diagnóstico con lo que conviene automatizar primero, su costo y lo que ahorra.</p></li>
+      <li><span class="n">3</span><b>Lo construimos y lo mejoramos</b><p>Lo publicamos, capacitamos a tu equipo y medimos. Cada mes ajustamos lo que no funciona.</p></li>
     </ol>
   </div>
 </section>
@@ -349,25 +468,26 @@
     <p class="ix-kick" data-reveal>Por qué Ceiba</p>
     <h2 class="ix-h" id="why-title" data-reveal data-delay="1">Lo que nos hace distintos.</h2>
     <div class="ix-why">
-      <div data-reveal><span class="ic"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.8"/></svg></span><b>Ves el resultado antes de pagar</b><p>Tu propuesta trae tu página nueva en pantalla completa, no un presupuesto en PDF.</p></div>
-      <div data-reveal data-delay="1"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 6.5h18v11H3zM3 10h18M7 14.5h4"/></svg></span><b>Precio fijo, en pesos</b><p>Un pago inicial y una mensualidad. Es el precio final, sin cargos sorpresa.</p></div>
-      <div data-reveal data-delay="2"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4.5 20.5c.8-3.6 3.8-5.5 7.5-5.5s6.7 1.9 7.5 5.5"/></svg></span><b>Un equipo que lo mantiene</b><p>No te dejamos con una plantilla y una contraseña: hacemos los cambios por ti cada mes.</p></div>
-      <div data-reveal data-delay="3"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4V5Z"/></svg></span><b>Pensado para Latinoamérica</b><p>WhatsApp primero, meses sin intereses y el lenguaje de tus clientes.</p></div>
+      <div data-reveal><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM12 7.5V12l3 2"/></svg></span><b>Empezamos por el problema</b><p>No vendemos una herramienta. Vemos dónde pierdes clientes o tiempo y diseñamos a partir de eso.</p></div>
+      <div data-reveal data-delay="1"><span class="ic"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.5-6.5 9.5-6.5 9.5 6.5 9.5 6.5-3.5 6.5-9.5 6.5S2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.8"/></svg></span><b>Lo ves antes de decidir</b><p>Tu página nueva en pantalla completa, o el proceso rediseñado paso a paso, antes de pagar.</p></div>
+      <div data-reveal data-delay="2"><span class="ic"><svg viewBox="0 0 24 24"><path d="M3 6.5h18v11H3zM3 10h18M7 14.5h4"/></svg></span><b>Precios claros, en pesos</b><p>Mensualidades fijas para páginas y asistentes, y proyectos cotizados por escrito.</p></div>
+      <div data-reveal data-delay="3"><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4.5 20.5c.8-3.6 3.8-5.5 7.5-5.5s6.7 1.9 7.5 5.5"/></svg></span><b>Nos quedamos después</b><p>Mantenemos, medimos y acompañamos a tu equipo mientras adopta lo nuevo.</p></div>
     </div>
     <h2 class="ix-h" id="faq-title" data-reveal style="font-size:clamp(30px,3.4vw,44px);margin-top:96px">Preguntas frecuentes.</h2>
     <div class="ix-faq" data-reveal data-delay="1">
-      <details><summary>¿Puedo contratar solo la inteligencia artificial?</summary><p>Sí. El asistente de WhatsApp y las automatizaciones se contratan por separado. Si tu página no es de Ceiba, en el diagnóstico revisamos cómo conectarlos.</p></details>
-      <details><summary>¿Qué pasa si no me gusta la propuesta?</summary><p>No pagas nada. Además, tu propuesta incluye una ronda de ajustes antes de activar: colores, tipografía, textos o fotos.</p></details>
-      <details><summary>¿Cuánto tarda?</summary><p>La propuesta llega en 24 horas hábiles. Los tiempos de construcción y publicación te los confirmamos en la propuesta, según lo que incluya.</p></details>
-      <details><summary>¿En qué países trabajan?</summary><p>Empezamos en México, con precios en pesos mexicanos.</p></details>
+      <details><summary>¿Con qué tipo de negocios trabajan?</summary><p>Con negocios que atienden clientes: clínicas, restaurantes, inmobiliarias, hoteles, despachos y empresas de servicios. Empezamos en México.</p></details>
+      <details><summary>¿Puedo contratar solo la parte de IA o de procesos?</summary><p>Sí. Las páginas, los asistentes y los proyectos de procesos se contratan por separado. Si tu página no es de Ceiba, revisamos cómo conectarla en el diagnóstico.</p></details>
+      <details><summary>¿Cómo empezamos si no sé qué necesito?</summary><p>Escríbenos cómo funciona hoy tu negocio y qué te quita más tiempo. Te decimos si conviene empezar por la página, por un asistente o por revisar un proceso.</p></details>
+      <details><summary>¿Qué pasa si no me gusta la propuesta?</summary><p>No pagas nada. En páginas web, tu propuesta incluye además una ronda de ajustes antes de activar.</p></details>
     </div>
+
   </div>
 </section>
 
 <section class="band ix-close" aria-labelledby="close-title">
   <div class="wrap">
-    <h2 id="close-title" data-reveal>Empieza por ver cómo quedaría tu página.</h2>
-    <div class="acts" data-reveal data-delay="1"><a class="btn btn-primary" href="/diagnostico">Revisar mi página gratis <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-line" href="/ia#contacto" style="border-color:rgba(247,244,235,.5)">Hablar de IA</a></div>
+    <h2 id="close-title" data-reveal>Cuéntanos cómo funciona hoy tu negocio.</h2>
+    <div class="acts" data-reveal data-delay="1"><a class="btn btn-primary" href="/ia#contacto">Hablar de tu negocio <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-line" href="/diagnostico" style="border-color:rgba(247,244,235,.5)">Revisar mi página gratis</a></div>
   </div>
 </section>
 </main>
@@ -464,7 +584,8 @@
   }));
 
   /* ---------- revisión de URL ---------- */
-  const form = document.getElementById('ix-audit'), input = document.getElementById('ix-url'), err = document.getElementById('ix-err'), field = document.getElementById('ix-field');
+  const form = document.getElementById('ix-audit'); if (form) {
+  const input = document.getElementById('ix-url'), err = document.getElementById('ix-err'), field = document.getElementById('ix-field');
   form.addEventListener('submit', e => {
     e.preventDefault();
     let s = input.value.trim();
@@ -477,6 +598,7 @@
     location.href = '/diagnostico?url=' + encodeURIComponent(host.replace(/^www\./, ''));
   });
   input.addEventListener('input', () => { err.hidden = true; field.classList.remove('invalid'); input.removeAttribute('aria-invalid'); });
+  }
 })();
 </script>
 </body>
