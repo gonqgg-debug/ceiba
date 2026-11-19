@@ -346,6 +346,27 @@ button{font:inherit;color:inherit}
   .mn-treat li{grid-template-columns:minmax(0,1fr) auto}
   .mn-treat li em{grid-column:2;grid-row:3}
 }
+/* --- clínica: carrusel de tratamientos --- */
+.mn-treat-head{display:flex;justify-content:space-between;align-items:center;gap:1em;margin-bottom:1.2em}
+.mn-treat .mn-treat-head h4{margin:0}
+.mn-car-nav{display:flex;gap:.5em}
+.mn-car-nav button{width:2.6em;height:2.6em;border-radius:.55em;border:1px solid var(--c-line);background:#fff;display:grid;place-items:center;cursor:pointer;color:var(--c-ink);padding:0}
+.mn-car-nav button:hover:not(:disabled){border-color:var(--c-ink)}
+.mn-car-nav button:disabled{opacity:.35;cursor:default}
+.mk-new .mn-car{list-style:none;margin:0;padding:0 0 .4em;display:grid;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:calc((100% - 2.4em) / 3);gap:1.2em;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.mk-new .mn-car::-webkit-scrollbar{display:none}
+.mk-new .mn-car:focus-visible{outline:2px solid var(--c-accent);outline-offset:4px;border-radius:.6em}
+.mn-treat .mn-tc{scroll-snap-align:start;display:grid;grid-template-columns:none;grid-template-rows:auto 1fr;gap:0;padding:0;border:1px solid var(--c-line);border-radius:.8em;overflow:hidden;background:#fff}
+.mn-tc-img{aspect-ratio:4/3;background:center/cover no-repeat #e6e1d6}
+.mn-tc-body{padding:1em 1.1em 1.2em;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.35em 1em;align-content:start}
+.mn-treat .mn-tc-body b{grid-column:1;grid-row:1;font-weight:600;font-size:1.08em}
+.mn-treat .mn-tc-body i{grid-column:2;grid-row:1;font-style:normal;font-weight:600;white-space:nowrap;text-align:right}
+.mn-treat .mn-tc-body span{grid-column:1/-1;grid-row:2;color:var(--c-muted);font-size:.95em}
+.mn-treat .mn-tc-body em{grid-column:1/-1;grid-row:3;align-self:start;font-style:normal;color:var(--c-accent);font-weight:600;margin-top:.4em}
+@container (max-width:560px){
+  .mk-new .mn-car{grid-auto-columns:82%;gap:.9em}
+  .mn-car-nav{display:none}
+}
 /* old site: guestbook + contact form */
 .mo-form{margin-top:10px;border:1px solid #bbb;background:#f6f6f6;padding:8px;font-size:10px}
 .mo-form b{display:block;color:#1b4f8f;font:bold 12px Arial;margin-bottom:6px}
@@ -769,7 +790,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
           </button></li>
           <li data-change="2"><button type="button" aria-label="Cambio 2: tratamientos. Mostrar en la página">
             <span class="n" aria-hidden="true">2</span><h3>Tratamientos</h3>
-            <span class="txt"><span class="before"><span>Antes</span>Once servicios mezclados en un solo párrafo.</span><span class="after"><span>Después</span>Cada tratamiento con lo que dura y su propio botón para agendar.</span></span>
+            <span class="txt"><span class="before"><span>Antes</span>Once servicios mezclados en un solo párrafo.</span><span class="after"><span>Después</span>Cada tratamiento con foto, precio y su propio botón para agendar.</span></span>
           </button></li>
           <li data-change="3"><button type="button" aria-label="Cambio 3: quién te atiende. Mostrar en la página">
             <span class="n" aria-hidden="true">3</span><h3>Quién te atiende</h3>
@@ -1046,15 +1067,8 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       </div>
     </div>
     <ul class="mn-trust"><li><b>Más de 15 años</b>cuidando sonrisas en Providencia</li><li><b>Cédula profesional</b>4512378</li><li><b>Hasta 6 MSI</b>en tratamientos mayores a $1,200</li><li><b>Estacionamiento gratis</b>frente a la clínica</li></ul>
-    <div class="mn-treat" data-mark="2"><h4>Nuestros tratamientos</h4>
-      <ul>
-        <li><b>Valoración dental</b><i>Sin costo</i><span>Revisamos dientes y encías, y te tomamos radiografía. Sales con tu presupuesto.</span><em>Agendar</em></li>
-        <li><b>Limpieza dental</b><i>$700</i><span>Retira el sarro y la placa que no quita el cepillado. Se recomienda 2 veces al año.</span><em>Agendar</em></li>
-        <li><b>Alineadores transparentes</b><i>Valoración sin costo</i><span>Casi no se notan y te los puedes quitar para comer.</span><em>Agendar</em></li>
-        <li><b>Implantes dentales</b><i>Desde $14,500</i><span>Reemplaza el diente que te falta con una pieza fija.</span><em>Agendar</em></li>
-        <li><b>Blanqueamiento</b><i>$3,800</i><span>Dientes más blancos en dos sesiones.</span><em>Agendar</em></li>
-        <li><b>Urgencias</b><i>Hoy mismo</i><span>¿Dolor, golpe o un diente roto? Llámanos y te hacemos un espacio.</span><em>Llamar</em></li>
-      </ul>
+    <div class="mn-treat" data-mark="2"><div class="mn-treat-head"><h4>Nuestros tratamientos</h4><div class="mn-car-nav"><button type="button" data-car="prev" aria-label="Tratamiento anterior"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" data-car="next" aria-label="Siguiente tratamiento"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>
+      <ul class="mn-car" tabindex="0" aria-label="Tratamientos, desliza para ver más"><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-valoracion.jpg)" role="img" aria-label="La dentista le muestra una radiografía a una paciente"></div><div class="mn-tc-body"><b>Valoración dental</b><i>Sin costo</i><span>Revisamos dientes y encías, y te tomamos radiografía. Sales con tu presupuesto.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-limpieza.jpg)" role="img" aria-label="Limpieza dental a una paciente"></div><div class="mn-tc-body"><b>Limpieza dental</b><i>$700</i><span>Retira el sarro y la placa que no quita el cepillado. Se recomienda 2 veces al año.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-alineadores.jpg)" role="img" aria-label="Paciente con un alineador transparente"></div><div class="mn-tc-body"><b>Alineadores transparentes</b><i>Valoración sin costo</i><span>Casi no se notan y te los puedes quitar para comer.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-implantes.jpg)" role="img" aria-label="Paciente sonriendo después de su tratamiento"></div><div class="mn-tc-body"><b>Implantes dentales</b><i>Desde $14,500</i><span>Reemplaza el diente que te falta con una pieza fija.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-blanqueamiento.jpg)" role="img" aria-label="Paciente con una sonrisa blanca"></div><div class="mn-tc-body"><b>Blanqueamiento</b><i>$3,800</i><span>Dientes más blancos en dos sesiones.</span><em>Agendar</em></div></li><li class="mn-tc"><div class="mn-tc-img" style="background-image:url(img/t-urgencias.jpg)" role="img" aria-label="La dentista atiende a un paciente con dolor de muela"></div><div class="mn-tc-body"><b>Urgencias</b><i>Hoy mismo</i><span>¿Dolor, golpe o un diente roto? Llámanos y te hacemos un espacio.</span><em>Llamar</em></div></li></ul>
       <p class="mn-note">*Los precios pueden cambiar según tu caso y te los confirmamos en tu valoración. Aceptamos efectivo, tarjetas de débito y crédito.</p>
     </div>
     <div class="mn-team" data-mark="3"><div class="mn-portrait" role="img" aria-label="Consultorio de la clínica"></div><div class="mn-cred"><h4>Tu sonrisa en manos expertas</h4><p>La Dra. Valeria Ríos es cirujana dentista egresada de la Universidad de Guadalajara y especialista en rehabilitación oral. Lleva más de 15 años atendiendo a familias en Providencia.</p><ul><li>Cédula profesional 4512378</li><li>Cédula de especialidad 7718203</li><li>No trabajamos con pasantes: siempre te atiende una especialista</li></ul><small>Personaje ficticio del ejemplo</small></div></div>
@@ -1129,6 +1143,24 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     log.scrollTop = log.scrollHeight; setTimeout(reply, 650);
   });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.mn-float.open').forEach(closeAI); });
+
+  /* ---------- carrusel de tratamientos (dentro de la web de ejemplo) ---------- */
+  const syncCar = track => {
+    const nav = track.closest('.mn-treat')?.querySelector('.mn-car-nav'); if (!nav) return;
+    nav.querySelector('[data-car="prev"]').disabled = track.scrollLeft < 4;
+    nav.querySelector('[data-car="next"]').disabled = track.scrollLeft + track.clientWidth > track.scrollWidth - 4;
+  };
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-car]'); if (!b) return;
+    const track = b.closest('.mn-treat').querySelector('.mn-car');
+    const card = track.querySelector('.mn-tc');
+    const step = card.getBoundingClientRect().width + (parseFloat(getComputedStyle(track).columnGap) || 0);
+    track.scrollBy({ left: b.dataset.car === 'next' ? step : -step, behavior: reduce.matches ? 'auto' : 'smooth' });
+  });
+  document.querySelectorAll('.mn-car').forEach(t => {
+    t.addEventListener('scroll', () => syncCar(t), { passive: true });
+    new ResizeObserver(() => syncCar(t)).observe(t);
+  });
 
   /* hero tag follows the intro wipe */
   const heroTag = $('#hero-tag');
