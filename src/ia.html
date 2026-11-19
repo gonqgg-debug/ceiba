@@ -241,6 +241,8 @@
 .ia-map div:last-child{border-bottom:0;padding-bottom:0}
 .ia-map b{font-weight:600}
 .ia-map span{color:rgba(247,244,235,.7)}
+.ia-more{display:flex;flex-wrap:wrap;gap:6px}
+.ia-more i{font-style:normal;font-size:13px;padding:5px 10px;border-radius:999px;border:1px solid rgba(214,250,82,.3);color:var(--lime)}
 @media (max-width:980px){.ia-case,.ia-any{grid-template-columns:1fr}.ia-case:nth-of-type(even) > .ia-viz{order:0}}
 @media (max-width:640px){.ia-order{grid-template-columns:1fr}.ia-pipe{grid-template-columns:repeat(3,1fr)}.ia-pipe div:nth-child(n+4){display:none}.ia-books-h,.ia-book{grid-template-columns:1fr 1fr}.ia-books-h :nth-child(2),.ia-book > :nth-child(2){display:none}.ia-map div{grid-template-columns:1fr;gap:4px}}
 @media (max-width:1100px){.ia-ways,.ia-autos{grid-template-columns:1fr 1fr}}
@@ -269,7 +271,7 @@
     <div>
       <h1 id="ia-title">Inteligencia artificial aplicada a <span class="ia-shine">cómo trabaja tu negocio.</span></h1>
       <p class="lede">Construimos agentes que ocupan puestos completos: buscan clientes y les dan seguimiento, toman pedidos, procesan facturas y analizan tus ventas cada mañana. Partimos de cómo trabaja hoy tu equipo, empezamos por un problema concreto y lo medimos.</p>
-      <div class="ia-acts"><a class="btn btn-primary" href="#contacto">Hablemos de tu operación <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-line" href="#sistemas">Ver lo que ya construimos</a></div>
+      <div class="ia-acts"><a class="btn btn-primary" href="#contacto">Hablemos de tu operación <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn-line" href="#sistemas">Ver lo que podemos hacer</a></div>
       <p class="ia-note">Trabajamos con las herramientas que tu equipo ya usa. No necesitas tener tu página con nosotros.</p>
     </div>
     <div class="ia-phone" aria-label="Ejemplo de conversación con el asistente de WhatsApp de una clínica">
@@ -287,7 +289,7 @@
     <h2 class="ia-h" id="formas-title" data-reveal>Mucho más que un chatbot.</h2>
     <p class="ia-sub" data-reveal>Elegimos la herramienta según el problema: a veces es un asistente que atiende, a veces un agente que hace el trabajo de un puesto y a veces un tablero donde tu equipo ve todo en un solo lugar.</p>
     <div class="ia-ways">
-      <a class="ia-way" href="#sistemas" data-reveal><span class="ia-way-n">01</span><b>Agentes que ocupan un puesto</b><p>Prospección y ventas, contabilidad, compras, análisis. Trabajan todos los días y te piden aprobación en lo importante.</p><em>Ver sistemas reales →</em></a>
+      <a class="ia-way" href="#sistemas" data-reveal><span class="ia-way-n">01</span><b>Agentes que ocupan un puesto</b><p>Prospección y ventas, contabilidad, compras, análisis. Trabajan todos los días y te piden aprobación en lo importante.</p><em>Ver ejemplos →</em></a>
       <a class="ia-way" href="#demo" data-reveal><span class="ia-way-n">02</span><b>Atención y pedidos por WhatsApp</b><p>Asistentes que responden, apartan citas y toman pedidos con catálogo digital, en tu mismo número.</p><em>Ver la demo →</em></a>
       <a class="ia-way" href="#caso-datos" data-reveal><span class="ia-way-n">03</span><b>Datos, análisis y tableros</b><p>Juntamos la información de tus ventas y sistemas, y un agente te explica cada mañana qué pasó y qué hacer.</p><em>Ver el analista →</em></a>
       <a class="ia-way" href="#operacion" data-reveal><span class="ia-way-n">04</span><b>Procesos a medida y adopción</b><p>Rediseñamos cómo pasa el trabajo de una persona a otra, conectamos tus herramientas y acompañamos a tu equipo.</p><em>Ver cómo lo hacemos →</em></a>
@@ -297,22 +299,22 @@
 
 <section class="band section ia-cases" id="sistemas" aria-labelledby="sis-title">
   <div class="wrap">
-    <p class="ia-kick" data-reveal>Lo que ya construimos</p>
-    <h2 class="ia-h" id="sis-title" data-reveal>Sistemas que trabajan todos los días en un negocio real.</h2>
-    <p class="ia-sub" data-reveal style="color:rgba(247,244,235,.75)">Estos cuatro los construimos para una cadena de minimarkets y hoy operan a diario. Te los mostramos porque la misma idea funciona en casi cualquier industria.</p>
+    <p class="ia-kick" data-reveal>Lo que podemos construir</p>
+    <h2 class="ia-h" id="sis-title" data-reveal>Agentes y sistemas que trabajan todos los días por tu negocio.</h2>
+    <p class="ia-sub" data-reveal style="color:rgba(247,244,235,.75)">Cuatro ejemplos de lo que ya sabemos hacer: vender, atender pedidos, llevar la contabilidad y analizar el negocio. Cambian los datos y las herramientas, pero funcionan en casi cualquier industria.</p>
 
     <article class="ia-case" id="caso-ventas">
       <div>
         <p class="ia-kick" data-reveal>Agente de prospección y ventas</p>
         <h3 data-reveal>Cada mañana busca clientes nuevos, les escribe y les da seguimiento.</h3>
-        <p class="ia-sub" data-reveal>Lo creamos para encontrar locales para nuevas sucursales. Todos los días ejecuta una rutina: busca opciones en mapas, portales y redes, encuentra al contacto correcto, le escribe un correo personalizado y registra todo en el CRM. Cuando alguien responde, lo mueve de etapa y agenda el siguiente paso.</p>
+        <p class="ia-sub" data-reveal>Todos los días ejecuta una rutina: busca prospectos que encajan con tu cliente ideal en mapas, portales, directorios y redes, encuentra a la persona que decide, le escribe un correo personalizado y registra todo en el CRM. Cuando alguien responde, lo mueve de etapa y agenda el siguiente paso.</p>
         <ul class="ia-list" data-reveal><li>Investiga y califica cada prospecto antes de escribir</li><li>Correos personalizados, no plantillas masivas</li><li>Maneja el CRM: etapas, notas, actividades y seguimiento</li><li>Tu equipo entra solo cuando hay una conversación real</li></ul>
         <div class="ia-for" data-reveal><small>Sirve para</small><span>Ventas B2B</span><span>Inmobiliarias</span><span>Distribuidores</span><span>Agencias y despachos</span><span>Cualquier negocio que vende</span></div>
       </div>
       <div class="ia-viz" data-reveal aria-label="Ejemplo de la rutina diaria del agente de prospección">
         <div class="ia-viz-top"><span class="dot"></span><b>Rutina diaria de prospección</b><small id="v1-time">07:00</small></div>
         <ol class="ia-run" id="v1-run">
-          <li>Busca opciones nuevas en mapas y portales<b>+38</b></li>
+          <li>Busca prospectos nuevos en mapas y portales<b>+38</b></li>
           <li>Encuentra al contacto que decide<b>+21</b></li>
           <li>Escribe un correo a cada uno<b>21</b></li>
           <li>Revisa respuestas y actualiza el CRM<b>3</b></li>
@@ -326,8 +328,8 @@
     <article class="ia-case" id="caso-pedidos">
       <div>
         <p class="ia-kick" data-reveal>Pedidos por WhatsApp con catálogo digital</p>
-        <h3 data-reveal>Tu cliente pide por WhatsApp como siempre. El pedido llega completo a tienda.</h3>
-        <p class="ia-sub" data-reveal>Un bot mixto: botones para lo que conviene guiar (hacer pedido, ver su pedido, cancelar) e IA cuando el cliente escribe libre, como «¿tienen leche deslactosada?». Le muestra los productos y lo lleva a un catálogo tipo app donde arma su carrito. El equipo recibe el pedido en un panel y le avisa cuando sale.</p>
+        <h3 data-reveal>Tu cliente pide por WhatsApp como siempre. El pedido llega completo a tu equipo.</h3>
+        <p class="ia-sub" data-reveal>Un bot mixto: botones para lo que conviene guiar (hacer pedido, ver su pedido, cancelar) e IA cuando el cliente escribe libre, como «¿tienen leche deslactosada?» o «¿me cotizas 20 piezas?». Le muestra los productos y lo lleva a un catálogo tipo app donde arma su pedido. El equipo recibe el pedido en un panel y le avisa cuando sale.</p>
         <ul class="ia-list" data-reveal><li>Árbol de opciones e IA trabajando juntos</li><li>Catálogo web con búsqueda, promociones y recomendaciones</li><li>Panel para el equipo: pedidos, faltantes y chats</li><li>Si el cliente prefiere a una persona, la pide con un botón</li></ul>
         <div class="ia-for" data-reveal><small>Sirve para</small><span>Tiendas y minimarkets</span><span>Restaurantes</span><span>Farmacias</span><span>Ferreterías y refacciones</span><span>Distribución</span></div>
       </div>
@@ -335,8 +337,8 @@
         <div class="ia-order">
           <div class="ia-demo-chat" id="v2-chat"></div>
           <div>
-            <div class="ia-cat" id="v2-cat"><b>Catálogo · Tu tienda</b><div class="ia-cat-grid"><div class="add">Leche deslactosada 1 L</div><div>Pan de caja grande</div><div class="add">Huevo blanco 12 pzs</div><div>Café molido 250 g</div></div><div class="ia-cat-sum"><span>3 productos</span><span>Enviar pedido →</span></div></div>
-            <p class="ia-staff" id="v2-staff">Pedido #1042 · recibido en tienda</p>
+            <div class="ia-cat" id="v2-cat"><b>Catálogo · Tu negocio</b><div class="ia-cat-grid"><div class="add">Leche deslactosada 1 L</div><div>Pan de caja grande</div><div class="add">Huevo blanco 12 pzs</div><div>Café molido 250 g</div></div><div class="ia-cat-sum"><span>3 productos</span><span>Enviar pedido →</span></div></div>
+            <p class="ia-staff" id="v2-staff">Pedido #1042 · recibido por tu equipo</p>
           </div>
         </div>
       </div>
@@ -368,7 +370,7 @@
       <div>
         <p class="ia-kick" data-reveal>Analista de ventas diario</p>
         <h3 data-reveal>Todos los días te explica qué pasó en tu negocio y qué conviene hacer.</h3>
-        <p class="ia-sub" data-reveal>Primero sacamos más datos de las ventas: cada ticket, producto, hora y sucursal, conectados al punto de venta. Después creamos un agente que los analiza cada día con definiciones exactas de margen y comparativos, y publica sus hallazgos: qué subió, qué bajó, qué se compra junto, qué horarios rinden y dónde se está perdiendo margen.</p>
+        <p class="ia-sub" data-reveal>Primero juntamos tus datos con más detalle: cada venta, producto, hora, sucursal o cita, conectados a tu punto de venta, ERP o agenda. Después un agente los analiza cada día con definiciones exactas de margen y comparativos, y publica sus hallazgos: qué subió, qué bajó, qué se compra junto, qué horarios rinden y dónde se está perdiendo margen.</p>
         <ul class="ia-list" data-reveal><li>Ventas, margen y canastas con cifras que cuadran</li><li>Comparativos contra la semana y el año anterior</li><li>Hallazgos en lenguaje claro, con su gráfica</li><li>Muchísimo más detalle para decidir</li></ul>
         <div class="ia-for" data-reveal><small>Sirve para</small><span>Retail</span><span>Restaurantes</span><span>Clínicas</span><span>E-commerce</span><span>Cualquier negocio con ventas</span></div>
       </div>
@@ -397,6 +399,7 @@
         <div><b>Pedidos y reservas</b><span>Restaurantes, farmacias, ferreterías, hoteles y cualquier negocio que recibe pedidos por WhatsApp</span></div>
         <div><b>Back office con agentes</b><span>Facturas, cuentas por pagar, conciliaciones, inventario, compras, expedientes y documentos</span></div>
         <div><b>Análisis diario</b><span>Ventas por sucursal, ocupación, citas y tratamientos, margen por producto, desempeño del equipo</span></div>
+        <div><b>Y mucho más</b><span class="ia-more"><i>Cobranza y recordatorios de pago</i><i>Inventario y reabasto</i><i>Cotizaciones automáticas</i><i>Filtrar candidatos y CVs</i><i>Alta de clientes y expedientes</i><i>Postventa y reseñas</i><i>Reportes para dirección</i><i>Control de calidad</i></span></div>
       </div>
     </div>
   </div>
@@ -554,7 +557,7 @@
     <div class="ia-faq">
       <details><summary>¿Qué diferencia hay entre un asistente y un agente?</summary><p>El asistente conversa: responde y recoge datos. El agente además ejecuta: consulta tus sistemas, prepara documentos y completa tareas de varios pasos, pidiendo tu aprobación cuando hace falta.</p></details>
       <details><summary>¿Un agente reemplaza a una persona de mi equipo?</summary><p>Se encarga de la parte repetitiva de un puesto: buscar, capturar, revisar, conciliar, dar seguimiento. Tu equipo pasa a revisar, decidir y atender lo que el agente marca como excepción. Lo importante siempre lo aprueba una persona.</p></details>
-      <details><summary>¿Esto funciona para mi industria?</summary><p>Casi seguro. Lo que construimos para un minimarket (prospección, pedidos, contabilidad y análisis) se repite en inmobiliarias, restaurantes, clínicas, despachos y distribuidores. En el diagnóstico vemos cuál conviene primero.</p></details>
+      <details><summary>¿Esto funciona para mi industria?</summary><p>Casi seguro. Prospección, pedidos, back office y análisis se repiten en inmobiliarias, restaurantes, hoteles, clínicas, despachos, tiendas y distribuidores. Y si tu caso es distinto, lo diseñamos a la medida. En el diagnóstico vemos cuál conviene primero.</p></details>
       <details><summary>¿Con qué herramientas trabajan?</summary><p>Con las que ya usas: WhatsApp Business, correo, hojas de cálculo, tu CRM, tu punto de venta, Odoo u otro ERP, o tu sistema de facturación. Si hace falta, construimos el tablero. En el diagnóstico revisamos qué se puede conectar y cómo.</p></details>
       <details><summary>¿Necesito tener mi página con Ceiba?</summary><p>No. El asistente funciona con tu número de WhatsApp. Si además tienes tu página con nosotros, también responde ahí.</p></details>
       <details><summary>¿Qué pasa si le preguntan algo que no sabe?</summary><p>No inventa: avisa que una persona de tu equipo le responde y te pasa la conversación con un resumen.</p></details>
