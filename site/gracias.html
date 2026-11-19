@@ -21,7 +21,7 @@
   --f-display:"Funnel Display","Helvetica Neue",Arial,sans-serif;
   --f-body:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --f-clinic:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --f-clinic:"Red Hat Display",ui-sans-serif,system-ui,sans-serif;
   --gut:max(20px, env(safe-area-inset-left,0px));
   --gut-r:max(20px, env(safe-area-inset-right,0px));
   --max:1240px;
@@ -310,6 +310,47 @@ button{font:inherit;color:inherit}
   .mn-float{bottom:5.2em}
   .mn-ai-btn{right:1em;padding:.75em 1.05em;font-size:.92em}
   .mn-ai{right:1em;width:calc(100cqi - 2em);bottom:3.6em}
+}
+/* --- clínica: tipografía sobria y detalles sin adornos --- */
+.mk-new{font-family:"Red Hat Text",ui-sans-serif,system-ui,sans-serif;--c-accent:#1D5BD8}
+.mn-brand{flex-direction:column;align-items:flex-start;gap:.15em}
+.mn-brand b{font:700 1.6em/1 var(--f-clinic);letter-spacing:-.01em}
+.mn-brand span{font-size:.85em;color:var(--c-muted)}
+.mn-btn,.mn-ghost,.mn-wa-btn{border-radius:.55em}
+.mn-hero{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}
+.mn-hero h3{font:700 3.3em/1.05 var(--f-clinic);letter-spacing:-.02em}
+.mn-photo{aspect-ratio:4/5;max-height:34em;background:var(--photo-doc) center 18%/cover #d9d4c6}
+.mn-rating{gap:.45em}
+.mn-treat h4,.mn-visit h4,.mn-rev-head h4,.mn-cred h4{font:700 1.75em/1.15 var(--f-clinic);letter-spacing:-.01em;color:var(--c-ink)}
+.mn-treat li{grid-template-columns:minmax(0,1fr) auto auto;gap:.25em 1.2em}
+.mn-treat li b{grid-column:1;grid-row:1}
+.mn-treat li i{grid-column:2;grid-row:1;font-style:normal;font-weight:600;text-align:right;white-space:nowrap}
+.mn-treat li span{grid-column:1/3}
+.mn-treat li em{grid-column:3;grid-row:1/3}
+.mn-note{margin-top:1.2em;font-size:.9em;color:var(--c-muted)}
+.mn-team{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:2.6em}
+.mn-portrait{width:auto;aspect-ratio:4/3;border-radius:.6em;background:var(--photo-room) center/cover #c9c1b0}
+.mn-cred p{margin:.6em 0 .9em;max-width:34em}
+.mn-cred ul{margin:0;padding:0;list-style:none;display:grid;gap:.35em}
+.mn-cred li{padding-left:1.1em;position:relative;color:var(--c-muted)}
+.mn-cred li::before{content:"";position:absolute;left:0;top:.6em;width:.4em;height:.4em;border-radius:50%;background:var(--c-accent)}
+.mn-cred small{display:block;margin-top:1em;font-size:.8em;color:var(--c-muted)}
+.mn-visit-acts{margin-top:1.2em;display:flex;flex-wrap:wrap;gap:.6em}
+.mn-foot{display:flex;flex-wrap:wrap;gap:.4em 2em}
+.mn-slots{border:1px solid var(--c-line);box-shadow:0 .8em 2em -1.2em rgba(20,30,25,.35)}
+.mn-rev-more small{font:400 .8em "Red Hat Text",sans-serif}
+.mn-ai-btn{background:var(--c-accent);border-radius:.6em;font-family:inherit}
+.mn-ai-btn:hover{background:#174BB5}
+.mn-ai-top{background:var(--c-accent)}
+.mn-ai-sug button{border-radius:.5em}
+@container (max-width:560px){
+  .mn-hero{grid-template-columns:1fr}
+  .mn-hero .mn-photo{aspect-ratio:4/3;max-height:none}
+  .mn-hero h3{font-size:2.3em}
+  .mn-team{grid-template-columns:1fr;gap:1.2em}
+  .mn-portrait{width:auto}
+  .mn-treat li{grid-template-columns:minmax(0,1fr) auto}
+  .mn-treat li em{grid-column:2;grid-row:3}
 }
 /* old site: guestbook + contact form */
 .mo-form{margin-top:10px;border:1px solid #bbb;background:#f6f6f6;padding:8px;font-size:10px}
