@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@500&display=swap">
 <style>
-:root{--ink:#0C1226;--ink-2:#151C35;--petrol:#2747E8;--deep:#14246B;--ivory:#FFFFFF;--paper:#F7F5EF;--lime:#F4A6C8;--rose:#E5508F;--sky:#2747E8;--muted:#5C6865;--line:rgba(11,21,20,.1);--serif:"Instrument Serif",Georgia,serif;--sans:Geist,system-ui,sans-serif}
+:root{--ink:#0C1226;--ink-2:#151C35;--petrol:#2747E8;--deep:#14246B;--ivory:#FFFFFF;--paper:#F7F5EF;--lime:#D6FA52;--rose:#2747E8;--sky:#2747E8;--muted:#5C6865;--line:rgba(11,21,20,.1);--serif:"Instrument Serif",Georgia,serif;--sans:Geist,system-ui,sans-serif}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;font:400 17px/1.55 var(--sans);color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;overflow-x:clip}
@@ -66,7 +66,7 @@ a{color:inherit}
 .node b i{width:18px;height:18px;border-radius:6px;display:grid;place-items:center;font-style:normal;font-size:10px;background:var(--sky);color:#fff}
 .node span{color:var(--muted)}
 .flow hr{border:0;height:2px;background:repeating-linear-gradient(90deg,#B9C4C0 0 6px,transparent 6px 11px);margin:0}
-.node.hot{border-color:var(--rose);box-shadow:0 0 0 3px rgba(229,80,143,.14)}
+.node.hot{border-color:var(--sky);box-shadow:0 0 0 3px rgba(39,71,232,.14)}
 .chat-mini{margin-top:6px;display:grid;gap:6px;max-width:330px}
 .chat-mini p{margin:0;padding:8px 11px;border-radius:12px;font-size:13px;background:#fff;border:1px solid var(--line);justify-self:start}
 .chat-mini p.me{background:#E8ECFF;border-color:#C7D0FB;justify-self:end}
@@ -76,7 +76,7 @@ a{color:inherit}
 .field{border:1px solid var(--line);border-radius:10px;padding:9px 10px;color:var(--muted)}
 .kpi{display:grid;gap:2px;padding:10px;border-radius:10px;background:#F4F2EB}
 .kpi span{font-size:11px;color:var(--muted)}.kpi b{font:400 26px/1 var(--serif)}
-.tag-ok{justify-self:start;font-size:11px;font-weight:600;color:#B5326C;background:#FCE7F0;padding:4px 8px;border-radius:999px}
+.tag-ok{justify-self:start;font-size:11px;font-weight:600;color:var(--ink);background:var(--lime);padding:4px 8px;border-radius:999px}
 /* rubros */
 .rubros{position:absolute;left:0;right:0;bottom:42px;z-index:4;display:flex;justify-content:center;flex-wrap:wrap;gap:12px 44px;font:400 26px var(--serif);color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.45)}
 .rubros span{display:inline-flex;align-items:center;gap:10px}
@@ -85,10 +85,10 @@ a{color:inherit}
 /* ---------- servicios ---------- */
 .svc{padding:120px 0 140px}
 .k{display:inline-flex;align-items:center;gap:10px;font:500 14px var(--sans);color:var(--petrol)}
-.k::before{content:"";width:22px;height:2px;background:var(--rose)}
+.k::before{content:"";width:22px;height:2px;background:var(--ink)}
 .svc-head{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:end;margin-top:22px}
 .svc h2{margin:0;font:400 clamp(44px,5.6vw,80px)/.98 var(--serif);letter-spacing:-.025em;max-width:12ch}
-.svc h2 em{font-style:italic;color:var(--rose)}
+.svc h2 em{font-style:normal;color:inherit}
 .svc-head p{margin:0;font-size:20px;line-height:1.5;color:#3E4A47;max-width:40ch;justify-self:end}
 .cards{display:grid;grid-template-columns:.75fr 1.25fr;gap:20px;margin-top:64px}
 .card{position:relative;isolation:isolate;overflow:hidden;border-radius:6px;min-height:520px;color:var(--ivory);background:var(--deep);display:grid;align-content:space-between}
@@ -126,7 +126,7 @@ a{color:inherit}
 .note span{font-size:12px;color:var(--muted)}.note b{font-size:15px}
 .note em{justify-self:start;margin-top:6px;font-style:normal;font-size:12px;font-weight:600;color:#fff;background:var(--sky);border-radius:999px;padding:6px 12px}
 .chart b{font:400 30px var(--serif)}
-.chart small{font-size:14px;color:#F4A6C8}
+.chart small{font-size:14px;color:var(--lime)}
 .chart svg{width:100%;height:150px;display:block;overflow:visible}
 .pin{font:600 13px var(--sans);fill:var(--ink)}
 @media (max-width:980px){
@@ -164,7 +164,7 @@ a{color:inherit}
 <section class="hero">
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-copy wrap">
-    <h1>Implementamos la tecnología que hace <em>crecer</em> tu negocio.</h1>
+    <h1>Implementamos la tecnología que hace crecer tu negocio.</h1>
     <p class="sub">De tu página web a tu operación: lo construimos y lo dejamos funcionando.</p>
     <div class="ctas"><a class="btn btn-ink" href="/#consultoria">Agendar una consultoría</a><a class="link" href="/webs">Revisar mi página web <span aria-hidden="true">→</span></a></div>
   </div>
@@ -213,7 +213,7 @@ a{color:inherit}
       <article class="card wide">
         <div class="txt"><span class="part">Las ramas · hacia dónde crece tu negocio</span><h3>Datos que te dicen qué hacer</h3><p style="margin-left:0">Cada mañana, un analista de IA te explica qué pasó en tu negocio y dónde está la oportunidad.</p></div>
         <div class="viz"><div class="chart glass"><b>Ventas de la semana</b><small>+18% vs. la semana pasada</small>
-          <svg viewBox="0 0 600 150" preserveAspectRatio="none" aria-hidden="true"><path d="M0 120 C 80 112, 120 118, 180 100 S 300 92, 360 70 S 480 50, 600 22" fill="none" stroke="#F7F4EB" stroke-width="2.5"/><circle cx="430" cy="58" r="7" fill="#F4A6C8"/><rect x="330" y="10" width="92" height="30" rx="15" fill="#F7F4EB"/><text x="376" y="30" text-anchor="middle" class="pin">$48,200</text></svg></div></div>
+          <svg viewBox="0 0 600 150" preserveAspectRatio="none" aria-hidden="true"><path d="M0 120 C 80 112, 120 118, 180 100 S 300 92, 360 70 S 480 50, 600 22" fill="none" stroke="#F7F4EB" stroke-width="2.5"/><circle cx="430" cy="58" r="7" fill="#D6FA52"/><rect x="330" y="10" width="92" height="30" rx="15" fill="#F7F4EB"/><text x="376" y="30" text-anchor="middle" class="pin">$48,200</text></svg></div></div>
         <div class="photo" aria-hidden="true" style="--img:url(/img/maqueta-ramas.jpg)"></div>
       </article>
     </div>
