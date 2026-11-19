@@ -79,6 +79,20 @@ export function renderClinica(c = {}, { mode = 'live', marks = {} } = {}) {
   const hoursRows = list(visit.rows).filter(r => !(contact.address && /^direcci/i.test(r.dt || '')));
   const legal = c.legal || {};
   const ctaTop = esc(hero.ctaTop || 'Agenda tu cita');
+  const stats = list(c.stats).slice(0, 4);
+  const priceRows = list(c.prices?.rows).length ? list(c.prices.rows) : services.filter(s => s.price).map(s => ({ name: s.name, price: s.price }));
+  const offers = list(c.offers?.items).slice(0, 3);
+  const tech = list(c.tech?.items).slice(0, 4);
+  const pay = list(c.payments?.methods), insurers = list(c.payments?.insurers);
+  const chat = list(c.chat?.faq).length ? c.chat : null;
+  // Lo que sabe el asistente (para la demostración y para responder lo que escriban)
+  const kb = chat ? {
+    name, wa: waNum, book: live ? bookHref : '', maps: live ? mapsHref : '', address: contact.address || '',
+    hours: hoursRows.map(r => [r.dt, r.dd]), slots: list(hero.slots).slice(0, 3),
+    faq: [...faq, ...list(chat.faq)].map(f => [f.q, f.a]).slice(0, 14),
+    services: services.map(s => [s.name, s.price || '', s.desc || '']), more: list(c.services?.more),
+    pay: [...pay, ...insurers], today: list(today?.bullets).map(b => b.t || b),
+  } : null;
   const ratingLine = rating ? `<span class="cx-stars" aria-hidden="true">${stars(rating.value)}</span><b>${esc(rating.value)}</b><span>${esc(rating.count)} reseñas en ${esc(rating.source || 'Google')}</span>` : '';
 
   const out = [];
@@ -88,7 +102,7 @@ export function renderClinica(c = {}, { mode = 'live', marks = {} } = {}) {
   if (c.util?.note || c.util?.hours || telNum) out.push(`<div class="cx-util">${c.util?.note ? `<span>${ico('bolt', 'cx-ico-s')}${esc(c.util.note)}</span>` : ''}${c.util?.hours ? `<span class="cx-util-h">${ico('clock', 'cx-ico-s')}${esc(c.util.hours)}</span>` : ''}${telNum ? act('cx-util-tel', `tel:${telNum}`, `${ico('phone', 'cx-ico-s')}${esc(contact.phone)}`) : ''}</div>`);
 
   // Encabezado
-  out.push(`<header class="cx-top"><div class="cx-brand">${url(brand.logo) ? `<img src="${url(brand.logo)}" alt="${esc(name)}">` : `<b>${esc(brand.name)}</b>${brand.tagline ? `<span>${esc(brand.tagline)}</span>` : ''}`}</div>
+  out.push(`<header class="cx-top"><div class="cx-brand">${url(brand.logo) ? `<img src="${url(brand.logo)}" alt="${esc(name)}"${brand.logoWide ? ' class="cx-logo-wide"' : ''}>` : `<b>${esc(brand.name)}</b>${brand.tagline ? `<span>${esc(brand.tagline)}</span>` : ''}`}</div>
     <nav class="cx-nav">${nav.map(page).join('')}</nav>
     <div class="cx-top-acts">${telNum ? act('cx-btn cx-btn--line cx-hide-s', `tel:${telNum}`, `${ico('phone', 'cx-ico-s')}Llamar`) : ''}${act('cx-btn', bookHref, ctaTop, mk('cta'))}</div></header>`);
 
@@ -108,6 +122,9 @@ export function renderClinica(c = {}, { mode = 'live', marks = {} } = {}) {
   // Beneficios
   if (trust.length) out.push(`<section class="cx-benefits"${mk('trust')}>${trust.map(t => `<div class="cx-benefit">${ico(iconName(t.icon, `${t.b} ${t.t}`))}<b>${esc(t.b)}</b><span>${esc(t.t)}</span></div>`).join('')}</section>`);
 
+  // Cifras
+  if (stats.length >= 3) out.push(`<section class="cx-stats">${stats.map(s => `<div><b>${esc(s.value)}</b><span>${esc(s.label)}</span></div>`).join('')}</section>`);
+
   // Atención de hoy
   if (today) out.push(`<section class="cx-today cx-sec"><div class="cx-today-copy"><h2>${esc(today.title || 'Te atendemos')}</h2>${today.text ? `<p>${esc(today.text)}</p>` : ''}${hoursRows.length ? `<dl class="cx-hours">${hoursRows.slice(0, 4).map(r => `<dt>${esc(r.dt)}</dt><dd>${esc(r.dd)}</dd>`).join('')}</dl>` : ''}</div>
     <div class="cx-panel"><ul class="cx-checks">${list(today.bullets).slice(0, 5).map(b => `<li>${ico(iconName(b.icon, b.t || b), 'cx-ico-c')}<span>${esc(b.t || b)}</span></li>`).join('')}</ul>${act('cx-btn', bookHref, ctaTop)}</div></section>`);
@@ -122,6 +139,9 @@ export function renderClinica(c = {}, { mode = 'live', marks = {} } = {}) {
     ${list(c.services.more).length ? `<div class="cx-pills"><span>También atendemos:</span>${list(c.services.more).slice(0, 14).map(m => `<em>${esc(m)}</em>`).join('')}</div>` : ''}
     ${c.services.note ? `<p class="cx-note">${esc(c.services.note)}</p>` : ''}</section>`);
 
+  // Lista de precios
+  if (priceRows.length >= 3) out.push(`<section class="cx-prices cx-sec"><div class="cx-prices-in"><div class="cx-prices-copy"><h2>${esc(c.prices?.title || 'Precios claros, sin sorpresas')}</h2><p>${esc(c.prices?.note || 'Precios de referencia. Te confirmamos el tuyo en tu valoración, antes de empezar.')}</p>${act('cx-btn', bookHref, ctaTop)}</div><ul>${priceRows.slice(0, 10).map(r => `<li><span>${esc(r.name)}</span><i aria-hidden="true"></i><b>${esc(r.price)}</b></li>`).join('')}</ul></div></section>`);
+
   // Ayuda para elegir (interactivo, con los mismos servicios)
   if (services.length >= 3) out.push(`<section class="cx-finder cx-sec"><div class="cx-panel cx-finder-in"><div><h2>${esc(c.finder?.title || '¿Qué necesitas?')}</h2><p>${esc(c.finder?.sub || 'Elige una opción y te decimos cómo empezar.')}</p></div>
     <div class="cx-finder-opts" role="radiogroup" aria-label="Servicio">${services.slice(0, 6).map((s, i) => `<button type="button" role="radio" aria-checked="${i === 0}" data-cx-pick="${i}">${esc(s.name)}</button>`).join('')}</div>
@@ -129,6 +149,20 @@ export function renderClinica(c = {}, { mode = 'live', marks = {} } = {}) {
       const href = waNum ? waMsg(`Hola, me interesa: ${s.name}. ¿Me ayudan a agendar?`) : bookHref;
       return `<div data-cx-res="${i}"${i ? ' hidden' : ''}><b>${esc(s.name)}</b>${s.price ? `<i>${esc(s.price)}</i>` : ''}<p>${esc(s.desc)}</p>${act('cx-btn', href, `${waNum ? WA : ''}Quiero agendar`)}</div>`;
     }).join('')}</div></div></section>`);
+
+  // Paquetes y promociones
+  if (offers.length) out.push(`<section class="cx-offers cx-sec"><div class="cx-head"><div><h2>${esc(c.offers.title || 'Paquetes y promociones')}</h2>${c.offers.sub ? `<p>${esc(c.offers.sub)}</p>` : ''}</div></div><div class="cx-offer-list">${offers.map((o, i) => {
+      const hl = offers.length > 1 ? i === 1 : true;
+      return `<div class="cx-offer${hl ? ' cx-offer--hl' : ''}">${o.tag ? `<em>${esc(o.tag)}</em>` : ''}<b>${esc(o.title)}</b><p>${esc(o.desc)}</p><div class="cx-offer-p">${o.was ? `<s>${esc(o.was)}</s>` : ''}<strong>${esc(o.price)}</strong></div>${act(`cx-btn${hl ? '' : ' cx-btn--line'}`, waNum ? waMsg(`Hola, me interesa: ${o.title}`) : bookHref, 'Lo quiero')}</div>`;
+    }).join('')}</div>${c.offers.note ? `<p class="cx-note">${esc(c.offers.note)}</p>` : ''}</section>`);
+
+  // Asistente con IA (demostración que se reproduce sola y responde lo que escriban)
+  if (chat) out.push(`<section class="cx-ai cx-sec"${mk('chat')}><div class="cx-ai-in"><div class="cx-ai-copy"><span class="cx-kicker">${ico('sparkle', 'cx-ico-s')}Asistente con IA</span><h2>${esc(c.assistant?.title || 'Pregunta lo que quieras, a cualquier hora')}</h2><p>${esc(c.assistant?.sub || 'Responde al momento con nuestra información, te ayuda a elegir y aparta tu cita. Si necesitas a una persona, te pasa con recepción por WhatsApp.')}</p>
+      <ul class="cx-checks">${(list(c.assistant?.bullets).length ? list(c.assistant.bullets) : ['Precios, horarios y ubicación al momento', 'Aparta tu cita sin esperar respuesta', 'Atiende de noche y en fin de semana', 'Te pasa con recepción cuando lo necesitas']).slice(0, 4).map(b => `<li>${ico('check', 'cx-ico-c')}<span>${esc(b)}</span></li>`).join('')}</ul>
+      <p class="cx-ai-try">${ico('chat', 'cx-ico-s')}Pruébalo: escribe una pregunta en el chat.</p></div>
+    <div class="cx-phone"><div class="cx-phone-top"><span class="cx-avatar" aria-hidden="true">${ico('sparkle', 'cx-ico-s')}</span><div><b>${esc(chat.title || name)}</b><small>Asistente · responde al momento</small></div></div>
+      <div class="cx-phone-log" data-cx-log aria-live="polite"></div>
+      <form class="cx-ask" data-cx-ask${live ? '' : ' inert'}><input name="q" placeholder="Escribe tu pregunta…" autocomplete="off" aria-label="Escribe tu pregunta al asistente"><button type="submit" aria-label="Enviar">${ico('arrow', 'cx-ico-s')}</button></form></div></div></section>`);
 
   // Proceso
   if (steps.length >= 2) out.push(`<section class="cx-process cx-sec"><div class="cx-head"><div><h2>${esc(c.process.title || 'Cómo es tu primera visita')}</h2>${c.process.sub ? `<p>${esc(c.process.sub)}</p>` : ''}</div></div><ol>${steps.map((s, i) => `<li><span class="cx-num">${i + 1}</span><b>${esc(s.t)}</b><p>${esc(s.d)}</p></li>`).join('')}</ol></section>`);
@@ -139,6 +173,9 @@ export function renderClinica(c = {}, { mode = 'live', marks = {} } = {}) {
       : `<div class="cx-team-solo">${img(c.team.photo, c.team.photoAlt, 'cx-team-img')}<ul class="cx-checks">${list(c.team.bullets).slice(0, 6).map(b => `<li>${ico('check', 'cx-ico-c')}<span>${esc(b)}</span></li>`).join('')}</ul></div>`}
     ${c.team.note ? `<p class="cx-note">${esc(c.team.note)}</p>` : ''}</section>`);
 
+  // Tecnología
+  if (tech.length >= 2) out.push(`<section class="cx-tech cx-sec"><div class="cx-tech-in">${img(c.tech.photo, c.tech.photoAlt, 'cx-tech-img')}<div class="cx-tech-copy"><h2>${esc(c.tech.title || 'Tecnología que se nota')}</h2>${c.tech.text ? `<p>${esc(c.tech.text)}</p>` : ''}<div class="cx-tech-grid">${tech.map(t => `<div>${ico(iconName(t.icon, `${t.b} ${t.t}`))}<b>${esc(t.b)}</b><span>${esc(t.t)}</span></div>`).join('')}</div></div></div></section>`);
+
   // Galería
   if (gallery.length >= 3) out.push(`<section class="cx-gallery cx-sec"><div class="cx-head"><div><h2>${esc(c.gallery.title || 'Conoce el lugar')}</h2>${c.gallery.text ? `<p>${esc(c.gallery.text)}</p>` : ''}</div></div><div class="cx-mosaic">${gallery.map((g, i) => img(g.img, g.alt, `cx-tile cx-tile--${i % 6}`)).join('')}</div></section>`);
 
@@ -147,6 +184,9 @@ export function renderClinica(c = {}, { mode = 'live', marks = {} } = {}) {
     <div class="cx-rev-list">${reviews.map(r => `<figure class="cx-rev"><span class="cx-stars" aria-label="${esc(r.stars || 5)} de 5">${stars(r.stars || 5)}</span><blockquote>${esc(r.text)}</blockquote><figcaption><span class="cx-avatar" aria-hidden="true">${esc((r.name || '?').trim()[0])}</span><b>${esc(r.name)}</b>${r.meta ? `<small>${esc(r.meta)}</small>` : ''}</figcaption></figure>`).join('')}</div>
     ${c.reviews.note ? `<p class="cx-note">${esc(c.reviews.note)}</p>` : ''}</section>`);
 
+  // Formas de pago y aseguradoras
+  if (pay.length || insurers.length) out.push(`<section class="cx-pay cx-sec"><div class="cx-pay-in"><div><h2>${esc(c.payments.title || 'Formas de pago')}</h2>${c.payments.text ? `<p>${esc(c.payments.text)}</p>` : ''}</div><div class="cx-pay-lists">${pay.length ? `<div class="cx-chips">${pay.map(x => `<span>${ico('card', 'cx-ico-s')}${esc(x)}</span>`).join('')}</div>` : ''}${insurers.length ? `<p class="cx-pay-l">Aseguradoras</p><div class="cx-chips">${insurers.map(x => `<span>${ico('shield', 'cx-ico-s')}${esc(x)}</span>`).join('')}</div>` : ''}</div></div></section>`);
+
   // Preguntas frecuentes
   if (faq.length) out.push(`<section class="cx-faq cx-sec"><div class="cx-head"><div><h2>Preguntas frecuentes</h2></div></div><div class="cx-faq-list">${faq.slice(0, 8).map((f, i) => `<details${i === 0 ? ' open' : ''}><summary>${esc(f.q)}<span aria-hidden="true"></span></summary><p>${esc(f.a)}</p></details>`).join('')}</div></section>`);
 
@@ -154,7 +194,8 @@ export function renderClinica(c = {}, { mode = 'live', marks = {} } = {}) {
   out.push(`<section class="cx-visit cx-sec"${mk('visit')}><div class="cx-visit-card">${img(visit.photo, visit.photoAlt || 'Fachada', 'cx-visit-img')}<div class="cx-visit-info"><h2>${esc(visit.title || 'Cómo llegar')}</h2>
       ${contact.address ? `<p class="cx-addr">${ico('map', 'cx-ico-s')}${esc(contact.address)}</p>` : ''}${visit.zones ? `<p class="cx-zones">${esc(visit.zones)}</p>` : ''}
       ${hoursRows.length ? `<dl class="cx-hours">${hoursRows.slice(0, 5).map(r => `<dt>${esc(r.dt)}</dt><dd>${esc(r.dd)}</dd>`).join('')}</dl>` : ''}
-      <div class="cx-ctas">${mapsHref ? act('cx-btn', mapsHref, `${ico('map', 'cx-ico-s')}Abrir en Google Maps`) : ''}${waNum ? act('cx-btn cx-btn--ghost', waHref, `${WA}WhatsApp`) : ''}</div></div></div></section>`);
+      <div class="cx-ctas">${mapsHref ? act('cx-btn', mapsHref, `${ico('map', 'cx-ico-s')}Abrir en Google Maps`) : ''}${waNum ? act('cx-btn cx-btn--ghost', waHref, `${WA}WhatsApp`) : ''}</div></div></div>
+    ${live && contact.address ? `<div class="cx-map"><iframe title="Mapa de ${esc(name)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=${encodeURIComponent(contact.address)}&amp;output=embed"></iframe></div>` : ''}</section>`);
 
   // Formulario de cita (en la vista previa abre WhatsApp con el mensaje armado)
   if (waNum || contact.bookingUrl) out.push(`<section class="cx-book cx-sec"><div class="cx-panel cx-book-in"><div class="cx-book-copy"><h2>${esc(c.form?.title || 'Agenda tu cita')}</h2><p>${esc(c.form?.sub || 'Déjanos tus datos y te confirmamos por WhatsApp.')}</p></div>
@@ -164,20 +205,22 @@ export function renderClinica(c = {}, { mode = 'live', marks = {} } = {}) {
       <button class="cx-btn cx-btn--lg cx-wide" type="submit">${waNum ? WA : ''}Enviar y agendar</button><small class="cx-wide">Al enviar aceptas nuestro aviso de privacidad.</small></form></div></section>`);
 
   // Pie
-  out.push(`<footer class="cx-foot"><div class="cx-foot-cols"><div><b class="cx-foot-name">${esc(name)}</b>${contact.address ? `<p>${esc(contact.address)}</p>` : ''}</div>
+  out.push(`<footer class="cx-foot"><div class="cx-foot-cols"><div>${url(brand.logo) ? `<span class="cx-foot-logo"><img src="${url(brand.logo)}" alt="${esc(name)}"></span>` : `<b class="cx-foot-name">${esc(name)}</b>`}${contact.address ? `<p>${esc(contact.address)}</p>` : ''}</div>
       ${services.length ? `<div><b>Servicios</b>${services.slice(0, 6).map(s => `<span>${esc(s.name)}</span>`).join('')}</div>` : ''}
       <div><b>Contacto</b>${telNum ? act('', `tel:${telNum}`, esc(contact.phone)) : ''}${waNum ? act('', waHref, 'WhatsApp') : ''}${contact.email ? act('', `mailto:${contact.email}`, esc(contact.email)) : ''}${hoursRows.slice(0, 2).map(r => `<span>${esc(r.dt)}: ${esc(r.dd)}</span>`).join('')}</div></div>
     <div class="cx-foot-legal"><span>© ${new Date().getFullYear()} ${esc(name)}</span><span>Aviso de privacidad</span>${legal.cofepris ? `<span>Aviso COFEPRIS ${esc(legal.cofepris)}</span>` : ''}${legal.responsable ? `<span>Responsable sanitario: ${esc(legal.responsable)}</span>` : ''}${c.footer?.note ? `<span>${esc(c.footer.note)}</span>` : ''}</div></footer>`);
 
   // Chat y WhatsApp flotantes
-  const chat = list(c.chat?.faq).length ? c.chat : null;
   out.push(`<div class="cx-fab">${chat ? `<div class="cx-chat" role="region" aria-label="Chat de ${esc(name)}"><div class="cx-chat-top"><div><b>${esc(chat.title || name)}</b><span>${esc(chat.subtitle || 'Te respondemos aquí o por WhatsApp')}</span></div><button type="button" data-cx-chat="toggle" aria-label="Cerrar chat">×</button></div>
       <div class="cx-chat-log"><p class="cx-msg">${esc(chat.greeting || 'Hola 👋 ¿En qué te podemos ayudar?')}</p></div>
-      <div class="cx-chat-sug">${list(chat.faq).slice(0, 4).map(f => `<button type="button" data-cx-q data-a="${esc(f.a)}" data-act="${f.action === 'book' ? 'book' : 'wa'}">${esc(f.q)}</button>`).join('')}</div></div>
-    <button type="button" class="cx-chat-btn" data-cx-chat="toggle" aria-expanded="false"${mk('chat')}>${ico('chat', 'cx-ico-s')}${esc(chat.button || '¿Dudas? Pregúntanos')}</button>` : ''}
+      <div class="cx-chat-sug">${list(chat.faq).slice(0, 4).map(f => `<button type="button" data-cx-q data-a="${esc(f.a)}" data-act="${f.action === 'book' ? 'book' : 'wa'}">${esc(f.q)}</button>`).join('')}</div>
+      <form class="cx-ask cx-ask--chat" data-cx-ask${live ? '' : ' inert'}><input name="q" placeholder="Escribe tu pregunta…" autocomplete="off" aria-label="Escribe tu pregunta"><button type="submit" aria-label="Enviar">${ico('arrow', 'cx-ico-s')}</button></form></div>
+    ${live ? `<p class="cx-teaser" hidden>${esc(chat.teaser || '¿Te ayudo a agendar tu cita? 👋')}</p>` : ''}
+    <button type="button" class="cx-chat-btn" data-cx-chat="toggle" aria-expanded="false" aria-label="${esc(chat.button || '¿Dudas? Pregúntanos')}">${ico('chat', 'cx-ico-s')}<span class="cx-chat-l">${esc(chat.button || '¿Dudas? Pregúntanos')}</span></button>` : ''}
     ${waNum ? act('cx-wa-fab', waHref, WA, ` aria-label="WhatsApp"${chat ? '' : mk('whatsapp')}`) : ''}</div>
   <div class="cx-sticky">${act('cx-btn', bookHref, ctaTop)}${waNum ? act('cx-btn cx-btn--ghost', waHref, `${WA}WhatsApp`) : ''}</div>`);
 
+  if (kb) out.push(`<script type="application/json" class="cx-kb">${JSON.stringify(kb).replace(/</g, '\\u003c')}</script>`);
   out.push('</div>');
   return out.join('\n');
 }

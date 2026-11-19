@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 56" role="img" aria-label="Clínica Dental Arrayán">
+  <g transform="translate(4 6)">
+    <path d="M22 0c7 0 13 4 15 11 2.4 8.4-1.6 15-4.4 22-2 5-2.6 11-6.6 11-3.4 0-3-7.6-6-7.6S16.4 44 13 44c-4 0-4.6-6-6.6-11C3.6 26 -.4 19.4 2 11 4 4 10 0 17 0c1.8 0 3.4.4 5 1Z" fill="#1F4FD1"/>
+    <path d="M19 9c6-3 12-1 14 4-5-1.4-9 .2-12 4.2-1.2-3.4-1.6-5.6-2-8.2Z" fill="#fff" opacity=".9"/>
+  </g>
+  <text x="56" y="30" font-family="Red Hat Display, Avenir Next, Segoe UI, Helvetica, Arial, sans-serif" font-size="25" font-weight="700" fill="#15211D" letter-spacing="-.5">Arrayán</text>
+  <text x="57" y="47" font-family="Red Hat Text, Avenir Next, Segoe UI, Helvetica, Arial, sans-serif" font-size="11.5" font-weight="500" fill="#5C6865" letter-spacing="2.2">CLÍNICA DENTAL</text>
+</svg>
