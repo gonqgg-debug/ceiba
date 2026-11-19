@@ -735,6 +735,11 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 .dg-list li{display:grid;grid-template-columns:112px minmax(0,1fr);gap:4px 20px;padding:18px 0;border-bottom:1px solid var(--line)}
 .dg-list h3{font:600 17px/1.35 var(--f-body);grid-column:2}
 .dg-list p{grid-column:2;color:var(--muted);font-size:15px;max-width:64ch}
+.dg-list p.offer{color:var(--lime);font:500 13px/1.4 var(--f-mono);margin-top:4px}
+.dg-ghead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 16px}
+.dg-ghead h2{font-size:clamp(22px,2.4vw,28px);letter-spacing:-.02em}
+.dg-ghead span{font:500 13px var(--f-mono);color:var(--muted)}
+.dg-gsub{color:var(--muted);font-size:15px;margin:6px 0 14px}
 .tag{grid-row:span 2;align-self:start;justify-self:start;font:500 12px/1 var(--f-mono);letter-spacing:.02em;padding:7px 9px;border-radius:6px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
 .tag--bad{color:var(--ink);background:var(--ivory);border-color:var(--ivory)}
 .tag--warn{color:var(--ivory);border-color:rgba(247,244,235,.5)}
@@ -797,7 +802,8 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
         <li>Abrimos tu página como si fuéramos un cliente desde el celular</li>
         <li>Buscamos cómo te pueden escribir, llamar o agendar</li>
         <li>Medimos cuánto tarda en cargar</li>
-        <li>Vemos cómo te muestra Google</li>
+        <li>Vemos cómo te muestra Google y Google Maps</li>
+        <li>Revisamos si tienes agenda en línea, asistente y medición</li>
       </ol>
     </div>
 
@@ -805,7 +811,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     <div id="st-done" hidden style="display:grid;gap:24px">
       <h1 id="done-title"></h1>
       <div class="dg-sum" id="done-sum"></div>
-      <ul class="dg-list" id="done-list"></ul>
+      <div id="done-groups" style="display:grid;gap:36px"></div>
       <p class="dg-note">Es una revisión automática de la portada. En tu propuesta, una persona del equipo revisa tu página completa y te muestra cómo quedaría la nueva.</p>
     </div>
 
@@ -903,7 +909,18 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       ? `Encontramos ${fix} ${fix === 1 ? 'cosa' : 'cosas'} que te pueden estar costando clientes <span class="soft">en ${esc(d.host)}.</span>`
       : `${esc(d.host)} cumple lo básico. <span class="soft">Ahora toca que te traiga más clientes.</span>`;
     $('#done-sum').innerHTML = `<span><b>${d.counts.bad}</b> faltan</span><span><b>${d.counts.warn}</b> mejorables</span><span><b>${d.counts.ok}</b> bien</span><span>Tardó <b>${d.seconds}</b> s</span>`;
-    $('#done-list').innerHTML = checks.map(c => `<li><span class="tag tag--${c.status}">${LABEL[c.status]}</span><h3>${esc(c.label)}</h3><p>${esc(c.detail)}</p></li>`).join('');
+    const OFFER = { 'Plan Negocio': 'Lo incluye el Plan Negocio', 'Asistente de WhatsApp': 'Lo resuelve el Asistente de WhatsApp', 'todos los planes': 'Incluido en todos los planes' };
+    const GROUPS = [
+      ['basico', 'Lo básico', 'Lo mínimo para que quien llega no se vaya.'],
+      ['clientes', 'Lo que te trae más clientes', 'Lo que hace que te encuentren en Google y que una visita termine en cita o venta.'],
+    ];
+    const item = c => `<li><span class="tag tag--${c.status}">${LABEL[c.status]}</span><h3>${esc(c.label)}</h3><p>${esc(c.detail)}</p>${c.offer ? `<p class="offer">${esc(OFFER[c.offer] || c.offer)}</p>` : ''}</li>`;
+    $('#done-groups').innerHTML = GROUPS.map(([id, title, sub]) => {
+      const list = checks.filter(c => (c.group || 'basico') === id);
+      if (!list.length) return '';
+      const miss = list.filter(c => c.status !== 'ok').length;
+      return `<section aria-labelledby="g-${id}"><div class="dg-ghead"><h2 id="g-${id}">${title}</h2><span>${miss ? `${miss} de ${list.length} por mejorar` : 'Todo bien'}</span></div><p class="dg-gsub">${sub}</p><ul class="dg-list">${list.map(item).join('')}</ul></section>`;
+    }).join('');
     show('done'); openAsk();
     $('#done-title').setAttribute('tabindex', '-1'); $('#done-title').focus({ preventScroll: true });
   }
