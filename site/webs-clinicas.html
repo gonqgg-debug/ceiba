@@ -1401,18 +1401,10 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   });
   diag.addEventListener('close', () => { if (lastFocus && document.contains(lastFocus) && !lastFocus.closest('#diag')) lastFocus.focus({ preventScroll: true }); });
 
-  /* ---------- industries ---------- */
-  const indBtns = $$('.ind-row');
-  const selectInd = b => {
-    indBtns.forEach(x => x.setAttribute('aria-pressed', x === b));
-    $$('.ind-panel').forEach(p => p.hidden = p.dataset.panel !== b.dataset.ind);
-    const pl = $('#ind-page-link'); pl.firstChild.textContent = 'Ver la página de ' + $('h3', b).textContent + ' ';
-    if (b.dataset.ind === 'clinicas') { pl.href = 'webs-clinicas.html'; delete pl.dataset.route; } else { pl.href = '#'; pl.dataset.route = '/webs/' + b.dataset.ind; }
-  };
-  indBtns.forEach(b => { b.addEventListener('click', () => selectInd(b)); b.addEventListener('mouseenter', () => { if (matchMedia('(hover:hover)').matches) selectInd(b); }); b.addEventListener('focus', () => selectInd(b)); });
-
   /* ---------- chat replay ---------- */
-  const chat = $('#chat-body'), handoff = $('.handoff', chat), items = [...chat.children].filter(el => el !== handoff);
+  const chat = $('#chat-body');
+  if (chat) {
+  const handoff = $('.handoff', chat), items = [...chat.children].filter(el => el !== handoff);
   let chatTimers = [];
   $('#chat-replay').addEventListener('click', () => {
     chatTimers.forEach(clearTimeout); chatTimers = [];
@@ -1427,6 +1419,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       t += isBot ? 700 : 900;
     });
   });
+  }
 
   /* ---------- FAQ ---------- */
   $$('.faq-q').forEach(q => q.addEventListener('click', () => {

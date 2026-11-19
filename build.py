@@ -34,11 +34,9 @@ cmp_js = (home[home.index("  /* ---------- clone mock templates"):home.index("  
           + home[home.index("  /* ---------- radiogroup helper"):home.index("  /* ---------- URL check (hero)")])
 
 # Bloques de Inicio que reutiliza la página de industria
-chat_start = home.index('<div class="chat" aria-label')
 industry = {
     "{{SCRIPT}}": home[home.rindex("<script>") + 8:home.rindex("</script>")],
     "{{CMP_SECTION}}": cut('<section class="band band--light section" id="antes-despues"', "</section>"),
-    "{{CHAT}}": home[chat_start:home.index("\n  </div>\n</section>", chat_start)],
     "{{FORM}}": cut('<form class="form" id="lead-form"', "</form>").replace(
         "<option>Clínica o consultorio</option>", "<option selected>Clínica o consultorio</option>"),
     "{{DIAG}}": cut('<dialog class="diag" id="diag"', "</dialog>"),

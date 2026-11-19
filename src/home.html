@@ -858,18 +858,6 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       <li><span class="dot" aria-hidden="true">2</span><h3>Te la mostramos y decides</h3><p>Si te gusta, eliges un plan y haces el pago inicial. Si no, no pagas nada.</p><span class="who">Tú: decides con la página a la vista</span></li>
       <li><span class="dot" aria-hidden="true">3</span><h3>La publicamos y nos encargamos</h3><p>Terminamos el resto de la página, la publicamos y cada mes hacemos los cambios que nos pidas.</p><span class="who">Nosotros: cada mes</span></li>
     </ol>
-    <div class="includes">
-      <div><h3>Qué incluye la mensualidad</h3><p>Lo que cambia entre planes es el número de páginas y cuántos cambios nos puedes pedir al mes.</p></div>
-      <dl class="inc-list">
-        <div><dt>Diseño a medida</dt><dd>Hecho para tu negocio y pensado primero para el celular.</dd></div>
-        <div><dt>Publicación</dt><dd>Hosting, tu dominio (.com o .mx) y certificado de seguridad.</dd></div>
-        <div><dt>Mantenimiento técnico</dt><dd>Actualizaciones, copias de respaldo y monitoreo de caídas.</dd></div>
-        <div><dt>Cambios cada mes</dt><dd>Nos pides cambios de textos, fotos, horarios o precios: hasta 30, 60 o 120 minutos al mes según tu plan.</dd></div>
-        <div><dt>SEO y optimización para IA</dt><dd>Datos estructurados, títulos, descripciones, mapa del sitio y contenido que Google y la IA pueden leer.</dd></div>
-        <div><dt>Formas de contacto</dt><dd>Formularios, WhatsApp, mapa y citas o reservas en línea según tu negocio.</dd></div>
-        <div><dt>Una persona a cargo</dt><dd>Hablas con quien diseñó tu página, no con un sistema de tickets.</dd></div>
-      </dl>
-    </div>
   </div>
 </section>
 
@@ -908,6 +896,13 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 .ws-check input{flex:1;min-width:180px;height:52px;border-radius:12px;border:1px solid rgba(247,244,235,.25);background:rgba(11,21,20,.35);color:var(--ivory);padding:0 14px;font:400 16px var(--f-body)}
 .ws-check input::placeholder{color:rgba(247,244,235,.5)}
 .ws-check .err{flex-basis:100%;color:#FFC9B8;font-size:14px;margin:0}
+.price-inc{margin-top:28px;padding:20px 22px;border-radius:16px;border:1px solid rgba(247,244,235,.14);display:grid;gap:12px}
+.price-inc b{font-weight:600}
+.price-inc ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 20px;font-size:15px;color:rgba(247,244,235,.82)}
+.price-inc li{display:grid;grid-template-columns:18px 1fr;gap:6px}
+.price-inc li::before{content:"✓";color:var(--lime);font-weight:700}
+.price-ind{margin-top:16px;font-size:15px;color:rgba(247,244,235,.8)}
+@media (max-width:860px){.price-inc ul{grid-template-columns:1fr}}
 .cur-switch{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:18px 0 0;font-size:14px;color:var(--muted)}
 .cur-switch button{font:inherit;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid rgba(247,244,235,.3);background:transparent;color:inherit;cursor:pointer}
 .cur-switch button[aria-pressed="true"]{background:var(--lime);color:var(--ink);border-color:var(--lime)}
@@ -947,17 +942,10 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
         <li><b>SEO base completo</b><p>Título y descripción para cada página, un encabezado claro, fotos con descripción, mapa del sitio, dirección canónica y vista previa al compartir en WhatsApp.</p></li>
         <li><b>Contenido que la IA puede citar</b><p>Preguntas frecuentes, precios o rangos, horarios y zonas en texto, no escondidos en imágenes. Es lo que la IA usa para responder «¿cuánto cuesta?» o «¿abren el sábado?».</p></li>
         <li><b>Abierta a los buscadores de IA</b><p>No bloqueamos a ChatGPT, Gemini, Perplexity ni Claude, y tu página se lee completa sin depender de código que muchos de ellos no ejecutan.</p></li>
-        <li><b>Rápida y pensada para el celular</b><p>Carga rápido con datos móviles. La velocidad cuenta para Google y para quien está decidiendo.</p></li>
-        <li><b>Los mismos datos en todos lados</b><p>Revisamos que nombre, dirección, teléfono y horario coincidan con tu perfil de Google. Si no cuadran, la IA desconfía.</p></li>
       </ol>
     </div>
-    <div class="ws-check" id="ws-check">
-      <div class="ws-gauge" id="ws-gauge" aria-hidden="true"><b id="ws-gauge-n">0</b><span>/100</span></div>
-      <div><h3>¿Cómo está tu página hoy?</h3><p>Analizamos tu SEO actual y tu visibilidad en la IA: te damos un puntaje de 0 a 100 y te explicamos qué falta, gratis y en segundos.</p></div>
-      <form id="ws-check-form" novalidate><input id="ws-check-url" type="text" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com" aria-label="Dirección de tu página"><button class="btn btn-primary" type="submit">Analizar mi SEO <span class="arrow" aria-hidden="true">→</span></button><p class="err" id="ws-check-err" hidden></p></form>
-    </div>
     <div class="ws-tiers">
-      <div><span>Gratis · todos los planes</span><b>SEO base y análisis rápido</b><p>Toda página sale optimizada para Google y la IA. Y cualquiera puede analizar su portada gratis: puntaje de 0 a 100, con lo que falta.</p></div>
+      <div><span>Gratis · todos los planes</span><b>SEO base y análisis rápido</b><p>Toda página sale optimizada para Google y la IA. Y cualquiera puede <a class="link" href="#revisar">analizar su portada gratis</a>: puntaje de 0 a 100, con lo que falta.</p></div>
       <div><span>Plan Negocio</span><b>Análisis avanzado y prueba trimestral</b><p>Al lanzar revisamos todo tu sitio, la velocidad real en celular y tus datos en Google. Y cada 3 meses le hacemos 10 preguntas reales a ChatGPT, Gemini y Perplexity sobre negocios como el tuyo para ver si te recomiendan.</p></div>
       <div class="hl"><span>Plan Avanzado</span><b>Reporte y mejora cada mes</b><p>Cada mes: 20 preguntas a la IA (también a Claude), tus búsquedas en Google, clics, posiciones y competidores. Y aplicamos una mejora de SEO al mes, aparte de tus minutos de cambios.</p></div>
     </div>
@@ -970,21 +958,6 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   const read = document.getElementById('ws-read'), rows = [...read.querySelectorAll('dl div')], ans = document.getElementById('ws-read-ans');
   let on = false;
   async function play() { if (on) return; on = true; while (true) { rows.forEach(r => r.classList.remove('on')); ans.classList.remove('on'); await wait(400); for (const r of rows) { r.classList.add('on'); await wait(450); } await wait(400); ans.classList.add('on'); if (reduce) return; await wait(6000); } }
-  const gauge = document.getElementById('ws-gauge'), n = document.getElementById('ws-gauge-n');
-  const fill = () => { const end = 34; if (reduce) { gauge.style.setProperty('--s', 100); n.textContent = '?'; return; } let v = 0; const t = setInterval(() => { v += 2; gauge.style.setProperty('--s', v); n.textContent = v; if (v >= end) { clearInterval(t); setTimeout(() => { n.textContent = '?'; gauge.style.setProperty('--s', 100); }, 900); } }, 30); };
-  new IntersectionObserver((es, o) => es.forEach(e => { if (!e.isIntersecting) return; if (e.target === read) play(); else { fill(); o.unobserve(e.target); } }), { threshold: .4 }).observe(read);
-  new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { fill(); o.disconnect(); } }), { threshold: .5 }).observe(gauge);
-  const f = document.getElementById('ws-check-form'), inp = document.getElementById('ws-check-url'), err = document.getElementById('ws-check-err');
-  f.addEventListener('submit', e => {
-    e.preventDefault();
-    let s = inp.value.trim(); const fail = m => { err.textContent = m; err.hidden = false; inp.setAttribute('aria-invalid', 'true'); inp.focus(); };
-    if (!s) return fail('Escribe la dirección de tu página, por ejemplo tunegocio.com');
-    if (!/^https?:\/\//i.test(s)) s = 'https://' + s;
-    let h; try { h = new URL(s).hostname.toLowerCase(); } catch { return fail('Esa dirección no parece válida.'); }
-    if (!/^([a-z0-9-]+\.)+[a-z]{2,}$/.test(h)) return fail('Le falta el final, como .com o .com.mx');
-    location.href = '/diagnostico?url=' + encodeURIComponent(h.replace(/^www\./, ''));
-  });
-  inp.addEventListener('input', () => { err.hidden = true; inp.removeAttribute('aria-invalid'); });
 })();
 </script>
 
@@ -1026,62 +999,13 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
           <ul><li>Contesta en WhatsApp y en tu página las preguntas de siempre</li><li>Toma los datos para una cita o cotización</li><li>Te pasa con alguien del equipo cuando hace falta</li><li>Hasta 300 conversaciones al mes durante el piloto</li></ul>
           <div class="price-cell"><span class="k">Pago inicial</span><span class="v"><span data-price="modulo.whatsapp.activation">$3,990</span><small>pago único</small></span></div>
           <div class="price-cell"><span class="k">Mensualidad</span><span class="v"><span data-price="modulo.whatsapp.monthly">$1,490</span><small>al mes</small></span></div>
-          <a class="btn btn-line" href="#ia">Ver cómo funciona</a>
+          <a class="btn btn-line" href="/ia#caso-pedidos">Ver cómo funciona</a>
         </div>
       </div>
+      <div class="price-inc"><b>Todos los planes incluyen</b><ul><li>Diseño a medida, pensado para el celular</li><li>Hosting, dominio y certificado de seguridad</li><li>Mantenimiento, respaldos y monitoreo</li><li>SEO base y optimizada para IA</li><li>Cambios cada mes según tu plan</li><li>Una persona a cargo, no tickets</li></ul></div>
+      <p class="price-ind">¿Tienes una clínica o consultorio? <a class="link" href="webs-clinicas.html">Ver páginas para clínicas <span class="arrow" aria-hidden="true">→</span></a></p>
       <p class="cur-switch" data-cur-switch hidden></p>
       <p class="price-foot">Precios de lanzamiento en <span data-cur-name>pesos mexicanos</span>. Es el precio final que pagas. Si aplica algún cargo de Meta o del proveedor de mensajería, lo desglosamos en tu propuesta.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ INDUSTRIES ============ -->
-<section class="band band--light section" id="industrias" aria-labelledby="ind-title">
-  <div class="wrap">
-    <h2 class="h2" id="ind-title">¿Qué tipo de negocio tienes?</h2>
-    <p class="lede" style="margin-top:20px">Cada página está pensada para lo que más necesitas que hagan tus clientes: agendar, reservar, cotizar o escribirte.</p>
-    <div class="ind-grid">
-      <ul class="ind-list" id="ind-list">
-        <li><button class="ind-row" type="button" data-ind="clinicas" aria-pressed="true"><h3>Clínicas</h3><span class="use">Tus pacientes agendan su primera cita sin tener que llamar.<span class="act">→ Agendar cita</span></span></button><a class="ind-link" href="webs-clinicas.html">Ver páginas para clínicas <span aria-hidden="true">→</span></a></li>
-        <li><button class="ind-row" type="button" data-ind="restaurantes" aria-pressed="false"><h3>Restaurantes</h3><span class="use">Tus clientes ven el menú en el celular y reservan mesa.<span class="act">→ Reservar mesa</span></span></button><a class="ind-link" href="#" data-route="/webs/restaurantes">Ver páginas para restaurantes <span aria-hidden="true">→</span></a></li>
-        <li><button class="ind-row" type="button" data-ind="inmobiliarias" aria-pressed="false"><h3>Inmobiliarias</h3><span class="use">Los interesados filtran por zona y precio, y agendan la visita desde la ficha.<span class="act">→ Agendar visita</span></span></button><a class="ind-link" href="#" data-route="/webs/inmobiliarias">Ver páginas para inmobiliarias <span aria-hidden="true">→</span></a></li>
-        <li><button class="ind-row" type="button" data-ind="hoteles" aria-pressed="false"><h3>Hoteles</h3><span class="use">Tus huéspedes ven las fechas libres y reservan directo contigo, sin pasar por otras plataformas.<span class="act">→ Ver disponibilidad</span></span></button><a class="ind-link" href="#" data-route="/webs/hoteles">Ver páginas para hoteles <span aria-hidden="true">→</span></a></li>
-        <li><button class="ind-row" type="button" data-ind="despachos" aria-pressed="false"><h3>Despachos</h3><span class="use">Tus clientes te cuentan su caso antes de la primera llamada.<span class="act">→ Enviar consulta</span></span></button><a class="ind-link" href="#" data-route="/webs/despachos">Ver páginas para despachos <span aria-hidden="true">→</span></a></li>
-      </ul>
-      <aside class="ind-preview" aria-label="Vista de la acción principal en el celular">
-        <div class="ind-panel" data-panel="clinicas"><p class="cap">Clínicas · cita de primera visita</p>
-          <div class="phone"><span class="pt">Agendar cita</span><div><p class="lb">Tratamiento</p><div class="inp">Valoración con radiografía <span>⌄</span></div></div><div><p class="lb">Día</p><div class="opt"><span>Mié 18</span><span class="on">Jue 19</span><span>Vie 20</span></div></div><div><p class="lb">Hora</p><div class="opt"><span>16:30</span><span class="on">18:00</span><span>19:15</span></div></div><span class="go">Confirmar jueves 18:00</span></div></div>
-        <div class="ind-panel" data-panel="restaurantes" hidden><p class="cap">Restaurantes · reserva de mesa</p>
-          <div class="phone"><span class="pt">Reservar mesa</span><div><p class="lb">Personas</p><div class="opt"><span>2</span><span class="on">4</span><span>6</span><span>8+</span></div></div><div><p class="lb">Viernes 20</p><div class="opt"><span>20:00</span><span class="on">20:30</span><span>21:00</span><span>21:30</span></div></div><div><p class="lb">Ocasión</p><div class="inp">Cumpleaños <span>⌄</span></div></div><span class="go">Reservar para 4 a las 20:30</span></div></div>
-        <div class="ind-panel" data-panel="inmobiliarias" hidden><p class="cap">Inmobiliarias · ficha con visita</p>
-          <div class="phone"><span class="pt">Departamentos en arriendo</span><div class="opt"><span class="on">Roma Norte</span><span>2 dormitorios</span><span>Hasta tu presupuesto</span></div><div class="card"><i></i><span><b>Depto. 2D · 64 m²</b>Cerca de metro · <u>Agendar visita</u></span></div><div class="card"><i></i><span><b>Depto. 2D · 58 m²</b>Con estacionamiento · <u>Agendar visita</u></span></div></div></div>
-        <div class="ind-panel" data-panel="hoteles" hidden><p class="cap">Hoteles · disponibilidad directa</p>
-          <div class="phone"><span class="pt">Tu estadía</span><div class="frow" style="gap:8px;grid-template-columns:1fr 1fr"><div><p class="lb">Llegada</p><div class="inp">12 dic</div></div><div><p class="lb">Salida</p><div class="inp">15 dic</div></div></div><div><p class="lb">Habitación</p><div class="opt"><span class="on">Doble</span><span>Suite</span><span>Familiar</span></div></div><span class="go">Ver disponibilidad</span></div></div>
-        <div class="ind-panel" data-panel="despachos" hidden><p class="cap">Despachos · consulta con el caso descrito</p>
-          <div class="phone"><span class="pt">Cuéntanos tu caso</span><div><p class="lb">Área</p><div class="opt"><span>Laboral</span><span class="on">Tributaria</span><span>Familia</span></div></div><div><p class="lb">Qué pasó</p><div class="inp tall">Me llegó un requerimiento del SAT por la declaración del año pasado…</div></div><span class="go">Enviar consulta</span></div></div>
-        <a class="link panel-link" id="ind-page-link" href="webs-clinicas.html">Ver la página de Clínicas <span class="arrow" aria-hidden="true">→</span></a>
-      </aside>
-    </div>
-  </div>
-</section>
-
-<!-- ============ AI ============ -->
-<section class="band section" id="ia" aria-labelledby="ia-title">
-  <div class="wrap ai-grid">
-    <div class="ai-copy">
-      <h2 class="h2" id="ia-title">Tu WhatsApp responde mientras tú atiendes.</h2>
-      <div><a class="link" href="/ia">Conoce cómo usamos la IA <span class="arrow" aria-hidden="true">→</span></a></div>
-    </div>
-    <div class="chat" aria-label="Ejemplo de conversación con el asistente de una clínica">
-      <div class="chat-top"><b>Asistente · Clínica Arrayán</b><span>Ejemplo ficticio</span></div>
-      <div class="chat-body" id="chat-body">
-        <div class="msg out"><small>Paciente</small>Hola, ¿tienen hora mañana en la tarde para una limpieza?</div>
-        <div class="msg in"><small>Asistente</small>Hola. La limpieza dura 45 minutos y mañana jueves atendemos de 9:00 a 20:00. ¿Qué horario prefieres?</div>
-        <div class="msg out"><small>Paciente</small>A las 18:00. Otra cosa: me pusieron un implante en otra clínica y se mueve un poco.</div>
-        <div class="msg in"><small>Asistente</small>Anoté tu solicitud de limpieza para el jueves a las 18:00. Lo del implante tiene que verlo el equipo clínico, así que se lo paso a recepción junto con tu mensaje. Te confirman por este mismo chat.</div>
-        <div class="handoff"><b>Pasado a recepción</b><dl><dt>Motivo</dt><dd>Implante de otra clínica con movilidad</dd><dt>Solicitud</dt><dd>Limpieza · jue 18:00</dd><dt>Pendiente</dt><dd>Confirmar horario y revisar el implante</dd></dl></div>
-      </div>
-      <div class="chat-foot"><span>Conversación de ejemplo</span><button type="button" id="chat-replay">Ver de nuevo</button></div>
     </div>
   </div>
 </section>
@@ -1093,13 +1017,8 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
     <div class="faq" id="faq">
       <div class="faq-item open"><h3><button class="faq-q" type="button" aria-expanded="true" aria-controls="fa1" id="fq1">¿Tengo que pagar por la propuesta?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa1" role="region" aria-labelledby="fq1"><div><p>No, es gratis. Solo pagas el monto inicial y la mensualidad si decides activar tu página.</p></div></div></div>
       <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa2" id="fq2">¿Qué incluye la propuesta?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa2" role="region" aria-labelledby="fq2"><div><p>Un enlace privado donde ves tu página de hoy junto a cómo quedaría, en computadora y en celular. También incluye qué mejoras, el plan que te recomendamos, el precio y hasta cuándo es válida. Desde ahí puedes activarla o agendar una llamada de 15 minutos.</p></div></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa3" id="fq3">No tengo textos ni fotos. ¿Puedo pedirla igual?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa3" role="region" aria-labelledby="fq3"><div><p>Sí. Partimos de lo que ya tienes: tu página, tus redes y tu perfil de Google. Si hace falta, te decimos qué fotos conviene tomar y escribimos los textos contigo.</p></div></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa4" id="fq4">¿El dominio queda a nombre de mi negocio?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa4" role="region" aria-labelledby="fq4"><div><p>Sí. El dominio es tuyo. Si ya tienes uno, lo conectamos; si no, te ayudamos a registrarlo a tu nombre.</p></div></div></div>
       <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa5" id="fq5">¿Cómo pido cambios después de publicar?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa5" role="region" aria-labelledby="fq5"><div><p>Le escribes a la persona que lleva tu página con lo que quieres cambiar: un horario, un precio, una foto nueva. Cada plan incluye tiempo de cambios al mes: 30 minutos en Esencial, 60 en Negocio y 120 en Avanzado.</p></div></div></div>
       <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa6" id="fq6">¿Puedo cancelar la suscripción?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa6" role="region" aria-labelledby="fq6"><div><p>Las condiciones de permanencia y cancelación están en la tabla de planes. Te las explicamos antes de que hagas el pago inicial.</p></div></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa7" id="fq7">¿Trabajan con negocios de mi país?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa7" role="region" aria-labelledby="fq7"><div><p>Trabajamos a distancia con negocios de Latinoamérica. Las reuniones son por videollamada y el seguimiento por WhatsApp o correo.</p></div></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa9" id="fq9">¿Qué pasa si el asistente de WhatsApp llega a 300 conversaciones?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa9" role="region" aria-labelledby="fq9"><div><p>Te avisamos cuando te acercas al cupo del mes. Si se agota, las conversaciones nuevas pasan directo a tu equipo, sin respuestas automáticas, hasta el mes siguiente. Si aplica algún cargo de Meta por mensajes, aparece desglosado en tu propuesta.</p></div></div></div>
-      <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa8" id="fq8">¿Tengo que contratar el asistente de WhatsApp para tener mi página?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa8" role="region" aria-labelledby="fq8"><div><p>No. Es opcional. Puedes sumarlo después, cuando tu página ya esté funcionando.</p></div></div></div>
       <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa10" id="fq10">¿Qué significa que esté optimizada para IA?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa10" role="region" aria-labelledby="fq10"><div><p>Que tu página está hecha para que Google y asistentes como ChatGPT, Gemini o Perplexity entiendan tu negocio: qué haces, dónde estás, tu horario, tus servicios y precios, tus reseñas y las respuestas a lo que más te preguntan, en texto y en datos estructurados. Nadie puede garantizar un lugar en sus respuestas, pero sí darte la mejor base para que te recomienden.</p></div></div></div>
       <div class="faq-item"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa11" id="fq11">¿Qué revisa el análisis de SEO gratis?<span class="pm" aria-hidden="true"></span></button></h3><div class="faq-a" id="fa11" role="region" aria-labelledby="fq11"><div><p>Revisa tu página como lo haría un buscador: título y descripción, encabezados, fotos, mapa del sitio, datos estructurados, si bloqueas a los buscadores de IA, cuánto texto se puede leer, preguntas frecuentes, precios y reseñas. Te da un puntaje de 0 a 100 y te explica cada punto en lenguaje simple. Es el análisis rápido. El plan Negocio incluye el análisis avanzado al lanzar: revisamos todo tu sitio, la velocidad real en celular y tus datos en Google, y cada 3 meses hacemos preguntas reales a ChatGPT, Gemini y Perplexity para ver si te recomiendan y a quién recomiendan en tu lugar. El plan Avanzado lo hace cada mes, con reporte y una mejora de SEO aplicada.</p></div></div></div>
       <p class="faq-more"><a class="link" href="#" data-route="/precios">Ver todas las preguntas en Precios</a></p>
@@ -1487,18 +1406,10 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   });
   diag.addEventListener('close', () => { if (lastFocus && document.contains(lastFocus) && !lastFocus.closest('#diag')) lastFocus.focus({ preventScroll: true }); });
 
-  /* ---------- industries ---------- */
-  const indBtns = $$('.ind-row');
-  const selectInd = b => {
-    indBtns.forEach(x => x.setAttribute('aria-pressed', x === b));
-    $$('.ind-panel').forEach(p => p.hidden = p.dataset.panel !== b.dataset.ind);
-    const pl = $('#ind-page-link'); pl.firstChild.textContent = 'Ver la página de ' + $('h3', b).textContent + ' ';
-    if (b.dataset.ind === 'clinicas') { pl.href = 'webs-clinicas.html'; delete pl.dataset.route; } else { pl.href = '#'; pl.dataset.route = '/webs/' + b.dataset.ind; }
-  };
-  indBtns.forEach(b => { b.addEventListener('click', () => selectInd(b)); b.addEventListener('mouseenter', () => { if (matchMedia('(hover:hover)').matches) selectInd(b); }); b.addEventListener('focus', () => selectInd(b)); });
-
   /* ---------- chat replay ---------- */
-  const chat = $('#chat-body'), handoff = $('.handoff', chat), items = [...chat.children].filter(el => el !== handoff);
+  const chat = $('#chat-body');
+  if (chat) {
+  const handoff = $('.handoff', chat), items = [...chat.children].filter(el => el !== handoff);
   let chatTimers = [];
   $('#chat-replay').addEventListener('click', () => {
     chatTimers.forEach(clearTimeout); chatTimers = [];
@@ -1513,6 +1424,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
       t += isBot ? 700 : 900;
     });
   });
+  }
 
   /* ---------- FAQ ---------- */
   $$('.faq-q').forEach(q => q.addEventListener('click', () => {

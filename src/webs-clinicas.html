@@ -182,7 +182,17 @@
     <div class="rec-copy">
       <h2 class="h2" id="rec-title">Tu WhatsApp contesta aunque recepción esté ocupada.</h2>
       <p class="lede" style="color:rgba(247,244,235,.82)">Configuramos las respuestas que tú apruebas. El asistente anota los datos para la cita y le pasa a recepción lo que necesita una persona.</p>
-      {{CHAT}}
+      <div class="chat" aria-label="Ejemplo de conversación con el asistente de una clínica">
+      <div class="chat-top"><b>Asistente · Clínica Arrayán</b><span>Ejemplo ficticio</span></div>
+      <div class="chat-body" id="chat-body">
+        <div class="msg out"><small>Paciente</small>Hola, ¿tienen hora mañana en la tarde para una limpieza?</div>
+        <div class="msg in"><small>Asistente</small>Hola. La limpieza dura 45 minutos y mañana jueves atendemos de 9:00 a 20:00. ¿Qué horario prefieres?</div>
+        <div class="msg out"><small>Paciente</small>A las 18:00. Otra cosa: me pusieron un implante en otra clínica y se mueve un poco.</div>
+        <div class="msg in"><small>Asistente</small>Anoté tu solicitud de limpieza para el jueves a las 18:00. Lo del implante tiene que verlo el equipo clínico, así que se lo paso a recepción junto con tu mensaje. Te confirman por este mismo chat.</div>
+        <div class="handoff"><b>Pasado a recepción</b><dl><dt>Motivo</dt><dd>Implante de otra clínica con movilidad</dd><dt>Solicitud</dt><dd>Limpieza · jue 18:00</dd><dt>Pendiente</dt><dd>Confirmar horario y revisar el implante</dd></dl></div>
+      </div>
+      <div class="chat-foot"><span>Conversación de ejemplo</span><button type="button" id="chat-replay">Ver de nuevo</button></div>
+    </div>
       <dl class="rec-scope">
         <div><dt>Un número y una sucursal</dt><dd>Lo que incluye para empezar.</dd></div>
         <div><dt>Respuestas que tú apruebas</dt><dd>En WhatsApp y en tu página: horarios, ubicación y tratamientos.</dd></div>
