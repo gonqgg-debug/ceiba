@@ -161,6 +161,29 @@
   .hx-toast--a{right:-6px;top:-30px}.hx-toast--b{display:none}
 }
 
+/* ---------- consultoría como carta ---------- */
+.ix-close--letter .wrap{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)!important;align-items:start!important;gap:40px clamp(40px,6vw,96px)!important}
+.ix-close--letter h2{font-size:clamp(38px,4.4vw,64px)!important}
+.ix-letter{position:relative}
+.ix-letter-txt{font:500 clamp(22px,2.2vw,32px)/1.75 var(--f-display);letter-spacing:-.015em;color:rgba(247,244,235,.92);margin:0}
+.ix-letter .ml{position:relative;display:inline-block;vertical-align:baseline;gap:0;margin:0;max-width:100%}
+.ix-letter .ml-pick{display:inline;gap:0}
+.ix-letter .ml input{max-width:calc(100% - .6em);height:auto;border-radius:0;box-shadow:none;font:inherit;letter-spacing:inherit;color:var(--lime);background:transparent;border:0;border-bottom:2px solid rgba(214,250,82,.45);padding:0 2px 2px;min-width:6ch;width:12ch;outline:none;transition:border-color .2s}
+.ml--wide input{width:22ch}
+.ml input::placeholder{color:rgba(247,244,235,.35)}
+.ml input:focus{border-bottom-color:var(--lime)}
+.ix-letter .ml.invalid input{border-bottom-color:#FF9C7A}
+.ml .err{position:absolute;left:0;top:100%;margin-top:-6px;white-space:nowrap;font:500 13px/1.3 var(--f-body);letter-spacing:0;color:#FFB59C}
+.ix-letter .ml-pick button{display:inline;box-shadow:none;font:inherit;letter-spacing:inherit;color:inherit;background:none;border:0;padding:0 3px;margin:0 -1px;border-radius:6px;cursor:pointer;text-decoration:underline dotted rgba(247,244,235,.45);text-decoration-thickness:2px;text-underline-offset:6px;transition:background .2s,color .2s}
+.ix-letter .ml-pick button:hover{color:var(--lime)}
+.ix-letter .ml-pick button[aria-pressed="true"]{background:var(--lime);color:var(--ink);text-decoration:none}
+.ix-letter-foot{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:34px;padding-top:26px;border-top:1px solid rgba(247,244,235,.16)}
+.ix-letter-foot p{margin:0;font-size:15px;color:rgba(247,244,235,.7);max-width:36ch}
+.ix-letter-err{margin-top:14px;color:#FFB59C}
+.ix-close--letter .ix-cons-ok b{font:700 clamp(30px,3vw,44px)/1.1 var(--f-display);letter-spacing:-.03em;color:var(--ivory)}
+.ix-close--letter .ix-cons-ok p{font:500 clamp(20px,1.8vw,26px)/1.5 var(--f-display);color:rgba(247,244,235,.85);margin-top:14px}
+@media (max-width:980px){.ix-close--letter .wrap{grid-template-columns:1fr!important}}
+@media (max-width:520px){.ix-letter-txt{font-size:21px;line-height:1.85}.ml input,.ml--wide input{max-width:calc(100vw - 48px)}}
 /* ---------- cinta ---------- */
 .ix-ticker{position:relative;z-index:2;margin-top:-4vw;padding:22px 0 clamp(32px,4vw,52px);overflow:hidden;background:linear-gradient(180deg,transparent,var(--ink) 40%);-webkit-mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
 .ix-ticker-row{overflow:hidden}
@@ -772,34 +795,32 @@
   </div>
 </section>
 
-<section class="band ix-close" id="consultoria" aria-labelledby="close-title">
+<section class="band ix-close ix-close--letter" id="consultoria" aria-labelledby="close-title">
   <div class="wrap">
-    <div>
+    <div class="ix-letter-head">
       <p class="ix-kick" data-reveal style="color:var(--lime)">Consultoría</p>
       <h2 id="close-title" data-reveal>Que la próxima recomendación sea tu negocio.</h2>
-      <p class="ix-close-p" data-reveal data-delay="1">Agenda una sesión para revisar tu negocio completo: cómo te encuentran, cómo atiendes, qué trabajo se repite y qué datos no estás usando. Sales con un plan por etapas y con lo que conviene hacer primero.</p>
-      <ul class="ix-cons-list" data-reveal data-delay="2"><li>Primera sesión de 30 minutos, sin costo</li><li>Por videollamada, con quien diseña la solución</li><li>Si no conviene automatizar algo, te lo decimos</li></ul>
+      <p class="ix-close-p" data-reveal data-delay="1">Una sesión para revisar tu negocio completo: cómo te encuentran, cómo atiendes, qué trabajo se repite y qué datos no usas. Sales con un plan por etapas.</p>
     </div>
-    <form class="ix-cons" id="cons-form" novalidate data-reveal data-delay="1">
-      <div id="cons-fields" class="ix-cons-in">
-        <b class="ix-cons-t">Agenda tu sesión</b>
-        <div class="ix-cons-row">
-          <div class="fld" data-f="name"><label for="c-name">Tu nombre</label><input id="c-name" autocomplete="name"><p class="err" hidden></p></div>
-          <div class="fld" data-f="biz"><label for="c-biz">Tu negocio</label><input id="c-biz" autocomplete="organization"><p class="err" hidden></p></div>
-        </div>
-        <div class="fld" data-f="contact"><label for="c-contact">Tu WhatsApp o correo</label><input id="c-contact" autocomplete="email" placeholder="+52 33 1234 5678 o tu@correo.com"><p class="err" hidden></p></div>
-        <fieldset class="ix-cons-q"><legend>¿Qué te interesa? <small>(elige las que quieras)</small></legend>
-          <div class="ix-cons-pills" data-multi="interests"><button type="button" data-v="web">Página web</button><button type="button" data-v="asistente">Asistente de WhatsApp</button><button type="button" data-v="agentes">Agentes y automatización</button><button type="button" data-v="datos">Datos y reportes</button><button type="button" data-v="todo">Todo / no sé por dónde empezar</button></div>
-        </fieldset>
-        <div class="fld" data-f="message"><label for="c-msg">Cuéntanos de tu negocio</label><textarea id="c-msg" maxlength="1500" placeholder="A qué se dedican, cuántas personas son y qué les quita más tiempo hoy."></textarea><p class="err" hidden></p></div>
-        <fieldset class="ix-cons-q"><legend>¿Cuándo te queda mejor?</legend>
-          <div class="ix-cons-pills" data-one="slot"><button type="button" data-v="manana">Mañanas</button><button type="button" data-v="tarde">Tardes</button><button type="button" data-v="cualquiera">Cualquier horario</button></div>
-        </fieldset>
+    <form class="ix-letter" id="cons-form" novalidate data-reveal data-delay="1" aria-label="Agenda tu consultoría">
+      <div id="cons-fields">
+        <p class="ix-letter-txt">
+          Hola, soy <span class="fld ml" data-f="name"><input id="c-name" autocomplete="name" placeholder="tu nombre" aria-label="Tu nombre" data-grow><span class="err" hidden></span></span>
+          de <span class="fld ml" data-f="biz"><input id="c-biz" autocomplete="organization" placeholder="tu negocio" aria-label="Nombre de tu negocio" data-grow><span class="err" hidden></span>.</span>
+          Me interesa
+          <span class="ix-cons-pills ml-pick" data-multi="interests" role="group" aria-label="Qué te interesa"><button type="button" data-v="web">la página web</button>, <button type="button" data-v="asistente">un asistente de WhatsApp</button>, <button type="button" data-v="agentes">agentes y automatización</button>, <button type="button" data-v="datos">datos y reportes</button> o <button type="button" data-v="todo">todo, no sé por dónde empezar</button></span>.
+          Lo que más nos quita tiempo hoy es <span class="fld ml ml--wide" data-f="message"><input id="c-msg" maxlength="600" placeholder="contestar mensajes…" aria-label="Qué les quita más tiempo hoy" data-grow><span class="err" hidden></span>.</span>
+          Escríbanme a <span class="fld ml" data-f="contact"><input id="c-contact" autocomplete="email" placeholder="tu WhatsApp o correo" aria-label="Tu WhatsApp o correo" data-grow><span class="err" hidden></span>,</span>
+          de preferencia por <span class="ix-cons-pills ml-pick" data-one="slot" role="group" aria-label="Cuándo te queda mejor"><button type="button" data-v="manana">las mañanas</button>, <button type="button" data-v="tarde">las tardes</button> o <button type="button" data-v="cualquiera">cuando sea</button></span>.
+        </p>
         <div aria-hidden="true" style="position:absolute;left:-9999px"><input id="c-trap" tabindex="-1" autocomplete="off"></div>
-        <p class="err" id="cons-err" role="alert" hidden></p>
-        <button class="btn btn-primary" type="submit" id="cons-btn">Agendar mi consultoría <span class="arrow" aria-hidden="true">→</span></button>
+        <div class="ix-letter-foot">
+          <button class="btn btn-primary" type="submit" id="cons-btn">Agendar mi consultoría <span class="arrow" aria-hidden="true">→</span></button>
+          <p>30 minutos · sin costo · por videollamada. Si no conviene automatizar algo, te lo decimos.</p>
+        </div>
+        <p class="err ix-letter-err" id="cons-err" role="alert" hidden></p>
       </div>
-      <div class="ix-cons-ok" id="cons-ok" hidden tabindex="-1"><b>Listo, recibimos tu solicitud.</b><p id="cons-when"></p></div>
+      <div class="ix-cons-ok" id="cons-ok" hidden tabindex="-1"><b>Listo, recibimos tu carta.</b><p id="cons-when"></p></div>
     </form>
   </div>
 </section>
@@ -1000,12 +1021,14 @@
     g.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (g.dataset.multi) b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true'); else g.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); });
   });
   const cf = n => cform.querySelector(`[data-f="${n}"]`), ci = n => cf(n).querySelector('input,textarea');
+  const grow = el => { el.style.width = Math.min(Math.max(el.value.length, el.placeholder.length) + 1, 30) + 'ch'; };
+  cform.querySelectorAll('[data-grow]').forEach(el => { grow(el); el.addEventListener('input', () => { grow(el); const f = el.closest('.fld'); if (f.classList.contains('invalid')) { f.classList.remove('invalid'); f.querySelector('.err').hidden = true; } }); });
   const picked = sel => [...cform.querySelectorAll(`${sel} [aria-pressed="true"]`)].map(b => b.dataset.v);
   const crules = {
     name: v => v.trim().length >= 2 || 'Escribe tu nombre.',
-    biz: v => v.trim().length >= 2 || 'Escribe el nombre de tu negocio.',
-    contact: v => { const s = v.trim(); if (s.includes('@')) return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s) || 'Revisa el correo.'; const d = s.replace(/\D/g, ''); return (d.length >= 8 && d.length <= 15) || 'Déjanos un WhatsApp con lada o un correo.'; },
-    message: v => v.trim().length >= 5 || picked('[data-multi]').length > 0 || 'Cuéntanos un poco de tu negocio o elige qué te interesa.',
+    biz: v => v.trim().length >= 2 || '¿Cómo se llama tu negocio?',
+    contact: v => { const s = v.trim(); if (s.includes('@')) return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s) || 'Revisa el correo.'; const d = s.replace(/\D/g, ''); return (d.length >= 8 && d.length <= 15) || 'Un WhatsApp con lada o un correo.'; },
+    message: v => v.trim().length >= 5 || picked('[data-multi]').length > 0 || 'Cuéntanos esto o elige qué te interesa.',
   };
   const ccheck = (n, msg) => { const r = msg ?? crules[n](ci(n).value), ok = r === true; cf(n).classList.toggle('invalid', !ok); const e = cf(n).querySelector('.err'); e.hidden = ok; e.textContent = ok ? '' : r; ci(n).setAttribute('aria-invalid', !ok); return ok; };
   cform.addEventListener('submit', async e => {
@@ -1017,7 +1040,7 @@
       const d = await r.json().catch(() => ({}));
       if (!r.ok) { if (d.fields) Object.entries(d.fields).forEach(([k, m]) => cf(k) && ccheck(k, m)); throw new Error(d.error || 'No pudimos enviar tu solicitud.'); }
       const first = ci('name').value.trim().split(/\s+/)[0];
-      document.getElementById('cons-when').textContent = d.dueDay ? `${first}, te escribimos ${d.dueDay}, ${d.dueTime.replace(/\.$/, '')}, para confirmar el día y la hora de tu sesión.` : 'Te escribimos pronto para confirmar el día y la hora de tu sesión.';
+      document.getElementById('cons-when').textContent = d.dueDay ? `Gracias, ${first}. Te escribimos ${d.dueDay}, ${d.dueTime.replace(/\.$/, '')}, para confirmar el día y la hora de tu sesión.` : 'Te escribimos pronto para confirmar el día y la hora de tu sesión.';
       document.getElementById('cons-fields').hidden = true; const ok = document.getElementById('cons-ok'); ok.hidden = false; ok.focus();
     } catch (x) { err.textContent = x.message; err.hidden = false; }
     btn.disabled = false;
