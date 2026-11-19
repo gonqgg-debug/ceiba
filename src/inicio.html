@@ -161,29 +161,48 @@
   .hx-toast--a{right:-6px;top:-30px}.hx-toast--b{display:none}
 }
 
-/* ---------- consultoría como carta ---------- */
-.ix-close--letter .wrap{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)!important;align-items:start!important;gap:40px clamp(40px,6vw,96px)!important}
-.ix-close--letter h2{font-size:clamp(38px,4.4vw,64px)!important}
-.ix-letter{position:relative}
-.ix-letter-txt{font:500 clamp(22px,2.2vw,32px)/1.75 var(--f-display);letter-spacing:-.015em;color:rgba(247,244,235,.92);margin:0}
-.ix-letter .ml{position:relative;display:inline-block;vertical-align:baseline;gap:0;margin:0;max-width:100%}
-.ix-letter .ml-pick{display:inline;gap:0}
-.ix-letter .ml input{max-width:calc(100% - .6em);height:auto;border-radius:0;box-shadow:none;font:inherit;letter-spacing:inherit;color:var(--lime);background:transparent;border:0;border-bottom:2px solid rgba(214,250,82,.45);padding:0 2px 2px;min-width:6ch;width:12ch;outline:none;transition:border-color .2s}
-.ml--wide input{width:22ch}
-.ml input::placeholder{color:rgba(247,244,235,.35)}
-.ml input:focus{border-bottom-color:var(--lime)}
-.ix-letter .ml.invalid input{border-bottom-color:#FF9C7A}
-.ml .err{position:absolute;left:0;top:100%;margin-top:-6px;white-space:nowrap;font:500 13px/1.3 var(--f-body);letter-spacing:0;color:#FFB59C}
-.ix-letter .ml-pick button{display:inline;box-shadow:none;font:inherit;letter-spacing:inherit;color:inherit;background:none;border:0;padding:0 3px;margin:0 -1px;border-radius:6px;cursor:pointer;text-decoration:underline dotted rgba(247,244,235,.45);text-decoration-thickness:2px;text-underline-offset:6px;transition:background .2s,color .2s}
-.ix-letter .ml-pick button:hover{color:var(--lime)}
-.ix-letter .ml-pick button[aria-pressed="true"]{background:var(--lime);color:var(--ink);text-decoration:none}
-.ix-letter-foot{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:34px;padding-top:26px;border-top:1px solid rgba(247,244,235,.16)}
-.ix-letter-foot p{margin:0;font-size:15px;color:rgba(247,244,235,.7);max-width:36ch}
-.ix-letter-err{margin-top:14px;color:#FFB59C}
-.ix-close--letter .ix-cons-ok b{font:700 clamp(30px,3vw,44px)/1.1 var(--f-display);letter-spacing:-.03em;color:var(--ivory)}
-.ix-close--letter .ix-cons-ok p{font:500 clamp(20px,1.8vw,26px)/1.5 var(--f-display);color:rgba(247,244,235,.85);margin-top:14px}
-@media (max-width:980px){.ix-close--letter .wrap{grid-template-columns:1fr!important}}
-@media (max-width:520px){.ix-letter-txt{font-size:21px;line-height:1.85}.ml input,.ml--wide input{max-width:calc(100vw - 48px)}}
+/* ---------- consultoría: formulario de la marca ---------- */
+.ix-close--form .wrap{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)!important;align-items:start!important;gap:40px clamp(40px,6vw,96px)!important}
+.ix-close--form h2{font-size:clamp(38px,4.4vw,64px)!important}
+.cf-points{list-style:none;margin:32px 0 0;padding:0;display:grid;gap:18px}
+.cf-points li{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start}
+.cf-points svg{width:30px;height:auto;fill:var(--lime);margin-top:4px}
+.cf-points b{display:block;font:600 18px var(--f-display);letter-spacing:-.01em;color:var(--ivory)}
+.cf-points span{color:rgba(247,244,235,.72);font-size:15px;line-height:1.5}
+.cf{position:relative;border-radius:24px;padding:clamp(22px,2.6vw,34px);background:rgba(11,21,20,.62);border:1px solid rgba(247,244,235,.12);box-shadow:0 50px 100px -50px rgba(0,0,0,.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);overflow:hidden}
+.cf::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,#0E9F8A,var(--lime))}
+.cf-in{display:grid;gap:18px}
+.cf-head{display:grid;gap:4px;padding-bottom:6px}
+.cf-head b{font:700 26px/1.1 var(--f-display);letter-spacing:-.025em;color:var(--ivory)}
+.cf-head span{font-size:14px;color:rgba(247,244,235,.6)}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cf .cf-f{display:grid;gap:7px;position:relative}
+.cf label,.cf legend{font-size:14px;font-weight:500;color:rgba(247,244,235,.8);padding:0}
+.cf label small{color:rgba(247,244,235,.45);font-weight:400}
+.cf input,.cf textarea{width:100%;font:400 16px var(--f-body);color:var(--ivory);background:rgba(247,244,235,.05);border:1px solid rgba(247,244,235,.16);border-radius:12px;padding:13px 14px;outline:none;transition:border-color .2s,background .2s,box-shadow .2s}
+.cf textarea{resize:vertical;min-height:84px}
+.cf input::placeholder,.cf textarea::placeholder{color:rgba(247,244,235,.35)}
+.cf input:focus,.cf textarea:focus{border-color:var(--lime);background:rgba(247,244,235,.08);box-shadow:0 0 0 3px rgba(214,250,82,.15)}
+.cf .cf-f.invalid input,.cf .cf-f.invalid textarea{border-color:#FF9C7A}
+.cf .err{font-size:13px;color:#FFB59C}
+.cf-q{border:0;margin:0;padding:0;display:grid;gap:10px}
+.cf-tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cf-tiles button{display:flex;align-items:center;gap:10px;text-align:left;font:500 15px var(--f-body);color:var(--ivory);background:rgba(247,244,235,.04);border:1px solid rgba(247,244,235,.14);border-radius:12px;padding:12px 14px;cursor:pointer;transition:border-color .2s,background .2s}
+.cf-tiles button i{font:600 12px var(--f-display);font-style:normal;color:rgba(247,244,235,.45);min-width:18px}
+.cf-tiles button:hover{border-color:rgba(214,250,82,.5)}
+.cf-tiles button[aria-pressed="true"]{border-color:var(--lime);background:rgba(214,250,82,.1);box-shadow:inset 0 0 0 1px var(--lime)}
+.cf-tiles button[aria-pressed="true"] i{color:var(--lime)}
+.cf-tiles .cf-wide{grid-column:1/-1}
+.cf-seg{display:grid;grid-template-columns:repeat(3,1fr);padding:4px;border-radius:12px;background:rgba(247,244,235,.05);border:1px solid rgba(247,244,235,.14)}
+.cf-seg button{font:500 14px var(--f-body);color:rgba(247,244,235,.75);background:none;border:0;border-radius:9px;padding:10px 6px;cursor:pointer;transition:background .2s,color .2s}
+.cf-seg button[aria-pressed="true"]{background:var(--lime);color:var(--ink);font-weight:600}
+.cf-send{width:100%;justify-content:center;height:54px;font-size:16px;margin-top:4px}
+.cf-ok{display:grid;gap:12px;justify-items:start;padding:12px 0}
+.cf-ok svg{width:46px;height:auto;fill:var(--lime)}
+.cf-ok b{font:700 clamp(26px,2.6vw,36px)/1.1 var(--f-display);letter-spacing:-.03em;color:var(--ivory)}
+.cf-ok p{font-size:17px;line-height:1.55;color:rgba(247,244,235,.8);margin:0}
+@media (max-width:980px){.ix-close--form .wrap{grid-template-columns:1fr!important}}
+@media (max-width:520px){.cf-row,.cf-tiles{grid-template-columns:1fr}.cf-seg button{font-size:13px}}
 /* ---------- cinta ---------- */
 .ix-ticker{position:relative;z-index:2;margin-top:-4vw;padding:22px 0 clamp(32px,4vw,52px);overflow:hidden;background:linear-gradient(180deg,transparent,var(--ink) 40%);-webkit-mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
 .ix-ticker-row{overflow:hidden}
@@ -407,32 +426,8 @@
 .ix-prop-a{font-size:12px;font-weight:600;color:#0F5C4B;margin-top:4px}
 .ix-close-p{color:rgba(247,244,235,.8);font-size:18px;max-width:52ch;margin-top:18px}
 .ix-close .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;align-items:start!important}
-.ix-cons-list{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:10px}
-.ix-cons-list li{display:grid;grid-template-columns:22px 1fr;gap:8px;color:rgba(247,244,235,.88)}
-.ix-cons-list li::before{content:"✓";color:var(--lime);font-weight:700}
 .ix-close-alt{margin-top:24px;color:rgba(247,244,235,.75);font-size:15px}
-.ix-cons{position:relative;background:var(--ivory);color:var(--ink);border-radius:24px;padding:clamp(22px,3vw,32px);box-shadow:0 50px 100px -40px rgba(0,0,0,.6);--fg:var(--ink);--muted:#5C6865;--line:rgba(11,21,20,.14)}
-.ix-cons-in{display:grid;gap:16px}
-.ix-cons-t{font:600 22px var(--f-display);letter-spacing:-.015em}
-.ix-cons-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.ix-cons .fld{display:grid;gap:6px}
-.ix-cons label,.ix-cons legend{font-weight:500;font-size:14px;padding:0}
-.ix-cons legend small{color:var(--muted);font-weight:400}
-.ix-cons input,.ix-cons textarea{width:100%;font:400 16px var(--f-body);color:var(--ink);background:#fff;border:1px solid rgba(11,21,20,.18);border-radius:10px;padding:12px 14px}
-.ix-cons textarea{min-height:92px;resize:vertical}
-.ix-cons input:focus,.ix-cons textarea:focus{outline:2px solid var(--petrol);outline-offset:1px}
-.ix-cons .fld.invalid input,.ix-cons .fld.invalid textarea{border-color:#C8553D}
-.ix-cons .err{color:#B3461E;font-size:14px;margin:0}
-.ix-cons-q{border:0;margin:0;padding:0;display:grid;gap:8px}
-.ix-cons-pills{display:flex;flex-wrap:wrap;gap:6px}
-.ix-cons-pills button{font:inherit;font-size:14px;padding:8px 12px;border-radius:999px;border:1px solid rgba(11,21,20,.2);background:#fff;color:var(--ink);cursor:pointer}
-.ix-cons-pills button[aria-pressed="true"]{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
-.ix-cons .btn{justify-self:start}
-.ix-cons-ok{display:grid;gap:10px}
-.ix-cons-ok b{font:600 24px var(--f-display)}
-.ix-cons-ok p{color:var(--muted)}
 @media (max-width:980px){.ix-close .wrap{grid-template-columns:1fr!important}}
-@media (max-width:520px){.ix-cons-row{grid-template-columns:1fr}}
 
 /* ---------- lo que está cambiando ---------- */
 .ix-shift-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px clamp(40px,6vw,96px);align-items:center}
@@ -795,32 +790,44 @@
   </div>
 </section>
 
-<section class="band ix-close ix-close--letter" id="consultoria" aria-labelledby="close-title">
+<section class="band ix-close ix-close--form" id="consultoria" aria-labelledby="close-title">
   <div class="wrap">
-    <div class="ix-letter-head">
+    <div class="cf-intro">
       <p class="ix-kick" data-reveal style="color:var(--lime)">Consultoría</p>
       <h2 id="close-title" data-reveal>Que la próxima recomendación sea tu negocio.</h2>
       <p class="ix-close-p" data-reveal data-delay="1">Una sesión para revisar tu negocio completo: cómo te encuentran, cómo atiendes, qué trabajo se repite y qué datos no usas. Sales con un plan por etapas.</p>
+      <ul class="cf-points" data-reveal data-delay="2">
+        <li><svg viewBox="0 0 100 72" aria-hidden="true"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></svg><span><b>30 minutos, sin costo</b>Por videollamada, con quien diseña la solución.</span></li>
+        <li><svg viewBox="0 0 100 72" aria-hidden="true"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></svg><span><b>Un plan por etapas</b>Qué conviene hacer primero y cuánto cuesta.</span></li>
+        <li><svg viewBox="0 0 100 72" aria-hidden="true"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></svg><span><b>Sin rodeos</b>Si no conviene automatizar algo, te lo decimos.</span></li>
+      </ul>
     </div>
-    <form class="ix-letter" id="cons-form" novalidate data-reveal data-delay="1" aria-label="Agenda tu consultoría">
-      <div id="cons-fields">
-        <p class="ix-letter-txt">
-          Hola, soy <span class="fld ml" data-f="name"><input id="c-name" autocomplete="name" placeholder="tu nombre" aria-label="Tu nombre" data-grow><span class="err" hidden></span></span>
-          de <span class="fld ml" data-f="biz"><input id="c-biz" autocomplete="organization" placeholder="tu negocio" aria-label="Nombre de tu negocio" data-grow><span class="err" hidden></span>.</span>
-          Me interesa
-          <span class="ix-cons-pills ml-pick" data-multi="interests" role="group" aria-label="Qué te interesa"><button type="button" data-v="web">la página web</button>, <button type="button" data-v="asistente">un asistente de WhatsApp</button>, <button type="button" data-v="agentes">agentes y automatización</button>, <button type="button" data-v="datos">datos y reportes</button> o <button type="button" data-v="todo">todo, no sé por dónde empezar</button></span>.
-          Lo que más nos quita tiempo hoy es <span class="fld ml ml--wide" data-f="message"><input id="c-msg" maxlength="600" placeholder="contestar mensajes…" aria-label="Qué les quita más tiempo hoy" data-grow><span class="err" hidden></span>.</span>
-          Escríbanme a <span class="fld ml" data-f="contact"><input id="c-contact" autocomplete="email" placeholder="tu WhatsApp o correo" aria-label="Tu WhatsApp o correo" data-grow><span class="err" hidden></span>,</span>
-          de preferencia por <span class="ix-cons-pills ml-pick" data-one="slot" role="group" aria-label="Cuándo te queda mejor"><button type="button" data-v="manana">las mañanas</button>, <button type="button" data-v="tarde">las tardes</button> o <button type="button" data-v="cualquiera">cuando sea</button></span>.
-        </p>
-        <div aria-hidden="true" style="position:absolute;left:-9999px"><input id="c-trap" tabindex="-1" autocomplete="off"></div>
-        <div class="ix-letter-foot">
-          <button class="btn btn-primary" type="submit" id="cons-btn">Agendar mi consultoría <span class="arrow" aria-hidden="true">→</span></button>
-          <p>30 minutos · sin costo · por videollamada. Si no conviene automatizar algo, te lo decimos.</p>
+    <form class="cf" id="cons-form" novalidate data-reveal data-delay="1">
+      <div id="cons-fields" class="cf-in">
+        <div class="cf-head"><b>Agenda tu sesión</b><span>Te respondemos en menos de un día hábil.</span></div>
+        <div class="cf-row">
+          <div class="fld cf-f" data-f="name"><label for="c-name">Tu nombre</label><input id="c-name" autocomplete="name"><span class="err" hidden></span></div>
+          <div class="fld cf-f" data-f="biz"><label for="c-biz">Tu negocio</label><input id="c-biz" autocomplete="organization"><span class="err" hidden></span></div>
         </div>
-        <p class="err ix-letter-err" id="cons-err" role="alert" hidden></p>
+        <div class="fld cf-f" data-f="contact"><label for="c-contact">WhatsApp o correo</label><input id="c-contact" autocomplete="email" placeholder="+52 33 1234 5678 o tu@correo.com"><span class="err" hidden></span></div>
+        <fieldset class="cf-q"><legend>¿Qué te interesa?</legend>
+          <div class="ix-cons-pills cf-tiles" data-multi="interests">
+            <button type="button" data-v="web"><i>01</i>Página web</button>
+            <button type="button" data-v="asistente"><i>02</i>Asistente de WhatsApp</button>
+            <button type="button" data-v="agentes"><i>03</i>Agentes y automatización</button>
+            <button type="button" data-v="datos"><i>04</i>Datos y reportes</button>
+            <button type="button" data-v="todo" class="cf-wide"><i>✦</i>Todo, no sé por dónde empezar</button>
+          </div>
+        </fieldset>
+        <div class="fld cf-f" data-f="message"><label for="c-msg">¿Qué les quita más tiempo hoy? <small>(opcional si elegiste arriba)</small></label><textarea id="c-msg" maxlength="1500" rows="3" placeholder="Por ejemplo: contestar mensajes, capturar pedidos, dar seguimiento a cotizaciones."></textarea><span class="err" hidden></span></div>
+        <fieldset class="cf-q"><legend>¿Cuándo te queda mejor?</legend>
+          <div class="ix-cons-pills cf-seg" data-one="slot"><button type="button" data-v="manana">Mañanas</button><button type="button" data-v="tarde">Tardes</button><button type="button" data-v="cualquiera">Cualquier horario</button></div>
+        </fieldset>
+        <div aria-hidden="true" style="position:absolute;left:-9999px"><input id="c-trap" tabindex="-1" autocomplete="off"></div>
+        <p class="err cf-err" id="cons-err" role="alert" hidden></p>
+        <button class="btn btn-primary cf-send" type="submit" id="cons-btn">Agendar mi consultoría <span class="arrow" aria-hidden="true">→</span></button>
       </div>
-      <div class="ix-cons-ok" id="cons-ok" hidden tabindex="-1"><b>Listo, recibimos tu carta.</b><p id="cons-when"></p></div>
+      <div class="cf-ok" id="cons-ok" hidden tabindex="-1"><svg viewBox="0 0 100 72" aria-hidden="true"><path d="M21 12h58a9 9 0 0 1 9 9v1H12v-1a9 9 0 0 1 9-9Z"/><rect x="3" y="27" width="94" height="13" rx="6.5"/><path d="M43 38h14v13l24 19H66L55 60l3 10H42l3-10-11 10H19l24-19Z"/></svg><b>Listo, recibimos tu solicitud.</b><p id="cons-when"></p></div>
     </form>
   </div>
 </section>
@@ -1021,14 +1028,14 @@
     g.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (g.dataset.multi) b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true'); else g.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); });
   });
   const cf = n => cform.querySelector(`[data-f="${n}"]`), ci = n => cf(n).querySelector('input,textarea');
-  const grow = el => { el.style.width = Math.min(Math.max(el.value.length, el.placeholder.length) + 1, 30) + 'ch'; };
-  cform.querySelectorAll('[data-grow]').forEach(el => { grow(el); el.addEventListener('input', () => { grow(el); const f = el.closest('.fld'); if (f.classList.contains('invalid')) { f.classList.remove('invalid'); f.querySelector('.err').hidden = true; } }); });
+  cform.querySelector('[data-multi]').addEventListener('click', () => { const f = cf('message'); if (f.classList.contains('invalid')) { f.classList.remove('invalid'); f.querySelector('.err').hidden = true; } });
+  cform.querySelectorAll('input,textarea').forEach(el => el.addEventListener('input', () => { const f = el.closest('.fld'); if (f?.classList.contains('invalid')) { f.classList.remove('invalid'); f.querySelector('.err').hidden = true; } }));
   const picked = sel => [...cform.querySelectorAll(`${sel} [aria-pressed="true"]`)].map(b => b.dataset.v);
   const crules = {
     name: v => v.trim().length >= 2 || 'Escribe tu nombre.',
-    biz: v => v.trim().length >= 2 || '¿Cómo se llama tu negocio?',
-    contact: v => { const s = v.trim(); if (s.includes('@')) return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s) || 'Revisa el correo.'; const d = s.replace(/\D/g, ''); return (d.length >= 8 && d.length <= 15) || 'Un WhatsApp con lada o un correo.'; },
-    message: v => v.trim().length >= 5 || picked('[data-multi]').length > 0 || 'Cuéntanos esto o elige qué te interesa.',
+    biz: v => v.trim().length >= 2 || 'Escribe el nombre de tu negocio.',
+    contact: v => { const s = v.trim(); if (s.includes('@')) return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s) || 'Revisa el correo.'; const d = s.replace(/\D/g, ''); return (d.length >= 8 && d.length <= 15) || 'Déjanos un WhatsApp con lada o un correo.'; },
+    message: v => v.trim().length >= 5 || picked('[data-multi]').length > 0 || 'Cuéntanos un poco o elige arriba qué te interesa.',
   };
   const ccheck = (n, msg) => { const r = msg ?? crules[n](ci(n).value), ok = r === true; cf(n).classList.toggle('invalid', !ok); const e = cf(n).querySelector('.err'); e.hidden = ok; e.textContent = ok ? '' : r; ci(n).setAttribute('aria-invalid', !ok); return ok; };
   cform.addEventListener('submit', async e => {
