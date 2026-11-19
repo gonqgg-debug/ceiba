@@ -71,7 +71,7 @@ export async function POST(request) {
       locale: 'es-419',
       custom_text: {
         submit: {
-          message: `Hoy pagas solo el monto inicial. La mensualidad de ${mxn(totals.monthly)} se cobra con esta tarjeta desde el día que publiquemos tu página. Precios con IVA.`,
+          message: `Hoy pagas solo el monto inicial. La mensualidad de ${mxn(totals.monthly)} se cobra con esta tarjeta desde el día que publiquemos tu página. Es el precio final.`,
         },
       },
       metadata,

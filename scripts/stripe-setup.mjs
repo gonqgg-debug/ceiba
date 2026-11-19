@@ -43,7 +43,7 @@ async function ensurePrice(p, productId) {
     product: productId,
     currency: CURRENCY,
     unit_amount,
-    tax_behavior: 'inclusive', // los montos ya incluyen IVA
+    tax_behavior: 'inclusive', // el monto es el precio final
     lookup_key: p.lookupKey,
     transfer_lookup_key: true,
     nickname: `${p.item.name} · ${p.phase}`,

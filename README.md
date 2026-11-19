@@ -47,7 +47,7 @@ build.py                 Arma site/ a partir de src/
 
 ## Precios
 
-Son precios de lanzamiento para probar en México, en MXN y con IVA incluido. Falta confirmar si las cifras ya incluyen el IVA.
+Son precios de lanzamiento para probar en México, en MXN. Son el precio final: Ceiba es una empresa de EE. UU. y por ahora no cobra IVA mexicano (pendiente de confirmar con el contador si algún servicio, como el hosting o el asistente, entra en el art. 18-B de la Ley del IVA).
 
 | | Pago inicial | Mensualidad |
 |---|---|---|
@@ -84,7 +84,7 @@ No se usa Checkout en modo suscripción con periodo de prueba porque le mostrar�
 
 | Archivo | Qué hace |
 |---|---|
-| `lib/catalog.js` | Planes, módulo y consultoría en MXN con IVA incluido; códigos fiscales de Stripe Tax |
+| `lib/catalog.js` | Planes, módulo y consultoría en MXN (precio final); códigos fiscales de Stripe Tax |
 | `lib/proposals.js` | Propuestas activas y su vigencia |
 | `api/checkout.js` | Crea la sesión de Checkout. Busca los precios por `lookup_key`, nunca confía en montos del navegador |
 | `api/webhook.js` | Verifica la firma y procesa los eventos de Stripe |
@@ -107,7 +107,7 @@ Para probar el pago usa la tarjeta `4242 4242 4242 4242`, cualquier fecha futura
 
 ### Pendiente en el Dashboard de Stripe
 
-1. **Stripe Tax:** cargar el domicilio fiscal (hoy falta y el estado es «pendiente»), revisar con el contador los registros (en México, un vendedor extranjero de servicios digitales debe registrarse ante el SAT dentro de los 30 días de la primera venta) y después poner `STRIPE_AUTOMATIC_TAX=true`.
+1. **Stripe Tax:** apagado por ahora, porque Ceiba (EE. UU.) no cobra IVA mexicano. Si el contador confirma que algún servicio entra en el art. 18-B de la Ley del IVA, cargar el domicilio fiscal y el registro en México, y poner `STRIPE_AUTOMATIC_TAX=true`.
 2. **Marca:** logo, ícono y colores (`#103D37` y `#D6FA52`) en Configuración › Marca, para que Checkout, facturas y correos se vean de Ceiba.
 3. **Webhook:** crear el endpoint `https://www.ceibalabs.io/api/webhook` con los eventos listados en `api/webhook.js` y guardar su secreto en `STRIPE_WEBHOOK_SECRET`.
 4. **Cobranza:** activar Smart Retries, los correos de pago fallido y la actualización automática de tarjetas (Facturación › Recuperación de ingresos).
