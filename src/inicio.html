@@ -826,27 +826,9 @@ h1,h2,h3,.ix-h{font-weight:400!important}
   </div>
 </section>
 
-<section class="band band--light section ix-level" id="etapa" aria-labelledby="lvl-title">
+<section class="band band--light section ix-level" id="preguntas" aria-labelledby="faq-title">
   <div class="wrap">
-    <h2 class="ix-h" id="lvl-title" data-reveal data-delay="1">¿En qué etapa está tu negocio?</h2>
-    <p class="ix-sub" data-reveal data-delay="2">Contesta con honestidad. Te decimos qué estás dejando ir y por dónde conviene empezar.</p>
-    <div class="ix-quiz">
-      <ol class="ix-qs" id="ix-qs">
-        <li data-st="1"><p>¿Tus clientes pueden agendar, reservar o pedir desde tu página en un par de toques?</p><div><button type="button" data-a="1">Sí</button><button type="button" data-a="0">No</button></div></li>
-        <li data-st="1"><p>¿Tu página muestra precios, horarios y reseñas de forma que Google y la IA puedan leerlos?</p><div><button type="button" data-a="1">Sí</button><button type="button" data-a="0">No / no sé</button></div></li>
-        <li data-st="2"><p>¿Respondes los mensajes de WhatsApp en menos de 5 minutos, incluso de noche?</p><div><button type="button" data-a="1">Sí</button><button type="button" data-a="0">No</button></div></li>
-        <li data-st="3"><p>¿Las tareas repetitivas (capturar, dar seguimiento, conciliar) ya no dependen de que alguien se acuerde?</p><div><button type="button" data-a="1">Sí</button><button type="button" data-a="0">No</button></div></li>
-        <li data-st="4"><p>¿Sabes cada mañana qué vendiste ayer, qué cambió y por qué?</p><div><button type="button" data-a="1">Sí</button><button type="button" data-a="0">No</button></div></li>
-      </ol>
-      <div class="ix-res" id="ix-res" aria-live="polite">
-        <div class="ix-res-meter"><i id="ix-res-bar"></i></div>
-        <span class="ix-res-k" id="ix-res-k">0 de 5 respuestas</span>
-        <b id="ix-res-t">Contesta las preguntas para ver tu etapa.</b>
-        <p id="ix-res-p">Ubicamos a tu negocio en una de las cuatro etapas y te decimos cuál es el siguiente paso.</p>
-        <a class="btn btn-primary" id="ix-res-cta" href="/webs" hidden>Revisar mi página web <span class="arrow" aria-hidden="true">→</span></a>
-      </div>
-    </div>
-    <h2 class="ix-h" id="faq-title" data-reveal style="font-size:clamp(30px,3.4vw,44px);margin-top:96px">Preguntas frecuentes.</h2>
+    <h2 class="ix-h" id="faq-title" data-reveal style="font-size:clamp(30px,3.4vw,44px)">Preguntas frecuentes.</h2>
     <div class="ix-faq" data-reveal data-delay="1">
       <details><summary>¿Qué significa aparecer en la IA?</summary><p>Cada vez más personas le preguntan a Google o a asistentes como ChatGPT a quién acudir. Esos sistemas recomiendan negocios cuya información encuentran clara y confiable: qué hacen, dónde están, precios, horarios y reseñas. Tu página nueva sale con esa información ordenada y con datos estructurados. Nadie puede garantizar un lugar en sus respuestas, pero sí ponerte en la mejor posición.</p></details>
       <details><summary>¿Con qué tipo de negocios trabajan?</summary><p>Con negocios que atienden y venden: clínicas, restaurantes, inmobiliarias, hoteles, tiendas, distribuidores, despachos y empresas de servicios. Trabajamos a distancia, por videollamada, con negocios de toda Latinoamérica.</p></details>
@@ -1060,33 +1042,6 @@ h1,h2,h3,.ix-h{font-weight:400!important}
   };
   addEventListener('scroll', onPath, { passive: true }); addEventListener('resize', onPath); onPath();
 
-  /* ---------- ¿en qué etapa está tu negocio? ---------- */
-  const qs = [...document.querySelectorAll('#ix-qs li')];
-  const RES = {
-    1: ['Etapa 1: que te encuentren', 'Hoy hay clientes buscando un negocio como el tuyo que terminan con otro. Lo primero es una página clara, lista para Google y la IA, donde agendar o pedir sea fácil.', '/webs', 'Revisar mi página web'],
-    2: ['Etapa 2: que te escriban y te elijan', 'Ya te encuentran, pero cada mensaje que tarda en responderse es una venta que se va con la competencia. Un asistente de WhatsApp responde y aparta en segundos, a cualquier hora.', '/ia#contacto', 'Quiero un asistente'],
-    3: ['Etapa 3: que tu operación trabaje sola', 'Tu equipo sigue haciendo a mano trabajo que un agente puede hacer todos los días: capturar, dar seguimiento, conciliar. Ahí están tus horas y tus ventas perdidas.', '#consultoria', 'Agendar una consultoría'],
-    4: ['Etapa 4: que decidas con datos', 'Tu negocio ya funciona bien. Lo siguiente es entenderlo a fondo: un analista que cada mañana te diga qué cambió y qué hacer.', '#consultoria', 'Agendar una consultoría'],
-    5: ['Vas adelante', 'Tu negocio ya hace lo que muchos apenas empiezan. Hablemos de procesos y agentes a la medida para crecer sin crecer el equipo.', '#consultoria', 'Agendar una consultoría'],
-  };
-  const resK = document.getElementById('ix-res-k'), resT = document.getElementById('ix-res-t'), resP = document.getElementById('ix-res-p'), resCta = document.getElementById('ix-res-cta'), resBar = document.getElementById('ix-res-bar');
-  const score = () => {
-    const ans = qs.map(li => li.dataset.v), n = ans.filter(Boolean).length;
-    resK.textContent = `${n} de ${qs.length} respuestas`;
-    if (n < qs.length) { resBar.style.width = `${n / qs.length * 100}%`; return; }
-    const miss = qs.find(li => li.dataset.v === '0'), st = miss ? +miss.dataset.st : 5;
-    const [t, p, href, cta] = RES[st];
-    resK.textContent = st === 5 ? 'Las cuatro etapas' : `Tu siguiente paso · etapa ${st} de 4`;
-    resBar.style.width = `${Math.min(100, (st - 1) / 4 * 100 + 6)}%`;
-    resT.textContent = t; resP.textContent = p; resCta.href = href; resCta.firstChild.textContent = cta + ' '; resCta.hidden = false;
-  };
-  qs.forEach(li => li.addEventListener('click', e => {
-    const b = e.target.closest('button[data-a]'); if (!b) return;
-    li.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
-    li.dataset.v = b.dataset.a; li.classList.toggle('yes', b.dataset.a === '1'); li.classList.toggle('no', b.dataset.a === '0');
-    score();
-  }));
-  qs.forEach(li => li.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', 'false')));
 
   /* ---------- consultoría ---------- */
   const cform = document.getElementById('cons-form');

@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Red+Hat+Display:wght@500;600;700&family=Red+Hat+Text:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Funnel+Display:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Red+Hat+Display:wght@500;600;700&family=Red+Hat+Text:wght@400;500;600&display=swap">
 <style>
 /* Layout: dark opening → ivory band for the work → dark offer → ivory industries → dark AI → ivory FAQ → petrol close.
    One look by design (brand palette), so no light/dark switching. */
@@ -97,7 +97,7 @@ button{font:inherit;color:inherit}
 /* hero */
 .hero{padding-block:clamp(48px,7vw,96px) 0;overflow:clip}
 .hero h1{font-size:clamp(42px,6.6vw,100px);line-height:.95;letter-spacing:-.04em;font-weight:700;max-width:15em}
-.hero h1 .soft{font-weight:400;color:rgba(247,244,235,.58)}
+.hero h1 .soft{font-weight:400;color:rgba(255,255,255,.72)}
 .hero-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,5vw,72px);margin-top:clamp(36px,4.5vw,64px);align-items:start}
 .hero-copy{display:grid;gap:28px;padding-bottom:clamp(40px,6vw,96px)}
 .hero-copy .lede{color:var(--ivory);font-size:clamp(19px,1.7vw,23px);max-width:28ch;line-height:1.35}
@@ -700,6 +700,25 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .hero .layer-old{visibility:hidden}
 }
+
+/* ===================== estilo «cielo y campo» (compartido) ===================== */
+:root{--ink:#0C1226;--ink-2:#1B2A72;--ink-3:#24358A;--petrol:#2747E8;--petrol-2:#1F3BCB;--ivory:#F7F5EF;--ivory-2:#ECE9DF;--navy:#14246B;--sky:#2747E8;--f-display:"Instrument Serif",Georgia,serif}
+body{background:var(--navy)}
+.band{background:var(--navy);--muted:rgba(247,245,239,.74);--surface:#1B2A72}
+.band--light{background:var(--ivory);--muted:rgba(12,18,38,.66);--surface:#fff}
+.band--petrol{background:#1D3ED6;--surface:rgba(12,18,38,.4);--line:rgba(255,255,255,.22)}
+h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
+.site-header{background:var(--navy)!important;border-bottom-color:rgba(255,255,255,.12)!important}
+.footer{background:var(--navy)}
+.field-url,.form input,.form select,.form textarea{background:rgba(12,18,38,.35)}
+/* héroe con cielo y pasto (páginas internas) */
+.sky-hero{position:relative;isolation:isolate;overflow:hidden;background:#1D3ED6!important}
+.sky-hero::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(12,24,90,.35),rgba(29,62,214,0) 55%),url(/img/hero-cielo.jpg) 18% 0/auto 140% no-repeat}
+.sky-hero::after{content:"";position:absolute;inset:auto 0 0;height:22%;z-index:-1;background:linear-gradient(180deg,transparent,rgba(20,36,107,.85))}
+.sky-hero h1{text-shadow:0 2px 30px rgba(10,20,80,.3)}
+/* tarjetas oscuras con pasto */
+.grass-card{position:relative;isolation:isolate;overflow:hidden;background:var(--navy)!important}
+.grass-card::after{content:"";position:absolute;inset:auto 0 0;height:40%;z-index:-1;pointer-events:none;background:linear-gradient(180deg,transparent 20%,rgba(8,12,34,.55)),url(/img/campo.jpg) center bottom/cover no-repeat;-webkit-mask-image:linear-gradient(180deg,transparent,#000 45%);mask-image:linear-gradient(180deg,transparent,#000 45%)}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -733,7 +752,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 
 <main>
 <!-- ============ HERO ============ -->
-<section class="band hero" aria-labelledby="hero-title">
+<section class="band hero sky-hero" aria-labelledby="hero-title">
   <div class="wrap">
     <h1 id="hero-title">Te mostramos tu nueva página web <span class="soft">antes de que pagues un peso.</span></h1>
     <div class="hero-grid">
@@ -914,7 +933,6 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 </style>
 <section class="band band--light section" id="optimizada-ia" aria-labelledby="ai-seo-title">
   <div class="wrap">
-    <p class="ws-kick">Optimizada para IA</p>
     <h2 class="h2" id="ai-seo-title" style="margin-top:12px;max-width:18ch">Hecha para que Google y la IA te recomienden.</h2>
     <p class="lede" style="margin-top:18px">Tus clientes ya le preguntan a ChatGPT, Gemini o Google «¿qué dentista me recomiendas cerca?». Cada página que producimos sale preparada para que esos sistemas entiendan tu negocio y lo puedan recomendar. No es un extra: es parte de cómo la construimos.</p>
     <div class="ws-ai-grid">
@@ -956,7 +974,7 @@ dialog.diag::backdrop{background:rgba(5,10,10,.72)}
 </script>
 
 <!-- ============ PRICING ============ -->
-<section class="band section pricing" id="precios" aria-labelledby="price-title">
+<section class="band section pricing grass-card" id="precios" aria-labelledby="price-title">
   <div class="wrap">
     <div class="pricing-inner">
       <div class="price-head">

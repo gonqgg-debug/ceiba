@@ -8,7 +8,7 @@
 {{HEAD_TAGS}}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Funnel+Display:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
 <style>
 {{BASE_CSS}}
 /* ===================== IA ===================== */
@@ -81,9 +81,9 @@
 .ia-chips button:hover{border-color:var(--lime)}
 
 /* ---------- IA v2 ---------- */
-.ia-hero{position:relative;isolation:isolate;overflow:hidden;clip-path:polygon(0 0,100% 0,100% 90%,0 100%);padding-bottom:clamp(90px,10vw,150px)!important;background:#0B1514}
-.ia-hero::before{content:"";position:absolute;inset:-20%;z-index:-1;background:radial-gradient(40% 50% at 75% 30%,rgba(14,159,138,.55),transparent 70%),radial-gradient(35% 45% at 90% 85%,rgba(214,250,82,.35),transparent 70%),radial-gradient(45% 55% at 20% 80%,rgba(16,61,55,.9),transparent 70%),radial-gradient(30% 40% at 55% 60%,rgba(31,79,209,.25),transparent 70%);animation:iaDrift 18s ease-in-out infinite alternate}
-.ia-hero::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 70% at 18% 45%,rgba(11,21,20,.75),transparent 72%)}
+.ia-hero{position:relative;isolation:isolate;overflow:hidden;clip-path:none;padding-bottom:clamp(90px,10vw,150px)!important;background:#0B1514}
+.ia-hero::before{display:none;content:"";position:absolute;inset:-20%;z-index:-1;background:radial-gradient(40% 50% at 75% 30%,rgba(14,159,138,.55),transparent 70%),radial-gradient(35% 45% at 90% 85%,rgba(214,250,82,.35),transparent 70%),radial-gradient(45% 55% at 20% 80%,rgba(16,61,55,.9),transparent 70%),radial-gradient(30% 40% at 55% 60%,rgba(31,79,209,.25),transparent 70%);animation:iaDrift 18s ease-in-out infinite alternate}
+.ia-hero::after{display:none;content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 70% at 18% 45%,rgba(11,21,20,.75),transparent 72%)}
 @keyframes iaDrift{to{transform:translate(-6%,4%) rotate(6deg) scale(1.08)}}
 .ia-shine{background:linear-gradient(100deg,#D6FA52,#7EE8C6 40%,#F7F4EB 55%,#7EE8C6 70%,#D6FA52);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:iaShine 7s linear infinite}
 @keyframes iaShine{to{background-position:-220% 0}}
@@ -156,7 +156,7 @@
 .ia-tools{display:flex;flex-wrap:wrap;gap:6px;padding-top:6px}
 .ia-tools span{font-size:12px;font-weight:500;padding:6px 10px;border-radius:999px;background:var(--ivory);border:1px solid var(--line)}
 /* ---------- Sistemas reales ---------- */
-.ia-cases{background:#0B1514}
+.ia-cases{background:var(--navy)}
 .ia-case{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:40px clamp(40px,6vw,96px);align-items:center;padding-block:clamp(48px,6vw,80px);border-top:1px solid rgba(247,244,235,.1)}
 .ia-case:first-of-type{border-top:0}
 .ia-case:nth-of-type(even) > .ia-viz{order:-1}
@@ -167,7 +167,7 @@
 .ia-for small{font-size:15px;font-weight:600;color:var(--lime);margin-right:10px}
 .ia-for span{color:rgba(247,244,235,.8)}
 .ia-for span + span::before{content:"·";margin:0 9px;color:rgba(247,244,235,.4)}
-.ia-viz{position:relative;border-radius:22px;background:linear-gradient(155deg,#14302A,#0E201C);border:1px solid rgba(247,244,235,.1);padding:20px 20px 34px;box-shadow:0 40px 80px -40px rgba(0,0,0,.8);min-height:360px;overflow:hidden}
+.ia-viz{position:relative;isolation:isolate;border-radius:8px;background:#101C58;border:1px solid rgba(247,244,235,.1);padding:20px 20px 34px;box-shadow:0 40px 80px -40px rgba(0,0,0,.8);min-height:360px;overflow:hidden}
 .ia-viz-top{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:14px}
 .ia-viz-top .dot{width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(214,250,82,.22);animation:blink 1.4s infinite}
 .ia-viz-top small{margin-left:auto;font:500 11px var(--f-mono);color:rgba(247,244,235,.55)}
@@ -270,6 +270,13 @@
   .ia-uses,.ia-trust,.ia-steps{grid-template-columns:1fr}
   .ia-phone-in{height:460px}
 }
+
+.ia-viz::after{content:"";position:absolute;inset:auto 0 0;height:38%;z-index:-1;pointer-events:none;background:linear-gradient(180deg,transparent 20%,rgba(8,12,34,.55)),url(/img/campo.jpg) center bottom/cover no-repeat;-webkit-mask-image:linear-gradient(180deg,transparent,#000 45%);mask-image:linear-gradient(180deg,transparent,#000 45%)}
+.ia-shine{background:none!important;color:inherit!important;-webkit-text-fill-color:currentColor;animation:none!important}
+.ia-svc-dark .ia-svc--hl{background:#1D3ED6;border-color:rgba(255,255,255,.25)}
+.ia-hero h1,.ia-h{font-weight:400}
+.ia-hero.sky-hero::before{display:block!important;inset:0!important;animation:none!important;transform:none!important;background:linear-gradient(180deg,rgba(12,24,90,.35),rgba(29,62,214,0) 55%),url(/img/hero-cielo.jpg) 18% 0/auto 150% no-repeat!important}
+.ia-hero.sky-hero::after{display:block!important;inset:auto 0 0!important;height:22%!important;background:linear-gradient(180deg,transparent,rgba(20,36,107,.85))!important}
 </style>
 </head>
 <body>
@@ -277,7 +284,7 @@
 <header class="site-header" id="top"></header>
 
 <main>
-<section class="band ia-hero" aria-labelledby="ia-title">
+<section class="band ia-hero sky-hero" aria-labelledby="ia-title">
   <div class="wrap ia-hero-grid">
     <div>
       <h1 id="ia-title">Inteligencia artificial aplicada a <span class="ia-shine">cómo trabaja tu negocio.</span></h1>
@@ -296,7 +303,6 @@
 
 <section class="band section ia-cases" id="sistemas" aria-labelledby="sis-title">
   <div class="wrap">
-    <p class="ia-kick" data-reveal>Lo que podemos construir</p>
     <h2 class="ia-h" id="sis-title" data-reveal>Agentes y sistemas que trabajan todos los días por tu negocio.</h2>
     <p class="ia-sub" data-reveal style="color:rgba(247,244,235,.75)">Cuatro ejemplos de lo que ya sabemos hacer: vender, atender pedidos, llevar la contabilidad y analizar el negocio. Cambian los datos y las herramientas, pero funcionan en casi cualquier industria.</p>
 
@@ -309,7 +315,6 @@
 
     <article class="ia-case" id="caso-ventas" role="tabpanel">
       <div>
-        <p class="ia-kick" data-reveal>Agente de prospección y ventas</p>
         <h3 data-reveal>Cada mañana busca clientes nuevos, les escribe y les da seguimiento.</h3>
         <p class="ia-sub" data-reveal>Todos los días ejecuta una rutina: busca prospectos que encajan con tu cliente ideal en mapas, portales, directorios y redes, encuentra a la persona que decide, le escribe un correo personalizado y registra todo en el CRM. Cuando alguien responde, lo mueve de etapa y agenda el siguiente paso.</p>
         <ul class="ia-list" data-reveal><li>Investiga y califica cada prospecto antes de escribir</li><li>Correos personalizados, no plantillas masivas</li><li>Maneja el CRM: etapas, notas, actividades y seguimiento</li><li>Tu equipo entra solo cuando hay una conversación real</li></ul>
@@ -331,7 +336,6 @@
 
     <article class="ia-case" id="caso-pedidos" role="tabpanel" hidden>
       <div>
-        <p class="ia-kick" data-reveal>Pedidos por WhatsApp con catálogo digital</p>
         <h3 data-reveal>Tu cliente pide por WhatsApp como siempre. El pedido llega completo a tu equipo.</h3>
         <p class="ia-sub" data-reveal>Un bot mixto: botones para lo que conviene guiar (hacer pedido, ver su pedido, cancelar) e IA cuando el cliente escribe libre, como «¿tienen leche deslactosada?» o «¿me cotizas 20 piezas?». Le muestra los productos y lo lleva a un catálogo tipo app donde arma su pedido. El equipo recibe el pedido en un panel y le avisa cuando sale.</p>
         <ul class="ia-list" data-reveal><li>Árbol de opciones e IA trabajando juntos</li><li>Catálogo web con búsqueda, promociones y recomendaciones</li><li>Panel para el equipo: pedidos, faltantes y chats</li><li>Si el cliente prefiere a una persona, la pide con un botón</li></ul>
@@ -350,7 +354,6 @@
 
     <article class="ia-case" id="caso-contable" role="tabpanel" hidden>
       <div>
-        <p class="ia-kick" data-reveal>Equipo contable de agentes</p>
         <h3 data-reveal>Un agente por puesto, y un tablero donde tu equipo trabaja.</h3>
         <p class="ia-sub" data-reveal>Dividimos el trabajo contable como lo haría un equipo: un agente recibe las facturas, otro revisa cada línea contra el catálogo, otro la verifica contra la compra, otro concilia bancos y pagos, otro prepara los asientos y reportes del cierre. Lo que un agente no puede resolver llega como excepción al tablero, y el cierre del mes lo aprueba una persona.</p>
         <ul class="ia-list" data-reveal><li>Facturas, compras, bancos y cierre mensual conectados</li><li>Cada agente con permisos solo para su parte</li><li>Excepciones y decisiones quedan registradas</li><li>El contador revisa y aprueba en lugar de capturar</li></ul>
@@ -372,7 +375,6 @@
 
     <article class="ia-case" id="caso-datos" role="tabpanel" hidden>
       <div>
-        <p class="ia-kick" data-reveal>Analista de ventas diario</p>
         <h3 data-reveal>Todos los días te explica qué pasó en tu negocio y qué conviene hacer.</h3>
         <p class="ia-sub" data-reveal>Primero juntamos tus datos con más detalle: cada venta, producto, hora, sucursal o cita, conectados a tu punto de venta, ERP o agenda. Después un agente los analiza cada día con definiciones exactas de margen y comparativos, y publica sus hallazgos: qué subió, qué bajó, qué se compra junto, qué horarios rinden y dónde se está perdiendo margen.</p>
         <ul class="ia-list" data-reveal><li>Ventas, margen y canastas con cifras que cuadran</li><li>Comparativos contra la semana y el año anterior</li><li>Hallazgos en lenguaje claro, con su gráfica</li><li>Muchísimo más detalle para decidir</li></ul>
@@ -412,7 +414,6 @@
 <section class="band band--light section" id="operacion" aria-labelledby="op-title">
   <div class="wrap ia-split">
     <div>
-      <p class="ia-kick" data-reveal>Procesos a medida y adopción</p>
       <h2 class="ia-h" id="op-title" data-reveal>Mejoremos cómo pasa el trabajo de una persona a otra.</h2>
       <p class="ia-sub" data-reveal>Antes de automatizar, revisamos el proceso completo con quien lo hace todos los días. Muchas veces lo que más ahorra es quitar un paso, definir un responsable o capturar el dato una sola vez. Después conectamos las herramientas y acompañamos a tu equipo hasta que lo nuevo se vuelve costumbre.</p>
       <p class="ia-stuck-t" data-reveal>Dónde solemos encontrar trabajo atorado</p>
@@ -430,7 +431,6 @@
 
 <section class="band section ia-svc-dark" id="servicios" aria-labelledby="svc-title">
   <div class="wrap">
-    <p class="ia-kick" data-reveal>Cómo empezar</p>
     <h2 class="ia-h" id="svc-title" data-reveal>Tres formas de empezar, con precio claro.</h2>
     <div class="ia-svcs">
       <article class="ia-svc ia-svc--hl">
@@ -458,7 +458,6 @@
 
 <section class="band band--light section" aria-labelledby="how-title">
   <div class="wrap">
-    <p class="ia-kick" data-reveal>Método</p>
     <h2 class="ia-h" id="how-title" data-reveal>Cómo lo hacemos, y tú decides qué hace la IA.</h2>
     <ol class="ia-steps">
       <li><span>1</span><b>Diagnóstico</b><p>Entendemos cómo atiendes hoy, qué preguntan tus clientes y dónde se le va el tiempo a tu equipo.</p></li>
