@@ -62,7 +62,6 @@ function validate(b) {
   if (!hasSite) {
     if (industry && !INDUSTRIES.includes(industry)) errors.industry = 'Elige un rubro de la lista.';
     if (city.length < 2) errors.city = 'Escribe la ciudad.';
-    if (social.length < 2) errors.social = 'Déjanos tu Instagram o tu perfil de Google Maps.';
   }
   const name = clean(b.name, 120), business = clean(b.biz, 160), contact = clean(b.contact, 160);
   if (name.length < 2) errors.name = 'Escribe tu nombre.';

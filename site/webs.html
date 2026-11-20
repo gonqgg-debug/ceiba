@@ -1104,7 +1104,7 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
               <select id="f-industry" name="industry" aria-describedby="e-industry"><option value="">Elige uno</option><option>Clínica o consultorio</option><option>Restaurante o café</option><option>Inmobiliaria</option><option>Hotel u hospedaje</option><option>Despacho contable o legal</option><option>Otro</option></select><p class="err" id="e-industry" hidden></p></div>
             <div class="fld" data-f="city"><label for="f-city">Ciudad</label><input id="f-city" name="city" autocomplete="address-level2" placeholder="Ej.: Guadalajara" aria-describedby="e-city"><p class="err" id="e-city" hidden></p></div>
           </div>
-          <div class="fld" data-f="social"><label for="f-social">Tu Instagram o tu perfil de Google Maps</label><input id="f-social" name="social" autocapitalize="off" spellcheck="false" placeholder="@tunegocio o enlace de Google Maps" aria-describedby="h-social e-social"><p class="hint" id="h-social">Con esto armamos tu propuesta aunque no tengas página.</p><p class="err" id="e-social" hidden></p></div>
+          <div class="fld" data-f="social"><label for="f-social">Tu Instagram o tu perfil de Google Maps <span style="font-weight:400;opacity:.7">(opcional)</span></label><input id="f-social" name="social" autocapitalize="off" spellcheck="false" placeholder="@tunegocio o enlace de Google Maps" aria-describedby="h-social e-social"><p class="hint" id="h-social">Si tienes, nos ayuda a armar tu propuesta con tus fotos y datos reales.</p><p class="err" id="e-social" hidden></p></div>
         </div>
         <div class="frow">
           <div class="fld" data-f="name"><label for="f-name">Tu nombre</label><input id="f-name" name="name" autocomplete="name" aria-describedby="e-name"><p class="err" id="e-name" hidden></p></div>
@@ -1492,7 +1492,7 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
     city: v => v.trim().length >= 2 || 'Escribe la ciudad donde está tu negocio.',
     social: v => {
       const s = v.trim();
-      if (!s) return 'Déjanos tu Instagram o el enlace de tu perfil de Google Maps.';
+      if (!s) return true; // opcional: hay negocios sin ninguna presencia en línea
       if (/^@?[a-z0-9._]{2,30}$/i.test(s)) return true;
       return parseUrl(s).error ? 'Escribe tu usuario de Instagram (@tunegocio) o pega el enlace de Google Maps.' : true;
     },
@@ -1554,7 +1554,7 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
       if (!res.ok) throw new Error(d.error || '');
       const rows = mode === 'web'
         ? [['Página', parseUrl(v('#f-site')).host]]
-        : [['Página', 'No tiene'], ['Rubro', v('#f-industry')], ['Ciudad', v('#f-city')], ['Perfil', v('#f-social')]];
+        : [['Página', 'No tiene'], ['Rubro', v('#f-industry')], ['Ciudad', v('#f-city')], ['Perfil', v('#f-social') || 'No tiene']];
       rows.push(['Nombre', v('#f-name')], ['Negocio', v('#f-biz')], ['Contacto', v('#f-contact')]);
       $('#lead-summary').innerHTML = rows.map(([k, val]) => `<dt>${k}</dt><dd>${esc(val)}</dd>`).join('');
       const first = v('#f-name').split(/\s+/)[0];
