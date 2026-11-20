@@ -136,11 +136,8 @@ def graph(key, page_html, cat):
     whatsapp = _service(f"{SITE}/ia#whatsapp", wa["name"], wa["description"], "Asistente de WhatsApp con inteligencia artificial", [{
         "@type": "Offer", "name": wa["name"], "price": wa["monthly"], "priceCurrency": "MXN", "seller": {"@id": ORG},
         "priceSpecification": [_price(wa["monthly"], name="Mensualidad", monthly=True), _price(wa["activation"], name="Pago inicial")]}], url=f"{SITE}/ia")
-    diagnostico = _service(f"{SITE}/ia#diagnostico", diag["name"], diag["description"], "Consultoría de inteligencia artificial", [{
-        "@type": "Offer", "name": diag["name"], "price": diag["amount"], "priceCurrency": "MXN", "seller": {"@id": ORG}}], url=f"{SITE}/ia")
-    piloto = _service(f"{SITE}/ia#piloto", pilot["name"], pilot["description"], "Implementación de agentes de IA y automatización", [{
-        "@type": "Offer", "name": pilot["name"], "seller": {"@id": ORG},
-        "priceSpecification": {"@type": "PriceSpecification", "minPrice": pilot["from"], "priceCurrency": "MXN"}}], url=f"{SITE}/ia")
+    diagnostico = _service(f"{SITE}/ia#diagnostico", diag["name"], diag["description"] + " Empieza con una llamada de descubrimiento gratis; se cotiza a la medida.", "Consultoría de inteligencia artificial", url=f"{SITE}/ia")
+    piloto = _service(f"{SITE}/ia#piloto", "Agentes, tableros y procesos a medida", pilot["description"] + " Se cotiza después de la llamada de descubrimiento.", "Implementación de agentes de IA y automatización", url=f"{SITE}/ia")
 
     if key == "index.html":
         org["hasOfferCatalog"] = {"@type": "OfferCatalog", "name": "Servicios de Ceiba Labs", "itemListElement": [
@@ -256,10 +253,10 @@ Precios de México en pesos mexicanos. También hay precios en moneda local o en
 
 ## Inteligencia artificial y procesos
 - [IA y automatización para negocios]({SITE}/ia): asistentes, agentes, automatización y cómo trabajamos.
-- Llamada de descubrimiento: gratis, 30 minutos por video.
-- {diag['name']}: desde {money(diag['amount'])}. {diag['description']}
-- {pilot['name']}: desde {money(pilot['from'])}. {pilot['description']}
-- {cat['operacion']['name']}: desde {money(cat['operacion']['from'])} al mes. {cat['operacion']['description']}
+- Todo empieza con una llamada de descubrimiento gratis de 30 minutos por video. Después se propone y cotiza a la medida:
+- {diag['name']}: {diag['description']}
+- Agentes, tableros y procesos a medida: {pilot['description']}
+- {cat['operacion']['name']}: {cat['operacion']['description']}
 
 ## Empezar
 - [Propuesta gratis]({SITE}/webs#diagnostico): el negocio deja su página actual (o sus datos) y recibe su propuesta con la página nueva.

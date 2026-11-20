@@ -23,10 +23,10 @@ Precios de México en pesos mexicanos. También hay precios en moneda local o en
 
 ## Inteligencia artificial y procesos
 - [IA y automatización para negocios](https://www.ceibalabs.io/ia): asistentes, agentes, automatización y cómo trabajamos.
-- Llamada de descubrimiento: gratis, 30 minutos por video.
-- Diagnóstico de IA: desde $9,900 MXN. Dos sesiones, mapa de procesos y plan por etapas con costos y retorno esperado. Se acredita al 100% a la implementación si la contratas en 30 días.
-- Implementación: desde $19,900 MXN. Una automatización o agente: asistente de WhatsApp avanzado, reporte diario o conciliación simple.
-- Operación mensual: desde $4,990 MXN al mes. Monitoreo, ajustes y uso de IA incluido para una automatización.
+- Todo empieza con una llamada de descubrimiento gratis de 30 minutos por video. Después se propone y cotiza a la medida:
+- Diagnóstico de IA: Dos sesiones, mapa de procesos y plan por etapas con costos y retorno esperado. Se acredita al 100% a la implementación si la contratas en 30 días.
+- Agentes, tableros y procesos a medida: Una automatización o agente: asistente de WhatsApp avanzado, reporte diario o conciliación simple.
+- Operación mensual: Monitoreo, ajustes y uso de IA incluido para una automatización.
 
 ## Empezar
 - [Propuesta gratis](https://www.ceibalabs.io/webs#diagnostico): el negocio deja su página actual (o sus datos) y recibe su propuesta con la página nueva.
