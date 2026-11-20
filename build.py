@@ -173,6 +173,19 @@ absolute = lambda t: re.sub(r'(["\'(])(img/|favicon|apple-touch-icon)', r'\1/\2'
 import subprocess
 subprocess.run(["node", str(ROOT / "scripts/render-static.mjs")], check=True)
 
+# ---------- SEO y visibilidad en IA (site_seo.py) ----------
+import site_seo
+seo_cat = json.loads(subprocess.run(["node", "--input-type=module", "-e",
+    "import { PLANS, ADDONS, CONSULTING, QUOTED } from './lib/catalog.js'; process.stdout.write(JSON.stringify({ plans: PLANS, whatsapp: ADDONS.whatsapp, "
+    "diagnostico: CONSULTING.diagnostico_ia, piloto: { description: 'Un primer agente o automatización sobre un proceso concreto, medido contra cómo se hace hoy.', ...QUOTED.piloto_ia } }))"],
+    capture_output=True, text=True, cwd=ROOT, check=True).stdout)
+for name in site_seo.PAGES:
+    pages[name] = site_seo.apply(name, pages[name], seo_cat)
+(SITE / "robots.txt").write_text(site_seo.robots_txt(), encoding="utf-8")
+(SITE / "sitemap.xml").write_text(site_seo.sitemap_xml(), encoding="utf-8")
+(SITE / "llms.txt").write_text(site_seo.llms_txt(seo_cat, pages), encoding="utf-8")
+pages["404.html"] = fill("404.html", common)
+
 for name, html in pages.items():
     html = linkfix(html)
     (SITE / name).write_text(html, encoding="utf-8")

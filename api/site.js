@@ -36,6 +36,16 @@ async function media(p) {
   }
 }
 
+// Resumen del negocio para asistentes de IA (formato llmstxt.org), con los mismos datos de su página.
+function llmsTxt(c, url) {
+  const b = c.brand || {}, k = c.contact || {}, line = (l, v) => (v ? `- ${l}: ${v}\n` : '');
+  const hours = c.util?.hours || (c.visit?.rows || []).map(r => `${r.dt}: ${r.dd}`).join('; ');
+  const services = (c.services?.items || []).map(s => `- ${s.name}${s.price ? ` (${s.price})` : ''}${s.desc ? `: ${s.desc}` : ''}`).join('\n');
+  const faq = (c.faq?.length ? c.faq : c.chat?.faq || []).filter(f => f.q && f.a).map(f => `- **${f.q}** ${f.a}`).join('\n');
+  const lede = c.hero?.sub || b.tagline;
+  return `# ${b.fullName || b.name || ''}\n\n${lede ? `> ${lede}\n\n` : ''}${line('Página', url)}${line('Dirección', k.address)}${line('Teléfono', k.phone)}${line('WhatsApp', k.whatsapp && `https://wa.me/${k.whatsapp}`)}${line('Correo', k.email)}${line('Horario', hours)}${line('Zonas', c.visit?.zones)}${services ? `\n## Servicios\n${services}\n` : ''}${faq ? `\n## Preguntas frecuentes\n${faq}\n` : ''}`;
+}
+
 export async function GET(request) {
   const q = new URL(request.url).searchParams;
   if (q.has('media')) return media(q.get('media') || '');
@@ -49,6 +59,7 @@ export async function GET(request) {
 
   const url = `https://${host}/`;
   if (path === '/robots.txt') return send(robotsTxt({ url }), 'text/plain');
+  if (path === '/llms.txt') return send(llmsTxt(row.site_content.page || {}, url), 'text/plain');
   if (path === '/sitemap.xml') return send(sitemapXml({ url, lastmod: (row.updated_at || row.published_at).slice(0, 10) }), 'application/xml');
   if (path !== '/' && path !== '/index.html') return Response.redirect(url, 301);
 
@@ -58,7 +69,7 @@ export async function GET(request) {
   return send(`<!doctype html>
 <html lang="es"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-${seoHead(page, { url })}
+${seoHead(page, { url }).replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, '') /* la plantilla ya trae los datos estructurados */}
 ${page.brand?.accent ? `<meta name="theme-color" content="${esc(page.brand.accent)}">` : ''}
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Red+Hat+Display:wght@500;600;700&family=Red+Hat+Text:wght@400;500;600&display=swap">

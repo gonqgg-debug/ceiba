@@ -1,0 +1,51 @@
+# Ceiba Labs
+
+> Ceiba Labs es un estudio digital que implementa la tecnología que hace crecer a los negocios: diseña, publica y mantiene páginas web por suscripción, optimizadas para Google y para buscadores de inteligencia artificial, y aplica IA en la operación (asistentes de WhatsApp, agentes que hacen trabajo repetitivo y automatización de procesos). Atiende a negocios de México y Latinoamérica, en español, a distancia.
+
+Datos clave:
+- Antes de pagar, el negocio recibe una propuesta gratis con su nueva página ya diseñada para que la vea.
+- Las páginas incluyen diseño, hosting, mantenimiento, SEO base, datos estructurados, optimización para buscadores de IA y minutos de cambios al mes.
+- Después de pagar, un asistente de IA reúne los materiales del negocio (logo, fotos, datos, dominio) y el equipo construye y publica la página.
+- Precios finales en pesos mexicanos (también se cotiza en dólares).
+
+## Páginas web
+- [Páginas web por suscripción](https://www.ceibalabs.io/webs): planes, qué incluye cada uno y cómo optimizamos para Google y la IA.
+- [Páginas web para clínicas y consultorios](https://www.ceibalabs.io/webs/clinicas): versión para clínicas dentales, consultorios y especialistas.
+
+### Planes
+- Plan Esencial: $3,490 MXN de pago inicial y $1,490 MXN al mes. Hasta 3 páginas pensadas para el celular, con hosting, mantenimiento, SEO base y optimización para IA, formulario y botón de WhatsApp. Hasta 30 minutos de cambios al mes.
+- Plan Negocio: $5,490 MXN de pago inicial y $2,490 MXN al mes. Hasta 7 páginas, conectadas con la agenda del negocio, con reporte de cuántas personas te contactan, análisis avanzado de SEO y prueba de visibilidad en IA cada 3 meses. Hasta 60 minutos de cambios al mes.
+- Plan Avanzado: $8,490 MXN de pago inicial y $3,990 MXN al mes. Hasta 12 páginas con catálogo de propiedades, habitaciones o servicios que tú actualizas, reporte mensual de visibilidad en IA y Google y una mejora de SEO aplicada al mes. Hasta 120 minutos de cambios al mes.
+- Complemento Asistente de WhatsApp: $3,990 MXN de pago inicial y $1,490 MXN al mes. Contesta en WhatsApp y en tu página con las respuestas que apruebas, anota los datos para la cita o cotización y te pasa lo que necesita una persona. Un número y una sucursal. Piloto con hasta 300 conversaciones al mes.
+
+## Inteligencia artificial y procesos
+- [IA y automatización para negocios](https://www.ceibalabs.io/ia): asistentes, agentes, automatización y cómo trabajamos.
+- Diagnóstico de IA: $3,900 MXN. Diagnóstico de procesos de atención, ventas u operación. Su costo se descuenta del proyecto si se contrata.
+- Piloto de agentes y automatización: desde $19,900 MXN. Un primer agente o automatización sobre un proceso concreto, medido contra cómo se hace hoy.
+
+## Empezar
+- [Propuesta gratis](https://www.ceibalabs.io/webs#diagnostico): el negocio deja su página actual (o sus datos) y recibe su propuesta con la página nueva.
+- [Consultoría](https://www.ceibalabs.io/#consultoria): para proyectos de procesos e IA a la medida.
+
+## Preguntas frecuentes
+
+### Generales
+- **¿Qué significa aparecer en la IA?** Cada vez más personas le preguntan a Google o a asistentes como ChatGPT a quién acudir. Esos sistemas recomiendan negocios cuya información encuentran clara y confiable: qué hacen, dónde están, precios, horarios y reseñas. Tu página nueva sale con esa información ordenada y con datos estructurados. Nadie puede garantizar un lugar en sus respuestas, pero sí ponerte en la mejor posición.
+- **¿Con qué tipo de negocios trabajan?** Con negocios que atienden y venden: clínicas, restaurantes, inmobiliarias, hoteles, tiendas, distribuidores, despachos y empresas de servicios. Trabajamos a distancia, por videollamada, con negocios de cualquier país.
+- **¿Tengo que pasar por las cuatro etapas?** No. Puedes empezar por la que más te urge: una página nueva, un asistente de WhatsApp o un agente para tu operación. Cada etapa hace más fuerte a la siguiente, pero se contratan por separado.
+- **¿Cómo empezamos si no sé qué necesito?** Escríbenos cómo funciona hoy tu negocio y qué te quita más tiempo. Te decimos si conviene empezar por la página, por un asistente o por revisar un proceso.
+
+### Páginas web
+- **¿Tengo que pagar por la propuesta?** No, es gratis. Solo pagas el monto inicial y la mensualidad si decides activar tu página.
+- **¿Qué incluye la propuesta?** Un enlace privado donde ves tu página de hoy junto a cómo quedaría, en computadora y en celular. También incluye qué mejoras, el plan que te recomendamos, el precio y hasta cuándo es válida. Desde ahí puedes activarla o agendar una llamada de 15 minutos.
+- **¿Cómo pido cambios después de publicar?** Le escribes a la persona que lleva tu página con lo que quieres cambiar: un horario, un precio, una foto nueva. Cada plan incluye tiempo de cambios al mes: 30 minutos en Esencial, 60 en Negocio y 120 en Avanzado.
+- **¿Puedo cancelar la suscripción?** Las condiciones de permanencia y cancelación están en la tabla de planes. Te las explicamos antes de que hagas el pago inicial.
+- **¿Qué significa que esté optimizada para IA?** Que tu página está hecha para que Google y asistentes como ChatGPT, Gemini o Perplexity entiendan tu negocio: qué haces, dónde estás, tu horario, tus servicios y precios, tus reseñas y las respuestas a lo que más te preguntan, en texto y en datos estructurados. Nadie puede garantizar un lugar en sus respuestas, pero sí darte la mejor base para que te recomienden.
+- **¿Qué revisa el análisis de SEO gratis?** Revisa tu página como lo haría un buscador: título y descripción, encabezados, fotos, mapa del sitio, datos estructurados, si bloqueas a los buscadores de IA, cuánto texto se puede leer, preguntas frecuentes, precios y reseñas. Te da un puntaje de 0 a 100 y te explica cada punto en lenguaje simple. Es el análisis rápido. El plan Negocio incluye el análisis avanzado al lanzar: revisamos todo tu sitio, la velocidad real en celular y tus datos en Google, y cada 3 meses hacemos preguntas reales a ChatGPT, Gemini y Perplexity para ver si te recomiendan y a quién recomiendan en tu lugar. El plan Avanzado lo hace cada mes, con reporte y una mejora de SEO aplicada.
+
+### Inteligencia artificial
+- **¿Qué diferencia hay entre un asistente y un agente?** El asistente conversa: responde y recoge datos. El agente además ejecuta: consulta tus sistemas, prepara documentos y completa tareas de varios pasos, pidiendo tu aprobación cuando hace falta.
+- **¿Un agente reemplaza a una persona de mi equipo?** Se encarga de la parte repetitiva de un puesto: buscar, capturar, revisar, conciliar, dar seguimiento. Tu equipo pasa a revisar, decidir y atender lo que el agente marca como excepción. Lo importante siempre lo aprueba una persona.
+- **¿Esto funciona para mi industria?** Casi seguro. Prospección, pedidos, back office y análisis se repiten en inmobiliarias, restaurantes, hoteles, clínicas, despachos, tiendas y distribuidores. Y si tu caso es distinto, lo diseñamos a la medida. En el diagnóstico vemos cuál conviene primero.
+- **¿Con qué herramientas trabajan?** Con las que ya usas: WhatsApp Business, correo, hojas de cálculo, tu CRM, tu punto de venta, Odoo u otro ERP, o tu sistema de facturación. Si hace falta, construimos el tablero. En el diagnóstico revisamos qué se puede conectar y cómo.
+- **¿Cuánto tarda en estar listo?** Depende de qué automaticemos. Te damos los tiempos en la propuesta del diagnóstico.

@@ -63,11 +63,79 @@
       "source": "/propuesta-clinica-arrayan.html",
       "destination": "/p/clinica-arrayan",
       "permanent": false
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/webs.html",
+      "destination": "/webs",
+      "permanent": true
+    },
+    {
+      "source": "/ia.html",
+      "destination": "/ia",
+      "permanent": true
+    },
+    {
+      "source": "/diagnostico.html",
+      "destination": "/diagnostico",
+      "permanent": true
+    },
+    {
+      "source": "/webs/",
+      "destination": "/webs",
+      "permanent": true
+    },
+    {
+      "source": "/ia/",
+      "destination": "/ia",
+      "permanent": true
+    },
+    {
+      "source": "/webs/clinicas/",
+      "destination": "/webs/clinicas",
+      "permanent": true
     }
   ],
   "functions": {
     "api/chat.js": {
       "maxDuration": 120
     }
-  }
+  },
+  "headers": [
+    {
+      "source": "/img/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=2592000, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/(llms.txt|robots.txt|sitemap.xml)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ]
 }
