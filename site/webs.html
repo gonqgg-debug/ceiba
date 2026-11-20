@@ -728,6 +728,7 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
 .grass-card{position:relative;isolation:isolate;overflow:hidden;background:var(--navy)!important}
 .grass-card::after{content:"";position:absolute;inset:auto 0 0;height:40%;z-index:-1;pointer-events:none;background:linear-gradient(180deg,transparent 20%,rgba(8,12,34,.55)),url(/img/campo.jpg) center bottom/cover no-repeat;-webkit-mask-image:linear-gradient(180deg,transparent,#000 45%);mask-image:linear-gradient(180deg,transparent,#000 45%)}
 .ws-tiers .hl span{color:var(--lime)!important}
+.ws-read dt{color:var(--lime)!important}.ws-read dd{color:#fff}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -882,7 +883,7 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
 .ws-read-top span{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:var(--lime);color:var(--ink);font-size:13px}
 .ws-read-top small{margin-left:auto;font:500 11px var(--f-mono);color:rgba(247,244,235,.5)}
 .ws-read dl{margin:0;display:grid;gap:6px}
-.ws-read dl div{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:10px 12px;border-radius:12px;background:rgba(247,244,235,.05);font-size:14px;opacity:.25;transition:opacity .4s,background .4s}
+.ws-read dl div{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:10px 12px;border-radius:12px;background:rgba(247,244,235,.05);font-size:14px;opacity:.6;transition:opacity .4s,background .4s}
 .ws-read dl div.on{opacity:1;background:rgba(214,250,82,.08)}
 .ws-read dt{font:500 12px var(--f-mono);color:var(--lime);padding-top:2px}
 .ws-read dd{margin:0}
@@ -943,7 +944,6 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
           <div><dt>Contacto</dt><dd>WhatsApp, teléfono y agenda en línea</dd></div>
         </dl>
         <p class="ws-read-ans" id="ws-read-ans"><b>Respuesta de un asistente de IA</b>Clínica Dental Arrayán, en Providencia: valoración sin costo, limpieza desde $700 y atienden urgencias el mismo día. Tiene 4.9 estrellas y puedes agendar en línea.</p>
-        <span class="ws-read-note">Ilustrativo · negocio ficticio</span>
       </div>
       <ol class="ws-feats">
         <li><b>Datos estructurados de tu negocio</b><p>Tipo de negocio, dirección, horario, servicios con precio, reseñas y preguntas frecuentes en el formato schema.org que leen Google y los asistentes de IA.</p></li>
@@ -966,6 +966,7 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
   const read = document.getElementById('ws-read'), rows = [...read.querySelectorAll('dl div')], ans = document.getElementById('ws-read-ans');
   let on = false;
   async function play() { if (on) return; on = true; while (true) { rows.forEach(r => r.classList.remove('on')); ans.classList.remove('on'); await wait(400); for (const r of rows) { r.classList.add('on'); await wait(450); } await wait(400); ans.classList.add('on'); if (reduce) return; await wait(6000); } }
+  new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { play(); o.disconnect(); } }), { threshold: .3 }).observe(read);
 })();
 </script>
 
