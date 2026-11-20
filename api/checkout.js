@@ -65,7 +65,7 @@ export async function POST(request) {
           description: `Pago inicial de ${packageName} para ${proposal.business}. La mensualidad de ${money(totals.monthly)} empieza el día que publicamos la página.`,
           metadata,
           custom_fields: [{ name: 'Propuesta', value: slug }],
-          footer: 'Ceiba Labs · Estudio digital para negocios de Latinoamérica · www.ceibalabs.io',
+          footer: 'Ceiba Labs · Estudio digital · www.ceibalabs.io',
         },
       },
       billing_address_collection: 'required',
