@@ -29,11 +29,12 @@ async function clientDetail(slug) {
   const sign = async f => ({ ...f, url: await signDownload(f.ruta || f.path, 60 * 60 * 24).catch(() => null) });
   const files = await Promise.all((chat.files || []).map(f => sign({ ...f, ruta: f.path })));
   const solicitudes = await Promise.all((sols || []).map(async r => ({ ...r, archivos: await Promise.all((r.archivos || []).map(sign)) })));
+  const prop = (await select('proposals', `slug=eq.${encodeURIComponent(slug)}&select=site_built_at&limit=1`).catch(() => []))?.[0];
   const { encontrado, cambios, ...data } = chat.data || {};
   return {
     slug: chat.slug, business: chat.business, email: chat.email, phase: chat.phase, needs_human: chat.needs_human,
     created_at: chat.created_at, last_client_at: chat.last_client_at, link: chatUrl(chat.slug),
-    checklist: checklist(chat), data, encontrado: encontrado || null, files, messages: transcript(chat), solicitudes,
+    site: !!prop?.site_built_at, checklist: checklist(chat), data, encontrado: encontrado || null, files, messages: transcript(chat), solicitudes,
   };
 }
 
@@ -65,12 +66,12 @@ export async function GET(request) {
     }
     if (q.get('action') === 'clients') {
       const chats = await select('client_chats', 'select=id,slug,business,email,phase,needs_human,data,files,created_at,updated_at,last_client_at&order=updated_at.desc&limit=200');
-      const open = await select('solicitudes', 'select=slug,estado,urgente&estado=in.(pendiente,en_proceso,necesita_info)&limit=1000').catch(() => []);
+      const open = await select('solicitudes', 'select=slug,estado,urgente&estado=in.(pendiente,construyendo,en_revision,en_proceso,necesita_info)&limit=1000').catch(() => []);
       const clients = (chats || []).map(c => {
         const mine = (open || []).filter(r => r.slug === c.slug);
         const ck = checklist(c);
         return { slug: c.slug, business: c.business, email: c.email, phase: c.phase, needs_human: c.needs_human, created_at: c.created_at, updated_at: c.updated_at, last_client_at: c.last_client_at,
-          avance: `${ck.done}/${ck.total}`, pendientes: mine.filter(r => r.estado === 'pendiente').length, abiertas: mine.length, urgente: mine.some(r => r.urgente) };
+          avance: `${ck.done}/${ck.total}`, revisar: mine.filter(r => r.estado === 'en_revision').length, pendientes: mine.filter(r => r.estado === 'pendiente').length, abiertas: mine.length, urgente: mine.some(r => r.urgente) };
       });
       return json({ clients });
     }

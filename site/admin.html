@@ -997,7 +997,7 @@ textarea.json{width:100%;min-height:420px;font:400 12.5px/1.5 var(--f-mono);back
 
   /* ---------- clientes que ya pagaron ---------- */
   const PHASE = { arranque: 'Reuniendo materiales', construccion: 'Construyendo', soporte: 'Publicada' };
-  const SOL = { pendiente: 'Pendiente', en_proceso: 'En proceso', necesita_info: 'Esperando al cliente', aplicado: 'Aplicado', descartado: 'Descartado' };
+  const SOL = { pendiente: 'En fila para Claude', construyendo: 'Claude la está haciendo', en_revision: 'Lista para revisar', en_proceso: 'En proceso', necesita_info: 'Esperando al cliente', aplicado: 'Aprobada y avisada', descartado: 'Descartada' };
   const DATA_LBL = { nombre_negocio: 'Nombre', giro: 'Giro', horario: 'Horario', direccion: 'Dirección', telefono: 'Teléfono', whatsapp: 'WhatsApp', correo: 'Correo', servicios: 'Servicios', colores: 'Colores', estilo: 'Estilo', redes: 'Redes', zona: 'Zona', dominio: 'Dominio', dominio_situacion: 'Dominio (situación)', dominio_proveedor: 'Proveedor del dominio', logo_web: 'Logo de su página', fotos_web: 'Fotos de su página', sin_logo: 'Sin logo', sin_fotos: 'Sin fotos', notas: 'Notas' };
   const link = (u, t) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`;
 
@@ -1005,12 +1005,12 @@ textarea.json{width:100%;min-height:420px;font:400 12.5px/1.5 var(--f-mono);back
     app.innerHTML = '<p class="empty">Cargando…</p>';
     const { clients: cs } = await api('GET', null, '?action=clients');
     $('#logout').hidden = false;
-    const rank = c => (c.needs_human ? 0 : c.urgente ? 1 : c.pendientes ? 2 : 3);
+    const rank = c => (c.needs_human ? 0 : c.revisar ? 1 : c.urgente ? 2 : c.pendientes ? 3 : 4);
     cs.sort((a, b) => rank(a) - rank(b));
     const rows = cs.map(c => `<tr class="row" data-slug="${esc(c.slug)}" tabindex="0">
       <td><b>${esc(c.business || c.slug)}</b><small>${esc(c.email || '')}</small></td>
       <td><span class="st">${PHASE[c.phase] || c.phase}</span>${c.phase === 'arranque' ? `<small>Avance ${esc(c.avance)}</small>` : ''}</td>
-      <td>${c.needs_human ? '<span class="st st--warn">Atender en persona</span>' : ''}${c.pendientes ? ` <span class="st st--hot">${c.pendientes} por hacer</span>` : ''}${c.urgente ? ' <span class="st st--warn">Urgente</span>' : ''}${!c.needs_human && !c.abiertas ? '<small>Nada pendiente</small>' : c.abiertas > c.pendientes ? `<small>${c.abiertas - c.pendientes} en curso</small>` : ''}</td>
+      <td>${c.needs_human ? '<span class="st st--warn">Atender en persona</span>' : ''}${c.revisar ? ` <span class="st st--hot">${c.revisar} por revisar</span>` : ''}${c.pendientes ? ` <span class="st">${c.pendientes} en fila</span>` : ''}${c.urgente ? ' <span class="st st--warn">Urgente</span>' : ''}${!c.needs_human && !c.abiertas ? '<small>Nada pendiente</small>' : c.abiertas > c.pendientes + c.revisar ? `<small>${c.abiertas - c.pendientes - c.revisar} en curso</small>` : ''}</td>
       <td>${fmt(c.last_client_at)}<small>pagó ${fmt(c.created_at)}</small></td></tr>`).join('');
     app.innerHTML = `<h1>Clientes</h1>${cs.length ? `<div style="overflow-x:auto"><table><thead><tr><th>Cliente</th><th>Etapa</th><th>Qué hay que hacer</th><th>Último mensaje</th></tr></thead><tbody>${rows}</tbody></table></div>` : '<p class="empty">Todavía no hay clientes que hayan pagado.</p>'}`;
     app.querySelectorAll('tr.row').forEach(tr => {
@@ -1027,12 +1027,16 @@ textarea.json{width:100%;min-height:420px;font:400 12.5px/1.5 var(--f-mono);back
     const data = Object.entries(c.data).map(([k, v]) => `<dt>${esc(DATA_LBL[k] || k)}</dt><dd>${val(k, v)}</dd>`).join('');
     const fileTile = f => `<a href="${esc(f.url || '#')}" target="_blank" rel="noopener"><span class="th" style="${/^image\//.test(f.tipo || f.type || '') && f.url ? `background-image:url('${esc(f.url)}')` : ''}">${/^image\//.test(f.tipo || f.type || '') ? '' : esc(((f.nombre || f.name || '').split('.').pop() || '').toUpperCase())}</span>${esc(f.clase || f.kind || 'sin clasificar')} · ${esc(f.nombre || f.name)}</a>`;
     const sols = c.solicitudes.map(r => `<div class="sol" data-id="${esc(r.id)}">
-        <div class="sol-h"><b>${r.tipo === 'materiales' ? 'Construir la página' : `Cambio: ${esc(r.seccion)}`}</b><span class="st ${r.estado === 'pendiente' ? 'st--hot' : r.estado === 'necesita_info' ? 'st--wait' : ''}">${SOL[r.estado] || r.estado}</span>${r.urgente ? '<span class="st st--warn">Urgente</span>' : ''}<span>${fmt(r.created_at)} · <code>${esc(r.id.slice(0, 8))}</code></span></div>
+        <div class="sol-h"><b>${r.tipo === 'materiales' ? 'Construir la página' : `Cambio: ${esc(r.seccion)}`}</b><span class="st ${r.estado === 'en_revision' ? 'st--hot' : r.estado === 'necesita_info' ? 'st--wait' : ''}">${SOL[r.estado] || r.estado}</span>${r.urgente ? '<span class="st st--warn">Urgente</span>' : ''}<span>${fmt(r.created_at)} · <code>${esc(r.id.slice(0, 8))}</code></span></div>
         <p>${esc(r.instruccion)}</p>
         ${r.archivos?.length ? `<div class="files">${r.archivos.map(fileTile).join('')}</div>` : ''}
         ${r.hilo?.length ? `<div class="hilo">${r.hilo.map(h => `<div class="${h.de === 'ingeniero' ? 'ing' : ''}"><em>${h.de === 'ingeniero' ? 'Equipo' : 'Cliente'} · ${fmt(h.at)}</em>${esc(h.texto)}</div>`).join('')}</div>` : ''}
-        ${r.nota ? `<small>Nota: ${esc(r.nota)}</small>` : ''}
-        ${['aplicado', 'descartado'].includes(r.estado) ? '' : `<textarea placeholder="Mensaje para el cliente (opcional). Le llega en su chat y por correo."></textarea>
+        ${r.resultado ? `<div class="notes">${esc(r.resultado)}</div>` : ''}
+        ${r.nota ? `<small>Nota del equipo: ${esc(r.nota)}</small>` : ''}
+        ${['en_revision', 'aplicado'].includes(r.estado) && c.site ? `<div class="acts"><a class="btn btn-line btn-s" href="/vista/${esc(c.slug)}?sitio=1" target="_blank" rel="noopener">Ver su página</a></div>` : ''}
+        ${['aplicado', 'descartado'].includes(r.estado) ? '' : r.estado === 'en_revision' ? `<label class="hint">Mensaje para el cliente (lo escribió Claude; edítalo si quieres). Le llega en su chat y por correo.</label>
+        <textarea>${esc(r.mensaje_cliente || '')}</textarea>
+        <div class="acts"><select>${['aplicado', 'necesita_info'].map(s => `<option value="${s}">${s === 'aplicado' ? 'Aprobar y avisar' : 'Mandar como pregunta'}</option>`).join('')}</select><button class="btn btn-primary btn-s" type="button" data-act="sol">Enviar al cliente</button><button class="btn btn-line btn-s" type="button" data-act="redo">Pedir otra versión</button></div>` : `<textarea placeholder="Mensaje para el cliente (opcional). Le llega en su chat y por correo."></textarea>
         <div class="acts"><select>${states.map(s => `<option value="${s}"${s === r.estado ? ' selected' : ''}>${SOL[s]}</option>`).join('')}</select><button class="btn btn-primary btn-s" type="button" data-act="sol">Guardar</button></div>`}
       </div>`).join('');
     app.innerHTML = `<div class="d-top"><a class="btn btn-line btn-s" href="#clientes">← Clientes</a><h1>${esc(c.business || c.slug)}</h1>
@@ -1061,6 +1065,10 @@ textarea.json{width:100%;min-height:420px;font:400 12.5px/1.5 var(--f-mono);back
     app.querySelectorAll('[data-act="sol"]').forEach(b => b.addEventListener('click', () => {
       const box = b.closest('.sol');
       run({ action: 'request_update', solicitud: box.dataset.id, estado: box.querySelector('select').value, mensaje: box.querySelector('textarea').value });
+    }));
+    app.querySelectorAll('[data-act="redo"]').forEach(b => b.addEventListener('click', () => {
+      const nota = prompt('¿Qué debe cambiar Claude en la siguiente versión?');
+      if (nota && nota.trim()) run({ action: 'request_update', solicitud: b.closest('.sol').dataset.id, estado: 'pendiente', nota: nota.trim() });
     }));
   }
 

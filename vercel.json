@@ -5,6 +5,10 @@
   "cleanUrls": false,
   "rewrites": [
     {
+      "source": "/media/:slug/:file",
+      "destination": "/api/media?p=:slug/:file"
+    },
+    {
       "source": "/vista/:slug",
       "destination": "/api/vista?slug=:slug"
     },

@@ -3,6 +3,7 @@
 import { SYMBOLS } from '../lib/generated/shared.js';
 import { isAdmin } from '../lib/admin.js';
 import { loadProposal, trackView } from '../lib/proposals.js';
+import { select } from '../lib/db.js';
 import { fontHref, renderClinica } from '../lib/templates/clinica.js';
 
 const TEMPLATES = { clinica: renderClinica };
@@ -37,6 +38,23 @@ body{margin:0;background:#fff;-webkit-font-smoothing:antialiased;overflow-x:clip
 @media (max-width:700px){.vp-bar{flex-wrap:wrap;font-size:13px}.vp-bar p{flex-basis:calc(100% - 50px)}.vp-acts{width:100%}.vp-acts .vp-btn:not(.vp-x){flex:1;justify-content:center}.vp-x{position:absolute;top:8px;right:10px}.vp-pill{bottom:76px}}
 </style></head>`;
 
+function sitePage(p, { admin }) {
+  const c = p.site || {}, render = TEMPLATES[c.template || p.template || 'clinica'] || renderClinica;
+  return html(`${HEAD(`${p.business} · Tu página`, fontHref(c.page))}
+<body>
+${SYMBOLS}
+<div class="vp-bar" id="vp-bar" role="region" aria-label="Vista previa">
+  <p><span class="tag${admin ? ' tag--draft' : ''}">Vista previa</span>Esta es tu página nueva, <b>${esc(p.business)}</b>. Todavía no está publicada: dinos en tu chat si quieres cambiar algo.</p>
+  <div class="vp-acts"><a class="vp-btn vp-btn--main" href="/cuenta/${esc(p.slug)}">Volver a mi chat</a><button class="vp-btn vp-x" type="button" id="vp-hide" aria-label="Ocultar barra de vista previa">×</button></div>
+</div>
+<button class="vp-pill" id="vp-pill" type="button" hidden>Vista previa · Ceiba Labs</button>
+<main class="vista">${render(c.page || {}, { mode: 'live' })}</main>
+<div class="vp-toast" id="vp-toast" role="status" aria-live="polite" hidden></div>
+<script src="/assets/clinica.js" defer></script>
+<script src="/assets/vista.js" defer></script>
+</body></html>`);
+}
+
 function page(p, { admin }) {
   const render = TEMPLATES[p.template || 'clinica'] || renderClinica;
   const draft = admin && !['enviada', 'vista', 'activada'].includes(p.status);
@@ -58,8 +76,15 @@ ${SYMBOLS}
 const notFound = (title, text, status) => html(`${HEAD(title)}<body style="display:grid;place-items:center;min-height:100dvh;font:16px/1.5 Geist,system-ui,sans-serif;color:#18231F;padding:24px;text-align:center"><div><h1 style="font:600 28px 'Red Hat Display',sans-serif;margin:0 0 8px">${esc(title)}</h1><p style="margin:0 0 20px;color:#5E6A64">${esc(text)}</p><a href="/" style="color:#103D37;font-weight:600">Ir a Ceiba Labs</a></div></body></html>`, status);
 
 export async function GET(request) {
-  const slug = new URL(request.url).searchParams.get('slug') || '';
+  const q = new URL(request.url).searchParams;
+  const slug = q.get('slug') || '';
   const admin = isAdmin(request);
+  if (q.has('sitio')) {
+    // La página real del cliente (ya pagó): sin vencimiento. Se lee de Supabase aunque exista una propuesta de ejemplo.
+    const row = (await select('proposals', `slug=eq.${encodeURIComponent(slug)}&select=*&limit=1`).catch(() => []))?.[0];
+    if (!row?.site_content || (!admin && row.status !== 'activada')) return notFound('Tu página todavía no está lista', 'Te avisamos en tu chat en cuanto tengas la vista previa.', 404);
+    return sitePage({ slug: row.slug, business: row.business, template: row.content?.template, site: row.site_content }, { admin });
+  }
   let r;
   try { r = await loadProposal(slug, { admin }); }
   catch (err) { console.error('vista', err.message); return notFound('No pudimos abrir la vista previa', 'Intenta de nuevo en unos minutos.', 502); }

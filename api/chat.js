@@ -20,7 +20,7 @@ import { dbReady, insert, select, update } from '../lib/db.js';
 import { escHtml, mailReady, sendMail } from '../lib/notify.js';
 import {
   ALLOWED_TYPES, LONG_LINK, MAX_BYTES, chatUrl, checkDomain, checklist, ensureChat, ensureFound,
-  findChatByEmail, getChat, saveChat, signDownload, signUpload, validToken, ATTACH, transcript, engineerUpdate,
+  findChatByEmail, getChat, saveChat, signDownload, signUpload, validToken, ATTACH, transcript, engineerUpdate, fireBuild,
 } from '../lib/client-chat.js';
 
 // Modelo barato a propósito: este asistente solo recoge materiales e instrucciones.
@@ -108,7 +108,7 @@ async function clientContext(chat) {
   return `Lo que ya sabemos de este cliente:\n${lines.join('\n')}\n\n${found ? `Lo que encontramos en su página actual${f.dominio ? ` (${f.dominio})` : ''}:\n${found}\nFalta en su página: ${Object.entries(LBL).filter(([k]) => !f[k] || (Array.isArray(f[k]) && !f[k].length)).map(([, l]) => l).join(', ') || 'nada'}.` : 'No encontramos su página actual o no tenía datos útiles.'}`;
 }
 
-const SHORT = { pendiente: 'pendiente, en la fila del ingeniero', en_proceso: 'el ingeniero lo está haciendo', necesita_info: 'el ingeniero espera una respuesta del cliente', aplicado: 'aplicado', descartado: 'descartado' };
+const SHORT = { pendiente: 'pendiente, en la fila del ingeniero', construyendo: 'el ingeniero lo está haciendo', en_revision: 'listo, el equipo lo está revisando antes de mostrárselo', en_proceso: 'el ingeniero lo está haciendo', necesita_info: 'el ingeniero espera una respuesta del cliente', aplicado: 'aplicado', descartado: 'descartado' };
 function requestsNote(list) {
   if (!list?.length) return 'Solicitudes: ninguna todavía.';
   return 'Solicitudes del cliente: ' + list.slice(0, 8).map(r => {
@@ -205,11 +205,12 @@ async function queueWork(chat, effects) {
     if (e.type === 'respuesta') {
       const hilo = [...(e.prev.hilo || []), { de: 'cliente', texto: e.texto, at: new Date().toISOString() }];
       await update('solicitudes', `id=eq.${e.solicitud}`, { hilo, archivos: [...(e.prev.archivos || []), ...e.archivos], estado: 'pendiente' })
+        .then(() => fireBuild(e.solicitud))
         .catch(err => console.error('chat: no se guardó la respuesta', err.message));
     }
     if (row) {
       const saved = await insert('solicitudes', { chat_id: chat.id, slug: chat.slug, business: chat.business, ...row }).catch(err => { console.error('chat: no se guardó la solicitud', err.message); return null; });
-      if (saved) e.solicitud = saved.id;
+      if (saved) { e.solicitud = saved.id; await fireBuild(saved.id); }
     }
   }
 }
