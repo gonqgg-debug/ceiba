@@ -21,7 +21,8 @@ import { json, siteUrl } from '../lib/stripe.js';
 import { validSlug } from '../lib/proposals.js';
 import { approveSite, checkSiteDomain, dnsMessage, publishSite, setDomain, siteState } from '../lib/delivery.js';
 import { vercelReady } from '../lib/vercel.js';
-import { checklist, chatUrl, engineerUpdate, getChat, messageClient, saveChat, signDownload, transcript, SOL_STATES } from '../lib/client-chat.js';
+import { PLANS as PLAN_NAMES, planSpec } from '../lib/catalog.js';
+import { checklist, chatUrl, minutesUsed, planOf, engineerUpdate, getChat, messageClient, saveChat, signDownload, transcript, SOL_STATES } from '../lib/client-chat.js';
 
 const PHASES = ['arranque', 'construccion', 'soporte'];
 async function clientDetail(slug) {
@@ -36,6 +37,7 @@ async function clientDetail(slug) {
   return {
     slug: chat.slug, business: chat.business, email: chat.email, phase: chat.phase, needs_human: chat.needs_human,
     created_at: chat.created_at, last_client_at: chat.last_client_at, link: chatUrl(chat.slug),
+    plan: { id: planOf(chat), name: PLAN_NAMES[planOf(chat)]?.name, whatsapp: !!chat.data?.whatsapp, minutes: await minutesUsed(slug).catch(() => 0), limit: planSpec(planOf(chat)).changeMinutes, rounds: planSpec(planOf(chat)).rounds },
     site: !!prop?.site_built_at, delivery: await siteState(slug).catch(() => null), vercel: vercelReady(), checklist: checklist(chat), data, encontrado: encontrado || null, files, messages: transcript(chat), solicitudes,
   };
 }
@@ -72,7 +74,7 @@ export async function GET(request) {
       const clients = (chats || []).map(c => {
         const mine = (open || []).filter(r => r.slug === c.slug);
         const ck = checklist(c);
-        return { slug: c.slug, business: c.business, email: c.email, phase: c.phase, needs_human: c.needs_human, created_at: c.created_at, updated_at: c.updated_at, last_client_at: c.last_client_at,
+        return { slug: c.slug, business: c.business, email: c.email, plan: PLAN_NAMES[planOf(c)]?.name.replace('Plan ', '') + (c.data?.whatsapp ? ' + WhatsApp' : ''), phase: c.phase, needs_human: c.needs_human, created_at: c.created_at, updated_at: c.updated_at, last_client_at: c.last_client_at,
           avance: `${ck.done}/${ck.total}`, revisar: mine.filter(r => r.estado === 'en_revision').length, pendientes: mine.filter(r => r.estado === 'pendiente').length, abiertas: mine.length, urgente: mine.some(r => r.urgente) };
       });
       return json({ clients });

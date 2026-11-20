@@ -290,7 +290,7 @@ body.adm input:not([type=checkbox]):not([type=color]),body.adm textarea,body.adm
     const rank = c => (c.needs_human ? 0 : c.revisar ? 1 : c.urgente ? 2 : c.pendientes ? 3 : 4);
     cs.sort((a, b) => rank(a) - rank(b));
     const rows = cs.map(c => `<tr class="row" data-slug="${esc(c.slug)}" tabindex="0">
-      <td><b>${esc(c.business || c.slug)}</b><small>${esc(c.email || '')}</small></td>
+      <td><b>${esc(c.business || c.slug)}</b><small>${esc(c.plan || '')} · ${esc(c.email || '')}</small></td>
       <td><span class="st">${PHASE[c.phase] || c.phase}</span>${c.phase === 'arranque' ? `<small>Avance ${esc(c.avance)}</small>` : ''}</td>
       <td>${c.needs_human ? '<span class="st st--warn">Atender en persona</span>' : ''}${c.revisar ? ` <span class="st st--hot">${c.revisar} por revisar</span>` : ''}${c.pendientes ? ` <span class="st">${c.pendientes} en fila</span>` : ''}${c.urgente ? ' <span class="st st--warn">Urgente</span>' : ''}${!c.needs_human && !c.abiertas ? '<small>Nada pendiente</small>' : c.abiertas > c.pendientes + c.revisar ? `<small>${c.abiertas - c.pendientes - c.revisar} en curso</small>` : ''}</td>
       <td>${fmt(c.last_client_at)}<small>pagó ${fmt(c.created_at)}</small></td></tr>`).join('');
@@ -332,6 +332,7 @@ body.adm input:not([type=checkbox]):not([type=color]),body.adm textarea,body.adm
         ${r.hilo?.length ? `<div class="hilo">${r.hilo.map(h => `<div class="${h.de === 'ingeniero' ? 'ing' : ''}"><em>${h.de === 'ingeniero' ? 'Equipo' : 'Cliente'} · ${fmt(h.at)}</em>${esc(h.texto)}</div>`).join('')}</div>` : ''}
         ${r.resultado ? `<div class="notes">${esc(r.resultado)}</div>` : ''}
         ${r.nota ? `<small>Nota del equipo: ${esc(r.nota)}</small>` : ''}
+        ${r.tipo === 'cambio' && r.minutos ? `<small>Estimado: ${r.minutos} min</small>` : ''}
         ${['en_revision', 'aplicado'].includes(r.estado) && c.site ? `<div class="acts"><a class="btn btn-line btn-s" href="/vista/${esc(c.slug)}?sitio=1" target="_blank" rel="noopener">Ver su página</a></div>` : ''}
         ${['aplicado', 'descartado'].includes(r.estado) ? '' : r.estado === 'en_revision' ? `<label class="hint">Mensaje para el cliente (lo escribió Claude; edítalo si quieres). Le llega en su chat y por correo.</label>
         <textarea>${esc(r.mensaje_cliente || '')}</textarea>
@@ -339,7 +340,7 @@ body.adm input:not([type=checkbox]):not([type=color]),body.adm textarea,body.adm
         <div class="acts"><select>${states.map(s => `<option value="${s}"${s === r.estado ? ' selected' : ''}>${SOL[s]}</option>`).join('')}</select><button class="btn btn-primary btn-s" type="button" data-act="sol">Guardar</button></div>`}
       </div>`).join('');
     app.innerHTML = `<div class="d-top"><a class="btn btn-line btn-s" href="#clientes">← Clientes</a><h1>${esc(c.business || c.slug)}</h1>
-        <span class="st">${PHASE[c.phase] || c.phase}</span>${c.needs_human ? '<span class="st st--warn">Pidió hablar con una persona</span>' : ''}<span class="sp" style="flex:1"></span>${link(c.link, 'Abrir su chat')}</div>
+        <span class="st">${PHASE[c.phase] || c.phase}</span><span class="st">${esc(c.plan.name || '')}${c.plan.whatsapp ? ' + WhatsApp' : ''}</span>${c.phase === 'soporte' ? `<span class="st${c.plan.minutes >= c.plan.limit ? ' st--warn' : ''}">${c.plan.minutes} de ${c.plan.limit} min este mes</span>` : ''}${c.needs_human ? '<span class="st st--warn">Pidió hablar con una persona</span>' : ''}<span class="sp" style="flex:1"></span>${link(c.link, 'Abrir su chat')}</div>
       <div class="c-grid">
         <div style="display:grid;gap:16px">
           <section class="panel"><h2>Solicitudes</h2>${sols || '<p class="empty" style="padding:0">El asistente todavía no ha mandado nada al equipo.</p>'}</section>

@@ -123,6 +123,24 @@ Después de pagar, el asistente del chat del cliente reúne sus materiales y ped
 ### Archivos del cliente
 Cada archivo de `solicitudes.archivos` es `{ruta, nombre, tipo, clase}`; `clase` es logo, foto, guia_marca, documento u otro. Para usar una imagen en la página, su URL es `https://www.ceibalabs.io/media/<ruta>` (solo imágenes). `datos.logo_web` y `datos.fotos_web` son el logo y las fotos de su página anterior que el cliente aceptó usar (URLs directas).
 
+### Plan del cliente
+`solicitudes.plan` dice qué plan contrató (esencial, negocio o avanzado); si está vacío, usa `proposals.recommended_plan`. Respeta lo que incluye su plan; no construyas lo que no incluye.
+
+| | esencial | negocio | avanzado |
+|---|---|---|---|
+| Páginas en total | 3 | 7 | 12 |
+| Páginas por servicio o zona | 0 | hasta 4 | hasta 9 |
+| Preguntas frecuentes (`page.faq`) | 5 | 15 | 25 |
+| Agenda en línea (`contact.bookingUrl`, botón de agendar) | no | sí | sí |
+| Catálogo que el cliente actualiza | no | no | sí |
+| Rondas de ajustes antes de publicar | 1 | 2 | 3 |
+| Minutos de cambios al mes | 30 | 60 | 120 |
+
+- Mientras la plantilla sea de una sola página, «páginas» son las secciones principales de la portada: no agregues más secciones de las que su plan permite contar como páginas (inicio, servicios y contacto en esencial).
+- `datos.agenda` es el enlace de su agenda (o «no»); `datos.catalogo` o un archivo de clase `catalogo`, su catálogo.
+- Si un cambio pide algo que su plan no incluye, no lo apliques: explica en `resultado` qué falta y en `mensaje_cliente` qué incluye su plan y que puede subir de plan.
+- Si la instrucción dice «fuera de plan», aplícalo igual: el equipo lo cotiza aparte.
+
 ### Tipo `materiales`: construir su página
 1. Base: `site_content` si ya existe; si no, `content` (o `ai_draft`) de su propuesta. Es el mismo esquema JSON (`template` y `page`).
 2. Aplica lo que confirmó el cliente en `solicitudes.datos`:
@@ -145,7 +163,8 @@ Cada archivo de `solicitudes.archivos` es `{ruta, nombre, tipo, clase}`; `clase`
    `update public.proposals set site_content_prev = site_content, site_content = $ceiba${...json completo...}$ceiba$::jsonb, site_built_at = now() where slug = '<slug>';`
    Verifica con un select que `site_content->'page'->'hero'->>'title'` no esté vacío.
 2. Cierra la solicitud para que el equipo la revise:
-   `update public.solicitudes set estado = 'en_revision', resultado = $ceiba$<para el equipo>$ceiba$, mensaje_cliente = $ceiba$<para el cliente>$ceiba$ where id = '<id>';`
+   `update public.solicitudes set estado = 'en_revision', minutos = <minutos>, resultado = $ceiba$<para el equipo>$ceiba$, mensaje_cliente = $ceiba$<para el cliente>$ceiba$ where id = '<id>';`
+   - `minutos`: solo en `cambio`, cuántos minutos le tomaría a una persona hacer ese cambio a mano (un dato o texto: 5; una foto o sección chica: 10 a 15; una sección nueva: 30 a 60). Se descuentan de los minutos del mes de su plan. En `materiales` déjalo en null.
    - `resultado`: viñetas cortas con qué hiciste, qué fotos usaste, qué falta o hay que confirmar y cualquier cosa rara.
    - `mensaje_cliente`: 2 o 3 frases, tuteando, como del equipo de Ceiba: qué hicimos y el enlace a su vista previa `https://www.ceibalabs.io/vista/<slug>?sitio=1`, invitándolo a pedir cambios en el chat. Si es una pregunta, solo la pregunta. Sin fechas de publicación ni promesas.
 3. Si no existe su propuesta en `proposals` o algo falla y no puedes terminar: `estado = 'en_revision'`, `resultado` con qué pasó y `mensaje_cliente` vacío.
