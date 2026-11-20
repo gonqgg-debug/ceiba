@@ -12,20 +12,24 @@
 //
 // Usa la Messages API con herramientas propias: el agente corre en nuestras funciones
 // de Vercel porque sus herramientas escriben en nuestra base y en nuestro Storage.
+// No edita páginas: deja cada pedido como una instrucción completa para Claude Code.
 import Anthropic from '@anthropic-ai/sdk';
 import { json, siteUrl, stripe } from '../lib/stripe.js';
-import { dbReady, select } from '../lib/db.js';
+import { timingSafeEqual } from 'node:crypto';
+import { dbReady, insert, select, update } from '../lib/db.js';
 import { escHtml, mailReady, sendMail } from '../lib/notify.js';
 import {
   ALLOWED_TYPES, LONG_LINK, MAX_BYTES, chatUrl, checkDomain, checklist, ensureChat,
   findChatByEmail, getChat, saveChat, signDownload, signUpload, validToken,
 } from '../lib/client-chat.js';
 
-const MODEL = 'claude-opus-5-5';
-const MAX_STEPS = 6;
+// Modelo barato a propósito: este asistente solo recoge materiales e instrucciones.
+// Los cambios a las páginas los ejecuta el equipo con Claude Code (ver ops/cambios-clientes.md).
+const MODEL = 'claude-haiku-5-5';
+const MAX_STEPS = 4;
 
 // ---------- instrucciones del agente (fijas: así se aprovecha el caché) ----------
-const SYSTEM = `Eres el asistente de Ceiba Labs, un estudio digital que diseña páginas web y aplica inteligencia artificial en negocios. Atiendes a un cliente que ya pagó su página web. Hablas en español, de tú, cálido y profesional, como alguien del equipo que sabe lo que hace.
+const SYSTEM = `Eres el equipo de customer success de Ceiba Labs, un estudio digital que diseña páginas web y aplica inteligencia artificial en negocios. Atiendes a un cliente que ya pagó su página web. Eres el puente entre el cliente y el ingeniero que construye y cambia su página: tú no editas nada; recoges materiales e instrucciones claras para el ingeniero, le transmites al cliente lo que el ingeniero necesita o ya terminó, y le das seguimiento. Hablas en español, de tú, cálido y profesional, como alguien del equipo que sabe lo que hace.
 
 Tu trabajo depende de la fase del cliente (te la decimos en cada turno):
 
@@ -40,10 +44,16 @@ Cuando el avance esté completo, haz un resumen corto de lo recibido, pregunta s
 
 FASE «construccion»: el equipo está armando su página. Responde dudas, recibe materiales nuevos (clasifícalos y guarda datos) y si pregunta por tiempos dile que la vista previa llega en pocos días hábiles, aquí mismo y por correo.
 
-FASE «soporte»: su página ya está publicada. Ayúdale con dudas de su página, su plan y su facturación. Si pide un cambio (horario, precios, fotos, textos, una sección nueva), entiéndelo bien, confirma los detalles y regístralo con solicitar_cambio. Dile que lo aplicamos y que le avisamos aquí cuando esté. Si algo está caído o es urgente, márcalo urgente.
+FASE «soporte»: su página ya está publicada. Tú no haces cambios: tu trabajo es dejar cada pedido tan claro que alguien del equipo lo pueda aplicar sin volver a preguntar. Cuando pida un cambio (horario, precios, fotos, textos, una sección nueva), pregunta solo lo que falte: en qué parte de la página, el texto exacto o el dato nuevo, y si hay fotos, que las suba. Resume el pedido en una frase y pídele que confirme. Cuando confirme, regístralo con solicitar_cambio y dile que el equipo lo aplica y le avisa aquí. Si algo está caído o es urgente, márcalo urgente. Para dudas de su plan o facturación, responde lo que sepas por este texto; si no, escala a una persona.
+
+Puente con el ingeniero:
+- En cada turno ves las solicitudes del cliente con su estado. Si preguntan cómo va algo, responde con ese estado.
+- Si una solicitud está en «necesita_info», el ingeniero le hizo una pregunta al cliente (ya aparece en el chat). Cuando el cliente responda, usa responder_al_ingeniero con su respuesta exacta y los archivos que haya subido.
+- Si el cliente agrega algo a un pedido que ya está en curso, usa responder_al_ingeniero en esa solicitud en vez de crear otra.
 
 Siempre:
-- Una cosa a la vez. Mensajes cortos (2 a 4 frases), sin listas largas ni tecnicismos. Si le pides algo, di exactamente qué y para qué sirve.
+- Nunca digas que ya hiciste un cambio ni des fechas exactas: el equipo los aplica.
+- Una cosa a la vez. Mensajes cortos (1 a 3 frases), sin listas largas ni tecnicismos. Si le pides algo, di exactamente qué y para qué sirve.
 - Cuando haya respuestas probables, ofrécelas como botones con mostrar_opciones (2 a 4 opciones cortas). Úsalo seguido: hace todo más fácil desde el celular.
 - Cuando el cliente suba archivos verás sus nombres y rutas. Revisa las imágenes y clasifica cada una con clasificar_archivo. Si un logo se ve borroso o muy chico, pídele una versión mejor con amabilidad.
 - Guarda cada dato que te dé con guardar_dato en cuanto lo tengas, aunque sea parcial.
@@ -62,7 +72,8 @@ const TOOLS = [
   strictTool('guardar_dominio', 'Guarda la situación del dominio del cliente.',
     { situacion: { type: 'string', enum: ['tiene', 'comprar', 'despues'] }, dominio: { type: 'string', description: 'El dominio, o cadena vacía si no hay.' }, proveedor: { type: 'string', description: 'Dónde lo compró, o cadena vacía.' } }),
   strictTool('marcar_listo', 'En la fase de arranque, cuando ya tenemos todo: avisa al equipo para que empiece a construir la página.', { resumen: { type: 'string', description: 'Resumen de lo recibido y cualquier nota para el equipo.' } }),
-  strictTool('solicitar_cambio', 'Registra un cambio que pidió el cliente en su página publicada.', { descripcion: { type: 'string' }, urgente: { type: 'boolean' } }),
+  strictTool('solicitar_cambio', 'Registra un cambio confirmado por el cliente, como instrucción completa para el equipo.', { seccion: { type: 'string', description: 'Qué parte de la página (por ejemplo: horario, servicios, portada, contacto, sección nueva).' }, instruccion: { type: 'string', description: 'Qué cambiar, con el texto o dato exacto que dio el cliente.' }, archivos: { type: 'array', items: { type: 'string' }, description: 'Rutas de archivos que subió para este cambio; lista vacía si no hay.' }, urgente: { type: 'boolean' } }),
+  strictTool('responder_al_ingeniero', 'Le pasa al ingeniero la respuesta o el agregado del cliente sobre una solicitud existente.', { solicitud: { type: 'string', description: 'El id corto de la solicitud (los primeros 8 caracteres).' }, respuesta: { type: 'string', description: 'Lo que dijo el cliente, con el dato exacto.' }, archivos: { type: 'array', items: { type: 'string' }, description: 'Rutas de archivos que subió para esto; lista vacía si no hay.' } }),
   strictTool('escalar_a_persona', 'Pide que alguien del equipo atienda al cliente personalmente.', { motivo: { type: 'string' } }),
   strictTool('mostrar_opciones', 'Muestra al cliente botones con respuestas rápidas debajo de tu mensaje.', { opciones: { type: 'array', items: { type: 'string' }, description: '2 a 4 opciones cortas.' } }),
 ];
@@ -84,9 +95,17 @@ async function clientContext(chat) {
   return `Lo que ya sabemos de este cliente (confírmalo con él, puede estar incompleto o desactualizado):\n${lines.join('\n')}`;
 }
 
+const SHORT = { pendiente: 'pendiente, en la fila del ingeniero', en_proceso: 'el ingeniero lo está haciendo', necesita_info: 'el ingeniero espera una respuesta del cliente', aplicado: 'aplicado', descartado: 'descartado' };
+function requestsNote(list) {
+  if (!list?.length) return 'Solicitudes: ninguna todavía.';
+  return 'Solicitudes del cliente: ' + list.slice(0, 8).map(r => {
+    const last = (r.hilo || []).filter(h => h.de === 'ingeniero').at(-1);
+    return `[${r.id.slice(0, 8)}] ${r.tipo === 'materiales' ? 'construcción de la página' : `cambio en ${r.seccion}: ${r.instruccion.slice(0, 120)}`} — ${SHORT[r.estado] || r.estado}${last ? ` (ingeniero: «${last.texto.slice(0, 160)}»)` : ''}`;
+  }).join(' | ');
+}
 function statusNote(chat) {
   const c = checklist(chat);
-  return `Fase actual: «${chat.phase}». Avance del arranque: ${c.done} de ${c.total}. ${c.items.map(i => `${i.label}: ${i.done ? 'listo' : 'pendiente'} (${i.detail})`).join('; ')}.`;
+  return `${requestsNote(chat._solicitudes)} Fase actual: «${chat.phase}». Avance del arranque: ${c.done} de ${c.total}. ${c.items.map(i => `${i.label}: ${i.done ? 'listo' : 'pendiente'} (${i.detail})`).join('; ')}.`;
 }
 
 // ---------- herramientas ----------
@@ -116,10 +135,18 @@ async function runTool(name, input, chat, effects) {
       return 'Listo: el equipo fue avisado y empieza a construir la página.';
     }
     case 'solicitar_cambio': {
-      const item = { at: new Date().toISOString(), descripcion: String(input.descripcion).slice(0, 2000), urgente: !!input.urgente, estado: 'pendiente' };
+      const item = { id: Date.now().toString(36), at: new Date().toISOString(), seccion: String(input.seccion || '').slice(0, 200), instruccion: String(input.instruccion || '').slice(0, 2000), archivos: (input.archivos || []).filter(r => (chat.files || []).some(f => f.path === r)).slice(0, 10), urgente: !!input.urgente, estado: 'pendiente' };
+      item.descripcion = `${item.seccion}: ${item.instruccion}`;
       chat.data = { ...chat.data, cambios: [...(chat.data?.cambios || []), item] };
       effects.push({ type: 'cambio', ...item });
-      return 'Cambio registrado y enviado al equipo.';
+      return 'Cambio registrado. El equipo lo aplicará; no le digas al cliente que ya está hecho.';
+    }
+    case 'responder_al_ingeniero': {
+      const sol = (chat._solicitudes || []).find(x => x.id.startsWith(String(input.solicitud || '').slice(0, 8)));
+      if (!sol) return 'No encontré esa solicitud. Usa el id corto que aparece en el estado.';
+      const files = (chat.files || []).filter(f => (input.archivos || []).includes(f.path)).map(f => ({ ruta: f.path, nombre: f.name, tipo: f.type, clase: f.kind || null }));
+      effects.push({ type: 'respuesta', solicitud: sol.id, texto: String(input.respuesta || '').slice(0, 2000), archivos: files, prev: sol });
+      return 'Respuesta enviada al ingeniero. Dile al cliente que ya la tiene y que le avisamos aquí.';
     }
     case 'escalar_a_persona':
       chat.needs_human = true;
@@ -134,6 +161,29 @@ async function runTool(name, input, chat, effects) {
 }
 
 // ---------- avisos al equipo ----------
+// Cola de trabajo para Claude Code (tabla «solicitudes», ver ops/cambios-clientes.md)
+async function queueWork(chat, effects) {
+  const fileRow = f => ({ ruta: f.path, nombre: f.name, tipo: f.type, clase: f.kind || null });
+  for (const e of effects) {
+    let row = null;
+    if (e.type === 'listo') {
+      const { cambios, ...datos } = chat.data || {};
+      row = { tipo: 'materiales', seccion: 'página completa', instruccion: e.resumen, archivos: (chat.files || []).map(fileRow), datos };
+    } else if (e.type === 'cambio') {
+      row = { tipo: 'cambio', seccion: e.seccion, instruccion: e.instruccion, urgente: e.urgente, archivos: (chat.files || []).filter(f => e.archivos.includes(f.path)).map(fileRow) };
+    }
+    if (e.type === 'respuesta') {
+      const hilo = [...(e.prev.hilo || []), { de: 'cliente', texto: e.texto, at: new Date().toISOString() }];
+      await update('solicitudes', `id=eq.${e.solicitud}`, { hilo, archivos: [...(e.prev.archivos || []), ...e.archivos], estado: 'pendiente' })
+        .catch(err => console.error('chat: no se guardó la respuesta', err.message));
+    }
+    if (row) {
+      const saved = await insert('solicitudes', { chat_id: chat.id, slug: chat.slug, business: chat.business, ...row }).catch(err => { console.error('chat: no se guardó la solicitud', err.message); return null; });
+      if (saved) e.solicitud = saved.id;
+    }
+  }
+}
+
 async function notifyTeam(chat, effects) {
   if (!mailReady() || !process.env.CEIBA_NOTIFY_EMAIL) return;
   const to = process.env.CEIBA_NOTIFY_EMAIL.split(',');
@@ -145,10 +195,13 @@ async function notifyTeam(chat, effects) {
       const files = await Promise.all((chat.files || []).map(async f => `<li>${escHtml(f.kind || 'sin clasificar')}: <a href="${await signDownload(f.path, 60 * 60 * 24 * 7).catch(() => '#')}">${escHtml(f.name)}</a>${f.description ? ` — ${escHtml(f.description)}` : ''}</li>`));
       const data = Object.entries(chat.data || {}).filter(([k]) => k !== 'cambios').map(([k, v]) => `<li><b>${escHtml(k)}:</b> ${escHtml(v)}</li>`).join('');
       subject = `Materiales listos: ${chat.business || chat.slug}`;
-      body = `<p>${escHtml(e.resumen)}</p><h3>Datos</h3><ul>${data}</ul><h3>Archivos (enlaces válidos 7 días)</h3><ul>${files.join('')}</ul>`;
+      body = `<p>${escHtml(e.resumen)}</p><p>Quedó en la tabla <code>solicitudes</code> (id <code>${escHtml(e.solicitud || '—')}</code>) para construir la página con Claude Code.</p><h3>Datos</h3><ul>${data}</ul><h3>Archivos (enlaces válidos 7 días)</h3><ul>${files.join('')}</ul>`;
     } else if (e.type === 'cambio') {
       subject = `${e.urgente ? 'URGENTE · ' : ''}Cambio pedido: ${chat.business || chat.slug}`;
-      body = `<p>${escHtml(e.descripcion)}</p>`;
+      body = `<p><b>${escHtml(e.seccion)}</b>: ${escHtml(e.instruccion)}</p>${e.archivos?.length ? `<p>Archivos: ${e.archivos.map(escHtml).join(', ')}</p>` : ''}<p>Quedó en la tabla <code>solicitudes</code> (id <code>${escHtml(e.solicitud || '—')}</code>) para aplicarlo con Claude Code.</p>`;
+    } else if (e.type === 'respuesta') {
+      subject = `Respuesta del cliente: ${chat.business || chat.slug}`;
+      body = `<p>${escHtml(e.texto)}</p><p>Solicitud <code>${escHtml(e.solicitud)}</code> volvió a «pendiente».</p>`;
     } else if (e.type === 'escalar') {
       subject = `Atender en persona: ${chat.business || chat.slug}`;
       body = `<p>${escHtml(e.motivo)}</p>`;
@@ -178,7 +231,7 @@ function transcript(chat) {
 }
 function greeting(chat) {
   const name = chat.data?.contacto_nombre;
-  return `¡Hola${name ? `, ${name}` : ''}! Soy el asistente de Ceiba Labs y voy a acompañarte con la página de ${chat.business || 'tu negocio'}. Para empezar necesito tu logo, unas fotos, tus colores, confirmar algunos datos y saber de tu dominio. Te tomará unos 10 minutos y puedes hacerlo en partes. ¿Empezamos con tu logo?`;
+  return `¡Hola${name ? `, ${name}` : ''}! Soy de customer success en Ceiba Labs y voy a acompañarte con la página de ${chat.business || 'tu negocio'}. Para empezar necesito tu logo, unas fotos, tus colores, confirmar algunos datos y saber de tu dominio. Te tomará unos 10 minutos y puedes hacerlo en partes. ¿Empezamos con tu logo?`;
 }
 async function publicState(chat, extra = {}) {
   const files = await Promise.all((chat.files || []).map(async f => ({ name: f.name, kind: f.kind || null, type: f.type, url: /^image\//.test(f.type) ? await signDownload(f.path).catch(() => null) : null })));
@@ -200,6 +253,7 @@ async function agentTurn(chat, text, uploads) {
   }
   if (!content.length) throw Object.assign(new Error('vacío'), { user: 'Escribe un mensaje o adjunta un archivo.' });
 
+  chat._solicitudes = await select('solicitudes', `slug=eq.${encodeURIComponent(chat.slug)}&estado=neq.descartado&order=created_at.desc&limit=8`).catch(() => []);
   const history = [...(chat.messages || [])];
   history.push({ role: 'user', content });
   history.push({ role: 'system', content: statusNote(chat) });
@@ -209,11 +263,10 @@ async function agentTurn(chat, text, uploads) {
   const effects = [];
   let reply = '';
   for (let step = 0; step < MAX_STEPS; step++) {
-    const res = await client.beta.messages.create({
-      model: MODEL, max_tokens: 16000, system, tools: TOOLS, messages: history,
-      output_config: { effort: 'medium' },
+    const res = await client.messages.create({
+      model: MODEL, max_tokens: 2000, system, tools: TOOLS, messages: history,
+      output_config: { effort: 'low' },
       cache_control: { type: 'ephemeral' },
-      betas: ['server-side-fallback-2026-07-01'], fallbacks: 'default',
     });
     history.push({ role: 'assistant', content: res.content });
     const said = res.content.filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
@@ -265,6 +318,33 @@ export async function POST(request) {
   if (!dbReady()) return json({ error: 'No disponible.' }, 503);
   let b; try { b = await request.json(); } catch { return json({ error: 'Solicitud inválida.' }, 400); }
 
+  // El ingeniero (Claude Code) le escribe al cliente a través del chat:
+  //   POST /api/chat  Authorization: Bearer $CEIBA_ADMIN_TOKEN
+  //   { action: "engineer", solicitud: "<uuid>", estado: "en_proceso" | "necesita_info" | "aplicado" | "descartado", mensaje: "..." }
+  if (b.action === 'engineer') {
+    const token = process.env.CEIBA_ADMIN_TOKEN || '';
+    const given = (request.headers.get('authorization') || '').replace(/^Bearer\s+/i, '');
+    if (!token || given.length !== token.length || !timingSafeEqual(Buffer.from(given), Buffer.from(token))) return json({ error: 'No autorizado.' }, 401);
+    const sol = (await select('solicitudes', `id=eq.${encodeURIComponent(b.solicitud || '')}&limit=1`).catch(() => []))?.[0];
+    if (!sol) return json({ error: 'No existe esa solicitud.' }, 404);
+    const estado = ['en_proceso', 'necesita_info', 'aplicado', 'descartado'].includes(b.estado) ? b.estado : sol.estado;
+    const mensaje = String(b.mensaje || '').trim().slice(0, 2000);
+    const patch = { estado, ...(estado === 'aplicado' ? { applied_at: new Date().toISOString() } : {}), ...(b.nota ? { nota: String(b.nota).slice(0, 2000) } : {}) };
+    if (mensaje) patch.hilo = [...(sol.hilo || []), { de: 'ingeniero', texto: mensaje, at: new Date().toISOString() }];
+    await update('solicitudes', `id=eq.${sol.id}`, patch);
+    const chat = await getChat(sol.slug);
+    if (chat && mensaje) {
+      // El mensaje le llega al cliente con la voz del equipo de customer success.
+      await saveChat(chat.id, { messages: [...(chat.messages || []), { role: 'assistant', content: [{ type: 'text', text: mensaje }] }] });
+      if (chat.email && mailReady()) {
+        await sendMail({ to: chat.email, subject: estado === 'aplicado' ? 'Listo tu cambio · Ceiba Labs' : 'Tenemos una pregunta sobre tu página · Ceiba Labs',
+          html: `<div style="max-width:560px;font:15px/1.6 sans-serif;color:#0C1226"><p>${escHtml(mensaje)}</p><p><a href="${chatUrl(chat.slug)}">Responder en tu chat</a></p><p>Equipo de Ceiba Labs</p></div>` })
+          .catch(err => console.error('chat: aviso al cliente no enviado', err.message));
+      }
+    }
+    return json({ ok: true, estado });
+  }
+
   if (b.action === 'link') {
     const chats = await findChatByEmail(b.email).catch(() => []);
     if (chats.length && mailReady()) {
@@ -295,6 +375,7 @@ export async function POST(request) {
       chat.files = [...(chat.files || []), ...uploads.map(u => ({ ...u, kind: null, at: new Date().toISOString() }))];
       const { reply, effects } = await agentTurn(chat, b.text, uploads);
       await saveChat(chat.id, { messages: chat.messages, data: chat.data, files: chat.files, phase: chat.phase, needs_human: chat.needs_human, last_client_at: new Date().toISOString() });
+      await queueWork(chat, effects);
       await notifyTeam(chat, effects);
       const options = effects.filter(e => e.type === 'opciones').at(-1)?.opciones || [];
       return json(await publicState(chat, { reply, options }));
