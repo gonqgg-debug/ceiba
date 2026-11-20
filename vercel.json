@@ -51,6 +51,14 @@
     {
       "source": "/maqueta",
       "destination": "/maqueta.html"
+    },
+    {
+      "source": "/terminos",
+      "destination": "/terminos.html"
+    },
+    {
+      "source": "/privacidad",
+      "destination": "/privacidad.html"
     }
   ],
   "redirects": [

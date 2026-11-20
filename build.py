@@ -85,13 +85,16 @@ def header(active, cta="/diagnostico"):
   </div>
 </header>'''
 
+import site_legal
+LEGAL_LINKS = ('<a href="/privacidad">Privacidad</a><a href="/terminos">Términos</a>' if site_legal.READY
+               else '<a href="#" data-soon="Privacidad">Privacidad</a><a href="#" data-soon="Términos">Términos</a>')
 FOOTER = '''<footer class="band footer">
   <div class="wrap">
     <a href="/" aria-label="Ceiba Labs, inicio" style="color:inherit"><svg viewBox="0 0 353.37 54" fill="currentColor" role="img" aria-label="Ceiba Labs"><use href="#ceiba-logo"/></svg></a>
     <nav aria-label="Pie de página"><a href="/webs">Páginas web</a><a href="/webs/clinicas">Clínicas</a><a href="/ia">Inteligencia artificial</a><a href="/webs#precios">Precios</a><a href="/p/clinica-arrayan">Propuesta de ejemplo</a><a href="/diagnostico">Propuesta gratis</a></nav>
   </div>
-  <div class="wrap foot-legal"><span>© 2026 Ceiba Labs · Estudio digital</span><nav aria-label="Legal"><a href="#" data-soon="Privacidad">Privacidad</a><a href="#" data-soon="Términos">Términos</a></nav></div>
-</footer>'''
+  <div class="wrap foot-legal"><span>© 2026 Ceiba Labs · Nombre comercial de GQG Holdings LLC</span><nav aria-label="Legal">{LEGAL_LINKS}</nav></div>
+</footer>'''.replace('{LEGAL_LINKS}', LEGAL_LINKS)
 
 # Menú móvil, submenú y enlaces «pronto» para las páginas que no traen el script de Inicio
 NAV_JS = """<script>
@@ -185,6 +188,8 @@ for name in site_seo.PAGES:
 (SITE / "sitemap.xml").write_text(site_seo.sitemap_xml(), encoding="utf-8")
 (SITE / "llms.txt").write_text(site_seo.llms_txt(seo_cat, pages), encoding="utf-8")
 pages["404.html"] = fill("404.html", common)
+for kind in ("terminos", "privacidad"):
+    pages[f"{kind}.html"] = site_chrome(site_legal.page(lambda t, v: fill(t, {**common, **v}), kind), kind)
 
 for name, html in pages.items():
     html = linkfix(html)

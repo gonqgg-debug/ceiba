@@ -104,7 +104,7 @@ def graph(key, page_html, cat):
     url = SITE + cfg["path"]
     og = f"{SITE}/img/og/{cfg['og']}.jpg"
     org = {
-        "@type": "Organization", "@id": ORG, "name": NAME, "url": SITE + "/",
+        "@type": "Organization", "@id": ORG, "name": NAME, "legalName": "GQG Holdings LLC", "url": SITE + "/",
         "logo": {"@type": "ImageObject", "url": f"{SITE}/img/ceiba-icono.png", "width": 512, "height": 512},
         "image": f"{SITE}/img/og/inicio.jpg",
         "description": "Estudio digital que diseña, publica y mantiene páginas web por suscripción y aplica inteligencia artificial en negocios: asistentes de WhatsApp, agentes y automatización de procesos.",
@@ -113,6 +113,7 @@ def graph(key, page_html, cat):
         "knowsAbout": ["Diseño de páginas web", "SEO", "Optimización para buscadores de inteligencia artificial (GEO)",
                        "Datos estructurados", "Asistentes de WhatsApp con IA", "Automatización de procesos", "Agentes de IA"],
         "areaServed": {"@type": "Place", "name": "México y Latinoamérica"},
+        "address": {"@type": "PostalAddress", "addressCountry": "US"},
     }
     if SAME_AS:
         org["sameAs"] = SAME_AS
