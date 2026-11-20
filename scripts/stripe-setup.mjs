@@ -95,7 +95,10 @@ for (const p of allPrices()) {
   const label = PHASE_LABEL[p.phase];
   const item = { name: label ? `${p.item.name} · ${label}` : p.item.name, description: p.item.description };
   const productId = await ensureProduct(p.lookupKey, item, p.taxCode);
-  await ensurePrice(p, productId);
+  const priceId = await ensurePrice(p, productId);
+  // Precio por defecto: sin él, el panel de Stripe muestra el producto sin precio.
+  const prod = await s.products.retrieve(productId);
+  if (prod.default_price !== priceId) await s.products.update(productId, { default_price: priceId });
 }
 await ensurePortal();
 console.log('\nListo.');
