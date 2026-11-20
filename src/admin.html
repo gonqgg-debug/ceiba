@@ -301,6 +301,22 @@ body.adm input:not([type=checkbox]):not([type=color]),body.adm textarea,body.adm
     });
   }
 
+  function reportsPanel(c) {
+    if (!['negocio', 'avanzado'].includes(c.plan?.id)) return '';
+    const KIND = { lanzamiento: 'Análisis al lanzar', trimestral: 'Prueba trimestral en IA', mensual: 'Reporte mensual' };
+    const rows = (c.reports || []).map(r => {
+      const v = r.data?.visibility;
+      return `<div class="sol"><div class="sol-h"><b>${KIND[r.kind] || r.kind}</b><span>${fmt(r.created_at)}${r.sent_at ? ' · enviado al cliente' : ' · solo interno'}</span></div>
+        <p>${esc(r.summary || '')}</p>
+        ${v?.results?.length ? `<small>${v.results.map(x => `${x.mentioned ? '✓' : x.error ? '!' : '✗'} ${esc(x.provider)}: «${esc(x.q)}»${x.cited?.length ? ` — fuentes: ${esc(x.cited.slice(0, 4).join(', '))}` : ''}`).join('<br>')}</small>` : ''}</div>`;
+    }).join('');
+    return `<section class="panel"><h2>SEO y visibilidad en IA</h2>
+      <small>${c.plan.id === 'avanzado' ? 'Avanzado: análisis al lanzar, reporte mensual con prueba en IA y una mejora de SEO incluida cada mes.' : 'Negocio: análisis al lanzar, prueba en IA cada 3 meses y contactos del mes.'} Corre solo cada día; aquí puedes correrlo ahora.</small>
+      ${rows || '<p class="empty" style="padding:0">Todavía no hay reportes. El primero sale un día después de publicar.</p>'}
+      <div class="acts"><select id="seo-kind"><option value="lanzamiento">Análisis completo</option><option value="trimestral">Prueba en IA</option><option value="mensual">Reporte mensual</option></select><label class="check"><input type="checkbox" id="seo-notify">Mandárselo al cliente</label><button class="btn btn-line btn-s" type="button" id="seo-run">Correr ahora</button></div>
+    </section>`;
+  }
+
   function deliveryPanel(c) {
     const d = c.delivery;
     if (!d) return '';
@@ -348,6 +364,7 @@ body.adm input:not([type=checkbox]):not([type=color]),body.adm textarea,body.adm
             ${c.phase === 'arranque' ? `<small>Avance: ${c.checklist.items.map(i => `${i.done ? '✓' : '·'} ${esc(i.label)}`).join(' &nbsp; ')}</small>` : ''}</section>
           <section class="panel"><h2>Archivos que subió</h2>${c.files.length ? `<div class="files">${c.files.map(fileTile).join('')}</div>` : '<p class="empty" style="padding:0">No ha subido archivos.</p>'}</section>
           ${deliveryPanel(c)}
+          ${reportsPanel(c)}
           <section class="panel c-phase"><h2>Etapa</h2><div class="acts"><select id="ph">${phases.map(p => `<option value="${p}"${p === c.phase ? ' selected' : ''}>${PHASE[p]}</option>`).join('')}</select><button class="btn btn-line btn-s" type="button" id="ph-save">Cambiar etapa</button></div>
             <small>Cuando publiques su página, pásalo a «Publicada»: el asistente cambia a modo de soporte y recibe pedidos de cambios.</small></section>
           <p class="msg" id="msg" role="status"></p>
@@ -363,6 +380,11 @@ body.adm input:not([type=checkbox]):not([type=color]),body.adm textarea,body.adm
     const run = async (body, done) => { try { await api('POST', { slug, ...body }); client(slug); } catch (e) { msg(e.message, 'err'); } };
     $('#cm-send').addEventListener('click', () => run({ action: 'client_message', mensaje: $('#cm').value }));
     $('#dl-approve')?.addEventListener('click', () => run({ action: 'site_approve' }));
+    $('#seo-run')?.addEventListener('click', async e => {
+      e.target.disabled = true; msg('Corriendo análisis y preguntas a la IA… puede tardar hasta un minuto.');
+      try { await api('POST', { slug, action: 'seo_run', kind: $('#seo-kind').value, notify: $('#seo-notify').checked }); await client(slug); msg('Listo.', 'ok'); }
+      catch (err) { msg(err.message, 'err'); e.target.disabled = false; }
+    });
     $('#dl-connect')?.addEventListener('click', async () => {
       try { const r = await api('POST', { slug, action: 'site_domain', domain: $('#dl-domain').value }); await client(slug); if ($('#dl-msg')) $('#dl-msg').value = r.message; }
       catch (e) { msg(e.message, 'err'); }

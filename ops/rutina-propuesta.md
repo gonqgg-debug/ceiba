@@ -163,13 +163,16 @@ Cada archivo de `solicitudes.archivos` es `{ruta, nombre, tipo, clase}`; `clase`
 2. Aplica `seccion` + `instruccion`, más lo que el cliente haya agregado en `hilo` y sus `archivos` (imágenes por URL de /media). Mismo alcance que la «Ronda de ajustes»: diseño con `page.theme`, color, textos, servicios, precios del negocio, horarios, contacto, fotos y quitar secciones. Sin inventar.
 3. Si el pedido no se entiende o falta un dato para hacerlo bien, no cambies nada: escribe en `mensaje_cliente` la pregunta exacta y explica en `resultado` qué falta.
 
+### Mejora de SEO del mes (Avanzado)
+Si `seccion = 'Mejora de SEO del mes'`, la creó el sistema con el reporte mensual: no la pidió el cliente y no descuenta minutos. En `instruccion` vienen los resultados de la prueba en IA (qué preguntas no lo mencionan) y la revisión técnica de su página. Haz una sola mejora concreta en `site_content`, la de más impacto: una página por servicio o zona que falte (dentro del límite de su plan), preguntas frecuentes que respondan esas búsquedas, o mejores `seo.title`/`seo.description`, textos alternativos o el texto de un servicio. Solo con datos reales del cliente. Explica en `resultado` qué cambiaste y por qué, y en `mensaje_cliente` díselo en una o dos frases.
+
 ### Guardar y cerrar
 1. Si cambiaste la página, usando `$ceiba$…$ceiba$` para el JSON:
    `update public.proposals set site_content_prev = site_content, site_content = $ceiba${...json completo...}$ceiba$::jsonb, site_built_at = now() where slug = '<slug>';`
    Verifica con un select que `site_content->'page'->'hero'->>'title'` no esté vacío.
 2. Cierra la solicitud para que el equipo la revise:
    `update public.solicitudes set estado = 'en_revision', minutos = <minutos>, resultado = $ceiba$<para el equipo>$ceiba$, mensaje_cliente = $ceiba$<para el cliente>$ceiba$ where id = '<id>';`
-   - `minutos`: solo en `cambio`, cuántos minutos le tomaría a una persona hacer ese cambio a mano (un dato o texto: 5; una foto o sección chica: 10 a 15; una sección nueva: 30 a 60). Se descuentan de los minutos del mes de su plan. En `materiales` déjalo en null.
+   - `minutos`: solo en `cambio`, cuántos minutos le tomaría a una persona hacer ese cambio a mano (un dato o texto: 5; una foto o sección chica: 10 a 15; una sección nueva: 30 a 60). Se descuentan de los minutos del mes de su plan. En `materiales` déjalo en null; en la «Mejora de SEO del mes», 0.
    - `resultado`: viñetas cortas con qué hiciste, qué fotos usaste, qué falta o hay que confirmar y cualquier cosa rara.
    - `mensaje_cliente`: 2 o 3 frases, tuteando, como del equipo de Ceiba: qué hicimos y el enlace a su vista previa `https://www.ceibalabs.io/vista/<slug>?sitio=1`, invitándolo a pedir cambios en el chat. Si es una pregunta, solo la pregunta. Sin fechas de publicación ni promesas.
 3. Si no existe su propuesta en `proposals` o algo falla y no puedes terminar: `estado = 'en_revision'`, `resultado` con qué pasó y `mensaje_cliente` vacío.

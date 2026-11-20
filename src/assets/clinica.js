@@ -2,6 +2,21 @@
 // completa y dentro del comparador de la propuesta.
 (() => {
   if (window.__cx) return; window.__cx = true;
+
+  // Contactos para el reporte del cliente: solo en su propio dominio (no en vistas previas de Ceiba)
+  if (!/(^|\.)ceibalabs\.io$|vercel\.app$|^localhost$/.test(location.hostname)) {
+    const track = kind => { try { navigator.sendBeacon('/api/site', JSON.stringify({ host: location.hostname, kind, page: location.pathname })); } catch {} };
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a[href]'); if (!a) return;
+      const h = a.getAttribute('href');
+      if (/wa\.me|whatsapp\.com/.test(h)) track('whatsapp');
+      else if (/^tel:/.test(h)) track('llamada');
+      else if (/^mailto:/.test(h)) track('correo');
+      else if (/google\.[^/]+\/maps|maps\.app/.test(h)) track('mapa');
+      else if (/calendly|doctoralia|agendapro|simplybook|setmore|booksy|fresha|cal\.com/.test(h)) track('agendar');
+    }, true);
+    document.addEventListener('submit', e => { if (e.target.closest('[data-cx-form]')) track('formulario'); }, true);
+  }
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const WA = '<svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href="#wa"/></svg>';

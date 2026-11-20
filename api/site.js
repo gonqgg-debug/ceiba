@@ -7,7 +7,7 @@
 // que el cliente subió en su chat (bucket privado «materiales»), solo si existen en su chat.
 // (Una sola función para no pasar el límite de funciones del plan de Vercel.)
 import { SYMBOLS } from '../lib/generated/shared.js';
-import { select } from '../lib/db.js';
+import { insert, select } from '../lib/db.js';
 import { fontHref, renderClinica } from '../lib/templates/clinica.js';
 import { robotsTxt, seoHead, sitemapXml } from '../lib/seo.js';
 import { signDownload } from '../lib/client-chat.js';
@@ -55,6 +55,19 @@ function pageSchema(c, current, pageUrl, home) {
   if (faq.length) graph.push({ '@type': 'FAQPage', mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) });
   if (current.view === 'sub' && current.sub?.kind !== 'zona') graph.push({ '@type': 'Service', name: current.title, description: current.sub?.intro || current.sub?.hero?.sub, provider: { '@type': 'LocalBusiness', name, url: home } });
   return { '@context': 'https://schema.org', '@graph': graph };
+}
+
+// POST /api/site  { host, kind, page }  (lo manda clinica.js desde el dominio del cliente)
+const KINDS = ['whatsapp', 'llamada', 'formulario', 'agendar', 'correo', 'mapa'];
+export async function POST(request) {
+  try {
+    const b = JSON.parse(await request.text() || '{}');
+    const host = String(b.host || '').toLowerCase().replace(/^www\./, '');
+    if (!KINDS.includes(b.kind) || !/^([a-z0-9-]+\.)+[a-z]{2,}$/.test(host)) return new Response(null, { status: 204 });
+    const row = (await select('proposals', `domain=eq.${encodeURIComponent(host)}&published_at=not.is.null&select=slug&limit=1`))?.[0];
+    if (row) await insert('site_events', { slug: row.slug, kind: b.kind, page: String(b.page || '/').slice(0, 120) });
+  } catch (err) { console.error('site evento', err.message); }
+  return new Response(null, { status: 204 });
 }
 
 export async function GET(request) {

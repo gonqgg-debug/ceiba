@@ -19,6 +19,7 @@ import { escHtml, mailReady, sendMail } from '../lib/notify.js';
 import { PLANS, COUNTRIES, CURRENCIES } from '../lib/catalog.js';
 import { json, siteUrl } from '../lib/stripe.js';
 import { validSlug } from '../lib/proposals.js';
+import { runDue, runReport } from '../lib/seo-monitor.js';
 import { approveSite, checkSiteDomain, dnsMessage, publishSite, setDomain, siteState } from '../lib/delivery.js';
 import { vercelReady } from '../lib/vercel.js';
 import { PLANS as PLAN_NAMES, planSpec } from '../lib/catalog.js';
@@ -33,11 +34,13 @@ async function clientDetail(slug) {
   const files = await Promise.all((chat.files || []).map(f => sign({ ...f, ruta: f.path })));
   const solicitudes = await Promise.all((sols || []).map(async r => ({ ...r, archivos: await Promise.all((r.archivos || []).map(sign)) })));
   const prop = (await select('proposals', `slug=eq.${encodeURIComponent(slug)}&select=site_built_at&limit=1`).catch(() => []))?.[0];
+  const reports = await select('seo_reports', `slug=eq.${encodeURIComponent(slug)}&select=id,kind,summary,data,sent_at,created_at&order=created_at.desc&limit=6`).catch(() => []);
   const { encontrado, cambios, ...data } = chat.data || {};
   return {
     slug: chat.slug, business: chat.business, email: chat.email, phase: chat.phase, needs_human: chat.needs_human,
     created_at: chat.created_at, last_client_at: chat.last_client_at, link: chatUrl(chat.slug),
     plan: { id: planOf(chat), name: PLAN_NAMES[planOf(chat)]?.name, whatsapp: !!chat.data?.whatsapp, minutes: await minutesUsed(slug).catch(() => 0), limit: planSpec(planOf(chat)).changeMinutes, rounds: planSpec(planOf(chat)).rounds },
+    reports: reports || [],
     site: !!prop?.site_built_at, delivery: await siteState(slug).catch(() => null), vercel: vercelReady(), checklist: checklist(chat), data, encontrado: encontrado || null, files, messages: transcript(chat), solicitudes,
   };
 }
@@ -54,6 +57,12 @@ async function getBySlug(slug) {
 }
 
 export async function GET(request) {
+  // Cron diario de Vercel (vercel.json): análisis, pruebas en IA y reportes que toquen hoy
+  if (new URL(request.url).searchParams.get('action') === 'cron') {
+    const secret = process.env.CRON_SECRET;
+    if (!secret || request.headers.get('authorization') !== `Bearer ${secret}`) return json({ error: 'No autorizado.' }, 401);
+    try { return json(await runDue({ max: 1 })); } catch (err) { console.error('cron', err.message); return json({ error: err.message }, 500); }
+  }
   if (!isAdmin(request)) return json({ error: 'Necesitas entrar al panel.' }, 401);
   if (!dbReady()) return json({ error: 'Supabase no está configurado en el servidor.' }, 500);
   const q = new URL(request.url).searchParams;
@@ -107,6 +116,12 @@ export async function POST(request) {
   if (!validSlug(b.slug)) return json({ error: 'Slug inválido.' }, 400);
 
   try {
+    if (b.action === 'seo_run') {
+      const row = (await select('proposals', `slug=eq.${encodeURIComponent(b.slug)}&select=slug,business,recommended_plan,domain,site_content,published_at&limit=1`))?.[0];
+      if (!row?.domain || !row.published_at) return json({ error: 'Primero publica su página en su dominio.' }, 400);
+      const kind = ['lanzamiento', 'trimestral', 'mensual'].includes(b.kind) ? b.kind : 'lanzamiento';
+      return json(await runReport(row, kind, { notify: !!b.notify }));
+    }
     if (['site_approve', 'site_domain', 'site_check', 'site_publish', 'site_dns_message'].includes(b.action)) {
       try {
         if (b.action === 'site_approve') return json(await approveSite(b.slug, 'equipo'));
