@@ -20,6 +20,7 @@ import { dbReady, insert, select, update } from '../lib/db.js';
 import { escHtml, mailReady, sendMail } from '../lib/notify.js';
 import { approveSite, checkSiteDomain, siteState } from '../lib/delivery.js';
 import { PLANS, planSpec, planSummary } from '../lib/catalog.js';
+import { planOptions, upgradeCheckout, upgradeQuote } from '../lib/upgrade.js';
 import {
   ALLOWED_TYPES, LONG_LINK, MAX_BYTES, chatUrl, checkDomain, checklist, ensureChat, ensureFound,
   findChatByEmail, getChat, saveChat, signDownload, signUpload, validToken, ATTACH, transcript, engineerUpdate, fireBuild, planOf, minutesUsed,
@@ -61,7 +62,9 @@ FASE «soporte»: su página ya está publicada. Tú no haces cambios: tu trabaj
 Su plan (lo ves abajo en «Plan contratado»):
 - Lo que pides en el arranque depende del plan: las fotos que indica, la agenda en línea si su plan la incluye (guarda el enlace en «agenda», o «no» si por ahora no usa una) y el catálogo si su plan lo incluye (que suba su hoja de cálculo o lista; guárdalo en «catalogo» o clasifica el archivo como catalogo). No pidas lo que su plan no incluye.
 - Si su plan incluye páginas por servicio o zona, pregúntale cuáles servicios o zonas quiere que tengan su propia página (hasta las de su plan): los que más le piden o le dejan más. Guárdalo en «paginas». Si no sabe, dile que elegimos nosotros los más buscados.
-- Si pide algo que su plan no incluye (más páginas, una integración nueva, más preguntas frecuentes de las de su plan), dile con claridad qué incluye su plan y ofrécele el plan que sí lo trae; no lo registres como cambio.
+- Si pide algo que su plan no incluye (más páginas, una integración nueva como la agenda o el catálogo, más preguntas frecuentes, más minutos, el Asistente de WhatsApp), dile con claridad qué incluye su plan y ofrécele siempre subir al plan que sí lo trae; no lo registres como cambio.
+- Para ofrecerlo, usa subir_de_plan con confirmado=false: te da qué gana, cuánto paga hoy (solo la diferencia del pago inicial) y su mensualidad nueva, en su moneda. Explícaselo en 2 o 3 frases y ofrece mostrar_opciones ["Sí, quiero subir de plan", "Por ahora no"]. Si acepta de forma clara, usa subir_de_plan con confirmado=true: le aparece un botón para pagar la diferencia. Después del pago, su plan se actualiza solo y le avisamos aquí.
+- No insistas: si dice que no, sigue ayudándole con lo que sí incluye su plan. Bajar de plan o quitar el asistente: escala a una persona.
 - Antes de publicar, su plan incluye unas rondas de ajustes sobre la vista previa (lo ves en el estado). Agrupa en un solo pedido todo lo que quiera cambiar en esa revisión. Si ya usó sus rondas, dile que lo anotamos y se hace después de publicar con sus minutos de cambios del mes.
 - Minutos de cambios: en cada turno ves cuántos lleva este mes y cuántos incluye su plan. Si ya los usó todos, antes de registrar un cambio dile que se pasa de su plan y ofrécele tres opciones: cotizarlo aparte, dejarlo para el mes siguiente o subir de plan. Si elige cotizar, regístralo igual y agrega «fuera de plan» en la instrucción.
 - Promete solo los tiempos de su plan (vista previa, respuesta a cambios) y nunca fechas exactas.
@@ -99,6 +102,8 @@ const TOOLS = [
   strictTool('responder_al_ingeniero', 'Le pasa al ingeniero la respuesta o el agregado del cliente sobre una solicitud existente.', { solicitud: { type: 'string', description: 'El id corto de la solicitud (los primeros 8 caracteres).' }, respuesta: { type: 'string', description: 'Lo que dijo el cliente, con el dato exacto.' }, archivos: { type: 'array', items: { type: 'string' }, description: 'Rutas de archivos que subió para esto; lista vacía si no hay.' } }),
   strictTool('aprobar_pagina', 'El cliente aprueba su página (la vista previa) para publicarla. Solo si lo dijo claramente.', { confirmado: { type: 'boolean', description: 'true si el cliente dijo explícitamente que la aprueba.' } }),
   strictTool('revisar_publicacion', 'Revisa si el dominio del cliente ya apunta a nosotros, después de que puso los registros DNS.', { motivo: { type: 'string', description: 'Por qué lo revisas, en pocas palabras.' } }),
+  strictTool('subir_de_plan', 'Cotiza o prepara el pago para subir de plan o sumar el Asistente de WhatsApp. Primero con confirmado=false para cotizar; con confirmado=true solo si el cliente aceptó.',
+    { plan: { type: 'string', enum: ['esencial', 'negocio', 'avanzado'], description: 'El plan al que sube (el actual si solo suma WhatsApp).' }, whatsapp: { type: 'boolean', description: 'Si el plan nuevo incluye el Asistente de WhatsApp.' }, confirmado: { type: 'boolean' } }),
   strictTool('escalar_a_persona', 'Pide que alguien del equipo atienda al cliente personalmente.', { motivo: { type: 'string' } }),
   strictTool('mostrar_opciones', 'Muestra al cliente botones con respuestas rápidas debajo de tu mensaje.', { opciones: { type: 'array', items: { type: 'string' }, description: '2 a 4 opciones cortas.' } }),
 ];
@@ -112,6 +117,7 @@ async function clientContext(chat) {
   const lines = [
     `Negocio: ${chat.business || p?.business || brand.name || '—'}`,
     `Plan contratado: ${planSummary(planOf(chat), { whatsapp: chat.data?.whatsapp ?? p?.whatsapp_recommended })}`,
+    `Planes disponibles en su país (para ofrecer subir de plan): ${await planOptions(chat.slug).catch(() => 'no disponible')}`,
     contact.address && `Dirección según su propuesta: ${contact.address}`,
     (contact.phone || contact.whatsapp) && `Teléfono / WhatsApp según su propuesta: ${[contact.phone, contact.whatsapp].filter(Boolean).join(' / ')}`,
     page.visit?.rows?.length && `Horario según su propuesta: ${page.visit.rows.map(r => `${r.dt}: ${r.dd}`).join('; ')}`,
@@ -220,6 +226,15 @@ async function runTool(name, input, chat, effects) {
       chat._site = await siteState(chat.slug);
       return r.ready ? `${r.domain} ya apunta a nosotros. Dile que ya quedó y que el equipo publica su página en breve; le avisamos aquí.` : `${r.domain} todavía no apunta a nosotros. Los cambios de DNS pueden tardar unas horas; pídele que revise que puso exactamente los registros del estado y que vuelva a avisar.`;
     }
+    case 'subir_de_plan': {
+      try {
+        if (!input.confirmado) return (await upgradeQuote(chat.slug, input.plan, input.whatsapp)).text;
+        const r = await upgradeCheckout(chat.slug, input.plan, input.whatsapp);
+        if (r.applied) { chat.data = { ...chat.data, plan: r.quote.to.plan, whatsapp: r.quote.to.whatsapp }; return `Listo, ya quedó el plan nuevo sin pago extra (${r.quote.text}). Díselo al cliente.`; }
+        effects.push({ type: 'pago', url: r.url, label: r.quote.pay ? 'Pagar y subir de plan' : 'Confirmar cambio de plan' });
+        return `Le aparece un botón para pagar la diferencia. Dile que al pagar su plan se actualiza solo y le avisamos aquí. (${r.quote.text})`;
+      } catch (err) { return err.user ? err.message : `No se pudo preparar: ${err.message}. Escala a una persona.`; }
+    }
     case 'escalar_a_persona':
       chat.needs_human = true;
       effects.push({ type: 'escalar', motivo: input.motivo });
@@ -262,7 +277,7 @@ async function notifyTeam(chat, effects) {
   const to = process.env.CEIBA_NOTIFY_EMAIL.split(',');
   const link = chatUrl(chat.slug);
   for (const e of effects) {
-    if (e.type === 'opciones') continue;
+    if (e.type === 'opciones' || e.type === 'pago') continue;
     let subject, body;
     if (e.type === 'listo') {
       const files = await Promise.all((chat.files || []).map(async f => `<li>${escHtml(f.kind || 'sin clasificar')}: <a href="${await signDownload(f.path, 60 * 60 * 24 * 7).catch(() => '#')}">${escHtml(f.name)}</a>${f.description ? ` — ${escHtml(f.description)}` : ''}</li>`));
@@ -447,7 +462,8 @@ export async function POST(request) {
       await queueWork(chat, effects);
       await notifyTeam(chat, effects);
       const options = effects.filter(e => e.type === 'opciones').at(-1)?.opciones || [];
-      return json(await publicState(chat, { reply, options }));
+      const pay = effects.filter(e => e.type === 'pago').at(-1);
+      return json(await publicState(chat, { reply, options, action: pay ? { label: pay.label, url: pay.url } : null }));
     }
     return json({ error: 'Acción desconocida.' }, 400);
   } catch (err) {

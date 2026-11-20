@@ -40,6 +40,7 @@ body.cu-page{background:var(--c-bg);color:var(--c-text);font-family:var(--f-body
 .typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
 .opts{display:flex;flex-wrap:wrap;gap:8px;padding-left:42px;margin-bottom:22px}
 .opts button{font:500 14px var(--f-body);color:var(--c-text);background:var(--c-bg);border:1px solid var(--c-line);border-radius:12px;padding:8px 14px;cursor:pointer;transition:background .15s,border-color .15s}
+.opts a.pay{font:600 14px var(--f-body);color:#fff;background:var(--c-ok);border-radius:12px;padding:10px 16px;text-decoration:none}
 .opts button:hover{background:var(--c-soft);border-color:#D5D4CF}
 /* lo que encontramos en su página */
 .cu-log > .found{margin:-6px auto 22px;padding-left:42px}
@@ -243,7 +244,7 @@ body.cu-page{background:var(--c-bg);color:var(--c-text);font-family:var(--f-body
     const imgs = (s.files || []).filter(f => f.url);
     $('#thumbs-w').hidden = !imgs.length;
     $('#thumbs').innerHTML = imgs.map(f => `<div style="background-image:url('${esc(f.url)}')" title="${esc(f.name)}">${f.kind ? `<em>${esc({ logo: 'logo', foto: 'foto', guia_marca: 'marca' }[f.kind] || f.kind)}</em>` : ''}</div>`).join('');
-    log.innerHTML = bubble({ who: 'bot', text: s.greeting }) + foundCard(s.found) + s.messages.map(bubble).join('') + (options.length ? `<div class="opts">${options.map(o => `<button type="button">${esc(o)}</button>`).join('')}</div>` : '');
+    log.innerHTML = bubble({ who: 'bot', text: s.greeting }) + foundCard(s.found) + s.messages.map(bubble).join('') + (s.action?.url ? `<div class="opts"><a class="pay" href="${esc(s.action.url)}">${esc(s.action.label)} →</a></div>` : '') + (options.length ? `<div class="opts">${options.map(o => `<button type="button">${esc(o)}</button>`).join('')}</div>` : '');
     scroll();
   }
 

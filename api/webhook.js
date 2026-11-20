@@ -9,6 +9,7 @@ import { dbReady, select, update } from '../lib/db.js';
 import { escHtml, mailReady, sendMail } from '../lib/notify.js';
 import { chatUrl, ensureChat } from '../lib/client-chat.js';
 import { PLANS, planSpec } from '../lib/catalog.js';
+import { applyUpgrade } from '../lib/upgrade.js';
 
 export async function POST(request) {
   const signature = request.headers.get('stripe-signature');
@@ -49,6 +50,11 @@ export async function handle(event) {
   switch (event.type) {
     case 'checkout.session.completed':
     case 'checkout.session.async_payment_succeeded': {
+      // Subida de plan pagada desde el chat
+      if (obj.metadata?.ceiba_upgrade === '1') {
+        if (obj.payment_status === 'paid') await applyUpgrade(obj.metadata);
+        return;
+      }
       // payment: pagó el monto inicial. setup: plan sin pago inicial, solo registró su tarjeta.
       const paid = obj.mode === 'payment' && obj.payment_status === 'paid';
       const setup = obj.mode === 'setup' && obj.status === 'complete';
