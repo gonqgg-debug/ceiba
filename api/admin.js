@@ -19,7 +19,7 @@ import { escHtml, mailReady, sendMail } from '../lib/notify.js';
 import { PLANS, COUNTRIES, CURRENCIES } from '../lib/catalog.js';
 import { json, siteUrl } from '../lib/stripe.js';
 import { validSlug } from '../lib/proposals.js';
-import { runDue, runReport } from '../lib/seo-monitor.js';
+import { discardReport, mergedVisibility, runDue, runReport, sendReport } from '../lib/seo-monitor.js';
 import { approveSite, checkSiteDomain, dnsMessage, publishSite, setDomain, siteState } from '../lib/delivery.js';
 import { vercelReady } from '../lib/vercel.js';
 import { PLANS as PLAN_NAMES, planSpec } from '../lib/catalog.js';
@@ -34,9 +34,11 @@ async function clientDetail(slug) {
   const files = await Promise.all((chat.files || []).map(f => sign({ ...f, ruta: f.path })));
   const solicitudes = await Promise.all((sols || []).map(async r => ({ ...r, archivos: await Promise.all((r.archivos || []).map(sign)) })));
   const prop = (await select('proposals', `slug=eq.${encodeURIComponent(slug)}&select=site_built_at&limit=1`).catch(() => []))?.[0];
-  const reports = await select('seo_reports', `slug=eq.${encodeURIComponent(slug)}&select=id,kind,summary,data,sent_at,created_at&order=created_at.desc&limit=6`).catch(() => []);
-  const pendingChecks = await select('ai_checks', `slug=eq.${encodeURIComponent(slug)}&estado=eq.pendiente&select=report_id,provider`).catch(() => []);
-  for (const r of reports || []) r.waiting = (pendingChecks || []).filter(c => c.report_id === r.id).map(c => c.provider);
+  const reports = (await select('seo_reports', `slug=eq.${encodeURIComponent(slug)}&estado=neq.descartado&select=id,kind,estado,summary,cowork_report,cowork_notes,mejora,data,sent_at,created_at&order=created_at.desc&limit=6`).catch(() => [])) || [];
+  if (reports.some(r => r.data?.pending)) {
+    const sp = (await select('proposals', `slug=eq.${encodeURIComponent(slug)}&select=domain,site_content&limit=1`).catch(() => []))?.[0] || {};
+    for (const r of reports) if (r.data?.pending) r.data.visibility = await mergedVisibility(r, sp);
+  }
   const { encontrado, cambios, ...data } = chat.data || {};
   return {
     slug: chat.slug, business: chat.business, email: chat.email, phase: chat.phase, needs_human: chat.needs_human,
@@ -118,6 +120,8 @@ export async function POST(request) {
   if (!validSlug(b.slug)) return json({ error: 'Slug inválido.' }, 400);
 
   try {
+    if (b.action === 'seo_send') return json(await sendReport(b.id, { text: b.text }));
+    if (b.action === 'seo_discard') { await discardReport(b.id); return json({ ok: true }); }
     if (b.action === 'seo_run') {
       const row = (await select('proposals', `slug=eq.${encodeURIComponent(b.slug)}&select=slug,business,recommended_plan,domain,site_content,published_at&limit=1`))?.[0];
       if (!row?.domain || !row.published_at) return json({ error: 'Primero publica su página en su dominio.' }, 400);

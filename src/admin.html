@@ -304,16 +304,22 @@ body.adm input:not([type=checkbox]):not([type=color]),body.adm textarea,body.adm
   function reportsPanel(c) {
     if (!['negocio', 'avanzado'].includes(c.plan?.id)) return '';
     const KIND = { lanzamiento: 'Análisis al lanzar', trimestral: 'Prueba trimestral en IA', mensual: 'Reporte mensual' };
+    const ST = { para_cowork: 'esperando la revisión de Cowork', por_revisar: 'Cowork lo redactó: revísalo y mándalo', enviado: 'enviado al cliente' };
     const rows = (c.reports || []).map(r => {
       const v = r.data?.visibility;
-      return `<div class="sol"><div class="sol-h"><b>${KIND[r.kind] || r.kind}</b><span>${fmt(r.created_at)}${r.data?.pending ? ` · esperando a Cowork (${r.waiting?.length || 0} preguntas en ${[...new Set(r.waiting || [])].join(', ') || '—'})` : r.sent_at ? ' · enviado al cliente' : ' · solo interno'}</span></div>
-        <p>${esc(r.summary || '')}</p>
+      const open = r.estado === 'para_cowork' || r.estado === 'por_revisar';
+      return `<div class="sol"><div class="sol-h"><b>${KIND[r.kind] || r.kind}</b><span>${fmt(r.created_at)} · ${r.estado === 'enviado' && !r.sent_at ? 'solo interno' : ST[r.estado] || r.estado}</span></div>
+        ${open ? `<textarea class="seo-text" data-id="${r.id}" rows="${r.cowork_report ? 12 : 5}">${esc(r.cowork_report || r.summary || '')}</textarea>
+          ${r.cowork_notes ? `<small><b>Notas de Cowork:</b> ${esc(r.cowork_notes)}</small>` : ''}
+          ${r.mejora ? `<small><b>Mejora del mes que propone:</b> ${esc(r.mejora)}</small>` : ''}
+          <div class="acts"><button class="btn btn-s seo-send" type="button" data-id="${r.id}">${r.estado === 'para_cowork' ? 'Mandar sin esperar a Cowork' : 'Mandar al cliente'}</button><button class="btn btn-line btn-s seo-discard" type="button" data-id="${r.id}">Descartar</button></div>`
+        : `<p>${esc(r.summary || '')}</p>`}
         ${v?.results?.length ? `<small>${v.results.map(x => `${x.mentioned ? '✓' : x.error ? '!' : '✗'} ${esc(x.provider)}${x.via === 'chat' ? ' (chat)' : ''}: «${esc(x.q)}»${x.cited?.length ? ` — fuentes: ${esc(x.cited.slice(0, 4).join(', '))}` : ''}`).join('<br>')}</small>` : ''}</div>`;
     }).join('');
     return `<section class="panel"><h2>SEO y visibilidad en IA</h2>
-      <small>${c.plan.id === 'avanzado' ? 'Avanzado: análisis al lanzar, reporte mensual con prueba en IA y una mejora de SEO incluida cada mes.' : 'Negocio: análisis al lanzar, prueba en IA cada 3 meses y contactos del mes.'} Corre solo cada día; aquí puedes correrlo ahora.</small>
+      <small>${c.plan.id === 'avanzado' ? 'Avanzado: análisis al lanzar, reporte mensual con prueba en IA y una mejora de SEO incluida cada mes.' : 'Negocio: análisis al lanzar, prueba en IA cada 3 meses y contactos del mes.'} El servidor junta los datos solo; Claude Cowork hace la revisión a fondo y redacta el reporte; tú lo mandas desde aquí.</small>
       ${rows || '<p class="empty" style="padding:0">Todavía no hay reportes. El primero sale un día después de publicar.</p>'}
-      <div class="acts"><select id="seo-kind"><option value="lanzamiento">Análisis completo</option><option value="trimestral">Prueba en IA</option><option value="mensual">Reporte mensual</option></select><label class="check"><input type="checkbox" id="seo-notify">Mandárselo al cliente</label><button class="btn btn-line btn-s" type="button" id="seo-run">Correr ahora</button></div>
+      <div class="acts"><select id="seo-kind"><option value="lanzamiento">Análisis completo</option><option value="trimestral">Prueba en IA</option><option value="mensual">Reporte mensual</option></select><button class="btn btn-line btn-s" type="button" id="seo-run">Correr ahora</button></div>
     </section>`;
   }
 
@@ -382,9 +388,17 @@ body.adm input:not([type=checkbox]):not([type=color]),body.adm textarea,body.adm
     $('#dl-approve')?.addEventListener('click', () => run({ action: 'site_approve' }));
     $('#seo-run')?.addEventListener('click', async e => {
       e.target.disabled = true; msg('Corriendo análisis y preguntas a la IA… puede tardar hasta un minuto.');
-      try { const r = await api('POST', { slug, action: 'seo_run', kind: $('#seo-kind').value, notify: $('#seo-notify').checked }); await client(slug); msg(r.waiting ? `Listo. Quedaron ${r.waiting}; el reporte se cierra cuando las conteste.` : 'Listo.', 'ok'); }
+      try { const r = await api('POST', { slug, action: 'seo_run', kind: $('#seo-kind').value }); await client(slug); msg(r.waiting ? `Listo. Queda esperando ${r.waiting}.` : 'Listo.', 'ok'); }
       catch (err) { msg(err.message, 'err'); e.target.disabled = false; }
     });
+    document.querySelectorAll('.seo-send').forEach(b => b.addEventListener('click', async () => {
+      const text = document.querySelector(`.seo-text[data-id="${b.dataset.id}"]`)?.value || '';
+      if (!confirm('¿Mandar este reporte al cliente por su chat y correo?')) return;
+      b.disabled = true;
+      try { await api('POST', { slug, action: 'seo_send', id: b.dataset.id, text }); await client(slug); msg('Reporte enviado.', 'ok'); }
+      catch (err) { msg(err.message, 'err'); b.disabled = false; }
+    }));
+    document.querySelectorAll('.seo-discard').forEach(b => b.addEventListener('click', () => run({ action: 'seo_discard', id: b.dataset.id })));
     $('#dl-connect')?.addEventListener('click', async () => {
       try { const r = await api('POST', { slug, action: 'site_domain', domain: $('#dl-domain').value }); await client(slug); if ($('#dl-msg')) $('#dl-msg').value = r.message; }
       catch (e) { msg(e.message, 'err'); }
