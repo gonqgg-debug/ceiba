@@ -1,4 +1,4 @@
-import { currencyFor } from '../lib/catalog.js';
+import { countryInfo } from '../lib/catalog.js';
 // POST /api/lead
 // Guarda una solicitud de propuesta en Supabase y avisa al equipo por correo.
 // Promesa al cliente: propuesta en 24 horas hábiles (ver lib/business-hours.js).
@@ -122,7 +122,8 @@ ${siteUrl()}`;
 // Vive aquí para no pasar el límite de funciones del plan de Vercel.
 export async function GET(request) {
   const country = (request.headers.get('x-vercel-ip-country') || '').toUpperCase().slice(0, 2) || null;
-  return new Response(JSON.stringify({ country, currency: currencyFor(country) }), {
+  const c = countryInfo(country);
+  return new Response(JSON.stringify({ country: c.code, name: c.name, currency: c.currency }), {
     headers: { 'content-type': 'application/json', 'cache-control': 'private, max-age=3600', vary: 'x-vercel-ip-country' },
   });
 }
@@ -147,6 +148,8 @@ export async function POST(request) {
   const lead = {
     ...row,
     source: SOURCES.includes(b.source) ? b.source : 'home',
+    // País por IP (encabezado de Vercel): define los precios de su propuesta
+    country: request.headers.get('x-vercel-ip-country') ? countryInfo(request.headers.get('x-vercel-ip-country')).code : null,
     audit: serverAudit || auditSummary(b.audit),
     preferences: cleanPrefs(b.preferences),
     page_snapshot: snapshot,

@@ -458,24 +458,28 @@ img{max-width:100%}
   $$('[data-renew-btn]').forEach(b => b.addEventListener('click', () => showToast('En el sitio, esto le avisa a Ceiba para actualizar tu propuesta.')));
 
   /* ---------- plan + module selector, single total ---------- */
-  const PLANS = P.plans || { esencial: ['Esencial', 3490, 1490], negocio: ['Negocio', 5490, 2490], avanzado: ['Avanzado', 8490, 3990] };
-  const WA = ['Asistente de WhatsApp', P.wa?.activation ?? 3990, P.wa?.monthly ?? 1490];
+  const PLANS = P.plans;
+  // El asistente cuesta distinto según el plan (con Negocio va en paquete con descuento)
+  const WA = id => P.wa[id];
   const mxn = n => (P.currency?.symbol || '$') + n.toLocaleString('en-US');
   let plan = P.plan;
   const addon = $('#addon-wa');
   function renderTotals() {
     const [pName, pAct, pMon] = PLANS[plan];
     const rows = [['Plan ' + pName, pAct, pMon]];
-    if (addon.checked) rows.push(WA);
+    if (addon.checked) rows.push(WA(plan));
+    const w = WA(plan), ap = document.querySelector('.addon-price');
+    if (ap) ap.innerHTML = `${mxn(w[1])}<small>+ ${mxn(w[2])}/mes${plan === 'negocio' ? ' · precio en paquete' : ''}</small>`;
     const tAct = rows.reduce((a, r) => a + r[1], 0), tMon = rows.reduce((a, r) => a + r[2], 0);
     const pack = 'Plan ' + pName + (addon.checked ? ' + Asistente de WhatsApp' : '');
     $('#sum-table').innerHTML = `<div class="st-row st-head"><span>Partida</span><span>Pago inicial</span><span>Al mes</span></div>` +
       rows.map(r => `<div class="st-row"><span>${r[0]}</span><span>${mxn(r[1])}</span><span>${mxn(r[2])}</span></div>`).join('') +
       `<div class="st-row st-total"><span>Total</span><span>${mxn(tAct)}</span><span>${mxn(tMon)}</span></div>
-       <p class="st-when"><span>Hoy pagas solo el monto inicial.</span><span>La mensualidad empieza cuando publicamos.</span></p>`;
+       <p class="st-when"><span>${tAct ? 'Hoy pagas solo el monto inicial.' : 'Hoy no pagas nada: solo registras tu tarjeta.'}</span><span>La mensualidad empieza cuando publicamos.</span></p>`;
     $('#act-sum').innerHTML = rows.map(r => `<dt>${r[0]}</dt><dd>${mxn(r[1])} + ${mxn(r[2])}/mes</dd>`).join('') +
       `<dt><strong>Pagas hoy · pago inicial</strong></dt><dd><strong>${mxn(tAct)}</strong></dd><dt>Mensualidad desde la publicación</dt><dd>${mxn(tMon)}</dd><dt>Precio válido hasta</dt><dd>${P.validShort}</dd>`;
     $$('[data-total-act]').forEach(el => el.textContent = mxn(tAct));
+    $$('[data-activate]').forEach(b => { b.innerHTML = tAct ? `Activar y pagar <span data-total-act>${mxn(tAct)}</span>` : 'Activar sin pago inicial'; });
     $$('[data-total-mon]').forEach(el => el.textContent = mxn(tMon));
     $$('[data-pack-name]').forEach(el => el.textContent = pack);
   }

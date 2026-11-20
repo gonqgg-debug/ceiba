@@ -745,6 +745,7 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
 #precios .plans .plan .price-cell + .price-cell .v small{display:inline;margin-left:6px;font:400 16px var(--f-body);color:var(--muted)}
 #precios .plans .plan .price-cell:has(+ .price-cell) .v{font:400 15px var(--f-body);color:var(--muted)}
 #precios .plans .plan .price-cell:has(+ .price-cell) .v::before{content:"+ "}
+#precios .plans .plan .price-cell.no-fee .v::before{content:none}
 #precios .plans .plan .price-cell:has(+ .price-cell) .v small{display:inline;margin-left:4px;font-size:15px}
 #precios .plans .plan ul{order:3;flex:1;align-content:start;gap:10px;display:grid}
 #precios .plans .plan ul li{display:block;position:relative;padding-left:22px}

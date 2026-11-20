@@ -6,22 +6,27 @@ Datos clave:
 - Antes de pagar, el negocio recibe una propuesta gratis con su nueva página ya diseñada para que la vea.
 - Las páginas incluyen diseño, hosting, mantenimiento, SEO base, datos estructurados, optimización para buscadores de IA y minutos de cambios al mes.
 - Después de pagar, un asistente de IA reúne los materiales del negocio (logo, fotos, datos, dominio) y el equipo construye y publica la página.
-- Precios finales en pesos mexicanos (también se cotiza en dólares).
+- Precios finales, por país y en moneda local o dólares.
 
 ## Páginas web
 - [Páginas web por suscripción](https://www.ceibalabs.io/webs): planes, qué incluye cada uno y cómo optimizamos para Google y la IA.
 - [Páginas web para clínicas y consultorios](https://www.ceibalabs.io/webs/clinicas): versión para clínicas dentales, consultorios y especialistas.
 
 ### Planes
-- Plan Esencial: $3,490 MXN de pago inicial y $1,490 MXN al mes. Hasta 3 páginas pensadas para el celular, con hosting, mantenimiento, SEO base y optimización para IA, formulario y botón de WhatsApp. Hasta 30 minutos de cambios al mes.
-- Plan Negocio: $5,490 MXN de pago inicial y $2,490 MXN al mes. Hasta 7 páginas, conectadas con la agenda del negocio, con reporte de cuántas personas te contactan, análisis avanzado de SEO y prueba de visibilidad en IA cada 3 meses. Hasta 60 minutos de cambios al mes.
-- Plan Avanzado: $8,490 MXN de pago inicial y $3,990 MXN al mes. Hasta 12 páginas con catálogo de propiedades, habitaciones o servicios que tú actualizas, reporte mensual de visibilidad en IA y Google y una mejora de SEO aplicada al mes. Hasta 120 minutos de cambios al mes.
-- Complemento Asistente de WhatsApp: $3,990 MXN de pago inicial y $1,490 MXN al mes. Contesta en WhatsApp y en tu página con las respuestas que apruebas, anota los datos para la cita o cotización y te pasa lo que necesita una persona. Un número y una sucursal. Piloto con hasta 300 conversaciones al mes.
+- Plan Esencial: sin pago inicial y $1,490 MXN al mes. Hasta 3 páginas pensadas para el celular, con hosting, mantenimiento, SEO base y optimización para IA, formulario y botón de WhatsApp. Sin pago inicial. Hasta 30 minutos de cambios al mes.
+- Plan Negocio: $2,990 MXN de pago inicial y $2,490 MXN al mes. Hasta 7 páginas, conectadas con la agenda del negocio, con reporte de cuántas personas te contactan, análisis avanzado de SEO y prueba de visibilidad en IA cada 3 meses. Hasta 60 minutos de cambios al mes.
+- Plan Avanzado: $5,990 MXN de pago inicial y $3,990 MXN al mes. Hasta 12 páginas con catálogo de propiedades, habitaciones o servicios que tú actualizas, reporte mensual de visibilidad en IA y Google y una mejora de SEO aplicada al mes. Hasta 120 minutos de cambios al mes.
+- Complemento Asistente de WhatsApp: $2,990 MXN de pago inicial y $1,490 MXN al mes. Contesta en WhatsApp y en tu página con las respuestas que apruebas, anota los datos para la cita o cotización y te pasa lo que necesita una persona. Un número y una sucursal. Piloto con hasta 300 conversaciones al mes.
+- Paquete Plan Negocio + Asistente de WhatsApp: $4,990 MXN de pago inicial y $3,490 MXN al mes.
+
+Precios de México en pesos mexicanos. También hay precios en moneda local o en dólares para México, Chile, Panamá, Costa Rica, Uruguay, Puerto Rico, Colombia, Perú, República Dominicana, Ecuador, Guatemala, El Salvador, Argentina, Bolivia, Paraguay, Honduras, Nicaragua y el resto del mundo; en ceibalabs.io/webs se puede elegir el país.
 
 ## Inteligencia artificial y procesos
 - [IA y automatización para negocios](https://www.ceibalabs.io/ia): asistentes, agentes, automatización y cómo trabajamos.
-- Diagnóstico de IA: $3,900 MXN. Diagnóstico de procesos de atención, ventas u operación. Su costo se descuenta del proyecto si se contrata.
-- Piloto de agentes y automatización: desde $19,900 MXN. Un primer agente o automatización sobre un proceso concreto, medido contra cómo se hace hoy.
+- Llamada de descubrimiento: gratis, 30 minutos por video.
+- Diagnóstico de IA: desde $9,900 MXN. Dos sesiones, mapa de procesos y plan por etapas con costos y retorno esperado. Se acredita al 100% a la implementación si la contratas en 30 días.
+- Implementación: desde $19,900 MXN. Una automatización o agente: asistente de WhatsApp avanzado, reporte diario o conciliación simple.
+- Operación mensual: desde $4,990 MXN al mes. Monitoreo, ajustes y uso de IA incluido para una automatización.
 
 ## Empezar
 - [Propuesta gratis](https://www.ceibalabs.io/webs#diagnostico): el negocio deja su página actual (o sus datos) y recibe su propuesta con la página nueva.

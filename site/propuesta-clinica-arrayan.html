@@ -746,6 +746,7 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
 #precios .plans .plan .price-cell + .price-cell .v small{display:inline;margin-left:6px;font:400 16px var(--f-body);color:var(--muted)}
 #precios .plans .plan .price-cell:has(+ .price-cell) .v{font:400 15px var(--f-body);color:var(--muted)}
 #precios .plans .plan .price-cell:has(+ .price-cell) .v::before{content:"+ "}
+#precios .plans .plan .price-cell.no-fee .v::before{content:none}
 #precios .plans .plan .price-cell:has(+ .price-cell) .v small{display:inline;margin-left:4px;font-size:15px}
 #precios .plans .plan ul{order:3;flex:1;align-content:start;gap:10px;display:grid}
 #precios .plans .plan ul li{display:block;position:relative;padding-left:22px}
@@ -1158,9 +1159,9 @@ img{max-width:100%}
         <div>
           <h3 class="pl-group">1 · Plan</h3>
           <div class="pl-list" role="radiogroup" aria-label="Plan" id="pl-list">
-            <button class="pl" type="button" role="radio" data-plan="esencial" aria-checked="false" tabindex="-1"><span class="radio" aria-hidden="true"></span><h3>Esencial <span class="pl-price">$3,490 + $1,490/mes</span></h3><p class="why">Una página clara para que te encuentren y te escriban, mientras sigues atendiendo por teléfono o WhatsApp.</p><ul><li>Hasta 3 páginas</li><li>Formulario y botón de WhatsApp</li><li>SEO base y optimizada para IA</li><li>Hasta 30 minutos de cambios al mes</li></ul></button>
-            <button class="pl" type="button" role="radio" data-plan="negocio" aria-checked="true" tabindex="0"><span class="radio" aria-hidden="true"></span><h3>Negocio <span class="pl-price">$5,490 + $2,490/mes</span><small>Recomendado para tu negocio</small></h3><p class="why">Todo lo que viste en esta propuesta, con citas o solicitudes directo a tu agenda.</p><ul><li>Hasta 7 páginas</li><li>Conectada con la agenda que ya usas</li><li>Análisis avanzado y prueba de visibilidad en IA cada 3 meses</li><li>Te decimos cuántas personas te contactaron</li><li>Hasta 60 minutos de cambios al mes</li></ul></button>
-            <button class="pl" type="button" role="radio" data-plan="avanzado" aria-checked="false" tabindex="-1"><span class="radio" aria-hidden="true"></span><h3>Avanzado <span class="pl-price">$8,490 + $3,990/mes</span></h3><p class="why">Si tienes muchos servicios y quieres una página para cada uno, que tú mismo actualizas.</p><ul><li>Hasta 12 páginas, con todo lo de Negocio</li><li>Catálogo de servicios que tú actualizas</li><li>Reporte mensual de visibilidad en IA y Google, con una mejora de SEO al mes</li><li>Hasta 120 minutos de cambios al mes</li></ul></button>
+            <button class="pl" type="button" role="radio" data-plan="esencial" aria-checked="false" tabindex="-1"><span class="radio" aria-hidden="true"></span><h3>Esencial <span class="pl-price">Sin pago inicial · $1,490/mes</span></h3><p class="why">Una página clara para que te encuentren y te escriban, mientras sigues atendiendo por teléfono o WhatsApp.</p><ul><li>Hasta 3 páginas</li><li>Formulario y botón de WhatsApp</li><li>SEO base y optimizada para IA</li><li>Hasta 30 minutos de cambios al mes</li></ul></button>
+            <button class="pl" type="button" role="radio" data-plan="negocio" aria-checked="true" tabindex="0"><span class="radio" aria-hidden="true"></span><h3>Negocio <span class="pl-price">$2,990 + $2,490/mes</span><small>Recomendado para tu negocio</small></h3><p class="why">Todo lo que viste en esta propuesta, con citas o solicitudes directo a tu agenda.</p><ul><li>Hasta 7 páginas</li><li>Conectada con la agenda que ya usas</li><li>Análisis avanzado y prueba de visibilidad en IA cada 3 meses</li><li>Te decimos cuántas personas te contactaron</li><li>Hasta 60 minutos de cambios al mes</li></ul></button>
+            <button class="pl" type="button" role="radio" data-plan="avanzado" aria-checked="false" tabindex="-1"><span class="radio" aria-hidden="true"></span><h3>Avanzado <span class="pl-price">$5,990 + $3,990/mes</span></h3><p class="why">Si tienes muchos servicios y quieres una página para cada uno, que tú mismo actualizas.</p><ul><li>Hasta 12 páginas, con todo lo de Negocio</li><li>Catálogo de servicios que tú actualizas</li><li>Reporte mensual de visibilidad en IA y Google, con una mejora de SEO al mes</li><li>Hasta 120 minutos de cambios al mes</li></ul></button>
           </div>
         </div>
         <div>
@@ -1169,7 +1170,7 @@ img{max-width:100%}
             <input type="checkbox" id="addon-wa" checked>
             <span class="sw" aria-hidden="true"></span>
             <span class="addon-txt"><b>Asistente de WhatsApp</b><span>Contesta las preguntas de siempre con las respuestas que tú apruebas, anota los datos de la cita o la cotización y le pasa a tu equipo lo que necesita una persona. Funciona en WhatsApp y en tu página, para un número y una sucursal.</span></span>
-            <span class="addon-price">$3,990<small>+ $1,490/mes</small></span>
+            <span class="addon-price">$2,000<small>+ $1,000/mes</small></span>
           </label>
           <p class="addon-note">El piloto incluye hasta 300 conversaciones al mes. Te avisamos al acercarte al límite y, si se agota, las conversaciones nuevas pasan directo a tu equipo.</p>
         </div>
@@ -1479,7 +1480,7 @@ img{max-width:100%}
 
 
   /* ---------- validity ---------- */
-  const P = {"slug":"clinica-arrayan","plan":"negocio","validUntil":"2026-12-02","validShort":"2 dic","changes":{"rounds":0,"max":1,"status":null,"note":"","demo":true},"wa":{"activation":3990,"monthly":1490},"currency":{"code":"MXN","symbol":"$"},"plans":{"esencial":["Esencial",3490,1490],"negocio":["Negocio",5490,2490],"avanzado":["Avanzado",8490,3990]}};
+  const P = {"slug":"clinica-arrayan","plan":"negocio","validUntil":"2026-12-02","validShort":"2 dic","changes":{"rounds":0,"max":1,"status":null,"note":"","demo":true},"wa":{"esencial":["Asistente de WhatsApp",2990,1490],"negocio":["Asistente de WhatsApp (precio en paquete)",2000,1000],"avanzado":["Asistente de WhatsApp",2990,1490]},"currency":{"code":"MXN","symbol":"$"},"plans":{"esencial":["Esencial",0,1490],"negocio":["Negocio",2990,2490],"avanzado":["Avanzado",5990,3990]}};
   const [vy, vm, vd] = P.validUntil.split('-').map(Number);
   const VALID_UNTIL = new Date(Date.UTC(vy, vm - 1, vd, 23, 59, 59) + 6 * 3600e3); // fin del día, hora del centro
   const now = new Date();
@@ -1502,24 +1503,28 @@ img{max-width:100%}
   $$('[data-renew-btn]').forEach(b => b.addEventListener('click', () => showToast('En el sitio, esto le avisa a Ceiba para actualizar tu propuesta.')));
 
   /* ---------- plan + module selector, single total ---------- */
-  const PLANS = P.plans || { esencial: ['Esencial', 3490, 1490], negocio: ['Negocio', 5490, 2490], avanzado: ['Avanzado', 8490, 3990] };
-  const WA = ['Asistente de WhatsApp', P.wa?.activation ?? 3990, P.wa?.monthly ?? 1490];
+  const PLANS = P.plans;
+  // El asistente cuesta distinto según el plan (con Negocio va en paquete con descuento)
+  const WA = id => P.wa[id];
   const mxn = n => (P.currency?.symbol || '$') + n.toLocaleString('en-US');
   let plan = P.plan;
   const addon = $('#addon-wa');
   function renderTotals() {
     const [pName, pAct, pMon] = PLANS[plan];
     const rows = [['Plan ' + pName, pAct, pMon]];
-    if (addon.checked) rows.push(WA);
+    if (addon.checked) rows.push(WA(plan));
+    const w = WA(plan), ap = document.querySelector('.addon-price');
+    if (ap) ap.innerHTML = `${mxn(w[1])}<small>+ ${mxn(w[2])}/mes${plan === 'negocio' ? ' · precio en paquete' : ''}</small>`;
     const tAct = rows.reduce((a, r) => a + r[1], 0), tMon = rows.reduce((a, r) => a + r[2], 0);
     const pack = 'Plan ' + pName + (addon.checked ? ' + Asistente de WhatsApp' : '');
     $('#sum-table').innerHTML = `<div class="st-row st-head"><span>Partida</span><span>Pago inicial</span><span>Al mes</span></div>` +
       rows.map(r => `<div class="st-row"><span>${r[0]}</span><span>${mxn(r[1])}</span><span>${mxn(r[2])}</span></div>`).join('') +
       `<div class="st-row st-total"><span>Total</span><span>${mxn(tAct)}</span><span>${mxn(tMon)}</span></div>
-       <p class="st-when"><span>Hoy pagas solo el monto inicial.</span><span>La mensualidad empieza cuando publicamos.</span></p>`;
+       <p class="st-when"><span>${tAct ? 'Hoy pagas solo el monto inicial.' : 'Hoy no pagas nada: solo registras tu tarjeta.'}</span><span>La mensualidad empieza cuando publicamos.</span></p>`;
     $('#act-sum').innerHTML = rows.map(r => `<dt>${r[0]}</dt><dd>${mxn(r[1])} + ${mxn(r[2])}/mes</dd>`).join('') +
       `<dt><strong>Pagas hoy · pago inicial</strong></dt><dd><strong>${mxn(tAct)}</strong></dd><dt>Mensualidad desde la publicación</dt><dd>${mxn(tMon)}</dd><dt>Precio válido hasta</dt><dd>${P.validShort}</dd>`;
     $$('[data-total-act]').forEach(el => el.textContent = mxn(tAct));
+    $$('[data-activate]').forEach(b => { b.innerHTML = tAct ? `Activar y pagar <span data-total-act>${mxn(tAct)}</span>` : 'Activar sin pago inicial'; });
     $$('[data-total-mon]').forEach(el => el.textContent = mxn(tMon));
     $$('[data-pack-name]').forEach(el => el.textContent = pack);
   }

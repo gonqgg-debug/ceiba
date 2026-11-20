@@ -6,9 +6,9 @@
 //
 // - Un producto por concepto con ID fijo (ceiba_web_negocio_activacion, ...),
 //   porque el código fiscal de Stripe Tax va en el producto.
-// - Precios identificados por lookup_key. Si cambia un monto, se crea un precio
-//   nuevo y se le transfiere la lookup_key; el anterior queda archivado.
-import { allPrices, CURRENCY } from '../lib/catalog.js';
+// - Los montos ya no viven en Stripe: el servidor los calcula por país con lib/catalog.js
+//   y los manda como price_data al cobrar. Aquí solo se crean los productos.
+import { PLANS, ADDONS, CONSULTING, TAX_CODES } from '../lib/catalog.js';
 import { stripe } from '../lib/stripe.js';
 
 const s = stripe();
@@ -30,36 +30,6 @@ async function ensureProduct(key, item, taxCode) {
     console.log(`  producto ${id} (creado)`);
     return id;
   }
-}
-
-async function ensurePrice(p, productId) {
-  const unit_amount = p.amount * 100; // centavos
-  // Las demás monedas van en currency_options del mismo precio (Checkout y
-  // Suscripciones eligen la moneda con el parámetro `currency`).
-  const currency_options = Object.fromEntries(Object.entries(p.other || {}).map(([c, amt]) => [c, { unit_amount: amt * 100, tax_behavior: 'inclusive' }]));
-  const show = `${p.amount} MXN${Object.entries(p.other || {}).map(([c, a]) => ` / ${a} ${c.toUpperCase()}`).join('')}`;
-  const existing = (await s.prices.list({ lookup_keys: [p.lookupKey], limit: 1, expand: ['data.currency_options'] })).data[0];
-  const sameOptions = existing && Object.entries(currency_options).every(([c, o]) => existing.currency_options?.[c]?.unit_amount === o.unit_amount)
-    && Object.keys(existing.currency_options || {}).filter(c => c !== CURRENCY).length === Object.keys(currency_options).length;
-  const same = existing && existing.unit_amount === unit_amount && existing.currency === CURRENCY &&
-    existing.product === productId && existing.tax_behavior === 'inclusive' && sameOptions &&
-    (existing.recurring?.interval ?? null) === (p.recurring?.interval ?? null);
-  if (same) { console.log(`    precio ${p.lookupKey}: ${show} (sin cambios)`); return existing.id; }
-  const price = await s.prices.create({
-    product: productId,
-    currency: CURRENCY,
-    unit_amount,
-    tax_behavior: 'inclusive', // el monto es el precio final
-    ...(Object.keys(currency_options).length ? { currency_options } : {}),
-    lookup_key: p.lookupKey,
-    transfer_lookup_key: true,
-    nickname: `${p.item.name} · ${p.phase}`,
-    ...(p.recurring ? { recurring: p.recurring } : {}),
-    metadata: { ceiba_key: p.lookupKey },
-  });
-  if (existing) await s.prices.update(existing.id, { active: false });
-  console.log(`    precio ${p.lookupKey}: ${show} (${existing ? 'reemplazado' : 'creado'})`);
-  return price.id;
 }
 
 async function ensurePortal() {
@@ -90,15 +60,12 @@ async function ensurePortal() {
   return res;
 }
 
-const PHASE_LABEL = { activacion: 'Pago inicial', mensual: 'Mensualidad', unico: '' };
-for (const p of allPrices()) {
-  const label = PHASE_LABEL[p.phase];
-  const item = { name: label ? `${p.item.name} · ${label}` : p.item.name, description: p.item.description };
-  const productId = await ensureProduct(p.lookupKey, item, p.taxCode);
-  const priceId = await ensurePrice(p, productId);
-  // Precio por defecto: sin él, el panel de Stripe muestra el producto sin precio.
-  const prod = await s.products.retrieve(productId);
-  if (prod.default_price !== priceId) await s.products.update(productId, { default_price: priceId });
-}
+const PHASE_LABEL = { activacion: 'Pago inicial', mensual: 'Mensualidad' };
+const items = [
+  ...Object.entries(PLANS).flatMap(([id, it]) => [['web', id, it, 'activacion', TAX_CODES.websiteDesign], ['web', id, it, 'mensual', TAX_CODES.websiteHosting]]),
+  ...Object.entries(ADDONS).flatMap(([id, it]) => [['modulo', id, it, 'activacion', TAX_CODES.saasBusiness], ['modulo', id, it, 'mensual', TAX_CODES.saasBusiness]]),
+];
+for (const [kind, id, it, phase, tax] of items) await ensureProduct(`${kind}_${id}_${phase}`, { name: `${it.name} · ${PHASE_LABEL[phase]}`, description: it.description }, tax);
+await ensureProduct('consultoria_diagnostico_ia_unico', { name: CONSULTING.diagnostico_ia.name, description: CONSULTING.diagnostico_ia.description }, TAX_CODES.consulting);
 await ensurePortal();
 console.log('\nListo.');

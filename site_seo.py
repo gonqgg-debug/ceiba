@@ -226,7 +226,7 @@ def sitemap_xml():
 def llms_txt(cat, pages_html):
     """Resumen para asistentes de IA (formato llmstxt.org), con precios y preguntas frecuentes reales."""
     money = lambda n: f"${n:,.0f} MXN"
-    plans = "\n".join(f"- {p['name']}: {money(p['activation'])} de pago inicial y {money(p['monthly'])} al mes. {p['description']}" for p in cat["plans"].values())
+    plans = "\n".join(f"- {p['name']}: {(money(p['activation']) + ' de pago inicial') if p['activation'] else 'sin pago inicial'} y {money(p['monthly'])} al mes. {p['description']}" for p in cat["plans"].values())
     wa, diag, pilot = cat["whatsapp"], cat["diagnostico"], cat["piloto"]
     faq_md = ""
     for key, title in [("index.html", "Generales"), ("webs.html", "Páginas web"), ("ia.html", "Inteligencia artificial")]:
@@ -241,7 +241,7 @@ Datos clave:
 - Antes de pagar, el negocio recibe una propuesta gratis con su nueva página ya diseñada para que la vea.
 - Las páginas incluyen diseño, hosting, mantenimiento, SEO base, datos estructurados, optimización para buscadores de IA y minutos de cambios al mes.
 - Después de pagar, un asistente de IA reúne los materiales del negocio (logo, fotos, datos, dominio) y el equipo construye y publica la página.
-- Precios finales en pesos mexicanos (también se cotiza en dólares).
+- Precios finales, por país y en moneda local o dólares.
 
 ## Páginas web
 - [Páginas web por suscripción]({SITE}/webs): planes, qué incluye cada uno y cómo optimizamos para Google y la IA.
@@ -250,11 +250,16 @@ Datos clave:
 ### Planes
 {plans}
 - Complemento {wa['name']}: {money(wa['activation'])} de pago inicial y {money(wa['monthly'])} al mes. {wa['description']}
+- Paquete {cat['bundle']['name']}: {money(cat['bundle']['activation'])} de pago inicial y {money(cat['bundle']['monthly'])} al mes.
+
+Precios de México en pesos mexicanos. También hay precios en moneda local o en dólares para {', '.join(cat['countries'])} y el resto del mundo; en ceibalabs.io/webs se puede elegir el país.
 
 ## Inteligencia artificial y procesos
 - [IA y automatización para negocios]({SITE}/ia): asistentes, agentes, automatización y cómo trabajamos.
-- {diag['name']}: {money(diag['amount'])}. {diag['description']}
+- Llamada de descubrimiento: gratis, 30 minutos por video.
+- {diag['name']}: desde {money(diag['amount'])}. {diag['description']}
 - {pilot['name']}: desde {money(pilot['from'])}. {pilot['description']}
+- {cat['operacion']['name']}: desde {money(cat['operacion']['from'])} al mes. {cat['operacion']['description']}
 
 ## Empezar
 - [Propuesta gratis]({SITE}/webs#diagnostico): el negocio deja su página actual (o sus datos) y recibe su propuesta con la página nueva.

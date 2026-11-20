@@ -36,11 +36,14 @@ export async function handle(event) {
   switch (event.type) {
     case 'checkout.session.completed':
     case 'checkout.session.async_payment_succeeded': {
-      if (obj.mode !== 'payment' || obj.payment_status !== 'paid' || !obj.metadata?.ceiba_proposal) return;
+      // payment: pagó el monto inicial. setup: plan sin pago inicial, solo registró su tarjeta.
+      const paid = obj.mode === 'payment' && obj.payment_status === 'paid';
+      const setup = obj.mode === 'setup' && obj.status === 'complete';
+      if ((!paid && !setup) || !obj.metadata?.ceiba_proposal) return;
       // Deja en el cliente lo necesario para crear la mensualidad al publicar.
-      const pi = await s.paymentIntents.retrieve(obj.payment_intent);
+      const pm = paid ? (await s.paymentIntents.retrieve(obj.payment_intent)).payment_method : (await s.setupIntents.retrieve(obj.setup_intent)).payment_method;
       await s.customers.update(obj.customer, {
-        invoice_settings: { default_payment_method: pi.payment_method },
+        invoice_settings: { default_payment_method: pm },
         metadata: { ...obj.metadata, ceiba_activation_session: obj.id, ceiba_status: 'activada' },
       });
       console.info(`Web activada: ${obj.metadata.ceiba_proposal} · plan ${obj.metadata.ceiba_plan} · cliente ${obj.customer}`);
@@ -65,7 +68,7 @@ export async function handle(event) {
         } catch (err) { console.error('webhook: no se creó el chat', err.message); }
       }
       if (mailReady() && process.env.CEIBA_NOTIFY_EMAIL) {
-        const total = `$${(obj.amount_total / 100).toLocaleString('en-US')} ${obj.currency.toUpperCase()}`;
+        const total = setup ? 'sin pago inicial (registró su tarjeta)' : `${(obj.amount_total / (obj.currency === 'clp' ? 1 : 100)).toLocaleString('en-US')} ${obj.currency.toUpperCase()}`;
         const who = obj.customer_details?.email || obj.customer;
         await sendMail({
           to: process.env.CEIBA_NOTIFY_EMAIL.split(','),

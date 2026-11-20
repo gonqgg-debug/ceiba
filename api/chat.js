@@ -352,7 +352,7 @@ export async function GET(request) {
     const sid = q.get('session_id');
     if (sid) {
       const s = await stripe().checkout.sessions.retrieve(sid);
-      if (s.payment_status !== 'paid' || !s.metadata?.ceiba_proposal) return json({ error: 'Pago no encontrado.' }, 404);
+      if ((s.payment_status !== 'paid' && !(s.mode === 'setup' && s.status === 'complete')) || !s.metadata?.ceiba_proposal) return json({ error: 'Pago no encontrado.' }, 404);
       const slug = s.metadata.ceiba_proposal;
       const prop = (await select('proposals', `slug=eq.${encodeURIComponent(slug)}&select=id,business&limit=1`))?.[0];
       await ensureChat({ proposalId: prop?.id, slug, business: prop?.business, email: s.customer_details?.email });

@@ -741,6 +741,7 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
 #precios .plans .plan .price-cell + .price-cell .v small{display:inline;margin-left:6px;font:400 16px var(--f-body);color:var(--muted)}
 #precios .plans .plan .price-cell:has(+ .price-cell) .v{font:400 15px var(--f-body);color:var(--muted)}
 #precios .plans .plan .price-cell:has(+ .price-cell) .v::before{content:"+ "}
+#precios .plans .plan .price-cell.no-fee .v::before{content:none}
 #precios .plans .plan .price-cell:has(+ .price-cell) .v small{display:inline;margin-left:4px;font-size:15px}
 #precios .plans .plan ul{order:3;flex:1;align-content:start;gap:10px;display:grid}
 #precios .plans .plan ul li{display:block;position:relative;padding-left:22px}
@@ -939,7 +940,7 @@ body.adm input:not([type=checkbox]):not([type=color]),body.adm textarea,body.adm
 
   async function detail(slug) {
     app.innerHTML = '<p class="empty">Cargando…</p>';
-    const { proposal: p, currencies: CURS = [] } = await api('GET', null, `?action=get&slug=${encodeURIComponent(slug)}`);
+    const { proposal: p, countries: CTRS = [] } = await api('GET', null, `?action=get&slug=${encodeURIComponent(slug)}`);
     $('#logout').hidden = false;
     const lead = p.leads?.[0] || {};
     const content = p.content || p.ai_draft || {};
@@ -967,10 +968,11 @@ body.adm input:not([type=checkbox]):not([type=color]),body.adm textarea,body.adm
             <div class="row2">
               <div class="fld"><label for="f-plan">Plan recomendado</label><select id="f-plan">${['esencial', 'negocio', 'avanzado'].map(x => `<option value="${x}"${x === p.recommended_plan ? ' selected' : ''}>${x[0].toUpperCase() + x.slice(1)}</option>`).join('')}</select></div>
               <div class="fld"><label for="f-days">Vigencia (días)</label><input id="f-days" type="number" min="3" max="30" value="14"></div>
-              <div class="fld"><label for="f-cur">Moneda</label><select id="f-cur">${(CURS.length ? CURS : [{ id: 'mxn', code: 'MXN', public: true }]).map(c => `<option value="${c.id}"${c.id === (p.currency || 'mxn') ? ' selected' : ''}>${c.code}${c.public ? '' : ' (solo propuestas)'}</option>`).join('')}</select></div>
+              <div class="fld"><label for="f-country">País (precios)</label><select id="f-country">${CTRS.map(c => `<option value="${c.id}"${c.id === (p.country || 'MX') ? ' selected' : ''}>${esc(c.name)} · ${c.code}</option>`).join('')}</select></div>
             </div>
             <fieldset class="theme"><legend>Diseño</legend>${Object.entries(THEME).map(([k, opts]) => `<label><span>${THEME_LABEL[k]}</span><select data-theme="${k}">${Object.entries(opts).map(([v, l]) => `<option value="${v}"${(page.theme?.[k] || Object.keys(opts)[0]) === v ? ' selected' : ''}>${l}</option>`).join('')}</select></label>`).join('')}<label><span>Color de marca</span><input type="color" id="f-accent" value="${esc(/^#[0-9a-f]{6}$/i.test(page.brand?.accent || '') ? page.brand.accent : '#1F4FD1')}"></label></fieldset>
             <label class="check"><input type="checkbox" id="f-wa"${p.whatsapp_recommended ? ' checked' : ''}>Recomendar el Asistente de WhatsApp</label>
+            <label class="check"><input type="checkbox" id="f-tour"${p.touristic ? ' checked' : ''}>Nicho turístico (hotel, villa, inmobiliaria): precios de nivel 1</label>
             <div class="fld"><label for="f-json">Contenido (JSON) <span>· textos, fotos y cambios. Esquema en ops/esquema-propuesta.md</span></label><textarea class="json" id="f-json" spellcheck="false">${esc(JSON.stringify(content, null, 2))}</textarea></div>
             <p class="msg" id="msg" role="status"></p>
             <div class="acts">
@@ -998,7 +1000,7 @@ body.adm input:not([type=checkbox]):not([type=color]),body.adm textarea,body.adm
       content.page ||= {}; content.page.theme = Object.fromEntries([...app.querySelectorAll('[data-theme]')].map(x => [x.dataset.theme, x.value]));
       content.page.brand = { ...(content.page.brand || {}), accent: $('#f-accent').value };
       $('#f-json').value = JSON.stringify(content, null, 2);
-      await api('POST', { action: 'save', slug, content, plan: $('#f-plan').value, currency: $('#f-cur').value, whatsapp: $('#f-wa').checked, business: $('#f-biz').value });
+      await api('POST', { action: 'save', slug, content, plan: $('#f-plan').value, country: $('#f-country').value, touristic: $('#f-tour').checked, whatsapp: $('#f-wa').checked, business: $('#f-biz').value });
       $('#frame').src = $('#frame').src; msg('Guardado.', 'ok');
     };
     $('#save').addEventListener('click', () => save().catch(e => msg(e.message, 'err')));
