@@ -20,7 +20,7 @@ import { dbReady, insert, select, update } from '../lib/db.js';
 import { escHtml, mailReady, sendMail } from '../lib/notify.js';
 import {
   ALLOWED_TYPES, LONG_LINK, MAX_BYTES, chatUrl, checkDomain, checklist, ensureChat, ensureFound,
-  findChatByEmail, getChat, saveChat, signDownload, signUpload, validToken,
+  findChatByEmail, getChat, saveChat, signDownload, signUpload, validToken, ATTACH, transcript, engineerUpdate,
 } from '../lib/client-chat.js';
 
 // Modelo barato a propósito: este asistente solo recoge materiales e instrucciones.
@@ -242,23 +242,6 @@ async function notifyTeam(chat, effects) {
 }
 
 // ---------- lo que ve el cliente ----------
-const ATTACH = '[Archivos adjuntos] ';
-function transcript(chat) {
-  const out = [];
-  for (const m of chat.messages || []) {
-    const blocks = typeof m.content === 'string' ? [{ type: 'text', text: m.content }] : m.content || [];
-    if (m.role === 'user') {
-      const text = blocks.filter(b => b.type === 'text' && !b.text.startsWith(ATTACH)).map(b => b.text).join('\n').trim();
-      const att = blocks.find(b => b.type === 'text' && b.text.startsWith(ATTACH));
-      const files = att ? JSON.parse(att.text.slice(ATTACH.length)).map(f => f.nombre) : [];
-      if (text || files.length) out.push({ who: 'me', text, files });
-    } else if (m.role === 'assistant') {
-      const text = blocks.filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
-      if (text) out.push({ who: 'bot', text });
-    }
-  }
-  return out;
-}
 function greeting(chat) {
   const name = chat.data?.contacto_nombre;
   const f = chat.data?.encontrado;
@@ -360,24 +343,9 @@ export async function POST(request) {
     const token = process.env.CEIBA_ADMIN_TOKEN || '';
     const given = (request.headers.get('authorization') || '').replace(/^Bearer\s+/i, '');
     if (!token || given.length !== token.length || !timingSafeEqual(Buffer.from(given), Buffer.from(token))) return json({ error: 'No autorizado.' }, 401);
-    const sol = (await select('solicitudes', `id=eq.${encodeURIComponent(b.solicitud || '')}&limit=1`).catch(() => []))?.[0];
-    if (!sol) return json({ error: 'No existe esa solicitud.' }, 404);
-    const estado = ['en_proceso', 'necesita_info', 'aplicado', 'descartado'].includes(b.estado) ? b.estado : sol.estado;
-    const mensaje = String(b.mensaje || '').trim().slice(0, 2000);
-    const patch = { estado, ...(estado === 'aplicado' ? { applied_at: new Date().toISOString() } : {}), ...(b.nota ? { nota: String(b.nota).slice(0, 2000) } : {}) };
-    if (mensaje) patch.hilo = [...(sol.hilo || []), { de: 'ingeniero', texto: mensaje, at: new Date().toISOString() }];
-    await update('solicitudes', `id=eq.${sol.id}`, patch);
-    const chat = await getChat(sol.slug);
-    if (chat && mensaje) {
-      // El mensaje le llega al cliente con la voz del equipo de customer success.
-      await saveChat(chat.id, { messages: [...(chat.messages || []), { role: 'assistant', content: [{ type: 'text', text: mensaje }] }] });
-      if (chat.email && mailReady()) {
-        await sendMail({ to: chat.email, subject: estado === 'aplicado' ? 'Listo tu cambio · Ceiba Labs' : 'Tenemos una pregunta sobre tu página · Ceiba Labs',
-          html: `<div style="max-width:560px;font:15px/1.6 sans-serif;color:#0C1226"><p>${escHtml(mensaje)}</p><p><a href="${chatUrl(chat.slug)}">Responder en tu chat</a></p><p>Equipo de Ceiba Labs</p></div>` })
-          .catch(err => console.error('chat: aviso al cliente no enviado', err.message));
-      }
-    }
-    return json({ ok: true, estado });
+    const r = await engineerUpdate(b);
+    if (r.error) return json({ error: r.error }, r.status || 400);
+    return json({ ok: true, estado: r.estado });
   }
 
   if (b.action === 'link') {

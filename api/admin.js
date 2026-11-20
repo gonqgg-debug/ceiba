@@ -8,12 +8,35 @@
 //   POST {action:'discard', slug}
 //   POST {action:'undo_changes', slug}    → vuelve al contenido antes de la ronda de ajustes
 //   POST {action:'grant_round', slug}     → le da otra ronda de ajustes al cliente
+//   GET  ?action=clients                   → clientes que pagaron (chats) con su avance
+//   GET  ?action=client&slug=...           → chat, datos, archivos y solicitudes
+//   POST {action:'client_message', slug, mensaje}           → escribirle al cliente
+//   POST {action:'client_phase', slug, phase}               → arranque | construccion | soporte
+//   POST {action:'request_update', slug, solicitud, estado, mensaje, nota}
 import { adminCookie, isAdmin } from '../lib/admin.js';
 import { dbReady, select, update } from '../lib/db.js';
 import { escHtml, mailReady, sendMail } from '../lib/notify.js';
 import { PLANS, CURRENCIES, pricedCurrencies } from '../lib/catalog.js';
 import { json, siteUrl } from '../lib/stripe.js';
 import { validSlug } from '../lib/proposals.js';
+import { checklist, chatUrl, engineerUpdate, getChat, messageClient, saveChat, signDownload, transcript, SOL_STATES } from '../lib/client-chat.js';
+
+const PHASES = ['arranque', 'construccion', 'soporte'];
+async function clientDetail(slug) {
+  const chat = await getChat(slug);
+  if (!chat) return null;
+  const sols = await select('solicitudes', `slug=eq.${encodeURIComponent(slug)}&order=created_at.desc&limit=50`).catch(() => []);
+  const sign = async f => ({ ...f, url: await signDownload(f.ruta || f.path, 60 * 60 * 24).catch(() => null) });
+  const files = await Promise.all((chat.files || []).map(f => sign({ ...f, ruta: f.path })));
+  const solicitudes = await Promise.all((sols || []).map(async r => ({ ...r, archivos: await Promise.all((r.archivos || []).map(sign)) })));
+  const { encontrado, cambios, ...data } = chat.data || {};
+  return {
+    slug: chat.slug, business: chat.business, email: chat.email, phase: chat.phase, needs_human: chat.needs_human,
+    created_at: chat.created_at, last_client_at: chat.last_client_at, link: chatUrl(chat.slug),
+    checklist: checklist(chat), data, encontrado: encontrado || null, files, messages: transcript(chat), solicitudes,
+  };
+}
+
 
 const MONTHS = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
 const longDate = iso => { const [y, m, d] = iso.split('-').map(Number); return `${d} de ${MONTHS[m - 1]}`; };
@@ -40,6 +63,23 @@ export async function GET(request) {
       const p = await getBySlug(slug);
       return p ? json({ proposal: p, currencies: pricedCurrencies().map(c => ({ id: c, code: CURRENCIES[c].code, public: CURRENCIES[c].public })) }) : json({ error: 'No existe.' }, 404);
     }
+    if (q.get('action') === 'clients') {
+      const chats = await select('client_chats', 'select=id,slug,business,email,phase,needs_human,data,files,created_at,updated_at,last_client_at&order=updated_at.desc&limit=200');
+      const open = await select('solicitudes', 'select=slug,estado,urgente&estado=in.(pendiente,en_proceso,necesita_info)&limit=1000').catch(() => []);
+      const clients = (chats || []).map(c => {
+        const mine = (open || []).filter(r => r.slug === c.slug);
+        const ck = checklist(c);
+        return { slug: c.slug, business: c.business, email: c.email, phase: c.phase, needs_human: c.needs_human, created_at: c.created_at, updated_at: c.updated_at, last_client_at: c.last_client_at,
+          avance: `${ck.done}/${ck.total}`, pendientes: mine.filter(r => r.estado === 'pendiente').length, abiertas: mine.length, urgente: mine.some(r => r.urgente) };
+      });
+      return json({ clients });
+    }
+    if (q.get('action') === 'client') {
+      const slug = q.get('slug');
+      if (!validSlug(slug)) return json({ error: 'Slug inválido.' }, 400);
+      const c = await clientDetail(slug);
+      return c ? json({ client: c, states: SOL_STATES, phases: PHASES }) : json({ error: 'No existe ese cliente.' }, 404);
+    }
     return json({ error: 'Acción desconocida.' }, 400);
   } catch (err) {
     console.error('admin GET', err.message);
@@ -62,6 +102,26 @@ export async function POST(request) {
   if (!validSlug(b.slug)) return json({ error: 'Slug inválido.' }, 400);
 
   try {
+    if (['client_message', 'client_phase', 'request_update'].includes(b.action)) {
+      const chat = await getChat(b.slug);
+      if (!chat) return json({ error: 'No existe ese cliente.' }, 404);
+      if (b.action === 'client_message') {
+        if (!String(b.mensaje || '').trim()) return json({ error: 'Escribe un mensaje.' }, 400);
+        await messageClient(chat, b.mensaje);
+        if (chat.needs_human) await saveChat(chat.id, { needs_human: false });
+        return json({ ok: true });
+      }
+      if (b.action === 'client_phase') {
+        if (!PHASES.includes(b.phase)) return json({ error: 'Fase inválida.' }, 400);
+        await saveChat(chat.id, { phase: b.phase, ...(b.phase !== chat.phase ? { needs_human: false } : {}) });
+        return json({ ok: true });
+      }
+      const sol = (await select('solicitudes', `id=eq.${encodeURIComponent(b.solicitud || '')}&slug=eq.${encodeURIComponent(b.slug)}&select=id&limit=1`))?.[0];
+      if (!sol) return json({ error: 'Esa solicitud no es de este cliente.' }, 404);
+      const r = await engineerUpdate(b);
+      return r.error ? json({ error: r.error }, r.status || 400) : json({ ok: true, estado: r.estado });
+    }
+
     const p = await getBySlug(b.slug);
     if (!p) return json({ error: 'No existe.' }, 404);
 

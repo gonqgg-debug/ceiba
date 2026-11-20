@@ -19,6 +19,20 @@ al cliente a través del agente. El agente es el puente entre los dos.
 
 Cada solicitud nueva también llega por correo al equipo con su id.
 
+## Desde el panel (/admin → Clientes)
+La pestaña **Clientes** lista a quien ya pagó, ordenado por lo urgente: quien pidió una persona,
+cambios urgentes y solicitudes pendientes. Al abrir un cliente ves:
+- **Solicitudes** con sus archivos y el hilo con el cliente. Cambia el estado y, si quieres, escríbele:
+  el mensaje le llega en su chat y por correo (igual que `action: "engineer"`).
+- **Datos que confirmó**, **archivos que subió** (enlaces de 24 h) y la **conversación** completa.
+- **Etapa**: al publicar su página, pásalo a «Publicada» para que el asistente atienda cambios.
+
+El flujo completo después del chat:
+1. El cliente confirma todo → el asistente crea la solicitud «Construir la página» (estado pendiente) y avisa por correo.
+2. La tomas (En proceso), construyes la página con Claude Code y le mandas la vista previa con un mensaje.
+3. Si falta algo, «Esperando al cliente» + tu pregunta; su respuesta regresa a la misma solicitud.
+4. Publicas, marcas «Aplicado» y cambias la etapa a «Publicada».
+
 ## Ver lo pendiente
 ```sql
 select id, tipo, slug, business, seccion, instruccion, archivos, urgente, created_at

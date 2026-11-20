@@ -59,6 +59,30 @@ textarea.json{width:100%;min-height:420px;font:400 12.5px/1.5 var(--f-mono);back
 .frame-wrap.mob iframe{width:390px;border-left:1px solid #ddd;border-right:1px solid #ddd}
 .sent{border:1px solid rgba(214,250,82,.4);background:rgba(214,250,82,.06);border-radius:12px;padding:14px;display:grid;gap:10px;font-size:14px}
 .sent textarea{width:100%;min-height:110px;background:var(--ink);color:var(--ivory);border:1px solid var(--line);border-radius:8px;padding:10px;font:14px/1.5 var(--f-body)}
+.a-tabs{display:flex;gap:4px}
+.a-tabs a{font-size:14px;color:var(--muted);padding:7px 12px;border-radius:8px;text-decoration:none}
+.a-tabs a.on{background:rgba(247,244,235,.08);color:var(--ivory)}
+.st--wait{border-color:#F5B94A;color:#F5B94A}
+.c-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start}
+.sol{border:1px solid rgba(247,244,235,.12);border-radius:12px;padding:14px;display:grid;gap:10px}
+.sol-h{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;color:var(--muted)}
+.sol-h b{color:var(--ivory);font-size:14px}
+.sol p{margin:0;white-space:pre-wrap;font-size:14px}
+.hilo{display:grid;gap:6px;font-size:13px}
+.hilo div{padding:8px 10px;border-radius:8px;background:rgba(247,244,235,.05)}
+.hilo div.ing{background:rgba(214,250,82,.07)}
+.hilo em{font-style:normal;color:var(--muted);font-size:12px;display:block;margin-bottom:2px}
+.sol textarea,.c-send textarea{width:100%;min-height:70px;background:var(--ink);color:var(--ivory);border:1px solid rgba(247,244,235,.18);border-radius:8px;padding:10px;font:14px/1.5 var(--f-body);resize:vertical}
+.sol select,.c-phase select{height:38px;border-radius:8px;border:1px solid rgba(247,244,235,.18);background:var(--ink);color:var(--ivory);padding:0 8px;font:inherit}
+.files{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
+.files a{display:grid;gap:4px;font-size:12px;color:var(--muted);text-decoration:none;overflow-wrap:anywhere}
+.files a span.th{aspect-ratio:1;border-radius:8px;background:rgba(247,244,235,.06) center/cover;display:grid;place-items:center;font:500 11px var(--f-mono);color:var(--ivory)}
+.convo{display:grid;gap:10px;max-height:calc(100vh - 220px);overflow:auto;padding-right:4px}
+.convo div{max-width:88%;padding:10px 12px;border-radius:12px;font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere}
+.convo .bot{background:rgba(247,244,235,.05)}
+.convo .me{justify-self:end;background:rgba(214,250,82,.1)}
+.convo small{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+@media (max-width:1000px){.c-grid{grid-template-columns:1fr}}
 @media (max-width:1000px){.d-grid{grid-template-columns:1fr}.prev{position:static}.frame-wrap{height:80vh}}
 </style>
 </head>
@@ -66,7 +90,7 @@ textarea.json{width:100%;min-height:420px;font:400 12.5px/1.5 var(--f-mono);back
 {{SYMBOLS}}
 <header class="a-head">
   <a href="/" aria-label="Ceiba Labs"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
-  <span class="crumb">Panel de propuestas</span><span class="sp"></span>
+  <nav class="a-tabs" id="tabs" hidden><a href="#" data-t="prop">Propuestas</a><a href="#clientes" data-t="cli">Clientes</a></nav><span class="sp"></span>
   <button class="btn btn-line btn-s" type="button" id="logout" hidden>Salir</button>
 </header>
 <main class="a-main" id="app" aria-live="polite"></main>
@@ -98,7 +122,7 @@ textarea.json{width:100%;min-height:420px;font:400 12.5px/1.5 var(--f-mono);back
   const PROP = { borrador: 'Borrador', enviada: 'Enviada', vista: 'La vio', activada: 'Pagó', vencida: 'Vencida', descartada: 'Descartada' };
 
   function login() {
-    $('#logout').hidden = true;
+    $('#logout').hidden = true; $('#tabs').hidden = true;
     app.innerHTML = `<form class="a-login form" id="lf"><h1>Entrar al panel</h1>
       <div class="fld"><label for="tk">Token del equipo</label><input id="tk" type="password" autocomplete="current-password" required></div>
       <p class="msg err" id="lerr" hidden></p><button class="btn btn-primary" type="submit">Entrar</button>
@@ -223,9 +247,82 @@ textarea.json{width:100%;min-height:420px;font:400 12.5px/1.5 var(--f-mono);back
     });
   }
 
+  /* ---------- clientes que ya pagaron ---------- */
+  const PHASE = { arranque: 'Reuniendo materiales', construccion: 'Construyendo', soporte: 'Publicada' };
+  const SOL = { pendiente: 'Pendiente', en_proceso: 'En proceso', necesita_info: 'Esperando al cliente', aplicado: 'Aplicado', descartado: 'Descartado' };
+  const DATA_LBL = { nombre_negocio: 'Nombre', giro: 'Giro', horario: 'Horario', direccion: 'Dirección', telefono: 'Teléfono', whatsapp: 'WhatsApp', correo: 'Correo', servicios: 'Servicios', colores: 'Colores', estilo: 'Estilo', redes: 'Redes', zona: 'Zona', dominio: 'Dominio', dominio_situacion: 'Dominio (situación)', dominio_proveedor: 'Proveedor del dominio', logo_web: 'Logo de su página', fotos_web: 'Fotos de su página', sin_logo: 'Sin logo', sin_fotos: 'Sin fotos', notas: 'Notas' };
+  const link = (u, t) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`;
+
+  async function clients() {
+    app.innerHTML = '<p class="empty">Cargando…</p>';
+    const { clients: cs } = await api('GET', null, '?action=clients');
+    $('#logout').hidden = false;
+    const rank = c => (c.needs_human ? 0 : c.urgente ? 1 : c.pendientes ? 2 : 3);
+    cs.sort((a, b) => rank(a) - rank(b));
+    const rows = cs.map(c => `<tr class="row" data-slug="${esc(c.slug)}" tabindex="0">
+      <td><b>${esc(c.business || c.slug)}</b><small>${esc(c.email || '')}</small></td>
+      <td><span class="st">${PHASE[c.phase] || c.phase}</span>${c.phase === 'arranque' ? `<small>Avance ${esc(c.avance)}</small>` : ''}</td>
+      <td>${c.needs_human ? '<span class="st st--warn">Atender en persona</span>' : ''}${c.pendientes ? ` <span class="st st--hot">${c.pendientes} por hacer</span>` : ''}${c.urgente ? ' <span class="st st--warn">Urgente</span>' : ''}${!c.needs_human && !c.abiertas ? '<small>Nada pendiente</small>' : c.abiertas > c.pendientes ? `<small>${c.abiertas - c.pendientes} en curso</small>` : ''}</td>
+      <td>${fmt(c.last_client_at)}<small>pagó ${fmt(c.created_at)}</small></td></tr>`).join('');
+    app.innerHTML = `<h1>Clientes</h1>${cs.length ? `<div style="overflow-x:auto"><table><thead><tr><th>Cliente</th><th>Etapa</th><th>Qué hay que hacer</th><th>Último mensaje</th></tr></thead><tbody>${rows}</tbody></table></div>` : '<p class="empty">Todavía no hay clientes que hayan pagado.</p>'}`;
+    app.querySelectorAll('tr.row').forEach(tr => {
+      const go = () => { location.hash = `cliente/${tr.dataset.slug}`; };
+      tr.addEventListener('click', go); tr.addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
+    });
+  }
+
+  async function client(slug) {
+    app.innerHTML = '<p class="empty">Cargando…</p>';
+    const { client: c, states, phases } = await api('GET', null, `?action=client&slug=${encodeURIComponent(slug)}`);
+    $('#logout').hidden = false;
+    const val = (k, v) => Array.isArray(v) ? (k === 'fotos_web' ? `${v.length} fotos: ${v.map((u, i) => link(u, i + 1)).join(' ')}` : esc(v.join(', '))) : k === 'logo_web' ? link(v, 'ver logo') : esc(v);
+    const data = Object.entries(c.data).map(([k, v]) => `<dt>${esc(DATA_LBL[k] || k)}</dt><dd>${val(k, v)}</dd>`).join('');
+    const fileTile = f => `<a href="${esc(f.url || '#')}" target="_blank" rel="noopener"><span class="th" style="${/^image\//.test(f.tipo || f.type || '') && f.url ? `background-image:url('${esc(f.url)}')` : ''}">${/^image\//.test(f.tipo || f.type || '') ? '' : esc(((f.nombre || f.name || '').split('.').pop() || '').toUpperCase())}</span>${esc(f.clase || f.kind || 'sin clasificar')} · ${esc(f.nombre || f.name)}</a>`;
+    const sols = c.solicitudes.map(r => `<div class="sol" data-id="${esc(r.id)}">
+        <div class="sol-h"><b>${r.tipo === 'materiales' ? 'Construir la página' : `Cambio: ${esc(r.seccion)}`}</b><span class="st ${r.estado === 'pendiente' ? 'st--hot' : r.estado === 'necesita_info' ? 'st--wait' : ''}">${SOL[r.estado] || r.estado}</span>${r.urgente ? '<span class="st st--warn">Urgente</span>' : ''}<span>${fmt(r.created_at)} · <code>${esc(r.id.slice(0, 8))}</code></span></div>
+        <p>${esc(r.instruccion)}</p>
+        ${r.archivos?.length ? `<div class="files">${r.archivos.map(fileTile).join('')}</div>` : ''}
+        ${r.hilo?.length ? `<div class="hilo">${r.hilo.map(h => `<div class="${h.de === 'ingeniero' ? 'ing' : ''}"><em>${h.de === 'ingeniero' ? 'Equipo' : 'Cliente'} · ${fmt(h.at)}</em>${esc(h.texto)}</div>`).join('')}</div>` : ''}
+        ${r.nota ? `<small>Nota: ${esc(r.nota)}</small>` : ''}
+        ${['aplicado', 'descartado'].includes(r.estado) ? '' : `<textarea placeholder="Mensaje para el cliente (opcional). Le llega en su chat y por correo."></textarea>
+        <div class="acts"><select>${states.map(s => `<option value="${s}"${s === r.estado ? ' selected' : ''}>${SOL[s]}</option>`).join('')}</select><button class="btn btn-primary btn-s" type="button" data-act="sol">Guardar</button></div>`}
+      </div>`).join('');
+    app.innerHTML = `<div class="d-top"><a class="btn btn-line btn-s" href="#clientes">← Clientes</a><h1>${esc(c.business || c.slug)}</h1>
+        <span class="st">${PHASE[c.phase] || c.phase}</span>${c.needs_human ? '<span class="st st--warn">Pidió hablar con una persona</span>' : ''}<span class="sp" style="flex:1"></span>${link(c.link, 'Abrir su chat')}</div>
+      <div class="c-grid">
+        <div style="display:grid;gap:16px">
+          <section class="panel"><h2>Solicitudes</h2>${sols || '<p class="empty" style="padding:0">El asistente todavía no ha mandado nada al equipo.</p>'}</section>
+          <section class="panel"><h2>Datos que confirmó</h2>${data ? `<dl class="kv">${data}</dl>` : '<p class="empty" style="padding:0">Todavía no hay datos.</p>'}
+            ${c.phase === 'arranque' ? `<small>Avance: ${c.checklist.items.map(i => `${i.done ? '✓' : '·'} ${esc(i.label)}`).join(' &nbsp; ')}</small>` : ''}</section>
+          <section class="panel"><h2>Archivos que subió</h2>${c.files.length ? `<div class="files">${c.files.map(fileTile).join('')}</div>` : '<p class="empty" style="padding:0">No ha subido archivos.</p>'}</section>
+          <section class="panel c-phase"><h2>Etapa</h2><div class="acts"><select id="ph">${phases.map(p => `<option value="${p}"${p === c.phase ? ' selected' : ''}>${PHASE[p]}</option>`).join('')}</select><button class="btn btn-line btn-s" type="button" id="ph-save">Cambiar etapa</button></div>
+            <small>Cuando publiques su página, pásalo a «Publicada»: el asistente cambia a modo de soporte y recibe pedidos de cambios.</small></section>
+          <p class="msg" id="msg" role="status"></p>
+        </div>
+        <section class="panel"><h2>Conversación</h2>
+          <div class="convo" id="convo">${c.messages.map(m => `<div class="${m.who}">${esc(m.text)}${m.files?.length ? `<small>📎 ${m.files.map(esc).join(', ')}</small>` : ''}</div>`).join('') || '<p class="empty" style="padding:0">El cliente todavía no escribe.</p>'}</div>
+          <div class="c-send"><textarea id="cm" placeholder="Escríbele al cliente. Le aparece en su chat y le llega por correo."></textarea>
+          <div class="acts" style="margin-top:8px"><button class="btn btn-primary btn-s" type="button" id="cm-send">Enviar al cliente</button></div></div>
+        </section>
+      </div>`;
+    const convo = $('#convo'); convo.scrollTop = convo.scrollHeight;
+    const msg = (t, k = '') => { const m = $('#msg'); m.textContent = t; m.className = `msg ${k}`; };
+    const run = async (body, done) => { try { await api('POST', { slug, ...body }); client(slug); } catch (e) { msg(e.message, 'err'); } };
+    $('#cm-send').addEventListener('click', () => run({ action: 'client_message', mensaje: $('#cm').value }));
+    $('#ph-save').addEventListener('click', () => run({ action: 'client_phase', phase: $('#ph').value }));
+    app.querySelectorAll('[data-act="sol"]').forEach(b => b.addEventListener('click', () => {
+      const box = b.closest('.sol');
+      run({ action: 'request_update', solicitud: box.dataset.id, estado: box.querySelector('select').value, mensaje: box.querySelector('textarea').value });
+    }));
+  }
+
   const route = () => {
-    const slug = decodeURIComponent(location.hash.slice(1));
-    (slug ? detail(slug) : list()).catch(err => { if (err.message !== 'Sesión vencida') app.innerHTML = `<p class="msg err">${esc(err.message)}</p>`; });
+    const h = decodeURIComponent(location.hash.slice(1));
+    const tab = h === 'clientes' || h.startsWith('cliente/') ? 'cli' : 'prop';
+    $('#tabs').hidden = false;
+    $('#tabs').querySelectorAll('a').forEach(a => a.classList.toggle('on', a.dataset.t === tab));
+    const slug = h;
+    (h === 'clientes' ? clients() : h.startsWith('cliente/') ? client(h.slice(8)) : slug ? detail(slug) : list()).catch(err => { if (err.message !== 'Sesión vencida') app.innerHTML = `<p class="msg err">${esc(err.message)}</p>`; });
   };
   addEventListener('hashchange', route);
   $('#logout').addEventListener('click', async () => { await api('POST', { action: 'logout' }).catch(() => {}); login(); });
