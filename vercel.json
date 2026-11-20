@@ -6,7 +6,7 @@
   "rewrites": [
     {
       "source": "/media/:slug/:file",
-      "destination": "/api/media?p=:slug/:file"
+      "destination": "/api/site?media=:slug/:file"
     },
     {
       "source": "/vista/:slug",

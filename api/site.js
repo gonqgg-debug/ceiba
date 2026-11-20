@@ -3,10 +3,14 @@
 //   /             -> su página (site_content) en modo live, con SEO y datos estructurados
 //   /robots.txt   -> deja pasar a buscadores y buscadores de IA
 //   /sitemap.xml
+// También sirve /media/<slug>/<archivo> (vercel.json -> /api/site?media=...): el logo y las fotos
+// que el cliente subió en su chat (bucket privado «materiales»), solo si existen en su chat.
+// (Una sola función para no pasar el límite de funciones del plan de Vercel.)
 import { SYMBOLS } from '../lib/generated/shared.js';
 import { select } from '../lib/db.js';
 import { fontHref, renderClinica } from '../lib/templates/clinica.js';
 import { robotsTxt, seoHead, sitemapXml } from '../lib/seo.js';
+import { signDownload } from '../lib/client-chat.js';
 
 const TEMPLATES = { clinica: renderClinica };
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -16,8 +20,25 @@ const send = (body, type, status = 200, cache = 'public, max-age=0, s-maxage=300
 const soon = host => send(`<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>${esc(host)}</title></head>
 <body style="margin:0;display:grid;place-items:center;min-height:100dvh;font:16px/1.5 system-ui,sans-serif;color:#1E1F24;padding:24px;text-align:center"><div><h1 style="font-size:26px;margin:0 0 8px">Muy pronto</h1><p style="margin:0;color:#6B6E76">Estamos preparando la nueva página de ${esc(host)}.</p></div></body></html>`, 'text/html', 200, 'no-store');
 
+async function media(p) {
+  
+  const slug = p.split('/')[0];
+  if (!/^[a-z0-9-]{3,80}\/[\w.-]{1,120}$/.test(p) || p.includes('..')) return new Response('No encontrado', { status: 404 });
+  try {
+    const chat = (await select('client_chats', `slug=eq.${encodeURIComponent(slug)}&select=files&limit=1`))?.[0];
+    const file = (chat?.files || []).find(f => f.path === p && /^image\//.test(f.type || ''));
+    if (!file) return new Response('No encontrado', { status: 404 });
+    const url = await signDownload(p, 60 * 60 * 24);
+    return new Response(null, { status: 302, headers: { location: url, 'cache-control': 'public, max-age=3600' } });
+  } catch (err) {
+    console.error('media', err.message);
+    return new Response('No disponible', { status: 502 });
+  }
+}
+
 export async function GET(request) {
   const q = new URL(request.url).searchParams;
+  if (q.has('media')) return media(q.get('media') || '');
   const host = String(q.get('host') || '').toLowerCase().replace(/:\d+$/, '').replace(/^www\./, '');
   const path = '/' + String(q.get('path') || '').replace(/^\/+/, '');
   if (!/^([a-z0-9-]+\.)+[a-z]{2,}$/.test(host)) return send('No encontrado', 'text/plain', 404, 'no-store');
