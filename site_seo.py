@@ -47,7 +47,8 @@ PAGES = {
 
 def _strip(s):
     s = re.sub(r"<[^>]+>", " ", s)
-    return re.sub(r"\s+", " ", _html.unescape(s)).strip()
+    s = re.sub(r"\s+", " ", _html.unescape(s)).strip()
+    return re.sub(r"\s+([,.;:!?])", r"\1", s)
 
 
 def faqs(page_html):
@@ -217,6 +218,7 @@ def sitemap_xml():
         f"  <url><loc>{SITE}{c['path']}</loc><lastmod>{today}</lastmod><priority>{pri[c['path']]}</priority>"
         f"<image:image><image:loc>{SITE}/img/og/{c['og']}.jpg</image:loc></image:image></url>\n"
         for c in PAGES.values())
+    urls += "".join(f"  <url><loc>{SITE}/{k}</loc><lastmod>{today}</lastmod><priority>0.3</priority></url>\n" for k in ("terminos", "privacidad"))
     return ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" '
             'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n' + urls + "</urlset>\n")
 

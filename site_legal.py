@@ -9,7 +9,7 @@ import html as _html
 LEGAL = {
     "entity": "GQG Holdings LLC",
     "dba": "Ceiba Labs",
-    "state": None,                  # estado de EE. UU. donde está constituida, ej. "Florida"
+    "state": "Florida",
     "email": "legal@ceibalabs.io",  # alias de contacto legal y de privacidad
     "min_months": 0,                # permanencia mínima de la mensualidad (0 = sin permanencia)
     "refund": "before_preview",     # "before_preview" | "never" | "until_approval"
