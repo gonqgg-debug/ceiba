@@ -826,6 +826,14 @@ textarea.json{width:100%;min-height:420px;font:400 12.5px/1.5 var(--f-mono);back
 .convo .bot{background:rgba(20,24,40,.05)}
 .convo .me{justify-self:end;background:rgba(30,122,70,.1)}
 .convo small{display:block;color:var(--muted);font-size:12px;margin-top:4px}
+.dl-step{display:grid;gap:6px;padding:10px 0;border-bottom:1px solid #EFEEEA;font-size:14px}
+.dl-step:last-child{border-bottom:0}
+.dl-step b{font-weight:600;color:#6B6E76}
+.dl-step.ok b{color:#1E7A46}
+.dns{border-collapse:collapse;font-size:13px;width:100%}
+.dns th,.dns td{text-align:left;padding:6px 8px;border-bottom:1px solid #EFEEEA}
+.dns code{font:12.5px var(--f-mono);word-break:break-all}
+#dl-msg{width:100%;min-height:120px;border:1px solid #D9D8D3;border-radius:8px;padding:10px;font:14px/1.5 var(--f-body);resize:vertical}
 @media (max-width:1000px){.c-grid{grid-template-columns:1fr}}
 @media (max-width:1000px){.d-grid{grid-template-columns:1fr}.prev{position:static}.frame-wrap{height:80vh}}
 /* Panel claro: fondo blanco y acentos sobrios */
@@ -848,6 +856,7 @@ body.adm .a-tabs a.on{background:#F2F2EF;color:#0C1226}
 body.adm .frame-wrap{border-color:#E9E8E4}
 body.adm a{color:inherit}
 body.adm .check input{accent-color:#1E7A46}
+body.adm input:not([type=checkbox]):not([type=color]),body.adm textarea,body.adm select{background:#fff;color:#1E1F24;border-color:#D9D8D3}
 </style>
 </head>
 <body class="adm">
@@ -1039,6 +1048,23 @@ body.adm .check input{accent-color:#1E7A46}
     });
   }
 
+  function deliveryPanel(c) {
+    const d = c.delivery;
+    if (!d) return '';
+    const step = (ok, label, body) => `<div class="dl-step${ok ? ' ok' : ''}"><b>${ok ? '✓' : '·'} ${label}</b>${body ? `<div>${body}</div>` : ''}</div>`;
+    const recs = d.records?.length ? `<table class="dns"><tr><th>Tipo</th><th>Nombre</th><th>Valor</th></tr>${d.records.map(r => `<tr><td>${esc(r.tipo)}</td><td>${esc(r.nombre)}</td><td><code>${esc(r.valor)}</code></td></tr>`).join('')}</table>` : '';
+    return `<section class="panel"><h2>Entrega</h2>
+      ${step(d.built, 'Página construida', d.built ? link(d.preview, 'Ver su página') : 'La construye Claude cuando el cliente termina de mandar sus materiales.')}
+      ${step(d.shared, 'Vista previa enviada al cliente', d.shared ? '' : 'Se envía al aprobar la solicitud «Construir la página».')}
+      ${step(d.approved, 'El cliente la aprobó', d.approved ? fmt(d.approved_at) : d.built ? '<button class="btn btn-line btn-s" type="button" id="dl-approve">Marcar como aprobada</button> <small>si te lo dijo por otro medio</small>' : '')}
+      ${step(d.domain_status === 'listo', 'Dominio conectado', `${!c.vercel ? '<p class="msg err">Falta VERCEL_TOKEN en Vercel para conectar dominios.</p>' : ''}
+        <div class="acts"><input id="dl-domain" value="${esc(d.domain || c.data.dominio || '')}" placeholder="tunegocio.com" style="height:38px;border-radius:8px;border:1px solid #D9D8D3;padding:0 10px;font:inherit;min-width:220px"><button class="btn btn-line btn-s" type="button" id="dl-connect">${d.domain ? 'Volver a conectar' : 'Conectar dominio'}</button>${d.domain ? '<button class="btn btn-line btn-s" type="button" id="dl-check">Revisar DNS</button>' : ''}</div>
+        ${d.domain ? `<small>${d.domain_status === 'listo' ? `${esc(d.domain)} ya apunta a nosotros.` : `Esperando que el cliente ponga estos registros en su DNS:`}</small>${d.domain_status === 'listo' ? '' : recs}
+        ${d.domain_status === 'listo' ? '' : `<textarea id="dl-msg" placeholder="Instrucciones para el cliente"></textarea><div class="acts"><button class="btn btn-line btn-s" type="button" id="dl-send">Mandarle las instrucciones</button></div>`}` : ''}`)}
+      ${step(d.published, 'Publicada y mensualidad activa', d.published ? `${link(d.live, d.live)} · ${fmt(d.published_at)}` : `<div class="acts"><button class="btn btn-primary btn-s" type="button" id="dl-publish"${d.domain ? '' : ' disabled'}>Publicar y arrancar mensualidad</button></div><small>${d.customer ? 'Cobra la primera mensualidad con la tarjeta que guardó al pagar.' : 'Este cliente no tiene cliente de Stripe: se publica sin crear mensualidad.'}</small>`)}
+    </section>`;
+  }
+
   async function client(slug) {
     app.innerHTML = '<p class="empty">Cargando…</p>';
     const { client: c, states, phases } = await api('GET', null, `?action=client&slug=${encodeURIComponent(slug)}`);
@@ -1067,6 +1093,7 @@ body.adm .check input{accent-color:#1E7A46}
           <section class="panel"><h2>Datos que confirmó</h2>${data ? `<dl class="kv">${data}</dl>` : '<p class="empty" style="padding:0">Todavía no hay datos.</p>'}
             ${c.phase === 'arranque' ? `<small>Avance: ${c.checklist.items.map(i => `${i.done ? '✓' : '·'} ${esc(i.label)}`).join(' &nbsp; ')}</small>` : ''}</section>
           <section class="panel"><h2>Archivos que subió</h2>${c.files.length ? `<div class="files">${c.files.map(fileTile).join('')}</div>` : '<p class="empty" style="padding:0">No ha subido archivos.</p>'}</section>
+          ${deliveryPanel(c)}
           <section class="panel c-phase"><h2>Etapa</h2><div class="acts"><select id="ph">${phases.map(p => `<option value="${p}"${p === c.phase ? ' selected' : ''}>${PHASE[p]}</option>`).join('')}</select><button class="btn btn-line btn-s" type="button" id="ph-save">Cambiar etapa</button></div>
             <small>Cuando publiques su página, pásalo a «Publicada»: el asistente cambia a modo de soporte y recibe pedidos de cambios.</small></section>
           <p class="msg" id="msg" role="status"></p>
@@ -1081,6 +1108,24 @@ body.adm .check input{accent-color:#1E7A46}
     const msg = (t, k = '') => { const m = $('#msg'); m.textContent = t; m.className = `msg ${k}`; };
     const run = async (body, done) => { try { await api('POST', { slug, ...body }); client(slug); } catch (e) { msg(e.message, 'err'); } };
     $('#cm-send').addEventListener('click', () => run({ action: 'client_message', mensaje: $('#cm').value }));
+    $('#dl-approve')?.addEventListener('click', () => run({ action: 'site_approve' }));
+    $('#dl-connect')?.addEventListener('click', async () => {
+      try { const r = await api('POST', { slug, action: 'site_domain', domain: $('#dl-domain').value }); await client(slug); if ($('#dl-msg')) $('#dl-msg').value = r.message; }
+      catch (e) { msg(e.message, 'err'); }
+    });
+    $('#dl-check')?.addEventListener('click', async () => {
+      try { const r = await api('POST', { slug, action: 'site_check' }); await client(slug); msg(r.ready ? `${r.domain} ya apunta a nosotros.` : `${r.domain} todavía no apunta. El DNS puede tardar unas horas.`, r.ready ? 'ok' : ''); }
+      catch (e) { msg(e.message, 'err'); }
+    });
+    if ($('#dl-msg') && !$('#dl-msg').value) api('POST', { slug, action: 'site_dns_message' }).then(r => { if ($('#dl-msg') && !$('#dl-msg').value) $('#dl-msg').value = r.message || ''; }).catch(() => {});
+    $('#dl-send')?.addEventListener('click', () => run({ action: 'client_message', mensaje: $('#dl-msg').value }));
+    $('#dl-publish')?.addEventListener('click', async () => {
+      const d = c.delivery;
+      const warn = [!d.approved && 'el cliente todavía no la aprueba', d.domain_status !== 'listo' && 'su dominio todavía no apunta a nosotros'].filter(Boolean);
+      if (!confirm(warn.length ? `Ojo: ${warn.join(' y ')}. ¿Publicar de todos modos?` : '¿Publicar su página y arrancar su mensualidad?')) return;
+      try { const r = await api('POST', { slug, action: 'site_publish', force: warn.length > 0 }); await client(slug); msg(`Publicada en ${r.live}.${r.billing?.skipped ? ' ' + r.billing.skipped : ' Mensualidad: ' + (r.billing?.status || 'creada') + '.'}`, 'ok'); }
+      catch (e) { msg(e.message, 'err'); }
+    });
     $('#ph-save').addEventListener('click', () => run({ action: 'client_phase', phase: $('#ph').value }));
     app.querySelectorAll('[data-act="sol"]').forEach(b => b.addEventListener('click', () => {
       const box = b.closest('.sol');

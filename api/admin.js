@@ -19,6 +19,8 @@ import { escHtml, mailReady, sendMail } from '../lib/notify.js';
 import { PLANS, CURRENCIES, pricedCurrencies } from '../lib/catalog.js';
 import { json, siteUrl } from '../lib/stripe.js';
 import { validSlug } from '../lib/proposals.js';
+import { approveSite, checkSiteDomain, dnsMessage, publishSite, setDomain, siteState } from '../lib/delivery.js';
+import { vercelReady } from '../lib/vercel.js';
 import { checklist, chatUrl, engineerUpdate, getChat, messageClient, saveChat, signDownload, transcript, SOL_STATES } from '../lib/client-chat.js';
 
 const PHASES = ['arranque', 'construccion', 'soporte'];
@@ -34,7 +36,7 @@ async function clientDetail(slug) {
   return {
     slug: chat.slug, business: chat.business, email: chat.email, phase: chat.phase, needs_human: chat.needs_human,
     created_at: chat.created_at, last_client_at: chat.last_client_at, link: chatUrl(chat.slug),
-    site: !!prop?.site_built_at, checklist: checklist(chat), data, encontrado: encontrado || null, files, messages: transcript(chat), solicitudes,
+    site: !!prop?.site_built_at, delivery: await siteState(slug).catch(() => null), vercel: vercelReady(), checklist: checklist(chat), data, encontrado: encontrado || null, files, messages: transcript(chat), solicitudes,
   };
 }
 
@@ -103,6 +105,18 @@ export async function POST(request) {
   if (!validSlug(b.slug)) return json({ error: 'Slug inválido.' }, 400);
 
   try {
+    if (['site_approve', 'site_domain', 'site_check', 'site_publish', 'site_dns_message'].includes(b.action)) {
+      try {
+        if (b.action === 'site_approve') return json(await approveSite(b.slug, 'equipo'));
+        if (b.action === 'site_domain') return json(await setDomain(b.slug, b.domain));
+        if (b.action === 'site_check') return json(await checkSiteDomain(b.slug));
+        if (b.action === 'site_dns_message') { const s = await siteState(b.slug); const chat = await getChat(b.slug); return json({ message: s?.domain ? dnsMessage(s.domain, s.records, chat?.data?.dominio_proveedor) : '' }); }
+        return json(await publishSite(b.slug, { force: !!b.force }));
+      } catch (err) {
+        if (err.user) return json({ error: err.message }, err.status || 400);
+        throw err;
+      }
+    }
     if (['client_message', 'client_phase', 'request_update'].includes(b.action)) {
       const chat = await getChat(b.slug);
       if (!chat) return json({ error: 'No existe ese cliente.' }, 404);

@@ -44,8 +44,8 @@ function sitePage(p, { admin }) {
 <body>
 ${SYMBOLS}
 <div class="vp-bar" id="vp-bar" role="region" aria-label="Vista previa">
-  <p><span class="tag${admin ? ' tag--draft' : ''}">Vista previa</span>Esta es tu página nueva, <b>${esc(p.business)}</b>. Todavía no está publicada: dinos en tu chat si quieres cambiar algo.</p>
-  <div class="vp-acts"><a class="vp-btn vp-btn--main" href="/cuenta/${esc(p.slug)}">Volver a mi chat</a><button class="vp-btn vp-x" type="button" id="vp-hide" aria-label="Ocultar barra de vista previa">×</button></div>
+  <p><span class="tag${admin ? ' tag--draft' : ''}">Vista previa</span>Esta es tu página nueva, <b>${esc(p.business)}</b>. Todavía no está publicada: apruébala o pide cambios en tu chat.</p>
+  <div class="vp-acts"><a class="vp-btn" href="/cuenta/${esc(p.slug)}">Pedir cambios</a><a class="vp-btn vp-btn--main" href="/cuenta/${esc(p.slug)}#aprobar">Aprobar mi página</a><button class="vp-btn vp-x" type="button" id="vp-hide" aria-label="Ocultar barra de vista previa">×</button></div>
 </div>
 <button class="vp-pill" id="vp-pill" type="button" hidden>Vista previa · Ceiba Labs</button>
 <main class="vista">${render(c.page || {}, { mode: 'live' })}</main>

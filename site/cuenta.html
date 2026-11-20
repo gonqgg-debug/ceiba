@@ -804,6 +804,14 @@ body.cu-page{background:var(--c-bg);color:var(--c-text);font-family:var(--f-body
 /* escribir */
 .cu-compose{padding:8px 16px calc(14px + env(safe-area-inset-bottom))}
 .cu-compose > *{max-width:740px;margin-inline:auto}
+.site-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:12px 14px;margin-bottom:10px;border:1px solid #BFE0CC;background:#F1F8F4;border-radius:16px;font-size:14px}
+.site-bar b{font-weight:600;color:var(--c-text)}
+.site-bar span{color:var(--c-mute)}
+.site-bar .sp{flex:1}
+.site-bar a,.site-bar button{font:500 14px var(--f-body);height:36px;padding:0 14px;border-radius:10px;display:inline-flex;align-items:center;text-decoration:none;cursor:pointer;border:1px solid var(--c-line);background:#fff;color:var(--c-text)}
+.site-bar button.ok{background:var(--c-ok);border-color:var(--c-ok);color:#fff}
+.site-bar.flash{animation:flash 1.2s ease-out 2}
+@keyframes flash{50%{box-shadow:0 0 0 4px rgba(30,122,70,.25)}}
 .pend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
 .pend div{position:relative;display:flex;align-items:center;gap:8px;font-size:13px;padding:6px 30px 6px 6px;border-radius:12px;border:1px solid var(--c-line);max-width:240px}
 .pend img,.pend .ph{width:36px;height:36px;border-radius:8px;object-fit:cover;background:var(--c-soft);display:grid;place-items:center;font:600 10px var(--f-mono);flex:none}
@@ -889,6 +897,7 @@ body.cu-page{background:var(--c-bg);color:var(--c-text);font-family:var(--f-body
     <section class="cu-chat" aria-label="Chat con el asistente de Ceiba Labs">
       <div class="cu-log" id="log" aria-live="polite"></div>
       <form class="cu-compose" id="compose">
+        <div class="site-bar" id="site-bar" hidden></div>
         <div class="pend" id="pend"></div>
         <div class="bar">
           <button type="button" class="ico att" id="att" aria-label="Adjuntar archivos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5l-8.6 8.6a5 5 0 0 1-7.1-7.1l8.6-8.6a3.4 3.4 0 0 1 4.8 4.8l-8.6 8.6a1.7 1.7 0 0 1-2.4-2.4l7.9-7.9"/></svg></button>
@@ -964,7 +973,16 @@ body.cu-page{background:var(--c-bg);color:var(--c-text);font-family:var(--f-body
   }
 
   function render(s, options = []) {
-    const [k, h, sub] = PHASE[s.phase] || PHASE.arranque;
+    let [k, h, sub] = PHASE[s.phase] || PHASE.arranque;
+    const st = s.site;
+    if (st && s.phase === 'construccion') [h, sub] = st.approved ? ['Conectamos tu dominio', 'Te escribimos aquí los pasos para que tu página se vea en tu dominio.'] : ['Revisa tu vista previa', 'Apruébala o pide cambios aquí en el chat.'];
+    const bar = $('#site-bar');
+    bar.hidden = !st;
+    if (st) bar.innerHTML = st.published
+      ? `<b>Tu página está en línea</b><span>${esc(st.domain || '')}</span><span class="sp"></span><a href="${esc(st.live)}" target="_blank" rel="noopener">Ver mi página</a>`
+      : st.approved
+        ? `<b>Aprobaste tu página</b><span>Ahora la conectamos a tu dominio.</span><span class="sp"></span><a href="${esc(st.preview)}" target="_blank" rel="noopener">Ver vista previa</a>`
+        : `<b>Tu vista previa está lista</b><span>Revísala y apruébala, o pide cambios en el chat.</span><span class="sp"></span><a href="${esc(st.preview)}" target="_blank" rel="noopener">Ver mi página</a><button type="button" class="ok" id="approve">Aprobar mi página</button>`;
     $('#ph-k').textContent = k; $('#ph-h').textContent = h; $('#ph-s').textContent = sub;
     const c = s.checklist;
     $('#meter').style.width = `${s.phase === 'arranque' ? Math.round(c.done / c.total * 100) : 100}%`;
@@ -981,7 +999,7 @@ body.cu-page{background:var(--c-bg);color:var(--c-text);font-family:var(--f-body
     const r = await fetch(`/api/chat?slug=${encodeURIComponent(slug)}&t=${encodeURIComponent(t)}`);
     const d = await r.json().catch(() => ({}));
     if (!r.ok) { $('#gate').hidden = false; $('#gate h1').textContent = r.status === 401 ? 'Ese enlace no es válido.' : 'No encontramos tu chat.'; wireGate(); return; }
-    $('#app').hidden = false; render(d, d.messages.length ? [] : d.found ? ['Todo está bien, úsalo', 'Quiero cambiar algo', 'Tengo fotos nuevas'] : ['Sí, empecemos', 'No tengo logo']);
+    $('#app').hidden = false; setTimeout(() => { if (location.hash === '#aprobar') $('#site-bar').classList.add('flash'); }, 300); render(d, d.messages.length ? [] : d.found ? ['Todo está bien, úsalo', 'Quiero cambiar algo', 'Tengo fotos nuevas'] : ['Sí, empecemos', 'No tengo logo']);
   }
   function wireGate() {
     $('#gate-form').addEventListener('submit', async e => {
@@ -1044,6 +1062,18 @@ body.cu-page{background:var(--c-bg);color:var(--c-text);font-family:var(--f-body
     busy = false; renderPending(); ta.focus();
   }
   $('#compose').addEventListener('submit', e => { e.preventDefault(); send(ta.value); });
+  $('#site-bar').addEventListener('click', async e => {
+    if (!e.target.closest('#approve') || busy) return;
+    if (!confirm('¿Apruebas tu página? Después la conectamos a tu dominio. Puedes seguir pidiendo cambios cuando quieras.')) return;
+    busy = true; showErr('');
+    try {
+      const r = await fetch('/api/chat', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'approve_site', slug, t }) });
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(d.error || 'No pudimos aprobarla. Intenta de nuevo.');
+      render(d);
+    } catch (x) { showErr(x.message); }
+    busy = false;
+  });
   log.addEventListener('click', e => { const b = e.target.closest('.opts button'); if (b) send(b.textContent); });
 
   if (matchMedia('(min-width:901px)').matches) $('#side-d').open = true;

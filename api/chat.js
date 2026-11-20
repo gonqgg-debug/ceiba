@@ -18,6 +18,7 @@ import { json, siteUrl, stripe } from '../lib/stripe.js';
 import { timingSafeEqual } from 'node:crypto';
 import { dbReady, insert, select, update } from '../lib/db.js';
 import { escHtml, mailReady, sendMail } from '../lib/notify.js';
+import { approveSite, checkSiteDomain, siteState } from '../lib/delivery.js';
 import {
   ALLOWED_TYPES, LONG_LINK, MAX_BYTES, chatUrl, checkDomain, checklist, ensureChat, ensureFound,
   findChatByEmail, getChat, saveChat, signDownload, signUpload, validToken, ATTACH, transcript, engineerUpdate, fireBuild,
@@ -48,7 +49,11 @@ Lo que necesitamos al final:
 Si no encontramos nada de su página, pide estas cosas una por una, empezando por el logo.
 Cuando el avance esté completo, haz un resumen corto de lo recibido, pregunta si quiere agregar algo y, si no, llama a marcar_listo. Dile que el equipo empieza a construir y que en este mismo chat recibirá su vista previa.
 
-FASE «construccion»: el equipo está armando su página. Responde dudas, recibe materiales nuevos (clasifícalos y guarda datos) y si pregunta por tiempos dile que la vista previa llega en pocos días hábiles, aquí mismo y por correo.
+FASE «construccion»: el equipo arma su página, se la muestra y la ajusta hasta que el cliente la apruebe. En cada turno ves el estado de su página («Su página: …»). Guíalo según ese estado:
+- Sin vista previa todavía: responde dudas, recibe materiales nuevos (clasifícalos y guarda datos) y, si pregunta por tiempos, dile que la vista previa llega en pocos días hábiles, aquí mismo y por correo.
+- Vista previa enviada: anímalo a revisarla (enlace en el estado). Si pide cambios, regístralos con solicitar_cambio como en soporte. Si dice que le gusta, que está bien o que está perfecta, pregúntale si la aprueba para publicarla, con mostrar_opciones ["Sí, apruébala", "Quiero otro cambio"]. Si la aprueba de forma clara, usa aprobar_pagina. No la apruebes si tiene cambios pendientes que quiere ver primero.
+- Aprobada: explícale el siguiente paso: conectar su dominio. El equipo le manda aquí los registros DNS exactos para su proveedor; si ya se los mandaron y dice que ya los puso, usa revisar_publicacion para ver si ya apunta.
+- Publicada: pasa a soporte.
 
 FASE «soporte»: su página ya está publicada. Tú no haces cambios: tu trabajo es dejar cada pedido tan claro que alguien del equipo lo pueda aplicar sin volver a preguntar. Cuando pida un cambio (horario, precios, fotos, textos, una sección nueva), pregunta solo lo que falte: en qué parte de la página, el texto exacto o el dato nuevo, y si hay fotos, que las suba. Resume el pedido en una frase y pídele que confirme. Cuando confirme, regístralo con solicitar_cambio y dile que el equipo lo aplica y le avisa aquí. Si algo está caído o es urgente, márcalo urgente. Para dudas de su plan o facturación, responde lo que sepas por este texto; si no, escala a una persona.
 
@@ -58,7 +63,7 @@ Puente con el ingeniero:
 - Si el cliente agrega algo a un pedido que ya está en curso, usa responder_al_ingeniero en esa solicitud en vez de crear otra.
 
 Siempre:
-- Nunca digas que ya hiciste un cambio ni des fechas exactas: el equipo los aplica.
+- Tú no haces cambios ni des fechas exactas: el equipo los aplica. Pero cuando el equipo avisa que algo ya está listo (verás «El equipo de Ceiba le escribió al cliente…» o una solicitud «aplicado»), es verdad: confírmalo con seguridad y nunca lo desmientas ni te disculpes por ello.
 - Una cosa a la vez. Mensajes cortos (1 a 3 frases), sin listas largas ni tecnicismos. Si le pides algo, di exactamente qué y para qué sirve.
 - Cuando haya respuestas probables, ofrécelas como botones con mostrar_opciones (2 a 4 opciones cortas). Úsalo seguido: hace todo más fácil desde el celular.
 - Cuando el cliente suba archivos verás sus nombres y rutas. Revisa las imágenes y clasifica cada una con clasificar_archivo. Si un logo se ve borroso o muy chico, pídele una versión mejor con amabilidad.
@@ -83,6 +88,8 @@ const TOOLS = [
   strictTool('marcar_listo', 'En la fase de arranque, cuando ya tenemos todo: avisa al equipo para que empiece a construir la página.', { resumen: { type: 'string', description: 'Resumen de lo recibido y cualquier nota para el equipo.' } }),
   strictTool('solicitar_cambio', 'Registra un cambio confirmado por el cliente, como instrucción completa para el equipo.', { seccion: { type: 'string', description: 'Qué parte de la página (por ejemplo: horario, servicios, portada, contacto, sección nueva).' }, instruccion: { type: 'string', description: 'Qué cambiar, con el texto o dato exacto que dio el cliente.' }, archivos: { type: 'array', items: { type: 'string' }, description: 'Rutas de archivos que subió para este cambio; lista vacía si no hay.' }, urgente: { type: 'boolean' } }),
   strictTool('responder_al_ingeniero', 'Le pasa al ingeniero la respuesta o el agregado del cliente sobre una solicitud existente.', { solicitud: { type: 'string', description: 'El id corto de la solicitud (los primeros 8 caracteres).' }, respuesta: { type: 'string', description: 'Lo que dijo el cliente, con el dato exacto.' }, archivos: { type: 'array', items: { type: 'string' }, description: 'Rutas de archivos que subió para esto; lista vacía si no hay.' } }),
+  strictTool('aprobar_pagina', 'El cliente aprueba su página (la vista previa) para publicarla. Solo si lo dijo claramente.', { confirmado: { type: 'boolean', description: 'true si el cliente dijo explícitamente que la aprueba.' } }),
+  strictTool('revisar_publicacion', 'Revisa si el dominio del cliente ya apunta a nosotros, después de que puso los registros DNS.', { motivo: { type: 'string', description: 'Por qué lo revisas, en pocas palabras.' } }),
   strictTool('escalar_a_persona', 'Pide que alguien del equipo atienda al cliente personalmente.', { motivo: { type: 'string' } }),
   strictTool('mostrar_opciones', 'Muestra al cliente botones con respuestas rápidas debajo de tu mensaje.', { opciones: { type: 'array', items: { type: 'string' }, description: '2 a 4 opciones cortas.' } }),
 ];
@@ -108,7 +115,7 @@ async function clientContext(chat) {
   return `Lo que ya sabemos de este cliente:\n${lines.join('\n')}\n\n${found ? `Lo que encontramos en su página actual${f.dominio ? ` (${f.dominio})` : ''}:\n${found}\nFalta en su página: ${Object.entries(LBL).filter(([k]) => !f[k] || (Array.isArray(f[k]) && !f[k].length)).map(([, l]) => l).join(', ') || 'nada'}.` : 'No encontramos su página actual o no tenía datos útiles.'}`;
 }
 
-const SHORT = { pendiente: 'pendiente, en la fila del ingeniero', construyendo: 'el ingeniero lo está haciendo', en_revision: 'listo, el equipo lo está revisando antes de mostrárselo', en_proceso: 'el ingeniero lo está haciendo', necesita_info: 'el ingeniero espera una respuesta del cliente', aplicado: 'aplicado', descartado: 'descartado' };
+const SHORT = { pendiente: 'pendiente, en la fila del ingeniero', construyendo: 'el ingeniero lo está haciendo', en_revision: 'listo, el equipo lo está revisando antes de mostrárselo', en_proceso: 'el ingeniero lo está haciendo', necesita_info: 'el ingeniero espera una respuesta del cliente', aplicado: 'terminado: el equipo ya lo hizo y se lo avisó al cliente', descartado: 'descartado' };
 function requestsNote(list) {
   if (!list?.length) return 'Solicitudes: ninguna todavía.';
   return 'Solicitudes del cliente: ' + list.slice(0, 8).map(r => {
@@ -116,9 +123,17 @@ function requestsNote(list) {
     return `[${r.id.slice(0, 8)}] ${r.tipo === 'materiales' ? 'construcción de la página' : `cambio en ${r.seccion}: ${r.instruccion.slice(0, 120)}`} — ${SHORT[r.estado] || r.estado}${last ? ` (ingeniero: «${last.texto.slice(0, 160)}»)` : ''}`;
   }).join(' | ');
 }
+function siteNote(s) {
+  if (!s?.built || !s.shared) return 'Su página: todavía no le mandamos su vista previa.';
+  if (s.published) return `Su página: publicada en ${s.live}.`;
+  if (!s.approved) return `Su página: vista previa enviada (${s.preview}), esperando que la apruebe o pida cambios.`;
+  if (!s.domain) return 'Su página: aprobada. El equipo va a conectar su dominio y le mandará aquí los registros DNS.';
+  if (s.domain_status === 'listo') return `Su página: aprobada y ${s.domain} ya apunta a nosotros; el equipo la publica en breve.`;
+  return `Su página: aprobada; le mandamos los registros DNS para ${s.domain} y estamos esperando que los configure (${(s.records || []).map(r => `${r.tipo} ${r.nombre} → ${r.valor}`).join('; ')}).`;
+}
 function statusNote(chat) {
   const c = checklist(chat);
-  return `${requestsNote(chat._solicitudes)} Fase actual: «${chat.phase}». Avance del arranque: ${c.done} de ${c.total}. ${c.items.map(i => `${i.label}: ${i.done ? 'listo' : 'pendiente'} (${i.detail})`).join('; ')}.`;
+  return `${siteNote(chat._site)} ${requestsNote(chat._solicitudes)} Fase actual: «${chat.phase}». Avance del arranque: ${c.done} de ${c.total}. ${c.items.map(i => `${i.label}: ${i.done ? 'listo' : 'pendiente'} (${i.detail})`).join('; ')}.`;
 }
 
 // ---------- herramientas ----------
@@ -177,6 +192,20 @@ async function runTool(name, input, chat, effects) {
       const files = (chat.files || []).filter(f => (input.archivos || []).includes(f.path)).map(f => ({ ruta: f.path, nombre: f.name, tipo: f.type, clase: f.kind || null }));
       effects.push({ type: 'respuesta', solicitud: sol.id, texto: String(input.respuesta || '').slice(0, 2000), archivos: files, prev: sol });
       return 'Respuesta enviada al ingeniero. Dile al cliente que ya la tiene y que le avisamos aquí.';
+    }
+    case 'aprobar_pagina': {
+      if (!input.confirmado) return 'Pregúntale primero si la aprueba.';
+      if (!chat._site?.shared) return 'Todavía no le mandamos su vista previa: no hay nada que aprobar.';
+      await approveSite(chat.slug, 'cliente');
+      chat._site = await siteState(chat.slug);
+      return 'Aprobada. Dile que gracias, que el siguiente paso es conectar su dominio y que el equipo le manda aquí los registros DNS para su proveedor (o lo hacen juntos en una llamada corta).';
+    }
+    case 'revisar_publicacion': {
+      if (!chat._site?.domain) return 'Todavía no conectamos su dominio: el equipo le mandará los registros DNS.';
+      const r = await checkSiteDomain(chat.slug).catch(err => ({ error: err.message }));
+      if (r.error) return `No se pudo revisar: ${r.error}`;
+      chat._site = await siteState(chat.slug);
+      return r.ready ? `${r.domain} ya apunta a nosotros. Dile que ya quedó y que el equipo publica su página en breve; le avisamos aquí.` : `${r.domain} todavía no apunta a nosotros. Los cambios de DNS pueden tardar unas horas; pídele que revise que puso exactamente los registros del estado y que vuelva a avisar.`;
     }
     case 'escalar_a_persona':
       chat.needs_human = true;
@@ -253,10 +282,17 @@ async function publicState(chat, extra = {}) {
   const files = await Promise.all((chat.files || []).map(async f => ({ name: f.name, kind: f.kind || null, type: f.type, url: /^image\//.test(f.type) ? await signDownload(f.path).catch(() => null) : null })));
   const f = chat.data?.encontrado;
   const found = f && chat.phase === 'arranque' ? { ...f, usado: { logo: !!chat.data.logo_web, fotos: !!chat.data.fotos_web } } : null;
-  return { business: chat.business, phase: chat.phase, greeting: greeting(chat), found, messages: transcript(chat), checklist: checklist(chat), files, ...extra };
+  const s = await siteState(chat.slug).catch(() => null);
+  const site = s && s.shared ? { preview: s.preview, approved: s.approved, published: s.published, live: s.live, domain: s.domain, domain_status: s.domain_status } : null;
+  return { business: chat.business, phase: chat.phase, greeting: greeting(chat), found, site, messages: transcript(chat), checklist: checklist(chat), files, ...extra };
 }
 
 // ---------- turno del agente ----------
+// Los mensajes que escribió el equipo (team: true) le llegan al modelo como contexto,
+// no como si los hubiera dicho él, para que no los desmienta.
+const forModel = msgs => msgs.map(m => m.team
+  ? { role: 'system', content: `El equipo de Ceiba le escribió al cliente (ya lo ve en su chat, y es verdad): «${(m.content || []).filter(b => b.type === 'text').map(b => b.text).join(' ')}»` }
+  : { role: m.role, content: m.content });
 async function agentTurn(chat, text, uploads) {
   const content = [];
   if (text) content.push({ type: 'text', text: String(text).slice(0, 4000) });
@@ -272,6 +308,7 @@ async function agentTurn(chat, text, uploads) {
   if (!content.length) throw Object.assign(new Error('vacío'), { user: 'Escribe un mensaje o adjunta un archivo.' });
 
   chat._solicitudes = await select('solicitudes', `slug=eq.${encodeURIComponent(chat.slug)}&estado=neq.descartado&order=created_at.desc&limit=8`).catch(() => []);
+  chat._site = await siteState(chat.slug).catch(() => null);
   const history = [...(chat.messages || [])];
   history.push({ role: 'user', content });
   history.push({ role: 'system', content: statusNote(chat) });
@@ -282,7 +319,7 @@ async function agentTurn(chat, text, uploads) {
   let reply = '';
   for (let step = 0; step < MAX_STEPS; step++) {
     const res = await client.messages.create({
-      model: MODEL, max_tokens: 2000, system, tools: TOOLS, messages: history,
+      model: MODEL, max_tokens: 2000, system, tools: TOOLS, messages: forModel(history),
       output_config: { effort: 'low' },
       cache_control: { type: 'ephemeral' },
     });
@@ -369,6 +406,17 @@ export async function POST(request) {
       if (!(b.size > 0 && b.size <= MAX_BYTES)) return json({ error: 'El archivo pesa más de 25 MB.' }, 400);
       if ((chat.files || []).length >= 80) return json({ error: 'Llegaste al límite de archivos. Escríbenos si necesitas mandar más.' }, 400);
       return json(await signUpload(chat.slug, b.name));
+    }
+    if (b.action === 'approve_site') {
+      const s = await siteState(chat.slug);
+      if (!s?.shared) return json({ error: 'Todavía no hay una vista previa para aprobar.' }, 400);
+      if (!s.approved) {
+        await approveSite(chat.slug, 'cliente');
+        await saveChat(chat.id, { messages: [...(chat.messages || []),
+          { role: 'user', content: [{ type: 'text', text: 'Apruebo mi página.' }] },
+          { role: 'assistant', content: [{ type: 'text', text: '¡Gracias! Tu página quedó aprobada. El siguiente paso es conectarla a tu dominio: te escribimos aquí los registros que hay que poner donde lo compraste, o si prefieres lo hacemos juntos en una llamada corta.' }] }] });
+      }
+      return json(await publicState(await getChat(chat.slug)));
     }
     if (b.action === 'message') {
       if (!process.env.ANTHROPIC_API_KEY && !process.env.ANTHROPIC_AUTH_TOKEN) return json({ error: 'El asistente no está disponible en este momento.' }, 503);

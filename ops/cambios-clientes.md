@@ -33,6 +33,13 @@ El flujo completo después del chat:
 3. Si falta algo, «Esperando al cliente» + tu pregunta; su respuesta regresa a la misma solicitud.
 4. Publicas, marcas «Aplicado» y cambias la etapa a «Publicada».
 
+## Entrega: aprobación y publicación
+1. El equipo aprueba la solicitud «Construir la página» → el cliente recibe su vista previa (`/vista/<slug>?sitio=1`).
+2. El cliente pide cambios en el chat (cada uno pasa por la rutina y el panel) o aprueba con el botón «Aprobar mi página» (o diciéndoselo al asistente).
+3. Panel → Entrega → **Conectar dominio**: lo agrega al proyecto de Vercel (necesita `VERCEL_TOKEN`) y arma el mensaje con los registros DNS. Mándaselo.
+4. Cuando el cliente avisa que ya los puso, el asistente revisa solo; también puedes usar **Revisar DNS**.
+5. **Publicar y arrancar mensualidad**: su página se sirve en su dominio (`middleware.js` → `/api/site`), se crea la suscripción en Stripe, el chat pasa a soporte y se le avisa.
+
 ## Ver lo pendiente
 ```sql
 select id, tipo, slug, business, seccion, instruccion, archivos, urgente, created_at

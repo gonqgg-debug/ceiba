@@ -10,7 +10,7 @@
 // Es idempotente: si el cliente ya tiene su suscripción, la devuelve sin crear otra.
 import { timingSafeEqual } from 'node:crypto';
 import { json, stripe } from '../lib/stripe.js';
-import { getProposal } from '../lib/proposals.js';
+import { startSubscription } from '../lib/subscription.js';
 
 function authorized(request) {
   const expected = process.env.CEIBA_ADMIN_TOKEN;
@@ -31,38 +31,6 @@ export async function POST(request) {
   if (!customerId && body?.session_id) customerId = (await s.checkout.sessions.retrieve(body.session_id)).customer;
   if (!customerId) return json({ error: 'Indica "customer" o "session_id".' }, 400);
 
-  const customer = await s.customers.retrieve(customerId);
-  const meta = customer.metadata || {};
-  if (meta.ceiba_status !== 'activada' && meta.ceiba_status !== 'publicada') {
-    return json({ error: 'Este cliente no tiene una activación pagada.' }, 409);
-  }
-
-  const existing = await s.subscriptions.list({ customer: customerId, status: 'all', limit: 10 });
-  const current = existing.data.find(sub => sub.metadata?.ceiba_proposal === meta.ceiba_proposal && sub.status !== 'canceled');
-  if (current) return json({ subscription: current.id, status: current.status, already: true });
-
-  const keys = (meta.ceiba_monthly_keys || '').split(',').filter(Boolean);
-  const { data: prices } = await s.prices.list({ lookup_keys: keys, active: true, limit: 10 });
-  if (prices.length !== keys.length) return json({ error: 'Faltan precios mensuales en Stripe.' }, 500);
-
-  const business = (await getProposal(meta.ceiba_proposal).catch(() => ({}))).proposal?.business ?? customer.name ?? '';
-  const subscription = await s.subscriptions.create({
-    customer: customerId,
-    items: prices.map(p => ({ price: p.id })),
-    currency: meta.ceiba_currency || 'mxn', // misma moneda que el pago inicial
-    default_payment_method: customer.invoice_settings?.default_payment_method || undefined,
-    billing_mode: { type: 'flexible' },
-    automatic_tax: { enabled: process.env.STRIPE_AUTOMATIC_TAX === 'true' },
-    off_session: true,
-    payment_behavior: 'allow_incomplete',
-    description: `Mensualidad · ${business}`,
-    metadata: {
-      ceiba_proposal: meta.ceiba_proposal,
-      ceiba_plan: meta.ceiba_plan,
-      ceiba_whatsapp: meta.ceiba_whatsapp,
-    },
-  }, { idempotencyKey: `ceiba-publish-${customerId}-${meta.ceiba_proposal}` });
-
-  await s.customers.update(customerId, { metadata: { ceiba_status: 'publicada', ceiba_published_at: new Date().toISOString() } });
-  return json({ subscription: subscription.id, status: subscription.status });
+  try { return json(await startSubscription(customerId)); }
+  catch (err) { return json({ error: err.message }, err.status || 502); }
 }

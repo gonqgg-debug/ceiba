@@ -1,0 +1,52 @@
+// Páginas de clientes en su propio dominio.
+// middleware.js reescribe cualquier host que no sea de Ceiba a /api/site?host=...&path=...
+//   /             -> su página (site_content) en modo live, con SEO y datos estructurados
+//   /robots.txt   -> deja pasar a buscadores y buscadores de IA
+//   /sitemap.xml
+import { SYMBOLS } from '../lib/generated/shared.js';
+import { select } from '../lib/db.js';
+import { fontHref, renderClinica } from '../lib/templates/clinica.js';
+import { robotsTxt, seoHead, sitemapXml } from '../lib/seo.js';
+
+const TEMPLATES = { clinica: renderClinica };
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const send = (body, type, status = 200, cache = 'public, max-age=0, s-maxage=300, stale-while-revalidate=86400') =>
+  new Response(body, { status, headers: { 'content-type': `${type}; charset=utf-8`, 'cache-control': cache } });
+
+const soon = host => send(`<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>${esc(host)}</title></head>
+<body style="margin:0;display:grid;place-items:center;min-height:100dvh;font:16px/1.5 system-ui,sans-serif;color:#1E1F24;padding:24px;text-align:center"><div><h1 style="font-size:26px;margin:0 0 8px">Muy pronto</h1><p style="margin:0;color:#6B6E76">Estamos preparando la nueva página de ${esc(host)}.</p></div></body></html>`, 'text/html', 200, 'no-store');
+
+export async function GET(request) {
+  const q = new URL(request.url).searchParams;
+  const host = String(q.get('host') || '').toLowerCase().replace(/:\d+$/, '').replace(/^www\./, '');
+  const path = '/' + String(q.get('path') || '').replace(/^\/+/, '');
+  if (!/^([a-z0-9-]+\.)+[a-z]{2,}$/.test(host)) return send('No encontrado', 'text/plain', 404, 'no-store');
+  let row;
+  try { row = (await select('proposals', `domain=eq.${encodeURIComponent(host)}&select=slug,business,site_content,published_at,updated_at&limit=1`))?.[0]; }
+  catch (err) { console.error('site', host, err.message); return send('No disponible', 'text/plain', 502, 'no-store'); }
+  if (!row?.site_content || !row.published_at) return path === '/robots.txt' ? send('User-agent: *\nDisallow: /\n', 'text/plain') : soon(host);
+
+  const url = `https://${host}/`;
+  if (path === '/robots.txt') return send(robotsTxt({ url }), 'text/plain');
+  if (path === '/sitemap.xml') return send(sitemapXml({ url, lastmod: (row.updated_at || row.published_at).slice(0, 10) }), 'application/xml');
+  if (path !== '/' && path !== '/index.html') return Response.redirect(url, 301);
+
+  const c = row.site_content, page = c.page || {};
+  const render = TEMPLATES[c.template || 'clinica'] || renderClinica;
+  const fonts = fontHref(page);
+  return send(`<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+${seoHead(page, { url })}
+${page.brand?.accent ? `<meta name="theme-color" content="${esc(page.brand.accent)}">` : ''}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Red+Hat+Display:wght@500;600;700&family=Red+Hat+Text:wght@400;500;600&display=swap">
+${fonts ? `<link rel="stylesheet" href="${fonts}">` : ''}
+<link rel="stylesheet" href="/assets/clinica.css">
+<style>body{margin:0;background:#fff;-webkit-font-smoothing:antialiased;overflow-x:clip}[hidden]{display:none!important}.vista{container-type:inline-size}</style>
+</head><body>
+${SYMBOLS}
+<main class="vista">${render(page, { mode: 'live' })}</main>
+<script src="/assets/clinica.js" defer></script>
+</body></html>`, 'text/html');
+}
