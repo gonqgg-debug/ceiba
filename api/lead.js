@@ -1,3 +1,4 @@
+import { currencyFor } from '../lib/catalog.js';
 // POST /api/lead
 // Guarda una solicitud de propuesta en Supabase y avisa al equipo por correo.
 // Promesa al cliente: propuesta en 24 horas hábiles (ver lib/business-hours.js).
@@ -114,6 +115,16 @@ Equipo de Ceiba Labs
 ${siteUrl()}`;
   const html = `<div style="max-width:560px;font:15px/1.6 sans-serif;color:#0B1514">${text.split('\n\n').map(p => `<p>${escHtml(p).replace(/\n/g, '<br>')}</p>`).join('')}</div>`;
   return { text, html };
+}
+
+// GET /api/geo (vercel.json -> /api/lead?geo=1)  ->  { country: "MX", currency: "mxn" }
+// País del visitante según Vercel, para mostrar precios en su moneda. No guarda nada.
+// Vive aquí para no pasar el límite de funciones del plan de Vercel.
+export async function GET(request) {
+  const country = (request.headers.get('x-vercel-ip-country') || '').toUpperCase().slice(0, 2) || null;
+  return new Response(JSON.stringify({ country, currency: currencyFor(country) }), {
+    headers: { 'content-type': 'application/json', 'cache-control': 'private, max-age=3600', vary: 'x-vercel-ip-country' },
+  });
 }
 
 export async function POST(request) {

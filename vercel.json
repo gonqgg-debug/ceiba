@@ -5,6 +5,10 @@
   "cleanUrls": false,
   "rewrites": [
     {
+      "source": "/api/geo",
+      "destination": "/api/lead?geo=1"
+    },
+    {
       "source": "/media/:slug/:file",
       "destination": "/api/site?media=:slug/:file"
     },
