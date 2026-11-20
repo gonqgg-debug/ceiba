@@ -60,6 +60,59 @@ async function getBySlug(slug) {
   return rows?.[0] || null;
 }
 
+// Manda la propuesta al cliente (correo) y la deja «enviada». La usa el botón del panel y el envío
+// automático que dispara la base de datos cuando la rutina termina el borrador (autosend).
+async function sendProposal(p, { validDays } = {}) {
+  const content = p.content || p.ai_draft;
+  if (!content?.page?.hero?.title) return { error: 'La propuesta no tiene contenido.' };
+  const days = Math.min(30, Math.max(3, Number(validDays) || 14));
+  const validUntil = addDays(todayMx(), days);
+  await update('proposals', `id=eq.${p.id}`, { content, status: 'enviada', sent_at: new Date().toISOString(), valid_until: validUntil });
+  const lead = p.leads?.[0];
+  if (lead) await update('leads', `id=eq.${lead.id}`, { status: 'propuesta_enviada' });
+
+  const link = `${siteUrl()}/p/${p.slug}`;
+  const first = (content.contactName || lead?.name || '').split(/\s+/)[0];
+  const message = `Hola${first ? `, ${first}` : ''}. Ya está lista la propuesta para ${p.business}: ${link}\n\nAhí ves cómo quedaría tu nueva página (también en pantalla completa), qué cambia y el precio. Es válida hasta el ${longDate(validUntil)}.`;
+  let emailed = false, emailError = null;
+  if (lead?.contact_type === 'email' && mailReady()) {
+    try {
+      await sendMail({
+        to: lead.contact,
+        subject: `Tu propuesta de página web para ${p.business}`,
+        text: `${message}\n\nSi tienes dudas, responde este correo.\n\nEquipo de Ceiba Labs`,
+        html: `<div style="max-width:560px;font:15px/1.6 sans-serif;color:#0B1514"><p>Hola${first ? `, ${escHtml(first)}` : ''}.</p><p>Ya está lista la propuesta para <b>${escHtml(p.business)}</b>. Ahí ves cómo quedaría tu nueva página (también en pantalla completa), qué cambia y el precio.</p><p><a href="${link}" style="display:inline-block;background:#D6FA52;color:#0B1514;padding:12px 18px;border-radius:8px;font-weight:600;text-decoration:none">Ver mi propuesta</a></p><p>Es válida hasta el ${longDate(validUntil)}. Si tienes dudas, responde este correo.</p><p>Equipo de Ceiba Labs</p></div>`,
+        replyTo: process.env.CEIBA_REPLY_TO || process.env.CEIBA_NOTIFY_EMAIL?.split(',')[0],
+      });
+      emailed = true;
+    } catch (err) { emailError = err.message; console.error('approve: correo no enviado', err.message); }
+  }
+  let waLink = null;
+  if (lead?.contact_type === 'whatsapp') {
+    let d = lead.contact.replace(/\D/g, '');
+    if (d.length === 10) d = '52' + d;
+    waLink = `https://wa.me/${d}?text=${encodeURIComponent(message)}`;
+  }
+  // Contacto por WhatsApp: todavía no hay envío automático; el equipo recibe el enlace listo
+  if (waLink && mailReady() && process.env.CEIBA_NOTIFY_EMAIL) {
+    await sendMail({ to: process.env.CEIBA_NOTIFY_EMAIL.split(','), subject: `Mandar por WhatsApp: propuesta de ${p.business}`,
+      html: `<p style="font:15px sans-serif">La propuesta de <b>${escHtml(p.business)}</b> ya está lista y el cliente dejó WhatsApp. Ábrela en tu teléfono y envía el mensaje:</p><p style="font:15px sans-serif"><a href="${waLink}">Mandar por WhatsApp</a></p>` }).catch(() => {});
+  }
+  return { ok: true, link, validUntil, emailed, emailError, waLink, message };
+}
+
+// Envío automático: lo llama un trigger de Supabase (pg_net) cuando la rutina deja la solicitud
+// «en_revision» con su propuesta. Sin token: solo manda borradores recién hechos de ese lead.
+async function autoSend(leadId) {
+  if (process.env.AUTO_SEND_PROPOSALS === 'off' || !/^[0-9a-f-]{36}$/.test(String(leadId || ''))) return { skipped: true };
+  const lead = (await select('leads', `id=eq.${leadId}&status=eq.en_revision&proposal_id=not.is.null&select=proposal_id,created_at&limit=1`))?.[0];
+  if (!lead || Date.now() - Date.parse(lead.created_at) > 2 * 864e5) return { skipped: true };
+  const prop = (await select('proposals', `id=eq.${lead.proposal_id}&status=eq.borrador&select=slug&limit=1`))?.[0];
+  if (!prop) return { skipped: true };
+  const p = await getBySlug(prop.slug);
+  return { slug: prop.slug, ...(await sendProposal(p)) };
+}
+
 export async function GET(request) {
   // Cron diario de Vercel (vercel.json): análisis, pruebas en IA y reportes que toquen hoy
   if (new URL(request.url).searchParams.get('action') === 'cron') {
@@ -107,6 +160,9 @@ export async function GET(request) {
 
 export async function POST(request) {
   let b; try { b = await request.json(); } catch { return json({ error: 'Solicitud inválida.' }, 400); }
+  if (b.action === 'autosend') {
+    try { return json(await autoSend(b.lead_id)); } catch (err) { console.error('autosend', err.message); return json({ error: err.message }, 500); }
+  }
 
   if (b.action === 'login') {
     const req = new Request(request.url, { headers: { authorization: `Bearer ${b.token || ''}` } });
@@ -192,37 +248,8 @@ export async function POST(request) {
     }
 
     if (b.action === 'approve') {
-      const content = p.content || p.ai_draft;
-      if (!content?.page?.hero?.title) return json({ error: 'La propuesta no tiene contenido.' }, 400);
-      const days = Math.min(30, Math.max(3, Number(b.validDays) || 14));
-      const validUntil = addDays(todayMx(), days);
-      await update('proposals', `id=eq.${p.id}`, { content, status: 'enviada', sent_at: new Date().toISOString(), valid_until: validUntil });
-      const lead = p.leads?.[0];
-      if (lead) await update('leads', `id=eq.${lead.id}`, { status: 'propuesta_enviada' });
-
-      const link = `${siteUrl()}/p/${p.slug}`;
-      const first = (content.contactName || lead?.name || '').split(/\s+/)[0];
-      const message = `Hola${first ? `, ${first}` : ''}. Ya está lista la propuesta para ${p.business}: ${link}\n\nAhí ves cómo quedaría tu nueva página (también en pantalla completa), qué cambia y el precio. Es válida hasta el ${longDate(validUntil)}.`;
-      let emailed = false, emailError = null;
-      if (lead?.contact_type === 'email' && mailReady()) {
-        try {
-          await sendMail({
-            to: lead.contact,
-            subject: `Tu propuesta de página web para ${p.business}`,
-            text: `${message}\n\nSi tienes dudas, responde este correo.\n\nEquipo de Ceiba Labs`,
-            html: `<div style="max-width:560px;font:15px/1.6 sans-serif;color:#0B1514"><p>Hola${first ? `, ${escHtml(first)}` : ''}.</p><p>Ya está lista la propuesta para <b>${escHtml(p.business)}</b>. Ahí ves cómo quedaría tu nueva página (también en pantalla completa), qué cambia y el precio.</p><p><a href="${link}" style="display:inline-block;background:#D6FA52;color:#0B1514;padding:12px 18px;border-radius:8px;font-weight:600;text-decoration:none">Ver mi propuesta</a></p><p>Es válida hasta el ${longDate(validUntil)}. Si tienes dudas, responde este correo.</p><p>Equipo de Ceiba Labs</p></div>`,
-            replyTo: process.env.CEIBA_REPLY_TO || process.env.CEIBA_NOTIFY_EMAIL?.split(',')[0],
-          });
-          emailed = true;
-        } catch (err) { emailError = err.message; console.error('approve: correo no enviado', err.message); }
-      }
-      let waLink = null;
-      if (lead?.contact_type === 'whatsapp') {
-        let d = lead.contact.replace(/\D/g, '');
-        if (d.length === 10) d = '52' + d;
-        waLink = `https://wa.me/${d}?text=${encodeURIComponent(message)}`;
-      }
-      return json({ ok: true, link, validUntil, emailed, emailError, waLink, message });
+      const r = await sendProposal(p, { days: b.validDays });
+      return r.error ? json({ error: r.error }, 400) : json(r);
     }
     return json({ error: 'Acción desconocida.' }, 400);
   } catch (err) {
