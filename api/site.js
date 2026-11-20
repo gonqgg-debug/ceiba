@@ -11,6 +11,7 @@ import { select } from '../lib/db.js';
 import { fontHref, renderClinica } from '../lib/templates/clinica.js';
 import { robotsTxt, seoHead, sitemapXml } from '../lib/seo.js';
 import { signDownload } from '../lib/client-chat.js';
+import { pageSeo, renderSitePage, sitePages } from '../lib/site-pages.js';
 
 const TEMPLATES = { clinica: renderClinica };
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -46,6 +47,16 @@ function llmsTxt(c, url) {
   return `# ${b.fullName || b.name || ''}\n\n${lede ? `> ${lede}\n\n` : ''}${line('Página', url)}${line('Dirección', k.address)}${line('Teléfono', k.phone)}${line('WhatsApp', k.whatsapp && `https://wa.me/${k.whatsapp}`)}${line('Correo', k.email)}${line('Horario', hours)}${line('Zonas', c.visit?.zones)}${services ? `\n## Servicios\n${services}\n` : ''}${faq ? `\n## Preguntas frecuentes\n${faq}\n` : ''}`;
 }
 
+// Datos estructurados de una página interna: ruta de navegación y sus preguntas frecuentes
+function pageSchema(c, current, pageUrl, home) {
+  const name = c.page?.brand?.fullName || c.page?.brand?.name || '';
+  const graph = [{ '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name, item: home }, { '@type': 'ListItem', position: 2, name: current.title, item: pageUrl }] }];
+  const faq = (current.sub?.faq || []).filter(f => f.q && f.a);
+  if (faq.length) graph.push({ '@type': 'FAQPage', mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) });
+  if (current.view === 'sub' && current.sub?.kind !== 'zona') graph.push({ '@type': 'Service', name: current.title, description: current.sub?.intro || current.sub?.hero?.sub, provider: { '@type': 'LocalBusiness', name, url: home } });
+  return { '@context': 'https://schema.org', '@graph': graph };
+}
+
 export async function GET(request) {
   const q = new URL(request.url).searchParams;
   if (q.has('media')) return media(q.get('media') || '');
@@ -53,23 +64,31 @@ export async function GET(request) {
   const path = '/' + String(q.get('path') || '').replace(/^\/+/, '');
   if (!/^([a-z0-9-]+\.)+[a-z]{2,}$/.test(host)) return send('No encontrado', 'text/plain', 404, 'no-store');
   let row;
-  try { row = (await select('proposals', `domain=eq.${encodeURIComponent(host)}&select=slug,business,site_content,published_at,updated_at&limit=1`))?.[0]; }
+  try { row = (await select('proposals', `domain=eq.${encodeURIComponent(host)}&select=slug,business,recommended_plan,site_content,published_at,updated_at&limit=1`))?.[0]; }
   catch (err) { console.error('site', host, err.message); return send('No disponible', 'text/plain', 502, 'no-store'); }
   if (!row?.site_content || !row.published_at) return path === '/robots.txt' ? send('User-agent: *\nDisallow: /\n', 'text/plain') : soon(host);
 
   const url = `https://${host}/`;
   if (path === '/robots.txt') return send(robotsTxt({ url }), 'text/plain');
   if (path === '/llms.txt') return send(llmsTxt(row.site_content.page || {}, url), 'text/plain');
-  if (path === '/sitemap.xml') return send(sitemapXml({ url, lastmod: (row.updated_at || row.published_at).slice(0, 10) }), 'application/xml');
-  if (path !== '/' && path !== '/index.html') return Response.redirect(url, 301);
+  const plan = row.recommended_plan;
+  if (path === '/sitemap.xml') return send(sitemapXml({ url, paths: sitePages(row.site_content, plan).map(p => `/${p.slug}`), lastmod: (row.updated_at || row.published_at).slice(0, 10) }), 'application/xml');
 
   const c = row.site_content, page = c.page || {};
-  const render = TEMPLATES[c.template || 'clinica'] || renderClinica;
+  const r = renderSitePage(c, plan, path, { href: slug => `/${slug}` });
+  if (!r) return Response.redirect(url, 301);
   const fonts = fontHref(page);
+  const pageUrl = url + r.page.slug;
+  const meta = pageSeo(c, r.page);
+  const head = meta
+    ? [`<title>${esc(meta.title)}</title>`, meta.description && `<meta name="description" content="${esc(meta.description)}">`, `<link rel="canonical" href="${esc(pageUrl)}">`,
+      `<meta property="og:type" content="website">`, `<meta property="og:title" content="${esc(meta.title)}">`, meta.description && `<meta property="og:description" content="${esc(meta.description)}">`,
+      `<meta property="og:url" content="${esc(pageUrl)}">`, `<script type="application/ld+json">${JSON.stringify(pageSchema(c, r.page, pageUrl, url)).replace(/</g, '\\u003c')}</script>`].filter(Boolean).join('\n')
+    : seoHead(page, { url }).replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, ''); /* la plantilla ya trae los datos estructurados */
   return send(`<!doctype html>
 <html lang="es"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-${seoHead(page, { url }).replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/, '') /* la plantilla ya trae los datos estructurados */}
+${head}
 ${page.brand?.accent ? `<meta name="theme-color" content="${esc(page.brand.accent)}">` : ''}
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Red+Hat+Display:wght@500;600;700&family=Red+Hat+Text:wght@400;500;600&display=swap">
@@ -78,7 +97,7 @@ ${fonts ? `<link rel="stylesheet" href="${fonts}">` : ''}
 <style>body{margin:0;background:#fff;-webkit-font-smoothing:antialiased;overflow-x:clip}[hidden]{display:none!important}.vista{container-type:inline-size}</style>
 </head><body>
 ${SYMBOLS}
-<main class="vista">${render(page, { mode: 'live' })}</main>
+<main class="vista">${r.html}</main>
 <script src="/assets/clinica.js" defer></script>
 </body></html>`, 'text/html');
 }

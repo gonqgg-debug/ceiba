@@ -4,6 +4,7 @@ import { SYMBOLS } from '../lib/generated/shared.js';
 import { isAdmin } from '../lib/admin.js';
 import { loadProposal, trackView } from '../lib/proposals.js';
 import { select } from '../lib/db.js';
+import { renderSitePage } from '../lib/site-pages.js';
 import { fontHref, renderClinica } from '../lib/templates/clinica.js';
 
 const TEMPLATES = { clinica: renderClinica };
@@ -48,7 +49,7 @@ ${SYMBOLS}
   <div class="vp-acts"><a class="vp-btn" href="/cuenta/${esc(p.slug)}">Pedir cambios</a><a class="vp-btn vp-btn--main" href="/cuenta/${esc(p.slug)}#aprobar">Aprobar mi página</a><button class="vp-btn vp-x" type="button" id="vp-hide" aria-label="Ocultar barra de vista previa">×</button></div>
 </div>
 <button class="vp-pill" id="vp-pill" type="button" hidden>Vista previa · Ceiba Labs</button>
-<main class="vista">${render(c.page || {}, { mode: 'live' })}</main>
+<main class="vista">${p.html || render(c.page || {}, { mode: 'live' })}</main>
 <div class="vp-toast" id="vp-toast" role="status" aria-live="polite" hidden></div>
 <script src="/assets/clinica.js" defer></script>
 <script src="/assets/vista.js" defer></script>
@@ -83,7 +84,9 @@ export async function GET(request) {
     // La página real del cliente (ya pagó): sin vencimiento. Se lee de Supabase aunque exista una propuesta de ejemplo.
     const row = (await select('proposals', `slug=eq.${encodeURIComponent(slug)}&select=*&limit=1`).catch(() => []))?.[0];
     if (!row?.site_content || (!admin && row.status !== 'activada')) return notFound('Tu página todavía no está lista', 'Te avisamos en tu chat en cuanto tengas la vista previa.', 404);
-    return sitePage({ slug: row.slug, business: row.business, template: row.content?.template, site: row.site_content }, { admin });
+    const r = renderSitePage(row.site_content, row.recommended_plan, q.get('p') || '/', { href: p => `/vista/${row.slug}${p ? `/${p}` : ''}?sitio=1` });
+    if (!r) return notFound('No encontramos esta página', 'Revisa el enlace o vuelve al inicio de tu vista previa.', 404);
+    return sitePage({ slug: row.slug, business: row.business, template: row.content?.template, site: row.site_content, html: r.html }, { admin });
   }
   let r;
   try { r = await loadProposal(slug, { admin }); }

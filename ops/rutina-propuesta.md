@@ -136,7 +136,12 @@ Cada archivo de `solicitudes.archivos` es `{ruta, nombre, tipo, clase}`; `clase`
 | Rondas de ajustes antes de publicar | 1 | 2 | 3 |
 | Minutos de cambios al mes | 30 | 60 | 120 |
 
-- Mientras la plantilla sea de una sola página, «páginas» son las secciones principales de la portada: no agregues más secciones de las que su plan permite contar como páginas (inicio, servicios y contacto en esencial).
+- Inicio, servicios y contacto se arman solas con el contenido de la portada (`page`): no las agregues en `pages`.
+- En negocio y avanzado, agrega en `site_content.pages` las páginas por servicio o zona que incluye su plan (hasta 4 en negocio, hasta 9 en avanzado). Elige las de `datos.paginas` si el cliente las dijo; si no, los servicios principales o las zonas que atiende. Cada una: `{slug, title, kind: servicio|zona|catalogo, navLabel?, nav?, hero: {sub, photo, photoAlt}, intro, sections: [{title, text, bullets[]}], items: [{name, price, desc, img, imgAlt}], prices: {title, note, rows: [{name, price}]} | null, faq: [{q, a}], seo: {title, description}}`.
+  - `slug` en minúsculas y con guiones (ej. `limpieza-dental`, `dentista-en-providencia`). Las de zona van con `nav: false` (salen en el pie, no en el menú). `seo.title` de máximo 60 caracteres con el servicio y la ciudad; `seo.description` de máximo 155.
+  - Solo datos reales del cliente: qué incluye, para quién es, cómo es el proceso, precios que dio y 3 a 5 preguntas frecuentes de ese servicio. Sin repetir textos de la portada palabra por palabra.
+  - En avanzado, su catálogo va en una página `kind: catalogo` con sus `items`.
+- El total de preguntas frecuentes del sitio (`page.faq` más las de cada página) no pasa del límite de su plan.
 - `datos.agenda` es el enlace de su agenda (o «no»); `datos.catalogo` o un archivo de clase `catalogo`, su catálogo.
 - Si un cambio pide algo que su plan no incluye, no lo apliques: explica en `resultado` qué falta y en `mensaje_cliente` qué incluye su plan y que puede subir de plan.
 - Si la instrucción dice «fuera de plan», aplícalo igual: el equipo lo cotiza aparte.

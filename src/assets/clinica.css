@@ -413,3 +413,12 @@
   .cx-sticky{display:flex;position:sticky;bottom:0;z-index:5;gap:.6em;padding:.8em var(--pad);background:color-mix(in srgb,var(--bg) 96%,transparent);border-top:1px solid var(--line)}
   .cx-sticky .cx-btn{flex:1}
 }
+
+/* Sitios con varias páginas */
+.cx-brand{position:relative}
+.cx-home{position:absolute;inset:0;z-index:1}
+.cx-nav a[aria-current="page"]{color:var(--a);font-weight:600}
+.cx-text .cx-checks{max-width:760px}
+.cx-text > .cx-lede{max-width:760px;font-size:1.15rem;line-height:1.6}
+.cx-foot-cols a{display:block;color:inherit;text-decoration:none;opacity:.85}
+.cx-foot-cols a:hover{opacity:1;text-decoration:underline}

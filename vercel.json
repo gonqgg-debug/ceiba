@@ -13,6 +13,10 @@
       "destination": "/api/site?media=:slug/:file"
     },
     {
+      "source": "/vista/:slug/:page",
+      "destination": "/api/vista?slug=:slug&p=:page"
+    },
+    {
       "source": "/vista/:slug",
       "destination": "/api/vista?slug=:slug"
     },
