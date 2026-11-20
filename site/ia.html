@@ -732,6 +732,32 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
 .ws-tiers .hl span{color:var(--lime)!important}
 .ws-read dt{color:var(--lime)!important}.ws-read dd{color:#fff}
 
+/* planes en tarjetas */
+#precios .plans{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;border-top:0;margin-top:40px;align-items:stretch}
+#precios .plans .plan{position:relative;display:flex;flex-direction:column;gap:14px;padding:28px;border:1px solid rgba(255,255,255,.14);border-radius:18px;background:rgba(255,255,255,.04)}
+#precios .plans .plan h3{font-size:36px}
+#precios .plans .plan > div:first-of-type{order:0}
+#precios .plans .plan .price-cell + .price-cell{order:1;display:block}
+#precios .plans .plan .price-cell:has(+ .price-cell){order:2;display:block;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.12)}
+#precios .plans .plan .price-cell .k{display:none}
+#precios .plans .plan .price-cell + .price-cell .v{font:400 54px/1 var(--f-display);letter-spacing:-.02em}
+#precios .plans .plan .price-cell + .price-cell .v small{display:inline;margin-left:6px;font:400 16px var(--f-body);color:var(--muted)}
+#precios .plans .plan .price-cell:has(+ .price-cell) .v{font:400 15px var(--f-body);color:var(--muted)}
+#precios .plans .plan .price-cell:has(+ .price-cell) .v::before{content:"+ "}
+#precios .plans .plan .price-cell:has(+ .price-cell) .v small{display:inline;margin-left:4px;font-size:15px}
+#precios .plans .plan ul{order:3;flex:1;align-content:start;gap:10px;display:grid}
+#precios .plans .plan ul li{display:block;position:relative;padding-left:22px}
+#precios .plans .plan ul li::before{content:"✓";position:absolute;left:0;top:0;width:auto;height:auto;background:none;margin:0;opacity:1;color:var(--lime);font-size:12px;font-weight:700;line-height:1.9}
+#precios .plans .plan .btn{order:4;justify-content:center;height:48px;margin-top:8px}
+#precios .plans .plan--mid{background:#1D3ED6;border-color:transparent;box-shadow:0 30px 60px -30px rgba(0,0,0,.5)}
+#precios .plans .plan--mid .btn{background:var(--lime);color:var(--ink);border-color:var(--lime)}
+#precios .plan-tag{position:absolute;top:-12px;left:28px;font-size:12px;font-weight:600;color:var(--ink);background:var(--lime);padding:5px 10px;border-radius:999px}
+#precios .addon-block .plan{grid-template-columns:minmax(140px,1fr) minmax(0,2fr) auto auto auto}
+@media (max-width:980px){#precios .plans{grid-template-columns:1fr}}
+#precios .plans .plan{text-align:left;align-items:stretch;justify-items:stretch}
+#precios .plans .plan > *{justify-self:stretch;text-align:left;margin-inline:0}
+#precios .plans .plan .btn{width:100%;display:flex}
+
 /* ===================== IA ===================== */
 .ia-hero{padding-block:clamp(48px,7vw,96px)}
 .ia-hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:48px clamp(40px,5vw,80px);align-items:center}
@@ -1187,7 +1213,7 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
         <p class="ia-price"><b><span data-price="consultoria.diagnostico_ia.amount">$3,900</span></b>se descuenta del proyecto si lo contratas</p>
       </article>
     </div>
-    <p class="hint" style="margin-top:18px;color:rgba(247,244,235,.7)">Precios en <span data-cur-name>pesos mexicanos</span>. Es el precio final. Si aplican cargos de Meta por mensajes de WhatsApp, se confirman al conectar tu número.</p>
+    <p class="hint" style="margin-top:18px;color:rgba(247,244,235,.7)">Es el precio final. Si aplican cargos de Meta por mensajes de WhatsApp, se confirman al conectar tu número.</p>
   </div>
 </section>
 
