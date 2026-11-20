@@ -35,6 +35,8 @@ async function clientDetail(slug) {
   const solicitudes = await Promise.all((sols || []).map(async r => ({ ...r, archivos: await Promise.all((r.archivos || []).map(sign)) })));
   const prop = (await select('proposals', `slug=eq.${encodeURIComponent(slug)}&select=site_built_at&limit=1`).catch(() => []))?.[0];
   const reports = await select('seo_reports', `slug=eq.${encodeURIComponent(slug)}&select=id,kind,summary,data,sent_at,created_at&order=created_at.desc&limit=6`).catch(() => []);
+  const pendingChecks = await select('ai_checks', `slug=eq.${encodeURIComponent(slug)}&estado=eq.pendiente&select=report_id,provider`).catch(() => []);
+  for (const r of reports || []) r.waiting = (pendingChecks || []).filter(c => c.report_id === r.id).map(c => c.provider);
   const { encontrado, cambios, ...data } = chat.data || {};
   return {
     slug: chat.slug, business: chat.business, email: chat.email, phase: chat.phase, needs_human: chat.needs_human,

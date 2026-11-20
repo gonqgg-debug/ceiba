@@ -1055,9 +1055,9 @@ body.adm input:not([type=checkbox]):not([type=color]),body.adm textarea,body.adm
     const KIND = { lanzamiento: 'Análisis al lanzar', trimestral: 'Prueba trimestral en IA', mensual: 'Reporte mensual' };
     const rows = (c.reports || []).map(r => {
       const v = r.data?.visibility;
-      return `<div class="sol"><div class="sol-h"><b>${KIND[r.kind] || r.kind}</b><span>${fmt(r.created_at)}${r.sent_at ? ' · enviado al cliente' : ' · solo interno'}</span></div>
+      return `<div class="sol"><div class="sol-h"><b>${KIND[r.kind] || r.kind}</b><span>${fmt(r.created_at)}${r.data?.pending ? ` · esperando a Cowork (${r.waiting?.length || 0} preguntas en ${[...new Set(r.waiting || [])].join(', ') || '—'})` : r.sent_at ? ' · enviado al cliente' : ' · solo interno'}</span></div>
         <p>${esc(r.summary || '')}</p>
-        ${v?.results?.length ? `<small>${v.results.map(x => `${x.mentioned ? '✓' : x.error ? '!' : '✗'} ${esc(x.provider)}: «${esc(x.q)}»${x.cited?.length ? ` — fuentes: ${esc(x.cited.slice(0, 4).join(', '))}` : ''}`).join('<br>')}</small>` : ''}</div>`;
+        ${v?.results?.length ? `<small>${v.results.map(x => `${x.mentioned ? '✓' : x.error ? '!' : '✗'} ${esc(x.provider)}${x.via === 'chat' ? ' (chat)' : ''}: «${esc(x.q)}»${x.cited?.length ? ` — fuentes: ${esc(x.cited.slice(0, 4).join(', '))}` : ''}`).join('<br>')}</small>` : ''}</div>`;
     }).join('');
     return `<section class="panel"><h2>SEO y visibilidad en IA</h2>
       <small>${c.plan.id === 'avanzado' ? 'Avanzado: análisis al lanzar, reporte mensual con prueba en IA y una mejora de SEO incluida cada mes.' : 'Negocio: análisis al lanzar, prueba en IA cada 3 meses y contactos del mes.'} Corre solo cada día; aquí puedes correrlo ahora.</small>
@@ -1131,7 +1131,7 @@ body.adm input:not([type=checkbox]):not([type=color]),body.adm textarea,body.adm
     $('#dl-approve')?.addEventListener('click', () => run({ action: 'site_approve' }));
     $('#seo-run')?.addEventListener('click', async e => {
       e.target.disabled = true; msg('Corriendo análisis y preguntas a la IA… puede tardar hasta un minuto.');
-      try { await api('POST', { slug, action: 'seo_run', kind: $('#seo-kind').value, notify: $('#seo-notify').checked }); await client(slug); msg('Listo.', 'ok'); }
+      try { const r = await api('POST', { slug, action: 'seo_run', kind: $('#seo-kind').value, notify: $('#seo-notify').checked }); await client(slug); msg(r.waiting ? `Listo. Quedaron ${r.waiting}; el reporte se cierra cuando las conteste.` : 'Listo.', 'ok'); }
       catch (err) { msg(err.message, 'err'); e.target.disabled = false; }
     });
     $('#dl-connect')?.addEventListener('click', async () => {
