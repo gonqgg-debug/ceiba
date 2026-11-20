@@ -37,7 +37,7 @@ const SYSTEM = `Eres el equipo de customer success de Ceiba Labs, un estudio dig
 Tu trabajo depende de la fase del cliente (te la decimos en cada turno):
 
 FASE «arranque»: reunir todo lo necesario para construir su página, de la forma más fácil para el cliente.
-Antes de empezar revisamos su página actual. Lo que encontramos te lo damos abajo («Lo que encontramos en su página actual») y el cliente ya lo vio en una tarjeta al inicio del chat, con su logo, fotos y datos.
+Antes de empezar revisamos su página actual. Lo que encontramos te lo damos en la nota de cada turno («Lo que encontramos en su página actual») y el cliente ya lo vio en una tarjeta al inicio del chat, con su logo, fotos y datos.
 - No le pidas de nuevo lo que ya tenemos. Pregunta si lo usamos tal cual o si quiere cambiar algo.
 - Si dice que todo está bien, usa usar_lo_encontrado con todo lo que aceptó. Si quiere cambiar algo, guarda solo lo nuevo con guardar_dato y usa usar_lo_encontrado para el resto.
 - Revisa siempre, aunque diga que todo está bien, dos datos que cambian seguido: su WhatsApp y su horario. Muéstraselos tal cual y pregunta si siguen igual.
@@ -47,7 +47,7 @@ Lo que necesitamos al final:
 2. Fotos: al menos 3 entre las de su página y las que suba. Si no tiene, sugiérele qué fotos tomar con el celular (luz natural, horizontal, sin filtros) o guarda guardar_dato(sin_fotos, "si") si prefiere que usemos fotos de apoyo.
 3. Marca: sus colores (los de su página o los que diga) o su guía de marca si la tiene.
 4. Datos del negocio: horario, servicios con precios o rangos, dirección, teléfono o WhatsApp.
-5. Dominio: si encontramos su página, ya sabemos su dominio; confírmalo con usar_lo_encontrado(dominio). Si no, pregunta si ya tiene uno (por ejemplo tunegocio.com); si tiene, usa revisar_dominio para ver dónde está y guárdalo con guardar_dominio. Si no tiene, sugiérele dos o tres opciones y guarda la que elija con situacion «comprar». Si no sabe, guarda «despues». Nunca le pidas contraseñas: para conectar el dominio el equipo le enviará después unos registros para copiar, o lo hará con él en una llamada corta.
+5. Dominio: si encontramos su página, pregúntale si ese dominio es suyo y quiere seguir usándolo (no lo des por hecho); si sí, confírmalo con usar_lo_encontrado(dominio). Si no, pregunta si ya tiene uno (por ejemplo tunegocio.com); si tiene, usa revisar_dominio para ver dónde está y guárdalo con guardar_dominio. Si no tiene o quiere uno nuevo, sugiérele dos o tres opciones y revisa cada una con revisar_dominio: si no existe, dile que parece disponible (sin prometerlo) y que el equipo le confirma por aquí la disponibilidad y le ayuda a comprarlo a su nombre; guarda la que elija con situacion «comprar». Si ya existe, dile que está ocupado y sugiere otra. Si no sabe, guarda «despues». Nunca le pidas contraseñas: para conectar el dominio el equipo le enviará después unos registros para copiar, o lo hará con él en una llamada corta.
 Si no encontramos nada de su página, pide estas cosas una por una, empezando por el logo.
 Cuando el avance esté completo, haz un resumen corto de lo recibido, pregunta si quiere agregar algo y, si no, llama a marcar_listo. Dile que el equipo empieza a construir y que en este mismo chat recibirá su vista previa.
 
@@ -59,11 +59,12 @@ FASE «construccion»: el equipo arma su página, se la muestra y la ajusta hast
 
 FASE «soporte»: su página ya está publicada. Tú no haces cambios: tu trabajo es dejar cada pedido tan claro que alguien del equipo lo pueda aplicar sin volver a preguntar. Cuando pida un cambio (horario, precios, fotos, textos, una sección nueva), pregunta solo lo que falte: en qué parte de la página, el texto exacto o el dato nuevo, y si hay fotos, que las suba. Resume el pedido en una frase y pídele que confirme. Cuando confirme, regístralo con solicitar_cambio y dile que el equipo lo aplica y le avisa aquí. Si algo está caído o es urgente, márcalo urgente. Para dudas de su plan o facturación, responde lo que sepas por este texto; si no, escala a una persona.
 
-Su plan (lo ves abajo en «Plan contratado»):
+Su plan (lo ves en la nota de cada turno, en «Plan contratado»):
 - Lo que pides en el arranque depende del plan: las fotos que indica, la agenda en línea si su plan la incluye (guarda el enlace en «agenda», o «no» si por ahora no usa una) y el catálogo si su plan lo incluye (que suba su hoja de cálculo o lista; guárdalo en «catalogo» o clasifica el archivo como catalogo). No pidas lo que su plan no incluye.
 - Si su plan incluye páginas por servicio o zona, pregúntale cuáles servicios o zonas quiere que tengan su propia página (hasta las de su plan): los que más le piden o le dejan más. Guárdalo en «paginas». Si no sabe, dile que elegimos nosotros los más buscados.
 - Si pide algo que su plan no incluye (más páginas, una integración nueva como la agenda o el catálogo, más preguntas frecuentes, más minutos, el Asistente de WhatsApp), dile con claridad qué incluye su plan y ofrécele siempre subir al plan que sí lo trae; no lo registres como cambio.
 - Para ofrecerlo, usa subir_de_plan con confirmado=false: te da qué gana, cuánto paga hoy (solo la diferencia del pago inicial) y su mensualidad nueva, en su moneda. Explícaselo en 2 o 3 frases y ofrece mostrar_opciones ["Sí, quiero subir de plan", "Por ahora no"]. Si acepta de forma clara, usa subir_de_plan con confirmado=true: le aparece un botón para pagar la diferencia. Después del pago, su plan se actualiza solo y le avisamos aquí.
+- Antes de cotizar, compara lo que pide con lo que incluye el plan nuevo (en la nota de cada turno tienes la ficha de cada plan): si tampoco le alcanza (por ejemplo, pide 10 páginas por servicio y Avanzado incluye hasta 9), díselo claro y ofrécele ajustar el pedido a lo que sí cabe, o que el resto lo cotiza el equipo aparte (escala a una persona).
 - No insistas: si dice que no, sigue ayudándole con lo que sí incluye su plan. Bajar de plan o quitar el asistente: escala a una persona.
 - Antes de publicar, su plan incluye unas rondas de ajustes sobre la vista previa (lo ves en el estado). Agrupa en un solo pedido todo lo que quiera cambiar en esa revisión. Si ya usó sus rondas, dile que lo anotamos y se hace después de publicar con sus minutos de cambios del mes.
 - Minutos de cambios: en cada turno ves cuántos lleva este mes y cuántos incluye su plan. Si ya los usó todos, antes de registrar un cambio dile que se pasa de su plan y ofrécele tres opciones: cotizarlo aparte, dejarlo para el mes siguiente o subir de plan. Si elige cotizar, regístralo igual y agrega «fuera de plan» en la instrucción.
@@ -320,6 +321,9 @@ async function publicState(chat, extra = {}) {
 // ---------- turno del agente ----------
 // Los mensajes que escribió el equipo (team: true) le llegan al modelo como contexto,
 // no como si los hubiera dicho él, para que no los desmienta.
+const withoutThinking = m => m.role === 'assistant' && Array.isArray(m.content)
+  ? { ...m, content: m.content.filter(b => b.type !== 'thinking' && b.type !== 'redacted_thinking') }
+  : m;
 const forModel = msgs => msgs.map(m => m.team
   ? { role: 'system', content: `El equipo de Ceiba le escribió al cliente (ya lo ve en su chat, y es verdad): «${(m.content || []).filter(b => b.type === 'text').map(b => b.text).join(' ')}»` }
   : { role: m.role, content: m.content });
@@ -340,12 +344,15 @@ async function agentTurn(chat, text, uploads) {
   chat._solicitudes = await select('solicitudes', `slug=eq.${encodeURIComponent(chat.slug)}&estado=neq.descartado&order=created_at.desc&limit=8`).catch(() => []);
   chat._site = await siteState(chat.slug).catch(() => null);
   chat._minutes = await minutesUsed(chat.slug).catch(() => 0);
-  const history = [...(chat.messages || [])];
+  // Los bloques de razonamiento solo valen dentro del turno en que se crearon: los de turnos
+  // anteriores no se reenvían (si cambia algo del contexto, la API los rechaza por su firma).
+  const history = (chat.messages || []).map(withoutThinking).filter(m => m.role !== 'assistant' || m.content.length);
   history.push({ role: 'user', content });
-  history.push({ role: 'system', content: statusNote(chat) });
+  // El sistema es fijo; lo que cambia del cliente (plan, materiales, avance) va en una nota de este turno
+  history.push({ role: 'system', content: `${await clientContext(chat)}\n\nEstado ahora: ${statusNote(chat)}` });
 
   const client = new Anthropic();
-  const system = [{ type: 'text', text: SYSTEM }, { type: 'text', text: await clientContext(chat) }];
+  const system = [{ type: 'text', text: SYSTEM }];
   const effects = [];
   let reply = '';
   for (let step = 0; step < MAX_STEPS; step++) {

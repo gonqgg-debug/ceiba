@@ -498,7 +498,17 @@ img{max-width:100%}
       if (j !== null) { e.preventDefault(); selectPlan(plBtns[j], true); }
     });
   });
-  addon.addEventListener('change', renderTotals);
+  // Recordar lo que eligió en este navegador (al recargar no vuelve al plan recomendado)
+  const PICK_KEY = 'ceiba-pick-' + P.slug;
+  const savePick = () => { try { localStorage.setItem(PICK_KEY, JSON.stringify({ plan, wa: addon.checked })); } catch {} };
+  try {
+    const saved = JSON.parse(localStorage.getItem(PICK_KEY) || 'null');
+    const btn = saved && plBtns.find(x => x.dataset.plan === saved.plan);
+    if (btn) selectPlan(btn);
+    if (saved && typeof saved.wa === 'boolean') addon.checked = saved.wa;
+  } catch {}
+  plBtns.forEach(b => b.addEventListener('click', savePick));
+  addon.addEventListener('change', () => { savePick(); renderTotals(); });
   renderTotals();
 
   /* ---------- call slots (next 3 weekdays) ---------- */
