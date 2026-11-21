@@ -77,12 +77,35 @@
     const f = e.target.closest('[data-cx-form]'); if (!f) return;
     e.preventDefault();
     const root = f.closest('.cx'), wa = root.dataset.wa;
-    const v = n => (f.elements[n]?.value || '').trim();
-    if (!v('n')) { f.elements.n.focus(); return; }
-    const msg = [`Hola, quiero agendar una cita en ${root.dataset.name}.`, `Nombre: ${v('n')}`, v('t') && `Teléfono: ${v('t')}`, v('s') && `Servicio: ${v('s')}`, v('d') && `Día que prefiero: ${v('d')}`, v('m') && `Comentarios: ${v('m')}`].filter(Boolean).join('\n');
+    if (!(f.elements.n?.value || '').trim()) { f.elements.n?.focus(); return; }
+    // Cada campo trae su etiqueta (data-l): el mensaje sirve para cualquier rubro
+    const lines = [...f.querySelectorAll('[data-l]')].filter(el => el.value.trim()).map(el => `${el.dataset.l}: ${el.value.trim()}`);
+    const msg = [`${f.dataset.intro || 'Hola, quiero agendar en'} ${root.dataset.name}.`, ...lines].join('\n');
     if (wa) window.open(`https://wa.me/${wa}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
   });
 
+
+  // Pestañas (menú del restaurante) y filtro (propiedades). Sin script se ve todo.
+  const bindTabs = () => document.querySelectorAll('.cx-menu:not([data-tabs])').forEach(sec => {
+    sec.dataset.tabs = 1;
+    if (!sec.querySelector('[data-cx-tab]')) return;
+    sec.classList.add('cx-menu--tabs');
+    sec.querySelector('[data-cx-panel="0"]')?.classList.add('is-on');
+  });
+  document.addEventListener('click', e => {
+    const t = e.target.closest('[data-cx-tab]');
+    if (t) {
+      const sec = t.closest('.cx-menu');
+      sec.querySelectorAll('[data-cx-tab]').forEach(b => b.setAttribute('aria-selected', b === t));
+      sec.querySelectorAll('[data-cx-panel]').forEach(p => p.classList.toggle('is-on', p.dataset.cxPanel === t.dataset.cxTab));
+    }
+    const fl = e.target.closest('[data-cx-filter]');
+    if (fl) {
+      const sec = fl.closest('.cx-listings'), op = fl.dataset.cxFilter;
+      sec.querySelectorAll('[data-cx-filter]').forEach(b => b.setAttribute('aria-checked', b === fl));
+      sec.querySelectorAll('.cx-prop').forEach(c => { c.hidden = !!op && c.dataset.op !== op; });
+    }
+  });
 
   // ---------- Asistente: responde con la información de la clínica ----------
   const kbOf = root => { try { return root._kb ||= JSON.parse(root.querySelector('.cx-kb')?.textContent || 'null'); } catch { return null; } };
@@ -262,6 +285,6 @@
     l.classList.add('is-pre'); pio.observe(l);
   });
 
-  bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop();
-  new MutationObserver(() => { bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop(); }).observe(document.documentElement, { childList: true, subtree: true });
+  bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop(); bindTabs();
+  new MutationObserver(() => { bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop(); bindTabs(); }).observe(document.documentElement, { childList: true, subtree: true });
 })();

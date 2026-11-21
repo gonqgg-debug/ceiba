@@ -79,7 +79,7 @@ export const fontHref = c => `https://fonts.googleapis.com/css2?family=${FONTS[t
 //   home: la portada completa · servicios · contacto · sub: página por servicio, zona o catálogo.
 // Cada vista reutiliza las mismas secciones de la portada, así todo el sitio se ve igual.
 const VIEWS = {
-  servicios: ['hero', 'services', 'prices', 'offers', 'finder', 'faq', 'book'],
+  servicios: ['hero', 'rooms', 'amenities', 'services', 'menu', 'listings', 'prices', 'offers', 'finder', 'faq', 'book'],
   contacto: ['hero', 'visit', 'book'],
   sub: ['hero', 'text', 'services', 'prices', 'faq', 'book'],
 };
@@ -96,6 +96,24 @@ function viewContent(c, view, sub) {
   };
   return c;
 }
+
+
+// Rubros (page.kind): cambian secciones, formulario, asistente y datos para Google
+export const KINDS = { clinica: 'Clínica o consultorio', restaurante: 'Restaurante o café', hotel: 'Hotel u hospedaje', inmobiliaria: 'Inmobiliaria', despacho: 'Despacho contable o legal' };
+const SCHEMA_TYPE = { clinica: 'MedicalClinic', restaurante: 'Restaurant', hotel: 'Hotel', inmobiliaria: 'RealEstateAgent', despacho: 'LegalService' };
+const N = ['n', 'Nombre', { auto: 'name', req: true }], T = ['t', 'Teléfono', { type: 'tel', auto: 'tel' }];
+const FORMS = {
+  clinica: { title: 'Agenda tu cita', sub: 'Déjanos tus datos y te confirmamos por WhatsApp.', intro: 'Hola, quiero agendar una cita en', btn: 'Enviar y agendar',
+    fields: [N, T, ['s', '¿Qué necesitas?', { opts: 'svc', wide: true }], ['d', 'Día que prefieres', { ph: 'Ej.: martes en la tarde' }], ['m', 'Comentarios']] },
+  restaurante: { title: 'Reserva tu mesa', sub: 'Elige día y hora y te confirmamos por WhatsApp.', intro: 'Hola, quiero reservar una mesa en', btn: 'Reservar mesa',
+    fields: [N, T, ['p', 'Personas', { opts: ['2', '3', '4', '5', '6', '7', '8', 'Más de 8'] }], ['d', 'Día', { type: 'date' }], ['h', 'Hora', { type: 'time' }], ['m', 'Ocasión o comentarios', { ph: 'Cumpleaños, terraza, silla para bebé…' }]] },
+  hotel: { title: 'Reserva tu estancia', sub: 'Dinos tus fechas y te confirmamos disponibilidad y tarifa por WhatsApp.', intro: 'Hola, quiero reservar en', btn: 'Consultar disponibilidad',
+    fields: [N, T, ['in', 'Llegada', { type: 'date' }], ['out', 'Salida', { type: 'date' }], ['g', 'Huéspedes', { opts: ['1', '2', '3', '4', '5', '6 o más'] }], ['r', 'Habitación', { opts: 'rooms' }], ['m', 'Comentarios', { wide: true }]] },
+  inmobiliaria: { title: 'Cuéntanos qué buscas', sub: 'Te mandamos opciones que sí te sirven, por WhatsApp.', intro: 'Hola, busco una propiedad con', btn: 'Enviar',
+    fields: [N, T, ['o', 'Busco', { opts: ['Comprar', 'Rentar', 'Vender mi propiedad', 'Poner en renta mi propiedad'] }], ['z', 'Zona o propiedad'], ['b', 'Presupuesto', { ph: 'Ej.: hasta $4,500,000' }], ['m', 'Comentarios']] },
+  despacho: { title: 'Agenda tu primera consulta', sub: 'Cuéntanos tu caso en dos líneas y te contactamos hoy.', intro: 'Hola, quiero agendar una consulta con', btn: 'Agendar consulta',
+    fields: [N, T, ['s', 'Tema', { opts: 'svc' }], ['f', '¿Cómo prefieres?', { opts: ['Llamada', 'Videollamada', 'En la oficina'] }], ['m', 'Cuéntanos brevemente tu caso', { wide: true }]] },
+};
 
 export function renderClinica(c = {}, { mode = 'live', marks = {}, view = 'home', sub = null, pages = null, href = null } = {}) {
   const live = mode === 'live';
@@ -136,12 +154,24 @@ export function renderClinica(c = {}, { mode = 'live', marks = {}, view = 'home'
   const tech = list(c.tech?.items).slice(0, 4);
   const pay = list(c.payments?.methods), insurers = list(c.payments?.insurers);
   const chat = list(c.chat?.faq).length ? c.chat : null;
+  const kind = KINDS[c.kind] ? c.kind : 'clinica';
+  const menuCats = list(c.menu?.categories).filter(m => list(m.items).length).slice(0, 8);
+  const rooms = list(c.rooms?.items).slice(0, 8);
+  const amenities = list(c.amenities?.items).slice(0, 12);
+  const listings = list(c.listings?.items).slice(0, 12);
+  const textCards = services.length && services.every(s => !url(s.img));
+  const actLabel = { clinica: 'Agendar', restaurante: 'Reservar', hotel: 'Reservar', inmobiliaria: 'Platicar con una asesora', despacho: 'Consultar' }[kind];
+  const wantLabel = { clinica: 'Quiero agendar', restaurante: 'Quiero reservar', hotel: 'Quiero reservar', inmobiliaria: 'Quiero información', despacho: 'Quiero una consulta' }[kind];
   // Lo que sabe el asistente (para la demostración y para responder lo que escriban)
   const kb = chat ? {
     name, wa: waNum, book: live ? bookHref : '', maps: live ? mapsHref : '', address: contact.address || '',
     hours: hoursRows.map(r => [r.dt, r.dd]), slots: list(hero.slots).slice(0, 3),
     faq: [...faq, ...list(chat.faq)].map(f => [f.q, f.a]).slice(0, 14),
-    services: services.map(s => [s.name, s.price || '', s.desc || '']), more: list(c.services?.more),
+    services: [...services.map(s => [s.name, s.price || '', s.desc || '']),
+      ...menuCats.flatMap(m => list(m.items).map(i => [i.name, i.price || '', [m.name, i.desc].filter(Boolean).join(': ')])),
+      ...rooms.map(r => [r.name, r.price ? `${r.price} por ${r.unit || 'noche'}` : '', [r.desc, r.guests && `hasta ${r.guests} huéspedes`].filter(Boolean).join(' · ')]),
+      ...listings.map(l => [l.title, l.price || '', [l.op, l.zone, l.beds && `${l.beds} recámaras`, l.m2 && `${l.m2} m²`].filter(Boolean).join(' · ')])].slice(0, 40),
+    more: list(c.services?.more),
     pay: [...pay, ...insurers], today: list(today?.bullets).map(b => b.t || b),
   } : null;
   const ratingLine = rating ? `<span class="cx-stars" aria-hidden="true">${stars(rating.value)}</span><b>${esc(rating.value)}</b><span>${esc(rating.count)} reseñas en ${esc(rating.source || 'Google')}</span>` : '';
@@ -194,12 +224,46 @@ export function renderClinica(c = {}, { mode = 'live', marks = {}, view = 'home'
   if (show('today') && today) out.push(`<section class="cx-today cx-sec"><div class="cx-today-copy"><h2>${esc(today.title || 'Te atendemos')}</h2>${today.text && !(xp && view === 'home' && !c.statement) ? `<p>${esc(today.text)}</p>` : ''}${hoursRows.length ? `<dl class="cx-hours">${hoursRows.slice(0, 4).map(r => `<dt>${esc(r.dt)}</dt><dd>${esc(r.dd)}</dd>`).join('')}</dl>` : ''}</div>
     <div class="cx-panel"><ul class="cx-checks">${list(today.bullets).slice(0, 5).map(b => `<li>${ico(iconName(b.icon, b.t || b), 'cx-ico-c')}<span>${esc(b.t || b)}</span></li>`).join('')}</ul>${act('cx-btn', bookHref, ctaTop)}</div></section>`);
 
+  // Habitaciones (hotel)
+  if (show('rooms') && rooms.length) out.push(`<section class="cx-rooms cx-sec"${mk('services')}><div class="cx-head"><div><h2>${esc(c.rooms.title || 'Habitaciones')}</h2>${c.rooms.sub ? `<p>${esc(c.rooms.sub)}</p>` : ''}</div></div>
+    <div class="cx-room-list">${rooms.map(r => {
+      const specs = [r.guests && `Hasta ${r.guests} huéspedes`, r.beds, r.size && `${r.size} m²`, r.view].filter(Boolean);
+      const href = waNum ? waMsg(`Hola, quiero reservar la habitación ${r.name}. ¿Tienen disponibilidad?`) : bookHref;
+      return `<article class="cx-room"><div class="cx-room-frame">${img(r.img, r.imgAlt || r.name, 'cx-room-img')}</div><div class="cx-room-body"><h3>${esc(r.name)}</h3>${r.desc ? `<p>${esc(r.desc)}</p>` : ''}
+        ${specs.length ? `<p class="cx-specs">${specs.map(x => `<span>${esc(x)}</span>`).join('')}</p>` : ''}
+        ${list(r.amenities).length ? `<ul class="cx-amen-mini">${list(r.amenities).slice(0, 6).map(x => `<li>${ico('check', 'cx-ico-s')}${esc(x)}</li>`).join('')}</ul>` : ''}
+        <div class="cx-room-foot">${r.price ? `<p class="cx-room-price"><small>Desde</small><b>${esc(r.price)}</b><small>por ${esc(r.unit || 'noche')}</small></p>` : '<span></span>'}${act('cx-btn', href, 'Reservar')}</div></div></article>`;
+    }).join('')}</div>${c.rooms.note ? `<p class="cx-note">${esc(c.rooms.note)}</p>` : ''}</section>`);
+
+  // Amenidades (hotel)
+  if (show('amenities') && amenities.length) out.push(`<section class="cx-amenities cx-sec"><div class="cx-head"><div><h2>${esc(c.amenities.title || 'Todo lo que incluye tu estancia')}</h2>${c.amenities.sub ? `<p>${esc(c.amenities.sub)}</p>` : ''}</div></div><ul class="cx-amen">${amenities.map(a => `<li>${ico(iconName(a.icon, a.b), 'cx-ico')}<b>${esc(a.b)}</b>${a.t ? `<span>${esc(a.t)}</span>` : ''}</li>`).join('')}</ul></section>`);
+
+  // Menú (restaurante): pestañas por categoría; sin script se ve completo
+  if (show('menu') && menuCats.length) out.push(`<section class="cx-menu cx-sec"${mk('services')}><div class="cx-head"><div><h2>${esc(c.menu.title || 'Nuestro menú')}</h2>${c.menu.sub ? `<p>${esc(c.menu.sub)}</p>` : ''}</div>${live && url(c.menu.pdf) ? `<a class="cx-btn cx-btn--line" href="${esc(url(c.menu.pdf))}" target="_blank" rel="noopener">Ver menú completo</a>` : ''}</div>
+    ${menuCats.length > 1 ? `<div class="cx-tabs" role="tablist" aria-label="Categorías del menú">${menuCats.map((m, i) => `<button type="button" role="tab" aria-selected="${i === 0}" data-cx-tab="${i}">${esc(m.name)}</button>`).join('')}</div>` : ''}
+    <div class="cx-menu-cats">${menuCats.map((m, i) => `<div class="cx-menu-cat" role="tabpanel" data-cx-panel="${i}"><h3>${esc(m.name)}</h3>${m.note ? `<p class="cx-note">${esc(m.note)}</p>` : ''}<ul>${list(m.items).slice(0, 16).map(it => `<li><div class="cx-dish"><b>${esc(it.name)}</b>${list(it.tags).length ? `<span class="cx-tags">${list(it.tags).slice(0, 3).map(t => `<em>${esc(t)}</em>`).join('')}</span>` : ''}${it.desc ? `<p>${esc(it.desc)}</p>` : ''}</div><i aria-hidden="true"></i>${it.price ? `<span class="cx-dish-p">${esc(it.price)}</span>` : ''}</li>`).join('')}</ul></div>`).join('')}</div>
+    ${c.menu.note ? `<p class="cx-note">${esc(c.menu.note)}</p>` : ''}</section>`);
+
+  // Propiedades (inmobiliaria): filtro venta / renta
+  if (show('listings') && listings.length) {
+    const ops = [...new Set(listings.map(l => String(l.op || '').toLowerCase()).filter(Boolean))];
+    out.push(`<section class="cx-listings cx-sec"${mk('services')}><div class="cx-head"><div><h2>${esc(c.listings.title || 'Propiedades disponibles')}</h2>${c.listings.sub ? `<p>${esc(c.listings.sub)}</p>` : ''}</div>
+      ${ops.length > 1 ? `<div class="cx-tabs cx-tabs--sm" role="radiogroup" aria-label="Filtrar propiedades"><button type="button" role="radio" aria-checked="true" data-cx-filter="">Todas</button>${ops.map(o => `<button type="button" role="radio" aria-checked="false" data-cx-filter="${esc(o)}">${esc(o[0].toUpperCase() + o.slice(1))}</button>`).join('')}</div>` : ''}</div>
+      <ul class="cx-props">${listings.map(l => {
+        const specs = [l.beds && `${l.beds} rec.`, l.baths && `${l.baths} baños`, l.m2 && `${l.m2} m²`, l.parking && `${l.parking} ${String(l.parking) === '1' ? 'auto' : 'autos'}`].filter(Boolean);
+        const href = waNum ? waMsg(`Hola, me interesa la propiedad: ${l.title}${l.zone ? ` (${l.zone})` : ''}. ¿Me dan más información?`) : bookHref;
+        return `<li class="cx-prop" data-op="${esc(String(l.op || '').toLowerCase())}"><div class="cx-card-frame">${img(l.img, l.imgAlt || l.title, 'cx-card-img')}${l.op ? `<em class="cx-badge">${esc(l.op)}</em>` : ''}</div>
+          <div class="cx-prop-body">${l.price ? `<p class="cx-prop-price">${esc(l.price)}</p>` : ''}<b>${esc(l.title)}</b>${l.zone ? `<p class="cx-prop-zone">${ico('map', 'cx-ico-s')}${esc(l.zone)}</p>` : ''}
+          ${specs.length ? `<p class="cx-specs">${specs.map(x => `<span>${esc(x)}</span>`).join('')}</p>` : ''}${act('cx-link cx-card-link', href, `Me interesa${ico('arrow', 'cx-ico-s cx-arrow')}`)}</div></li>`;
+      }).join('')}</ul>${c.listings.note ? `<p class="cx-note">${esc(c.listings.note)}</p>` : ''}</section>`);
+  }
+
   // Servicios
   if (show('services') && services.length) out.push(`<section class="cx-services cx-sec"${mk('services')}><div class="cx-head"><div><h2>${esc(c.services.title || 'Nuestros servicios')}</h2>${c.services.sub ? `<p>${esc(c.services.sub)}</p>` : ''}</div><div class="cx-car-nav"><button type="button" data-cx-car="prev" aria-label="Anterior">${ico('arrow', 'cx-ico-s cx-flip')}</button><button type="button" data-cx-car="next" aria-label="Siguiente">${ico('arrow', 'cx-ico-s')}</button></div></div>
-    <ul class="cx-car"${ck ? ' data-cx-pop' : ''} tabindex="0" aria-label="${esc(c.services.title || 'Servicios')}, desliza para ver más">${services.map(s => {
+    <ul class="cx-car${textCards ? ' cx-car--text' : ''}"${ck ? ' data-cx-pop' : ''} tabindex="0" aria-label="${esc(c.services.title || 'Servicios')}, desliza para ver más">${services.map(s => {
       const call = s.action === 'Llamar' && telNum;
-      const href = call ? `tel:${telNum}` : (waNum && !contact.bookingUrl ? waMsg(`Hola, quiero agendar: ${s.name}`) : bookHref);
-      return `<li class="cx-card"><div class="cx-card-frame">${img(s.img, s.imgAlt || s.name, 'cx-card-img')}</div><div class="cx-card-body"><div class="cx-card-t"><b>${esc(s.name)}</b>${s.price ? `<i>${esc(s.price)}</i>` : ''}</div><p>${esc(s.desc)}</p>${act('cx-link cx-card-link', href, `${esc(s.action || 'Agendar')}${ico('arrow', 'cx-ico-s cx-arrow')}`)}</div></li>`;
+      const href = call ? `tel:${telNum}` : (waNum && !contact.bookingUrl ? waMsg(`Hola, me interesa: ${s.name}`) : bookHref);
+      return `<li class="cx-card">${textCards ? '' : `<div class="cx-card-frame">${img(s.img, s.imgAlt || s.name, 'cx-card-img')}</div>`}<div class="cx-card-body"><div class="cx-card-t"><b>${esc(s.name)}</b>${s.price ? `<i>${esc(s.price)}</i>` : ''}</div><p>${esc(s.desc)}</p>${act('cx-link cx-card-link', href, `${esc(s.action || actLabel)}${ico('arrow', 'cx-ico-s cx-arrow')}`)}</div></li>`;
     }).join('')}</ul>
     ${list(c.services.more).length ? (xp ? `<div class="cx-marquee" role="marquee" aria-label="También atendemos: ${esc(list(c.services.more).slice(0, 14).join(', '))}"><div class="cx-mq-track" aria-hidden="true">${[0, 1].map(() => `<span>${list(c.services.more).slice(0, 14).map(m => `<em>${esc(m)}</em>`).join('<i>·</i>')}<i>·</i></span>`).join('')}</div></div>` : `<div class="cx-pills"><span>También atendemos:</span>${list(c.services.more).slice(0, 14).map(m => `<em>${esc(m)}</em>`).join('')}</div>`) : ''}
     ${c.services.note ? `<p class="cx-note">${esc(c.services.note)}</p>` : ''}</section>`);
@@ -211,8 +275,8 @@ export function renderClinica(c = {}, { mode = 'live', marks = {}, view = 'home'
   if (show('finder') && services.length >= 3) out.push(`<section class="cx-finder cx-sec"><div class="cx-panel cx-finder-in"><div><h2>${esc(c.finder?.title || '¿Qué necesitas?')}</h2><p>${esc(c.finder?.sub || 'Elige una opción y te decimos cómo empezar.')}</p></div>
     <div class="cx-finder-opts" role="radiogroup" aria-label="Servicio">${services.slice(0, 6).map((s, i) => `<button type="button" role="radio" aria-checked="${i === 0}" data-cx-pick="${i}">${esc(s.name)}</button>`).join('')}</div>
     <div class="cx-finder-out" aria-live="polite">${services.slice(0, 6).map((s, i) => {
-      const href = waNum ? waMsg(`Hola, me interesa: ${s.name}. ¿Me ayudan a agendar?`) : bookHref;
-      return `<div data-cx-res="${i}"${i ? ' hidden' : ''}><b>${esc(s.name)}</b>${s.price ? `<i>${esc(s.price)}</i>` : ''}<p>${esc(s.desc)}</p>${act('cx-btn', href, `${waNum ? WA : ''}Quiero agendar`)}</div>`;
+      const href = waNum ? waMsg(`Hola, me interesa: ${s.name}. ¿Me dan más información?`) : bookHref;
+      return `<div data-cx-res="${i}"${i ? ' hidden' : ''}><b>${esc(s.name)}</b>${s.price ? `<i>${esc(s.price)}</i>` : ''}<p>${esc(s.desc)}</p>${act('cx-btn', href, `${waNum ? WA : ''}${wantLabel}`)}</div>`;
     }).join('')}</div></div></section>`);
 
   // Paquetes y promociones
@@ -263,12 +327,19 @@ export function renderClinica(c = {}, { mode = 'live', marks = {}, view = 'home'
       <div class="cx-ctas">${mapsHref ? act('cx-btn', mapsHref, `${ico('map', 'cx-ico-s')}Abrir en Google Maps`) : ''}${waNum ? act('cx-btn cx-btn--ghost', waHref, `${WA}WhatsApp`) : ''}</div></div></div>
     ${live && contact.address ? `<div class="cx-map"><iframe title="Mapa de ${esc(name)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=${encodeURIComponent(contact.address)}&amp;output=embed"></iframe></div>` : ''}</section>`);
 
-  // Formulario de cita (en la vista previa abre WhatsApp con el mensaje armado)
-  if (show('book') && (waNum || contact.bookingUrl)) out.push(`<section class="cx-book cx-sec"><div class="cx-panel cx-book-in"><div class="cx-book-copy"><h2>${esc(c.form?.title || 'Agenda tu cita')}</h2><p>${esc(c.form?.sub || 'Déjanos tus datos y te confirmamos por WhatsApp.')}</p></div>
-    <form class="cx-form" data-cx-form${live ? '' : ' inert'}><label><span>Nombre</span><input name="n" autocomplete="name" required></label><label><span>Teléfono</span><input name="t" type="tel" autocomplete="tel" inputmode="tel"></label>
-      ${services.length ? `<label class="cx-wide"><span>¿Qué necesitas?</span><select name="s"><option value="">Elige una opción</option>${services.map(s => `<option>${esc(s.name)}</option>`).join('')}<option>Otro</option></select></label>` : ''}
-      <label><span>Día que prefieres</span><input name="d" placeholder="Ej.: martes en la tarde"></label><label><span>Comentarios</span><input name="m"></label>
-      <button class="cx-btn cx-btn--lg cx-wide" type="submit">${waNum ? WA : ''}Enviar y agendar</button><small class="cx-wide">Al enviar aceptas nuestro aviso de privacidad.</small></form></div></section>`);
+  // Formulario por rubro (abre WhatsApp con el mensaje armado)
+  const F = FORMS[kind];
+  const field = ([n, label, o = {}]) => {
+    const opts = o.opts === 'svc' ? services.map(x => x.name).concat(services.length ? ['Otro'] : []) : o.opts === 'rooms' ? rooms.map(r => r.name) : o.opts;
+    if (Array.isArray(opts) && !opts.length) return '';
+    const ctl = Array.isArray(opts)
+      ? `<select name="${n}" data-l="${esc(label)}"><option value="">Elige una opción</option>${opts.map(x => `<option>${esc(x)}</option>`).join('')}</select>`
+      : `<input name="${n}" data-l="${esc(label)}"${o.type ? ` type="${o.type}"` : ''}${o.auto ? ` autocomplete="${o.auto}"` : ''}${o.type === 'tel' ? ' inputmode="tel"' : ''}${o.ph ? ` placeholder="${esc(o.ph)}"` : ''}${o.req ? ' required' : ''}>`;
+    return `<label${o.wide ? ' class="cx-wide"' : ''}><span>${esc(label)}</span>${ctl}</label>`;
+  };
+  if (show('book') && (waNum || contact.bookingUrl)) out.push(`<section class="cx-book cx-sec"><div class="cx-panel cx-book-in"><div class="cx-book-copy"><h2>${esc(c.form?.title || F.title)}</h2><p>${esc(c.form?.sub || F.sub)}</p></div>
+    <form class="cx-form" data-cx-form data-intro="${esc(F.intro)}"${live ? '' : ' inert'}>${F.fields.map(field).join('')}
+      <button class="cx-btn cx-btn--lg cx-wide" type="submit">${waNum ? WA : ''}${esc(c.form?.button || F.btn)}</button><small class="cx-wide">Al enviar aceptas nuestro aviso de privacidad.</small></form></div></section>`);
 
   // Pie
   out.push(`<footer class="cx-foot"><div class="cx-foot-cols"><div>${url(brand.logo) ? `<span class="cx-foot-logo"><img src="${url(brand.logo)}" alt="${esc(name)}"></span>` : `<b class="cx-foot-name">${esc(name)}</b>`}${contact.address ? `<p>${esc(contact.address)}</p>` : ''}</div>
@@ -299,7 +370,7 @@ export function schemaClinica(c = {}) {
   const list = v => (Array.isArray(v) ? v : []);
   const clean = o => Object.fromEntries(Object.entries(o).filter(([, v]) => v != null && v !== '' && !(Array.isArray(v) && !v.length)));
   const biz = clean({
-    '@type': c.schemaType || 'Dentist',
+    '@type': c.schemaType || SCHEMA_TYPE[c.kind] || 'Dentist',
     name: brand.fullName || brand.name,
     description: c.hero?.sub || c.meta?.description,
     url: contact.website, logo: brand.logo, image: c.hero?.img || brand.logo,
@@ -311,6 +382,12 @@ export function schemaClinica(c = {}) {
     aggregateRating: c.rating?.value ? { '@type': 'AggregateRating', ratingValue: String(c.rating.value), reviewCount: String(c.rating.count || '') } : null,
     makesOffer: list(c.services?.items).map(s => clean({ '@type': 'Offer', itemOffered: clean({ '@type': 'Service', name: s.name, description: s.desc }), price: (String(s.price || '').match(/[\d,.]+/) || [''])[0].replace(/,/g, '') || null, priceCurrency: s.price ? 'MXN' : null })),
   });
+  const priceOf = v => (String(v || '').match(/[\d,.]+/) || [''])[0].replace(/,/g, '') || null;
+  const menuCats = list(c.menu?.categories).filter(m => list(m.items).length);
+  if (menuCats.length) biz.hasMenu = { '@type': 'Menu', hasMenuSection: menuCats.map(m => clean({ '@type': 'MenuSection', name: m.name, hasMenuItem: list(m.items).map(i => clean({ '@type': 'MenuItem', name: i.name, description: i.desc, offers: i.price ? { '@type': 'Offer', price: priceOf(i.price), priceCurrency: 'MXN' } : null })) })) };
+  if (list(c.rooms?.items).length) biz.makesOffer = list(c.rooms.items).map(r => clean({ '@type': 'Offer', itemOffered: clean({ '@type': 'HotelRoom', name: r.name, description: r.desc, occupancy: r.guests ? { '@type': 'QuantitativeValue', maxValue: Number(r.guests) || undefined } : null }), price: priceOf(r.price), priceCurrency: r.price ? 'MXN' : null }));
+  if (list(c.amenities?.items).length) biz.amenityFeature = list(c.amenities.items).map(a => ({ '@type': 'LocationFeatureSpecification', name: a.b, value: true }));
+  if (list(c.listings?.items).length) biz.makesOffer = list(c.listings.items).map(l => clean({ '@type': 'Offer', name: l.title, description: [l.op, l.zone].filter(Boolean).join(' · '), price: priceOf(l.price), priceCurrency: l.price ? 'MXN' : null }));
   const faq = (list(c.faq).length ? list(c.faq) : list(c.chat?.faq)).filter(f => f.q && f.a);
   const graph = [biz];
   if (faq.length) graph.push({ '@type': 'FAQPage', mainEntity: faq.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) });
