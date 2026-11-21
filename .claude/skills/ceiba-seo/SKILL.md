@@ -52,7 +52,7 @@ No usamos `directory-submissions`, `vs-and-alternatives`, `block-ai-scrapers` ni
 5. Verificar con Playwright en 1366x768 y 390x844 que lo que se corrigió se ve, y volver a correr `build.py`.
 
 ### Preguntas para medir a Ceiba en la IA
-Con `customer-journey`, armar 10 a 20 preguntas como las haría un dueño de negocio, por etapa y en español: «¿cuánto cuesta una página web para un consultorio en México?», «¿quién hace páginas web para restaurantes en Guadalajara?», «¿qué es mejor, Wix o pagar a alguien?», «¿cómo hago que ChatGPT recomiende mi negocio?». Probarlas en ChatGPT, Gemini, Perplexity y Claude y anotar si aparece Ceiba y a quién recomiendan en su lugar.
+Ya están en `ops/seo/preguntas-ceiba.json` (y el mapa completo en `ops/seo/customer-journey.md`). Con `customer-journey` se arman como las haría un dueño de negocio, por etapa y en español: «¿cuánto cuesta una página web para un consultorio en México?», «¿quién hace páginas web para restaurantes en Guadalajara?», «¿qué es mejor, Wix o pagar a alguien?», «¿cómo hago que ChatGPT recomiende mi negocio?». Probarlas en ChatGPT, Gemini, Perplexity y Claude y anotar si aparece Ceiba y a quién recomiendan en su lugar.
 
 ## 2. Páginas de los clientes
 

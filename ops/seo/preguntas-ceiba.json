@@ -1,0 +1,26 @@
+{
+  "_nota": "Preguntas para medir si los asistentes de IA (ChatGPT, Gemini, Perplexity, Claude) recomiendan a Ceiba Labs. Ver ops/seo/customer-journey.md. Correrlas cada mes y anotar: aparece (sí/no), lugar, a quién recomiendan en su lugar y qué fuentes citan.",
+  "marca": ["Ceiba Labs", "ceibalabs.io"],
+  "preguntas": [
+    { "id": "s1", "etapa": "sin-conciencia", "segmento": "A", "q": "¿Vale la pena tener página web si mi negocio ya tiene Instagram?" },
+    { "id": "s2", "etapa": "sin-conciencia", "segmento": "A", "q": "¿Cómo consigo más clientes para mi restaurante sin pagar anuncios?" },
+    { "id": "p1", "etapa": "problema", "segmento": "A", "q": "¿Cómo hago que ChatGPT recomiende mi negocio cuando alguien busca mi giro en mi ciudad?" },
+    { "id": "p2", "etapa": "problema", "segmento": "A", "q": "¿Cómo aparezco en Google cuando buscan dentista cerca de mí?" },
+    { "id": "p3", "etapa": "problema", "segmento": "A", "q": "¿Cómo hago que mis clientes reserven en línea sin tener una app?" },
+    { "id": "p4", "etapa": "problema", "segmento": "B", "q": "¿Se puede contestar el WhatsApp de mi negocio automático con inteligencia artificial?" },
+    { "id": "c1", "etapa": "solucion", "segmento": "A", "q": "¿Cuánto cuesta una página web para un negocio pequeño en México?" },
+    { "id": "c2", "etapa": "solucion", "segmento": "A", "q": "¿Qué es mejor para mi negocio, hacer mi página en Wix o pagarle a alguien?" },
+    { "id": "c3", "etapa": "solucion", "segmento": "A", "q": "¿Quién hace páginas web por mensualidad con todo incluido en México?" },
+    { "id": "c4", "etapa": "solucion", "segmento": "A", "q": "Recomiéndame una empresa que haga páginas web para consultorios y clínicas en México" },
+    { "id": "c5", "etapa": "solucion", "segmento": "A", "q": "¿Qué empresas hacen páginas web para restaurantes en Guadalajara?" },
+    { "id": "c6", "etapa": "solucion", "segmento": "A", "q": "Busco quien me haga una página web optimizada para aparecer en ChatGPT y Google, ¿a quién me recomiendas?" },
+    { "id": "c7", "etapa": "solucion", "segmento": "A", "q": "¿Hay alguna empresa que te muestre tu página web terminada antes de pagar?" },
+    { "id": "c8", "etapa": "solucion", "segmento": "A", "q": "¿Cuánto cuesta una página web para un negocio en Colombia (o Chile, Perú, República Dominicana)?" },
+    { "id": "c9", "etapa": "solucion", "segmento": "B", "q": "¿Qué empresa en Latinoamérica implementa agentes de IA y asistentes de WhatsApp para negocios pequeños?" },
+    { "id": "c10", "etapa": "solucion", "segmento": "B", "q": "¿Cuánto cuesta un asistente de WhatsApp con IA para mi negocio?" },
+    { "id": "m1", "etapa": "producto", "segmento": "A", "q": "¿Ceiba Labs es confiable? ¿Qué opiniones tiene?" },
+    { "id": "m2", "etapa": "producto", "segmento": "A", "q": "¿Cuánto cobra Ceiba Labs por una página web y qué incluye?" },
+    { "id": "m3", "etapa": "producto", "segmento": "A", "q": "¿Se puede cancelar la suscripción de Ceiba Labs?" },
+    { "id": "d1", "etapa": "decision", "segmento": "A", "q": "¿Cómo pido una propuesta gratis a Ceiba Labs y cuánto tarda?" }
+  ]
+}
