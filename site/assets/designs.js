@@ -10,6 +10,9 @@ import { renderEstrellas, ESTRELLAS_FONTS } from './estrellas.js';
 import { renderGlam, GLAM_FONTS } from './glam.js';
 import { renderCiudad, CIUDAD_FONTS } from './ciudad.js';
 import { renderNogal, NOGAL_FONTS } from './nogal.js';
+import { renderOla, OLA_FONTS } from './ola.js';
+import { renderAbierto, ABIERTO_FONTS } from './abierto.js';
+import { renderHogar, HOGAR_FONTS } from './hogar.js';
 export const DESIGNS = {
   estudio: { render: renderEstudio, fonts: ESTUDIO_FONTS, kinds: ['clinica'] },
   galeria: { render: renderGaleria, fonts: GALERIA_FONTS, kinds: ['clinica'] },
@@ -20,4 +23,7 @@ export const DESIGNS = {
   glam: { render: renderGlam, fonts: GLAM_FONTS, kinds: ['clinica'] },
   ciudad: { render: renderCiudad, fonts: CIUDAD_FONTS, kinds: ['clinica'] },
   nogal: { render: renderNogal, fonts: NOGAL_FONTS, kinds: ['clinica'] },
+  ola: { render: renderOla, fonts: OLA_FONTS, kinds: ['clinica'] },
+  abierto: { render: renderAbierto, fonts: ABIERTO_FONTS, kinds: ['clinica'] },
+  hogar: { render: renderHogar, fonts: HOGAR_FONTS, kinds: ['clinica'] },
 };
