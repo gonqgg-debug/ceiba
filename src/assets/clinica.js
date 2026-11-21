@@ -444,7 +444,7 @@
       f.dataset.tb = 1;
       const root = f.closest('.cx'), out = root && root.querySelector('[data-t-count]');
       const items = root ? [...root.querySelectorAll('[data-t-list] [data-op]')] : [];
-      const num = s => { const m = s.match(/(\d+(?:[.,]\d+)?)\s*(millones|millón|mdp|m\b|mil|k\b)?/); if (!m) return 0; const n = parseFloat(m[1].replace(',', '.')); return /^m/.test(m[2] || '') ? n * 1e6 : /^(mil|k)/.test(m[2] || '') ? n * 1e3 : n; };
+      const num = s => { const m = s.match(/(\d+(?:[.,]\d+)?)\s*(millones|millón|mdp|m\b|mil|k\b)?/); if (!m) return 0; const n = parseFloat(m[1].replace(',', '.')); const u = m[2] || ''; return u === 'mil' || u === 'k' ? n * 1e3 : /^m/.test(u) ? n * 1e6 : n; };
       const run = () => {
         const v = Object.fromEntries(new FormData(f)), q = String(v.q || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         let op = v.op || '', beds = +v.beds || 0, max = 0, words = [];
@@ -452,7 +452,8 @@
           if (/rent/.test(q)) op = 'renta'; else if (/compr|venta|vend/.test(q)) op = 'venta';
           const b = q.match(/(\d+)\s*(rec|cuart|hab)/); if (b) beds = +b[1];
           const p = q.match(/(?:hasta|menos de|maximo|max\.?|por)\s*\$?\s*([\d.,]+\s*(?:millones|millon|mdp|mil|k|m)?)/); if (p) max = num(p[1]);
-          words = q.replace(/(\d+)\s*(rec\w*|cuart\w*|hab\w*)|(hasta|menos de|maximo|max\.?|por)\s*\$?\s*[\d.,]+\s*(millones|millon|mdp|mil|k|m)?|\b(busco|quiero|una?|casa|depa\w*|en|de|con|para|comprar|rentar|renta|venta|y|el|la|los|las)\b/g, ' ').split(/\s+/).filter(w => w.length > 3);
+          if (max && !op) op = max >= 5e5 ? 'venta' : max < 2e5 ? 'renta' : '';
+          words = q.replace(/(\d+)\s*(rec\w*|cuart\w*|hab\w*)|(hasta|menos de|maximo|max\.?|por)\s*\$?\s*[\d.,]+\s*(millones|millon|mdp|mil|k|m)?|\b(busco|quiero|algo|alguna?|cerca|zona|colonia|donde|una?|casa|depa\w*|en|de|con|para|comprar|rentar|renta|venta|y|el|la|los|las)\b/g, ' ').split(/\s+/).filter(w => w.length > 3);
         }
         let shown = 0;
         items.forEach(x => {
@@ -478,6 +479,11 @@
         const u = new SpeechSynthesisUtterance(txt); u.lang = 'es-MX'; u.onend = () => bt.setAttribute('aria-pressed', false);
         speechSynthesis.speak(u); bt.setAttribute('aria-pressed', true);
       });
+    });
+    // Ejemplos de búsqueda escrita: al tocar uno se escribe en el buscador ([data-t-q])
+    document.querySelectorAll('[data-t-q]:not([data-tb])').forEach(bt => {
+      bt.dataset.tb = 1;
+      bt.addEventListener('click', () => { const i = bt.closest('.cx')?.querySelector('[data-t-filt] [name=q]'); if (i) { i.value = bt.dataset.tQ; i.dispatchEvent(new Event('input', { bubbles: true })); i.focus(); } });
     });
     // «Bowl»: filtros de la carta y panel del platillo elegido
     document.querySelectorAll('.bw-shop:not([data-tb])').forEach(sh => {
