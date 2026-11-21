@@ -4,7 +4,7 @@
 //   id: theme.style · kind: page.kind · demo: lib/demos/<demo>.js con que se muestra
 export const CATALOGO = [
   {
-    id: 'estudio', name: 'Estudio', kind: 'clinica', demo: 'clinica-arrayan', estado: 'piloto',
+    id: 'estudio', name: 'Estudio', kind: 'clinica', demo: 'clinica-arrayan',
     ref: { name: 'Zen Dental Studio y Tend', url: 'https://www.zen.dentist/' },
     idea: 'Cálida y tranquila: reservar desde el hero, carta de tratamientos con foto, la visita en pasos y calculadora de meses sin intereses.',
   },
@@ -62,6 +62,21 @@ export const CATALOGO = [
     id: 'hogar', name: "Hogar", kind: 'clinica', demo: 'clinica-arrayan', accent: '#E07B57',
     ref: { name: "ABC Dental", url: 'https://abcdentaltexas.com/' },
     idea: "Familiar y cálida: video de bienvenida de la doctora, durazno con patrón suave, tarjetas con íconos de línea, testimonios en coral y «Platiquemos».",
+  },
+  {
+    id: 'menta', name: "Menta", kind: 'clinica', demo: 'clinica-arrayan', accent: '#1F9D6B',
+    ref: { name: "Mint Dentistry (según la nota del documento; el sitio bloquea visitas automáticas)", url: 'https://mintdentistry.com/' },
+    idea: "Un solo verde de marca en todo, letra redondeada y tarjetas de tratamiento que se voltean al tocarlas.",
+  },
+  {
+    id: 'clara', name: "Clara", kind: 'clinica', demo: 'clinica-arrayan', accent: '#1D3D6E',
+    ref: { name: "Cox Bond Dental (según la nota del documento; el sitio bloquea visitas automáticas)", url: 'https://www.coxbonddental.com/' },
+    idea: "Profesional y limpia: la portada como tablero con todo a la mano (agendar, horario de hoy, llamar, llegar, precios) e índice fijo de secciones.",
+  },
+  {
+    id: 'revista', name: "Revista", kind: 'clinica', demo: 'clinica-arrayan', accent: '#B4432F',
+    ref: { name: "Studio Dental (según la nota del documento; el sitio no carga)", url: 'https://home.studiodental.com/' },
+    idea: "Como revista: cabecera con el nombre en grande, portada con titular, texto a columnas con letra capital, citas destacadas y tratamientos como artículos.",
   },
 ];
 

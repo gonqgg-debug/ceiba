@@ -1,0 +1,105 @@
+/* Diseño «Revista» (lib/templates/revista.js, raíz .cx.rv). Tipo revista: Caslon de display,
+   papel cálido, reglas finas, letra capital, citas destacadas y pies de foto. */
+.cx.rv{--paper:#F7F3EC;--ink:#1A1715;--mute:#6B635C;--rule:#1A1715;--hair:#D8D0C4;
+  --fh:'Libre Caslon Display',Georgia,serif;--ft:'Libre Caslon Text',Georgia,serif;--fb:'Inter Tight',ui-sans-serif,system-ui,sans-serif;--pad:max(1.25rem,5cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:400 clamp(15px,1.05cqi,16.5px)/1.65 var(--ft);background:var(--paper);color:var(--ink);position:relative;overflow:clip}
+.rv h1,.rv h2,.rv h3{font-family:var(--fh);font-weight:400;color:inherit;margin:0;line-height:1.02;letter-spacing:-.01em;text-wrap:balance}
+.rv :where(p){margin:0}.rv a{color:inherit}
+.rv svg{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.rv-cta{display:inline-flex;align-items:center;gap:.5em;min-height:2.4em;padding:0 1em;background:var(--ink);color:var(--paper)!important;font:500 .78em/1 var(--fb);letter-spacing:.08em;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:background-color .2s}
+.rv-cta:hover{background:var(--a)}
+.rv-cta--lg{min-height:3em;padding:0 1.4em;font-size:.82em}
+.rv-cta--line{background:transparent;color:var(--ink)!important;box-shadow:inset 0 0 0 1px var(--ink)}
+.rv-arr{transition:transform .2s var(--ease)}.rv-cta:hover .rv-arr{transform:translateX(3px)}
+.rv-u{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+.rv a:focus-visible{outline:2px solid var(--a);outline-offset:3px}
+.rv-kick{font:600 .7em/1 var(--fb);letter-spacing:.18em;text-transform:uppercase;color:var(--a);margin-bottom:1rem}
+.rv-note{font:400 .74em/1.4 var(--fb);color:var(--mute);margin-top:1rem}
+/* cabecera de revista */
+.rv-mast{padding:1rem var(--pad) 0;border-bottom:3px double var(--rule)}
+.rv-issue{display:flex;align-items:center;gap:1.6rem;font:500 .7em/1 var(--fb);letter-spacing:.14em;text-transform:uppercase;padding-bottom:.8rem;border-bottom:1px solid var(--rule)}
+.rv-issue .rv-cta{margin-left:auto}
+.rv-name{font:400 clamp(3.6rem,13cqi,12rem)/.9 var(--fh);letter-spacing:-.03em;text-align:center;padding:1.2rem 0 1.1rem}
+.rv-name--s{font-size:clamp(2.4rem,7cqi,5rem);padding:0 0 1rem}
+.rv-mast nav{display:flex;justify-content:center;flex-wrap:wrap;gap:.4rem 1.8rem;padding:.7rem 0;border-top:1px solid var(--rule);font:500 .74em/1 var(--fb);letter-spacing:.06em;text-transform:uppercase}
+.rv-mast nav a,.rv-mast nav span{text-decoration:none;display:flex;gap:.4rem}
+.rv-mast nav i{font-style:normal;color:var(--a)}
+.rv-mast nav a:hover{color:var(--a)}
+@media (prefers-reduced-motion:no-preference){
+  .rv:not(.rv-still) .rv-name{animation:rv-ink 1.2s var(--ease) both}
+  .rv:not(.rv-still) .rv-cover-img{animation:rv-reveal 1.2s var(--ease) .15s both}
+}
+@keyframes rv-ink{from{opacity:0;letter-spacing:.05em}}
+@keyframes rv-reveal{from{clip-path:inset(0 0 100% 0)}}
+/* portada */
+.rv-cover{display:grid;grid-template-columns:1.25fr .75fr;gap:max(1.6rem,3cqi);padding:max(2rem,3cqi) var(--pad);border-bottom:1px solid var(--rule)}
+.rv-cover-img{aspect-ratio:4/3;background:center 25%/cover no-repeat;filter:saturate(.92)}
+.rv-cover-copy{display:grid;gap:1.1rem;align-content:end;justify-items:start;border-left:1px solid var(--hair);padding-left:max(1.4rem,2.5cqi)}
+.rv-cover h1{font-size:clamp(2.6rem,4.6cqi,4.6rem)}
+.rv-dek{font:italic 400 1.15em/1.45 var(--ft);color:var(--mute)}
+/* carta */
+.rv-letter{padding:max(2.5rem,4cqi) var(--pad);border-bottom:1px solid var(--rule)}
+.rv-cols{columns:3 16rem;column-gap:2.4rem;column-rule:1px solid var(--hair)}
+.rv-cols p{margin-bottom:1rem;break-inside:avoid-column}
+.rv-drop::first-letter{float:left;font:400 4.2em/.8 var(--fh);margin:.08em .1em 0 0;color:var(--a)}
+.rv-sign{font-style:italic;text-align:right}
+/* cita destacada */
+.rv-pull{margin:0;padding:max(2.5rem,5cqi) var(--pad);text-align:center;border-bottom:1px solid var(--rule)}
+.rv-pull p{font:400 clamp(1.8rem,3.4cqi,3.2rem)/1.15 var(--fh);max-width:22em;margin:0 auto}
+.rv-pull cite{display:block;margin-top:1.2rem;font:500 .74em/1 var(--fb);letter-spacing:.14em;text-transform:uppercase;font-style:normal;color:var(--mute)}
+/* tratamientos como artículos */
+.rv-trat{padding:max(2.5rem,4cqi) var(--pad);border-bottom:1px solid var(--rule)}
+.rv-trat>h2{font-size:clamp(2rem,3.6cqi,3.2rem);max-width:16em;margin-bottom:2rem}
+.rv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.4rem 2rem}
+.rv-art{display:grid;gap:.5rem;align-content:start;border-top:1px solid var(--rule);padding-top:1rem}
+.rv-art--lead{grid-column:span 2;grid-row:span 2}
+.rv-art-img{aspect-ratio:4/3;background:center/cover no-repeat}
+.rv-art--lead .rv-art-img{aspect-ratio:16/10}
+.rv-cap{font:400 .72em/1.4 var(--fb);color:var(--mute)}
+.rv-art h3{font-size:1.6rem}.rv-art--lead h3{font-size:clamp(2rem,3cqi,2.8rem)}
+.rv-art>p:not(.rv-cap):not(.rv-meta){color:var(--mute);font-size:.94em}
+.rv-meta{font:500 .78em/1 var(--fb);letter-spacing:.04em}
+/* perfil */
+.rv-profile{display:grid;grid-template-columns:1.2fr .8fr;gap:max(2rem,4cqi);padding:max(2.5rem,4cqi) var(--pad);border-bottom:1px solid var(--rule)}
+.rv-profile>div{display:grid;gap:1rem;align-content:start}
+.rv-profile h2{font-size:clamp(2.4rem,4.4cqi,4.2rem)}
+.rv-profile ul{margin:.6rem 0 0;padding:0;list-style:none;display:grid;gap:.3rem;font-size:.92em;border-top:1px solid var(--hair);padding-top:.8rem}
+.rv-profile figure{margin:0;display:grid;gap:.5rem}
+.rv-profile-img{aspect-ratio:3/4;background:center top/cover no-repeat}
+.rv-profile figcaption{font:400 .72em/1.4 var(--fb);color:var(--mute)}
+/* voces */
+.rv-voices{padding:max(2.5rem,4cqi) var(--pad);border-bottom:1px solid var(--rule)}
+.rv-voices>div{display:grid;grid-template-columns:repeat(2,1fr);gap:2.4rem}
+.rv-voices blockquote{margin:0;display:grid;gap:.8rem}
+.rv-voices blockquote p{font:italic 400 1.2em/1.5 var(--ft)}
+.rv-voices cite{font:500 .72em/1 var(--fb);letter-spacing:.14em;text-transform:uppercase;font-style:normal;color:var(--mute)}
+.rv-score{margin-top:1.6rem;font:500 .86em/1 var(--fb)}.rv-score b{font:400 2rem/1 var(--fh)}
+/* preguntas */
+.rv-faq{padding:max(2.5rem,4cqi) var(--pad);border-bottom:1px solid var(--rule)}
+.rv-faq dl{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:1.6rem 2.4rem}
+.rv-faq dt{font:400 1.35rem/1.2 var(--fh);margin-bottom:.4rem}
+.rv-faq dd{margin:0;color:var(--mute);font-size:.94em}
+/* directorio */
+.rv-dir{padding:max(2.5rem,4cqi) var(--pad);display:grid;gap:1.6rem;justify-items:start}
+.rv-dir-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;width:100%;border-top:1px solid var(--rule);padding-top:1.2rem}
+.rv-dir h3{font-size:1.4rem;margin-bottom:.4rem}
+.rv-dir-grid p{font-size:.94em}
+.rv-foot{padding:1.6rem var(--pad) calc(1.4rem + env(safe-area-inset-bottom));border-top:3px double var(--rule);text-align:center}
+.rv-foot>div{display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem 1.3rem;font:400 .72rem/1.4 var(--fb);color:var(--mute)}
+.rv-sticky{display:none}
+@container (max-width:980px){
+  .rv-cover,.rv-profile{grid-template-columns:1fr}
+  .rv-cover-copy{border-left:0;padding-left:0}
+  .rv-grid{grid-template-columns:1fr 1fr}
+  .rv-faq dl,.rv-voices>div{grid-template-columns:1fr}
+}
+@container (max-width:640px){
+  .rv-issue span:first-child{display:none}
+  .rv-name{font-size:3.4rem}
+  .rv-mast nav{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;white-space:nowrap}
+  .rv-grid,.rv-dir-grid{grid-template-columns:1fr}
+  .rv-art--lead{grid-column:auto;grid-row:auto}
+  .rv-issue .rv-cta{display:none}
+  .rv-sticky{display:flex;gap:.5rem;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:var(--paper);border-top:1px solid var(--rule)}
+  .rv-sticky .rv-cta{flex:1;justify-content:center}
+}

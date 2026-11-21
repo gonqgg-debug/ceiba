@@ -13,6 +13,9 @@ import { renderNogal, NOGAL_FONTS } from './nogal.js';
 import { renderOla, OLA_FONTS } from './ola.js';
 import { renderAbierto, ABIERTO_FONTS } from './abierto.js';
 import { renderHogar, HOGAR_FONTS } from './hogar.js';
+import { renderMenta, MENTA_FONTS } from './menta.js';
+import { renderClara, CLARA_FONTS } from './clara.js';
+import { renderRevista, REVISTA_FONTS } from './revista.js';
 export const DESIGNS = {
   estudio: { render: renderEstudio, fonts: ESTUDIO_FONTS, kinds: ['clinica'] },
   galeria: { render: renderGaleria, fonts: GALERIA_FONTS, kinds: ['clinica'] },
@@ -26,4 +29,7 @@ export const DESIGNS = {
   ola: { render: renderOla, fonts: OLA_FONTS, kinds: ['clinica'] },
   abierto: { render: renderAbierto, fonts: ABIERTO_FONTS, kinds: ['clinica'] },
   hogar: { render: renderHogar, fonts: HOGAR_FONTS, kinds: ['clinica'] },
+  menta: { render: renderMenta, fonts: MENTA_FONTS, kinds: ['clinica'] },
+  clara: { render: renderClara, fonts: CLARA_FONTS, kinds: ['clinica'] },
+  revista: { render: renderRevista, fonts: REVISTA_FONTS, kinds: ['clinica'] },
 };
