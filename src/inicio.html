@@ -28,7 +28,42 @@ body{background:var(--night);color:var(--white);font-family:var(--fb)}
 .n h1,.n h2,.n h3{font-family:var(--fd);font-weight:600;letter-spacing:-.035em;line-height:1;margin:0;overflow-wrap:normal;min-width:0}
 .n p{margin:0}
 .n :focus-visible{outline:2px solid var(--lime);outline-offset:3px}
-.site-header{background:color-mix(in srgb,var(--night) 78%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom-color:var(--hair)}
+/* ---------- encabezado propio del inicio: transparente sobre la tinta, cristal al bajar ---------- */
+.n-nav{position:fixed;inset:0 0 auto;z-index:60;padding-top:env(safe-area-inset-top,0px);transition:transform .45s var(--enter),background-color .35s var(--ease),box-shadow .35s var(--ease)}
+.n-nav.solid{background:color-mix(in srgb,var(--night) 90%,transparent);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);box-shadow:0 1px 0 var(--hair)}
+.n-nav.away{transform:translateY(-100%)}
+.n-nav .n-wrap{display:flex;align-items:center;gap:2rem;height:4.6rem;transition:height .35s var(--ease)}
+.n-nav.solid .n-wrap{height:3.9rem}
+.n-brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;color:var(--white);font:600 1.38rem var(--fd);letter-spacing:-.03em}
+.n-brand em{font-style:normal;font-weight:300;color:var(--mist);margin-left:.18em}
+/* el logo: una gota de la misma tinta del hero, viva */
+.n-orb{position:relative;width:1.9rem;height:1.9rem;border-radius:50%;overflow:hidden;flex:none;isolation:isolate;box-shadow:0 0 0 1px rgba(255,255,255,.14),0 0 1.4rem -.2rem color-mix(in srgb,var(--cobalt) 80%,transparent);transition:transform .5s var(--enter),width .35s var(--ease),height .35s var(--ease)}
+.n-orb::before{content:"";position:absolute;inset:-35%;background:conic-gradient(from var(--o,0deg),var(--lime),var(--skyl),var(--cobalt),#7B5CFF,var(--lime));filter:blur(5px)}
+.n-orb::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.85),transparent 34%),radial-gradient(circle at 70% 78%,rgba(8,16,54,.55),transparent 60%)}
+@property --o{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes n-orb{to{--o:360deg}}
+.n-brand:hover .n-orb{transform:scale(1.12) rotate(-12deg)}
+.n-nav.solid .n-orb{width:1.6rem;height:1.6rem}
+.n-links{position:relative;display:flex;gap:.2rem;margin:0 0 0 auto;padding:.3rem;list-style:none;border-radius:999px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px var(--hair)}
+.n-links a{position:relative;z-index:1;display:block;padding:.5rem .95rem;border-radius:999px;font:500 .93rem var(--fb);color:var(--mist);text-decoration:none;transition:color .2s}
+.n-links a:hover,.n-links a:focus-visible{color:var(--white)}
+.n-hl{position:absolute;z-index:0;top:.3rem;bottom:.3rem;left:0;width:0;border-radius:999px;background:rgba(255,255,255,.1);opacity:0;transition:transform .35s var(--enter),width .35s var(--enter),opacity .2s}
+.n-nav .n-cta{height:2.75rem;font-size:.93rem;padding:0 1.15rem}
+.n-menu{display:none;margin-left:auto;align-items:center;gap:.6rem;height:2.75rem;padding:0 1.1rem;border-radius:999px;border:0;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px var(--hair);color:var(--white);font:500 .95rem var(--fb);cursor:pointer}
+.n-menu i{position:relative;width:1rem;height:2px;background:currentColor;transition:background-color .2s}
+.n-menu i::before,.n-menu i::after{content:"";position:absolute;left:0;width:100%;height:2px;background:currentColor;transition:transform .35s var(--enter)}
+.n-menu i::before{transform:translateY(-5px)}.n-menu i::after{transform:translateY(5px)}
+.n-nav.open .n-menu i{background:transparent}
+.n-nav.open .n-menu i::before{transform:rotate(45deg)}.n-nav.open .n-menu i::after{transform:rotate(-45deg)}
+.n-sheet{position:fixed;inset:0;z-index:-1;background:var(--night);padding:6.5rem var(--gut) 2rem;display:flex;flex-direction:column;gap:2rem;clip-path:circle(0 at calc(100% - 3rem) 2.3rem);transition:clip-path .6s var(--enter),visibility 0s .6s;visibility:hidden}
+.n-nav.open .n-sheet{clip-path:circle(150% at calc(100% - 3rem) 2.3rem);visibility:visible;transition:clip-path .6s var(--enter)}
+.n-sheet ul{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
+.n-sheet a.big{display:block;font:600 clamp(2rem,9vw,2.8rem)/1.15 var(--fd);letter-spacing:-.03em;color:var(--white);text-decoration:none;opacity:0;transform:translateY(14px);transition:opacity .4s var(--ease),transform .5s var(--enter)}
+.n-nav.open .n-sheet a.big{opacity:1;transform:none}
+.n-sheet li:nth-child(2) a.big{transition-delay:.05s}.n-sheet li:nth-child(3) a.big{transition-delay:.1s}.n-sheet li:nth-child(4) a.big{transition-delay:.15s}
+.n-sheet .n-btn{align-self:flex-start}
+@media (prefers-reduced-motion:no-preference){.n-orb::before{animation:n-orb 7s linear infinite}}
+@media (max-width:900px){.n-links,.n-nav .n-cta{display:none}.n-menu{display:inline-flex}}
 
 .n-btn{display:inline-flex;align-items:center;gap:.6rem;height:3.2rem;padding:0 1.4rem;border-radius:999px;background:var(--lime);color:var(--night);font:600 1rem var(--fb);text-decoration:none;border:0;cursor:pointer;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
 .n-btn:hover{transform:translateY(-2px);box-shadow:0 .8rem 2rem -1rem var(--lime)}
@@ -45,7 +80,7 @@ body{background:var(--night);color:var(--white);font-family:var(--fb)}
 .js [data-reveal]:not(.in){opacity:0;transform:translateY(18px)}
 
 /* ---------- 1. hero ---------- */
-.n-hero{position:relative;min-height:calc(100svh - 69px);display:grid;align-items:end;padding:5rem 0 4rem;isolation:isolate;overflow:hidden;
+.n-hero{position:relative;min-height:100svh;display:grid;align-items:end;padding:7rem 0 4rem;isolation:isolate;overflow:hidden;
   background:radial-gradient(60% 50% at 78% 28%,color-mix(in srgb,var(--cobalt) 42%,transparent),transparent 70%),radial-gradient(40% 40% at 15% 85%,color-mix(in srgb,var(--skyl) 18%,transparent),transparent 70%),var(--night)}
 #fluid{position:absolute;inset:0;width:100%;height:100%;z-index:-2;display:block}
 .n-hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(transparent 60%,var(--night)),radial-gradient(70% 60% at 18% 78%,color-mix(in srgb,var(--night) 72%,transparent),transparent 75%)}
@@ -82,7 +117,7 @@ body{background:var(--night);color:var(--white);font-family:var(--fb)}
 .n-shift s{color:var(--mist);text-decoration-color:color-mix(in srgb,var(--lime) 70%,transparent);text-decoration-thickness:2px;font-size:.95rem}
 .n-shift b{font:600 1.35rem var(--fd);letter-spacing:-.02em}
 .n-shift span{color:var(--mist);font-size:.95rem}
-.n-answer{position:sticky;top:6.5rem;border-radius:1.4rem;background:linear-gradient(160deg,#14246B,var(--night));box-shadow:0 0 0 1px var(--hair),0 3rem 5rem -3rem #000;padding:1.6rem}
+.n-answer{position:sticky;top:5.5rem;border-radius:1.4rem;background:linear-gradient(160deg,#14246B,var(--night));box-shadow:0 0 0 1px var(--hair),0 3rem 5rem -3rem #000;padding:1.6rem}
 .n-answer .q{display:flex;gap:.7rem;align-items:center;padding:.9rem 1.1rem;border-radius:999px;background:rgba(255,255,255,.06);font-size:.98rem;margin-bottom:1.3rem;min-height:3.2rem}
 .n-answer .q svg{width:1.1rem;height:1.1rem;color:var(--mist);flex:none}
 .n-answer ol{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
@@ -99,7 +134,7 @@ body{background:var(--night);color:var(--white);font-family:var(--fb)}
 
 /* ---------- 3. el camino: un escenario que avanza con el scroll ---------- */
 .n-path{position:relative;height:520vh;background:var(--paper);color:var(--night)}
-.n-pin{position:sticky;top:69px;height:calc(100svh - 69px);display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:4vw;align-items:center;max-width:var(--max);margin:0 auto;padding:2.5rem var(--gut) 2rem}
+.n-pin{position:sticky;top:0;height:100svh;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:4vw;align-items:center;max-width:var(--max);margin:0 auto;padding:5rem var(--gut) 2rem}
 .n-path .n-h2{font-size:clamp(2.1rem,3.8vw,3.8rem);max-width:14ch}
 .n-steps{list-style:none;margin:2rem 0 0;padding:0;display:grid;gap:.4rem;counter-reset:s}
 .n-steps li{display:grid;grid-template-columns:2.4rem 1fr;gap:.9rem;align-items:start;padding:.75rem 0;border-top:1px solid var(--hair-d);opacity:.42;transition:opacity .4s var(--ease)}
@@ -250,14 +285,15 @@ body{background:var(--night);color:var(--white);font-family:var(--fb)}
 .cf-ok p{color:var(--mist)}
 
 @media (max-width:900px){
-  .n-hero{padding-top:5rem;min-height:calc(92svh - 64px)}
+  .n-hero{padding-top:6rem;min-height:92svh}
   .n-hint{display:none}
-  .n-hero h1 .ln{display:inline}
+  .n-hero h1 .ln,.n-hero h1 .ln>span{display:inline;animation:none}
+  .n-hero h1{animation:n-fade .8s var(--enter) both}
   .n-ask{padding:6rem 0}
   .n-ask .n-wrap,.n-faq .n-wrap,.n-close .n-wrap{grid-template-columns:minmax(0,1fr);gap:2.6rem}
   .n-answer{position:static}
   .n-path{height:460vh}
-  .n-pin{grid-template-columns:minmax(0,1fr);gap:1rem;align-content:center;padding:1.2rem var(--gut)}
+  .n-pin{grid-template-columns:minmax(0,1fr);gap:1rem;align-content:center;padding:4.6rem var(--gut) 1.2rem}
   .n-path .n-h2{font-size:1.75rem}
   .n-steps{margin-top:.8rem;gap:0}
   .n-steps li{padding:.45rem 0;grid-template-columns:2rem 1fr;gap:.7rem}
@@ -290,7 +326,18 @@ body{background:var(--night);color:var(--white);font-family:var(--fb)}
 </head>
 <body>
 {{SYMBOLS}}
-<header class="site-header" id="top"></header>
+<header class="n-nav" id="top">
+  <div class="n-wrap">
+    <a class="n-brand" href="/" aria-label="Ceiba Labs, inicio"><span class="n-orb" aria-hidden="true"></span><span>Ceiba<em>Labs</em></span></a>
+    <div class="n-links" id="n-links"><a href="/webs">Páginas web</a><a href="/ia">Inteligencia artificial</a><a href="#trabajo">Trabajo</a><a href="/webs#precios">Precios</a><span class="n-hl" aria-hidden="true"></span></div>
+    <a class="n-btn n-cta" href="#consultoria">Agendar consultoría</a>
+    <button class="n-menu" id="n-menu" type="button" aria-expanded="false" aria-controls="n-sheet"><i aria-hidden="true"></i>Menú</button>
+  </div>
+  <nav class="n-sheet" id="n-sheet" aria-label="Menú">
+    <ul><li><a class="big" href="/webs">Páginas web</a></li><li><a class="big" href="/ia">Inteligencia artificial</a></li><li><a class="big" href="#trabajo">Trabajo</a></li><li><a class="big" href="/webs#precios">Precios</a></li></ul>
+    <a class="n-btn" href="#consultoria">Agendar una consultoría</a>
+  </nav>
+</header>
 
 <main class="n">
 <section class="n-hero" aria-labelledby="n-title">
@@ -393,7 +440,7 @@ body{background:var(--night);color:var(--white);font-family:var(--fb)}
 <section class="n-how" id="como" aria-labelledby="how-title"><div class="n-wrap">
   <h2 class="n-h2" id="how-title" data-reveal>Empezamos por lo que más te urge.</h2>
   <div class="n-flow" id="n-flow">
-    <svg class="links" id="n-links" aria-hidden="true"></svg>
+    <svg class="links" id="n-flow-links" aria-hidden="true"></svg>
     <article data-reveal><div class="ic"><svg class="l" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></div><h3>Una sesión de 30 minutos</h3><p>Por videollamada y sin costo, con quien diseña la solución. Revisamos cómo te encuentran, cómo atiendes y qué se repite.</p></article>
     <article data-reveal><div class="ic"><svg class="l" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></svg></div><h3>Un plan por etapas</h3><p>Qué conviene hacer primero y cuánto cuesta. Si algo no conviene automatizarlo, te lo decimos.</p></article>
     <article data-reveal><div class="ic"><svg class="l" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="14" y="3" rx="1"/><path d="M10 21V8a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H3"/></svg></div><h3>Lo construimos y conectamos</h3><p>Con tus herramientas de siempre: tu WhatsApp, tu agenda, tu sistema de ventas o tu contabilidad.</p></article>
@@ -461,6 +508,26 @@ body{background:var(--night);color:var(--white);font-family:var(--fb)}
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.documentElement.classList.add('js');
   const wait = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
+
+  /* ---------- encabezado: cristal al bajar, se esconde al bajar y vuelve al subir ---------- */
+  const nav = $('#top'), menu = $('#n-menu');
+  let lastY = scrollY;
+  const onNav = () => {
+    const y = scrollY; nav.classList.toggle('solid', y > 30);
+    if (!nav.classList.contains('open')) {
+      if (y < 520 || y < lastY - 4) nav.classList.remove('away');
+      else if (y > lastY + 4) nav.classList.add('away');
+    }
+    lastY = y;
+  };
+  addEventListener('scroll', onNav, { passive: true }); onNav();
+  const setMenu = o => { nav.classList.toggle('open', o); menu.setAttribute('aria-expanded', o); document.body.style.overflow = o ? 'hidden' : ''; };
+  menu.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
+  $$('#n-sheet a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) { setMenu(false); menu.focus(); } });
+  const navLinks = $('#n-links'), hl = navLinks.querySelector('.n-hl');
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('pointerenter', () => { hl.style.opacity = 1; hl.style.width = a.offsetWidth + 'px'; hl.style.transform = `translateX(${a.offsetLeft}px)`; }));
+  navLinks.addEventListener('pointerleave', () => { hl.style.opacity = 0; });
 
   /* ---------- aparición al hacer scroll ---------- */
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .15, rootMargin: '0px 0px -6% 0px' });
@@ -544,7 +611,7 @@ body{background:var(--night);color:var(--white);font-family:var(--fb)}
   }
 
   /* ---------- trazos a mano entre los pasos (Rough.js) ---------- */
-  const flow = $('#n-flow'), links = $('#n-links');
+  const flow = $('#n-flow'), links = $("#n-flow-links");
   const drawLinks = () => {
     if (!window.rough || innerWidth < 900) return;
     links.innerHTML = ''; const lr = rough.svg(links), fr = flow.getBoundingClientRect(), ics = [...flow.querySelectorAll('.ic')];

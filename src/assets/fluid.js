@@ -41,7 +41,7 @@ let config = {
     VELOCITY_DISSIPATION: 0.2,
     PRESSURE: 0.8,
     PRESSURE_ITERATIONS: 20,
-    CURL: 22,
+    CURL: 28,
     SPLAT_RADIUS: 0.32,
     SPLAT_FORCE: 6000,
     SHADING: true,
@@ -60,6 +60,9 @@ let config = {
     SUNRAYS_RESOLUTION: 196,
     SUNRAYS_WEIGHT: 1.0,
 }
+
+// Celulares y pantallas chicas: menos resolución para que vaya fluido sin gastar batería
+if (Math.min(innerWidth, innerHeight) < 700) { config.DYE_RESOLUTION = 512; config.SIM_RESOLUTION = 96; config.BLOOM_ITERATIONS = 6; }
 
 function pointerPrototype () {
     this.id = -1;
@@ -1454,7 +1457,7 @@ window.addEventListener('touchmove', e => {
 window.addEventListener('touchend', () => { pointers[0].down = false; }, { passive: true });
 // salpicaduras suaves de vez en cuando, para que el lienzo esté vivo aunque nadie lo toque
 new IntersectionObserver(es => { visible = es[0].isIntersecting; }).observe(canvas);
-setInterval(() => { if (visible && !document.hidden) splatStack.push(1); }, 2600);
+setInterval(() => { if (visible && !document.hidden) splatStack.push(1); }, 1800);
 
 window.addEventListener('keydown', e => {
     if (e.code === 'KeyP')
