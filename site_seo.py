@@ -249,7 +249,7 @@ Datos clave:
 - Complemento {wa['name']}: {money(wa['activation'])} de pago inicial y {money(wa['monthly'])} al mes. {wa['description']}
 - Paquete {cat['bundle']['name']}: {money(cat['bundle']['activation'])} de pago inicial y {money(cat['bundle']['monthly'])} al mes.
 
-Precios de México en pesos mexicanos. También hay precios en moneda local o en dólares para {', '.join(cat['countries'])} y el resto del mundo; en ceibalabs.io/webs se puede elegir el país.
+Precios de México en pesos mexicanos. También hay precios en moneda local o en dólares para {', '.join(cat['countries'])} y el resto del mundo. Cada visitante ve los precios de su país, detectado por su ubicación.
 
 ## Inteligencia artificial y procesos
 - [IA y automatización para negocios]({SITE}/ia): asistentes, agentes, automatización y cómo trabajamos.
@@ -259,7 +259,7 @@ Precios de México en pesos mexicanos. También hay precios en moneda local o en
 - {cat['operacion']['name']}: {cat['operacion']['description']}
 
 ## Empezar
-- [Propuesta gratis]({SITE}/webs#diagnostico): el negocio deja su página actual (o sus datos) y recibe su propuesta con la página nueva.
+- [Arma tu página]({SITE}/empezar): una conversación corta donde el negocio cuenta qué hace (o deja su página o Instagram), elige el modelo de su giro y su estilo, ve su página armarse al momento y recibe la versión completa gratis.
 - [Consultoría]({SITE}/#consultoria): para proyectos de procesos e IA a la medida.
 
 ## Preguntas frecuentes
