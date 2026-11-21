@@ -422,3 +422,337 @@
 .cx-text > .cx-lede{max-width:760px;font-size:1.15rem;line-height:1.6}
 .cx-foot-cols a{display:block;color:inherit;text-decoration:none;opacity:.85}
 .cx-foot-cols a:hover{opacity:1;text-decoration:underline}
+
+/* =====================================================================
+   v3 · rediseño editorial (skills: design-taste-frontend, emil-*, avoid-ai-design)
+   Menos cajas y más tipografía; líneas finas en vez de tarjetas grises; sin
+   degradados ni vidrio; entrada del hero una vez, hovers sutiles y un solo
+   «momento» (la galería se revela). Todo respeta prefers-reduced-motion.
+   ===================================================================== */
+.cx{
+  --ease:cubic-bezier(.2,.8,.2,1);--ease-enter:cubic-bezier(.22,1,.36,1);
+  --m-in:150ms;--m-out:120ms;--m-press:90ms;--m-image:600ms;--m-image-out:400ms;
+  --r:1.1em;--line:color-mix(in srgb,var(--fg) 12%,var(--bg));--soft:color-mix(in srgb,var(--a) 5%,var(--bg));
+}
+
+/* botones: color sólido, sin degradado ni resplandor; responden al pasar y al presionar */
+.cx-btn{background:var(--a);background-image:none;box-shadow:none;font-weight:600;letter-spacing:-.005em;transition:background-color var(--m-out) var(--ease),transform var(--m-out) var(--ease),box-shadow var(--m-out) var(--ease)}
+.cx-btn:hover{transform:none;box-shadow:none}
+@media (hover:hover) and (pointer:fine){
+  .cx-btn:hover{background-color:color-mix(in srgb,var(--a) 86%,var(--ink));transform:translateY(-1px);transition-duration:var(--m-in)}
+  .cx-btn--ghost:hover,.cx-btn--line:hover{background:color-mix(in srgb,var(--fg) 4%,var(--bg));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--fg) 40%,var(--bg))}
+}
+.cx-btn:active{transform:translateY(1px) scale(.985);transition-duration:var(--m-press)}
+.cx-btn--ghost,.cx-btn--line{background:transparent;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--fg) 22%,var(--bg))}
+.cx a:focus-visible,.cx button:focus-visible,.cx input:focus-visible,.cx select:focus-visible{outline:2px solid var(--a);outline-offset:2px}
+
+/* enlaces: la línea se dibuja de izquierda a derecha */
+.cx-link,.cx-u,.cx-nav a,.cx-foot-cols a{background:linear-gradient(currentColor,currentColor) left bottom/0 1px no-repeat;transition:background-size var(--m-out) var(--ease)}
+@media (hover:hover) and (pointer:fine){.cx-link:hover,.cx-u:hover,.cx-nav a:hover,.cx-foot-cols a:hover{background-size:100% 1px;transition-duration:var(--m-in);text-decoration:none}}
+.cx-arrow{transition:transform var(--m-out) var(--ease)}
+@media (hover:hover) and (pointer:fine){.cx-card:hover .cx-arrow,.cx-link:hover .cx-arrow{transform:translateX(3px);transition-duration:var(--m-in)}}
+
+/* barra superior y encabezado: sólidos, sin vidrio */
+.cx-util{background:var(--bg);color:var(--muted);border-bottom:1px solid var(--line);font-size:.8em;padding:.55em var(--pad)}
+.cx-util .cx-ico-s{color:var(--a)}
+.cx-util-tel{color:var(--fg)}
+.cx-top{background:var(--bg);backdrop-filter:none;padding:1em var(--pad)}
+.cx-nav{color:var(--fg);gap:2em}
+.cx-nav a{padding-bottom:.15em}
+.cx-nav a[aria-current="page"]{color:var(--fg);background-size:100% 2px}
+
+/* hero: título grande, foto rectangular sin anillos ni insignias */
+.cx-hero{grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:5em;padding:5.5em var(--pad) 6.5em;align-items:end}
+.cx-rating{background:none;padding:0;border-radius:0;margin-bottom:1.8em;font-size:.95em}
+.cx-hero h1{font-size:4.5em;line-height:1;font-weight:600;letter-spacing:-.035em;margin-bottom:.5em}
+.cx-lede{font-size:1.2em;margin-bottom:2.2em;max-width:30em}
+.cx-next{display:flex;flex-wrap:wrap;align-items:center;gap:.5em .6em;margin-top:1.8em;font-size:.92em;color:var(--muted)}
+.cx-next > span{margin-right:.3em}
+.cx-next-slot{padding:.4em .75em;border-radius:.5em;box-shadow:inset 0 0 0 1px var(--line);color:var(--fg);font-weight:500;transition:box-shadow var(--m-out) var(--ease)}
+@media (hover:hover) and (pointer:fine){a.cx-next-slot:hover{box-shadow:inset 0 0 0 1px var(--a);transition-duration:var(--m-in)}}
+.cx-call{margin-top:1.1em}
+.cx-hero-media{overflow:hidden;border-radius:var(--r)}
+.cx-hero-img,.cx--hero-rounded .cx-hero-img,.cx--hero-square .cx-hero-img{aspect-ratio:4/4.8;border-radius:0;box-shadow:none;background-position:center 30%}
+.cx--hero-square .cx-hero-media{border-radius:.3em}
+.cx--hero-organic .cx-hero-media,.cx:not(.cx--hero-rounded):not(.cx--hero-square) .cx-hero-media{border-radius:12em 12em var(--r) var(--r)}
+
+/* entrada del hero: una vez, al cargar; solo transform y opacidad */
+@keyframes cx-rise{from{opacity:0;transform:translateY(.45em)}}
+@keyframes cx-up{from{opacity:0;transform:translateY(12px)}}
+@keyframes cx-settle{from{transform:scale(1.05)}}
+@media (prefers-reduced-motion:no-preference){
+  .cx-hero[data-enter] h1{animation:cx-rise 700ms var(--ease-enter) both}
+  .cx-hero[data-enter] .cx-rating{animation:cx-up 520ms var(--ease-enter) both}
+  .cx-hero[data-enter] .cx-lede{animation:cx-up 520ms var(--ease-enter) 260ms both}
+  .cx-hero[data-enter] .cx-ctas{animation:cx-up 520ms var(--ease-enter) 320ms both}
+  .cx-hero[data-enter] .cx-next,.cx-hero[data-enter] .cx-call{animation:cx-up 520ms var(--ease-enter) 380ms both}
+  .cx-hero[data-enter] .cx-hero-img{animation:cx-settle 1.1s var(--ease-enter) both}
+}
+
+/* beneficios y cifras: tipografía y líneas, sin íconos ni cajas */
+.cx-benefits{gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:0;max-width:calc(84em - 2 * var(--pad));margin:0 auto}
+.cx-benefit{border-top:0;padding:1.6em 1.6em 1.7em;border-left:1px solid var(--line);gap:.35em}
+.cx-benefit:first-child{border-left:0;padding-left:0}
+.cx-benefit b{font:600 1.08em/1.25 var(--fh)}
+.cx-stats{background:none;padding:0;margin:4.5em auto 0;border-radius:0}
+.cx-stats div{border-left:1px solid var(--line)}
+.cx-stats b{color:var(--fg);font-weight:600;font-size:3.2em;letter-spacing:-.04em}
+
+/* secciones */
+.cx-sec{padding:6em var(--pad)}
+.cx-head{margin-bottom:2.8em}
+.cx-head h2,.cx-today h2,.cx-book h2,.cx-visit h2,.cx-ai h2,.cx-tech-copy h2,.cx-prices-in h2{font-size:2.7em;line-height:1.04;font-weight:600;letter-spacing:-.03em}
+.cx-panel{background:none;border-radius:0;padding:0}
+.cx-ico-c{padding:0;background:none;box-shadow:none;width:1.15em;height:1.15em}
+.cx-checks li{align-items:flex-start;padding-bottom:1em;border-bottom:1px solid var(--line);gap:.8em}
+.cx-checks li:last-child{border-bottom:0}
+.cx-kicker{background:none;box-shadow:none;padding:0;text-transform:none;letter-spacing:0;font-size:.95em;font-weight:600}
+
+/* atención de hoy */
+.cx-today{align-items:start}
+.cx-today .cx-panel{padding-top:.3em}
+
+/* servicios: cuadrícula editorial en pantalla grande; la tarjeta con enlace sube 2px y la foto se acerca */
+.cx-car{grid-auto-flow:row;grid-template-columns:repeat(3,minmax(0,1fr));grid-auto-columns:auto;overflow:visible;gap:3em 2em;padding:0;scroll-snap-type:none}
+.cx-car-nav{display:none}
+.cx-card{background:none;box-shadow:none;border-radius:0;overflow:visible;position:relative;transition:transform 120ms var(--ease)}
+.cx-card:hover{box-shadow:none;transform:none}
+.cx-card-frame{overflow:hidden;border-radius:var(--r)}
+.cx-card-img{transition:transform var(--m-image-out) var(--ease)}
+.cx-card-body{padding:1.1em 0 0}
+.cx-card-t b{font-size:1.25em;letter-spacing:-.015em}
+.cx-card-t i{color:var(--fg)}
+.cx-link{color:var(--fg)!important;margin-top:.9em}
+.cx-card-link::after{content:"";position:absolute;inset:0}
+@media (hover:hover) and (pointer:fine){
+  .cx-card:hover{transform:translateY(-2px);transition-duration:180ms}
+  .cx-card:hover .cx-card-img{transform:scale(1.03);transition-duration:var(--m-image)}
+  .cx-card:hover .cx-card-link{background-size:100% 1px}
+}
+.cx-pills em{background:none;box-shadow:inset 0 0 0 1px var(--line)}
+
+/* ayuda para elegir y paquetes: sin degradados */
+.cx-finder-in{background:none;border:1px solid var(--line);border-radius:var(--r)}
+.cx-finder-out > div{box-shadow:none;background:var(--soft)}
+.cx-offer{box-shadow:inset 0 0 0 1px var(--line)}
+.cx-offer--hl{background:var(--soft);box-shadow:inset 0 0 0 2px var(--a)}
+.cx-offer em{background:none;box-shadow:none;padding:0;letter-spacing:0;text-transform:none;font-size:.85em}
+
+/* precios: bloque oscuro, menos redondeado */
+.cx-prices-in{border-radius:var(--r);padding:3.4em}
+
+/* asistente: fondo liso, sin degradados radiales ni morados */
+.cx-ai-in{background:var(--soft);border-radius:var(--r)}
+.cx-phone{box-shadow:0 0 0 1px var(--line),0 1.6em 3em -2.4em rgba(15,30,25,.35);border-radius:1.4em}
+.cx-phone-top .cx-avatar{background:var(--a)}
+.cx-phone-log{background:var(--card)}
+
+/* proceso: línea de tiempo con números discretos */
+.cx-process ol{gap:0;border-top:1px solid var(--line)}
+.cx-process li{background:none;box-shadow:none;border-radius:0;padding:1.6em 1.6em 0 0}
+.cx-num{width:auto;height:auto;background:none;border-radius:0;color:var(--muted);font-weight:500;font-size:.9em;display:block;margin-bottom:.8em}
+
+/* galería: el momento de la página. Las fotos se revelan una vez al llegar */
+.cx-tile{border-radius:var(--r);overflow:hidden;position:relative}
+.cx-tile--1,.cx-tile--5{border-radius:var(--r)}
+.cx-tile-img{position:absolute;inset:0;background:center/cover no-repeat}
+@media (prefers-reduced-motion:no-preference){
+  .cx-mosaic.is-pre .cx-tile-img{filter:grayscale(1) contrast(.9);transform:scale(1.06);opacity:.75}
+  .cx-mosaic.is-in .cx-tile-img{transition:filter 1.2s var(--ease-enter),transform 1.4s var(--ease-enter),opacity .9s var(--ease-enter)}
+  .cx-mosaic.is-in .cx-tile:nth-child(2) .cx-tile-img{transition-delay:.12s}
+  .cx-mosaic.is-in .cx-tile:nth-child(3) .cx-tile-img{transition-delay:.24s}
+  .cx-mosaic.is-in .cx-tile:nth-child(4) .cx-tile-img{transition-delay:.36s}
+  .cx-mosaic.is-in .cx-tile:nth-child(n+5) .cx-tile-img{transition-delay:.48s}
+}
+
+/* reseñas: la cita manda, sin cajas */
+.cx-rev-list{gap:0;border-top:1px solid var(--line)}
+.cx-rev{background:none;border-radius:0;padding:1.8em 1.8em 0 0;gap:1.1em}
+.cx-rev + .cx-rev{padding-left:1.8em;border-left:1px solid var(--line)}
+.cx-rev blockquote{font:500 1.15em/1.45 var(--fh);letter-spacing:-.01em}
+.cx-avatar{background:var(--soft);color:var(--fg)}
+
+/* preguntas frecuentes: todas abiertas, en dos columnas */
+.cx-faq-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 3em;max-width:none}
+.cx-qa{padding:1.5em 0;border-top:1px solid var(--line)}
+.cx-qa h3{font:600 1.1em/1.3 var(--fh);letter-spacing:-.01em;margin-bottom:.5em}
+.cx-qa p{color:var(--muted);line-height:1.6}
+
+/* ubicación, pagos, mapa */
+.cx-visit-card{border-radius:var(--r);background:var(--soft)}
+.cx-pay-in{box-shadow:none;border-top:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:0;padding:2.6em 0}
+.cx-chips span{background:none;box-shadow:inset 0 0 0 1px var(--line)}
+.cx-map{border-radius:var(--r)}
+.cx-tech-img{border-radius:var(--r)}
+
+/* formulario y pie */
+.cx-book-in{border-radius:var(--r);padding:3.4em}
+.cx-form input,.cx-form select{border-radius:.6em}
+
+/* tema oscuro y esquinas rectas siguen mandando */
+.cx--sharp{--r:.4em}
+.cx--sharp .cx-hero-media{border-radius:.4em!important}
+.cx--dark .cx-util{background:var(--bg)}
+
+@container (max-width:980px){
+  .cx-hero{gap:3em}
+  .cx-hero h1{font-size:3.6em}
+  .cx-car{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cx-benefits{grid-template-columns:1fr 1fr}
+  .cx-benefit:nth-child(3){border-left:0;padding-left:0}
+  .cx-benefit:nth-child(n+3){border-top:1px solid var(--line)}
+}
+@container (max-width:640px){
+  .cx-hero{padding:1.6em var(--pad) 3em;gap:2em;align-items:start}
+  .cx-hero-media{order:-1;padding:0;margin:0}
+  .cx-hero-img,.cx--hero-rounded .cx-hero-img,.cx--hero-square .cx-hero-img{aspect-ratio:4/3.6;box-shadow:none}
+  .cx:not(.cx--hero-rounded):not(.cx--hero-square) .cx-hero-media{border-radius:8em 8em var(--r) var(--r)}
+  .cx-hero h1{font-size:2.5em;letter-spacing:-.03em}
+  .cx-benefits{margin:0 var(--pad);max-width:none}
+  .cx-benefit{padding:1.2em 1em 1.3em}
+  .cx-benefit:nth-child(odd){border-left:0;padding-left:0}
+  .cx-sec{padding:3.8em var(--pad)}
+  .cx-head h2,.cx-today h2,.cx-book h2,.cx-visit h2,.cx-ai h2,.cx-tech-copy h2,.cx-prices-in h2{font-size:1.95em}
+  .cx-car{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:80%;overflow-x:auto;scroll-snap-type:x mandatory;gap:1.2em;padding-bottom:.6em}
+  .cx-card{scroll-snap-align:start}
+  .cx-faq-list{grid-template-columns:1fr}
+  .cx-rev + .cx-rev{padding-left:0;border-left:0}
+  .cx-rev{padding:1.4em 0 0}
+  .cx-rev-list{border-top:0}
+  .cx-rev{border-top:1px solid var(--line)}
+  .cx-process li{padding:1.3em 0 .4em;border-bottom:1px solid var(--line)}
+  .cx-process ol{border-top:0}
+  .cx-prices-in,.cx-book-in{padding:1.6em}
+  .cx-stats{margin:2.6em var(--pad) 0}
+}
+.cx-book-in{background:var(--ink)}
+.cx--dark .cx-book-in{background:var(--card)}
+@container (max-width:640px){.cx-hero{grid-template-columns:1fr}.cx-today,.cx-team-solo,.cx-visit-card,.cx-book-in{grid-template-columns:1fr}}
+.cx-sticky .cx-btn--ghost{background:var(--bg)}
+
+/* =====================================================================
+   Variante «Expresiva» (page.theme.style = 'expresiva'): más movimiento para
+   impresionar. Momentos tomados de design-taste-frontend (headline-arrives,
+   word-highlight, photo-chapters, counter-rolls, marquee-row, lines-rise).
+   Sin librerías; con movimiento reducido todo queda quieto y legible.
+   ===================================================================== */
+
+/* hero a pantalla completa: la foto es el fondo y el título entra palabra por palabra */
+.cx--expresiva .cx-hero{max-width:none;margin:0;position:relative;grid-template-columns:minmax(0,1fr);min-height:46em;padding:7em var(--pad) 4.5em;align-items:end;isolation:isolate;overflow:hidden}
+.cx--expresiva .cx-hero-media{position:absolute;inset:0;border-radius:0!important;z-index:-1}
+.cx--expresiva .cx-hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,14,12,.62) 0%,rgba(8,14,12,.25) 55%,rgba(8,14,12,0) 80%),linear-gradient(180deg,rgba(8,14,12,.1) 0%,rgba(8,14,12,.15) 40%,rgba(8,14,12,.8) 100%)}
+.cx--expresiva .cx-hero-img{position:absolute;inset:0;aspect-ratio:auto!important;height:100%;background-position:center 25%}
+.cx--expresiva .cx-hero-copy{max-width:58em;color:#fff}
+.cx--expresiva .cx-hero h1{color:#fff;font-size:6.2em;line-height:.95;letter-spacing:-.045em;max-width:12em}
+.cx--expresiva .cx-hero .cx-lede{color:rgba(255,255,255,.86);font-size:1.3em;max-width:34em}
+.cx--expresiva .cx-hero .cx-rating,.cx--expresiva .cx-hero .cx-rating b{color:#fff}
+.cx--expresiva .cx-hero .cx-call,.cx--expresiva .cx-hero .cx-next{color:rgba(255,255,255,.8)}
+.cx--expresiva .cx-hero .cx-call b{color:#fff}
+.cx--expresiva .cx-hero .cx-next-slot{color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)}
+.cx--expresiva .cx-hero .cx-btn--ghost{color:#fff!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.55)}
+.cx--expresiva .cx-hero .cx-btn--ghost:hover{background:rgba(255,255,255,.12)}
+.cx-w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.cx-w > span{display:inline-block}
+@keyframes cx-word{from{transform:translateY(105%)}}
+@keyframes cx-slowsettle{from{transform:scale(1.14)}}
+@media (prefers-reduced-motion:no-preference){
+  .cx--expresiva .cx-hero[data-enter] h1{animation:none}
+  .cx--expresiva .cx-h1-words .cx-w > span{animation:cx-word 900ms var(--ease-enter) both;animation-delay:calc(120ms + var(--i) * 55ms)}
+  .cx--expresiva .cx-hero[data-enter] .cx-lede{animation-delay:620ms}
+  .cx--expresiva .cx-hero[data-enter] .cx-ctas{animation-delay:700ms}
+  .cx--expresiva .cx-hero[data-enter] .cx-next,.cx--expresiva .cx-hero[data-enter] .cx-call{animation-delay:780ms}
+  .cx--expresiva .cx-hero[data-enter] .cx-hero-img{animation:cx-slowsettle 2.4s var(--ease-enter) both}
+}
+
+/* frase que se enciende palabra por palabra al hacer scroll */
+.cx-statement{padding-top:7em;padding-bottom:7em}
+.cx-statement p{font:600 3.4em/1.12 var(--fh);letter-spacing:-.035em;max-width:20em;color:var(--fg)}
+.cx-statement .cx-w{overflow:visible}
+.cx-statement .cx-w > span{transition:color 250ms var(--ease),opacity 250ms var(--ease)}
+.cx-statement.is-live .cx-w > span{opacity:.22}
+.cx-statement.is-live .cx-w.is-on > span{opacity:1}
+.cx-statement.is-live .cx-w.is-on:nth-child(5n+3) > span{color:var(--a)}
+
+/* cinta de servicios: se mueve sola y se pausa al pasar el mouse */
+.cx-marquee{margin-top:2.4em;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:1.1em 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.cx-mq-track{display:flex;width:max-content}
+.cx-mq-track > span{display:flex;align-items:center;gap:1.2em;padding-right:1.2em;white-space:nowrap}
+.cx-mq-track em{font:500 1.6em/1 var(--fh);font-style:normal;letter-spacing:-.02em}
+.cx-mq-track i{font-style:normal;color:var(--a);font-size:1.4em}
+@keyframes cx-mq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:no-preference){
+  .cx-mq-track{animation:cx-mq 38s linear infinite}
+  .cx-marquee:hover .cx-mq-track{animation-play-state:paused}
+}
+@media (prefers-reduced-motion:reduce){.cx-mq-track{flex-wrap:wrap;width:auto}.cx-mq-track > span + span{display:none}.cx-mq-track > span{flex-wrap:wrap;white-space:normal}}
+
+/* galería en capítulos: la sección se queda fija y las fotos cambian con el scroll */
+.cx-chapters{height:calc(var(--n) * 70vh + 30vh);position:relative}
+.cx-ch-pin{position:sticky;top:0;height:100vh;display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:3em;align-items:center;padding:0 var(--pad);max-width:84em;margin:0 auto}
+.cx-ch-head h2{font-size:2.7em;line-height:1.04;font-weight:600;letter-spacing:-.03em}
+.cx-ch-head p{color:var(--muted);margin-top:1em;font-size:1.05em;max-width:24em}
+.cx-ch-count{display:block;margin-top:2em;color:var(--muted);font-variant-numeric:tabular-nums;font-size:1.05em}
+.cx-ch-count b{font:600 2.6em/1 var(--fh);color:var(--fg);letter-spacing:-.03em;margin-right:.1em}
+.cx-ch-frame{position:relative;height:min(78vh,44em);border-radius:var(--r);overflow:hidden}
+.cx-ch-img{position:absolute;inset:0;background:center/cover no-repeat;opacity:0;transform:scale(1.08);transition:opacity 700ms var(--ease-enter),transform 1.4s var(--ease-enter)}
+.cx-ch-img.is-on{opacity:1;transform:scale(1)}
+@media (prefers-reduced-motion:reduce){
+  .cx-chapters{height:auto}
+  .cx-ch-pin{position:static;height:auto;padding:6em var(--pad);grid-template-columns:1fr}
+  .cx-ch-frame{height:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(14em,1fr));gap:1em;overflow:visible}
+  .cx-ch-img{position:relative;aspect-ratio:4/3;opacity:1;transform:none;border-radius:var(--r)}
+  .cx-ch-count{display:none}
+}
+
+/* títulos de sección que suben desde su máscara la primera vez */
+@media (prefers-reduced-motion:no-preference){
+  .cx--expresiva .cx-rise.is-pre{clip-path:inset(0 0 100% 0);transform:translateY(.4em)}
+  .cx--expresiva .cx-rise.is-in{transition:clip-path 800ms var(--ease-enter),transform 800ms var(--ease-enter)}
+}
+
+/* cifras: tamaño grande para que la cuenta luzca */
+.cx--expresiva .cx-stats b{font-size:4.4em;color:var(--a)}
+
+/* servicios: la foto se acerca más y el nombre se subraya */
+@media (hover:hover) and (pointer:fine){.cx--expresiva .cx-card:hover .cx-card-img{transform:scale(1.06)}}
+
+@container (max-width:980px){
+  .cx--expresiva .cx-hero h1{font-size:4.6em}
+  .cx-ch-pin{grid-template-columns:1fr;align-content:center;gap:1.6em}
+  .cx-ch-frame{height:56vh}
+}
+@container (max-width:640px){
+  .cx--expresiva .cx-hero{min-height:38em;padding:5em var(--pad) 2.6em}
+  .cx--expresiva .cx-hero-media{order:0;padding:0}
+  .cx--expresiva .cx-hero h1{font-size:3em}
+  .cx--expresiva .cx-hero .cx-lede{font-size:1.05em}
+  .cx-statement{padding-top:4em;padding-bottom:4em}
+  .cx-statement p{font-size:2em}
+  .cx-ch-head h2{font-size:1.95em}
+  .cx-ch-frame{height:52vh}
+  .cx-mq-track em{font-size:1.25em}
+  .cx--expresiva .cx-stats b{font-size:3em}
+}
+
+/* =====================================================================
+   Ritmo: bandas de color de lado a lado para que las secciones no se
+   mezclen. Las secciones se alternan solas (blanco / tono suave de la marca)
+   y precios y la cita son pausas oscuras. Ancho completo sin envolturas:
+   box-shadow + clip-path (el sitio recorta el desborde horizontal).
+   ===================================================================== */
+.cx{--band:color-mix(in srgb,var(--a) 6%,var(--bg))}
+.cx--dark{--band:color-mix(in srgb,var(--a) 9%,var(--bg))}
+.cx > section.cx-sec:nth-of-type(even){background:var(--band);box-shadow:0 0 0 100vmax var(--band);clip-path:inset(0 -100vmax)}
+/* lo que tiene fondo suave propio se vuelve blanco sobre una banda */
+.cx > section.cx-sec:nth-of-type(even) :is(.cx-ai-in,.cx-visit-card,.cx-finder-out > div,.cx-offer--hl){background:var(--bg)}
+.cx > section.cx-sec:nth-of-type(even) .cx-finder-in{background:var(--bg);border-color:transparent}
+/* pausas oscuras de lado a lado: precios y cita */
+.cx > section.cx-sec.cx-prices:nth-of-type(n),.cx > section.cx-sec.cx-book:nth-of-type(n){background:var(--ink);box-shadow:0 0 0 100vmax var(--ink);clip-path:inset(0 -100vmax);color:#fff}
+.cx-prices-in,.cx-book-in{background:none!important;padding:0!important;border-radius:0}
+.cx--dark > section.cx-sec.cx-prices:nth-of-type(n),.cx--dark > section.cx-sec.cx-book:nth-of-type(n){--ink:#060B0A}
+/* la cita va pegada al pie (los dos oscuros): una línea fina los separa */
+.cx > section.cx-book + footer.cx-foot{border-top:1px solid rgba(255,255,255,.08)}
+/* menos aire repetido: la banda ya separa */
+.cx > section.cx-sec{padding-top:5.5em;padding-bottom:5.5em}
+.cx-benefits{margin-bottom:0}
+@container (max-width:640px){.cx > section.cx-sec{padding-top:3.6em;padding-bottom:3.6em}}
