@@ -141,9 +141,25 @@ def n_nav(active, cta_href, cta, cta_long):
         html = html.replace(f'<a href="{active}">', f'<a href="{active}" aria-current="page">')
     return html
 
+# Muro 3D de /webs: columnas de capturas reales de la plantilla; cada columna va duplicada
+# para que la animación (subir o bajar 50%) dé la vuelta sin corte.
+def wall():
+    names = ["clinica", "restaurante", "hotel", "inmobiliaria", "despacho", "cercana", "expresiva"]
+    desk = [f"{n}-{k}" for k in range(3) for n in names]
+    mob = [f"{n}-m" for n in names]
+    cols, di, mi = [], 0, 0
+    for c, (kind, dur) in enumerate([("d", 70), ("m", 55), ("d", 85), ("d", 62), ("m", 74), ("d", 90)]):
+        if kind == "d":
+            imgs = [desk[(di + k * 5) % len(desk)] for k in range(5)]; di += 2
+        else:
+            imgs = [mob[(mi + k) % len(mob)] for k in range(4)]; mi += 3
+        tags = "".join(f'<img src="/img/webs/{i}.jpg" alt="" width="{640 if kind == "d" else 300}" height="{400 if kind == "d" else 600}" loading="{"eager" if c < 4 else "lazy"}" decoding="async">' for i in imgs)
+        cols.append(f'<div class="w-col{" thin" if kind == "m" else ""}" style="--d:{dur}s">{tags}{tags}</div>')
+    return "".join(cols)
+
 pages = {
     "index.html": site_chrome(fill("inicio.html", {**common, "{{N_NAV}}": n_nav(None, "#consultoria", "Agendar consultoría", "Agendar una consultoría")}), "inicio"),
-    "webs.html": site_chrome(index, "webs", cta="#diagnostico", own_menu=True),
+    "webs.html": site_chrome(fill("webs.html", {**common, "{{WALL}}": wall(), "{{N_NAV}}": n_nav("/webs", "#diagnostico", "Pedir propuesta", "Pedir mi propuesta gratis")}), "webs"),
     "ia.html": site_chrome(fill("ia.html", {**common, "{{N_NAV}}": n_nav("/ia", "#contacto", "Agendar diagnóstico", "Agendar un diagnóstico")}), "ia"),
     "webs-clinicas.html": site_chrome(fill("webs-clinicas.html", {**shared, **industry}), "clinicas", cta="#diagnostico", own_menu=True),
     "diagnostico.html": fill("diagnostico.html", {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBOLS}}"]}),

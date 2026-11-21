@@ -793,15 +793,12 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
 .n-hero h1 .ln>span{display:inline-block}
 .n-hero .lede{max-width:34rem;font-size:clamp(1.08rem,1.4vw,1.25rem);color:var(--mist);margin:1.8rem 0 2.2rem}
 .n-acts{display:flex;flex-wrap:wrap;gap:.8rem}
-.n-hint{position:absolute;right:var(--gut);bottom:4.8rem;font-size:.85rem;color:var(--mist);display:flex;align-items:center;gap:.5rem}
-.n-hint svg{width:1rem;height:1rem}
 @keyframes n-rise{from{transform:translateY(105%)}}
 @keyframes n-fade{from{opacity:0;transform:translateY(12px)}}
 @media (prefers-reduced-motion:no-preference){
   .n-hero h1 .ln>span{animation:n-rise 1s var(--enter) both}
   .n-hero h1 .ln:nth-child(2)>span{animation-delay:.08s}.n-hero h1 .ln:nth-child(3)>span{animation-delay:.16s}
-  .n-hero .lede{animation:n-fade .8s var(--enter) .45s both}.n-acts{animation:n-fade .8s var(--enter) .55s both}.n-hint{animation:n-fade .8s var(--enter) 1s both}
-}
+  .n-hero .lede{animation:n-fade .8s var(--enter) .45s both}.n-acts{animation:n-fade .8s var(--enter) .55s both}}
 
 /* cinta de lo que hacemos */
 .n-strip{border-block:1px solid var(--hair);overflow:hidden}
@@ -954,8 +951,7 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
 
 @media (max-width:900px){
   .n-hero{padding-top:6rem;min-height:92svh}
-  .n-hint{display:none}
-  .n-hero h1 .ln,.n-hero h1 .ln>span{display:inline;animation:none}
+    .n-hero h1 .ln,.n-hero h1 .ln>span{display:inline;animation:none}
   .n-hero h1{animation:n-fade .8s var(--enter) both}
   .n-ask{padding:6rem 0}
   .n-ask .n-wrap,.n-faq .n-wrap,.n-close .n-wrap{grid-template-columns:minmax(0,1fr);gap:2.6rem}
@@ -1046,7 +1042,6 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
     <p class="lede">De tu página web a tu operación: lo diseñamos, lo construimos y lo dejamos funcionando. Páginas web, asistentes de WhatsApp, agentes de IA y datos.</p>
     <div class="n-acts"><a class="n-btn" href="#consultoria">Agendar una consultoría <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 7 10 10"/><path d="M17 7v10H7"/></svg></a><a class="n-btn ghost" href="/webs">Revisar mi página web</a></div>
   </div>
-  <span class="n-hint" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.037 4.688a.495.495 0 0 1 .651-.651l16 6.5a.5.5 0 0 1-.063.947l-6.124 1.58a2 2 0 0 0-1.438 1.435l-1.579 6.126a.5.5 0 0 1-.947.063z"/></svg>Mueve el cursor</span>
 </section>
 
 <div class="n-strip" aria-label="Lo que hacemos"><ul><li>Páginas web</li><li>Asistentes de WhatsApp</li><li>Agentes de IA</li><li>Automatización</li><li>Tableros</li><li>Análisis diario</li><li>SEO para la IA</li><li aria-hidden="true">Páginas web</li><li aria-hidden="true">Asistentes de WhatsApp</li><li aria-hidden="true">Agentes de IA</li><li aria-hidden="true">Automatización</li><li aria-hidden="true">Tableros</li><li aria-hidden="true">Análisis diario</li><li aria-hidden="true">SEO para la IA</li></ul></div>
@@ -1123,15 +1118,15 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
 
 <section class="n-work" id="trabajo" aria-labelledby="work-title">
   <div class="n-wrap"><header>
-    <h2 class="n-h2" id="work-title" data-reveal>Una plantilla, cinco giros, ninguna igual.</h2>
+    <h2 class="n-h2" id="work-title" data-reveal>Clínicas, restaurantes, hoteles y otros. Ninguna igual.</h2>
     <div data-reveal><p>Páginas hechas con nuestra plantilla para negocios de ejemplo. Cada giro trae sus secciones: la carta del restaurante, las habitaciones del hotel, las propiedades de la inmobiliaria.</p><a class="n-link" href="/webs">Ver páginas web y precios <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
   </header></div>
   <div class="n-row" tabindex="0" aria-label="Galería de páginas de ejemplo">
-    <a class="n-shot" href="/p/demo-restaurante"><figure><div class="img" style="background-image:url('/img/home/restaurante.jpg')" role="img" aria-label="Página de un restaurante"></div><figcaption><b>Restaurante</b><span>Diseño Fonda</span></figcaption></figure></a>
-    <a class="n-shot" href="/p/demo-hotel"><figure><div class="img" style="background-image:url('/img/home/hotel.jpg')" role="img" aria-label="Página de un hotel boutique"></div><figcaption><b>Hotel boutique</b><span>Estilo Expresiva</span></figcaption></figure></a>
-    <a class="n-shot" href="/p/clinica-arrayan"><figure><div class="img" style="background-image:url('/img/home/clinica.jpg')" role="img" aria-label="Página de una clínica dental"></div><figcaption><b>Clínica dental</b><span>Estilo Sobria</span></figcaption></figure></a>
-    <a class="n-shot" href="/p/demo-inmobiliaria"><figure><div class="img" style="background-image:url('/img/home/inmobiliaria.jpg')" role="img" aria-label="Página de una inmobiliaria"></div><figcaption><b>Inmobiliaria</b><span>Estilo Sobria</span></figcaption></figure></a>
-    <a class="n-shot" href="/p/demo-despacho"><figure><div class="img" style="background-image:url('/img/home/despacho.jpg')" role="img" aria-label="Página de un despacho"></div><figcaption><b>Despacho</b><span>Letra elegante</span></figcaption></figure></a>
+    <div class="n-shot"><figure><div class="img" style="background-image:url('/img/home/restaurante.jpg')" role="img" aria-label="Página de un restaurante"></div><figcaption><b>Restaurante</b><span>Diseño Fonda</span></figcaption></figure></div>
+    <div class="n-shot"><figure><div class="img" style="background-image:url('/img/home/hotel.jpg')" role="img" aria-label="Página de un hotel boutique"></div><figcaption><b>Hotel boutique</b><span>Estilo Expresiva</span></figcaption></figure></div>
+    <div class="n-shot"><figure><div class="img" style="background-image:url('/img/home/clinica.jpg')" role="img" aria-label="Página de una clínica dental"></div><figcaption><b>Clínica dental</b><span>Estilo Sobria</span></figcaption></figure></div>
+    <div class="n-shot"><figure><div class="img" style="background-image:url('/img/home/inmobiliaria.jpg')" role="img" aria-label="Página de una inmobiliaria"></div><figcaption><b>Inmobiliaria</b><span>Estilo Sobria</span></figcaption></figure></div>
+    <div class="n-shot"><figure><div class="img" style="background-image:url('/img/home/despacho.jpg')" role="img" aria-label="Página de un despacho"></div><figcaption><b>Despacho</b><span>Letra elegante</span></figcaption></figure></div>
     <div class="n-shot"><figure><div class="img" style="background-image:url('/img/home/cercana.jpg')" role="img" aria-label="Página de un consultorio en estilo cercano"></div><figcaption><b>Consultorio familiar</b><span>Estilo Cercana</span></figcaption></figure></div>
   </div>
 </section>

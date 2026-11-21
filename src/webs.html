@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Páginas web optimizadas para Google y la IA · Ceiba Labs</title>
+<meta name="description" content="Tu página web por suscripción: diseño, publicación, mantenimiento y cambios cada mes, lista para Google y la IA. Te la mostramos terminada antes de que decidas.">
+{{HEAD_TAGS}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Funnel+Display:wght@300;400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/estudio.css">
+<style>
+{{BASE_CSS}}
+/* ===================== PÁGINAS WEB =====================
+   La idea memorable: el muro. Páginas reales hechas con nuestra plantilla flotan en un
+   plano inclinado y suben y bajan sin fin; es el trabajo mostrándose solo. Después,
+   un antes y después que se arrastra con el dedo. */
+.w-hero{position:relative;min-height:100svh;display:grid;align-items:center;padding:7rem 0 5rem;overflow:hidden;isolation:isolate;background:var(--night)}
+.w-hero{grid-template-columns:minmax(0,1fr)}
+.w-hero>.n-wrap{width:100%}
+.w-wall{position:absolute;inset:0;z-index:-2;perspective:1600px;perspective-origin:70% 40%;overflow:hidden;pointer-events:none}
+.w-plane{position:absolute;left:44%;top:-30%;width:120%;height:170%;display:flex;gap:1.4rem;transform-style:preserve-3d;
+  transform:rotateX(calc(42deg + var(--ry,0) * 4deg)) rotateZ(calc(-24deg + var(--rx,0) * 3deg)) translateZ(-60px);transform-origin:30% 40%;transition:transform .6s var(--ease)}
+.w-col{flex:none;width:21rem;display:flex;flex-direction:column;gap:1.4rem;will-change:transform}
+.w-col.thin{width:10rem}
+.w-col img{display:block;width:100%;height:auto;border-radius:.9rem;box-shadow:0 0 0 1px rgba(255,255,255,.1),0 2rem 3rem -1.5rem rgba(0,0,0,.7);background:#14246B}
+.w-col.thin img{border-radius:1.2rem}
+@keyframes w-up{to{transform:translateY(-50%)}}
+@keyframes w-down{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+@media (prefers-reduced-motion:no-preference){
+  .w-col{animation:w-up var(--d,60s) linear infinite}
+  .w-col:nth-child(even){animation-name:w-down}
+  .w-hero.paused .w-col{animation-play-state:paused}
+}
+.w-hero::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(90deg,var(--night) 12%,color-mix(in srgb,var(--night) 82%,transparent) 36%,color-mix(in srgb,var(--night) 10%,transparent) 64%,color-mix(in srgb,var(--night) 50%,transparent)),linear-gradient(var(--night),transparent 18%,transparent 78%,var(--night))}
+.w-hero h1{font-size:clamp(2.7rem,5.4vw,5.8rem);max-width:11ch;letter-spacing:-.05em;line-height:.96}
+.w-hero h1 span{color:var(--mist);font-weight:300}
+.w-hero .lede{max-width:31rem;font-size:clamp(1.05rem,1.35vw,1.2rem);color:var(--mist);margin:1.6rem 0 2rem}
+.w-audit{max-width:34rem;display:grid;gap:.6rem}
+.w-audit label{font-size:.92rem;font-weight:500}
+.w-field{display:flex;align-items:center;gap:.4rem;padding:.35rem .35rem .35rem 1.1rem;border-radius:999px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px var(--hair);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:box-shadow .2s}
+.w-field:focus-within{box-shadow:inset 0 0 0 1px var(--lime)}
+.w-field.invalid{box-shadow:inset 0 0 0 1px #FF9A8A}
+.w-field span{color:var(--mist);font:400 .95rem var(--fm)}
+.w-field input{flex:1;min-width:0;width:0;height:2.9rem;border:0;background:transparent;color:var(--white);font:400 1rem var(--fb);outline:none}
+.w-field input::placeholder{color:rgba(169,180,224,.7)}
+.w-field .n-btn{height:2.9rem;flex:none}
+.w-audit .err{color:#FFB3A6;font-size:.9rem;margin:0}
+.w-alt{font-size:.92rem;color:var(--mist)}
+.w-alt a{color:var(--white)}
+@keyframes w-fade{from{opacity:0;transform:translateY(14px)}}
+@media (prefers-reduced-motion:no-preference){.w-hero .n-wrap>*{animation:w-fade .9s var(--enter) both}.w-hero .lede{animation-delay:.1s}.w-audit{animation-delay:.2s}.w-alt{animation-delay:.3s}}
+
+/* ---------- primero ves tu página ---------- */
+.w-flow{padding:9rem 0 7rem}
+.w-flow .n-h2{max-width:14ch}
+.w-steps{list-style:none;margin:4rem 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2rem;position:relative}
+.w-steps::before{content:"";position:absolute;left:0;right:0;top:1.6rem;height:2px;background:linear-gradient(90deg,var(--lime) var(--p,0%),var(--hair) var(--p,0%));transition:--p 1.6s var(--enter)}
+@property --p{syntax:'<percentage>';initial-value:0%;inherits:false}
+.w-steps.in::before{--p:100%}
+.w-steps li{position:relative;padding-top:4rem}
+.w-steps li::before{content:attr(data-n);position:absolute;top:0;left:0;width:3.2rem;height:3.2rem;border-radius:50%;display:grid;place-items:center;font:600 1.1rem var(--fd);background:var(--night);box-shadow:inset 0 0 0 1.5px var(--lime);color:var(--lime)}
+.w-steps h3{font-size:1.5rem;letter-spacing:-.025em;margin:1.2rem 0 .6rem}
+.w-steps p{color:var(--mist);max-width:24rem}
+.w-steps small{display:inline-block;margin-top:1rem;font:500 .78rem var(--fm);color:var(--lime);padding:.25rem .6rem;border-radius:999px;background:rgba(214,250,82,.08)}
+
+/* ---------- antes y después ---------- */
+.w-cmp{background:var(--paper);color:var(--night);padding:8rem 0}
+.w-cmp .top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:5vw;align-items:end;margin-bottom:3rem}
+.w-cmp .top p{color:color-mix(in srgb,var(--night) 72%,transparent);max-width:31rem}
+.w-dev{display:inline-flex;gap:.3rem;padding:.3rem;border-radius:999px;background:var(--white);box-shadow:0 0 0 1px var(--hair-d);margin-top:1.4rem}
+.w-dev button{border:0;background:transparent;padding:.5rem 1rem;border-radius:999px;font:500 .9rem var(--fb);color:color-mix(in srgb,var(--night) 70%,transparent);cursor:pointer}
+.w-dev button[aria-pressed="true"]{background:var(--night);color:var(--white)}
+.w-cmpgrid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:3rem;align-items:center}
+.w-slider{position:relative;border-radius:1.2rem;overflow:hidden;box-shadow:0 0 0 1px var(--hair-d),0 3rem 5rem -3rem rgba(8,16,54,.5);background:#fff;touch-action:pan-y;user-select:none;-webkit-user-select:none;--pos:50%;aspect-ratio:1203/932}
+.w-slider.mob{aspect-ratio:582/1022;max-width:24rem;margin:0 auto}
+.w-slider img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;pointer-events:none}
+.w-slider .new{clip-path:inset(0 0 0 var(--pos))}
+.w-slider .bar{position:absolute;top:0;bottom:0;left:var(--pos);width:2px;margin-left:-1px;background:var(--white);box-shadow:0 0 0 1px rgba(8,16,54,.15)}
+.w-slider .knob{position:absolute;top:50%;left:var(--pos);width:3.2rem;height:3.2rem;margin:-1.6rem 0 0 -1.6rem;border-radius:50%;background:var(--night);color:var(--lime);display:grid;place-items:center;box-shadow:0 .8rem 1.6rem -.6rem rgba(8,16,54,.6);cursor:ew-resize;border:0}
+.w-slider .knob svg{width:1.3rem;height:1.3rem}
+.w-slider .tag{position:absolute;top:1rem;font:500 .75rem var(--fm);padding:.3rem .7rem;border-radius:999px;background:rgba(8,16,54,.82);color:var(--white)}
+.w-slider .tag.l{left:1rem}.w-slider .tag.r{right:1rem;background:var(--lime);color:var(--night)}
+.w-changes{list-style:none;margin:0;padding:0;display:grid;gap:1rem}
+.w-changes li{padding:1.2rem 1.3rem;border-radius:1.1rem;background:var(--white);box-shadow:0 0 0 1px var(--hair-d)}
+.w-changes b{display:block;font:600 1.15rem var(--fd);letter-spacing:-.015em;margin-bottom:.5rem}
+.w-changes s{display:block;color:color-mix(in srgb,var(--night) 50%,transparent);font-size:.9rem;text-decoration-color:color-mix(in srgb,var(--night) 30%,transparent)}
+.w-changes span{display:block;font-size:.95rem;margin-top:.3rem}
+.w-note{margin-top:1.4rem!important;font-size:.82rem;color:color-mix(in srgb,var(--night) 55%,transparent)}
+
+/* ---------- Google y la IA ---------- */
+.w-ai{padding:9rem 0}
+.w-ai .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:5vw;align-items:start;margin-top:3.5rem}
+.w-read{position:sticky;top:6rem;border-radius:1.4rem;background:linear-gradient(160deg,#14246B,var(--night));box-shadow:0 0 0 1px var(--hair),0 3rem 5rem -3rem #000;padding:1.5rem}
+.w-read header{display:flex;justify-content:space-between;align-items:center;font-size:.92rem;margin-bottom:1rem}
+.w-read header small{font:500 .72rem var(--fm);color:var(--mist)}
+.w-read dl{margin:0;display:grid;gap:.4rem}
+.w-read dl div{display:grid;grid-template-columns:6.5rem 1fr;gap:.8rem;padding:.7rem .85rem;border-radius:.8rem;background:rgba(255,255,255,.04);font-size:.9rem;opacity:.45;transition:opacity .4s,background-color .4s}
+.w-read dl div.on{opacity:1;background:rgba(214,250,82,.08)}
+.w-read dt{font:500 .75rem var(--fm);color:var(--lime);padding-top:.15rem}
+.w-read dd{margin:0}
+.w-ans{margin-top:1rem;padding:1rem;border-radius:1rem;background:var(--white);color:var(--night);font-size:.92rem;line-height:1.5;opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s}
+.w-ans.on{opacity:1;transform:none}
+.w-ans b{display:block;font:500 .72rem var(--fm);color:var(--cobalt);margin-bottom:.3rem}
+.w-read .n-note{text-align:right;margin-top:.8rem!important;font-size:.75rem;color:var(--mist)}
+.w-feats{list-style:none;margin:0;padding:0;display:grid;gap:1.6rem}
+.w-feats li{display:grid;grid-template-columns:2.8rem 1fr;gap:1rem;padding-bottom:1.6rem;border-bottom:1px solid var(--hair)}
+.w-feats li>svg{width:2.8rem;height:2.8rem;padding:.7rem;border-radius:.9rem;background:rgba(214,250,82,.08);color:var(--lime)}
+.w-feats b{display:block;font:600 1.2rem var(--fd);letter-spacing:-.015em;margin-bottom:.35rem}
+.w-feats p{color:var(--mist);font-size:.95rem}
+.w-tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:3.5rem}
+.w-tiers div{padding:1.4rem;border-radius:1.1rem;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px var(--hair)}
+.w-tiers div.hl{background:rgba(214,250,82,.07);box-shadow:inset 0 0 0 1px rgba(214,250,82,.35)}
+.w-tiers small{font:500 .75rem var(--fm);color:var(--lime)}
+.w-tiers b{display:block;font:600 1.15rem var(--fd);margin:.4rem 0}
+.w-tiers p{color:var(--mist);font-size:.92rem}
+
+/* ---------- planes ---------- */
+.w-plans{background:var(--paper);color:var(--night);padding:8rem 0}
+.w-plans .top{display:flex;justify-content:space-between;align-items:end;gap:2rem;margin-bottom:3rem}
+.w-plans .top p{max-width:28rem;color:color-mix(in srgb,var(--night) 72%,transparent)}
+.w-grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2rem}
+.w-plan{position:relative;border-radius:1.4rem;padding:2rem;background:var(--white);box-shadow:0 0 0 1px var(--hair-d);display:flex;flex-direction:column;gap:1.1rem;transition:transform .3s var(--ease),box-shadow .3s}
+.w-plan:hover{transform:translateY(-4px);box-shadow:0 0 0 1px var(--hair-d),0 2rem 3rem -2rem rgba(8,16,54,.4)}
+.w-plan.pick{background:var(--night);color:var(--white)}
+.w-plan .pop{position:absolute;top:1.3rem;right:1.3rem;font:500 .72rem var(--fm);padding:.25rem .6rem;border-radius:999px;background:var(--lime);color:var(--night)}
+.w-plan h3{font-size:1.9rem;letter-spacing:-.03em}
+.w-plan .for{color:color-mix(in srgb,currentColor 70%,transparent);font-size:.95rem;margin-top:-.5rem!important}
+.w-price{display:grid;gap:.2rem;padding:1.1rem 0;border-block:1px solid var(--hair-d)}
+.w-plan.pick .w-price{border-color:var(--hair)}
+.w-price b{font:600 2.4rem/1 var(--fd);letter-spacing:-.035em}
+.w-price b small{font:500 .95rem var(--fb);letter-spacing:0;color:color-mix(in srgb,currentColor 65%,transparent)}
+.w-price>span{font-size:.88rem;color:color-mix(in srgb,currentColor 65%,transparent)}
+.w-plan ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem;font-size:.94rem}
+.w-plan li{display:flex;gap:.6rem}
+.w-plan li svg{width:1.05rem;height:1.05rem;flex:none;margin-top:.2rem;color:var(--cobalt)}
+.w-plan.pick li svg{color:var(--lime)}
+.w-plan .n-btn{margin-top:auto;align-self:flex-start}
+.w-plan:not(.pick) .n-btn{background:var(--night);color:var(--white)}
+.w-addon{margin-top:1.2rem;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:1.6rem;align-items:center;padding:1.6rem 2rem;border-radius:1.4rem;background:var(--white);box-shadow:0 0 0 1px var(--hair-d)}
+.w-addon>svg{width:3rem;height:3rem;padding:.75rem;border-radius:50%;background:var(--night);color:var(--lime)}
+.w-addon b{font:600 1.3rem var(--fd);letter-spacing:-.02em}
+.w-addon p{color:color-mix(in srgb,var(--night) 70%,transparent);font-size:.94rem;margin-top:.25rem!important}
+.w-addon .pr{text-align:right;font-size:.9rem;white-space:nowrap}
+.w-addon .pr b{font-size:1.6rem}
+.w-inc{margin-top:2.4rem;display:grid;grid-template-columns:auto 1fr;gap:1rem 2rem;align-items:start}
+.w-inc b{font:600 1rem var(--fd)}
+.w-inc ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}
+.w-inc li{font-size:.86rem;padding:.4rem .8rem;border-radius:999px;background:var(--white);box-shadow:0 0 0 1px var(--hair-d)}
+.w-fine{margin-top:1.4rem!important;font-size:.84rem;color:color-mix(in srgb,var(--night) 58%,transparent);max-width:54rem}
+
+/* ---------- pide tu propuesta ---------- */
+.w-close{position:relative;padding:9rem 0;overflow:hidden;isolation:isolate}
+.w-close::before{content:"";position:absolute;inset:auto -10% -40% 45%;height:90%;z-index:-1;background:radial-gradient(closest-side,color-mix(in srgb,var(--cobalt) 42%,transparent),transparent)}
+.w-close .n-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:5vw;align-items:start}
+.w-close h2{font-size:clamp(2.5rem,5vw,5rem);max-width:11ch;letter-spacing:-.045em}
+.w-how{list-style:none;margin:2.4rem 0 0;padding:0;display:grid;gap:1rem;counter-reset:h}
+.w-how li{display:grid;grid-template-columns:2.4rem 1fr;gap:.9rem;align-items:center;color:var(--mist)}
+.w-how li::before{counter-increment:h;content:counter(h);width:2.4rem;height:2.4rem;border-radius:50%;display:grid;place-items:center;font:600 .95rem var(--fd);box-shadow:inset 0 0 0 1.5px var(--hair);color:var(--white)}
+#lead-form .seg{display:grid;grid-template-columns:1fr 1fr;gap:.3rem;padding:.3rem;border-radius:999px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px var(--hair)}
+#lead-form .seg button{height:2.7rem;border:0;border-radius:999px;background:transparent;color:var(--mist);font:500 .92rem var(--fb);cursor:pointer;transition:background-color .2s,color .2s}
+#lead-form .seg button[aria-checked="true"]{background:var(--white);color:var(--night)}
+#lead-form .frow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+#lead-form .fld input,#lead-form .fld select{background:rgba(255,255,255,.04);border-color:var(--hair);color:var(--white)}
+#lead-form .fld select option{color:#081036}
+#lead-form .hint{font-size:.82rem;color:var(--mist);margin:0}
+#lead-form .trap{position:absolute;left:-9999px}
+#lead-form .form-err{color:#FFB3A6;margin:0}
+#lead-form .success{display:grid;gap:1rem}
+#lead-form .success h3{font:600 1.6rem var(--fd);letter-spacing:-.02em}
+#lead-form .done-when{font:600 1.3rem/1.3 var(--fd)}
+#lead-form .done-when span{color:var(--lime)}
+#lead-form #lead-how{color:var(--mist)}
+#lead-form dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.4rem 1.2rem;font-size:.92rem}
+#lead-form dt{color:var(--mist)}
+#lead-form dd{margin:0}
+#lead-form .n-btn.ghost{justify-self:start}
+
+@media (max-width:900px){
+  .w-hero{align-items:end;padding:6rem 0 3.5rem;min-height:96svh}
+  .w-plane{left:-30%;top:-20%;width:190%;transform:rotateX(46deg) rotateZ(-22deg) translateZ(-60px)}
+  .w-col{width:14rem}.w-col.thin{width:7rem}
+  .w-hero::after{background:linear-gradient(color-mix(in srgb,var(--night) 30%,transparent),color-mix(in srgb,var(--night) 70%,transparent) 38%,var(--night) 62%)}
+  .w-flow{padding:6rem 0 4rem}
+  .w-steps{grid-template-columns:minmax(0,1fr);gap:2.4rem}
+  .w-steps::before{display:none}
+  .w-steps li{padding-top:0;padding-left:4.4rem}
+  .w-steps h3{margin-top:.4rem}
+  .w-cmp,.w-plans{padding:6rem 0}
+  .w-cmp .top,.w-cmpgrid,.w-ai .grid,.w-close .n-wrap{grid-template-columns:minmax(0,1fr);gap:2.4rem}
+  .w-ai{padding:6rem 0}
+  .w-read{position:static}
+  .w-tiers,.w-grid3{grid-template-columns:minmax(0,1fr)}
+  .w-plans .top{flex-direction:column;align-items:flex-start}
+  .w-addon{grid-template-columns:minmax(0,1fr);gap:1rem}
+  .w-addon .pr{text-align:left}
+  .w-inc{grid-template-columns:minmax(0,1fr)}
+  .w-close{padding:6rem 0}
+}
+@media (max-width:520px){#lead-form .frow{grid-template-columns:minmax(0,1fr)}.w-read dl div{grid-template-columns:minmax(0,1fr);gap:.2rem}.w-field span{display:none}}
+@media (prefers-reduced-motion:reduce){.n *,.n *::before,.n *::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+{{SYMBOLS}}
+{{N_NAV}}
+
+<main class="n">
+<section class="w-hero" id="w-hero" aria-labelledby="w-title">
+  <div class="w-wall" aria-hidden="true"><div class="w-plane" id="w-plane">{{WALL}}</div></div>
+  <div class="n-wrap">
+    <h1 id="w-title">Tu página nueva, <span>antes de decidir.</span></h1>
+    <p class="lede">Diseñamos, publicamos y cuidamos tu página por una mensualidad fija. Te la mostramos terminada antes de que pagues, lista para Google y para la IA desde el primer día.</p>
+    <form class="w-audit" id="audit-form" novalidate>
+      <label for="audit-url">Analiza gratis cómo ven tu página Google y la IA</label>
+      <div class="w-field" id="audit-field"><span aria-hidden="true">https://</span><input id="audit-url" name="url" type="text" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com"><button class="n-btn" type="submit">Analizar <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></div>
+      <p class="err" id="audit-err" hidden></p>
+    </form>
+    <p class="w-alt" style="margin-top:1rem">¿No tienes página? <a href="#diagnostico" id="no-web">Pide tu propuesta gratis</a></p>
+  </div>
+</section>
+
+<section class="w-flow" id="suscripcion" aria-labelledby="flow-title"><div class="n-wrap">
+  <h2 class="n-h2" id="flow-title" data-reveal>Primero ves tu página. Después decides.</h2>
+  <p class="n-lead" data-reveal>Pagas un monto inicial para empezar y una mensualidad que incluye diseño, publicación y mantenimiento. Tu página no se queda olvidada.</p>
+  <ol class="w-steps" id="w-steps">
+    <li data-n="1"><h3>Nos mandas tu página o tu Instagram</h3><p>Con eso preparamos cómo quedaría tu página nueva, con tus fotos, servicios y datos.</p><small>Tú: 2 minutos</small></li>
+    <li data-n="2"><h3>Te la mostramos y decides</h3><p>Te llega un enlace privado con tu página terminada. Si te gusta, eliges un plan. Si no, no pagas nada.</p><small>Tú: decides con la página a la vista</small></li>
+    <li data-n="3"><h3>La publicamos y la cuidamos</h3><p>Terminamos el resto, la publicamos en tu dominio y cada mes hacemos los cambios que nos pidas.</p><small>Nosotros: cada mes</small></li>
+  </ol>
+</div></section>
+
+<section class="w-cmp" id="antes-despues" aria-labelledby="cmp-title"><div class="n-wrap">
+  <div class="top">
+    <div><h2 class="n-h2" id="cmp-title" data-reveal>Arrastra y compara.</h2>
+      <div class="w-dev" role="group" aria-label="Ver en"><button type="button" data-d="desk" aria-pressed="true">Computadora</button><button type="button" data-d="mob" aria-pressed="false">Celular</button></div></div>
+    <p data-reveal>La página de hoy de una clínica dental contra la que haríamos. Mismo negocio, mismos datos: cambia lo que el paciente encuentra y lo fácil que es agendar.</p>
+  </div>
+  <div class="w-cmpgrid">
+    <div>
+      <div class="w-slider" id="w-slider">
+        <img class="old" src="/img/webs/cmp-old.jpg" alt="Página actual de la clínica: carrusel con foto de banco, teléfono en letra chica y sin precios" data-desk="/img/webs/cmp-old.jpg" data-mob="/img/webs/cmp-old-m.jpg">
+        <img class="new" src="/img/webs/cmp-new.jpg" alt="Página nueva de la clínica: botón para agendar, horarios disponibles, reseñas y precios" data-desk="/img/webs/cmp-new.jpg" data-mob="/img/webs/cmp-new-m.jpg">
+        <span class="tag l">Hoy</span><span class="tag r">Con Ceiba</span>
+        <span class="bar" aria-hidden="true"></span>
+        <button class="knob" type="button" role="slider" aria-label="Comparar antes y después" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 7-5 5 5 5"/><path d="m15 7 5 5-5 5"/></svg></button>
+      </div>
+      <p class="w-note">Ejemplo de rediseño. Clínica Dental Arrayán es un negocio ficticio.</p>
+    </div>
+    <ul class="w-changes">
+      <li data-reveal><b>Agendar una cita</b><s>Un teléfono en letra chica que no se puede tocar en el celular.</s><span>«Agenda tu cita» siempre a la vista, con horarios disponibles.</span></li>
+      <li data-reveal><b>Tratamientos</b><s>Tres recuadros genéricos con «Leer más» y ningún precio.</s><span>Cada tratamiento con precio y su propio botón para agendar.</span></li>
+      <li data-reveal><b>Confianza</b><s>Foto de banco y una frase que podría ser de cualquiera.</s><span>La dentista real, su cédula y 186 reseñas de Google en la portada.</span></li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="w-ai" id="optimizada-ia" aria-labelledby="ai-title"><div class="n-wrap">
+  <h2 class="n-h2" id="ai-title" data-reveal>Hecha para que Google y la IA te recomienden.</h2>
+  <p class="n-lead" data-reveal>Tus clientes ya le preguntan a ChatGPT, Gemini o Google «¿qué dentista me recomiendas cerca?». Cada página sale preparada para que esos sistemas entiendan tu negocio. No es un extra: es cómo la construimos.</p>
+  <div class="grid">
+    <div class="w-read" id="w-read" aria-label="Ejemplo de lo que la IA lee de una página">
+      <header><span>Lo que la IA lee de tu página</span><small>datos estructurados</small></header>
+      <dl>
+        <div><dt>Negocio</dt><dd>Clínica dental en Providencia, Guadalajara</dd></div>
+        <div><dt>Horario</dt><dd>Lun a vie 9:00 a 20:00, sáb 9:00 a 14:00</dd></div>
+        <div><dt>Servicios</dt><dd>Valoración sin costo, limpieza $700, ortodoncia desde $1,200 al mes</dd></div>
+        <div><dt>Reseñas</dt><dd>4.9 de 186 opiniones</dd></div>
+        <div><dt>Preguntas</dt><dd>¿Atienden urgencias? Sí, el mismo día</dd></div>
+        <div><dt>Contacto</dt><dd>WhatsApp, teléfono y agenda en línea</dd></div>
+      </dl>
+      <div class="w-ans" id="w-ans"><b>Respuesta de un asistente de IA</b>Clínica Dental Arrayán, en Providencia: valoración sin costo, limpieza desde $700 y atienden urgencias el mismo día. Tiene 4.9 estrellas y puedes agendar en línea.</div>
+      <p class="n-note">Ejemplo con un negocio ficticio.</p>
+    </div>
+    <ul class="w-feats">
+      <li data-reveal><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg><div><b>Datos estructurados de tu negocio</b><p>Tipo de negocio, dirección, horario, servicios con precio, reseñas y preguntas frecuentes en el formato schema.org que leen Google y los asistentes.</p></div></li>
+      <li data-reveal><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 11 2 2 4-4"/><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><div><b>SEO base completo</b><p>Título y descripción por página, encabezados claros, fotos descritas, mapa del sitio y vista previa al compartir en WhatsApp.</p></div></li>
+      <li data-reveal><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></svg><div><b>Contenido que la IA puede citar</b><p>Precios, horarios, zonas y preguntas frecuentes en texto, no escondidos en imágenes. Es lo que la IA usa para responder «¿cuánto cuesta?».</p></div></li>
+      <li data-reveal><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg><div><b>Abierta a los buscadores de IA</b><p>No bloqueamos a ChatGPT, Gemini, Perplexity ni Claude, y tu página se lee completa sin depender de código que muchos de ellos no ejecutan.</p></div></li>
+    </ul>
+  </div>
+  <div class="w-tiers">
+    <div data-reveal><small>Todos los planes</small><b>SEO base y análisis rápido</b><p>Toda página sale optimizada. Y cualquiera puede <a href="#w-hero" style="color:var(--white)">analizar su portada gratis</a>: puntaje de 0 a 100 con lo que falta.</p></div>
+    <div class="hl" data-reveal><small>Plan Negocio</small><b>Prueba real cada 3 meses</b><p>Análisis avanzado al lanzar y, cada 3 meses, preguntas reales a ChatGPT, Gemini y Perplexity para ver si te recomiendan.</p></div>
+    <div data-reveal><small>Plan Avanzado</small><b>Reporte y mejora cada mes</b><p>Preguntas a la IA, búsquedas en Google, competidores y una mejora de SEO aplicada al mes, aparte de tus minutos de cambios.</p></div>
+  </div>
+</div></section>
+
+<section class="w-plans" id="precios" aria-labelledby="price-title"><div class="n-wrap">
+  <div class="top"><h2 class="n-h2" id="price-title" data-reveal>Planes.</h2><p data-reveal>Empiezas con un pago inicial (el Plan Esencial no tiene) y la mensualidad corre desde que tu página está publicada.</p></div>
+  <div class="w-grid3">
+    <article class="w-plan" data-reveal><h3>Esencial</h3><p class="for">Para que te encuentren y te escriban</p>
+      <div class="w-price"><b><span data-price="web.esencial.monthly">$1,490</span> <small>al mes</small></b><span>Sin pago inicial</span></div>
+      <ul><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Hasta 3 páginas, pensadas para el celular</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Formulario y botón de WhatsApp</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>SEO base y optimizada para IA, con 5 preguntas frecuentes de tu giro</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Hosting y mantenimiento</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>30 minutos de cambios al mes</li></ul>
+      <a class="n-btn" href="#diagnostico">Pedir mi propuesta</a></article>
+    <article class="w-plan pick" data-reveal><span class="pop">El más elegido</span><h3>Negocio</h3><p class="for">Para recibir citas y reservas en línea</p>
+      <div class="w-price"><b><span data-price="web.negocio.monthly">$2,490</span> <small>al mes</small></b><span><span data-price="web.negocio.activation">$2,990</span> de pago inicial</span></div>
+      <ul><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Hasta 7 páginas, con todo lo de Esencial</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Conectada con la agenda que ya usas</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Prueba real en ChatGPT, Gemini y Perplexity cada 3 meses</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>15 preguntas frecuentes y hasta 4 páginas por servicio o zona</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Cuántas personas te escribieron o llamaron desde la página</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>60 minutos de cambios al mes</li></ul>
+      <a class="n-btn" href="#diagnostico">Pedir mi propuesta</a></article>
+    <article class="w-plan" data-reveal><h3>Avanzado</h3><p class="for">Para mostrar un catálogo que tú mismo actualizas</p>
+      <div class="w-price"><b><span data-price="web.avanzado.monthly">$3,990</span> <small>al mes</small></b><span><span data-price="web.avanzado.activation">$5,990</span> de pago inicial</span></div>
+      <ul><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Hasta 12 páginas, con todo lo de Negocio</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Reporte mensual de IA y Google, y una mejora de SEO al mes</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Hasta 9 páginas por servicio o zona</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Catálogo de propiedades, habitaciones o servicios que tú actualizas</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>120 minutos de cambios al mes</li></ul>
+      <a class="n-btn" href="#diagnostico">Pedir mi propuesta</a></article>
+  </div>
+  <div class="w-addon" data-reveal><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg><div><b>Agrega un asistente de WhatsApp</b><p>Contesta en WhatsApp y en tu página las preguntas de siempre, toma los datos para una cita o cotización y te pasa con alguien cuando hace falta. Se suma a cualquier plan.</p></div>
+    <div class="pr">Desde <b data-price="modulo.whatsapp.monthly">$1,490</b> al mes<br><small>desde <span data-price="modulo.whatsapp.activation">$2,990</span> de inicio · <a href="/ia" style="color:var(--cobalt)">Ver cómo funciona</a></small></div></div>
+  <div class="w-inc" data-reveal><b>Todos los planes incluyen</b><ul><li>Diseño a medida, pensado para el celular</li><li>Hosting, dominio y certificado de seguridad</li><li>Mantenimiento, respaldos y monitoreo</li><li>SEO base y optimizada para IA</li><li>Cambios cada mes según tu plan</li><li>Una persona a cargo, no tickets</li></ul></div>
+  <p class="w-fine">Precios de lanzamiento, en la moneda de tu país. Es el precio final que pagas. Si aplica algún cargo de Meta o del proveedor de mensajería, lo desglosamos en tu propuesta.</p>
+</div></section>
+
+<section class="n-faq" id="preguntas" aria-labelledby="faq-title"><div class="n-wrap">
+  <h2 class="n-h2" id="faq-title" data-reveal>Preguntas frecuentes.</h2>
+  <div data-reveal>
+    <details><summary>¿Tengo que pagar por la propuesta?</summary><p>No, es gratis. Solo pagas el monto inicial y la mensualidad si decides activar tu página.</p></details>
+    <details><summary>¿Qué incluye la propuesta?</summary><p>Un enlace privado donde ves tu página de hoy junto a cómo quedaría, en computadora y en celular. También incluye qué mejoras, el plan que te recomendamos, el precio y hasta cuándo es válida. Desde ahí puedes activarla o agendar una llamada de 15 minutos.</p></details>
+    <details><summary>¿Cómo pido cambios después de publicar?</summary><p>Le escribes a la persona que lleva tu página con lo que quieres cambiar: un horario, un precio, una foto nueva. Cada plan incluye tiempo de cambios al mes: 30 minutos en Esencial, 60 en Negocio y 120 en Avanzado.</p></details>
+    <details><summary>¿Puedo cancelar la suscripción?</summary><p>Sí. Las condiciones de cancelación y del pago inicial están en nuestros <a href="/terminos">términos y condiciones</a>, y te las explicamos antes de que pagues.</p></details>
+    <details><summary>¿Qué significa que esté optimizada para IA?</summary><p>Que tu página está hecha para que Google y asistentes como ChatGPT, Gemini o Perplexity entiendan tu negocio: qué haces, dónde estás, tu horario, tus servicios y precios, tus reseñas y las respuestas a lo que más te preguntan, en texto y en datos estructurados. Nadie puede garantizar un lugar en sus respuestas, pero sí darte la mejor base para que te recomienden.</p></details>
+    <details><summary>¿Qué revisa el análisis de SEO gratis?</summary><p>Revisa tu página como lo haría un buscador: título y descripción, encabezados, fotos, mapa del sitio, datos estructurados, si bloqueas a los buscadores de IA, cuánto texto se puede leer, preguntas frecuentes, precios y reseñas. Te da un puntaje de 0 a 100 y te explica cada punto en lenguaje simple. El plan Negocio incluye el análisis avanzado al lanzar y una prueba real en la IA cada 3 meses; el plan Avanzado lo hace cada mes, con reporte y una mejora de SEO aplicada.</p></details>
+  </div>
+</div></section>
+
+<section class="w-close" id="diagnostico" aria-labelledby="close-title"><div class="n-wrap">
+  <div>
+    <h2 id="close-title" data-reveal>Pide tu propuesta gratis.</h2>
+    <p class="n-lead" data-reveal>Mándanos tu página o tu Instagram. Te enviamos un enlace privado con cómo quedaría tu página nueva, el plan que te conviene y el precio.</p>
+    <ol class="w-how" data-reveal><li>Nos mandas tu página, tu Instagram o tu perfil de Google.</li><li>Preparamos tu propuesta en un enlace privado.</li><li>Si te gusta, la activas ahí mismo o hablamos 15 minutos.</li></ol>
+  </div>
+  <form class="cf" id="lead-form" novalidate data-reveal>
+    <div id="lead-fields" class="cf-in">
+      <div class="cf-head"><b>Tu propuesta, sin costo</b><span>Te la mandamos por WhatsApp o por correo.</span></div>
+      <div class="seg" role="radiogroup" aria-label="¿Tienes página web?" id="seg-mode">
+        <button type="button" role="radio" data-v="web" aria-checked="true" tabindex="0">Ya tengo página</button>
+        <button type="button" role="radio" data-v="noweb" aria-checked="false" tabindex="-1">No tengo página</button>
+      </div>
+      <div class="fld" data-f="site" data-mode="web"><label for="f-site">Dirección de tu página</label><input id="f-site" name="site" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com" aria-describedby="e-site"><p class="err" id="e-site" hidden></p></div>
+      <div data-mode="noweb" hidden style="display:grid;gap:1.1rem">
+        <div class="frow">
+          <div class="fld" data-f="industry"><label for="f-industry">Giro</label>
+            <select id="f-industry" name="industry" aria-describedby="e-industry"><option value="">Elige uno</option><option>Clínica o consultorio</option><option>Restaurante o café</option><option>Inmobiliaria</option><option>Hotel u hospedaje</option><option>Despacho contable o legal</option><option>Otro</option></select><p class="err" id="e-industry" hidden></p></div>
+          <div class="fld" data-f="city"><label for="f-city">Ciudad</label><input id="f-city" name="city" autocomplete="address-level2" placeholder="Ej.: Guadalajara" aria-describedby="e-city"><p class="err" id="e-city" hidden></p></div>
+        </div>
+        <div class="fld" data-f="social"><label for="f-social">Tu Instagram o tu perfil de Google Maps <small>(opcional)</small></label><input id="f-social" name="social" autocapitalize="off" spellcheck="false" placeholder="@tunegocio o enlace de Google Maps" aria-describedby="h-social e-social"><p class="hint" id="h-social">Si tienes, nos ayuda a armar tu propuesta con tus fotos y datos reales.</p><p class="err" id="e-social" hidden></p></div>
+      </div>
+      <div class="frow">
+        <div class="fld" data-f="name"><label for="f-name">Tu nombre</label><input id="f-name" name="name" autocomplete="name" aria-describedby="e-name"><p class="err" id="e-name" hidden></p></div>
+        <div class="fld" data-f="biz"><label for="f-biz">Nombre del negocio</label><input id="f-biz" name="biz" autocomplete="organization" aria-describedby="e-biz"><p class="err" id="e-biz" hidden></p></div>
+      </div>
+      <div class="fld" data-f="contact"><label for="f-contact">Tu WhatsApp o correo</label><input id="f-contact" name="contact" autocomplete="email" placeholder="+52 33 1234 5678 o tu@correo.com" aria-describedby="e-contact"><p class="err" id="e-contact" hidden></p></div>
+      <div class="trap" aria-hidden="true"><label for="f-company-url">No llenar</label><input id="f-company-url" name="company_url" tabindex="-1" autocomplete="off"></div>
+      <p class="form-err" id="lead-err" role="alert" hidden></p>
+      <button class="n-btn cf-send" type="submit" id="lead-btn">Quiero mi propuesta gratis <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
+    </div>
+    <div class="success" id="lead-success" hidden tabindex="-1">
+      <h3>Listo, recibimos tu solicitud.</h3>
+      <p class="done-when" id="lead-when"></p>
+      <p id="lead-how"></p>
+      <dl id="lead-summary"></dl>
+      <button class="n-btn ghost" type="button" id="lead-reset">Corregir mis datos</button>
+    </div>
+  </form>
+</div></section>
+</main>
+
+<footer class="band footer"></footer>
+
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  document.documentElement.classList.add('js');
+
+  /* ---------- el muro: se inclina con el cursor y se pausa fuera de pantalla ---------- */
+  const hero = $('#w-hero'), plane = $('#w-plane');
+  new IntersectionObserver(([e]) => hero.classList.toggle('paused', !e.isIntersecting)).observe(hero);
+  if (!reduce && matchMedia('(pointer:fine)').matches) {
+    hero.addEventListener('pointermove', e => { plane.style.setProperty('--rx', (e.clientX / innerWidth - .5).toFixed(3)); plane.style.setProperty('--ry', (e.clientY / innerHeight - .5).toFixed(3)); });
+  }
+
+  /* ---------- aparición al hacer scroll ---------- */
+  const rio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); rio.unobserve(e.target); } }), { threshold: .15, rootMargin: '0px 0px -6% 0px' });
+  $$('[data-reveal], #w-steps').forEach(el => rio.observe(el));
+
+  /* ---------- antes y después: se arrastra con el mouse, el dedo o el teclado ---------- */
+  const sl = $('#w-slider'), knob = $('.knob', sl);
+  const setPos = v => { v = Math.max(0, Math.min(100, v)); sl.style.setProperty('--pos', v + '%'); knob.setAttribute('aria-valuenow', Math.round(v)); };
+  let drag = false;
+  const fromEvent = e => { const r = sl.getBoundingClientRect(); setPos((e.clientX - r.left) / r.width * 100); };
+  sl.addEventListener('pointerdown', e => { drag = true; sl.setPointerCapture(e.pointerId); fromEvent(e); });
+  sl.addEventListener('pointermove', e => { if (drag) fromEvent(e); });
+  sl.addEventListener('pointerup', () => { drag = false; });
+  knob.addEventListener('keydown', e => { const v = +knob.getAttribute('aria-valuenow'); if (e.key === 'ArrowLeft') { setPos(v - 5); e.preventDefault(); } if (e.key === 'ArrowRight') { setPos(v + 5); e.preventDefault(); } });
+  // Una pasada sola la primera vez que se ve, para que se entienda que se arrastra
+  if (!reduce) new IntersectionObserver(([e], o) => { if (!e.isIntersecting) return; o.disconnect(); let t0 = null;
+    const f = t => { if (drag) return; t0 ??= t; const p = Math.min(1, (t - t0) / 1800); setPos(50 + Math.sin(p * Math.PI * 2) * 28); if (p < 1) requestAnimationFrame(f); else setPos(50); };
+    requestAnimationFrame(f); }, { threshold: .6 }).observe(sl);
+  $$('.w-dev button').forEach(b => b.addEventListener('click', () => {
+    $$('.w-dev button').forEach(x => x.setAttribute('aria-pressed', x === b)); const d = b.dataset.d;
+    sl.classList.toggle('mob', d === 'mob'); $$('img', sl).forEach(i => i.src = i.dataset[d]); setPos(50);
+  }));
+
+  /* ---------- lo que la IA lee ---------- */
+  const read = $('#w-read'), rows = $$('dl div', read), ans = $('#w-ans');
+  new IntersectionObserver(([e], o) => { if (!e.isIntersecting) return; o.disconnect();
+    if (reduce) { rows.forEach(r => r.classList.add('on')); ans.classList.add('on'); return; }
+    rows.forEach((r, i) => setTimeout(() => r.classList.add('on'), 250 + i * 320)); setTimeout(() => ans.classList.add('on'), 250 + rows.length * 320 + 300);
+  }, { threshold: .4 }).observe(read);
+
+  /* ---------- revisión de URL (hero) ---------- */
+  function parseUrl(raw) {
+    let s = raw.trim();
+    if (!s) return { error: 'Escribe la dirección de tu página, por ejemplo tunegocio.com' };
+    if (/\s/.test(s)) return { error: 'La dirección no puede tener espacios. Revisa cómo la escribiste.' };
+    if (!/^https?:\/\//i.test(s)) s = 'https://' + s;
+    let u; try { u = new URL(s); } catch { return { error: 'Esa dirección no parece válida. Debe verse como tunegocio.com' }; }
+    const h = u.hostname.toLowerCase();
+    if (!/^([a-z0-9áéíóúñü-]+\.)+[a-z]{2,}$/i.test(h) || h.split('.').some(p => !p || p.startsWith('-') || p.endsWith('-')))
+      return { error: 'Le falta el final, como .com o .com.mx' };
+    return { host: h.replace(/^www\./, ''), href: u.href };
+  }
+  const aForm = $('#audit-form'), aIn = $('#audit-url'), aField = $('#audit-field'), aErr = $('#audit-err');
+  aIn.addEventListener('input', () => { aField.classList.remove('invalid'); aIn.removeAttribute('aria-invalid'); aErr.hidden = true; });
+  aForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const r = parseUrl(aIn.value);
+    if (r.error) { aField.classList.add('invalid'); aIn.setAttribute('aria-invalid', 'true'); aErr.textContent = r.error; aErr.hidden = false; aIn.setAttribute('aria-describedby', 'audit-err'); aIn.focus(); return; }
+    location.href = '/diagnostico?url=' + encodeURIComponent(r.host);
+  });
+
+  /* ---------- formulario de propuesta ---------- */
+  function radiogroup(group, onChange) {
+    const btns = $$('[role="radio"]', group);
+    const select = (b, focus) => { btns.forEach(x => { const on = x === b; x.setAttribute('aria-checked', on); x.tabIndex = on ? 0 : -1; }); if (focus) b.focus(); onChange(b); };
+    btns.forEach((b, i) => {
+      b.addEventListener('click', () => { if (b.getAttribute('aria-checked') !== 'true') select(b); });
+      b.addEventListener('keydown', e => { let j = null; if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % btns.length; if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + btns.length) % btns.length; if (j !== null) { e.preventDefault(); select(btns[j], true); } });
+    });
+    return { set: v => { const b = btns.find(x => x.dataset.v === v); if (b && b.getAttribute('aria-checked') !== 'true') select(b); } };
+  }
+  const form = $('#lead-form');
+  let mode = 'web';
+  const rules = {
+    site: v => !v.trim() ? 'Escribe la dirección de tu página, o elige «No tengo página».' : (parseUrl(v).error || true),
+    industry: v => !!v || 'Elige el giro que más se parece a tu negocio.',
+    city: v => v.trim().length >= 2 || 'Escribe la ciudad donde está tu negocio.',
+    social: v => { const s = v.trim(); if (!s) return true; if (/^@?[a-z0-9._]{2,30}$/i.test(s)) return true; return parseUrl(s).error ? 'Escribe tu usuario de Instagram (@tunegocio) o pega el enlace de Google Maps.' : true; },
+    name: v => v.trim().length >= 2 || 'Escribe tu nombre para saber a quién contactar.',
+    biz: v => v.trim().length >= 2 || 'Escribe el nombre de tu negocio.',
+    contact: v => {
+      const s = v.trim();
+      if (!s) return 'Déjanos un WhatsApp o un correo para enviarte la propuesta.';
+      if (s.includes('@')) return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s) || 'Revisa el correo: debe verse como nombre@dominio.com.';
+      const d = s.replace(/[^\d]/g, '');
+      return (/^[+\d\s().-]+$/.test(s) && d.length >= 8 && d.length <= 15) || 'Revisa el número. Escríbelo con lada, por ejemplo 33 1234 5678';
+    }
+  };
+  const fldOf = n => $(`#lead-form [data-f="${n}"]`), inputOf = n => $('input,select', fldOf(n));
+  const activeFields = () => Object.keys(rules).filter(n => !fldOf(n).closest('[hidden]'));
+  const clearFld = n => { const f = fldOf(n); f.classList.remove('invalid', 'valid'); $('.err', f).hidden = true; inputOf(n).removeAttribute('aria-invalid'); };
+  function check(name, show = true) {
+    const fld = fldOf(name), input = inputOf(name), err = $('.err', fld), res = rules[name](input.value), ok = res === true;
+    if (show) { fld.classList.toggle('invalid', !ok); fld.classList.toggle('valid', ok && !!input.value.trim()); input.setAttribute('aria-invalid', !ok); err.hidden = ok; err.textContent = ok ? '' : res; }
+    return ok;
+  }
+  Object.keys(rules).forEach(n => {
+    const input = inputOf(n);
+    input.addEventListener('blur', () => { if (input.value.trim() || input.dataset.touched) check(n); input.dataset.touched = 1; });
+    input.addEventListener('input', () => { if (fldOf(n).classList.contains('invalid')) check(n); });
+    if (input.tagName === 'SELECT') input.addEventListener('change', () => check(n));
+  });
+  const setMode = v => { mode = v; $$('[data-mode]', form).forEach(el => el.hidden = el.dataset.mode !== v); ['site', 'industry', 'city', 'social'].forEach(clearFld); };
+  const modeGroup = radiogroup($('#seg-mode'), b => setMode(b.dataset.v));
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const bad = activeFields().filter(n => !check(n));
+    if (bad.length) { inputOf(bad[0]).focus(); return; }
+    if (window.CeibaPrefs && !form._skipQuiz) {
+      form._quiz = window.CeibaPrefs.ask(form, prefs => { form._prefs = prefs; form._skipQuiz = true; form._quiz.close(); form.requestSubmit(); }, { fields: $('#lead-fields') });
+      return;
+    }
+    const v = id => $(id).value.trim();
+    const btn = $('#lead-btn'), ferr = $('#lead-err'), label = btn.firstChild.textContent;
+    btn.disabled = true; btn.firstChild.textContent = 'Enviando… '; ferr.hidden = true;
+    try {
+      const res = await fetch('/api/lead', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({
+        source: 'home', mode,
+        site: v('#f-site'), industry: v('#f-industry'), city: v('#f-city'), social: v('#f-social'),
+        name: v('#f-name'), biz: v('#f-biz'), contact: v('#f-contact'), company_url: v('#f-company-url'), preferences: form._prefs || null,
+        utm: Object.fromEntries([...new URLSearchParams(location.search)].filter(([k]) => k.startsWith('utm_'))),
+      }) });
+      const d = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(d.error || '');
+      const rowsS = mode === 'web' ? [['Página', parseUrl(v('#f-site')).host]] : [['Página', 'No tiene'], ['Giro', v('#f-industry')], ['Ciudad', v('#f-city')], ['Perfil', v('#f-social') || 'No tiene']];
+      rowsS.push(['Nombre', v('#f-name')], ['Negocio', v('#f-biz')], ['Contacto', v('#f-contact')]);
+      $('#lead-summary').innerHTML = rowsS.map(([k, val]) => `<dt>${k}</dt><dd>${esc(val)}</dd>`).join('');
+      const first = v('#f-name').split(/\s+/)[0];
+      $('#lead-when').innerHTML = d.dueDay ? `${esc(first)}, te mandamos tu propuesta <span>${esc(d.dueDay)}</span>, ${esc(d.dueTime.replace(/\.$/, ''))}.` : '';
+      $('#lead-how').textContent = d.emailed ? 'Te enviamos un correo de confirmación. El enlace a tu propuesta llega a ese mismo correo.' : d.channel === 'email' ? 'Te mandamos el enlace a tu propuesta al correo que nos dejaste.' : 'Te mandamos el enlace a tu propuesta por WhatsApp, al número que nos dejaste.';
+      $('#lead-fields').hidden = true; const ok = $('#lead-success'); ok.hidden = false; ok.focus();
+    } catch (err) {
+      ferr.textContent = err.message || 'No pudimos enviar tu solicitud. Revisa tu conexión e intenta de nuevo.'; ferr.hidden = false;
+    } finally { btn.disabled = false; btn.firstChild.textContent = label; }
+  });
+  $('#lead-reset').addEventListener('click', () => { $('#lead-success').hidden = true; $('#lead-fields').hidden = false; inputOf(mode === 'web' ? 'site' : 'industry').focus(); });
+  $('#no-web').addEventListener('click', e => { e.preventDefault(); modeGroup.set('noweb'); $('#diagnostico').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); setTimeout(() => $('#f-industry').focus({ preventScroll: true }), reduce ? 0 : 650); });
+})();
+</script>
+<script src="/assets/prefs.js" defer></script>
+</body>
+</html>
