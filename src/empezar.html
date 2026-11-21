@@ -43,6 +43,31 @@ button{font:inherit;color:inherit;cursor:pointer}
 .typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
 @keyframes t-dot{50%{opacity:.25;transform:translateY(-2px)}}
 @keyframes m-in{from{opacity:0;transform:translateY(8px)}}
+/* ---- piezas de IA ----
+   «Pensando»: texto con brillo que pasa, en lugar de los tres puntos.
+   Texto que se escribe: cada palabra entra con un desfase corto (tope ~0.6 s por mensaje).
+   Pasos: lo que el asistente hace en la página, con su estado (en curso → listo).
+   Respuestas sugeridas: entran escalonadas. */
+.m.think{align-self:flex-start;display:inline-flex;align-items:center;gap:.55rem;padding:.7rem .95rem;font:500 .85rem var(--fm)}
+.m.think .orb{width:.7rem;height:.7rem;border-radius:50%;background:var(--lime);animation:orb 1.6s ease-in-out infinite}
+@keyframes orb{50%{transform:scale(.6);opacity:.55}}
+.shim{background:linear-gradient(90deg,var(--mist) 0%,var(--mist) 40%,var(--white) 50%,var(--mist) 60%,var(--mist) 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shim 1.8s linear infinite}
+@keyframes shim{from{background-position:100% 0}to{background-position:-150% 0}}
+.w{display:inline-block;animation:w-in .32s var(--enter) both;animation-delay:calc(var(--i) * 22ms)}
+@keyframes w-in{from{opacity:0;transform:translateY(.25em)}}
+.m.steps{align-self:flex-start;display:grid;gap:.5rem;min-width:min(17rem,88%)}
+.m.steps small{font:500 .72rem var(--fm);color:var(--mist)}
+.m.steps ul{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
+.m.steps li{display:flex;align-items:center;gap:.55rem;font-size:.9rem;color:var(--mist);opacity:.45;transition:opacity .25s,color .25s}
+.m.steps li.run,.m.steps li.ok{opacity:1}
+.m.steps li.ok{color:var(--white)}
+.m.steps li i{flex:none;width:1rem;height:1rem;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--hair);display:grid;place-items:center}
+.m.steps li.run i{box-shadow:inset 0 0 0 1.5px var(--lime);-webkit-mask:conic-gradient(#000 0 75%,transparent 0);mask:conic-gradient(#000 0 75%,transparent 0);animation:spin .8s linear infinite}
+.m.steps li.ok i{background:var(--lime);box-shadow:none;color:var(--night)}
+.m.steps li.ok i svg{width:.7rem;height:.7rem;animation:pop .25s var(--enter) both}
+@keyframes spin{to{transform:rotate(1turn)}}
+@keyframes pop{from{transform:scale(.4);opacity:0}}
+.chips .chip,.styles .sty{animation:m-in .3s var(--enter) both;animation-delay:calc(var(--i,0) * 40ms)}
 /* lo que contesta el cliente */
 .e-ask{padding:1rem 1.4rem 1.3rem;border-top:1px solid var(--hair);display:grid;gap:.7rem;background:color-mix(in srgb,var(--night) 94%,var(--cobalt))}
 .e-ask[hidden]{display:none}
@@ -59,7 +84,10 @@ textarea.inp{height:auto;min-height:5rem;padding:.75rem 1rem;resize:none;line-he
 .inp.bad{border-color:#FF9A8A}
 .go{flex:none;width:3rem;height:3rem;border-radius:.9rem;border:0;background:var(--lime);color:var(--night);display:grid;place-items:center}
 .go svg{width:1.2rem;height:1.2rem}
+.go{transition:opacity .2s,transform .15s var(--enter)}
+.go:active:not(:disabled){transform:scale(.94)}
 .go:disabled{opacity:.5;cursor:default}
+.row:has(.inp:placeholder-shown) .go{opacity:.5}
 .err{color:#FFB3A6;font-size:.85rem;margin:0}
 .styles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem}
 .sty{display:grid;gap:.2rem;text-align:left;padding:.75rem .85rem;border-radius:.9rem;border:1px solid var(--hair);background:rgba(255,255,255,.03);transition:border-color .2s,background-color .2s}
@@ -144,7 +172,8 @@ const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAl
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const wait = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const ICON = { send: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>' };
+const ICON = { send: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg>' };
 
 /* ---------- giros: modelo, textos y metas ---------- */
 const DEMOS = { clinica, restaurante, hotel, inmobiliaria, despacho, otro: despacho };
@@ -275,10 +304,44 @@ addEventListener('resize', sizeFrame);
 /* ---------- conversación ---------- */
 const log = $('#log'), ask = $('#ask');
 const scroll = () => { log.scrollTop = log.scrollHeight; };
-async function bot(html, cls = '') {
-  const t = document.createElement('div'); t.className = 'm bot typing'; t.innerHTML = '<i></i><i></i><i></i>'; log.appendChild(t); scroll();
+// «Pensando…» con brillo; la etiqueta puede decir qué está haciendo.
+function think(label = 'Pensando') {
+  const t = document.createElement('div'); t.className = 'm bot think'; t.setAttribute('aria-label', label);
+  t.innerHTML = `<span class="orb" aria-hidden="true"></span><span class="shim">${esc(label)}…</span>`; log.appendChild(t); scroll();
+  return t;
+}
+// Parte el texto del mensaje en palabras para que entren una tras otra (sin tocar las etiquetas).
+function reveal(el) {
+  if (reduce) return;
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  let i = 0; const total = nodes.reduce((n, x) => n + x.nodeValue.split(/\s+/).filter(Boolean).length, 0), step = Math.min(1, 28 / Math.max(total, 1));
+  for (const n of nodes) {
+    const frag = document.createDocumentFragment();
+    for (const part of n.nodeValue.split(/(\s+)/)) {
+      if (!part) continue;
+      if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); continue; }
+      const s = document.createElement('span'); s.className = 'w'; s.style.setProperty('--i', (i++ * step).toFixed(2)); s.textContent = part; frag.appendChild(s);
+    }
+    n.replaceWith(frag);
+  }
+}
+async function bot(html, cls = '', label) {
+  const t = think(label);
   await wait(Math.min(1100, 380 + html.length * 6)); t.remove();
-  const m = document.createElement('div'); m.className = 'm bot ' + cls; m.innerHTML = html; log.appendChild(m); scroll();
+  const m = document.createElement('div'); m.className = 'm bot ' + cls; m.innerHTML = html; reveal(m); log.appendChild(m); scroll();
+}
+// Lo que el asistente va haciendo en la página: cada paso pasa de «en curso» a «listo».
+async function steps(title, items, onStep = () => {}) {
+  const m = document.createElement('div'); m.className = 'm bot steps';
+  m.innerHTML = `<small>${esc(title)}</small><ul>${items.map(x => `<li><i aria-hidden="true"></i><span>${esc(x)}</span></li>`).join('')}</ul>`;
+  log.appendChild(m); scroll();
+  const lis = [...m.querySelectorAll('li')];
+  for (let k = 0; k < lis.length; k++) {
+    lis[k].className = 'run'; await wait(520);
+    onStep(k); lis[k].className = 'ok'; lis[k].querySelector('i').innerHTML = ICON.check;
+  }
+  await wait(250);
 }
 function me(text) { const m = document.createElement('div'); m.className = 'm me'; m.textContent = text; log.appendChild(m); scroll(); }
 function setStep(i) { S.step = i; save(); $$('#prog li').forEach((l, k) => l.classList.toggle('on', k <= i)); $('#prog-t').textContent = `Paso ${Math.min(i + 1, 5)} de 5 · ${STEPS[i]}`; }
@@ -288,7 +351,7 @@ const hide = () => { ask.hidden = true; ask.innerHTML = ''; };
 // Un campo de texto con botón de enviar. Devuelve lo que escribió (o el valor de un atajo).
 function askText({ ph = '', area = false, value = '', chips = [], validate = v => v.trim().length >= 2 || 'Escribe un poco más.', type = 'text' } = {}) {
   return new Promise(res => {
-    show(`${chips.length ? `<div class="chips">${chips.map(([v, l, cls]) => `<button type="button" class="chip ${cls || ''}" data-v="${esc(v)}">${esc(l)}</button>`).join('')}</div>` : ''}
+    show(`${chips.length ? `<div class="chips">${chips.map(([v, l, cls], i) => `<button type="button" class="chip ${cls || ''}" style="--i:${i}" data-v="${esc(v)}">${esc(l)}</button>`).join('')}</div>` : ''}
       <form class="row" id="f">${area ? `<textarea class="inp" id="t" rows="3" placeholder="${esc(ph)}">${esc(value)}</textarea>` : `<input class="inp" id="t" type="${type}" autocomplete="off" placeholder="${esc(ph)}" value="${esc(value)}">`}<button class="go" aria-label="Enviar">${ICON.send}</button></form><p class="err" id="er" hidden></p>`);
     const t = $('#t'), er = $('#er');
     if (area) t.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); $('#f').requestSubmit(); } });
@@ -299,7 +362,7 @@ function askText({ ph = '', area = false, value = '', chips = [], validate = v =
 }
 function askChoice(opts, { multi = false, pre = [] } = {}) {
   return new Promise(res => {
-    show(`<div class="chips">${opts.map(([v, l]) => `<button type="button" class="chip" data-v="${esc(v)}" aria-pressed="${pre.includes(v)}">${esc(l)}</button>`).join('')}</div>${multi ? '<button class="n-btn next" type="button" id="nx">Siguiente</button>' : ''}`);
+    show(`<div class="chips">${opts.map(([v, l], i) => `<button type="button" class="chip" style="--i:${i}" data-v="${esc(v)}" aria-pressed="${pre.includes(v)}">${esc(l)}</button>`).join('')}</div>${multi ? '<button class="n-btn next" type="button" id="nx">Siguiente</button>' : ''}`);
     ask.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => {
       if (!multi) { hide(); return res([b.dataset.v, b.textContent]); }
       b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true');
@@ -311,7 +374,7 @@ function askStyle() {
   return new Promise(res => {
     const g = GIROS[S.kind] || GIROS.otro, keys = Object.keys(STYLES).filter(k => k !== 'fonda' || S.kind === 'restaurante');
     S.style = S.style || g.style;
-    show(`<div class="styles">${keys.map(k => `<button type="button" class="sty" data-v="${k}" aria-pressed="${S.style === k}"><i>${STYLES[k].c.map(c => `<em style="background:${c}"></em>`).join('')}</i><b>${STYLES[k].b}</b><span>${STYLES[k].t}</span></button>`).join('')}</div>
+    show(`<div class="styles">${keys.map((k, i) => `<button type="button" class="sty" style="--i:${i}" data-v="${k}" aria-pressed="${S.style === k}"><i>${STYLES[k].c.map(c => `<em style="background:${c}"></em>`).join('')}</i><b>${STYLES[k].b}</b><span>${STYLES[k].t}</span></button>`).join('')}</div>
       <div class="sw"><small>Color principal</small>${COLORS.map(c => `<button type="button" style="background:${c}" data-c="${c}" aria-label="Color ${c}" aria-pressed="${S.color === c}"></button>`).join('')}</div>
       <button class="n-btn next" type="button" id="nx">Me gusta así</button>`);
     ask.querySelectorAll('.sty').forEach(b => b.addEventListener('click', () => { S.style = b.dataset.v; ask.querySelectorAll('.sty').forEach(x => x.setAttribute('aria-pressed', x === b)); save(); render(); }));
@@ -345,8 +408,10 @@ async function run() {
     await bot(`¿A qué se dedica <b>${esc(S.name)}</b>?`);
     const [k, label] = await askChoice(Object.entries(GIROS).map(([v, g]) => [v, g.label])); S.kind = k; me(label);
   }
-  save(); render();
-  await bot(`<small>Tu modelo</small>${GIROS[S.kind].model}`, 'model');
+  save();
+  { const g = GIROS[S.kind]; let shown = false;
+    await steps('Armando tu página', [`Plantilla para ${g.short}`, `${S.name} en el encabezado`, 'Secciones que más usa tu giro'], k => { if (!shown) { render(); shown = true; } }); }
+  await bot(`<small>Tu modelo</small>${GIROS[S.kind].model}`, 'model', 'Eligiendo tu modelo');
 
   // 3. Página, Instagram o nada
   if (!S.presence) {
@@ -374,7 +439,10 @@ async function run() {
   await bot(`¿Cuáles son tus ${GIROS[S.kind].items} principales? Sepáralos con comas.`);
   const rs = await askText({ area: true, value: S.services, ph: 'Ej.: Pastor, suadero, gringas, aguas frescas', chips: [['skip', 'Lo vemos después', 'ghost']], validate: v => v.trim().length >= 3 || 'Escribe al menos uno, o elige «Lo vemos después».' });
   if (!rs.chip) { S.services = rs.text; me(rs.text); } else me(rs.label);
-  save(); render(rs.chip ? 'top' : 'items');
+  save();
+  if (rs.chip) render('top');
+  else { const n = S.services.split(/[,\n;]+/).map(x => x.trim()).filter(Boolean).slice(0, 8).length;
+    await steps('Actualizando tu página', [`${n} ${n === 1 ? 'elemento' : GIROS[S.kind].items.split(' o ')[0]} en su sección`, 'Textos de ejemplo mientras tanto'], k => { if (k === 0) render('items'); }); }
 
   // 7. Estilo
   setStep(3);
@@ -383,7 +451,7 @@ async function run() {
 
   // 8. A dónde mandarla
   setStep(4);
-  await bot(`Así va tu página. Ahora la terminamos con calma: textos completos, tus fotos y todo revisado por una persona. <b>¿A dónde te mandamos la versión completa?</b>`);
+  await bot(`Así va tu página. Ahora la terminamos con calma: textos completos, tus fotos y todo revisado por una persona. <b>¿A dónde te mandamos la versión completa?</b>`, '', 'Revisando tu página');
   await contact();
 }
 
