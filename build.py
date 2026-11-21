@@ -116,6 +116,7 @@ def site_chrome(html, active, cta="/diagnostico", own_menu=False):
 # Rutas limpias y archivos con ruta absoluta (las páginas viven en /, /webs, /webs/clinicas, /ia…)
 def linkfix(html):
     html = _re.sub(r'(["\'(])(img/|assets/|favicon|apple-touch-icon)', r'\1/\2', html)
+    html = html.replace('rel="/apple-touch-icon"', 'rel="apple-touch-icon"')  # el rel no es una ruta
     for a, b in [('"webs-clinicas.html"', '"/webs/clinicas"'), ('"propuesta-clinica-arrayan.html"', '"/p/clinica-arrayan"'),
                  ("'diagnostico.html?url='", "'/diagnostico?url='"), ('"diagnostico.html"', '"/diagnostico"'), ('href="index.html"', 'href="/"')]:
         html = html.replace(a, b)
@@ -181,7 +182,7 @@ import json
 # Propuesta privada: plantilla con marcadores {{P_...}} que llena lib/render-proposal.js
 import re
 proposal = fill("propuesta.html", {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBOLS}}"], "{{CMP_JS}}": cmp_js, "{{HOME}}": "/"})
-absolute = lambda t: re.sub(r'(["\'(])(img/|favicon|apple-touch-icon)', r'\1/\2', t)
+absolute = lambda t: re.sub(r'(["\'(])(img/|favicon|apple-touch-icon)', r'\1/\2', t).replace('rel="/apple-touch-icon"', 'rel="apple-touch-icon"')
 (ROOT / "lib" / "generated" / "shared.js").write_text(
     "// Generado por build.py a partir de src/. No editar.\n"
     "export const SYMBOLS = " + json.dumps(shared["{{SYMBOLS}}"], ensure_ascii=False) + ";\n"
