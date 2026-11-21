@@ -43,7 +43,7 @@
 @keyframes gl-in{from{opacity:0;letter-spacing:.3em}}
 /* intro con la doctora */
 .gl-intro{display:grid;grid-template-columns:1.4fr .6fr;gap:max(2rem,5cqi);align-items:center;background:var(--fog);padding:max(3rem,5cqi) var(--pad) max(3rem,5cqi) calc(var(--pad) + 2cqi)}
-.gl-intro>div{display:grid;gap:1.2rem}
+.gl-intro>div:not([class*="-img"]):not([class*="-map"]){display:grid;gap:1.2rem}
 .gl-intro h2{font-size:clamp(1.3rem,2cqi,1.8rem);font-weight:400}
 .gl-intro p{color:var(--mute)}
 .gl-doc{margin:0;position:relative}
@@ -63,7 +63,7 @@
 /* opiniones */
 .gl-revs{padding:max(3rem,5cqi) var(--pad);display:grid;justify-items:center;gap:2rem;text-align:left}
 .gl-revs>h2{font-size:1.6rem;letter-spacing:.06em}
-.gl-revs>div{display:grid;grid-template-columns:repeat(3,1fr);gap:2.4rem;max-width:68rem}
+.gl-revs>div:not([class*="-img"]):not([class*="-map"]){display:grid;grid-template-columns:repeat(3,1fr);gap:2.4rem;max-width:68rem}
 .gl-revs figure{margin:0;display:grid;gap:.8rem;align-content:start}
 .gl-revs figure span{display:flex;gap:2px;color:var(--a)}
 .gl-revs blockquote{margin:0;font-size:.86rem;color:var(--mute)}
@@ -109,13 +109,13 @@
 .gl-foot{display:grid;justify-items:center;gap:.6rem;text-align:center;padding:2.4rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom))}
 .gl-foot>b{font:500 1.6rem/1 var(--fh);letter-spacing:.06em;color:var(--a)}
 .gl-foot .gl-phone{color:var(--black)!important}
-.gl-foot>div{display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem 1.2rem;font-size:.72rem;color:var(--mute)}
+.gl-foot>div:not([class*="-img"]):not([class*="-map"]){display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem 1.2rem;font-size:.72rem;color:var(--mute)}
 .gl-sticky{display:none}
 @container (max-width:980px){
   .gl-bar-r{display:none}.gl-bar{grid-template-columns:1fr auto}
   .gl-nav{gap:1.2rem;overflow-x:auto;justify-content:flex-start}
   .gl-seals ul{grid-template-columns:1fr 1fr}
-  .gl-revs>div{grid-template-columns:1fr}
+  .gl-revs>div:not([class*="-img"]):not([class*="-map"]){grid-template-columns:1fr}
 }
 @container (max-width:640px){
   .gl-bar{grid-template-columns:1fr;justify-items:center}

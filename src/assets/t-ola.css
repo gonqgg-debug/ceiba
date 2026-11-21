@@ -61,7 +61,7 @@
 /* opiniones */
 .ol-revs{padding:0 var(--pad) max(3rem,5cqi);text-align:center}
 .ol-revs h2,.ol-faq h2{font-size:clamp(1.5rem,2.4cqi,2rem);font-weight:600;color:var(--purple);margin-bottom:1.6rem}
-.ol-revs>div{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;max-width:66rem;margin:0 auto}
+.ol-revs>div:not([class*="-img"]):not([class*="-map"]){display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;max-width:66rem;margin:0 auto}
 .ol-revs blockquote{margin:0;padding:1.4rem;background:color-mix(in srgb,var(--green) 25%,#fff);border-radius:1.2rem 1.2rem 1.2rem 0;display:grid;gap:.8rem;text-align:left;font-size:.9em}
 .ol-revs cite{font-style:normal;font-weight:800;color:var(--purple)}
 .ol-note{font-size:.76em;color:var(--mute);margin-top:1rem}
@@ -87,18 +87,18 @@
 .ol-foot{border-top:3px solid var(--purple);padding:2rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom));display:grid;justify-items:center;gap:1rem;text-align:center}
 .ol-foot nav{display:flex;flex-wrap:wrap;justify-content:center;gap:1.2rem;font:700 .7em/1 var(--fh);letter-spacing:.08em;text-transform:uppercase}
 .ol-foot nav a{text-decoration:none}
-.ol-foot>div{display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem 1.2rem;font-size:.74rem;color:var(--mute)}
+.ol-foot>div:not([class*="-img"]):not([class*="-map"]){display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem 1.2rem;font-size:.74rem;color:var(--mute)}
 .ol-sticky{display:none}
 @container (max-width:980px){
   .ol-top nav{display:none}.ol-tel{margin-left:auto}
-  .ol-icons ul,.ol-band ul,.ol-revs>div{grid-template-columns:1fr 1fr}
+  .ol-icons ul,.ol-band ul,.ol-revs>div:not([class*="-img"]):not([class*="-map"]){grid-template-columns:1fr 1fr}
 }
 @container (max-width:640px){
   .ol-hero{grid-template-columns:1fr;min-height:0}
   .ol-hero-img{min-height:16rem;mask-image:none}
   .ol-hero-copy{padding:1.6rem var(--pad) 6.5rem}
   .ol-hero>.ol-book{bottom:4rem}
-  .ol-icons ul,.ol-band ul,.ol-revs>div,.ol-hours{grid-template-columns:1fr}
+  .ol-icons ul,.ol-band ul,.ol-revs>div:not([class*="-img"]),.ol-hours{grid-template-columns:1fr}
   .ol-sticky{display:flex;gap:.5rem;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:#fffffff2;border-top:1px solid var(--line)}
   .ol-sticky>*{flex:1;justify-content:center}
 }

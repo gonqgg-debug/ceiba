@@ -96,7 +96,7 @@ a.cp-chip:hover{background:color-mix(in srgb,var(--lime) 60%,var(--soft));transf
 /* preguntas */
 .cp-faq{padding:max(3.5rem,7cqi) var(--pad) 0;display:grid;grid-template-columns:minmax(0,1fr);background:#EEF3EF}
 .cp-faq h2{text-align:center}
-.cp-faq>div{max-width:46rem;width:100%;justify-self:center;margin-top:2rem;display:grid;gap:.5rem}
+.cp-faq>div:not([class*="-img"]):not([class*="-map"]){max-width:46rem;width:100%;justify-self:center;margin-top:2rem;display:grid;gap:.5rem}
 .cp-faq details{background:#fff;border-radius:1.2rem}
 .cp-faq summary{list-style:none;cursor:pointer;padding:1rem 1.3rem;font-weight:600;display:flex;justify-content:space-between;gap:1rem}
 .cp-faq summary::-webkit-details-marker{display:none}

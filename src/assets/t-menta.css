@@ -70,7 +70,7 @@
 .mt-team b{font-weight:600}.mt-team span,.mt-team small{font-size:.82em;color:var(--mute)}
 /* opiniones */
 .mt-revs{padding:max(2.5rem,5cqi) var(--pad);text-align:center}
-.mt-revs>div{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2rem;text-align:left}
+.mt-revs>div:not([class*="-img"]):not([class*="-map"]){display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2rem;text-align:left}
 .mt-revs figure{margin:0;padding:1.4rem;border-radius:1.4rem;border:2px solid var(--g2);display:flex;flex-direction:column;gap:1rem;justify-content:space-between}
 .mt-revs blockquote{margin:0;font-size:.95em}
 .mt-revs figcaption{display:grid;grid-template-columns:auto 1fr;gap:0 .6rem;align-items:center;font-weight:500}
@@ -87,20 +87,20 @@
 .mt-faq details p{padding:0 1.2rem 1rem;color:var(--mute)}
 /* visita */
 .mt-visit{margin:0 var(--pad);border-radius:2rem;background:var(--g3);color:#fff;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
-.mt-visit>div{padding:max(2rem,4cqi);display:grid;gap:.8rem;align-content:center}
+.mt-visit>div:not([class*="-img"]):not([class*="-map"]){padding:max(2rem,4cqi);display:grid;gap:.8rem;align-content:center}
 .mt-visit h2{font-size:clamp(2rem,3.4cqi,3rem)}
 .mt-visit dl{margin:0;display:grid;gap:.3rem;font-size:.9em}
 .mt-visit dl div{display:flex;justify-content:space-between;gap:1rem;border-bottom:1px solid #ffffff2a;padding-bottom:.3rem}.mt-visit dd{margin:0}
 .mt-visit-img{min-height:20rem;background:center/cover no-repeat}
 .mt-foot{padding:2rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom));display:grid;gap:.8rem}
-.mt-foot>div{display:flex;flex-wrap:wrap;gap:.3rem 1.3rem;font-size:.74rem;color:var(--mute)}
+.mt-foot>div:not([class*="-img"]):not([class*="-map"]){display:flex;flex-wrap:wrap;gap:.3rem 1.3rem;font-size:.74rem;color:var(--mute)}
 .mt-sticky{display:none}
 @container (max-width:980px){
   .mt-top nav{display:none}.mt-top .mt-btn{margin-left:auto}
   .mt-trust{grid-template-columns:1fr 1fr}
   .mt-trat ul{grid-template-columns:repeat(3,1fr)}
   .mt-team{grid-template-columns:1fr}
-  .mt-revs>div{grid-template-columns:1fr}
+  .mt-revs>div:not([class*="-img"]):not([class*="-map"]){grid-template-columns:1fr}
 }
 @container (max-width:640px){
   .mt-hero{grid-template-columns:1fr;margin:0 .8rem;border-radius:1.6rem}

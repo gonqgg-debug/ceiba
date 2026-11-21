@@ -50,7 +50,7 @@
 .es2-band--2{background:color-mix(in srgb,var(--sky) 80%,var(--lilac))}
 /* bienvenida */
 .es2-intro{display:grid;grid-template-columns:1fr 1fr;gap:max(2rem,4cqi);align-items:center;padding:max(3rem,5cqi) var(--pad)}
-.es2-intro>div{display:grid;gap:1rem;justify-items:center;text-align:center}
+.es2-intro>div:not([class*="-img"]):not([class*="-map"]){display:grid;gap:1rem;justify-items:center;text-align:center}
 .es2-intro h2{color:var(--lilac);font-size:clamp(1.8rem,3cqi,2.6rem)}
 .es2-intro p{color:var(--mute);text-align:left}
 .es2-intro-img{aspect-ratio:4/3;background:center/cover no-repeat;border-radius:.3rem}
@@ -61,7 +61,7 @@
 .es2-trat li{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start}
 .es2-ico{width:3rem;height:3rem;border-radius:50%;display:grid;place-items:center;border:2px solid var(--lilac);color:var(--lilac);font-size:1.3rem;transition:transform .3s var(--ease)}
 .es2-trat li:hover .es2-ico{transform:rotate(-12deg) scale(1.08)}
-.es2-trat li>div{display:grid;gap:.4rem;justify-items:start}
+.es2-trat li>div:not([class*="-img"]):not([class*="-map"]){display:grid;gap:.4rem;justify-items:start}
 .es2-trat h3{font:400 1.35rem/1.2 var(--script);color:var(--lilac)}
 .es2-trat p{font-size:.9em;color:var(--mute)}
 .es2-price{font-weight:700;color:var(--ink)!important}

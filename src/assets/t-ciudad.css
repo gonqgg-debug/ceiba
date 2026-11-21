@@ -105,7 +105,7 @@
 .cd-faq details[open] summary::after{transform:rotate(45deg)}
 .cd-faq details p{color:var(--mute);padding-bottom:1rem}
 .cd-foot{margin-top:max(3.5rem,6cqi);background:var(--navy);color:#fff;padding:2rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom));display:grid;gap:1rem}
-.cd-foot>div{display:flex;flex-wrap:wrap;gap:.3rem 1.4rem;font-size:.76em;opacity:.75}
+.cd-foot>div:not([class*="-img"]):not([class*="-map"]){display:flex;flex-wrap:wrap;gap:.3rem 1.4rem;font-size:.76em;opacity:.75}
 .cd-sticky{display:none}
 @container (max-width:980px){
   .cd-top nav{display:none}.cd-top .cd-pill{margin-left:auto}

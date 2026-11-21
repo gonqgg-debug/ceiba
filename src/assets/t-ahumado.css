@@ -16,7 +16,7 @@
 .ah a:focus-visible,.ah summary:focus-visible,.ah button:focus-visible{outline:2px solid var(--a);outline-offset:3px}
 /* barra que se encoge */
 .ah-top{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem var(--pad);color:#fff;margin-bottom:-4.4rem;transition:background-color .3s,padding .3s var(--ease)}
-.ah-top>div{display:flex;gap:.5rem}
+.ah-top>div:not([class*="-img"]):not([class*="-map"]){display:flex;gap:.5rem}
 .ah-mini{font:900 1.3rem/1 var(--fs);letter-spacing:.04em;text-transform:uppercase;transition:font-size .3s var(--ease)}
 .ah.t-scrolled .ah-top{background:var(--black);padding:.55rem var(--pad)}
 .ah.t-scrolled .ah-top .ah-mini{font-size:1rem}
@@ -78,7 +78,7 @@
 /* visita */
 .ah-visit{display:grid;grid-template-columns:1fr 1fr;background:var(--black);color:#fff}
 .ah-visit-img{min-height:26rem;background:center/cover no-repeat}
-.ah-visit>div{padding:max(2.5rem,5cqi) var(--pad);display:grid;gap:.9rem;align-content:center;justify-items:start}
+.ah-visit>div:not([class*="-img"]):not([class*="-map"]){padding:max(2.5rem,5cqi) var(--pad);display:grid;gap:.9rem;align-content:center;justify-items:start}
 .ah-visit h2{font-size:clamp(2rem,3.6cqi,3.2rem)}
 .ah-visit .ah-sub{text-align:left;color:#ffffffaa}
 .ah-visit dl{margin:0;display:grid;gap:.25rem;width:100%;max-width:24rem;font-size:.9em}
@@ -88,14 +88,14 @@
 .ah-form input[name=n]{grid-column:1/-1}.ah-form button{grid-column:1/-1;min-height:3rem}
 .ah-foot{display:flex;flex-wrap:wrap;align-items:center;gap:1rem 2rem;padding:1.6rem var(--pad) calc(1.4rem + env(safe-area-inset-bottom));background:var(--black);color:#fff;border-top:1px solid #ffffff1a}
 .ah-foot a{text-decoration:none}
-.ah-foot>div{display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;font-size:.74rem;opacity:.65;width:100%}
+.ah-foot>div:not([class*="-img"]):not([class*="-map"]){display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;font-size:.74rem;opacity:.65;width:100%}
 .ah-sticky{display:none}
 @container (max-width:980px){
   .ah-black ul{grid-template-columns:1fr 1fr}
   .ah-revs{grid-template-columns:1fr}
 }
 @container (max-width:640px){
-  .ah-top>div{display:none}
+  .ah-top>div:not([class*="-img"]):not([class*="-map"]){display:none}
   .ah-hero{min-height:30rem}
   .ah-name{font-size:4.2rem}
   .ah-block,.ah-visit,.ah-cols{grid-template-columns:1fr}

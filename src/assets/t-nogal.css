@@ -74,7 +74,7 @@
 .ng-doc-img{position:absolute;left:4%;bottom:0;width:62%;height:78%;background:center top/cover no-repeat;outline:10px solid var(--beige)}
 /* opiniones */
 .ng-revs{padding:max(3.5rem,6cqi) var(--pad);display:grid;justify-items:center;gap:1rem;text-align:center}
-.ng-revs>div{display:grid;grid-template-columns:repeat(3,1fr);gap:2.4rem;margin-top:1.6rem;max-width:66rem}
+.ng-revs>div:not([class*="-img"]):not([class*="-map"]){display:grid;grid-template-columns:repeat(3,1fr);gap:2.4rem;margin-top:1.6rem;max-width:66rem}
 .ng-revs figure{margin:0;display:grid;gap:.7rem;justify-items:center}
 .ng-revs figure span{display:flex;color:var(--copper)}
 .ng-revs blockquote{margin:0;font-size:.9em;color:var(--mute)}
@@ -96,11 +96,11 @@
 .ng-help li b{font:500 1.15rem/1.2 var(--fh);margin-bottom:.3rem}
 .ng-help li a,.ng-help li span{color:var(--copper);text-decoration:none;font-weight:700;letter-spacing:.02em}
 .ng-foot{background:var(--choco);color:#fff;padding:2rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom));display:grid;gap:1.2rem}
-.ng-foot>div{display:flex;flex-wrap:wrap;gap:.3rem 1.4rem;font-size:.76em;opacity:.75}
+.ng-foot>div:not([class*="-img"]):not([class*="-map"]){display:flex;flex-wrap:wrap;gap:.3rem 1.4rem;font-size:.76em;opacity:.75}
 .ng-sticky{display:none}
 @container (max-width:980px){
   .ng-top nav{display:none}.ng-phone{margin-left:auto}
-  .ng-revs>div{grid-template-columns:1fr}
+  .ng-revs>div:not([class*="-img"]):not([class*="-map"]){grid-template-columns:1fr}
   .ng-help ul{grid-template-columns:1fr 1fr}
 }
 @container (max-width:640px){

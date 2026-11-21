@@ -61,7 +61,7 @@
 .rv-meta{font:500 .78em/1 var(--fb);letter-spacing:.04em}
 /* perfil */
 .rv-profile{display:grid;grid-template-columns:1.2fr .8fr;gap:max(2rem,4cqi);padding:max(2.5rem,4cqi) var(--pad);border-bottom:1px solid var(--rule)}
-.rv-profile>div{display:grid;gap:1rem;align-content:start}
+.rv-profile>div:not([class*="-img"]):not([class*="-map"]){display:grid;gap:1rem;align-content:start}
 .rv-profile h2{font-size:clamp(2.4rem,4.4cqi,4.2rem)}
 .rv-profile ul{margin:.6rem 0 0;padding:0;list-style:none;display:grid;gap:.3rem;font-size:.92em;border-top:1px solid var(--hair);padding-top:.8rem}
 .rv-profile figure{margin:0;display:grid;gap:.5rem}
@@ -69,7 +69,7 @@
 .rv-profile figcaption{font:400 .72em/1.4 var(--fb);color:var(--mute)}
 /* voces */
 .rv-voices{padding:max(2.5rem,4cqi) var(--pad);border-bottom:1px solid var(--rule)}
-.rv-voices>div{display:grid;grid-template-columns:repeat(2,1fr);gap:2.4rem}
+.rv-voices>div:not([class*="-img"]):not([class*="-map"]){display:grid;grid-template-columns:repeat(2,1fr);gap:2.4rem}
 .rv-voices blockquote{margin:0;display:grid;gap:.8rem}
 .rv-voices blockquote p{font:italic 400 1.2em/1.5 var(--ft)}
 .rv-voices cite{font:500 .72em/1 var(--fb);letter-spacing:.14em;text-transform:uppercase;font-style:normal;color:var(--mute)}
@@ -85,13 +85,13 @@
 .rv-dir h3{font-size:1.4rem;margin-bottom:.4rem}
 .rv-dir-grid p{font-size:.94em}
 .rv-foot{padding:1.6rem var(--pad) calc(1.4rem + env(safe-area-inset-bottom));border-top:3px double var(--rule);text-align:center}
-.rv-foot>div{display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem 1.3rem;font:400 .72rem/1.4 var(--fb);color:var(--mute)}
+.rv-foot>div:not([class*="-img"]):not([class*="-map"]){display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem 1.3rem;font:400 .72rem/1.4 var(--fb);color:var(--mute)}
 .rv-sticky{display:none}
 @container (max-width:980px){
   .rv-cover,.rv-profile{grid-template-columns:1fr}
   .rv-cover-copy{border-left:0;padding-left:0}
   .rv-grid{grid-template-columns:1fr 1fr}
-  .rv-faq dl,.rv-voices>div{grid-template-columns:1fr}
+  .rv-faq dl,.rv-voices>div:not([class*="-img"]):not([class*="-map"]){grid-template-columns:1fr}
 }
 @container (max-width:640px){
   .rv-issue span:first-child{display:none}
