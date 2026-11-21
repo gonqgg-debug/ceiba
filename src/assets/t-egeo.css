@@ -1,0 +1,90 @@
+/* Diseño «Egeo» (lib/templates/egeo.js, raíz .cx.eg). Basado en Amaris Mykonos: azul intenso, foto
+   de mar a todo lo ancho, nombre gigante como marca de agua y tarjetas de habitación altas. */
+.cx.eg{--blue:var(--a);--deep:color-mix(in srgb,var(--a) 70%,#04122A);--sand:#F5F1EA;--ink:#14213D;--mute:#5E6B82;
+  --fh:'Playfair Display',Georgia,serif;--fb:'Manrope',ui-sans-serif,system-ui,sans-serif;--pad:max(1.25rem,6cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:400 clamp(14.5px,1.02cqi,16px)/1.65 var(--fb);background:#fff;color:var(--ink);position:relative;overflow:clip}
+.eg h1,.eg h2,.eg h3{font-family:var(--fh);font-weight:500;color:inherit;margin:0;line-height:1.12;text-wrap:balance}
+.eg :where(p){margin:0}.eg a{color:inherit}
+.eg svg{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.eg-btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.6em;padding:0 1.3em;background:var(--blue);color:#fff!important;font:600 .8em/1 var(--fb);text-decoration:none;white-space:nowrap;transition:background-color .2s}
+.eg-btn:hover{background:var(--deep)}
+.eg-btn--sm{min-height:2.3em;font-size:.74em}
+.eg-btn--line{background:#fff;color:var(--blue)!important;box-shadow:inset 0 0 0 1.5px var(--blue)}
+.eg-link{display:inline-flex;align-items:center;gap:.4em;font-weight:600;font-size:.9em;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:.15em}
+.eg-arr{transition:transform .2s var(--ease)}.eg-link:hover .eg-arr{transform:translateX(3px)}
+.eg a:focus-visible,.eg summary:focus-visible,.eg .t-stay :focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+/* hero */
+.eg-hero{position:relative;min-height:min(50cqi,42rem);color:#fff;display:grid;grid-template-rows:auto 1fr;overflow:hidden}
+.eg-hero-img{position:absolute;inset:0;background:center/cover no-repeat}
+.eg-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#00142ecc,#00142e33 60%,transparent)}
+.eg-top{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:start}
+.eg-logo{font:500 1.4rem/1 var(--fh);padding:1.2rem var(--pad)}
+.eg-menu{width:3.6rem;height:3.6rem;background:var(--blue);display:grid;place-items:center;font-size:0;text-decoration:none}
+.eg-menu::before{content:"";width:1.3rem;height:.9rem;border-block:2px solid #fff;box-shadow:inset 0 .35rem 0 -.25rem #fff}
+.eg-hero-in{position:relative;z-index:1;display:grid;gap:1.4rem;align-content:center;justify-items:start;padding:2rem var(--pad);max-width:36rem}
+.eg-hero h1{font-size:clamp(2.4rem,4.4cqi,4.2rem)}
+.eg-rate{position:absolute;right:var(--pad);bottom:1.4rem;z-index:1;display:grid;justify-items:center;background:#fff;color:var(--ink);padding:.7rem 1rem;font-size:.72em}
+.eg-rate b{font:600 1.6rem/1 var(--fh);color:var(--blue)}
+@media (prefers-reduced-motion:no-preference){.eg:not(.eg-still) .eg-hero-img{animation:eg-drift 14s ease-in-out infinite alternate}}
+@keyframes eg-drift{to{transform:scale(1.06) translateX(-1%)}}
+/* intro con marca de agua */
+.eg-intro{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:max(2rem,5cqi);align-items:center;padding:max(4rem,7cqi) var(--pad) max(6rem,10cqi)}
+.eg-intro>div:not([class*="-img"]){display:grid;gap:1.1rem;justify-items:start;position:relative;z-index:1}
+.eg-intro h2{font-size:clamp(1.6rem,2.6cqi,2.4rem);color:var(--blue)}
+.eg-intro ul{margin:0;padding-left:1.1rem;display:grid;gap:.3rem;color:var(--mute);font-size:.92em}
+.eg-intro figure{margin:0;position:relative;z-index:1}
+.eg-intro-img{aspect-ratio:4/5;background:center/cover no-repeat}
+.eg-intro figcaption{position:absolute;left:-1.6rem;bottom:2rem;background:var(--blue);color:#fff;font:500 1.15rem/1.2 var(--fh);padding:.8rem 1rem;max-width:12rem}
+.eg-water{position:absolute;right:-2%;bottom:-.1em;margin:0;font:600 clamp(5rem,18cqi,16rem)/.8 var(--fh);color:color-mix(in srgb,var(--blue) 10%,#fff);white-space:nowrap;pointer-events:none}
+.eg-sea-img{aspect-ratio:21/8;background:center/cover no-repeat}
+/* habitaciones */
+.eg-rooms{padding:max(3.5rem,6cqi) var(--pad);background:var(--deep);color:#fff;text-align:center}
+.eg-rooms>h2{font-size:clamp(2rem,3.4cqi,3rem)}
+.eg-sub{opacity:.8;margin:.6rem auto 0;max-width:36em}
+.eg-rooms>div:not([class*="-img"]){display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,14rem),1fr));gap:1rem;margin-top:2rem;text-align:left}
+.eg-rooms article{position:relative;aspect-ratio:3/4.4;display:grid;align-items:end;overflow:hidden}
+.eg-room-img{position:absolute;inset:0;background:center/cover no-repeat;transition:transform .8s var(--ease)}
+.eg-rooms article:hover .eg-room-img{transform:scale(1.05)}
+.eg-rooms article>div:not([class*="-img"]){position:relative;padding:1.2rem;background:linear-gradient(transparent,#000c);display:grid;gap:.3rem;justify-items:start}
+.eg-rooms h3{font-size:1.3rem}.eg-rooms article p{font-size:.8em;opacity:.85}
+.eg-price b{font:600 1.1rem/1 var(--fh)}
+/* reserva */
+.eg-book{padding:max(3rem,5cqi) var(--pad);background:var(--sand);display:grid;gap:1.4rem;justify-items:center;text-align:center}
+.eg-book h2{font-size:clamp(1.6rem,2.6cqi,2.2rem);color:var(--blue)}
+.eg .t-stay{display:flex;flex-wrap:wrap;align-items:end;justify-content:center;gap:.6rem;width:min(60rem,100%)}
+.eg .t-stay label{display:grid;gap:.25rem;text-align:left;font:600 .7rem/1 var(--fb);color:var(--mute)}
+.eg .t-stay input,.eg .t-stay select{font:inherit;font-size:.95rem;color:var(--ink);border:1px solid #d5cfc3;background:#fff;min-height:2.8rem;padding:0 .8rem;min-width:9rem}
+.eg .t-stay button{min-height:2.8rem;padding:0 1.4rem;border:0;background:var(--blue);color:#fff;font:600 .82rem/1 var(--fb);cursor:pointer}
+/* amenidades, opiniones, preguntas, visita */
+.eg-amen{padding:max(3rem,5cqi) var(--pad)}
+.eg-amen h2{font-size:clamp(1.8rem,3cqi,2.6rem);margin-bottom:1.4rem}
+.eg-amen ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+.eg-amen li{display:grid;gap:.2rem;border-top:2px solid var(--blue);padding-top:.7rem}
+.eg-amen b{font:500 1.05rem/1.2 var(--fh)}.eg-amen span{font-size:.84em;color:var(--mute)}
+.eg-revs{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding:max(3rem,5cqi) var(--pad);background:var(--sand)}
+.eg-revs blockquote{margin:0;display:grid;gap:.6rem}
+.eg-revs p{font:italic 500 1.2rem/1.45 var(--fh)}.eg-revs cite{font-style:normal;font-size:.8em;color:var(--mute)}
+.eg-faq{max-width:46rem;margin:0 auto;padding:max(3rem,5cqi) var(--pad);box-sizing:content-box}
+.eg-faq h2{font-size:2rem;margin-bottom:1rem}
+.eg-faq details{border-bottom:1px solid #0002}
+.eg-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:.9rem 0;font-weight:600}
+.eg-faq summary::-webkit-details-marker{display:none}
+.eg-faq summary::after{content:"+";color:var(--blue)}
+.eg-faq details[open] summary::after{content:"−"}
+.eg-faq details p{color:var(--mute);padding-bottom:1rem}
+.eg-visit{background:var(--blue);color:#fff;padding:max(3rem,5cqi) var(--pad);display:grid;gap:.5rem;justify-items:center;text-align:center}
+.eg-visit h2{font-size:clamp(2rem,3.4cqi,3rem);margin-bottom:.4rem}
+.eg-link--w{color:#fff!important;margin-top:.8rem}
+.eg-foot{display:grid;gap:.6rem;justify-items:center;text-align:center;padding:2rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom))}
+.eg-foot .eg-logo{padding:0;color:var(--blue)}
+.eg-foot>div:not([class*="-img"]){display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem 1.2rem;font-size:.72rem;color:var(--mute)}
+.eg-sticky{display:none}
+@container (max-width:980px){.eg-amen ul{grid-template-columns:1fr 1fr}.eg-revs{grid-template-columns:1fr}}
+@container (max-width:640px){
+  .eg-hero{min-height:32rem}
+  .eg-intro{grid-template-columns:1fr}.eg-intro figcaption{left:.6rem}
+  .eg-sea-img{aspect-ratio:4/3}
+  .eg .t-stay{display:grid;grid-template-columns:1fr 1fr}.eg .t-stay button{grid-column:1/-1}.eg .t-stay input,.eg .t-stay select{min-width:0;width:100%}
+  .eg-sticky{display:flex;gap:.5rem;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:#fff;border-top:1px solid #0002}
+  .eg-sticky>*{flex:1}
+}

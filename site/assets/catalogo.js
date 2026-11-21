@@ -153,6 +153,26 @@ export const CATALOGO = [
     ref: { name: "Talat Market", url: 'https://talatmarketatl.com/' },
     idea: "La mesa llena vista desde arriba, el nombre manuscrito de color y reservar como acción principal, con colores de mercado.",
   },
+  {
+    id: 'spa', name: "Spa", kind: 'hotel', demo: 'hotel-casa-azahar', accent: '#2C7A7B',
+    ref: { name: "Wellness & Spa Hotel Kaskady", url: 'https://www.resortkaskady.com/' },
+    idea: "Para hoteles con spa: hero turquesa con textura de agua y emblema redondo, reserva arriba y amenidades con recuadro blanco sobre la foto.",
+  },
+  {
+    id: 'egeo', name: "Egeo", kind: 'hotel', demo: 'hotel-casa-azahar', accent: '#1C4E9C',
+    ref: { name: "Amaris Mykonos", url: 'https://www.amarismykonos.com/' },
+    idea: "De playa: mar a todo lo ancho, azul intenso, el nombre gigante como marca de agua, calificación a la vista y habitaciones en tarjetas altas.",
+  },
+  {
+    id: 'alpes', name: "Alpes", kind: 'hotel', demo: 'hotel-casa-azahar', accent: '#B89B6A',
+    ref: { name: "Swiss Deluxe Hotels", url: 'https://www.swissdeluxehotels.com/' },
+    idea: "Selector «Elige tu experiencia» (pareja, familia, descanso) que cambia foto, texto y habitación recomendada; hero oscuro y filas sobrias.",
+  },
+  {
+    id: 'archivo', name: "Archivo", kind: 'hotel', demo: 'hotel-casa-azahar', accent: '#8C3B3B',
+    ref: { name: "Landa", url: 'https://www.landa.as/es/' },
+    idea: "Con historia: papel rosado, la historia centrada como carta, separador de cubiertos y fotos en blanco y negro que toman color.",
+  },
 ];
 
 export const RUBROS = { clinica: 'Clínicas dentales', consultorio: 'Consultorios médicos', restaurante: 'Restaurantes', hotel: 'Hoteles', inmobiliaria: 'Inmobiliarias', despacho: 'Despachos legales' };

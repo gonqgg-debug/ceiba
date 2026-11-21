@@ -30,6 +30,10 @@ import { renderRecreo, RECREO_FONTS } from './recreo.js';
 import { renderTaberna, TABERNA_FONTS } from './taberna.js';
 import { renderFiesta, FIESTA_FONTS } from './fiesta.js';
 import { renderMercado, MERCADO_FONTS } from './mercado.js';
+import { renderSpa, SPA_FONTS } from './spa.js';
+import { renderEgeo, EGEO_FONTS } from './egeo.js';
+import { renderAlpes, ALPES_FONTS } from './alpes.js';
+import { renderArchivo, ARCHIVO_FONTS } from './archivo.js';
 export const DESIGNS = {
   estudio: { render: renderEstudio, fonts: ESTUDIO_FONTS, kinds: ['clinica'] },
   galeria: { render: renderGaleria, fonts: GALERIA_FONTS, kinds: ['clinica'] },
@@ -60,4 +64,8 @@ export const DESIGNS = {
   taberna: { render: renderTaberna, fonts: TABERNA_FONTS, kinds: ['restaurante'] },
   fiesta: { render: renderFiesta, fonts: FIESTA_FONTS, kinds: ['restaurante'] },
   mercado: { render: renderMercado, fonts: MERCADO_FONTS, kinds: ['restaurante'] },
+  spa: { render: renderSpa, fonts: SPA_FONTS, kinds: ['hotel'] },
+  egeo: { render: renderEgeo, fonts: EGEO_FONTS, kinds: ['hotel'] },
+  alpes: { render: renderAlpes, fonts: ALPES_FONTS, kinds: ['hotel'] },
+  archivo: { render: renderArchivo, fonts: ARCHIVO_FONTS, kinds: ['hotel'] },
 };

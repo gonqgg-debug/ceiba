@@ -67,6 +67,13 @@ export function base(c = {}, { mode = 'live', marks = {} } = {}, fallbackAccent 
     serviceHref: s => (waNum && !contact.bookingUrl ? waMsg(`Hola, me interesa: ${s.name}`) : bookHref),
     kb: extra => `<script type="application/json" class="t-kb">${JSON.stringify({ name, wa: waNum, book: live ? bookHref : '', ...extra }).replace(/</g, '\\u003c')}</script>`,
     legal: () => [`© ${new Date().getFullYear()} ${esc(name)}`, 'Aviso de privacidad', c.legal?.cofepris && `COFEPRIS ${esc(c.legal.cofepris)}`, c.legal?.responsable && `Responsable sanitario: ${esc(c.legal.responsable)}`, c.footer?.note && esc(c.footer.note)].filter(Boolean).map(x => `<span>${x}</span>`).join(''),
+    // Reservación de hotel: llegada, salida, huéspedes y habitación; arma el mensaje para WhatsApp
+    stayForm: (cls = '') => (waNum ? `<form class="t-stay ${cls}" data-t-form data-intro="Hola, quiero reservar en"${live ? '' : ' inert'}>
+      <label><span>Llegada</span><input name="in" data-l="Llegada" type="date"></label><label><span>Salida</span><input name="out" data-l="Salida" type="date"></label>
+      <label><span>Huéspedes</span><select name="g" data-l="Huéspedes">${['1', '2', '3', '4', '5', '6 o más'].map(x => `<option${x === '2' ? ' selected' : ''}>${x}</option>`).join('')}</select></label>
+      ${list(c.rooms?.items).length ? `<label><span>Habitación</span><select name="r" data-l="Habitación"><option value="">La que esté disponible</option>${list(c.rooms.items).map(r => `<option>${esc(r.name)}</option>`).join('')}</select></label>` : ''}
+      <button type="submit">Consultar disponibilidad</button></form>` : ''),
+    roomHref: r => (waNum ? waMsg(`Hola, quiero reservar la habitación ${r.name}. ¿Tienen disponibilidad?`) : bookHref),
     navLink: ([id, label]) => (live ? `<a href="#${id}">${esc(label)}</a>` : `<span>${esc(label)}</span>`),
   };
 }
