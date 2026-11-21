@@ -26,7 +26,7 @@ La app ya manda cada correo desde su alias y con respuesta a ese mismo alias (`l
 3. **Enviar como el alias desde Gmail** (para contestar desde `propuestas@` o `clientes@`): Configuración → Cuentas → Enviar como → Agregar otra dirección, una por alias, sin marcar «tratar como alias». Activa «Responder desde la misma dirección a la que se envió el mensaje».
 4. **Avisos internos.** En Vercel, `CEIBA_NOTIFY_EMAIL=avisos@ceibalabs.io` para que los avisos de la app caigan en su etiqueta y no revueltos en la bandeja.
 5. **Stripe.** Settings → Business → Public details: correo de soporte `facturacion@ceibalabs.io`; y en Emails, recibos con respuesta a ese mismo alias.
-6. **DMARC.** Agregar en el DNS (Vercel) un registro TXT `_dmarc` con `v=DMARC1; p=none; rua=mailto:dmarc@ceibalabs.io; fo=1`. Después de 2 a 4 semanas sin problemas en los reportes, subir a `p=quarantine`.
+6. **DMARC.** Ya está en el DNS (Vercel): registro TXT `_dmarc` con `v=DMARC1; p=none; rua=mailto:dmarc@ceibalabs.io; fo=1`, creado el 21 de noviembre de 2026. Después de 2 a 4 semanas sin problemas en los reportes, subir a `p=quarantine`.
 
 ## Cómo los usan los agentes
 
