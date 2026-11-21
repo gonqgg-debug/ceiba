@@ -80,7 +80,7 @@ export async function handle(event) {
           if (email && mailReady()) {
             const link = chatUrl(meta.ceiba_proposal);
             await sendMail({
-              to: email, subject: 'Empecemos tu página · Ceiba Labs', replyTo: process.env.CEIBA_REPLY_TO || undefined,
+              as: 'clientes', to: email, subject: 'Empecemos tu página · Ceiba Labs', replyTo: process.env.CEIBA_REPLY_TO || undefined,
               html: `<div style="max-width:560px;font:15px/1.6 sans-serif;color:#0B1514"><p>¡Gracias! ${setup ? 'Ya registramos tu tarjeta' : 'Ya está confirmado tu pago'} de tu <b>${PLANS[meta.ceiba_plan]?.name || 'plan'}${meta.ceiba_whatsapp === 'true' ? ' + Asistente de WhatsApp' : ''}</b>.</p>${welcomePlan(meta.ceiba_plan)}<p>Para construir tu página necesitamos tu logo, ${planSpec(meta.ceiba_plan).photos} fotos, tus colores y algunos datos${planSpec(meta.ceiba_plan).integrations.includes('agenda') ? ', el enlace de tu agenda en línea' : ''}${planSpec(meta.ceiba_plan).integrations.includes('catalogo') ? ' y tu catálogo' : ''}. Te atiende nuestro asistente en un chat privado: puedes hacerlo desde el celular en unos minutos.</p><p><a href="${link}" style="display:inline-block;background:#D6FA52;color:#0B1514;padding:12px 20px;border-radius:10px;font-weight:600;text-decoration:none">Empezar ahora</a></p><p>Guarda este correo: con este mismo enlace vuelves cuando quieras para ver tu avance, pedir cambios o resolver dudas.</p><p>Equipo de Ceiba Labs</p></div>`,
             }).catch(err => console.error('webhook: correo de bienvenida no enviado', err.message));
           }

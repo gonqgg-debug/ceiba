@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:apps='http://schemas.google.com/apps/2006'>
+  <title>Filtros de Ceiba Labs</title>
+  <entry>
+    <category term='filter'></category>
+    <title>hola@ceibalabs.io</title>
+    <content></content>
+    <apps:property name='hasTheWord' value='deliveredto:hola@ceibalabs.io'/>
+    <apps:property name='label' value='Ceiba/Hola'/>
+    <apps:property name='shouldNeverSpam' value='true'/>
+  </entry>
+  <entry>
+    <category term='filter'></category>
+    <title>propuestas@ceibalabs.io</title>
+    <content></content>
+    <apps:property name='hasTheWord' value='deliveredto:propuestas@ceibalabs.io'/>
+    <apps:property name='label' value='Ceiba/Propuestas'/>
+    <apps:property name='shouldNeverSpam' value='true'/>
+  </entry>
+  <entry>
+    <category term='filter'></category>
+    <title>clientes@ceibalabs.io</title>
+    <content></content>
+    <apps:property name='hasTheWord' value='deliveredto:clientes@ceibalabs.io'/>
+    <apps:property name='label' value='Ceiba/Clientes'/>
+    <apps:property name='shouldNeverSpam' value='true'/>
+  </entry>
+  <entry>
+    <category term='filter'></category>
+    <title>reportes@ceibalabs.io</title>
+    <content></content>
+    <apps:property name='hasTheWord' value='deliveredto:reportes@ceibalabs.io'/>
+    <apps:property name='label' value='Ceiba/Reportes'/>
+    <apps:property name='shouldNeverSpam' value='true'/>
+  </entry>
+  <entry>
+    <category term='filter'></category>
+    <title>facturacion@ceibalabs.io</title>
+    <content></content>
+    <apps:property name='hasTheWord' value='deliveredto:facturacion@ceibalabs.io'/>
+    <apps:property name='label' value='Ceiba/Facturación'/>
+    <apps:property name='shouldNeverSpam' value='true'/>
+  </entry>
+  <entry>
+    <category term='filter'></category>
+    <title>legal@ceibalabs.io</title>
+    <content></content>
+    <apps:property name='hasTheWord' value='deliveredto:legal@ceibalabs.io'/>
+    <apps:property name='label' value='Ceiba/Legal'/>
+    <apps:property name='shouldNeverSpam' value='true'/>
+  </entry>
+  <entry>
+    <category term='filter'></category>
+    <title>avisos@ceibalabs.io</title>
+    <content></content>
+    <apps:property name='hasTheWord' value='deliveredto:avisos@ceibalabs.io'/>
+    <apps:property name='label' value='Ceiba/Avisos'/>
+    <apps:property name='shouldNeverSpam' value='true'/>
+  </entry>
+  <entry>
+    <category term='filter'></category>
+    <title>agentes@ceibalabs.io</title>
+    <content></content>
+    <apps:property name='hasTheWord' value='deliveredto:agentes@ceibalabs.io'/>
+    <apps:property name='label' value='Ceiba/Agentes'/>
+    <apps:property name='shouldNeverSpam' value='true'/>
+    <apps:property name='shouldArchive' value='true'/>
+  </entry>
+  <entry>
+    <category term='filter'></category>
+    <title>dmarc@ceibalabs.io</title>
+    <content></content>
+    <apps:property name='hasTheWord' value='deliveredto:dmarc@ceibalabs.io'/>
+    <apps:property name='label' value='Ceiba/DMARC'/>
+    <apps:property name='shouldNeverSpam' value='true'/>
+    <apps:property name='shouldArchive' value='true'/>
+    <apps:property name='shouldMarkAsRead' value='true'/>
+  </entry>
+</feed>

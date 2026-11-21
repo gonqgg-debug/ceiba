@@ -78,6 +78,7 @@ async function sendProposal(p, { validDays } = {}) {
   if (lead?.contact_type === 'email' && mailReady()) {
     try {
       await sendMail({
+        as: 'propuestas',
         to: lead.contact,
         subject: `Tu propuesta de página web para ${p.business}`,
         text: `${message}\n\nSi tienes dudas, responde este correo.\n\nEquipo de Ceiba Labs`,

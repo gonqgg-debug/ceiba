@@ -428,7 +428,7 @@ export async function POST(request) {
     const chats = await findChatByEmail(b.email).catch(() => []);
     if (chats.length && mailReady()) {
       const links = chats.map(c => `<p><a href="${chatUrl(c.slug)}">${escHtml(c.business || c.slug)}</a></p>`).join('');
-      await sendMail({ to: String(b.email).trim(), subject: 'Tu enlace a Ceiba Labs', html: `<div style="font:15px/1.6 sans-serif"><p>Aquí está tu enlace para volver al chat de tu página:</p>${links}<p>Guárdalo en tus favoritos. Si no pediste este correo, ignóralo.</p></div>` })
+      await sendMail({ as: 'clientes', to: String(b.email).trim(), subject: 'Tu enlace a Ceiba Labs', html: `<div style="font:15px/1.6 sans-serif"><p>Aquí está tu enlace para volver al chat de tu página:</p>${links}<p>Guárdalo en tus favoritos. Si no pediste este correo, ignóralo.</p></div>` })
         .catch(err => console.error('chat: enlace no enviado', err.message));
     }
     return json({ ok: true }); // misma respuesta exista o no, para no revelar correos

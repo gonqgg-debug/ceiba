@@ -172,7 +172,7 @@ export async function POST(request) {
 
   if (mailReady() && process.env.CEIBA_NOTIFY_EMAIL) {
     const tasks = [sendMail({ to: process.env.CEIBA_NOTIFY_EMAIL.split(','), subject: b.mode === 'consultoria' ? `Consultoría: ${lead.business}` : b.mode === 'ia' ? `IA: ${lead.business}` : `Propuesta para ${lead.business}${lead.site_host ? ` (${lead.site_host})` : ''}`, ...teamEmail(lead, label), replyTo: lead.contact_type === 'email' ? lead.contact : undefined })];
-    if (lead.contact_type === 'email') tasks.push(sendMail({ to: lead.contact, subject: `Recibimos tu solicitud, ${lead.name.split(/\s+/)[0]}`, ...clientEmail(lead, label), replyTo: process.env.CEIBA_REPLY_TO || process.env.CEIBA_NOTIFY_EMAIL.split(',')[0] }));
+    if (lead.contact_type === 'email') tasks.push(sendMail({ as: 'hola', to: lead.contact, subject: `Recibimos tu solicitud, ${lead.name.split(/\s+/)[0]}`, ...clientEmail(lead, label), replyTo: process.env.CEIBA_REPLY_TO || process.env.CEIBA_NOTIFY_EMAIL.split(',')[0] }));
     const [team, client] = await Promise.allSettled(tasks);
     notified = team.status === 'fulfilled';
     if (!notified) console.error('lead: no salió el aviso al equipo', team.reason?.message);
