@@ -57,7 +57,7 @@
 @container (max-width:980px){.mk-revs{grid-template-columns:1fr}.mk-photos{grid-template-columns:1fr 1fr}}
 @container (max-width:640px){
   .mk-hero{min-height:32rem}
-  .mk-menu>div{grid-template-columns:1fr}
+  .mk-menu>div:not([class*="-img"]){grid-template-columns:1fr}
   .mk-sticky{display:flex;gap:.5rem;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:var(--cream);border-top:2px solid var(--ink)}
   .mk-sticky>*{flex:1}
 }

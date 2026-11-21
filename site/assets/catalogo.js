@@ -193,6 +193,26 @@ export const CATALOGO = [
     ref: { name: "Teranga Lodges", url: 'https://www.terangalodges.com/' },
     idea: "Glamping y cabañas: bloques rojo vino con la foto al lado, tres razones con íconos, lista de lo que trae cada alojamiento y FAQ completo para primerizos.",
   },
+  {
+    id: 'rancho', name: "Rancho", kind: 'hotel', demo: 'hotel-casa-azahar', accent: '#5C4A32',
+    ref: { name: "Gage Hotel", url: 'https://gagehotel.com/' },
+    idea: "Campo o desierto: tres palabras sobre la foto, bloques con caja café desplazada, mosaicos de experiencias y reconocimientos en oscuro.",
+  },
+  {
+    id: 'safari', name: "Safari", kind: 'hotel', demo: 'hotel-casa-azahar', accent: '#A2834A',
+    ref: { name: "Xigera Safari Lodge", url: 'https://xigera.com/' },
+    idea: "Lodge o ecohotel: logo dorado grande, narración por capítulos (llegar, mirar, probar, dormir) con fotos altas, escena nocturna y diario.",
+  },
+  {
+    id: 'motel', name: "Motel", kind: 'hotel', demo: 'hotel-casa-azahar', accent: '#C0634A',
+    ref: { name: "Amigo Motor Lodge", url: 'https://amigomotorlodge.com/' },
+    idea: "Motel renovado o hostal con onda: máquina de escribir, reserva sobre la foto, franja rosa, carrusel de cuartos, promoción terracota y fotos tipo Instagram.",
+  },
+  {
+    id: 'calendario', name: "Calendario", kind: 'hotel', demo: 'hotel-casa-azahar', accent: '#2F5D8A',
+    ref: { name: "Petunia Ibiza (según las notas; la página no cargó)", url: 'https://www.petunia-ibiza.com/' },
+    idea: "Casa vacacional o villa: el calendario de disponibilidad hasta arriba; dos clics eligen llegada y salida y mandan la consulta por WhatsApp.",
+  },
 ];
 
 export const RUBROS = { clinica: 'Clínicas dentales', consultorio: 'Consultorios médicos', restaurante: 'Restaurantes', hotel: 'Hoteles', inmobiliaria: 'Inmobiliarias', despacho: 'Despachos legales' };

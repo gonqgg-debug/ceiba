@@ -73,7 +73,7 @@
 @container (max-width:980px){.tb-top nav{display:none}.tb-top .tb-btn{margin-left:auto}.tb-cards,.tb-revs{grid-template-columns:1fr 1fr}}
 @container (max-width:640px){
   .tb-hero-img{aspect-ratio:4/3}
-  .tb-cards,.tb-revs,.tb-perk,.tb-menu>div,.tb-locs article{grid-template-columns:1fr}
+  .tb-cards,.tb-revs,.tb-perk,.tb-menu>div:not([class*="-img"]),.tb-locs article{grid-template-columns:1fr}
   .tb-top .tb-btn{display:none}
   .tb-sticky{display:flex;gap:.5rem;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:var(--cream);border-top:1px solid var(--line)}
   .tb-sticky>*{flex:1}

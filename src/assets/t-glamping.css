@@ -22,7 +22,7 @@
 .gp-hero>div:not([class*="-img"]){background:var(--wine);color:#fff;padding:max(2rem,4cqi);display:grid;gap:1.2rem;align-content:center;justify-items:center;text-align:center}
 .gp-hero .gp-script{font-size:clamp(2rem,4cqi,3.4rem)}
 .gp-hero h1{font-size:clamp(1.2rem,2cqi,1.7rem);font-weight:400}
-@media (prefers-reduced-motion:no-preference){.gp:not(.gp-still) .gp-hero>div{animation:gp-in 1s var(--ease) both}}
+@media (prefers-reduced-motion:no-preference){.gp:not(.gp-still) .gp-hero>div:not([class*="-img"]){animation:gp-in 1s var(--ease) both}}
 @keyframes gp-in{from{clip-path:inset(0 0 0 100%)}}
 /* tres razones */
 .gp-why{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding:max(3rem,5cqi) var(--pad)}
@@ -73,11 +73,11 @@
 .gp-foot{display:grid;gap:.8rem;padding:2rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom))}
 .gp-foot>div:not([class*="-img"]){display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;font-size:.72rem;color:var(--mute)}
 .gp-sticky{display:none}
-@container (max-width:980px){.gp-top nav{display:none}.gp-top .gp-btn{margin-left:auto}.gp-guests>div{grid-template-columns:1fr 1fr}}
+@container (max-width:980px){.gp-top nav{display:none}.gp-top .gp-btn{margin-left:auto}.gp-guests>div:not([class*="-img"]){grid-template-columns:1fr 1fr}}
 @container (max-width:640px){
   .gp-hero,.gp-lodges article,.gp-visit,.gp-why{grid-template-columns:1fr}
   .gp-hero-img{min-height:18rem}.gp-lodge-img{min-height:16rem}.gp-lodge--r .gp-lodge-img{order:0}
-  .gp-guests>div{grid-template-columns:1fr}
+  .gp-guests>div:not([class*="-img"]){grid-template-columns:1fr}
   .gp .t-stay{display:grid;grid-template-columns:1fr 1fr}.gp .t-stay button{grid-column:1/-1}.gp .t-stay input,.gp .t-stay select{min-width:0;width:100%}
   .gp-top .gp-btn{display:none}
   .gp-sticky{display:flex;gap:.5rem;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:var(--cream);border-top:1px solid var(--line)}

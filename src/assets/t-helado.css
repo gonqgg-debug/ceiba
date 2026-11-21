@@ -74,7 +74,7 @@
   .hl-split{grid-template-columns:1fr;height:auto}
   .hl-col--r{display:none}
   .hl-col{grid-auto-rows:auto}.hl-cell{min-height:20rem}
-  .hl-menu>div{grid-template-columns:1fr}
+  .hl-menu>div:not([class*="-img"]){grid-template-columns:1fr}
   .hl-r a:not(.hl-btn),.hl-r span{display:none}
   .hl-sticky{display:flex;gap:.5rem;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:var(--cream);border-top:1px solid #0002}
   .hl-sticky>*{flex:1}

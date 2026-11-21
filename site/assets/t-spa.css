@@ -73,7 +73,7 @@
 .sp-foot{display:grid;gap:1rem;justify-items:center;text-align:center;padding:2rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom));border-top:1px solid var(--line)}
 .sp-foot>div:not([class*="-img"]){display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem 1.2rem;font-size:.72rem;color:var(--mute)}
 .sp-sticky{display:none}
-@container (max-width:980px){.sp-top nav{display:none}.sp-top{grid-template-columns:auto 1fr auto}.sp-revs>div{grid-template-columns:1fr}}
+@container (max-width:980px){.sp-top nav{display:none}.sp-top{grid-template-columns:auto 1fr auto}.sp-revs>div:not([class*="-img"]){grid-template-columns:1fr}}
 @container (max-width:640px){
   .sp-top .sp-book{display:none}.sp-emblem{width:3.6rem;height:3.6rem}
   .sp-visit{grid-template-columns:1fr}.sp-visit-img{min-height:16rem}

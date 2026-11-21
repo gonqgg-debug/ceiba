@@ -79,7 +79,7 @@
 @container (max-width:640px){
   .cs-top .cs-btn{display:none}
   .cs-invite,.cs-sand,.cs-hood{grid-template-columns:1fr}
-  .cs-invite>div{justify-items:start;text-align:left}
+  .cs-invite>div:not([class*="-img"]){justify-items:start;text-align:left}
   .cs-sand-img{margin-top:0}
   .cs .t-stay{display:grid;grid-template-columns:1fr 1fr}.cs .t-stay button{grid-column:1/-1}.cs .t-stay input,.cs .t-stay select{min-width:0;width:100%}
   .cs-sticky{display:flex;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:var(--paper);border-top:1px solid var(--line)}

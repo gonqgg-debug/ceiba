@@ -406,6 +406,25 @@
       const tick = () => { const s = scrollY > 80; if (s !== on) { on = s; root.classList.toggle('t-scrolled', s); } };
       addEventListener('scroll', tick, { passive: true }); tick();
     });
+    // «Calendario»: dos clics en el calendario eligen llegada y salida y llenan el formulario de estancia
+    document.querySelectorAll('[data-t-cal]:not([data-tb])').forEach(cal => {
+      cal.dataset.tb = 1;
+      const root = cal.closest('.cx'), f = root && root.querySelector('.t-stay'), out = cal.querySelector('[data-cal-out]');
+      const fmt = s => new Date(s + 'T12:00').toLocaleDateString('es-MX', { day: 'numeric', month: 'short' });
+      let a = '', b = '';
+      const paint = () => {
+        cal.querySelectorAll('[data-d]').forEach(x => { const d = x.dataset.d; x.classList.toggle('is-sel', d === a || d === b); x.classList.toggle('is-in', !!(a && b && d > a && d < b)); x.setAttribute('aria-pressed', d === a || d === b); });
+        if (out) out.textContent = a ? (b ? `${fmt(a)} → ${fmt(b)}` : `Llegada ${fmt(a)} · elige la salida`) : 'Elige tu llegada';
+        if (f) { const i = f.querySelector('[name=in]'), o = f.querySelector('[name=out]'); if (i) i.value = a; if (o) o.value = b; }
+      };
+      cal.addEventListener('click', e => {
+        const x = e.target.closest('[data-d]'); if (!x || x.disabled) return;
+        const d = x.dataset.d;
+        if (!a || b || d <= a) { a = d; b = ''; } else b = d;
+        paint();
+      });
+      paint();
+    });
     // «Bowl»: filtros de la carta y panel del platillo elegido
     document.querySelectorAll('.bw-shop:not([data-tb])').forEach(sh => {
       sh.dataset.tb = 1;

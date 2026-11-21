@@ -70,7 +70,7 @@
 .fs-sticky{display:none}
 @container (max-width:640px){
   .fs-tv{grid-template-columns:1fr;padding:1rem}.fs-knobs{display:none}.fs-screen::after{inset:1rem}
-  .fs-find-card,.fs-menu>div{grid-template-columns:1fr}
+  .fs-find-card,.fs-menu>div:not([class*="-img"]){grid-template-columns:1fr}
   .fs-tiles span{width:2.4rem;height:2.6rem}.fs-tiles b{font-size:1.4rem}
   .fs-top .fs-btn{display:none}
   .fs-sticky{display:flex;gap:.5rem;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:var(--purple)}

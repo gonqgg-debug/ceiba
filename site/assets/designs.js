@@ -38,6 +38,10 @@ import { renderClasico, CLASICO_FONTS } from './clasico.js';
 import { renderSelva, SELVA_FONTS } from './selva.js';
 import { renderFinca, FINCA_FONTS } from './finca.js';
 import { renderGlamping, GLAMPING_FONTS } from './glamping.js';
+import { renderRancho, RANCHO_FONTS } from './rancho.js';
+import { renderSafari, SAFARI_FONTS } from './safari.js';
+import { renderMotel, MOTEL_FONTS } from './motel.js';
+import { renderCalendario, CALENDARIO_FONTS } from './calendario.js';
 export const DESIGNS = {
   estudio: { render: renderEstudio, fonts: ESTUDIO_FONTS, kinds: ['clinica'] },
   galeria: { render: renderGaleria, fonts: GALERIA_FONTS, kinds: ['clinica'] },
@@ -76,4 +80,8 @@ export const DESIGNS = {
   selva: { render: renderSelva, fonts: SELVA_FONTS, kinds: ['hotel'] },
   finca: { render: renderFinca, fonts: FINCA_FONTS, kinds: ['hotel'] },
   glamping: { render: renderGlamping, fonts: GLAMPING_FONTS, kinds: ['hotel'] },
+  rancho: { render: renderRancho, fonts: RANCHO_FONTS, kinds: ['hotel'] },
+  safari: { render: renderSafari, fonts: SAFARI_FONTS, kinds: ['hotel'] },
+  motel: { render: renderMotel, fonts: MOTEL_FONTS, kinds: ['hotel'] },
+  calendario: { render: renderCalendario, fonts: CALENDARIO_FONTS, kinds: ['hotel'] },
 };

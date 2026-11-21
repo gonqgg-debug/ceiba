@@ -1,0 +1,91 @@
+/* Diseño «Calendario» (lib/templates/calendario.js, raíz .cx.ca). Notas de Petunia Ibiza: la
+   disponibilidad hasta arriba; blanco cal, azul mediterráneo y esquinas redondeadas. */
+.cx.ca{--blue:var(--a);--lime:#FBFAF6;--sand:#F1ECE2;--ink:#1F2A33;--mute:#66707A;--line:#E3DED4;
+  --fh:'Young Serif',Georgia,serif;--fb:'Figtree',ui-sans-serif,system-ui,sans-serif;--pad:max(1.25rem,5cqi);--r:1.1rem;--ease:cubic-bezier(.22,1,.36,1);
+  font:400 clamp(14.5px,1.02cqi,16px)/1.65 var(--fb);background:var(--lime);color:var(--ink);position:relative;overflow:clip}
+.ca h1,.ca h2,.ca h3{font-family:var(--fh);font-weight:400;color:inherit;margin:0;line-height:1.15;text-wrap:balance}
+.ca :where(p){margin:0}.ca a{color:inherit}
+.ca-btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.5rem;padding:0 1.2rem;border-radius:999px;background:var(--blue);color:#fff!important;font:600 .86rem/1 var(--fb);text-decoration:none;white-space:nowrap;justify-self:start;transition:filter .2s}
+.ca-btn:hover{filter:brightness(1.12)}
+.ca-btn--line{background:transparent;color:var(--blue)!important;box-shadow:inset 0 0 0 1.5px var(--blue)}
+.ca-kick,.ca-meta{font:500 .78rem/1.4 var(--fb);letter-spacing:.06em;color:var(--mute)}
+.ca a:focus-visible,.ca summary:focus-visible,.ca .t-stay :focus-visible,.ca [data-d]:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.ca-top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:2rem;padding:.8rem var(--pad);background:#FBFAF6ee}
+.ca-logo{font:400 1.35rem/1 var(--fh);color:var(--blue)}
+.ca-top nav{display:flex;gap:1.4rem;margin-left:auto;font-weight:500;font-size:.9em}
+.ca-top nav a,.ca-top nav span{text-decoration:none}
+/* hero: nombre + calendario */
+.ca-hero{display:grid;grid-template-columns:1fr minmax(0,30rem);gap:max(1.5rem,3cqi);padding:1.4rem var(--pad) max(3rem,5cqi);align-items:start}
+.ca-intro{display:grid;gap:1rem}
+.ca-intro h1{font-size:clamp(1.8rem,3.4cqi,3rem)}
+.ca-hero-img{aspect-ratio:16/10;background:center/cover no-repeat;border-radius:var(--r)}
+.ca-cal{position:sticky;top:4.4rem;display:grid;gap:1rem;background:#fff;border-radius:var(--r);padding:1.4rem;box-shadow:0 0 0 1px var(--line),0 1.4rem 3rem -2rem #1f2a3340}
+.ca-cal-head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap}
+.ca-cal-head h2{font-size:1.3rem}
+.ca-cal-head p{font-weight:600;font-size:.86rem;color:var(--blue)}
+.ca-months{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.ca-month>p{font-weight:600;text-transform:capitalize;margin-bottom:.4rem;font-size:.9rem}
+.ca-wd,.ca-days{display:grid;grid-template-columns:repeat(7,1fr);text-align:center}
+.ca-wd span{font-size:.66rem;color:var(--mute);padding:.2rem 0}
+.ca-days button{appearance:none;border:0;background:none;font:500 .8rem/1 var(--fb);color:var(--ink);aspect-ratio:1;border-radius:50%;cursor:pointer;transition:background-color .15s}
+.ca-days button:hover:not(:disabled){background:var(--sand)}
+.ca-days button:disabled{color:#C9CDD1;cursor:default}
+.ca-days button[data-busy]{text-decoration:line-through;color:#B7BCC1}
+.ca-days button.is-in{background:color-mix(in srgb,var(--blue) 14%,#fff);border-radius:0}
+.ca-days button.is-sel{background:var(--blue);color:#fff}
+.ca .t-stay{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.ca .t-stay label{display:grid;gap:.2rem;font:600 .64rem/1 var(--fb);letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.ca .t-stay input,.ca .t-stay select{font:inherit;font-size:.92rem;color:var(--ink);border:1px solid var(--line);border-radius:.6rem;background:var(--lime);min-height:2.6rem;padding:0 .6rem;min-width:0;width:100%;box-sizing:border-box}
+.ca .t-stay button{grid-column:1/-1;min-height:2.8rem;border:0;border-radius:999px;background:var(--blue);color:#fff;font:600 .9rem/1 var(--fb);cursor:pointer}
+.ca-note{font-size:.78rem;color:var(--mute);text-align:center}
+@media (prefers-reduced-motion:no-preference){.ca:not(.ca-still) .ca-cal{animation:ca-in .9s var(--ease) both}}
+@keyframes ca-in{from{opacity:0;transform:translateY(16px)}}
+/* la casa */
+.ca-about{display:grid;grid-template-columns:1fr 1fr;gap:max(2rem,5cqi);padding:max(3rem,5cqi) var(--pad);border-top:1px solid var(--line)}
+.ca-about>p{font:400 clamp(1.2rem,2cqi,1.6rem)/1.45 var(--fh)}
+.ca-about ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.ca-about li{display:grid}.ca-about b{font-weight:600}.ca-about span{font-size:.88em;color:var(--mute)}
+/* galería */
+.ca-gal{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:12rem 12rem;gap:.6rem;padding:0 var(--pad)}
+.ca-g{background:center/cover no-repeat;border-radius:var(--r)}
+.ca-g0{grid-row:span 2}
+.ca-g3:last-child{grid-column:span 2}
+/* habitaciones */
+.ca-rooms{padding:max(3.5rem,6cqi) var(--pad)}
+.ca-rooms>h2{font-size:clamp(1.8rem,3cqi,2.6rem);margin-bottom:1.6rem}
+.ca-rooms>div:not([class*="-img"]){display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr));gap:1.2rem}
+.ca-rooms article{display:grid;grid-template-rows:auto 1fr auto;background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:0 0 0 1px var(--line)}
+.ca-room-img{aspect-ratio:4/3;background:center/cover no-repeat}
+.ca-rooms article>div:not([class*="-img"]){padding:1rem 1.1rem;display:grid;gap:.4rem;align-content:start}
+.ca-rooms h3{font-size:1.25rem}.ca-rooms article p:not(.ca-meta){font-size:.9em;color:var(--mute)}
+.ca-rooms .ca-row{display:flex;justify-content:space-between;align-items:center;gap:.6rem;padding:.8rem 1.1rem 1.1rem;border-top:1px solid var(--line)}
+.ca-row b{font-size:1.2rem}.ca-row small{font-size:.7em;font-weight:400;color:var(--mute)}
+/* opiniones */
+.ca-revs{padding:0 var(--pad) max(3.5rem,6cqi)}
+.ca-score{font-size:.9rem;color:var(--mute);margin-bottom:1rem}.ca-score b{font:400 1.6rem var(--fh);color:var(--blue)}
+.ca-revs>div:not([class*="-img"]){display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.ca-revs blockquote{margin:0;display:grid;gap:.6rem;background:var(--sand);border-radius:var(--r);padding:1.2rem}
+.ca-revs p{font:400 1.02rem/1.5 var(--fh)}.ca-revs cite{font-style:normal;font-weight:600;font-size:.84rem;color:var(--blue)}
+.ca-faq{max-width:46rem;margin:0 auto;padding:0 var(--pad) max(3.5rem,6cqi);box-sizing:content-box}
+.ca-faq h2{font-size:1.8rem;margin-bottom:1rem}
+.ca-faq details{border-bottom:1px solid var(--line)}
+.ca-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:.9rem 0;font-weight:600}
+.ca-faq summary::-webkit-details-marker{display:none}
+.ca-faq summary::after{content:"+";color:var(--blue)}
+.ca-faq details[open] summary::after{content:"−"}
+.ca-faq details p{color:var(--mute);padding-bottom:1rem}
+.ca-foot{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem 2rem;background:var(--blue);color:#fff;padding:3rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom))}
+.ca-foot .ca-logo{color:#fff}
+.ca-foot>div{display:grid;gap:.5rem;align-content:start}.ca-foot p{opacity:.85}
+.ca-foot .ca-btn--line{color:#fff!important;box-shadow:inset 0 0 0 1.5px #fff}
+.ca-legal{grid-column:1/-1;display:flex!important;flex-wrap:wrap;gap:.3rem 1.2rem;font-size:.7rem;opacity:.7}
+.ca-sticky{display:none}
+@container (max-width:980px){.ca-hero{grid-template-columns:1fr}.ca-cal{position:static}.ca-top nav{display:none}.ca-top .ca-btn{margin-left:auto}.ca-revs>div:not([class*="-img"]){grid-template-columns:1fr}}
+@container (max-width:640px){
+  .ca-months{grid-template-columns:1fr}.ca-month:nth-child(2){display:none}
+  .ca-about,.ca-about ul,.ca-foot{grid-template-columns:1fr}
+  .ca-gal{grid-template-columns:1fr 1fr;grid-template-rows:14rem 9rem 9rem}.ca-g0{grid-column:1/-1;grid-row:auto}.ca-g4{display:none}.ca-g3:last-child{grid-column:1/-1}
+  .ca-top .ca-btn{display:none}
+  .ca-sticky{display:flex;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line)}
+  .ca-sticky>*{flex:1}
+}

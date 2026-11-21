@@ -71,7 +71,7 @@
 .rc-sticky{display:none}
 @container (max-width:980px){.rc-top nav{display:none}.rc-top .rc-btn{margin-left:auto}.rc-revs{grid-template-columns:1fr}}
 @container (max-width:640px){
-  .rc-menu>div,.rc-about{grid-template-columns:1fr}
+  .rc-menu>div:not([class*="-img"]),.rc-about{grid-template-columns:1fr}
   .rc-hero h1{font-size:2.8rem}
   .rc-cars figure{width:11rem}
   .rc-top .rc-btn{display:none}
