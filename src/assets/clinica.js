@@ -185,6 +185,19 @@
   // Saludo del chat flotante en la vista previa
   setTimeout(() => document.querySelectorAll('.vista .cx-teaser').forEach(t => { if (!t.closest('.cx-fab').classList.contains('open')) { t.hidden = false; setTimeout(() => { t.hidden = true; }, 7000); } }), 3500);
 
-  bindCars(); bindDemos();
-  new MutationObserver(() => { bindCars(); bindDemos(); }).observe(document.documentElement, { childList: true, subtree: true });
+  // El momento de la página: las fotos de la galería se revelan una vez al llegar a ellas.
+  // Sin script o con movimiento reducido se ven normales; solo se «velan» si aún no están a la vista.
+  const mio = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    mio.unobserve(e.target);
+    requestAnimationFrame(() => { e.target.classList.add('is-in'); e.target.classList.remove('is-pre'); });
+  }), { threshold: .3 });
+  const bindMoments = () => document.querySelectorAll('[data-moment="develop"]:not([data-io])').forEach(m => {
+    m.dataset.io = 1;
+    if (reduce || m.getBoundingClientRect().top < innerHeight) return;
+    m.classList.add('is-pre'); mio.observe(m);
+  });
+
+  bindCars(); bindDemos(); bindMoments();
+  new MutationObserver(() => { bindCars(); bindDemos(); bindMoments(); }).observe(document.documentElement, { childList: true, subtree: true });
 })();
