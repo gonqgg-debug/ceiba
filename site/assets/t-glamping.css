@@ -1,0 +1,85 @@
+/* Diseño «Glamping» (lib/templates/glamping.js, raíz .cx.gp). Basado en Teranga Lodges: rojo vino,
+   fotos de tiendas a un lado, íconos de línea, listas con palomitas y FAQ completo. */
+.cx.gp{--wine:var(--a);--cream:#FAF5EE;--ink:#2B2220;--mute:#6E625E;--line:#E8DED3;
+  --fh:'Montserrat',ui-sans-serif,system-ui,sans-serif;--script:'Gloria Hallelujah',cursive;--fb:'Montserrat',ui-sans-serif,system-ui,sans-serif;--pad:max(1.25rem,5cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:400 clamp(14.5px,1.02cqi,16px)/1.65 var(--fb);background:var(--cream);color:var(--ink);position:relative;overflow:clip}
+.gp h1,.gp h2,.gp h3{font-family:var(--fh);font-weight:500;color:inherit;margin:0;line-height:1.2;text-wrap:balance}
+.gp :where(p){margin:0}.gp a{color:inherit}
+.gp svg{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.gp-btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.5em;padding:0 1.3em;border-radius:.4em;background:var(--wine);color:#fff!important;font:600 .8em/1 var(--fb);text-decoration:none;white-space:nowrap;transition:filter .2s}
+.gp-btn:hover{filter:brightness(1.15)}
+.gp-btn--w{background:#fff;color:var(--wine)!important}
+.gp-btn--line{background:transparent;color:var(--wine)!important;box-shadow:inset 0 0 0 1.5px var(--wine)}
+.gp a:focus-visible,.gp summary:focus-visible,.gp .t-stay :focus-visible{outline:2px solid var(--wine);outline-offset:3px}
+.gp-script{font:400 1.2rem/1.2 var(--script)}
+.gp-top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:2rem;padding:.8rem var(--pad);background:#FAF5EEee}
+.gp-logo{font:600 1.2rem/1 var(--fh);color:var(--wine)}
+.gp-top nav{display:flex;gap:1.4rem;margin-left:auto;font-size:.88em;font-weight:500}
+.gp-top nav a,.gp-top nav span{text-decoration:none}
+/* hero con bloque */
+.gp-hero{display:grid;grid-template-columns:1.25fr .75fr;min-height:min(42cqi,34rem)}
+.gp-hero-img{background:center/cover no-repeat}
+.gp-hero>div:not([class*="-img"]){background:var(--wine);color:#fff;padding:max(2rem,4cqi);display:grid;gap:1.2rem;align-content:center;justify-items:center;text-align:center}
+.gp-hero .gp-script{font-size:clamp(2rem,4cqi,3.4rem)}
+.gp-hero h1{font-size:clamp(1.2rem,2cqi,1.7rem);font-weight:400}
+@media (prefers-reduced-motion:no-preference){.gp:not(.gp-still) .gp-hero>div{animation:gp-in 1s var(--ease) both}}
+@keyframes gp-in{from{clip-path:inset(0 0 0 100%)}}
+/* tres razones */
+.gp-why{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding:max(3rem,5cqi) var(--pad)}
+.gp-why div{display:grid;gap:.6rem}
+.gp-why svg{width:2.4rem;height:2.4rem;color:var(--wine)}
+.gp-why h2{font-size:1.15rem}.gp-why p{color:var(--mute);font-size:.9em}
+/* alojamientos */
+.gp-lodges{display:grid}
+.gp-lodges article{display:grid;grid-template-columns:1fr 1fr}
+.gp-lodge--r .gp-lodge-img{order:2}
+.gp-lodge-img{min-height:28rem;background:center/cover no-repeat}
+.gp-lodges article>div:not([class*="-img"]){background:var(--wine);color:#fff;padding:max(2.5rem,4cqi);display:grid;gap:.9rem;align-content:center}
+.gp-lodges article:nth-child(even)>div{background:color-mix(in srgb,var(--wine) 80%,#1b0d0d)}
+.gp-lodges h2{font-size:clamp(1.6rem,2.6cqi,2.4rem)}
+.gp-lodges ul{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
+.gp-lodges li{display:flex;gap:.5rem;align-items:center;font-size:.92em}
+.gp-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-top:.6rem;padding-top:1rem;border-top:1px solid #ffffff33}
+.gp-row b{font-size:1.6rem;font-weight:600}.gp-row small{font-size:.5em;font-weight:400;opacity:.8}
+/* reserva */
+.gp-book{padding:max(3rem,5cqi) var(--pad);display:grid;gap:1.2rem;justify-items:center;text-align:center}
+.gp-book h2{font-size:clamp(1.6rem,2.6cqi,2.2rem)}
+.gp .t-stay{display:flex;flex-wrap:wrap;align-items:end;justify-content:center;gap:.6rem;width:min(60rem,100%)}
+.gp .t-stay label{display:grid;gap:.25rem;text-align:left;font:600 .7rem/1 var(--fb);color:var(--mute)}
+.gp .t-stay input,.gp .t-stay select{font:inherit;font-size:.95rem;color:var(--ink);border:1px solid var(--line);background:#fff;border-radius:.4rem;min-height:2.8rem;padding:0 .8rem;min-width:9rem}
+.gp .t-stay button{min-height:2.8rem;padding:0 1.4rem;border:0;border-radius:.4rem;background:var(--wine);color:#fff;font:600 .82rem/1 var(--fb);cursor:pointer}
+/* FAQ completo */
+.gp-faq{max-width:50rem;margin:0 auto;padding:max(3rem,5cqi) var(--pad);box-sizing:content-box;text-align:center}
+.gp-faq .gp-script{color:var(--wine)}
+.gp-faq h2{font-size:clamp(1.6rem,2.6cqi,2.2rem);margin:.2rem 0 1.4rem}
+.gp-faq details{border:1px solid var(--line);background:#fff;border-radius:.5rem;margin-bottom:.5rem;text-align:left}
+.gp-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:.9rem 1.1rem;font-weight:500}
+.gp-faq summary::-webkit-details-marker{display:none}
+.gp-faq summary::after{content:"+";color:var(--wine);font-size:1.3rem;line-height:1}
+.gp-faq details[open] summary::after{content:"−"}
+.gp-faq details p{color:var(--mute);padding:0 1.1rem 1rem}
+/* huéspedes */
+.gp-guests{padding:0 var(--pad) max(3rem,5cqi)}
+.gp-guests h2{font-size:clamp(1.5rem,2.4cqi,2rem);text-align:center;margin-bottom:1.4rem}
+.gp-guests>div:not([class*="-img"]){display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.gp-guests figure{margin:0;background:#fff;border-radius:.5rem;overflow:hidden;box-shadow:0 0 0 1px var(--line)}
+.gp-guest-img{aspect-ratio:1;background:center/cover no-repeat}
+.gp-guests figcaption{padding:.8rem 1rem;font-size:.86em}.gp-guests b{display:block;margin-top:.3rem;color:var(--wine)}
+/* visita */
+.gp-visit{display:grid;grid-template-columns:1fr 1fr;background:var(--wine);color:#fff}
+.gp-visit>div:not([class*="-img"]){padding:max(2.5rem,4cqi) var(--pad);display:grid;gap:.6rem;align-content:center;justify-items:start}
+.gp-visit h2{font-size:clamp(1.6rem,2.6cqi,2.4rem)}
+.gp-visit-img{min-height:22rem;background:center/cover no-repeat}
+.gp-foot{display:grid;gap:.8rem;padding:2rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom))}
+.gp-foot>div:not([class*="-img"]){display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;font-size:.72rem;color:var(--mute)}
+.gp-sticky{display:none}
+@container (max-width:980px){.gp-top nav{display:none}.gp-top .gp-btn{margin-left:auto}.gp-guests>div{grid-template-columns:1fr 1fr}}
+@container (max-width:640px){
+  .gp-hero,.gp-lodges article,.gp-visit,.gp-why{grid-template-columns:1fr}
+  .gp-hero-img{min-height:18rem}.gp-lodge-img{min-height:16rem}.gp-lodge--r .gp-lodge-img{order:0}
+  .gp-guests>div{grid-template-columns:1fr}
+  .gp .t-stay{display:grid;grid-template-columns:1fr 1fr}.gp .t-stay button{grid-column:1/-1}.gp .t-stay input,.gp .t-stay select{min-width:0;width:100%}
+  .gp-top .gp-btn{display:none}
+  .gp-sticky{display:flex;gap:.5rem;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:var(--cream);border-top:1px solid var(--line)}
+  .gp-sticky>*{flex:1}
+}

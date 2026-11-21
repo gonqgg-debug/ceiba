@@ -34,6 +34,10 @@ import { renderSpa, SPA_FONTS } from './spa.js';
 import { renderEgeo, EGEO_FONTS } from './egeo.js';
 import { renderAlpes, ALPES_FONTS } from './alpes.js';
 import { renderArchivo, ARCHIVO_FONTS } from './archivo.js';
+import { renderClasico, CLASICO_FONTS } from './clasico.js';
+import { renderSelva, SELVA_FONTS } from './selva.js';
+import { renderFinca, FINCA_FONTS } from './finca.js';
+import { renderGlamping, GLAMPING_FONTS } from './glamping.js';
 export const DESIGNS = {
   estudio: { render: renderEstudio, fonts: ESTUDIO_FONTS, kinds: ['clinica'] },
   galeria: { render: renderGaleria, fonts: GALERIA_FONTS, kinds: ['clinica'] },
@@ -68,4 +72,8 @@ export const DESIGNS = {
   egeo: { render: renderEgeo, fonts: EGEO_FONTS, kinds: ['hotel'] },
   alpes: { render: renderAlpes, fonts: ALPES_FONTS, kinds: ['hotel'] },
   archivo: { render: renderArchivo, fonts: ARCHIVO_FONTS, kinds: ['hotel'] },
+  clasico: { render: renderClasico, fonts: CLASICO_FONTS, kinds: ['hotel'] },
+  selva: { render: renderSelva, fonts: SELVA_FONTS, kinds: ['hotel'] },
+  finca: { render: renderFinca, fonts: FINCA_FONTS, kinds: ['hotel'] },
+  glamping: { render: renderGlamping, fonts: GLAMPING_FONTS, kinds: ['hotel'] },
 };

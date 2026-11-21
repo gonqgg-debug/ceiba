@@ -1,0 +1,87 @@
+/* Diseño «Clásico» (lib/templates/clasico.js, raíz .cx.cs). Basado en The Wallace: negro, arena,
+   Bodoni, versalitas espaciadas y fotos superpuestas. */
+.cx.cs{--sand:#C2AC8C;--paper:#FBFAF7;--black:#0D0D0D;--ink:#1B1A18;--mute:#6F6A62;--line:#E4DED3;
+  --fh:'Bodoni Moda',Didot,Georgia,serif;--fb:'Montserrat',ui-sans-serif,system-ui,sans-serif;--pad:max(1.25rem,6cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:400 clamp(14px,1cqi,15.5px)/1.75 var(--fb);background:var(--paper);color:var(--ink);position:relative;overflow:clip}
+.cs h1,.cs h2,.cs h3{font-family:var(--fh);font-weight:400;color:inherit;margin:0;line-height:1.15;text-wrap:balance}
+.cs :where(p){margin:0}.cs a{color:inherit}
+.cs-btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.4em;padding:0 1.3em;border:1px solid var(--ink);color:var(--ink)!important;font:500 .68em/1 var(--fb);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:background-color .2s,color .2s}
+.cs-btn:hover{background:var(--ink);color:#fff!important}
+.cs-btn--w{border-color:#fff;color:#fff!important}.cs-btn--w:hover{background:#fff;color:var(--black)!important}
+.cs-link{font:500 .68em/1 var(--fb);letter-spacing:.2em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:.25em;justify-self:start}
+.cs-kick{font:500 .68em/1 var(--fb);letter-spacing:.24em;text-transform:uppercase;color:var(--a)}
+.cs a:focus-visible,.cs summary:focus-visible,.cs .t-stay :focus-visible{outline:1px solid var(--a);outline-offset:3px}
+.cs-logo{font:400 1.05rem/1 var(--fh);letter-spacing:.32em}
+/* hero negro */
+.cs-hero{background:var(--black);color:#fff;min-height:min(44cqi,36rem);display:grid;grid-template-rows:auto 1fr}
+.cs-top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem;padding:1.2rem var(--pad)}
+.cs-top nav{display:flex;gap:1.4rem;font:500 .66em/1 var(--fb);letter-spacing:.18em;text-transform:uppercase}
+.cs-top nav a,.cs-top nav span{text-decoration:none}
+.cs-top .cs-btn{justify-self:end}
+.cs-award{display:grid;gap:.6rem;justify-items:center;align-content:center;text-align:center;padding:2rem var(--pad) 4rem}
+.cs-big{font:400 clamp(3rem,6cqi,5rem)/1 var(--fh);color:var(--a)}
+.cs-award p:not(.cs-big){font:500 .7em/1 var(--fb);letter-spacing:.2em;text-transform:uppercase;opacity:.75}
+.cs-award h1{font:500 .82rem/1.6 var(--fb);letter-spacing:.24em;text-transform:uppercase;max-width:34em;margin-top:1rem}
+@media (prefers-reduced-motion:no-preference){.cs:not(.cs-still) .cs-award>*{animation:cs-in 1.2s var(--ease) both}.cs:not(.cs-still) .cs-award>:nth-child(2){animation-delay:.15s}.cs:not(.cs-still) .cs-award>:nth-child(3){animation-delay:.3s}}
+@keyframes cs-in{from{opacity:0;transform:translateY(10px)}}
+/* invitación con foto desplazada */
+.cs-invite{display:grid;grid-template-columns:1fr 1fr;gap:max(2rem,5cqi);align-items:center;padding:max(4rem,7cqi) var(--pad)}
+.cs-invite>div:not([class*="-img"]){display:grid;gap:1.2rem;justify-items:end;text-align:right}
+.cs-invite h2{font-size:clamp(1.8rem,3cqi,2.6rem)}
+.cs-invite p{color:var(--mute);max-width:26em}
+.cs-invite figure{margin:0;position:relative;padding:0 0 2rem 2rem}
+.cs-invite figure::before{content:"";position:absolute;left:0;bottom:0;width:70%;height:70%;border:1px solid var(--sand)}
+.cs-invite-img{position:relative;aspect-ratio:4/3;background:center/cover no-repeat}
+/* bloque arena */
+.cs-sand{position:relative;display:grid;grid-template-columns:.9fr 1.1fr;align-items:center;background:var(--sand);padding:max(3rem,5cqi) var(--pad);gap:max(2rem,4cqi)}
+.cs-sand-img{aspect-ratio:4/5;background:center/cover no-repeat;margin-top:-6rem;box-shadow:0 1.6rem 3rem -2rem #0007}
+.cs-sand>div:not([class*="-img"]){display:grid;gap:1rem;justify-items:start;color:#fff}
+.cs-sand h2{font-size:clamp(1.8rem,3cqi,2.6rem)}
+.cs-sand .cs-btn{border-color:#fff;color:#fff!important}
+/* habitaciones */
+.cs-rooms{padding:max(4rem,7cqi) var(--pad);text-align:center}
+.cs-rooms>h2{font-size:clamp(2rem,3.4cqi,3rem);margin:.4rem 0 2rem}
+.cs-rooms>div:not([class*="-img"]){display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:2.4rem;text-align:left}
+.cs-rooms article{display:grid;gap:.6rem;align-content:start}
+.cs-room-img{aspect-ratio:3/4;background:center/cover no-repeat;margin-bottom:.4rem}
+.cs-rooms h3{font-size:1.6rem}.cs-rooms article>p{color:var(--mute);font-size:.92em}
+.cs-meta{font-size:.74em!important;letter-spacing:.1em;text-transform:uppercase}
+/* barrio */
+.cs-hood{display:grid;grid-template-columns:1fr 1fr;background:var(--black);color:#fff}
+.cs-hood>div:not([class*="-img"]){padding:max(3rem,5cqi) var(--pad);display:grid;gap:1rem;align-content:center}
+.cs-hood h2{font-size:clamp(1.8rem,3cqi,2.6rem)}
+.cs-hood p{opacity:.8}.cs-hood ul{margin:0;padding-left:1rem;display:grid;gap:.3rem;opacity:.85}
+.cs-hood-img{min-height:24rem;background:center/cover no-repeat}
+/* reserva */
+.cs-book{padding:max(3rem,5cqi) var(--pad);display:grid;gap:1.4rem;justify-items:center;text-align:center;border-bottom:1px solid var(--line)}
+.cs-book h2{font-size:2rem}
+.cs .t-stay{display:flex;flex-wrap:wrap;align-items:end;justify-content:center;gap:1.2rem;width:min(56rem,100%)}
+.cs .t-stay label{display:grid;gap:.3rem;text-align:left;font:500 .62rem/1 var(--fb);letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.cs .t-stay input,.cs .t-stay select{font:400 1rem var(--fh);color:var(--ink);border:0;border-bottom:1px solid var(--ink);background:transparent;padding:.4rem 0;min-width:9rem}
+.cs .t-stay button{min-height:2.6rem;padding:0 1.4rem;border:1px solid var(--ink);background:var(--ink);color:#fff;font:500 .66rem/1 var(--fb);letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
+/* opiniones, preguntas, pie */
+.cs-revs{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding:max(3.5rem,6cqi) var(--pad);text-align:center}
+.cs-revs blockquote{margin:0;display:grid;gap:.6rem}.cs-revs p{font:italic 400 1.2rem/1.45 var(--fh)}
+.cs-revs cite{font:500 .66em/1 var(--fb);letter-spacing:.2em;text-transform:uppercase;font-style:normal;color:var(--mute)}
+.cs-faq{max-width:46rem;margin:0 auto;padding:0 var(--pad) max(3rem,5cqi);box-sizing:content-box}
+.cs-faq h2{font-size:1.8rem;text-align:center;margin-bottom:1rem}
+.cs-faq details{border-bottom:1px solid var(--line)}
+.cs-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:.9rem 0;font:400 1.1rem/1.3 var(--fh)}
+.cs-faq summary::-webkit-details-marker{display:none}
+.cs-faq summary::after{content:"+";color:var(--a)}
+.cs-faq details[open] summary::after{content:"−"}
+.cs-faq details p{color:var(--mute);padding-bottom:1rem}
+.cs-foot{display:grid;gap:.6rem;justify-items:center;text-align:center;padding:3rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom));background:var(--black);color:#fff}
+.cs-foot a{text-decoration:none}
+.cs-foot>div:not([class*="-img"]){display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem 1.2rem;font-size:.7rem;opacity:.6;margin-top:1rem}
+.cs-sticky{display:none}
+@container (max-width:980px){.cs-top nav{display:none}.cs-top{grid-template-columns:auto 1fr}.cs-revs{grid-template-columns:1fr}}
+@container (max-width:640px){
+  .cs-top .cs-btn{display:none}
+  .cs-invite,.cs-sand,.cs-hood{grid-template-columns:1fr}
+  .cs-invite>div{justify-items:start;text-align:left}
+  .cs-sand-img{margin-top:0}
+  .cs .t-stay{display:grid;grid-template-columns:1fr 1fr}.cs .t-stay button{grid-column:1/-1}.cs .t-stay input,.cs .t-stay select{min-width:0;width:100%}
+  .cs-sticky{display:flex;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:var(--paper);border-top:1px solid var(--line)}
+  .cs-sticky>*{flex:1}
+}

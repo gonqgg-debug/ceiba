@@ -1,0 +1,84 @@
+/* Diseño «Selva» (lib/templates/selva.js, raíz .cx.sv). Basado en Samsara Ubud: carbón oscuro,
+   palabras enormes espaciadas como marca de agua, naturaleza a todo lo ancho y los dueños. */
+.cx.sv{--coal:#24252A;--coal2:#2E3036;--fg:#E9E6DF;--mute:#A4A29C;--leaf:var(--a);
+  --fh:'Cinzel',Georgia,serif;--fb:'Nunito Sans',ui-sans-serif,system-ui,sans-serif;--pad:max(1.25rem,7cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:300 clamp(14.5px,1.02cqi,16px)/1.8 var(--fb);background:var(--coal);color:var(--fg);position:relative;overflow:clip}
+.sv h1,.sv h2,.sv h3{font-family:var(--fh);font-weight:400;color:inherit;margin:0;line-height:1.25;letter-spacing:.06em;text-wrap:balance}
+.sv :where(p){margin:0}.sv a{color:inherit}
+.sv-btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.5em;padding:0 1.3em;background:var(--leaf);color:var(--coal)!important;font:600 .7em/1 var(--fb);letter-spacing:.18em;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:filter .2s}
+.sv-btn:hover{filter:brightness(1.1)}
+.sv-btn--line{background:transparent;color:var(--fg)!important;box-shadow:inset 0 0 0 1px #ffffff55}
+.sv a:focus-visible,.sv summary:focus-visible,.sv .t-stay :focus-visible{outline:1px solid var(--leaf);outline-offset:3px}
+.sv-kick{font:400 .78rem/1 var(--fh);letter-spacing:.3em;color:var(--leaf)}
+.sv-water{position:absolute;left:var(--pad);top:1rem;margin:0;font:400 clamp(4rem,13cqi,11rem)/1 var(--fh);letter-spacing:.24em;color:#ffffff0b;white-space:nowrap;pointer-events:none;text-transform:capitalize}
+.sv-top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:2rem;padding:1rem var(--pad);background:#24252ae8}
+.sv-logo{font:400 1.2rem/1 var(--fh);letter-spacing:.3em;text-transform:uppercase}
+.sv-top nav{display:flex;gap:1.6rem;margin-left:auto;font:400 .7em/1 var(--fb);letter-spacing:.2em;text-transform:uppercase}
+.sv-top nav a,.sv-top nav span{text-decoration:none}
+.sv-hero{position:relative;min-height:min(52cqi,44rem);display:grid;align-items:end;overflow:hidden}
+.sv-hero-img{position:absolute;inset:0;background:center/cover no-repeat;filter:brightness(.75) saturate(.9)}
+.sv-hero h1{position:relative;font-size:clamp(1.6rem,3cqi,2.8rem);padding:3rem var(--pad);max-width:22em}
+@media (prefers-reduced-motion:no-preference){.sv:not(.sv-still) .sv-hero-img{animation:sv-mist 3s var(--ease) both}}
+@keyframes sv-mist{from{filter:brightness(.3) blur(6px);transform:scale(1.05)}}
+/* historia con marca de agua */
+.sv-story{position:relative;padding:max(6rem,10cqi) var(--pad) max(4rem,7cqi)}
+.sv-story>div:not([class*="-img"]){position:relative;display:grid;gap:2rem;max-width:44rem;margin-left:auto}
+.sv-story h2{font-size:clamp(1.3rem,2.2cqi,1.9rem)}
+.sv-story ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.sv-story li{display:grid;border-top:1px solid #ffffff22;padding-top:.7rem}.sv-story b{font-weight:600}.sv-story span{color:var(--mute);font-size:.88em}
+/* villas */
+.sv-villas{position:relative;padding:max(6rem,10cqi) var(--pad) max(3rem,5cqi);background:var(--coal2);display:grid;gap:max(3rem,6cqi)}
+.sv-villa{position:relative;display:grid;grid-template-columns:1.2fr .8fr;gap:max(2rem,5cqi);align-items:center}
+.sv-villa--r .sv-villa-img{order:2}
+.sv-villa-img{aspect-ratio:16/11;background:center/cover no-repeat}
+.sv-villa>div:not([class*="-img"]){display:grid;gap:.8rem;justify-items:start}
+.sv-villa h3{font-size:clamp(1.5rem,2.4cqi,2.2rem)}
+.sv-villa p{color:var(--mute)}
+.sv-meta{font-size:.78em!important;letter-spacing:.1em;text-transform:uppercase}
+/* foto a todo lo ancho */
+.sv-wide{position:relative}
+.sv-wide-img{aspect-ratio:21/8;background:center/cover no-repeat}
+.sv-wide p{position:absolute;left:var(--pad);bottom:1.4rem;font:400 1.1rem/1.4 var(--fh);letter-spacing:.06em;text-shadow:0 2px 12px #000a;max-width:30em}
+/* dueños */
+.sv-owners{display:grid;grid-template-columns:.8fr 1.2fr;gap:max(2rem,5cqi);align-items:center;padding:max(4rem,7cqi) var(--pad)}
+.sv-owners-img{aspect-ratio:4/5;background:center/cover no-repeat;filter:grayscale(.3)}
+.sv-owners>div:not([class*="-img"]){display:grid;gap:1rem}
+.sv-owners h2{font-size:clamp(1.6rem,2.6cqi,2.4rem)}
+.sv-owners p:not(.sv-kick){color:var(--mute)}
+/* reserva */
+.sv-book{padding:max(3rem,5cqi) var(--pad);background:var(--coal2);display:grid;gap:1.4rem;justify-items:center;text-align:center}
+.sv-book h2{font-size:clamp(1.5rem,2.4cqi,2rem)}
+.sv .t-stay{display:flex;flex-wrap:wrap;align-items:end;justify-content:center;gap:1.2rem;width:min(56rem,100%)}
+.sv .t-stay label{display:grid;gap:.3rem;text-align:left;font:400 .64rem/1 var(--fb);letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.sv .t-stay input,.sv .t-stay select{font:300 1rem var(--fb);color:var(--fg);border:0;border-bottom:1px solid #ffffff44;background:transparent;padding:.4rem 0;min-width:9rem;color-scheme:dark}
+.sv .t-stay select option{color:#222}
+.sv .t-stay button{min-height:2.7rem;padding:0 1.4rem;border:0;background:var(--leaf);color:var(--coal);font:600 .68rem/1 var(--fb);letter-spacing:.18em;text-transform:uppercase;cursor:pointer}
+.sv-amen{font-size:.82em;color:var(--mute);letter-spacing:.06em}
+/* opiniones, preguntas, visita */
+.sv-revs{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding:max(3.5rem,6cqi) var(--pad)}
+.sv-revs blockquote{margin:0;display:grid;gap:.6rem}.sv-revs p{font:400 1.05rem/1.6 var(--fh);letter-spacing:.02em}
+.sv-revs cite{font:400 .68em/1 var(--fb);letter-spacing:.2em;text-transform:uppercase;font-style:normal;color:var(--leaf)}
+.sv-faq{max-width:46rem;margin:0 auto;padding:0 var(--pad) max(3rem,5cqi);box-sizing:content-box}
+.sv-faq h2{font-size:1.6rem;margin-bottom:1rem}
+.sv-faq details{border-bottom:1px solid #ffffff1f}
+.sv-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:.9rem 0;font-weight:600}
+.sv-faq summary::-webkit-details-marker{display:none}
+.sv-faq summary::after{content:"+";color:var(--leaf)}
+.sv-faq details[open] summary::after{content:"−"}
+.sv-faq details p{color:var(--mute);padding-bottom:1rem}
+.sv-visit{padding:max(3.5rem,6cqi) var(--pad);display:grid;gap:.5rem;justify-items:center;text-align:center;background:var(--coal2)}
+.sv-visit h2{font-size:clamp(1.6rem,2.6cqi,2.4rem);margin-bottom:.4rem}
+.sv-visit p{color:var(--mute)}.sv-visit .sv-btn{margin-top:.8rem}
+.sv-foot{display:grid;gap:.8rem;justify-items:center;text-align:center;padding:2rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom))}
+.sv-foot>div:not([class*="-img"]){display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem 1.2rem;font-size:.7rem;color:var(--mute)}
+.sv-sticky{display:none}
+@container (max-width:980px){.sv-top nav{display:none}.sv-top .sv-btn{margin-left:auto}.sv-revs{grid-template-columns:1fr}}
+@container (max-width:640px){
+  .sv-villa,.sv-owners{grid-template-columns:1fr}.sv-villa--r .sv-villa-img{order:0}
+  .sv-story ul{grid-template-columns:1fr}
+  .sv-wide-img{aspect-ratio:4/3}
+  .sv .t-stay{display:grid;grid-template-columns:1fr 1fr}.sv .t-stay button{grid-column:1/-1}.sv .t-stay input,.sv .t-stay select{min-width:0;width:100%}
+  .sv-top .sv-btn{display:none}
+  .sv-sticky{display:flex;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:var(--coal)}
+  .sv-sticky>*{flex:1}
+}
