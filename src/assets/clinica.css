@@ -733,3 +733,26 @@
   .cx-mq-track em{font-size:1.25em}
   .cx--expresiva .cx-stats b{font-size:3em}
 }
+
+/* =====================================================================
+   Ritmo: bandas de color de lado a lado para que las secciones no se
+   mezclen. Las secciones se alternan solas (blanco / tono suave de la marca)
+   y precios y la cita son pausas oscuras. Ancho completo sin envolturas:
+   box-shadow + clip-path (el sitio recorta el desborde horizontal).
+   ===================================================================== */
+.cx{--band:color-mix(in srgb,var(--a) 6%,var(--bg))}
+.cx--dark{--band:color-mix(in srgb,var(--a) 9%,var(--bg))}
+.cx > section.cx-sec:nth-of-type(even){background:var(--band);box-shadow:0 0 0 100vmax var(--band);clip-path:inset(0 -100vmax)}
+/* lo que tiene fondo suave propio se vuelve blanco sobre una banda */
+.cx > section.cx-sec:nth-of-type(even) :is(.cx-ai-in,.cx-visit-card,.cx-finder-out > div,.cx-offer--hl){background:var(--bg)}
+.cx > section.cx-sec:nth-of-type(even) .cx-finder-in{background:var(--bg);border-color:transparent}
+/* pausas oscuras de lado a lado: precios y cita */
+.cx > section.cx-sec.cx-prices:nth-of-type(n),.cx > section.cx-sec.cx-book:nth-of-type(n){background:var(--ink);box-shadow:0 0 0 100vmax var(--ink);clip-path:inset(0 -100vmax);color:#fff}
+.cx-prices-in,.cx-book-in{background:none!important;padding:0!important;border-radius:0}
+.cx--dark > section.cx-sec.cx-prices:nth-of-type(n),.cx--dark > section.cx-sec.cx-book:nth-of-type(n){--ink:#060B0A}
+/* la cita va pegada al pie (los dos oscuros): una línea fina los separa */
+.cx > section.cx-book + footer.cx-foot{border-top:1px solid rgba(255,255,255,.08)}
+/* menos aire repetido: la banda ya separa */
+.cx > section.cx-sec{padding-top:5.5em;padding-bottom:5.5em}
+.cx-benefits{margin-bottom:0}
+@container (max-width:640px){.cx > section.cx-sec{padding-top:3.6em;padding-bottom:3.6em}}
