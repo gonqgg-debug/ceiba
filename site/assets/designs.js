@@ -22,6 +22,10 @@ import { renderBanquete, BANQUETE_FONTS } from './banquete.js';
 import { renderFantasia, FANTASIA_FONTS } from './fantasia.js';
 import { renderBowl, BOWL_FONTS } from './bowl.js';
 import { renderHelado, HELADO_FONTS } from './helado.js';
+import { renderTrazo, TRAZO_FONTS } from './trazo.js';
+import { renderTienda, TIENDA_FONTS } from './tienda.js';
+import { renderFijo, FIJO_FONTS } from './fijo.js';
+import { renderNoche, NOCHE_FONTS } from './noche.js';
 export const DESIGNS = {
   estudio: { render: renderEstudio, fonts: ESTUDIO_FONTS, kinds: ['clinica'] },
   galeria: { render: renderGaleria, fonts: GALERIA_FONTS, kinds: ['clinica'] },
@@ -44,4 +48,8 @@ export const DESIGNS = {
   fantasia: { render: renderFantasia, fonts: FANTASIA_FONTS, kinds: ['restaurante'] },
   bowl: { render: renderBowl, fonts: BOWL_FONTS, kinds: ['restaurante'] },
   helado: { render: renderHelado, fonts: HELADO_FONTS, kinds: ['restaurante'] },
+  trazo: { render: renderTrazo, fonts: TRAZO_FONTS, kinds: ['restaurante'] },
+  tienda: { render: renderTienda, fonts: TIENDA_FONTS, kinds: ['restaurante'] },
+  fijo: { render: renderFijo, fonts: FIJO_FONTS, kinds: ['restaurante'] },
+  noche: { render: renderNoche, fonts: NOCHE_FONTS, kinds: ['restaurante'] },
 };

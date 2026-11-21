@@ -1,0 +1,81 @@
+/* Diseño «Trazo» (lib/templates/trazo.js, raíz .cx.tz). Basado en Osteria Angelina: menú vertical,
+   firma manuscrita, mucho aire y panel de reservación a pantalla completa que se desliza. */
+.cx.tz{--paper:#FBF8F2;--sand:#EFE7DA;--ink:#2A2422;--mute:#7A706A;
+  --fh:'EB Garamond',Georgia,serif;--sign:'Mrs Saint Delafield',cursive;--fb:'Archivo Narrow',ui-sans-serif,system-ui,sans-serif;--pad:max(1.25rem,6cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:400 clamp(14.5px,1.02cqi,16px)/1.7 var(--fb);background:var(--paper);color:var(--ink);position:relative;overflow:clip;display:grid;grid-template-columns:12rem 1fr}
+.tz h1,.tz h2,.tz h3{font-family:var(--fh);font-weight:400;color:inherit;margin:0;line-height:1.15;text-wrap:balance}
+.tz :where(p){margin:0}.tz a{color:inherit}
+.tz-btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.6em;padding:0 1.4em;border:1px solid var(--ink);background:transparent;color:var(--ink);font:500 .74em/1 var(--fb);letter-spacing:.18em;text-transform:uppercase;text-decoration:none;cursor:pointer;white-space:nowrap;transition:background-color .2s,color .2s}
+.tz-btn:hover{background:var(--ink);color:var(--paper)}
+.tz-link{font:500 .74em/1 var(--fb);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:.2em;justify-self:start}
+.tz a:focus-visible,.tz label:focus-visible,.tz summary:focus-visible{outline:1.5px solid var(--a);outline-offset:3px}
+.tz-kick{font:500 .72em/1 var(--fb);letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.tz-sign{font:400 3rem/1 var(--sign);color:var(--a)}
+/* menú lateral */
+.tz-side{position:sticky;top:0;height:100dvh;max-height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:1.6rem 1.2rem;border-right:1px solid #0001}
+.tz-side nav{display:grid;gap:.5rem;font:500 .74em/1.4 var(--fb);letter-spacing:.16em;text-transform:uppercase}
+.tz-side nav a,.tz-side nav span{text-decoration:none}
+.tz-open{cursor:pointer;color:var(--a);margin-top:.8rem}
+.tz-main{min-width:0}
+/* hero */
+.tz-hero{display:grid;grid-template-columns:1.3fr .7fr;min-height:min(46cqi,38rem)}
+.tz-hero-img{background:center/cover no-repeat}
+.tz-hero>div:not([class*="-img"]){display:grid;gap:1.6rem;align-content:end;justify-items:start;padding:2rem var(--pad) 3rem}
+.tz-hero h1{font-size:clamp(2rem,3.2cqi,3rem);font-style:italic}
+@media (prefers-reduced-motion:no-preference){.tz:not(.tz-still) .tz-hero-img{animation:tz-fade 1.4s var(--ease) both}}
+@keyframes tz-fade{from{opacity:0;filter:grayscale(1)}}
+/* filas */
+.tz-row{display:grid;grid-template-columns:1fr 1fr;gap:max(2rem,6cqi);align-items:center;padding:max(4rem,7cqi) var(--pad)}
+.tz-row--r figure{order:-1}
+.tz-row figure{margin:0;padding:1.4rem;background:var(--sand)}
+.tz-row-img{aspect-ratio:4/5;background:center/cover no-repeat}
+.tz-row-copy{display:grid;gap:1rem;max-width:30rem}
+.tz-row h2{font-size:clamp(1.6rem,2.6cqi,2.4rem)}
+.tz-row-copy>p:not(.tz-kick){color:var(--mute)}
+.tz-menu{display:grid;gap:1.4rem;margin-top:.6rem}
+.tz-menu h3{font-size:1.25rem;font-style:italic;margin-bottom:.3rem}
+.tz-menu p{display:flex;justify-content:space-between;gap:1rem;font-size:.92em;border-bottom:1px dotted #0002;padding:.2rem 0}
+.tz-menu em{font-style:normal;color:var(--mute)}
+/* cita */
+.tz-quote{padding:max(4rem,7cqi) var(--pad);text-align:center;background:var(--sand)}
+.tz-quote blockquote{margin:0 auto;max-width:34em;display:grid;gap:1rem}
+.tz-quote p{font:italic 400 clamp(1.4rem,2.4cqi,2.2rem)/1.35 var(--fh)}
+.tz-quote cite{font:500 .72em/1 var(--fb);letter-spacing:.2em;text-transform:uppercase;font-style:normal;color:var(--mute)}
+/* preguntas y visita */
+.tz-faq{max-width:40rem;margin:0 auto;padding:max(3rem,5cqi) var(--pad);box-sizing:content-box}
+.tz-faq details{border-bottom:1px solid #0002}
+.tz-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:.9rem 0;font:400 1.15rem/1.3 var(--fh)}
+.tz-faq summary::-webkit-details-marker{display:none}
+.tz-faq summary::after{content:"+";color:var(--a)}
+.tz-faq details[open] summary::after{content:"−"}
+.tz-faq details p{color:var(--mute);padding-bottom:1rem}
+.tz-visit{padding:max(3rem,5cqi) var(--pad);display:grid;gap:.5rem;justify-items:start;border-top:1px solid #0001}
+.tz-visit p:not(.tz-kick){font:400 1.15rem/1.4 var(--fh)}
+.tz-foot{display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;padding:1.4rem var(--pad) calc(1.4rem + env(safe-area-inset-bottom));font-size:.72rem;color:var(--mute)}
+/* panel de reservación */
+.tz-panel{position:fixed;inset:0;z-index:60;display:grid;grid-template-columns:1fr 1fr;background:var(--paper);transform:translateX(100%);visibility:hidden;transition:transform .7s var(--ease),visibility 0s .7s}
+.tz-toggle:checked~.tz-panel{transform:none;visibility:visible;transition:transform .7s var(--ease)}
+.tz-panel-img{background:center/cover no-repeat}
+.tz-panel-in{display:grid;gap:1.2rem;align-content:center;padding:3rem max(1.5rem,6cqi);overflow:auto}
+.tz-panel h2{font-size:clamp(2rem,3.2cqi,3rem)}
+.tz-panel form{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.tz-panel label:not(.tz-close){display:grid;gap:.3rem;font:500 .7em/1 var(--fb);letter-spacing:.14em;text-transform:uppercase}
+.tz-panel input,.tz-panel select{font:400 1rem var(--fh);border:0;border-bottom:1px solid var(--ink);background:transparent;padding:.4rem 0;color:var(--ink);border-radius:0}
+.tz-panel label:first-child,.tz-panel form .tz-btn{grid-column:1/-1}
+.tz-close{position:absolute;right:1.4rem;top:1rem;font:300 2.4rem/1 var(--fh);cursor:pointer;z-index:2}
+.tz-small{font-size:.8em;color:var(--mute)}
+.tz-sticky{display:none}
+@container (max-width:980px){
+  .cx.tz{grid-template-columns:1fr}
+  .tz-side{position:static;height:auto;flex-direction:row;align-items:center;border-right:0;border-bottom:1px solid #0001;padding:.8rem var(--pad)}
+  .tz-side nav{grid-auto-flow:column;gap:1.2rem}.tz-side .tz-sign{font-size:2rem;order:-1}
+  .tz-side nav a,.tz-side nav span{display:none}
+}
+@container (max-width:640px){
+  .tz-hero,.tz-row,.tz-panel{grid-template-columns:1fr}
+  .tz-hero-img{min-height:20rem}
+  .tz-row--r figure{order:0}
+  .tz-panel-img{display:none}
+  .tz-sticky{display:flex;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:var(--paper);border-top:1px solid #0002}
+  .tz-sticky .tz-btn{flex:1}
+}

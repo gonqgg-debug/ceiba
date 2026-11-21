@@ -416,6 +416,30 @@
         if (p) { sh.querySelectorAll('[data-bw-pick]').forEach(x => x.setAttribute('aria-pressed', x === p)); sh.querySelectorAll('[data-bw-det]').forEach(d => { d.hidden = d.dataset.bwDet !== p.dataset.bwPick; }); }
       });
     });
+    // «Tienda»: filtros por etiqueta y carrito que arma el pedido para WhatsApp
+    document.querySelectorAll('.td:not([data-tb])').forEach(root => {
+      root.dataset.tb = 1;
+      const cart = new Map(), money = v => { const n = parseFloat(String(v).replace(/[^\d.]/g, '')); return isNaN(n) ? 0 : n; };
+      let kb = {}; try { kb = JSON.parse(root.querySelector('.t-kb')?.textContent || '{}'); } catch {}
+      const paint = () => {
+        const lines = root.querySelector('[data-t-lines]'), items = [...cart.values()];
+        root.querySelectorAll('[data-t-count]').forEach(x => { x.textContent = items.reduce((s, i) => s + i.q, 0); });
+        root.querySelector('[data-t-total]').textContent = '$' + items.reduce((s, i) => s + i.q * money(i.p), 0).toLocaleString('es-MX');
+        lines.innerHTML = items.length ? items.map(i => `<li><span>${i.q} × ${esc(i.n)}</span><span>${esc(i.p)} <button type="button" data-t-del="${esc(i.n)}" aria-label="Quitar ${esc(i.n)}">×</button></span></li>`).join('') : '<li class="td-empty">Agrega productos con el botón «Agregar».</li>';
+      };
+      root.addEventListener('click', e => {
+        const add = e.target.closest('[data-t-add]');
+        if (add) { const n = add.dataset.tAdd, it = cart.get(n) || { n, p: add.dataset.price, q: 0 }; it.q++; cart.set(n, it); add.classList.add('added'); add.textContent = `Agregado (${it.q})`; paint(); return; }
+        const del = e.target.closest('[data-t-del]');
+        if (del) { cart.delete(del.dataset.tDel); root.querySelectorAll(`[data-t-add]`).forEach(b => { if (!cart.has(b.dataset.tAdd)) { b.classList.remove('added'); b.textContent = 'Agregar'; } }); paint(); return; }
+        const tag = e.target.closest('[data-td-tag]');
+        if (tag) { root.querySelectorAll('[data-td-tag]').forEach(x => x.setAttribute('aria-selected', x === tag)); root.querySelectorAll('.td-row>li[data-tags]').forEach(li => { li.hidden = !!tag.dataset.tdTag && !li.dataset.tags.split('|').includes(tag.dataset.tdTag); }); return; }
+        if (e.target.closest('[data-t-cartsend]') && cart.size && kb.wa) {
+          const msg = `Hola, quiero hacer este pedido en ${kb.name || root.dataset.name}:\n${[...cart.values()].map(i => `• ${i.q} × ${i.n} (${i.p})`).join('\n')}`;
+          window.open(`https://wa.me/${kb.wa}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+        }
+      });
+    });
     document.querySelectorAll('[data-t-flip]:not([data-tb])').forEach(b => { b.dataset.tb = 1; b.addEventListener('click', () => b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true')); });
     document.querySelectorAll('[data-t-case] input:not([data-tb])').forEach(r => { r.dataset.tb = 1; r.addEventListener('input', () => r.parentElement.style.setProperty('--p', r.value + '%')); });
     document.querySelectorAll('[data-t-tabs]:not([data-tb])').forEach(box => {

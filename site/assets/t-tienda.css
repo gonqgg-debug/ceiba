@@ -1,0 +1,85 @@
+/* Diseño «Tienda» (lib/templates/tienda.js, raíz .cx.td). Basado en Rebel Cheese: titular grueso
+   en mayúsculas, rosa claro, verde azulado, tarjetas de producto con «Agregar» y carrito. */
+.cx.td{--blush:#FBEDE7;--ink:#1E1E1E;--mute:#666;--line:#EADBD3;
+  --fh:'Archivo Black',Impact,sans-serif;--fb:'Archivo',ui-sans-serif,system-ui,sans-serif;--pad:max(1.25rem,5cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:400 clamp(14.5px,1.02cqi,16px)/1.55 var(--fb);background:#fff;color:var(--ink);position:relative;overflow:clip}
+.td h1,.td h2,.td h3{font-family:var(--fh);font-weight:400;color:inherit;margin:0;line-height:1;letter-spacing:-.01em;text-transform:uppercase;text-wrap:balance}
+.td :where(p){margin:0}.td a{color:inherit}
+.td svg{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.td-btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;min-height:2.7em;padding:0 1.3em;border-radius:999px;background:var(--a);color:#fff!important;font:600 .84em/1 var(--fb);text-decoration:none;border:0;cursor:pointer;white-space:nowrap;transition:filter .2s}
+.td-btn:hover{filter:brightness(1.12)}
+.td-btn--line{background:transparent;color:var(--a)!important;box-shadow:inset 0 0 0 1.5px var(--a)}
+.td-wa{fill:currentColor!important;stroke:none!important}
+.td a:focus-visible,.td button:focus-visible,.td summary:focus-visible{outline:2px solid var(--a);outline-offset:2px}
+.td-bar{background:var(--a);color:#fff;text-align:center;font-size:.8em;padding:.45rem var(--pad)}
+.td-top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:2rem;padding:.8rem var(--pad);background:#ffffffee;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.td-logo{font:400 1.3rem/1 var(--fh);text-transform:uppercase;letter-spacing:.02em}
+.td-top nav{display:flex;gap:1.4rem;margin:0 auto;font-size:.88em;font-weight:500}
+.td-top nav a,.td-top nav span{text-decoration:none}
+.td-cart-btn{display:flex;align-items:center;gap:.3rem;padding:.4rem .8rem;border-radius:999px;background:var(--blush);text-decoration:none;font-weight:600}
+/* hero */
+.td-hero{position:relative;min-height:min(40cqi,32rem);display:grid;align-items:center;color:#fff;overflow:hidden}
+.td-hero-img{position:absolute;inset:0;background:center/cover no-repeat}
+.td-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#000a,transparent 70%)}
+.td-hero>div:not([class*="-img"]){position:relative;z-index:1;display:grid;gap:1rem;justify-items:start;padding:3rem var(--pad);max-width:40rem}
+.td-hero h1{font-size:clamp(2.4rem,5cqi,4.6rem)}
+.td-kick{font-size:.74em;font-weight:600;letter-spacing:.14em;text-transform:uppercase;opacity:.9}
+@media (prefers-reduced-motion:no-preference){.td:not(.td-still) .td-hero h1{animation:td-in .9s var(--ease) both}}
+@keyframes td-in{from{opacity:0;transform:translateX(-20px)}}
+/* beneficios y citas */
+.td-perks{list-style:none;margin:0;padding:1rem var(--pad);display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem 2rem;background:var(--blush);font-size:.78em;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.td-perks li{display:flex;align-items:center;gap:.4rem}.td-perks svg{color:var(--a)}
+.td-press{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;padding:1.6rem var(--pad);border-bottom:1px solid var(--line)}
+.td-press blockquote{margin:0;display:grid;gap:.3rem;font-size:.84em}.td-press b{color:#E2A400;letter-spacing:.1em}
+.td-press cite{font-style:normal;color:var(--mute);font-size:.9em}
+.td-score{grid-column:1/-1;text-align:center;font-size:.84em;font-weight:600;color:var(--a)}
+/* los más pedidos */
+.td-best{padding:max(2.5rem,4cqi) 0;background:var(--blush)}
+.td-best-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:1rem;padding:0 var(--pad);margin-bottom:1.2rem}
+.td-best h2{font-size:clamp(1.8rem,3.4cqi,3rem)}
+.td-filters{display:flex;flex-wrap:wrap;gap:.4rem}
+.td-filters button{font:600 .76em/1 var(--fb);padding:.5rem .9rem;border-radius:999px;border:1.5px solid var(--a);background:#fff;color:var(--a);cursor:pointer}
+.td-filters button[aria-selected="true"]{background:var(--a);color:#fff}
+.td-row{list-style:none;margin:0;padding:0 var(--pad) .6rem;display:grid;grid-auto-flow:column;grid-auto-columns:min(14rem,62%);gap:.8rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 var(--pad)}
+.td-row>li{scroll-snap-align:start;background:#fff;border-radius:.6rem;display:grid;grid-template-rows:auto 1fr auto;overflow:hidden;box-shadow:0 0 0 1px var(--line)}
+.td-card-img{aspect-ratio:1;background:center/cover no-repeat}
+.td-row li>div:not([class*="-img"]){padding:.7rem .8rem;display:grid;gap:.2rem;align-content:start}
+.td-row b{font-weight:600;font-size:.92em}.td-row small{font-size:.78em;color:var(--mute)}.td-row span{font-weight:600}
+.td-add{margin:0 .8rem .8rem;min-height:2.4rem;border:0;border-radius:.4rem;background:var(--a);color:#fff;font:600 .78em/1 var(--fb);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:transform .15s}
+.td-add:active{transform:scale(.96)}
+.td-add.added{background:var(--ink)}
+.td-promo{background:#C97C5D!important;color:#fff;padding:1.2rem;display:grid!important;align-content:start;gap:.6rem}
+.td-promo p{font-size:.72em;font-weight:600;letter-spacing:.14em;text-transform:uppercase}.td-promo h3{font-size:1.6rem}.td-promo span{font-size:.84em!important;font-weight:400!important}
+/* carrito */
+.td-cart{max-width:36rem;margin:2rem auto;padding:1.4rem;border:2px dashed var(--a);border-radius:.8rem;display:grid;gap:.8rem}
+.td-cart h2{font-size:1.6rem}
+.td-cart ul{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
+.td-cart li{display:flex;justify-content:space-between;gap:1rem;font-size:.92em}
+.td-cart li button{border:0;background:none;color:var(--mute);cursor:pointer;font-size:1rem}
+.td-empty{color:var(--mute)}
+.td-total{font-size:.92em}.td-total b{font-size:1.2em}
+/* historia, preguntas, visita */
+.td-story{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;padding:max(2.5rem,4cqi) var(--pad)}
+.td-story>div:not([class*="-img"]){display:grid;gap:1rem}.td-story h2{font-size:clamp(1.8rem,3cqi,2.6rem)}.td-story p{color:var(--mute)}
+.td-story-img{aspect-ratio:4/3;border-radius:.8rem;background:center/cover no-repeat}
+.td-faq{max-width:46rem;margin:0 auto;padding:0 var(--pad) max(2.5rem,4cqi);box-sizing:content-box}
+.td-faq h2{font-size:1.8rem;margin-bottom:1rem}
+.td-faq details{border-top:1px solid var(--line)}
+.td-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:.9rem 0;font-weight:600}
+.td-faq summary::-webkit-details-marker{display:none}
+.td-faq summary::after{content:"+";color:var(--a)}
+.td-faq details[open] summary::after{content:"−"}
+.td-faq details p{color:var(--mute);padding-bottom:1rem}
+.td-visit{background:var(--a);color:#fff;padding:max(2.5rem,4cqi) var(--pad);display:grid;gap:.6rem;justify-items:center;text-align:center}
+.td-visit h2{font-size:clamp(1.8rem,3cqi,2.6rem)}
+.td-visit .td-btn--line{color:#fff!important;box-shadow:inset 0 0 0 1.5px #fff}
+.td-foot{display:grid;gap:.6rem;padding:2rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom))}
+.td-foot>div:not([class*="-img"]){display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;font-size:.72rem;color:var(--mute)}
+.td-sticky{display:none}
+@container (max-width:980px){.td-top nav{display:none}.td-cart-btn{margin-left:auto}.td-press{grid-template-columns:1fr 1fr}}
+@container (max-width:640px){
+  .td-story{grid-template-columns:1fr}.td-press{grid-template-columns:1fr}
+  .td-cart{margin:1.6rem var(--pad)}
+  .td-sticky{display:flex;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line)}
+  .td-sticky .td-btn{flex:1}
+}

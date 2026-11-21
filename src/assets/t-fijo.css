@@ -1,0 +1,67 @@
+/* Diseño «Fijo» (lib/templates/fijo.js, raíz .cx.fj). Basado en Bresca: foto fija al fondo con
+   bloques azul marino y ocre que pasan encima, versalitas espaciadas y serif clásica. */
+.cx.fj{--navy:#0F1E3D;--ochre:var(--a);--paper:#FBF7EF;--ink:#14213D;--mute:#5B6276;
+  --fh:'Josefin Sans',ui-sans-serif,system-ui,sans-serif;--fs:'Libre Baskerville',Georgia,serif;--fb:'Josefin Sans',ui-sans-serif,system-ui,sans-serif;--pad:max(1.25rem,6cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:300 clamp(14.5px,1.02cqi,16px)/1.7 var(--fb);background:var(--paper);color:var(--ink);position:relative;overflow:clip}
+.fj h1,.fj h2,.fj h3{font-family:var(--fh);font-weight:400;color:inherit;margin:0;line-height:1.15;letter-spacing:.18em;text-transform:uppercase;text-wrap:balance}
+.fj :where(p){margin:0}.fj a{color:inherit}
+.fj-btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.6em;padding:0 1.4em;background:var(--ochre);color:var(--navy)!important;font:600 .72em/1 var(--fb);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:filter .2s}
+.fj-btn:hover{filter:brightness(1.08)}
+.fj-btn--light{background:#fff}
+.fj-btn--line{background:transparent;color:inherit!important;box-shadow:inset 0 0 0 1px currentColor}
+.fj a:focus-visible,.fj summary:focus-visible{outline:2px solid var(--ochre);outline-offset:3px}
+.fj-info{background:var(--ochre);color:var(--navy);text-align:center;font:600 .7em/1.4 var(--fb);letter-spacing:.14em;text-transform:uppercase;padding:.45rem var(--pad);white-space:pre-wrap}
+.fj-top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:2rem;padding:.8rem var(--pad);background:var(--navy);color:#fff}
+.fj-logo{font:400 1.4rem/1 var(--fh);letter-spacing:.4em;text-transform:uppercase}
+.fj-top nav{display:flex;gap:1.6rem;margin-left:auto;font:400 .72em/1 var(--fb);letter-spacing:.18em;text-transform:uppercase}
+.fj-top nav a,.fj-top nav span{text-decoration:none}
+/* escenario con foto fija */
+.fj-stage{position:relative}
+.fj-fixed{position:sticky;top:0;height:100vh;max-height:100%;margin-bottom:-100vh;background:center/cover no-repeat;z-index:0}
+.fj-stage>section,.fj-gap{position:relative;z-index:1}
+.fj-hero{min-height:min(48cqi,40rem);display:grid;place-items:center;align-content:center;gap:1.2rem;text-align:center;color:#fff;padding:3rem var(--pad);background:linear-gradient(#0003,#0006)}
+.fj-hero h1{font-size:clamp(1.8rem,3.4cqi,3.2rem);max-width:18em}
+.fj-hero p{font:italic 400 1.1rem/1.5 var(--fs);max-width:34em}
+.fj-gap{height:min(36cqi,28rem)}
+.fj-block{margin:0 auto;width:min(56rem,calc(100% - 2*var(--pad)));padding:max(2.5rem,4cqi);text-align:center;display:grid;gap:.6rem;justify-items:center}
+.fj-block--navy{background:var(--navy);color:#fff}
+.fj-block--paper{background:var(--paper)}
+.fj-block h2{font-size:1.2rem;margin-bottom:.6rem}
+.fj-menu{display:grid;grid-template-columns:1fr 1fr;gap:2rem 3rem;width:100%;text-align:left}
+.fj-menu h3{font-size:.9rem;color:var(--ochre);margin-bottom:.6rem}
+.fj-menu p{display:grid;grid-template-columns:1fr auto;gap:0 1rem;margin-bottom:.6rem;font:400 .98rem/1.4 var(--fs)}
+.fj-menu em{font-style:normal}.fj-menu small{grid-column:1/-1;font:300 .82rem/1.4 var(--fb);color:var(--mute)}
+.fj-story{display:grid;grid-template-columns:1fr 1fr;gap:2rem;text-align:left;align-items:center;justify-items:stretch}
+.fj-story>div:not([class*="-img"]){display:grid;gap:1rem;justify-items:start}
+.fj-story p{font:italic 400 1rem/1.7 var(--fs);opacity:.9}
+.fj-story figure{margin:0;padding:1rem;background:var(--ochre)}
+.fj-story-img{aspect-ratio:4/3;background:center/cover no-repeat}
+@media (prefers-reduced-motion:no-preference){.fj:not(.fj-still) .fj-hero h1{animation:fj-in 1.2s var(--ease) both}}
+@keyframes fj-in{from{opacity:0;letter-spacing:.5em}}
+/* opiniones, preguntas, visita */
+.fj-revs{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding:max(3.5rem,6cqi) var(--pad);text-align:center;background:var(--paper)}
+.fj-revs blockquote{margin:0;display:grid;gap:.6rem}
+.fj-revs p{font:italic 400 1.05rem/1.6 var(--fs)}
+.fj-revs cite{font:600 .7em/1 var(--fb);letter-spacing:.16em;text-transform:uppercase;font-style:normal;color:var(--mute)}
+.fj-faq{max-width:46rem;margin:0 auto;padding:0 var(--pad) max(3rem,5cqi);box-sizing:content-box}
+.fj-faq h2{font-size:1.2rem;text-align:center;margin-bottom:1rem}
+.fj-faq details{border-top:1px solid #0002}
+.fj-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:.9rem 0;font:400 1rem/1.4 var(--fs)}
+.fj-faq summary::-webkit-details-marker{display:none}
+.fj-faq summary::after{content:"+";color:var(--ochre)}
+.fj-faq details[open] summary::after{content:"−"}
+.fj-faq details p{color:var(--mute);padding-bottom:1rem}
+.fj-visit{background:var(--navy);color:#fff;padding:max(3.5rem,6cqi) var(--pad);display:grid;gap:.8rem;justify-items:center;text-align:center}
+.fj-visit h2{font-size:1.4rem}
+.fj-visit p{font:italic 400 1rem/1.5 var(--fs)}
+.fj-ctas{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:.6rem}
+.fj-foot{display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem 1.2rem;padding:1.4rem var(--pad) calc(1.4rem + env(safe-area-inset-bottom));font-size:.72rem;color:var(--mute)}
+.fj-sticky{display:none}
+@container (max-width:980px){.fj-top nav{display:none}.fj-top .fj-btn{margin-left:auto}.fj-revs{grid-template-columns:1fr}}
+@container (max-width:640px){
+  .fj-info{display:none}
+  .fj-menu,.fj-story{grid-template-columns:1fr}
+  .fj-top .fj-btn{display:none}
+  .fj-sticky{display:flex;gap:.5rem;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:var(--navy)}
+  .fj-sticky>*{flex:1}
+}
