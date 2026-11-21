@@ -152,6 +152,8 @@ pages = {
 (SITE / "assets" / "prefs.js").write_text((SRC / "assets/prefs.js").read_text(encoding="utf-8"), encoding="utf-8")
 (SITE / "assets" / "tpl-clinica.js").write_text((ROOT / "lib/templates/clinica.js").read_text(encoding="utf-8"), encoding="utf-8")
 (SITE / "assets" / "fonda.js").write_text((ROOT / "lib/templates/fonda.js").read_text(encoding="utf-8"), encoding="utf-8")
+for _lib in ("fluid.js", "rough.js"):
+    (SITE / "assets" / _lib).write_text((SRC / "assets" / _lib).read_text(encoding="utf-8"), encoding="utf-8")
 (SITE / "assets" / "vista.js").write_text((SRC / "assets/vista.js").read_text(encoding="utf-8"), encoding="utf-8")
 # Precios por moneda: el catálogo sale de lib/catalog.js (única fuente) y precios.js los pinta
 catalog_json = subprocess.run(["node", "--input-type=module", "-e",
