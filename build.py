@@ -143,7 +143,7 @@ def wall():
 
 pages = {
     "index.html": site_chrome(fill("inicio.html", {**common, "{{N_NAV}}": n_nav(None, "#consultoria", "Agendar consultoría", "Agendar una consultoría")}), "inicio"),
-    "webs.html": site_chrome(fill("webs.html", {**common, "{{WALL}}": wall(), "{{N_NAV}}": n_nav("/webs", "#diagnostico", "Pedir propuesta", "Pedir mi propuesta gratis")}), "webs"),
+    "webs.html": site_chrome(fill("webs.html", {**common, "{{WALL}}": wall(), "{{N_NAV}}": n_nav("/webs", "/empezar", "Armar mi página", "Armar mi página gratis")}), "webs"),
     "empezar.html": fill("empezar.html", {"{{HEAD_TAGS}}": head_tags, "{{SYMBOLS}}": shared["{{SYMBOLS}}"]}),
     "ia.html": site_chrome(fill("ia.html", {**common, "{{N_NAV}}": n_nav("/ia", "#contacto", "Agendar diagnóstico", "Agendar un diagnóstico")}), "ia"),
     "webs-clinicas.html": site_chrome(fill("webs-clinicas.html", {**shared, **industry}), "clinicas", cta="#diagnostico", own_menu=True),

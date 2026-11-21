@@ -920,28 +920,70 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
 .w-close{position:relative;padding:9rem 0;overflow:hidden;isolation:isolate}
 .w-close::before{content:"";position:absolute;inset:auto -10% -40% 45%;height:90%;z-index:-1;background:radial-gradient(closest-side,color-mix(in srgb,var(--cobalt) 42%,transparent),transparent)}
 .w-close .n-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:5vw;align-items:start}
-.w-close h2{font-size:clamp(2.5rem,5vw,5rem);max-width:11ch;letter-spacing:-.045em}
+.w-close h2{font-size:clamp(2.4rem,4.4vw,4.4rem);max-width:14ch;letter-spacing:-.045em}
 .w-how{list-style:none;margin:2.4rem 0 0;padding:0;display:grid;gap:1rem;counter-reset:h}
 .w-how li{display:grid;grid-template-columns:2.4rem 1fr;gap:.9rem;align-items:center;color:var(--mist)}
 .w-how li::before{counter-increment:h;content:counter(h);width:2.4rem;height:2.4rem;border-radius:50%;display:grid;place-items:center;font:600 .95rem var(--fd);box-shadow:inset 0 0 0 1.5px var(--hair);color:var(--white)}
-#lead-form .seg{display:grid;grid-template-columns:1fr 1fr;gap:.3rem;padding:.3rem;border-radius:999px;background:rgba(255,255,255,.05);box-shadow:inset 0 0 0 1px var(--hair)}
-#lead-form .seg button{height:2.7rem;border:0;border-radius:999px;background:transparent;color:var(--mist);font:500 .92rem var(--fb);cursor:pointer;transition:background-color .2s,color .2s}
-#lead-form .seg button[aria-checked="true"]{background:var(--white);color:var(--night)}
-#lead-form .frow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
-#lead-form .fld input,#lead-form .fld select{background:rgba(255,255,255,.04);border-color:var(--hair);color:var(--white)}
-#lead-form .fld select option{color:#081036}
-#lead-form .hint{font-size:.82rem;color:var(--mist);margin:0}
-#lead-form .trap{position:absolute;left:-9999px}
-#lead-form .form-err{color:#FFB3A6;margin:0}
-#lead-form .success{display:grid;gap:1rem}
-#lead-form .success h3{font:600 1.6rem var(--fd);letter-spacing:-.02em}
-#lead-form .done-when{font:600 1.3rem/1.3 var(--fd)}
-#lead-form .done-when span{color:var(--lime)}
-#lead-form #lead-how{color:var(--mist)}
-#lead-form dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:.4rem 1.2rem;font-size:.92rem}
-#lead-form dt{color:var(--mist)}
-#lead-form dd{margin:0}
-#lead-form .n-btn.ghost{justify-self:start}
+
+
+/* ---------- la caja para empezar (hero y cierre) ---------- */
+.w-start{max-width:38rem;display:grid;gap:.8rem}
+.w-box{display:flex;align-items:flex-end;gap:.5rem;padding:.55rem .55rem .55rem 1.1rem;border-radius:1.4rem;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px var(--hair),0 1.5rem 3rem -1.5rem rgba(0,0,0,.6);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:box-shadow .2s}
+.w-box:focus-within{box-shadow:inset 0 0 0 1px var(--lime),0 1.5rem 3rem -1.5rem rgba(0,0,0,.6)}
+.w-box textarea{flex:1;min-width:0;width:0;min-height:3rem;max-height:9rem;padding:.75rem 0;border:0;background:transparent;color:var(--white);font:400 1.05rem/1.45 var(--fb);resize:none;outline:none}
+.w-box textarea::placeholder{color:rgba(169,180,224,.85)}
+.w-box .n-btn{flex:none}
+.w-giros{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+.w-giros small{font-size:.85rem;color:var(--mist);margin-right:.2rem}
+.w-giros a{font-size:.85rem;padding:.4rem .8rem;border-radius:999px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px var(--hair);color:var(--white);text-decoration:none;transition:background-color .2s,box-shadow .2s}
+.w-giros a:hover{background:rgba(214,250,82,.12);box-shadow:inset 0 0 0 1px rgba(214,250,82,.5)}
+.w-act{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1.2rem;margin-top:2.6rem}
+.w-act small{color:var(--mist);font-size:.88rem}
+.on-light .w-act small{color:color-mix(in srgb,var(--night) 60%,transparent)}
+
+/* ---------- la base de todo lo demás ---------- */
+.w-base{padding:9rem 0 7rem}
+.w-base .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:5vw;align-items:center}
+.w-hub{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;padding:1rem}
+.w-hub::before{content:"";position:absolute;inset:10% 10%;border-radius:50%;border:1px dashed var(--hair)}
+.w-core{grid-column:1/-1;justify-self:center;display:grid;justify-items:center;gap:.4rem;padding:1.4rem 2rem;border-radius:1.4rem;background:var(--lime);color:var(--night);box-shadow:0 0 0 10px rgba(214,250,82,.1),0 2rem 4rem -1.5rem rgba(214,250,82,.4);position:relative;z-index:1;order:0}
+.w-core b{font:600 1.5rem var(--fd);letter-spacing:-.02em}
+.w-core span{font:500 .78rem var(--fm)}
+.w-sat{position:relative;z-index:1;display:grid;grid-template-columns:2.4rem 1fr;gap:.8rem;align-items:start;padding:1.1rem;border-radius:1.1rem;background:#0D1748;box-shadow:inset 0 0 0 1px var(--hair)}
+.w-sat svg{width:2.4rem;height:2.4rem;padding:.6rem;border-radius:.8rem;background:rgba(214,250,82,.08);color:var(--lime)}
+.w-sat b{display:block;font:600 1rem var(--fd);margin-bottom:.2rem}
+.w-sat p{font-size:.88rem;color:var(--mist)}
+
+/* ---------- modelos por giro ---------- */
+.w-models{background:var(--paper);color:var(--night);padding:8rem 0}
+.w-models .top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:5vw;align-items:end;margin-bottom:2.6rem}
+.w-models .top p{color:color-mix(in srgb,var(--night) 72%,transparent);max-width:32rem}
+.w-tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.6rem}
+.w-tabs button{border:0;padding:.6rem 1.1rem;border-radius:999px;background:var(--white);box-shadow:0 0 0 1px var(--hair-d);font:500 .92rem var(--fb);color:var(--night);cursor:pointer;transition:background-color .2s,color .2s}
+.w-tabs button[aria-selected="true"]{background:var(--night);color:var(--white);box-shadow:none}
+.w-model{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:3rem;align-items:center}
+.w-model[hidden]{display:none}
+.w-model figure{margin:0;border-radius:1.2rem;overflow:hidden;box-shadow:0 0 0 1px var(--hair-d),0 3rem 5rem -3rem rgba(8,16,54,.5);background:#fff}
+.w-model figure .bar{display:flex;gap:.35rem;align-items:center;height:2rem;padding:0 .8rem;background:#E3E8F3}
+.w-model figure .bar i{width:.55rem;height:.55rem;border-radius:50%;background:#C3CBE0}
+.w-model figure img{display:block;width:100%;height:auto}
+.w-model h3{font-size:clamp(1.6rem,2.4vw,2.2rem);letter-spacing:-.03em;margin-bottom:1.2rem}
+.w-model ul{list-style:none;margin:0 0 1.8rem;padding:0;display:grid;gap:.9rem}
+.w-model li{display:grid;grid-template-columns:1.6rem 1fr;gap:.6rem}
+.w-model li svg{width:1.3rem;height:1.3rem;color:var(--cobalt);margin-top:.15rem}
+.w-model li b{display:block;font-weight:600}
+.w-model li span{font-size:.92rem;color:color-mix(in srgb,var(--night) 68%,transparent)}
+.w-model .n-btn{background:var(--night);color:var(--white)}
+.w-other{margin-top:2rem!important;font-size:.95rem;color:color-mix(in srgb,var(--night) 70%,transparent)}
+.w-other a{color:var(--cobalt);font-weight:600}
+.w-mejora{display:flex;gap:.5rem;margin-top:1.4rem;max-width:32rem;padding:.35rem .35rem .35rem 1rem;border-radius:999px;background:var(--white);box-shadow:0 0 0 1px var(--hair-d)}
+.w-mejora input{flex:1;min-width:0;width:0;border:0;background:transparent;font:400 1rem var(--fb);color:var(--night);outline:none}
+.w-mejora .n-btn{height:2.8rem;background:var(--night);color:var(--white)}
+@media (max-width:900px){
+  .w-base{padding:6rem 0 4rem}.w-base .grid,.w-models .top,.w-model{grid-template-columns:minmax(0,1fr);gap:2rem}
+  .w-models{padding:6rem 0}
+  .w-hub{grid-template-columns:minmax(0,1fr);padding:0}.w-hub::before{display:none}
+}
 
 @media (max-width:900px){
   .w-hero{align-items:end;padding:6rem 0 3.5rem;min-height:96svh}
@@ -964,7 +1006,7 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
   .w-inc{grid-template-columns:minmax(0,1fr)}
   .w-close{padding:6rem 0}
 }
-@media (max-width:520px){#lead-form .frow{grid-template-columns:minmax(0,1fr)}.w-read dl div{grid-template-columns:minmax(0,1fr);gap:.2rem}.w-field span{display:none}}
+@media (max-width:520px){.w-box textarea{min-height:4.6rem}.w-read dl div{grid-template-columns:minmax(0,1fr);gap:.2rem}.w-field span{display:none}}
 @media (prefers-reduced-motion:reduce){.n *,.n *::before,.n *::after{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -992,12 +1034,12 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
   <div class="n-wrap">
     <a class="n-brand" href="/" aria-label="Ceiba Labs, inicio"><span class="n-orb" aria-hidden="true"></span><span>Ceiba<em>Labs</em></span></a>
     <div class="n-links" id="n-links"><a href="/webs" aria-current="page">Páginas web</a><a href="/ia">Inteligencia artificial</a><a href="/#trabajo">Trabajo</a><a href="/webs#precios">Precios</a><span class="n-hl" aria-hidden="true"></span></div>
-    <a class="n-btn n-cta" href="#diagnostico">Pedir propuesta</a>
+    <a class="n-btn n-cta" href="/empezar">Armar mi página</a>
     <button class="n-menu" id="n-menu" type="button" aria-expanded="false" aria-controls="n-sheet"><i aria-hidden="true"></i>Menú</button>
   </div>
   <nav class="n-sheet" id="n-sheet" aria-label="Menú">
     <ul><li><a class="big" href="/webs">Páginas web</a></li><li><a class="big" href="/ia">Inteligencia artificial</a></li><li><a class="big" href="/#trabajo">Trabajo</a></li><li><a class="big" href="/webs#precios">Precios</a></li></ul>
-    <a class="n-btn" href="#diagnostico">Pedir mi propuesta gratis</a>
+    <a class="n-btn" href="/empezar">Armar mi página gratis</a>
   </nav>
 </header>
 <script>
@@ -1030,32 +1072,77 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
 <section class="w-hero" id="w-hero" aria-labelledby="w-title">
   <div class="w-wall" aria-hidden="true"><div class="w-plane" id="w-plane"><div class="w-col" style="--d:70s"><img src="/img/webs/clinica-0.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/cercana-0.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/inmobiliaria-1.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/restaurante-2.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/expresiva-2.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/clinica-0.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/cercana-0.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/inmobiliaria-1.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/restaurante-2.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/expresiva-2.jpg" alt="" width="640" height="400" loading="eager" decoding="async"></div><div class="w-col thin" style="--d:55s"><img src="/img/webs/clinica-m.jpg" alt="" width="300" height="600" loading="eager" decoding="async"><img src="/img/webs/restaurante-m.jpg" alt="" width="300" height="600" loading="eager" decoding="async"><img src="/img/webs/hotel-m.jpg" alt="" width="300" height="600" loading="eager" decoding="async"><img src="/img/webs/inmobiliaria-m.jpg" alt="" width="300" height="600" loading="eager" decoding="async"><img src="/img/webs/clinica-m.jpg" alt="" width="300" height="600" loading="eager" decoding="async"><img src="/img/webs/restaurante-m.jpg" alt="" width="300" height="600" loading="eager" decoding="async"><img src="/img/webs/hotel-m.jpg" alt="" width="300" height="600" loading="eager" decoding="async"><img src="/img/webs/inmobiliaria-m.jpg" alt="" width="300" height="600" loading="eager" decoding="async"></div><div class="w-col" style="--d:85s"><img src="/img/webs/hotel-0.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/clinica-1.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/cercana-1.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/inmobiliaria-2.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/restaurante-0.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/hotel-0.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/clinica-1.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/cercana-1.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/inmobiliaria-2.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/restaurante-0.jpg" alt="" width="640" height="400" loading="eager" decoding="async"></div><div class="w-col" style="--d:62s"><img src="/img/webs/despacho-0.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/hotel-1.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/clinica-2.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/cercana-2.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/inmobiliaria-0.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/despacho-0.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/hotel-1.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/clinica-2.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/cercana-2.jpg" alt="" width="640" height="400" loading="eager" decoding="async"><img src="/img/webs/inmobiliaria-0.jpg" alt="" width="640" height="400" loading="eager" decoding="async"></div><div class="w-col thin" style="--d:74s"><img src="/img/webs/inmobiliaria-m.jpg" alt="" width="300" height="600" loading="lazy" decoding="async"><img src="/img/webs/despacho-m.jpg" alt="" width="300" height="600" loading="lazy" decoding="async"><img src="/img/webs/cercana-m.jpg" alt="" width="300" height="600" loading="lazy" decoding="async"><img src="/img/webs/expresiva-m.jpg" alt="" width="300" height="600" loading="lazy" decoding="async"><img src="/img/webs/inmobiliaria-m.jpg" alt="" width="300" height="600" loading="lazy" decoding="async"><img src="/img/webs/despacho-m.jpg" alt="" width="300" height="600" loading="lazy" decoding="async"><img src="/img/webs/cercana-m.jpg" alt="" width="300" height="600" loading="lazy" decoding="async"><img src="/img/webs/expresiva-m.jpg" alt="" width="300" height="600" loading="lazy" decoding="async"></div><div class="w-col" style="--d:90s"><img src="/img/webs/expresiva-0.jpg" alt="" width="640" height="400" loading="lazy" decoding="async"><img src="/img/webs/despacho-1.jpg" alt="" width="640" height="400" loading="lazy" decoding="async"><img src="/img/webs/hotel-2.jpg" alt="" width="640" height="400" loading="lazy" decoding="async"><img src="/img/webs/clinica-0.jpg" alt="" width="640" height="400" loading="lazy" decoding="async"><img src="/img/webs/cercana-0.jpg" alt="" width="640" height="400" loading="lazy" decoding="async"><img src="/img/webs/expresiva-0.jpg" alt="" width="640" height="400" loading="lazy" decoding="async"><img src="/img/webs/despacho-1.jpg" alt="" width="640" height="400" loading="lazy" decoding="async"><img src="/img/webs/hotel-2.jpg" alt="" width="640" height="400" loading="lazy" decoding="async"><img src="/img/webs/clinica-0.jpg" alt="" width="640" height="400" loading="lazy" decoding="async"><img src="/img/webs/cercana-0.jpg" alt="" width="640" height="400" loading="lazy" decoding="async"></div></div></div>
   <div class="n-wrap">
-    <h1 id="w-title">Tu página nueva, <span>antes de decidir.</span></h1>
-    <p class="lede">Diseñamos, publicamos y cuidamos tu página por una mensualidad fija. Te la mostramos terminada antes de que pagues, lista para Google y para la IA desde el primer día.</p>
-    <form class="w-audit" id="audit-form" novalidate>
-      <label for="audit-url">Analiza gratis cómo ven tu página Google y la IA</label>
-      <div class="w-field" id="audit-field"><span aria-hidden="true">https://</span><input id="audit-url" name="url" type="text" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com"><button class="n-btn" type="submit">Analizar <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></div>
-      <p class="err" id="audit-err" hidden></p>
+    <h1 id="w-title">Todo lo digital de tu negocio <span>empieza por tu página.</span></h1>
+    <p class="lede">Te ayudamos a construir una base sólida, con un modelo pensado para tu giro, lista para crecer contigo.</p>
+    <form class="w-start" data-start novalidate>
+      <label class="sr" for="w-q">Cuéntanos de tu negocio</label>
+      <div class="w-box"><textarea id="w-q" rows="1" placeholder="Cuéntanos de tu negocio o pega tu página o Instagram"></textarea><button class="n-btn" type="submit">Empezar <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></div>
+      <div class="w-giros"><small>O elige tu giro:</small><a href="/empezar?giro=restaurante">Restaurante</a><a href="/empezar?giro=clinica">Clínica</a><a href="/empezar?giro=hotel">Hotel</a><a href="/empezar?giro=inmobiliaria">Inmobiliaria</a><a href="/empezar?giro=despacho">Despacho</a><a href="/empezar?giro=otro">Otro</a></div>
     </form>
-    <p class="w-alt" style="margin-top:1rem">¿No tienes página? <a href="#diagnostico" id="no-web">Pide tu propuesta gratis</a></p>
   </div>
 </section>
 
+<section class="w-base" id="base" aria-labelledby="base-title"><div class="n-wrap grid">
+  <div>
+    <h2 class="n-h2" id="base-title" data-reveal>Es la base de todo lo demás.</h2>
+    <p class="n-lead" data-reveal>Si tu página está bien hecha, todo lo que pongas encima funciona: que te encuentren, que te contesten a cualquier hora, que tu operación trabaje sola. Si está mal, todo lo demás falla.</p>
+    <div class="w-act" data-reveal><a class="n-btn" href="/empezar">Empezar por mi página <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a><small>2 minutos, sin costo</small></div>
+  </div>
+  <div class="w-hub" data-reveal>
+    <div class="w-core"><b>Tu página</b><span>la base</span></div>
+    <div class="w-sat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><div><b>Google y la IA la leen</b><p>para recomendarte cuando alguien pregunta por tu giro.</p></div></div>
+    <div class="w-sat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg><div><b>Tu asistente contesta con ella</b><p>precios, horarios y dudas, de día y de noche.</p></div></div>
+    <div class="w-sat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg><div><b>Los agentes usan sus datos</b><p>para cotizar, dar seguimiento y tomar pedidos.</p></div></div>
+    <div class="w-sat"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></svg><div><b>Los reportes miden</b><p>cuánta gente te encontró y te escribió.</p></div></div>
+  </div>
+</div></section>
+
+<section class="w-models on-light" id="modelos" aria-labelledby="models-title"><div class="n-wrap">
+  <div class="top"><h2 class="n-h2" id="models-title" data-reveal>No empiezas de cero: un modelo hecho para tu giro.</h2>
+    <p data-reveal>Estudiamos qué busca el cliente de cada giro antes de reservar, agendar o escribir, y armamos el modelo alrededor de eso. Tú solo pones lo tuyo.</p></div>
+  <div class="w-tabs" role="tablist" aria-label="Modelos por giro">
+    <button type="button" role="tab" aria-selected="true" aria-controls="m-restaurante" data-m="restaurante">Restaurante</button><button type="button" role="tab" aria-selected="false" aria-controls="m-clinica" data-m="clinica">Clínica</button><button type="button" role="tab" aria-selected="false" aria-controls="m-hotel" data-m="hotel">Hotel</button><button type="button" role="tab" aria-selected="false" aria-controls="m-inmobiliaria" data-m="inmobiliaria">Inmobiliaria</button><button type="button" role="tab" aria-selected="false" aria-controls="m-despacho" data-m="despacho">Despacho</button>
+  </div>
+  <div class="w-model" id="m-restaurante" role="tabpanel">
+    <figure><div class="bar"><i></i><i></i><i></i></div><img src="/img/home/restaurante.jpg" alt="Página de ejemplo del modelo para restaurante" width="1440" height="900" loading="lazy"></figure>
+    <div><h3>Para que te encuentren, te reserven y lleguen.</h3><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Tu carta con precios</b><span>se lee bien en el celular, sin descargar un PDF.</span></div></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Reservaciones en un minuto</b><span>confirmadas por WhatsApp.</span></div></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Horario de hoy y cómo llegar</b><span>siempre a la vista, con el mapa a un toque.</span></div></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Fotos que abren el apetito</b><span>tus platillos y tu lugar, no fotos de banco.</span></div></li></ul><a class="n-btn" href="/empezar?giro=restaurante">Empezar con el modelo de restaurante <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>
+  </div>
+  <div class="w-model" id="m-clinica" role="tabpanel" hidden>
+    <figure><div class="bar"><i></i><i></i><i></i></div><img src="/img/home/clinica.jpg" alt="Página de ejemplo del modelo para clínica o consultorio" width="1440" height="900" loading="lazy"></figure>
+    <div><h3>Para que agenden con confianza.</h3><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Servicios con precio</b><span>o un «desde», que es lo primero que preguntan.</span></div></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Agenda en línea</b><span>con los horarios disponibles a la vista.</span></div></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Quién te atiende</b><span>con su especialidad y su cédula.</span></div></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Reseñas de Google en la portada</b><span>la prueba que buscan antes de agendar.</span></div></li></ul><a class="n-btn" href="/empezar?giro=clinica">Empezar con el modelo de clínica <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>
+  </div>
+  <div class="w-model" id="m-hotel" role="tabpanel" hidden>
+    <figure><div class="bar"><i></i><i></i><i></i></div><img src="/img/home/hotel.jpg" alt="Página de ejemplo del modelo para hotel u hospedaje" width="1440" height="900" loading="lazy"></figure>
+    <div><h3>Para que reserven directo contigo.</h3><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Habitaciones con tarifa y fotos</b><span>para decidir sin escribir.</span></div></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Reserva directa</b><span>sin la comisión de las plataformas.</span></div></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Lo que hay cerca</b><span>y cómo llegar desde el aeropuerto o la central.</span></div></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Respuestas antes de reservar</b><span>mascotas, estacionamiento, check-in.</span></div></li></ul><a class="n-btn" href="/empezar?giro=hotel">Empezar con el modelo de hotel u hospedaje <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>
+  </div>
+  <div class="w-model" id="m-inmobiliaria" role="tabpanel" hidden>
+    <figure><div class="bar"><i></i><i></i><i></i></div><img src="/img/home/inmobiliaria.jpg" alt="Página de ejemplo del modelo para inmobiliaria" width="1440" height="900" loading="lazy"></figure>
+    <div><h3>Para que agenden visitas.</h3><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Propiedades con filtro</b><span>venta o renta, zona y recámaras.</span></div></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Una asesora a un mensaje</b><span>en cada propiedad.</span></div></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Las zonas que conoces</b><span>explicadas para quien no es de ahí.</span></div></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Agenda de visitas</b><span>sin ir y venir de llamadas.</span></div></li></ul><a class="n-btn" href="/empezar?giro=inmobiliaria">Empezar con el modelo de inmobiliaria <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>
+  </div>
+  <div class="w-model" id="m-despacho" role="tabpanel" hidden>
+    <figure><div class="bar"><i></i><i></i><i></i></div><img src="/img/home/despacho.jpg" alt="Página de ejemplo del modelo para despacho contable o legal" width="1440" height="900" loading="lazy"></figure>
+    <div><h3>Para que te elijan y agenden la primera consulta.</h3><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Áreas de práctica claras</b><span>en palabras que tu cliente entiende.</span></div></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Primera consulta fácil de agendar</b><span>con lo que conviene llevar.</span></div></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Quiénes son</b><span>su experiencia y cómo trabajan.</span></div></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><div><b>Preguntas frecuentes</b><span>que te ahorran llamadas.</span></div></li></ul><a class="n-btn" href="/empezar?giro=despacho">Empezar con el modelo de despacho contable <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a></div>
+  </div>
+  <p class="w-other">¿Tu giro no está aquí? Tiendas, talleres, escuelas, estéticas y más: <a href="/empezar?giro=otro">armamos tu modelo contigo</a>.</p>
+</div></section>
+
 <section class="w-flow" id="suscripcion" aria-labelledby="flow-title"><div class="n-wrap">
-  <h2 class="n-h2" id="flow-title" data-reveal>Primero ves tu página. Después decides.</h2>
-  <p class="n-lead" data-reveal>Pagas un monto inicial para empezar y una mensualidad que incluye diseño, publicación y mantenimiento. Tu página no se queda olvidada.</p>
+  <h2 class="n-h2" id="flow-title" data-reveal>Así arrancas hoy. Primero la ves, después decides.</h2>
+  <p class="n-lead" data-reveal>No pagas nada para verla. Si te gusta, una mensualidad incluye diseño, publicación, mantenimiento y cambios cada mes.</p>
   <ol class="w-steps" id="w-steps">
-    <li data-n="1"><h3>Nos mandas tu página o tu Instagram</h3><p>Con eso preparamos cómo quedaría tu página nueva, con tus fotos, servicios y datos.</p><small>Tú: 2 minutos</small></li>
-    <li data-n="2"><h3>Te la mostramos y decides</h3><p>Te llega un enlace privado con tu página terminada. Si te gusta, eliges un plan. Si no, no pagas nada.</p><small>Tú: decides con la página a la vista</small></li>
+    <li data-n="1"><h3>Cuéntanos de tu negocio</h3><p>En una conversación corta: tu giro, tus servicios y tu estilo. Si tienes página o Instagram, partimos de ahí.</p><small>Tú: 2 minutos</small></li>
+    <li data-n="2"><h3>La ves armarse y te mandamos la completa</h3><p>Ves el borrador al momento. La versión completa, con tus datos y fotos, te llega en un enlace privado.</p><small>Tú: decides con la página a la vista</small></li>
     <li data-n="3"><h3>La publicamos y la cuidamos</h3><p>Terminamos el resto, la publicamos en tu dominio y cada mes hacemos los cambios que nos pidas.</p><small>Nosotros: cada mes</small></li>
   </ol>
+  <div class="w-act" data-reveal><a class="n-btn" href="/empezar">Armar mi página <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a><small>Gratis y sin compromiso</small></div>
 </div></section>
 
 <section class="w-cmp" id="antes-despues" aria-labelledby="cmp-title"><div class="n-wrap">
   <div class="top">
-    <div><h2 class="n-h2" id="cmp-title" data-reveal>Arrastra y compara.</h2>
+    <div><h2 class="n-h2" id="cmp-title" data-reveal>¿Ya tienes página? Partimos de lo que ya tienes.</h2>
       <div class="w-dev" role="group" aria-label="Ver en"><button type="button" data-d="desk" aria-pressed="true">Computadora</button><button type="button" data-d="mob" aria-pressed="false">Celular</button></div></div>
-    <p data-reveal>La página de hoy de una clínica dental contra la que haríamos. Mismo negocio, mismos datos: cambia lo que el paciente encuentra y lo fácil que es agendar.</p>
+    <div data-reveal><p>Arrastra y compara la página de hoy de una clínica dental contra la que haríamos. Mismo negocio, mismos datos: cambia lo que el paciente encuentra y lo fácil que es agendar.</p>
+      <form class="w-mejora" data-start novalidate><label class="sr" for="w-url">Dirección de tu página</label><input id="w-url" type="text" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com"><button class="n-btn" type="submit">Mejorar mi página</button></form></div>
   </div>
   <div class="w-cmpgrid">
     <div>
@@ -1101,31 +1188,33 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
     </ul>
   </div>
   <div class="w-tiers">
-    <div data-reveal><small>Todos los planes</small><b>SEO base y análisis rápido</b><p>Toda página sale optimizada. Y cualquiera puede <a href="#w-hero" style="color:var(--white)">analizar su portada gratis</a>: puntaje de 0 a 100 con lo que falta.</p></div>
+    <div data-reveal><small>Todos los planes</small><b>SEO base y análisis rápido</b><p>Toda página sale optimizada. Y cualquiera puede <a href="/diagnostico" style="color:var(--white)">analizar su página gratis</a>: puntaje de 0 a 100 con lo que falta.</p></div>
     <div class="hl" data-reveal><small>Plan Negocio</small><b>Prueba real cada 3 meses</b><p>Análisis avanzado al lanzar y, cada 3 meses, preguntas reales a ChatGPT, Gemini y Perplexity para ver si te recomiendan.</p></div>
     <div data-reveal><small>Plan Avanzado</small><b>Reporte y mejora cada mes</b><p>Preguntas a la IA, búsquedas en Google, competidores y una mejora de SEO aplicada al mes, aparte de tus minutos de cambios.</p></div>
   </div>
+  <div class="w-act" data-reveal><a class="n-btn" href="/empezar">Empezar mi página <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a><small>Sale lista para Google y la IA desde el primer día</small></div>
 </div></section>
 
 <section class="w-plans" id="precios" aria-labelledby="price-title"><div class="n-wrap">
-  <div class="top"><h2 class="n-h2" id="price-title" data-reveal>Planes.</h2><p data-reveal>Empiezas con un pago inicial (el Plan Esencial no tiene) y la mensualidad corre desde que tu página está publicada.</p></div>
+  <div class="top"><h2 class="n-h2" id="price-title" data-reveal>Hoy tu página. Mañana, lo que sigue.</h2><p data-reveal>Cada plan es una etapa: empiezas por que te encuentren y creces cuando lo necesites. Hay un pago inicial (el Plan Esencial no tiene) y la mensualidad corre desde que tu página está publicada.</p></div>
   <div class="w-grid3">
-    <article class="w-plan" data-reveal><h3>Esencial</h3><p class="for">Para que te encuentren y te escriban</p>
+    <article class="w-plan" data-reveal><h3>Esencial</h3><p class="for">Etapa 1: que te encuentren y te escriban</p>
       <div class="w-price"><b><span data-price="web.esencial.monthly">$1,490</span> <small>al mes</small></b><span>Sin pago inicial</span></div>
       <ul><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Hasta 3 páginas, pensadas para el celular</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Formulario y botón de WhatsApp</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>SEO base y optimizada para IA, con 5 preguntas frecuentes de tu giro</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Hosting y mantenimiento</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>30 minutos de cambios al mes</li></ul>
-      <a class="n-btn" href="#diagnostico">Pedir mi propuesta</a></article>
-    <article class="w-plan pick" data-reveal><span class="pop">El más elegido</span><h3>Negocio</h3><p class="for">Para recibir citas y reservas en línea</p>
+      <a class="n-btn" href="/empezar">Empezar con este plan</a></article>
+    <article class="w-plan pick" data-reveal><span class="pop">El más elegido</span><h3>Negocio</h3><p class="for">Etapa 2: que te agenden y la IA te recomiende</p>
       <div class="w-price"><b><span data-price="web.negocio.monthly">$2,490</span> <small>al mes</small></b><span><span data-price="web.negocio.activation">$2,990</span> de pago inicial</span></div>
       <ul><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Hasta 7 páginas, con todo lo de Esencial</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Conectada con la agenda que ya usas</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Prueba real en ChatGPT, Gemini y Perplexity cada 3 meses</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>15 preguntas frecuentes y hasta 4 páginas por servicio o zona</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Cuántas personas te escribieron o llamaron desde la página</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>60 minutos de cambios al mes</li></ul>
-      <a class="n-btn" href="#diagnostico">Pedir mi propuesta</a></article>
-    <article class="w-plan" data-reveal><h3>Avanzado</h3><p class="for">Para mostrar un catálogo que tú mismo actualizas</p>
+      <a class="n-btn" href="/empezar">Empezar con este plan</a></article>
+    <article class="w-plan" data-reveal><h3>Avanzado</h3><p class="for">Etapa 3: tu catálogo y una mejora cada mes</p>
       <div class="w-price"><b><span data-price="web.avanzado.monthly">$3,990</span> <small>al mes</small></b><span><span data-price="web.avanzado.activation">$5,990</span> de pago inicial</span></div>
       <ul><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Hasta 12 páginas, con todo lo de Negocio</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Reporte mensual de IA y Google, y una mejora de SEO al mes</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Hasta 9 páginas por servicio o zona</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Catálogo de propiedades, habitaciones o servicios que tú actualizas</li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>120 minutos de cambios al mes</li></ul>
-      <a class="n-btn" href="#diagnostico">Pedir mi propuesta</a></article>
+      <a class="n-btn" href="/empezar">Empezar con este plan</a></article>
   </div>
   <div class="w-addon" data-reveal><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg><div><b>Agrega un asistente de WhatsApp</b><p>Contesta en WhatsApp y en tu página las preguntas de siempre, toma los datos para una cita o cotización y te pasa con alguien cuando hace falta. Se suma a cualquier plan.</p></div>
     <div class="pr">Desde <b data-price="modulo.whatsapp.monthly">$1,490</b> al mes<br><small>desde <span data-price="modulo.whatsapp.activation">$2,990</span> de inicio · <a href="/ia" style="color:var(--cobalt)">Ver cómo funciona</a></small></div></div>
   <div class="w-inc" data-reveal><b>Todos los planes incluyen</b><ul><li>Diseño a medida, pensado para el celular</li><li>Hosting, dominio y certificado de seguridad</li><li>Mantenimiento, respaldos y monitoreo</li><li>SEO base y optimizada para IA</li><li>Cambios cada mes según tu plan</li><li>Una persona a cargo, no tickets</li></ul></div>
+  <div class="w-act on-light" data-reveal><a class="n-btn" href="/empezar" style="background:var(--night);color:var(--white)">Empezar mi página <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a><small>Te recomendamos el plan que te conviene cuando veas tu página</small></div>
   <p class="w-fine">Precios de lanzamiento, en la moneda de tu país. Es el precio final que pagas. Si aplica algún cargo de Meta o del proveedor de mensajería, lo desglosamos en tu propuesta.</p>
 </div></section>
 
@@ -1143,42 +1232,14 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
 
 <section class="w-close" id="diagnostico" aria-labelledby="close-title"><div class="n-wrap">
   <div>
-    <h2 id="close-title" data-reveal>Pide tu propuesta gratis.</h2>
-    <p class="n-lead" data-reveal>Mándanos tu página o tu Instagram. Te enviamos un enlace privado con cómo quedaría tu página nueva, el plan que te conviene y el precio.</p>
-    <ol class="w-how" data-reveal><li>Nos mandas tu página, tu Instagram o tu perfil de Google.</li><li>Preparamos tu propuesta en un enlace privado.</li><li>Si te gusta, la activas ahí mismo o hablamos 15 minutos.</li></ol>
+    <h2 id="close-title" data-reveal>Tu base digital empieza con una conversación.</h2>
+    <p class="n-lead" data-reveal>Cuéntanos de tu negocio y mira tu página armarse. Te mandamos la versión completa sin costo, y solo pagas si decides publicarla.</p>
   </div>
-  <form class="cf" id="lead-form" novalidate data-reveal>
-    <div id="lead-fields" class="cf-in">
-      <div class="cf-head"><b>Tu propuesta, sin costo</b><span>Te la mandamos por WhatsApp o por correo.</span></div>
-      <div class="seg" role="radiogroup" aria-label="¿Tienes página web?" id="seg-mode">
-        <button type="button" role="radio" data-v="web" aria-checked="true" tabindex="0">Ya tengo página</button>
-        <button type="button" role="radio" data-v="noweb" aria-checked="false" tabindex="-1">No tengo página</button>
-      </div>
-      <div class="fld" data-f="site" data-mode="web"><label for="f-site">Dirección de tu página</label><input id="f-site" name="site" inputmode="url" autocapitalize="off" spellcheck="false" placeholder="tunegocio.com" aria-describedby="e-site"><p class="err" id="e-site" hidden></p></div>
-      <div data-mode="noweb" hidden style="display:grid;gap:1.1rem">
-        <div class="frow">
-          <div class="fld" data-f="industry"><label for="f-industry">Giro</label>
-            <select id="f-industry" name="industry" aria-describedby="e-industry"><option value="">Elige uno</option><option>Clínica o consultorio</option><option>Restaurante o café</option><option>Inmobiliaria</option><option>Hotel u hospedaje</option><option>Despacho contable o legal</option><option>Otro</option></select><p class="err" id="e-industry" hidden></p></div>
-          <div class="fld" data-f="city"><label for="f-city">Ciudad</label><input id="f-city" name="city" autocomplete="address-level2" placeholder="Ej.: Guadalajara" aria-describedby="e-city"><p class="err" id="e-city" hidden></p></div>
-        </div>
-        <div class="fld" data-f="social"><label for="f-social">Tu Instagram o tu perfil de Google Maps <small>(opcional)</small></label><input id="f-social" name="social" autocapitalize="off" spellcheck="false" placeholder="@tunegocio o enlace de Google Maps" aria-describedby="h-social e-social"><p class="hint" id="h-social">Si tienes, nos ayuda a armar tu propuesta con tus fotos y datos reales.</p><p class="err" id="e-social" hidden></p></div>
-      </div>
-      <div class="frow">
-        <div class="fld" data-f="name"><label for="f-name">Tu nombre</label><input id="f-name" name="name" autocomplete="name" aria-describedby="e-name"><p class="err" id="e-name" hidden></p></div>
-        <div class="fld" data-f="biz"><label for="f-biz">Nombre del negocio</label><input id="f-biz" name="biz" autocomplete="organization" aria-describedby="e-biz"><p class="err" id="e-biz" hidden></p></div>
-      </div>
-      <div class="fld" data-f="contact"><label for="f-contact">Tu WhatsApp o correo</label><input id="f-contact" name="contact" autocomplete="email" placeholder="+52 33 1234 5678 o tu@correo.com" aria-describedby="e-contact"><p class="err" id="e-contact" hidden></p></div>
-      <div class="trap" aria-hidden="true"><label for="f-company-url">No llenar</label><input id="f-company-url" name="company_url" tabindex="-1" autocomplete="off"></div>
-      <p class="form-err" id="lead-err" role="alert" hidden></p>
-      <button class="n-btn cf-send" type="submit" id="lead-btn">Quiero mi propuesta gratis <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button>
-    </div>
-    <div class="success" id="lead-success" hidden tabindex="-1">
-      <h3>Listo, recibimos tu solicitud.</h3>
-      <p class="done-when" id="lead-when"></p>
-      <p id="lead-how"></p>
-      <dl id="lead-summary"></dl>
-      <button class="n-btn ghost" type="button" id="lead-reset">Corregir mis datos</button>
-    </div>
+  <form class="w-start" data-start novalidate data-reveal>
+    <label class="sr" for="w-q2">Cuéntanos de tu negocio</label>
+    <div class="w-box"><textarea id="w-q2" rows="2" placeholder="Ej.: Taquería en Zapopan, tacos al pastor desde 1998. @tacoslaesquina"></textarea><button class="n-btn" type="submit">Empezar <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button></div>
+    <div class="w-giros"><small>O elige tu giro:</small><a href="/empezar?giro=restaurante">Restaurante</a><a href="/empezar?giro=clinica">Clínica</a><a href="/empezar?giro=hotel">Hotel</a><a href="/empezar?giro=inmobiliaria">Inmobiliaria</a><a href="/empezar?giro=despacho">Despacho</a><a href="/empezar?giro=otro">Otro</a></div>
+    <p class="w-alt">¿Solo quieres saber cómo está tu página hoy? <a href="/diagnostico">Analízala gratis</a></p>
   </form>
 </div></section>
 </main>
@@ -1193,7 +1254,7 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
     <nav class="n-foot-cols" aria-label="Pie de página">
       <div><b>Servicios</b><a href="/webs">Páginas web</a><a href="/ia">Inteligencia artificial</a><a href="/webs#precios">Precios</a></div>
       <div><b>Por giro</b><a href="/webs/clinicas">Clínicas y consultorios</a></div>
-      <div><b>Empieza</b><a href="/webs#diagnostico">Propuesta gratis</a><a href="/diagnostico">Analiza tu página</a><a href="/ia#contacto">Diagnóstico de IA</a></div>
+      <div><b>Empieza</b><a href="/empezar">Arma tu página</a><a href="/diagnostico">Analiza tu página</a><a href="/ia#contacto">Diagnóstico de IA</a></div>
     </nav>
   </div>
   <div class="n-wrap n-foot-legal"><span>© 2026 Ceiba Labs · Nombre comercial de GQG Holdings LLC</span><nav aria-label="Legal"><a href="/privacidad">Privacidad</a><a href="/terminos">Términos</a></nav></div>
@@ -1243,106 +1304,30 @@ h1,h2,h3{font-weight:400!important;letter-spacing:-.02em!important}
     rows.forEach((r, i) => setTimeout(() => r.classList.add('on'), 250 + i * 320)); setTimeout(() => ans.classList.add('on'), 250 + rows.length * 320 + 300);
   }, { threshold: .4 }).observe(read);
 
-  /* ---------- revisión de URL (hero) ---------- */
-  function parseUrl(raw) {
-    let s = raw.trim();
-    if (!s) return { error: 'Escribe la dirección de tu página, por ejemplo tunegocio.com' };
-    if (/\s/.test(s)) return { error: 'La dirección no puede tener espacios. Revisa cómo la escribiste.' };
-    if (!/^https?:\/\//i.test(s)) s = 'https://' + s;
-    let u; try { u = new URL(s); } catch { return { error: 'Esa dirección no parece válida. Debe verse como tunegocio.com' }; }
-    const h = u.hostname.toLowerCase();
-    if (!/^([a-z0-9áéíóúñü-]+\.)+[a-z]{2,}$/i.test(h) || h.split('.').some(p => !p || p.startsWith('-') || p.endsWith('-')))
-      return { error: 'Le falta el final, como .com o .com.mx' };
-    return { host: h.replace(/^www\./, ''), href: u.href };
-  }
-  const aForm = $('#audit-form'), aIn = $('#audit-url'), aField = $('#audit-field'), aErr = $('#audit-err');
-  aIn.addEventListener('input', () => { aField.classList.remove('invalid'); aIn.removeAttribute('aria-invalid'); aErr.hidden = true; });
-  aForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const r = parseUrl(aIn.value);
-    if (r.error) { aField.classList.add('invalid'); aIn.setAttribute('aria-invalid', 'true'); aErr.textContent = r.error; aErr.hidden = false; aIn.setAttribute('aria-describedby', 'audit-err'); aIn.focus(); return; }
-    location.href = '/diagnostico?url=' + encodeURIComponent(r.host);
+  /* ---------- las cajas para empezar llevan a /empezar con lo que escribieron ---------- */
+  $$('[data-start]').forEach(f => {
+    const t = $('textarea,input', f);
+    if (t.tagName === 'TEXTAREA') {
+      const grow = () => { t.style.height = 'auto'; t.style.height = Math.min(t.scrollHeight, 144) + 'px'; };
+      t.addEventListener('input', grow);
+      t.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); f.requestSubmit(); } });
+    }
+    f.addEventListener('submit', e => {
+      e.preventDefault();
+      const v = t.value.trim();
+      location.href = v ? '/empezar?q=' + encodeURIComponent(v) : '/empezar';
+    });
   });
 
-  /* ---------- formulario de propuesta ---------- */
-  function radiogroup(group, onChange) {
-    const btns = $$('[role="radio"]', group);
-    const select = (b, focus) => { btns.forEach(x => { const on = x === b; x.setAttribute('aria-checked', on); x.tabIndex = on ? 0 : -1; }); if (focus) b.focus(); onChange(b); };
-    btns.forEach((b, i) => {
-      b.addEventListener('click', () => { if (b.getAttribute('aria-checked') !== 'true') select(b); });
-      b.addEventListener('keydown', e => { let j = null; if (e.key === 'ArrowRight' || e.key === 'ArrowDown') j = (i + 1) % btns.length; if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') j = (i - 1 + btns.length) % btns.length; if (j !== null) { e.preventDefault(); select(btns[j], true); } });
-    });
-    return { set: v => { const b = btns.find(x => x.dataset.v === v); if (b && b.getAttribute('aria-checked') !== 'true') select(b); } };
-  }
-  const form = $('#lead-form');
-  let mode = 'web';
-  const rules = {
-    site: v => !v.trim() ? 'Escribe la dirección de tu página, o elige «No tengo página».' : (parseUrl(v).error || true),
-    industry: v => !!v || 'Elige el giro que más se parece a tu negocio.',
-    city: v => v.trim().length >= 2 || 'Escribe la ciudad donde está tu negocio.',
-    social: v => { const s = v.trim(); if (!s) return true; if (/^@?[a-z0-9._]{2,30}$/i.test(s)) return true; return parseUrl(s).error ? 'Escribe tu usuario de Instagram (@tunegocio) o pega el enlace de Google Maps.' : true; },
-    name: v => v.trim().length >= 2 || 'Escribe tu nombre para saber a quién contactar.',
-    biz: v => v.trim().length >= 2 || 'Escribe el nombre de tu negocio.',
-    contact: v => {
-      const s = v.trim();
-      if (!s) return 'Déjanos un WhatsApp o un correo para enviarte la propuesta.';
-      if (s.includes('@')) return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s) || 'Revisa el correo: debe verse como nombre@dominio.com.';
-      const d = s.replace(/[^\d]/g, '');
-      return (/^[+\d\s().-]+$/.test(s) && d.length >= 8 && d.length <= 15) || 'Revisa el número. Escríbelo con lada, por ejemplo 33 1234 5678';
-    }
-  };
-  const fldOf = n => $(`#lead-form [data-f="${n}"]`), inputOf = n => $('input,select', fldOf(n));
-  const activeFields = () => Object.keys(rules).filter(n => !fldOf(n).closest('[hidden]'));
-  const clearFld = n => { const f = fldOf(n); f.classList.remove('invalid', 'valid'); $('.err', f).hidden = true; inputOf(n).removeAttribute('aria-invalid'); };
-  function check(name, show = true) {
-    const fld = fldOf(name), input = inputOf(name), err = $('.err', fld), res = rules[name](input.value), ok = res === true;
-    if (show) { fld.classList.toggle('invalid', !ok); fld.classList.toggle('valid', ok && !!input.value.trim()); input.setAttribute('aria-invalid', !ok); err.hidden = ok; err.textContent = ok ? '' : res; }
-    return ok;
-  }
-  Object.keys(rules).forEach(n => {
-    const input = inputOf(n);
-    input.addEventListener('blur', () => { if (input.value.trim() || input.dataset.touched) check(n); input.dataset.touched = 1; });
-    input.addEventListener('input', () => { if (fldOf(n).classList.contains('invalid')) check(n); });
-    if (input.tagName === 'SELECT') input.addEventListener('change', () => check(n));
+  /* ---------- modelos por giro ---------- */
+  const tabs = $$('.w-tabs [role="tab"]');
+  const pick = b => { tabs.forEach(x => { const on = x === b; x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1; $('#m-' + x.dataset.m).hidden = !on; }); };
+  tabs.forEach((b, i) => {
+    b.addEventListener('click', () => pick(b));
+    b.addEventListener('keydown', e => { const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0; if (d) { e.preventDefault(); const n = tabs[(i + d + tabs.length) % tabs.length]; pick(n); n.focus(); } });
   });
-  const setMode = v => { mode = v; $$('[data-mode]', form).forEach(el => el.hidden = el.dataset.mode !== v); ['site', 'industry', 'city', 'social'].forEach(clearFld); };
-  const modeGroup = radiogroup($('#seg-mode'), b => setMode(b.dataset.v));
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    const bad = activeFields().filter(n => !check(n));
-    if (bad.length) { inputOf(bad[0]).focus(); return; }
-    if (window.CeibaPrefs && !form._skipQuiz) {
-      form._quiz = window.CeibaPrefs.ask(form, prefs => { form._prefs = prefs; form._skipQuiz = true; form._quiz.close(); form.requestSubmit(); }, { fields: $('#lead-fields') });
-      return;
-    }
-    const v = id => $(id).value.trim();
-    const btn = $('#lead-btn'), ferr = $('#lead-err'), label = btn.firstChild.textContent;
-    btn.disabled = true; btn.firstChild.textContent = 'Enviando… '; ferr.hidden = true;
-    try {
-      const res = await fetch('/api/lead', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({
-        source: 'home', mode,
-        site: v('#f-site'), industry: v('#f-industry'), city: v('#f-city'), social: v('#f-social'),
-        name: v('#f-name'), biz: v('#f-biz'), contact: v('#f-contact'), company_url: v('#f-company-url'), preferences: form._prefs || null,
-        utm: Object.fromEntries([...new URLSearchParams(location.search)].filter(([k]) => k.startsWith('utm_'))),
-      }) });
-      const d = await res.json().catch(() => ({}));
-      if (!res.ok) throw new Error(d.error || '');
-      const rowsS = mode === 'web' ? [['Página', parseUrl(v('#f-site')).host]] : [['Página', 'No tiene'], ['Giro', v('#f-industry')], ['Ciudad', v('#f-city')], ['Perfil', v('#f-social') || 'No tiene']];
-      rowsS.push(['Nombre', v('#f-name')], ['Negocio', v('#f-biz')], ['Contacto', v('#f-contact')]);
-      $('#lead-summary').innerHTML = rowsS.map(([k, val]) => `<dt>${k}</dt><dd>${esc(val)}</dd>`).join('');
-      const first = v('#f-name').split(/\s+/)[0];
-      $('#lead-when').innerHTML = d.dueDay ? `${esc(first)}, te mandamos tu propuesta <span>${esc(d.dueDay)}</span>, ${esc(d.dueTime.replace(/\.$/, ''))}.` : '';
-      $('#lead-how').textContent = d.emailed ? 'Te enviamos un correo de confirmación. El enlace a tu propuesta llega a ese mismo correo.' : d.channel === 'email' ? 'Te mandamos el enlace a tu propuesta al correo que nos dejaste.' : 'Te mandamos el enlace a tu propuesta por WhatsApp, al número que nos dejaste.';
-      $('#lead-fields').hidden = true; const ok = $('#lead-success'); ok.hidden = false; ok.focus();
-    } catch (err) {
-      ferr.textContent = err.message || 'No pudimos enviar tu solicitud. Revisa tu conexión e intenta de nuevo.'; ferr.hidden = false;
-    } finally { btn.disabled = false; btn.firstChild.textContent = label; }
-  });
-  $('#lead-reset').addEventListener('click', () => { $('#lead-success').hidden = true; $('#lead-fields').hidden = false; inputOf(mode === 'web' ? 'site' : 'industry').focus(); });
-  $('#no-web').addEventListener('click', e => { e.preventDefault(); modeGroup.set('noweb'); $('#diagnostico').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); setTimeout(() => $('#f-industry').focus({ preventScroll: true }), reduce ? 0 : 650); });
 })();
 </script>
-<script src="/assets/prefs.js" defer></script>
 <script>
 (() => {
   if (!window.__ceibaMenu) {
