@@ -212,3 +212,7 @@ for name, html in pages.items():
     html = linkfix(html)
     (SITE / name).write_text(html, encoding="utf-8")
     print(f"site/{name}  {len(html.encode()) // 1024} KB")
+
+# ---------- Galería de plantillas (/plantillas, sin indexar) ----------
+import subprocess
+subprocess.run(["node", str(ROOT / "scripts/plantillas.mjs")], check=True)
