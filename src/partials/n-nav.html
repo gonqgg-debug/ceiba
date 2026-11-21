@@ -1,0 +1,36 @@
+<header class="n-nav" id="top">
+  <div class="n-wrap">
+    <a class="n-brand" href="/" aria-label="Ceiba Labs, inicio"><span class="n-orb" aria-hidden="true"></span><span>Ceiba<em>Labs</em></span></a>
+    <div class="n-links" id="n-links"><a href="/webs">Páginas web</a><a href="/ia">Inteligencia artificial</a><a href="/#trabajo">Trabajo</a><a href="/webs#precios">Precios</a><span class="n-hl" aria-hidden="true"></span></div>
+    <a class="n-btn n-cta" href="{{CTA_HREF}}">{{CTA}}</a>
+    <button class="n-menu" id="n-menu" type="button" aria-expanded="false" aria-controls="n-sheet"><i aria-hidden="true"></i>Menú</button>
+  </div>
+  <nav class="n-sheet" id="n-sheet" aria-label="Menú">
+    <ul><li><a class="big" href="/webs">Páginas web</a></li><li><a class="big" href="/ia">Inteligencia artificial</a></li><li><a class="big" href="/#trabajo">Trabajo</a></li><li><a class="big" href="/webs#precios">Precios</a></li></ul>
+    <a class="n-btn" href="{{CTA_HREF}}">{{CTA_LONG}}</a>
+  </nav>
+</header>
+<script>
+(() => {
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  /* ---------- encabezado: cristal al bajar, se esconde al bajar y vuelve al subir ---------- */
+  const nav = $('#top'), menu = $('#n-menu');
+  let lastY = scrollY;
+  const onNav = () => {
+    const y = scrollY; nav.classList.toggle('solid', y > 30);
+    if (!nav.classList.contains('open')) {
+      if (y < 520 || y < lastY - 4) nav.classList.remove('away');
+      else if (y > lastY + 4) nav.classList.add('away');
+    }
+    lastY = y;
+  };
+  addEventListener('scroll', onNav, { passive: true }); onNav();
+  const setMenu = o => { nav.classList.toggle('open', o); menu.setAttribute('aria-expanded', o); document.body.style.overflow = o ? 'hidden' : ''; };
+  menu.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
+  $$('#n-sheet a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) { setMenu(false); menu.focus(); } });
+  const navLinks = $('#n-links'), hl = navLinks.querySelector('.n-hl');
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('pointerenter', () => { hl.style.opacity = 1; hl.style.width = a.offsetWidth + 'px'; hl.style.transform = `translateX(${a.offsetLeft}px)`; }));
+  navLinks.addEventListener('pointerleave', () => { hl.style.opacity = 0; });
+})();
+</script>

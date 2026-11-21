@@ -133,10 +133,18 @@ head_tags = ('<link rel="icon" href="/favicon.svg" type="image/svg+xml">\n<link 
              '<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n<meta name="theme-color" content="#0B1514">')
 common = {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBOLS}}"], "{{HEAD_TAGS}}": head_tags}
 
+# Encabezado del diseño nuevo (logo vivo, cristal al bajar): src/partials/n-nav.html
+def n_nav(active, cta_href, cta, cta_long):
+    html = (SRC / "partials/n-nav.html").read_text(encoding="utf-8")
+    html = html.replace("{{CTA_HREF}}", cta_href).replace("{{CTA}}", cta).replace("{{CTA_LONG}}", cta_long)
+    if active:
+        html = html.replace(f'<a href="{active}">', f'<a href="{active}" aria-current="page">')
+    return html
+
 pages = {
-    "index.html": site_chrome(fill("inicio.html", common), "inicio"),
+    "index.html": site_chrome(fill("inicio.html", {**common, "{{N_NAV}}": n_nav(None, "#consultoria", "Agendar consultoría", "Agendar una consultoría")}), "inicio"),
     "webs.html": site_chrome(index, "webs", cta="#diagnostico", own_menu=True),
-    "ia.html": site_chrome(fill("ia.html", common), "ia"),
+    "ia.html": site_chrome(fill("ia.html", {**common, "{{N_NAV}}": n_nav("/ia", "#contacto", "Agendar diagnóstico", "Agendar un diagnóstico")}), "ia"),
     "webs-clinicas.html": site_chrome(fill("webs-clinicas.html", {**shared, **industry}), "clinicas", cta="#diagnostico", own_menu=True),
     "diagnostico.html": fill("diagnostico.html", {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBOLS}}"]}),
     "admin.html": fill("admin.html", {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBOLS}}"]}),
@@ -152,7 +160,7 @@ pages = {
 (SITE / "assets" / "prefs.js").write_text((SRC / "assets/prefs.js").read_text(encoding="utf-8"), encoding="utf-8")
 (SITE / "assets" / "tpl-clinica.js").write_text((ROOT / "lib/templates/clinica.js").read_text(encoding="utf-8"), encoding="utf-8")
 (SITE / "assets" / "fonda.js").write_text((ROOT / "lib/templates/fonda.js").read_text(encoding="utf-8"), encoding="utf-8")
-for _lib in ("fluid.js", "rough.js"):
+for _lib in ("fluid.js", "rough.js", "estudio.css"):
     (SITE / "assets" / _lib).write_text((SRC / "assets" / _lib).read_text(encoding="utf-8"), encoding="utf-8")
 (SITE / "assets" / "vista.js").write_text((SRC / "assets/vista.js").read_text(encoding="utf-8"), encoding="utf-8")
 # Precios por moneda: el catálogo sale de lib/catalog.js (única fuente) y precios.js los pinta
