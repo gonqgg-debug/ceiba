@@ -375,6 +375,42 @@
     });
     root.querySelectorAll('[data-ga-case] input').forEach(r => r.addEventListener('input', () => r.parentElement.style.setProperty('--p', r.value + '%')));
   });
-  bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop(); bindTabs(); bindFonda(); bindEstudio(); bindGaleria();
-  new MutationObserver(() => { bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop(); bindTabs(); bindFonda(); bindEstudio(); bindGaleria(); }).observe(document.documentElement, { childList: true, subtree: true });
+
+  // Piezas comunes de los diseños nuevos (lib/templates/base.js): formulario a WhatsApp,
+  // «abierto ahora», antes/después y pestañas. Cada diseño solo marca con data-t-*.
+  const bindT = () => {
+    document.querySelectorAll('[data-t-form]:not([data-tb])').forEach(f => {
+      f.dataset.tb = 1;
+      f.addEventListener('submit', e => {
+        e.preventDefault();
+        const root = f.closest('.cx'); let kb = {}; try { kb = JSON.parse(root?.querySelector('.t-kb')?.textContent || '{}'); } catch {}
+        const parts = [...f.querySelectorAll('[name]')].filter(x => x.value.trim()).map(x => `• ${x.dataset.l || x.name}: ${x.value.trim()}`);
+        const msg = `${f.dataset.intro || 'Hola, quiero agendar una cita en'} ${kb.name || root?.dataset.name || ''}.\n${parts.join('\n')}`;
+        if (kb.wa) window.open(`https://wa.me/${kb.wa}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+      });
+    });
+    document.querySelectorAll('[data-t-open]:not([data-tb])').forEach(el => {
+      el.dataset.tb = 1;
+      let sch = []; try { sch = JSON.parse(el.dataset.tOpen); } catch {}
+      const D = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'], hm = m => `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')}`;
+      const now = new Date(), d = now.getDay(), m = now.getHours() * 60 + now.getMinutes();
+      const today = sch.find(s => s.days.includes(d) && m >= s.from && m < s.to);
+      if (today) { el.dataset.state = 'open'; el.textContent = `Abierto ahora · cierra a las ${hm(today.to)}`; return; }
+      for (let k = 0; k < 8; k++) {
+        const dd = (d + k) % 7, next = sch.filter(s => s.days.includes(dd) && (k || s.from > m)).sort((a, b) => a.from - b.from)[0];
+        if (next) { el.dataset.state = 'closed'; el.textContent = `Cerrado · abre ${k === 0 ? 'hoy' : k === 1 ? 'mañana' : `el ${D[dd]}`} a las ${hm(next.from)}`; return; }
+      }
+    });
+    document.querySelectorAll('[data-t-case] input:not([data-tb])').forEach(r => { r.dataset.tb = 1; r.addEventListener('input', () => r.parentElement.style.setProperty('--p', r.value + '%')); });
+    document.querySelectorAll('[data-t-tabs]:not([data-tb])').forEach(box => {
+      box.dataset.tb = 1;
+      box.addEventListener('click', e => {
+        const b = e.target.closest('[role="tab"]'); if (!b) return;
+        box.querySelectorAll('[role="tab"]').forEach(x => x.setAttribute('aria-selected', x === b));
+        box.querySelectorAll('[role="tabpanel"]').forEach(p => { p.hidden = p.id !== b.getAttribute('aria-controls'); });
+      });
+    });
+  };
+  bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop(); bindTabs(); bindFonda(); bindEstudio(); bindGaleria(); bindT();
+  new MutationObserver(() => { bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop(); bindTabs(); bindFonda(); bindEstudio(); bindGaleria(); bindT(); }).observe(document.documentElement, { childList: true, subtree: true });
 })();

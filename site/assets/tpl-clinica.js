@@ -1,13 +1,5 @@
 import { renderFonda, FONDA_FONTS } from './fonda.js';
-import { renderEstudio, ESTUDIO_FONTS } from './estudio.js';
-import { renderGaleria, GALERIA_FONTS } from './galeria.js';
-import { renderFresca, FRESCA_FONTS } from './fresca.js';
-// Diseños con portada propia (uno por sitio de referencia, ver catalogo.js): render, letras y rubros donde aplica
-const DESIGNS = {
-  estudio: { render: renderEstudio, fonts: ESTUDIO_FONTS, kinds: ['clinica'] },
-  galeria: { render: renderGaleria, fonts: GALERIA_FONTS, kinds: ['clinica'] },
-  fresca: { render: renderFresca, fonts: FRESCA_FONTS, kinds: ['clinica'] },
-};
+import { DESIGNS } from './designs.js';
 // Plantilla «clínica» (v2): la portada nueva que ve el cliente en su propuesta.
 // Módulo ES sin dependencias: lo usan el servidor (/vista/[slug]) y el
 // navegador (comparador de /p/[slug]; build.py lo copia a site/assets/).
@@ -67,7 +59,7 @@ export const THEME_OPTIONS = {
   font: { moderna: 'Moderna', elegante: 'Elegante (con serif)', geometrica: 'Geométrica', clasica: 'Clásica', amable: 'Amable', sobria: 'Sobria', editorial: 'Editorial', calida: 'Cálida', lujo: 'De lujo', fuerte: 'Con carácter', retro: 'Retro', limpia: 'Limpia' },
   corners: { soft: 'Suaves', sharp: 'Rectas' },
   buttons: { pill: 'Redondos', square: 'Rectangulares', outline: 'Con contorno' },
-  style: { sobria: 'Sobria', expresiva: 'Expresiva (más animación)', cercana: 'Cercana (colorida y amable)', fonda: 'Fonda (restaurantes)', estudio: 'Estudio (clínicas)', galeria: 'Galería (clínicas)', fresca: 'Fresca (clínicas)' },
+  style: { sobria: 'Sobria', expresiva: 'Expresiva (más animación)', cercana: 'Cercana (colorida y amable)', fonda: 'Fonda (restaurantes)', estudio: 'Estudio (clínicas)', galeria: 'Galería (clínicas)', fresca: 'Fresca (clínicas)' , capsula: 'Cápsula (clínicas)' , cine: 'Cine (clínicas)' },
 };
 export const FONTS = {
   moderna: ['Red Hat Display', 'Red Hat Text', 'Red+Hat+Display:wght@500;600;700&family=Red+Hat+Text:wght@400;500;600'],

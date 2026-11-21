@@ -1454,3 +1454,5 @@
   .es-sticky{display:flex;gap:.5rem;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--paper) 94%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-top:1px solid var(--line)}
   .es-sticky .es-btn{flex:1}
 }
+
+.t-noimg{background:color-mix(in srgb,var(--a) 14%,#f4f2ee)}
