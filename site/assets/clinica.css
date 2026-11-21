@@ -1456,3 +1456,12 @@
 }
 
 .t-noimg{background:color-mix(in srgb,var(--a) 14%,#f4f2ee)}
+
+/* Formulario de primera consulta de los diseños de despacho (base.caseForm): estilo base que cada diseño ajusta */
+.cx .t-case{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;width:100%;box-sizing:border-box}
+.cx .t-case label{display:grid;gap:.3rem;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.cx .t-case .t-case-w{grid-column:1/-1}
+.cx .t-case input,.cx .t-case select{font:inherit;font-size:.95rem;letter-spacing:0;text-transform:none;color:inherit;border:0;border-bottom:1px solid currentColor;background:transparent;padding:.45rem 0;min-width:0;width:100%;box-sizing:border-box}
+.cx .t-case select option{color:#222}
+.cx .t-case button{grid-column:1/-1;min-height:2.9rem;border:0;background:var(--a);color:#fff;font:inherit;font-weight:600;cursor:pointer}
+@container (max-width:520px){.cx .t-case{grid-template-columns:1fr}}
