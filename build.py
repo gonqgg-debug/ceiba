@@ -164,6 +164,7 @@ pages = {
 (SITE / "assets" / "prefs.js").write_text((SRC / "assets/prefs.js").read_text(encoding="utf-8"), encoding="utf-8")
 (SITE / "assets" / "tpl-clinica.js").write_text((ROOT / "lib/templates/clinica.js").read_text(encoding="utf-8"), encoding="utf-8")
 (SITE / "assets" / "fonda.js").write_text((ROOT / "lib/templates/fonda.js").read_text(encoding="utf-8"), encoding="utf-8")
+(SITE / "assets" / "estudio.js").write_text((ROOT / "lib/templates/estudio.js").read_text(encoding="utf-8"), encoding="utf-8")
 # Datos de las páginas de ejemplo por giro: /empezar arma la vista previa con ellos en el navegador
 (SITE / "assets" / "demos").mkdir(exist_ok=True)
 for _demo in (ROOT / "lib/demos").glob("*.js"):

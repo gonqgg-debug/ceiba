@@ -319,6 +319,46 @@
     });
   });
 
-  bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop(); bindTabs(); bindFonda();
-  new MutationObserver(() => { bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop(); bindTabs(); bindFonda(); }).observe(document.documentElement, { childList: true, subtree: true });
+
+  // Diseño «Estudio» (.es): reserva del hero, foto de la carta, pasos de la visita y meses sin intereses
+  const bindEstudio = () => document.querySelectorAll('.es:not([data-es])').forEach(root => {
+    root.dataset.es = 1;
+    let kb = {}; try { kb = JSON.parse(root.querySelector('.es-kb')?.textContent || '{}'); } catch {}
+    const book = root.querySelector('[data-es-book]');
+    book?.addEventListener('submit', e => {
+      e.preventDefault();
+      const f = new FormData(book), svc = f.get('svc'), slot = f.get('slot');
+      const msg = `Hola, quiero agendar una cita en ${kb.name || root.dataset.name}.\n• ${svc}${slot ? `\n• ${slot}` : '\n• ¿Qué días tienen disponibles?'}`;
+      if (kb.wa) window.open(`https://wa.me/${kb.wa}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+    });
+    // Carta: la foto del tratamiento que tienes enfrente
+    const stage = root.querySelector('.es-menu-stage');
+    if (stage) root.querySelectorAll('.es-menu-list li').forEach(li => {
+      const show = () => { const im = stage.querySelector(`[data-i="${li.dataset.i}"]`); if (!im) return; stage.querySelectorAll('.on').forEach(x => x.classList.remove('on')); im.classList.add('on'); };
+      li.addEventListener('pointerenter', show); li.addEventListener('focusin', show);
+    });
+    // Visita: cada paso cambia la foto
+    const steps = root.querySelector('[data-es-steps]');
+    steps?.addEventListener('click', e => {
+      const b = e.target.closest('.es-steps button'); if (!b) return;
+      steps.querySelectorAll('.es-steps button').forEach(x => x.setAttribute('aria-pressed', x === b));
+      steps.querySelectorAll('.es-visit-img').forEach(x => x.classList.toggle('on', x.dataset.i === b.dataset.i));
+      const n = steps.querySelector('.es-visit-count b'); if (n) n.textContent = +b.dataset.i + 1;
+    });
+    // Calculadora de meses sin intereses
+    const calc = root.querySelector('[data-es-calc]');
+    if (calc) {
+      const sel = calc.querySelector('[data-es-svc]');
+      const run = () => {
+        const m = +(calc.querySelector('.es-seg [aria-pressed="true"]')?.dataset.m || 1), opt = sel.selectedOptions[0];
+        calc.querySelector('[data-es-mo]').textContent = '$' + Math.ceil(+sel.value / m).toLocaleString('es-MX');
+        calc.querySelector('[data-es-n]').textContent = m;
+        calc.querySelector('[data-es-from]').textContent = opt?.hasAttribute('data-from') ? 'Desde' : '';
+      };
+      sel.addEventListener('change', run);
+      calc.querySelector('.es-seg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; calc.querySelectorAll('.es-seg button').forEach(x => x.setAttribute('aria-pressed', x === b)); run(); });
+    }
+  });
+  bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop(); bindTabs(); bindFonda(); bindEstudio();
+  new MutationObserver(() => { bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop(); bindTabs(); bindFonda(); bindEstudio(); }).observe(document.documentElement, { childList: true, subtree: true });
 })();
