@@ -57,6 +57,7 @@ export const THEME_OPTIONS = {
   font: { moderna: 'Moderna', elegante: 'Elegante (con serif)', geometrica: 'Geométrica', clasica: 'Clásica', amable: 'Amable', sobria: 'Sobria' },
   corners: { soft: 'Suaves', sharp: 'Rectas' },
   buttons: { pill: 'Redondos', square: 'Rectangulares', outline: 'Con contorno' },
+  style: { sobria: 'Sobria', expresiva: 'Expresiva (más animación)' },
 };
 export const FONTS = {
   moderna: ['Red Hat Display', 'Red Hat Text', 'Red+Hat+Display:wght@500;600;700&family=Red+Hat+Text:wght@400;500;600'],
@@ -68,7 +69,7 @@ export const FONTS = {
 };
 export const themeOf = c => {
   const t = c?.theme || {}, pick = (k, d) => (THEME_OPTIONS[k][t[k]] ? t[k] : d);
-  return { mode: pick('mode', 'light'), hero: pick('hero', 'organic'), font: pick('font', 'moderna'), corners: pick('corners', 'soft'), buttons: pick('buttons', 'pill') };
+  return { mode: pick('mode', 'light'), hero: pick('hero', 'organic'), font: pick('font', 'moderna'), corners: pick('corners', 'soft'), buttons: pick('buttons', 'pill'), style: pick('style', 'sobria') };
 };
 export const fontHref = c => `https://fonts.googleapis.com/css2?family=${FONTS[themeOf(c).font][2]}&display=swap`;
 
@@ -145,7 +146,10 @@ export function renderClinica(c = {}, { mode = 'live', marks = {}, view = 'home'
 
   const out = [];
   const th = themeOf(c), [fh, fb] = FONTS[th.font];
-  const cls = ['cx', th.mode === 'dark' && 'cx--dark', th.hero !== 'organic' && `cx--hero-${th.hero}`, th.corners === 'sharp' && 'cx--sharp', th.buttons !== 'pill' && `cx--btn-${th.buttons}`].filter(Boolean).join(' ');
+  const cls = ['cx', th.mode === 'dark' && 'cx--dark', th.hero !== 'organic' && `cx--hero-${th.hero}`, th.corners === 'sharp' && 'cx--sharp', th.buttons !== 'pill' && `cx--btn-${th.buttons}`, th.style === 'expresiva' && 'cx--expresiva'].filter(Boolean).join(' ');
+  const xp = th.style === 'expresiva';
+  // Palabras en máscaras (entrada del título y frase que se enciende): se arman aquí para que no parpadee
+  const words = t => String(t || '').split(/\s+/).filter(Boolean).map((w, i) => `<span class="cx-w" style="--i:${i}"><span>${esc(w)}</span></span>`).join(' ');
   const fstack = f => `'${f}',ui-sans-serif,system-ui,sans-serif`;
   out.push(`<div class="${cls}" style="--a:${hex(brand.accent)};--fh:${fstack(fh)};--fb:${fstack(fb)}" data-name="${esc(name)}" data-wa="${esc(waNum)}">`);
 
@@ -160,7 +164,7 @@ export function renderClinica(c = {}, { mode = 'live', marks = {}, view = 'home'
   // Hero
   if (show('hero')) out.push(`<section class="cx-hero" data-enter${mk('hero')}><div class="cx-hero-copy">
       ${rating ? `<p class="cx-rating">${ratingLine}</p>` : ''}
-      <h1>${esc(hero.title)}</h1>
+      <h1${xp ? ' class="cx-h1-words"' : ''}>${xp ? words(hero.title) : esc(hero.title)}</h1>
       ${hero.sub ? `<p class="cx-lede">${esc(hero.sub)}</p>` : ''}
       <div class="cx-ctas">${act('cx-btn cx-btn--lg', bookHref, `${esc(hero.cta || 'Agenda tu cita')}${ico('arrow', 'cx-ico-s')}`)}${waNum ? act('cx-btn cx-btn--lg cx-btn--ghost', waHref, `${WA}${esc(hero.ctaWhatsapp || 'Escríbenos por WhatsApp')}`) : ''}</div>
       ${list(hero.slots).length ? `<p class="cx-next"><span>Próximos horarios</span>${list(hero.slots).slice(0, 3).map(s => act('cx-next-slot', waNum ? waMsg(`Hola, quiero agendar el horario de ${s}`) : bookHref, esc(s))).join('')}</p>` : ''}
@@ -178,10 +182,14 @@ export function renderClinica(c = {}, { mode = 'live', marks = {}, view = 'home'
   if (show('trust') && trust.length) out.push(`<section class="cx-benefits"${mk('trust')}>${trust.map(t => `<div class="cx-benefit"><b>${esc(t.b)}</b><span>${esc(t.t)}</span></div>`).join('')}</section>`);
 
   // Cifras
-  if (show('stats') && stats.length >= 3) out.push(`<section class="cx-stats">${stats.map(s => `<div><b>${esc(s.value)}</b><span>${esc(s.label)}</span></div>`).join('')}</section>`);
+  if (show('stats') && stats.length >= 3) out.push(`<section class="cx-stats">${stats.map(s => `<div><b${xp ? ' data-cx-count' : ''}>${esc(s.value)}</b><span>${esc(s.label)}</span></div>`).join('')}</section>`);
+
+  // Expresiva: una frase grande que se enciende palabra por palabra al hacer scroll
+  const statement = c.statement || today?.text || '';
+  if (xp && view === 'home' && statement) out.push(`<section class="cx-statement cx-sec"><p data-cx-words>${words(statement)}</p></section>`);
 
   // Atención de hoy
-  if (show('today') && today) out.push(`<section class="cx-today cx-sec"><div class="cx-today-copy"><h2>${esc(today.title || 'Te atendemos')}</h2>${today.text ? `<p>${esc(today.text)}</p>` : ''}${hoursRows.length ? `<dl class="cx-hours">${hoursRows.slice(0, 4).map(r => `<dt>${esc(r.dt)}</dt><dd>${esc(r.dd)}</dd>`).join('')}</dl>` : ''}</div>
+  if (show('today') && today) out.push(`<section class="cx-today cx-sec"><div class="cx-today-copy"><h2>${esc(today.title || 'Te atendemos')}</h2>${today.text && !(xp && view === 'home' && !c.statement) ? `<p>${esc(today.text)}</p>` : ''}${hoursRows.length ? `<dl class="cx-hours">${hoursRows.slice(0, 4).map(r => `<dt>${esc(r.dt)}</dt><dd>${esc(r.dd)}</dd>`).join('')}</dl>` : ''}</div>
     <div class="cx-panel"><ul class="cx-checks">${list(today.bullets).slice(0, 5).map(b => `<li>${ico(iconName(b.icon, b.t || b), 'cx-ico-c')}<span>${esc(b.t || b)}</span></li>`).join('')}</ul>${act('cx-btn', bookHref, ctaTop)}</div></section>`);
 
   // Servicios
@@ -191,7 +199,7 @@ export function renderClinica(c = {}, { mode = 'live', marks = {}, view = 'home'
       const href = call ? `tel:${telNum}` : (waNum && !contact.bookingUrl ? waMsg(`Hola, quiero agendar: ${s.name}`) : bookHref);
       return `<li class="cx-card"><div class="cx-card-frame">${img(s.img, s.imgAlt || s.name, 'cx-card-img')}</div><div class="cx-card-body"><div class="cx-card-t"><b>${esc(s.name)}</b>${s.price ? `<i>${esc(s.price)}</i>` : ''}</div><p>${esc(s.desc)}</p>${act('cx-link cx-card-link', href, `${esc(s.action || 'Agendar')}${ico('arrow', 'cx-ico-s cx-arrow')}`)}</div></li>`;
     }).join('')}</ul>
-    ${list(c.services.more).length ? `<div class="cx-pills"><span>También atendemos:</span>${list(c.services.more).slice(0, 14).map(m => `<em>${esc(m)}</em>`).join('')}</div>` : ''}
+    ${list(c.services.more).length ? (xp ? `<div class="cx-marquee" role="marquee" aria-label="También atendemos: ${esc(list(c.services.more).slice(0, 14).join(', '))}"><div class="cx-mq-track" aria-hidden="true">${[0, 1].map(() => `<span>${list(c.services.more).slice(0, 14).map(m => `<em>${esc(m)}</em>`).join('<i>·</i>')}<i>·</i></span>`).join('')}</div></div>` : `<div class="cx-pills"><span>También atendemos:</span>${list(c.services.more).slice(0, 14).map(m => `<em>${esc(m)}</em>`).join('')}</div>`) : ''}
     ${c.services.note ? `<p class="cx-note">${esc(c.services.note)}</p>` : ''}</section>`);
 
   // Lista de precios
@@ -232,7 +240,8 @@ export function renderClinica(c = {}, { mode = 'live', marks = {}, view = 'home'
   if (show('tech') && tech.length >= 2) out.push(`<section class="cx-tech cx-sec"><div class="cx-tech-in">${img(c.tech.photo, c.tech.photoAlt, 'cx-tech-img')}<div class="cx-tech-copy"><h2>${esc(c.tech.title || 'Tecnología que se nota')}</h2>${c.tech.text ? `<p>${esc(c.tech.text)}</p>` : ''}<div class="cx-tech-grid">${tech.map(t => `<div>${ico(iconName(t.icon, `${t.b} ${t.t}`))}<b>${esc(t.b)}</b><span>${esc(t.t)}</span></div>`).join('')}</div></div></div></section>`);
 
   // Galería
-  if (show('gallery') && gallery.length >= 3) out.push(`<section class="cx-gallery cx-sec"><div class="cx-head"><div><h2>${esc(c.gallery.title || 'Conoce el lugar')}</h2>${c.gallery.text ? `<p>${esc(c.gallery.text)}</p>` : ''}</div></div><div class="cx-mosaic" data-moment="develop">${gallery.map((g, i) => `<div class="cx-tile cx-tile--${i % 6}">${img(g.img, g.alt, 'cx-tile-img')}</div>`).join('')}</div></section>`);
+  if (show('gallery') && gallery.length >= 3 && xp) out.push(`<section class="cx-chapters" data-cx-chapters style="--n:${gallery.length}"><div class="cx-ch-pin"><div class="cx-ch-head"><h2>${esc(c.gallery.title || 'Conoce el lugar')}</h2>${c.gallery.text ? `<p>${esc(c.gallery.text)}</p>` : ''}<span class="cx-ch-count" aria-hidden="true"><b>1</b> / ${gallery.length}</span></div><div class="cx-ch-frame">${gallery.map((g, i) => `<div class="cx-ch-img${i ? '' : ' is-on'}" role="img" aria-label="${esc(g.alt || '')}" style="background-image:url('${url(g.img)}')"></div>`).join('')}</div></div></section>`);
+  else if (show('gallery') && gallery.length >= 3) out.push(`<section class="cx-gallery cx-sec"><div class="cx-head"><div><h2>${esc(c.gallery.title || 'Conoce el lugar')}</h2>${c.gallery.text ? `<p>${esc(c.gallery.text)}</p>` : ''}</div></div><div class="cx-mosaic" data-moment="develop">${gallery.map((g, i) => `<div class="cx-tile cx-tile--${i % 6}">${img(g.img, g.alt, 'cx-tile-img')}</div>`).join('')}</div></section>`);
 
   // Reseñas
   if (show('reviews') && reviews.length) out.push(`<section class="cx-reviews cx-sec"${mk('reviews')}><div class="cx-head"><div><h2>${esc(c.reviews.title || 'Lo que dicen nuestros clientes')}</h2>${rating ? `<p class="cx-rating">${ratingLine}</p>` : ''}</div>${live && url(c.reviews.moreUrl) ? `<a class="cx-btn cx-btn--line" href="${esc(url(c.reviews.moreUrl))}" target="_blank" rel="noopener">Ver todas en Google</a>` : ''}</div>

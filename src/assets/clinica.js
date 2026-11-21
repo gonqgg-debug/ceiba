@@ -198,6 +198,63 @@
     m.classList.add('is-pre'); mio.observe(m);
   });
 
-  bindCars(); bindDemos(); bindMoments();
-  new MutationObserver(() => { bindCars(); bindDemos(); bindMoments(); }).observe(document.documentElement, { childList: true, subtree: true });
+  // ---------- Variante «Expresiva» ----------
+  // Un solo manejador de scroll (con rAF) para la frase que se enciende y la galería en capítulos.
+  const scrubs = new Set();
+  let ticking = false;
+  const onScroll = () => { if (ticking) return; ticking = true; requestAnimationFrame(() => { ticking = false; scrubs.forEach(f => f()); }); };
+  addEventListener('scroll', onScroll, { passive: true }); addEventListener('resize', onScroll);
+  const clamp = v => Math.max(0, Math.min(1, v));
+  const cio = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return; cio.unobserve(e.target);
+    const b = e.target, { to, dec, pre, post } = b._cx, t0 = performance.now(), dur = 1300;
+    const step = now => { const t = clamp((now - t0) / dur), v = to * (1 - Math.pow(1 - t, 3)); b.textContent = pre + v.toFixed(dec) + post; if (t < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  }), { threshold: .6 });
+  // Se observa el contenedor del título: el título enmascarado no tiene área visible que observar
+  const rio = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; rio.unobserve(e.target); const h = e.target._cxH; requestAnimationFrame(() => { h.classList.add('is-in'); h.classList.remove('is-pre'); }); }), { threshold: .2 });
+  const bindExpresiva = () => {
+    // Frase: cada palabra se enciende al cruzar la mitad de la pantalla (y se apaga al volver)
+    document.querySelectorAll('[data-cx-words]:not([data-io])').forEach(p => {
+      p.dataset.io = 1; if (reduce) return;
+      const sec = p.closest('.cx-statement'), ws = [...p.querySelectorAll('.cx-w')];
+      sec.classList.add('is-live');
+      let n = -1;
+      const f = () => {
+        const r = p.getBoundingClientRect(), vh = innerHeight, start = vh * .85, end = vh * .4;
+        const k = Math.round(clamp((start - r.top) / Math.max(1, start - end + r.height)) * ws.length);
+        if (k !== n) { n = k; ws.forEach((w, i) => w.classList.toggle('is-on', i < k)); }
+      };
+      scrubs.add(f); f();
+    });
+    // Galería en capítulos: la foto que toca según cuánto se ha recorrido la sección fija
+    document.querySelectorAll('[data-cx-chapters]:not([data-io])').forEach(sec => {
+      sec.dataset.io = 1; if (reduce) return;
+      const imgs = [...sec.querySelectorAll('.cx-ch-img')], count = sec.querySelector('.cx-ch-count b');
+      let cur = 0;
+      const f = () => {
+        const r = sec.getBoundingClientRect(), span = Math.max(1, r.height - innerHeight);
+        const k = Math.min(imgs.length - 1, Math.floor(clamp(-r.top / span) * imgs.length));
+        if (k !== cur) { imgs[cur].classList.remove('is-on'); imgs[k].classList.add('is-on'); cur = k; if (count) count.textContent = k + 1; }
+      };
+      scrubs.add(f); f();
+    });
+    // Cifras que cuentan una vez al aparecer (solo si aún no están a la vista; sin script se ven completas)
+    document.querySelectorAll('[data-cx-count]:not([data-io])').forEach(b => {
+      b.dataset.io = 1;
+      const m = b.textContent.trim().match(/^(\D*)(\d+(?:[.,]\d+)?)(.*)$/);
+      if (reduce || !m || b.getBoundingClientRect().top < innerHeight) return;
+      const num = m[2].replace(',', '.');
+      b._cx = { pre: m[1], post: m[3], to: parseFloat(num), dec: (num.split('.')[1] || '').length };
+      b.textContent = m[1] + (0).toFixed(b._cx.dec) + m[3]; cio.observe(b);
+    });
+    // Títulos de sección: suben desde su máscara la primera vez que aparecen
+    document.querySelectorAll('.cx--expresiva .cx-sec h2:not([data-io]), .cx--expresiva .cx-ch-head h2:not([data-io])').forEach(h => {
+      h.dataset.io = 1; if (reduce || h.getBoundingClientRect().top < innerHeight) return;
+      h.classList.add('cx-rise', 'is-pre'); h.parentElement._cxH = h; rio.observe(h.parentElement);
+    });
+  };
+
+  bindCars(); bindDemos(); bindMoments(); bindExpresiva();
+  new MutationObserver(() => { bindCars(); bindDemos(); bindMoments(); bindExpresiva(); }).observe(document.documentElement, { childList: true, subtree: true });
 })();

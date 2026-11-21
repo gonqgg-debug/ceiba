@@ -629,3 +629,107 @@
 .cx--dark .cx-book-in{background:var(--card)}
 @container (max-width:640px){.cx-hero{grid-template-columns:1fr}.cx-today,.cx-team-solo,.cx-visit-card,.cx-book-in{grid-template-columns:1fr}}
 .cx-sticky .cx-btn--ghost{background:var(--bg)}
+
+/* =====================================================================
+   Variante «Expresiva» (page.theme.style = 'expresiva'): más movimiento para
+   impresionar. Momentos tomados de design-taste-frontend (headline-arrives,
+   word-highlight, photo-chapters, counter-rolls, marquee-row, lines-rise).
+   Sin librerías; con movimiento reducido todo queda quieto y legible.
+   ===================================================================== */
+
+/* hero a pantalla completa: la foto es el fondo y el título entra palabra por palabra */
+.cx--expresiva .cx-hero{max-width:none;margin:0;position:relative;grid-template-columns:minmax(0,1fr);min-height:46em;padding:7em var(--pad) 4.5em;align-items:end;isolation:isolate;overflow:hidden}
+.cx--expresiva .cx-hero-media{position:absolute;inset:0;border-radius:0!important;z-index:-1}
+.cx--expresiva .cx-hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,14,12,.62) 0%,rgba(8,14,12,.25) 55%,rgba(8,14,12,0) 80%),linear-gradient(180deg,rgba(8,14,12,.1) 0%,rgba(8,14,12,.15) 40%,rgba(8,14,12,.8) 100%)}
+.cx--expresiva .cx-hero-img{position:absolute;inset:0;aspect-ratio:auto!important;height:100%;background-position:center 25%}
+.cx--expresiva .cx-hero-copy{max-width:58em;color:#fff}
+.cx--expresiva .cx-hero h1{color:#fff;font-size:6.2em;line-height:.95;letter-spacing:-.045em;max-width:12em}
+.cx--expresiva .cx-hero .cx-lede{color:rgba(255,255,255,.86);font-size:1.3em;max-width:34em}
+.cx--expresiva .cx-hero .cx-rating,.cx--expresiva .cx-hero .cx-rating b{color:#fff}
+.cx--expresiva .cx-hero .cx-call,.cx--expresiva .cx-hero .cx-next{color:rgba(255,255,255,.8)}
+.cx--expresiva .cx-hero .cx-call b{color:#fff}
+.cx--expresiva .cx-hero .cx-next-slot{color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)}
+.cx--expresiva .cx-hero .cx-btn--ghost{color:#fff!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.55)}
+.cx--expresiva .cx-hero .cx-btn--ghost:hover{background:rgba(255,255,255,.12)}
+.cx-w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.cx-w > span{display:inline-block}
+@keyframes cx-word{from{transform:translateY(105%)}}
+@keyframes cx-slowsettle{from{transform:scale(1.14)}}
+@media (prefers-reduced-motion:no-preference){
+  .cx--expresiva .cx-hero[data-enter] h1{animation:none}
+  .cx--expresiva .cx-h1-words .cx-w > span{animation:cx-word 900ms var(--ease-enter) both;animation-delay:calc(120ms + var(--i) * 55ms)}
+  .cx--expresiva .cx-hero[data-enter] .cx-lede{animation-delay:620ms}
+  .cx--expresiva .cx-hero[data-enter] .cx-ctas{animation-delay:700ms}
+  .cx--expresiva .cx-hero[data-enter] .cx-next,.cx--expresiva .cx-hero[data-enter] .cx-call{animation-delay:780ms}
+  .cx--expresiva .cx-hero[data-enter] .cx-hero-img{animation:cx-slowsettle 2.4s var(--ease-enter) both}
+}
+
+/* frase que se enciende palabra por palabra al hacer scroll */
+.cx-statement{padding-top:7em;padding-bottom:7em}
+.cx-statement p{font:600 3.4em/1.12 var(--fh);letter-spacing:-.035em;max-width:20em;color:var(--fg)}
+.cx-statement .cx-w{overflow:visible}
+.cx-statement .cx-w > span{transition:color 250ms var(--ease),opacity 250ms var(--ease)}
+.cx-statement.is-live .cx-w > span{opacity:.22}
+.cx-statement.is-live .cx-w.is-on > span{opacity:1}
+.cx-statement.is-live .cx-w.is-on:nth-child(5n+3) > span{color:var(--a)}
+
+/* cinta de servicios: se mueve sola y se pausa al pasar el mouse */
+.cx-marquee{margin-top:2.4em;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:1.1em 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.cx-mq-track{display:flex;width:max-content}
+.cx-mq-track > span{display:flex;align-items:center;gap:1.2em;padding-right:1.2em;white-space:nowrap}
+.cx-mq-track em{font:500 1.6em/1 var(--fh);font-style:normal;letter-spacing:-.02em}
+.cx-mq-track i{font-style:normal;color:var(--a);font-size:1.4em}
+@keyframes cx-mq{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:no-preference){
+  .cx-mq-track{animation:cx-mq 38s linear infinite}
+  .cx-marquee:hover .cx-mq-track{animation-play-state:paused}
+}
+@media (prefers-reduced-motion:reduce){.cx-mq-track{flex-wrap:wrap;width:auto}.cx-mq-track > span + span{display:none}.cx-mq-track > span{flex-wrap:wrap;white-space:normal}}
+
+/* galería en capítulos: la sección se queda fija y las fotos cambian con el scroll */
+.cx-chapters{height:calc(var(--n) * 70vh + 30vh);position:relative}
+.cx-ch-pin{position:sticky;top:0;height:100vh;display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:3em;align-items:center;padding:0 var(--pad);max-width:84em;margin:0 auto}
+.cx-ch-head h2{font-size:2.7em;line-height:1.04;font-weight:600;letter-spacing:-.03em}
+.cx-ch-head p{color:var(--muted);margin-top:1em;font-size:1.05em;max-width:24em}
+.cx-ch-count{display:block;margin-top:2em;color:var(--muted);font-variant-numeric:tabular-nums;font-size:1.05em}
+.cx-ch-count b{font:600 2.6em/1 var(--fh);color:var(--fg);letter-spacing:-.03em;margin-right:.1em}
+.cx-ch-frame{position:relative;height:min(78vh,44em);border-radius:var(--r);overflow:hidden}
+.cx-ch-img{position:absolute;inset:0;background:center/cover no-repeat;opacity:0;transform:scale(1.08);transition:opacity 700ms var(--ease-enter),transform 1.4s var(--ease-enter)}
+.cx-ch-img.is-on{opacity:1;transform:scale(1)}
+@media (prefers-reduced-motion:reduce){
+  .cx-chapters{height:auto}
+  .cx-ch-pin{position:static;height:auto;padding:6em var(--pad);grid-template-columns:1fr}
+  .cx-ch-frame{height:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(14em,1fr));gap:1em;overflow:visible}
+  .cx-ch-img{position:relative;aspect-ratio:4/3;opacity:1;transform:none;border-radius:var(--r)}
+  .cx-ch-count{display:none}
+}
+
+/* títulos de sección que suben desde su máscara la primera vez */
+@media (prefers-reduced-motion:no-preference){
+  .cx--expresiva .cx-rise.is-pre{clip-path:inset(0 0 100% 0);transform:translateY(.4em)}
+  .cx--expresiva .cx-rise.is-in{transition:clip-path 800ms var(--ease-enter),transform 800ms var(--ease-enter)}
+}
+
+/* cifras: tamaño grande para que la cuenta luzca */
+.cx--expresiva .cx-stats b{font-size:4.4em;color:var(--a)}
+
+/* servicios: la foto se acerca más y el nombre se subraya */
+@media (hover:hover) and (pointer:fine){.cx--expresiva .cx-card:hover .cx-card-img{transform:scale(1.06)}}
+
+@container (max-width:980px){
+  .cx--expresiva .cx-hero h1{font-size:4.6em}
+  .cx-ch-pin{grid-template-columns:1fr;align-content:center;gap:1.6em}
+  .cx-ch-frame{height:56vh}
+}
+@container (max-width:640px){
+  .cx--expresiva .cx-hero{min-height:38em;padding:5em var(--pad) 2.6em}
+  .cx--expresiva .cx-hero-media{order:0;padding:0}
+  .cx--expresiva .cx-hero h1{font-size:3em}
+  .cx--expresiva .cx-hero .cx-lede{font-size:1.05em}
+  .cx-statement{padding-top:4em;padding-bottom:4em}
+  .cx-statement p{font-size:2em}
+  .cx-ch-head h2{font-size:1.95em}
+  .cx-ch-frame{height:52vh}
+  .cx-mq-track em{font-size:1.25em}
+  .cx--expresiva .cx-stats b{font-size:3em}
+}
