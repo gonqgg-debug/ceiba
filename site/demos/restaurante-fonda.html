@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>La Milpa · Fonda de barrio (concepto C)</title><meta name="robots" content="noindex">
+<meta name="description" content="Concepto de Ceiba Labs: página de restaurante familiar con bloques de color, títulos en mayúsculas y trazos a mano. Negocio ficticio.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Lora:ital,wght@0,400;0,500;1,400&family=Yellowtail&family=Caveat:wght@500;700&display=swap">
+<style>
+/* Concepto C — «Fonda de barrio». Una fonda familiar que habla fuerte y alegre:
+   bloques de color de pared a pared, títulos en mayúsculas, palabras resaltadas
+   y trazos a mano de plumón, como el pizarrón de la entrada. */
+:root{--chile:#C8302B;--cempa:#F2A900;--atole:#EBB98C;--cream:#FFF8EE;--ink:#1D1714;--blue:#2B3A8C;
+  --head:'Playfair Display',Georgia,serif;--body:'Lora',Georgia,serif;--script:'Yellowtail',cursive;--hand:'Caveat',cursive;
+  --ease:cubic-bezier(.2,.8,.2,1);--enter:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box}
+.red > *,.board > *,.shop > *{min-width:0}
+.shop p,.shop a,.note{overflow-wrap:anywhere;word-break:break-word}
+body{margin:0;background:var(--cream);color:var(--ink);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit}button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--cempa);outline-offset:3px}
+.g{padding-left:max(1.25rem,env(safe-area-inset-left));padding-right:max(1.25rem,env(safe-area-inset-right))}
+h1,h2,h3{font-family:var(--head);text-transform:uppercase;letter-spacing:-.005em;line-height:1.02;margin:0}
+
+/* trazos a mano: se dibujan una vez cuando aparecen */
+.mk{position:relative;display:inline-block;white-space:nowrap}
+.mk svg{position:absolute;left:-6%;width:112%;overflow:visible;pointer-events:none}
+.mk.u svg{bottom:-.18em;height:.35em}
+.mk.o svg{top:-18%;height:136%}
+.mk path{fill:none;stroke:var(--cempa);stroke-width:5;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:0}
+.js .mk path{stroke-dashoffset:1;transition:stroke-dashoffset .9s var(--enter) .2s}
+.js .mk.in path{stroke-dashoffset:0}
+/* palabra resaltada: el recuadro de color se barre de izquierda a derecha */
+.hl{background:linear-gradient(var(--atole),var(--atole)) left center/100% 92% no-repeat;padding:0 .12em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.js .hl{background-size:0 92%;transition:background-size .8s var(--enter) .35s}
+.js .in .hl,.js .hl.in{background-size:100% 92%}
+
+/* menú: botón de hamburguesa y panel rojo a pantalla completa */
+.burger{position:fixed;top:max(1rem,env(safe-area-inset-top));right:max(1rem,env(safe-area-inset-right));z-index:40;width:3.2rem;height:3.2rem;border-radius:50%;border:0;background:var(--cream);display:grid;place-items:center;box-shadow:0 .5rem 1.2rem -.6rem #0006}
+.burger i,.burger i::before,.burger i::after{display:block;width:1.3rem;height:2px;background:var(--ink);position:relative;transition:transform .3s var(--ease),background .2s}
+.burger i::before,.burger i::after{content:"";position:absolute;left:0}.burger i::before{top:-6px}.burger i::after{top:6px}
+.open-nav .burger i{background:transparent}.open-nav .burger i::before{transform:translateY(6px) rotate(45deg)}.open-nav .burger i::after{transform:translateY(-6px) rotate(-45deg)}
+.nav{position:fixed;inset:0;z-index:35;background:var(--chile);color:var(--cream);display:grid;align-content:center;gap:.4rem;padding:2rem max(2rem,env(safe-area-inset-left));clip-path:circle(0 at calc(100% - 2.6rem) 2.6rem);transition:clip-path .6s var(--enter);visibility:hidden}
+.open-nav .nav{clip-path:circle(150% at calc(100% - 2.6rem) 2.6rem);visibility:visible}
+.nav a{font:900 clamp(2.4rem,7vw,5rem)/1.05 var(--head);text-transform:uppercase;text-decoration:none;width:max-content}
+.nav a:hover{color:var(--cempa)}
+.nav p{font:500 1.6rem var(--hand);color:var(--atole);margin-top:1.4rem}
+.book-fab{position:fixed;left:max(1rem,env(safe-area-inset-left));top:max(1rem,env(safe-area-inset-top));z-index:30;background:var(--chile);color:var(--cream);font:800 .85rem var(--head);letter-spacing:.08em;text-transform:uppercase;padding:.85rem 1.2rem;border-radius:999px;text-decoration:none;box-shadow:0 .5rem 1.2rem -.6rem #0006}
+
+/* 1. apertura: la milpa de donde viene la receta, con el nombre encima */
+.hero{position:relative;height:88svh;min-height:32rem;background:url('../img/demo/rest-milpa.jpg') center 60%/cover;display:grid;place-items:center;overflow:hidden}
+.hero{filter:brightness(1.1) saturate(.9)}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#6FA6E0 0%,#9CC3EA 30%,#7E9B4C 46%,#9AA64A 70%,#C9A24E 100%);mix-blend-mode:color;opacity:.62}
+.hero::after{content:"";position:absolute;inset:auto 0 0;height:40%;background:linear-gradient(transparent,#1D171433)}
+.logo{position:relative;z-index:1;text-align:center;color:var(--chile);filter:drop-shadow(0 .2rem .6rem #FFF8EE99)}
+.logo small{display:block;font:600 clamp(1rem,2.4vw,1.6rem)/1 var(--body);letter-spacing:.6em;color:var(--cream);text-shadow:0 1px 8px #0008;margin-bottom:-.2em;padding-left:.6em}
+.logo b{display:block;font:400 clamp(6rem,19vw,15rem)/.9 var(--script);text-transform:none;letter-spacing:0;transform:rotate(-6deg)}
+.js .logo b{animation:pop 1.1s var(--enter) both .2s}
+@keyframes pop{from{opacity:0;transform:rotate(-12deg) scale(.85)}}
+
+/* 2. bloque rojo: quiénes somos, con el plato recortado que gira despacio */
+.red{overflow:hidden;background:var(--chile);color:var(--cream);display:grid;grid-template-columns:1.25fr 1fr;align-items:center;gap:3rem;padding-block:6rem 5rem}
+.red h1{font-weight:800;font-size:clamp(2.3rem,5.4vw,4.8rem)}
+.red .hl{color:var(--cream);background-image:linear-gradient(#E8946B,#E8946B)}
+.plate{aspect-ratio:1;border-radius:50%;background:url('../img/demo/rest-molcajete.jpg') center/cover;box-shadow:0 0 0 .8rem #FFF8EE22,0 2rem 3rem -1.6rem #0008}
+@media (prefers-reduced-motion:no-preference){.plate{animation:spin 60s linear infinite}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* 3. de dónde viene: foto grande con nota encima, pie a mano y sello */
+.origin{position:relative;min-height:80svh;background:url('../img/demo/rest-cocinera.jpg') center 30%/cover;display:flex;align-items:flex-start;justify-content:flex-end;padding:3rem max(1.25rem,env(safe-area-inset-right))}
+.note{background:var(--cream);max-width:24rem;padding:1.4rem 1.5rem;font-size:.98rem;box-shadow:0 1rem 2rem -1.2rem #0007;transform:rotate(1.2deg)}
+.note a{color:var(--chile)}
+.tag{position:absolute;left:max(1.25rem,env(safe-area-inset-left));bottom:2rem;font:700 1.7rem var(--hand);color:var(--cream);text-shadow:0 1px 6px #0009}
+.tag .mk path{stroke:var(--chile)}
+.stamp{position:absolute;right:max(2rem,env(safe-area-inset-right));bottom:2.2rem;width:8.5rem;height:8.5rem;border-radius:50%;background:var(--chile);color:var(--cream);display:grid;place-items:center;text-align:center;font:800 1.15rem/1.05 var(--head);text-transform:uppercase;transform:rotate(-10deg);box-shadow:0 0 0 .35rem var(--cream),0 1rem 1.6rem -1rem #000a}
+.stamp small{display:block;font:500 .8rem var(--body);text-transform:none;margin-top:.3rem}
+
+/* 4. bloque amarillo: lo que dicen de nosotros */
+.yellow{background:var(--cempa);text-align:center;padding-block:6rem}
+.yellow blockquote{margin:0 auto;max-width:56rem;font:800 clamp(1.8rem,3.8vw,3.2rem)/1.12 var(--head);text-transform:uppercase;color:var(--chile)}
+.yellow cite{display:inline-block;margin-top:1.6rem;font:700 1.6rem var(--hand);font-style:normal}
+.yellow cite .mk path{stroke:var(--chile)}
+
+/* 5. la carta y la reservación, como pizarrón de entrada */
+.board{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:3rem;padding-block:6rem}
+.board .big{display:grid;gap:1.4rem}
+.board .big a{font:900 clamp(2.2rem,4.4vw,4.4rem)/1.05 var(--head);text-transform:uppercase;text-decoration:none;color:var(--chile)}
+.board .big a:nth-child(2){color:var(--ink)}
+.board .big a:hover{color:var(--blue)}
+.board .pics{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.board .pics div{aspect-ratio:3/4;border-radius:.4rem;background:center/cover;transition:transform .45s var(--ease)}
+.board .pics div:first-child{transform:rotate(-2.5deg) translateY(1rem)}.board .pics div:last-child{transform:rotate(2deg)}
+.board .pics div:hover{transform:rotate(0) scale(1.03)}
+
+/* la carta se despliega aquí mismo */
+.carta{background:var(--atole);padding-block:5rem;display:none}
+.carta.show{display:block;animation:fold .6s var(--enter)}
+@keyframes fold{from{opacity:0;transform:translateY(-1rem)}}
+.carta h2{text-align:center;font-size:clamp(2.4rem,5vw,4rem);margin-bottom:3rem}
+.cols{display:grid;grid-template-columns:repeat(2,1fr);gap:3rem 5rem;max-width:68rem;margin:0 auto}
+.cols h3{font-size:1.5rem;margin-bottom:1rem;color:var(--chile)}
+.cols ul{list-style:none;margin:0;padding:0}
+.cols li{display:flex;align-items:baseline;gap:.6rem;padding:.55rem 0;border-bottom:1.5px dashed #1D171433}
+.cols li b{font-weight:500}.cols li i{flex:1}.cols li span{font:800 1rem var(--head)}
+.cols small{display:block;font-style:italic;color:#1D1714AA;font-size:.88rem}
+
+/* 6. bloque durazno: la tiendita de salsas para llevar */
+.shop{background:var(--atole);display:grid;grid-template-columns:1fr 1.2fr;gap:3rem;align-items:center;padding-block:6rem}
+.shop h2{font-size:clamp(2.4rem,5vw,4.4rem)}
+.shop h2 em{display:block;font-style:normal;color:var(--chile)}
+.shop p{max-width:30rem;margin:1.2rem 0}
+.shop .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.shop .grid3 div{aspect-ratio:3/4;background:center/cover;border-radius:.3rem}
+
+/* 7. reservación: boleto crema sobre rojo */
+.book{background:var(--chile);color:var(--cream);padding-block:6rem;text-align:center}
+.book h2{font-size:clamp(2.6rem,6vw,5rem)}
+.book > p{margin:.8rem 0 2.6rem;font-size:1.05rem}
+.ticket{max-width:50rem;margin:0 auto;display:grid;grid-template-columns:1fr 12rem;background:var(--cream);color:var(--ink);border-radius:.8rem;text-align:left;position:relative;box-shadow:0 2rem 3rem -1.6rem #0008}
+.ticket::before,.ticket::after{content:"";position:absolute;right:12rem;width:1.8rem;height:1.8rem;border-radius:50%;background:var(--chile);transform:translateX(50%)}
+.ticket::before{top:-.9rem}.ticket::after{bottom:-.9rem}
+.t-main{padding:2rem;display:grid;gap:1.2rem}
+.t-stub{border-left:2px dashed #1D171440;padding:2rem 1.4rem;display:flex;flex-direction:column;justify-content:space-between;gap:1rem;text-align:center}
+.t-stub b{font:800 1.2rem/1.15 var(--head);text-transform:uppercase}
+.field > b{display:block;font:700 1.35rem var(--hand);margin-bottom:.4rem;color:var(--chile)}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.chips button{border:2px solid var(--ink);background:transparent;border-radius:999px;padding:.4rem .8rem;font:500 .92rem var(--body);line-height:1.15}
+.chips button small{display:block;font-size:.7rem;opacity:.7}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--cream)}
+.step{display:flex;align-items:center;gap:1rem}
+.step button{width:2.3rem;height:2.3rem;border-radius:50%;border:2px solid var(--ink);background:transparent;font-size:1.1rem}
+.step output{font:800 1.8rem var(--head);min-width:2ch;text-align:center}
+.t-main input{height:2.6rem;border:0;border-bottom:2px solid var(--ink);background:transparent;font:inherit;width:100%;outline:none}
+.go{height:3.1rem;border-radius:999px;border:0;background:var(--cempa);color:var(--ink);font:800 1rem var(--head);text-transform:uppercase;letter-spacing:.05em}
+
+/* 8. pie: horario, como el pizarrón de la puerta */
+.foot{background:var(--chile);color:var(--cream);border-top:2px dashed #FFF8EE55;display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding-block:4rem 3rem;text-align:center}
+.foot h3{font-size:1.25rem;margin-bottom:.8rem}
+.foot h3 .mk path{stroke:var(--cempa)}
+.foot p{margin:0;font-size:.95rem;line-height:1.8}
+.foot .demo{grid-column:1/-1;font-size:.78rem;opacity:.7}
+
+@media (max-width:820px){
+  .red,.board,.shop{grid-template-columns:minmax(0,1fr);gap:2.4rem;padding-block:4rem}
+  .board .big a{width:auto;font-size:2.1rem!important}
+  .plate{width:78%;justify-self:center}
+  .origin{min-height:70svh;padding-top:5.5rem}
+  .stamp{width:6.6rem;height:6.6rem;font-size:.95rem;bottom:1.4rem}
+  .tag{font-size:1.35rem;bottom:1.4rem;max-width:55%}
+  .cols{grid-template-columns:1fr}
+  .ticket{grid-template-columns:1fr}.ticket::before,.ticket::after{display:none}
+  .t-stub{border-left:0;border-top:2px dashed #1D171440;flex-direction:row;align-items:center;text-align:left}
+  .t-main{padding:1.4rem}
+  .foot{grid-template-columns:1fr}
+  
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style></head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<a class="book-fab" href="#reserva">Reservar</a>
+<button class="burger" type="button" aria-label="Abrir menú" aria-expanded="false" id="burger"><i></i></button>
+<nav class="nav" id="nav" aria-label="Menú">
+  <a href="#reserva">Reservar</a><a href="#carta" data-carta>La carta</a><a href="#tiendita">La tiendita</a><a href="#historia">Nuestra historia</a><a href="#visitanos">Cómo llegar</a>
+  <p>Calle Morelos 812 · Americana, Guadalajara</p>
+</nav>
+
+<header class="hero" aria-label="La Milpa">
+  <h1 class="logo"><small>FONDA</small><b>La Milpa</b></h1>
+</header>
+
+<section class="red g" id="historia">
+  <h1 class="rv"><span class="mk u">¡QUIUBO!<svg viewBox="0 0 200 20" preserveAspectRatio="none"><path pathLength="1" d="M3 14 C 50 4, 120 18, 197 8"/></svg></span> SOMOS UNA <span class="hl">FONDA FAMILIAR</span> Y <span class="hl">TIENDITA</span> EN EL CORAZÓN DE LA AMERICANA.</h1>
+  <div class="plate" role="img" aria-label="Guacamole de molcajete con salsas"></div>
+</section>
+
+<section class="origin" aria-label="Quién cocina">
+  <p class="note">La Milpa sirve lo que Doña Rosa aprendió en el rancho de su abuela, en la sierra de Tapalpa: maíz que se nixtamaliza aquí cada mañana, birria que se cuece desde la madrugada y salsas de molcajete. Traemos el maíz y los chiles de productores de <a href="#tiendita">Jalisco</a>.</p>
+  <span class="tag"><span class="mk o">Doña Rosa en su cocina<svg viewBox="0 0 200 60" preserveAspectRatio="none"><path pathLength="1" d="M20 30 C 20 6, 180 4, 190 28 C 198 52, 30 58, 12 34 C 6 24, 30 10, 60 8"/></svg></span></span>
+  <div class="stamp">Desde<br>2009<small>en la Americana</small></div>
+</section>
+
+<section class="yellow g" aria-label="Lo que dicen">
+  <blockquote class="rv">“La mejor birria que he probado en Guadalajara, y las tortillas salen calientitas del comal.”</blockquote>
+  <cite class="rv"><span class="mk o">Andrea P., reseña en Google<svg viewBox="0 0 200 60" preserveAspectRatio="none"><path pathLength="1" d="M20 30 C 20 6, 180 4, 190 28 C 198 52, 30 58, 12 34 C 6 24, 30 10, 60 8"/></svg></span></cite>
+</section>
+
+<section class="board g" aria-label="Carta y reservación">
+  <div class="big">
+    <a href="#carta" data-carta class="rv">Ve nuestra <span class="mk o">carta<svg viewBox="0 0 200 60" preserveAspectRatio="none"><path pathLength="1" d="M20 30 C 20 6, 180 4, 190 28 C 198 52, 30 58, 12 34 C 6 24, 30 10, 60 8"/></svg></span></a>
+    <a href="#reserva" class="rv">Haz tu <span class="mk u">reservación<svg viewBox="0 0 200 20" preserveAspectRatio="none"><path pathLength="1" d="M3 12 C 60 18, 140 4, 197 10"/></svg></span></a>
+  </div>
+  <div class="pics"><div style="background-image:url('../img/demo/rest-birria.jpg')" role="img" aria-label="Tacos de birria"></div><div style="background-image:url('../img/demo/rest-platos.jpg')" role="img" aria-label="Platillos de la casa"></div></div>
+</section>
+
+<section class="carta g" id="carta" aria-label="La carta">
+  <h2>La carta</h2>
+  <div class="cols">
+    <div><h3>Para empezar</h3><ul>
+      <li><b>Guacamole de molcajete</b><i></i><span>$145</span></li><li><b>Sopes de tinga</b><i></i><span>$110</span></li><li><b>Queso fundido</b><i></i><span>$135</span></li><li><b>Tostada de aguachile</b><i></i><span>$95</span></li></ul></div>
+    <div><h3>Platos fuertes</h3><ul>
+      <li><b>Tacos de birria con consomé</b><i></i><span>$165</span></li><li><b>Enchiladas verdes</b><i></i><span>$150</span></li><li><b>Mole poblano</b><i></i><span>$185</span></li><li><b>Tacos de hongos</b><i></i><span>$140</span></li></ul></div>
+    <div><h3>Para tomar</h3><ul>
+      <li><b>Agua de jamaica (jarra)</b><i></i><span>$75</span></li><li><b>Horchata de la casa</b><i></i><span>$45</span></li><li><b>Café de olla</b><i></i><span>$40</span></li></ul></div>
+    <div><h3>Postres</h3><ul>
+      <li><b>Flan napolitano</b><i></i><span>$70</span></li><li><b>Churros con chocolate</b><i></i><span>$85</span></li></ul><small>Precios en pesos, IVA incluido. Pregunta por el platillo del día.</small></div>
+  </div>
+</section>
+
+<section class="shop g" id="tiendita" aria-label="La tiendita">
+  <div class="rv">
+    <h2><span class="mk u">La tiendita<svg viewBox="0 0 200 20" preserveAspectRatio="none"><path pathLength="1" d="M3 14 C 50 4, 120 18, 197 8"/></svg></span><em>de La Milpa</em></h2>
+    <p>Junto a la fonda vendemos lo que usamos en la cocina: salsas de molcajete en frasco, tortillas por kilo, mole en pasta, café de Chiapas y dulces de la sierra. Los jueves damos clase de tortillas a mano.</p>
+    <p><a href="https://wa.me/523300000000?text=Hola%2C%20quiero%20pedir%20de%20la%20tiendita" target="_blank" rel="noopener">Pide por WhatsApp y pasa por tu pedido →</a></p>
+  </div>
+  <div class="grid3"><div style="background-image:url('../img/demo/rest-comal.jpg')" role="img" aria-label="Tortillas en el comal"></div><div style="background-image:url('../img/demo/rest-molcajete.jpg')" role="img" aria-label="Salsas de molcajete"></div><div style="background-image:url('../img/demo/rest-terraza.jpg')" role="img" aria-label="La terraza"></div></div>
+</section>
+
+<section class="book g" id="reserva" aria-label="Reservar">
+  <h2 class="rv">¿Te apartamos <span class="mk u">mesa?<svg viewBox="0 0 200 20" preserveAspectRatio="none"><path pathLength="1" d="M3 12 C 60 18, 140 4, 197 10"/></svg></span></h2>
+  <p>Elige día, hora y cuántos son. Te confirmamos por WhatsApp.</p>
+  <div class="ticket">
+    <div class="t-main">
+      <div class="field"><b>¿Qué día?</b><div class="chips" id="days"></div></div>
+      <div class="field"><b>¿A qué hora?</b><div class="chips" id="hours"><span>Primero elige el día</span></div></div>
+      <div class="field"><b>¿Cuántos son?</b><div class="step"><button type="button" id="minus" aria-label="Menos personas">−</button><output id="ppl">2</output><button type="button" id="plus" aria-label="Más personas">+</button></div></div>
+      <div class="field"><b>¿A nombre de quién?</b><input id="who" autocomplete="name" placeholder="Tu nombre"></div>
+    </div>
+    <div class="t-stub"><div><b id="sum">Elige día y hora</b></div><button class="go" id="go" type="button">Reservar</button></div>
+  </div>
+</section>
+
+<footer class="foot g" id="visitanos">
+  <div><h3><span class="mk o">La fonda<svg viewBox="0 0 200 60" preserveAspectRatio="none"><path pathLength="1" d="M20 30 C 20 6, 180 4, 190 28 C 198 52, 30 58, 12 34 C 6 24, 30 10, 60 8"/></svg></span></h3><p>Martes a jueves — 13 a 22 h<br>Viernes y sábado — 13 a 23:30 h<br>Domingo — 13 a 19 h<br>Lunes — cerrado</p></div>
+  <div><h3><span class="mk o">La tiendita<svg viewBox="0 0 200 60" preserveAspectRatio="none"><path pathLength="1" d="M20 30 C 20 6, 180 4, 190 28 C 198 52, 30 58, 12 34 C 6 24, 30 10, 60 8"/></svg></span></h3><p>Martes a domingo — 10 a 19 h<br>Clase de tortillas: jueves 11 h</p></div>
+  <div><h3><span class="mk o">Dónde<svg viewBox="0 0 200 60" preserveAspectRatio="none"><path pathLength="1" d="M20 30 C 20 6, 180 4, 190 28 C 198 52, 30 58, 12 34 C 6 24, 30 10, 60 8"/></svg></span></h3><p>Calle Morelos 812, Col. Americana<br>Guadalajara · 33 0000 0000<br><a href="https://www.google.com/maps/search/?api=1&query=Calle%20Morelos%20812%20Americana%20Guadalajara" target="_blank" rel="noopener">Cómo llegar</a></p></div>
+  <p class="demo">Concepto de Ceiba Labs con un negocio ficticio.</p>
+</footer>
+
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  // trazos y resaltados: se dibujan una vez al aparecer
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); e.target.querySelectorAll('.mk,.hl').forEach(m => m.classList.add('in')); io.unobserve(e.target); } }), { threshold: .4 });
+  document.querySelectorAll('.rv, .mk').forEach(el => io.observe(el));
+  // menú
+  const toggle = o => { document.body.classList.toggle('open-nav', o); $('#burger').setAttribute('aria-expanded', o); $('#burger').setAttribute('aria-label', o ? 'Cerrar menú' : 'Abrir menú'); };
+  $('#burger').onclick = () => toggle(!document.body.classList.contains('open-nav'));
+  $('#nav').addEventListener('click', e => { if (e.target.closest('a')) toggle(false); });
+  addEventListener('keydown', e => { if (e.key === 'Escape') toggle(false); });
+  // la carta se despliega en la misma página
+  document.querySelectorAll('[data-carta]').forEach(a => a.addEventListener('click', () => $('#carta').classList.add('show')));
+  // boleto de reservación
+  const D = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'], M = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+  const open = { 0: ['14:00', '15:30', '17:00'], 2: ['14:00', '15:30', '19:00', '20:30'], 3: ['14:00', '15:30', '19:00', '20:30'], 4: ['14:00', '15:30', '19:00', '20:30'], 5: ['14:00', '19:00', '20:30', '22:00'], 6: ['14:00', '19:00', '20:30', '22:00'] };
+  const days = []; for (let i = 0; days.length < 6 && i < 10; i++) { const d = new Date(Date.now() + i * 864e5); if (open[d.getDay()]) days.push(d); }
+  let day = null, hour = null, ppl = 2;
+  const sum = () => { $('#sum').textContent = day && hour ? `${D[day.getDay()]} ${day.getDate()} ${M[day.getMonth()]} · ${hour} · ${ppl} ${ppl === 1 ? 'persona' : 'personas'}` : 'Elige día y hora'; };
+  const pick = (box, b) => box.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+  $('#days').innerHTML = days.map((d, i) => `<button type="button" aria-pressed="false" data-d="${i}">${i === 0 && d.toDateString() === new Date().toDateString() ? 'Hoy' : D[d.getDay()]}<small>${d.getDate()} ${M[d.getMonth()]}</small></button>`).join('');
+  $('#days').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; day = days[b.dataset.d]; hour = null; pick($('#days'), b);
+    const today = day.toDateString() === new Date().toDateString(), now = new Date().getHours() * 60 + new Date().getMinutes() + 45;
+    const hs = open[day.getDay()].filter(h => !today || +h.slice(0, 2) * 60 + +h.slice(3) > now);
+    $('#hours').innerHTML = hs.length ? hs.map(h => `<button type="button" aria-pressed="false">${h}</button>`).join('') : '<span>Hoy ya no hay horarios; elige otro día</span>'; sum(); });
+  $('#hours').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; hour = b.textContent; pick($('#hours'), b); sum(); });
+  $('#minus').onclick = () => { ppl = Math.max(1, ppl - 1); $('#ppl').textContent = ppl; sum(); };
+  $('#plus').onclick = () => { ppl = Math.min(10, ppl + 1); $('#ppl').textContent = ppl; sum(); };
+  $('#go').onclick = () => {
+    if (!day || !hour) { $('#sum').textContent = 'Elige día y hora para reservar'; return; }
+    const msg = `Hola, quiero reservar en La Milpa${$('#who').value ? ` a nombre de ${$('#who').value}` : ''}:\n• ${D[day.getDay()]} ${day.getDate()} de ${M[day.getMonth()]}\n• ${hour}\n• ${ppl} ${ppl === 1 ? 'persona' : 'personas'}`;
+    window.open(`https://wa.me/523300000000?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+  };
+})();
+</script>
+</body></html>
