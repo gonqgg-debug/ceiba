@@ -17,7 +17,7 @@
   const nav = $('#top'), menu = $('#n-menu');
   let lastY = scrollY;
   const onNav = () => {
-    const y = scrollY; nav.classList.toggle('solid', y > 30);
+    const y = scrollY; nav.classList.toggle('solid', y > 30 || 'solid' in nav.dataset);
     if (!nav.classList.contains('open')) {
       if (y < 520 || y < lastY - 4) nav.classList.remove('away');
       else if (y > lastY + 4) nav.classList.add('away');

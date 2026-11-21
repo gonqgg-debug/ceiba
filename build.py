@@ -59,7 +59,7 @@ index = ('<!doctype html>\n<html lang="es">\n<meta charset="utf-8">\n'
          '<link rel="icon" href="favicon.svg" type="image/svg+xml">\n'
          '<link rel="icon" href="favicon.ico" sizes="32x32">\n'
          '<link rel="apple-touch-icon" href="apple-touch-icon.png">\n'
-         '<meta name="theme-color" content="#0B1514">\n' + home)
+         '<meta name="theme-color" content="#081036">\n' + home)
 
 
 # ---------- Encabezado y pie comunes (Inicio, Páginas web, IA, Clínicas) ----------
@@ -67,34 +67,24 @@ import re as _re
 CHEV = '<svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>'
 SOON = ["Restaurantes", "Inmobiliarias", "Hoteles", "Despachos"]
 
+# Encabezado del diseño nuevo (logo vivo, cristal al bajar): src/partials/n-nav.html
+def n_nav(active, cta_href, cta, cta_long):
+    html = (SRC / "partials/n-nav.html").read_text(encoding="utf-8")
+    html = html.replace("{{CTA_HREF}}", cta_href).replace("{{CTA}}", cta).replace("{{CTA_LONG}}", cta_long)
+    if active:
+        html = html.replace(f'<a href="{active}">', f'<a href="{active}" aria-current="page">')
+    return html
+
 def header(active, cta="/diagnostico"):
-    cur = lambda k: ' aria-current="true"' if active == k else ''
-    soon = "".join(f'<li><a href="#" data-soon="{n}">{n} <small>pronto</small></a></li>' for n in SOON)
-    return f'''<header class="site-header" id="top">
-  <div class="wrap nav">
-    <a class="brand" href="/" aria-label="Ceiba Labs, inicio"><svg viewBox="0 0 353.37 54" fill="currentColor" aria-hidden="true"><use href="#ceiba-logo"/></svg></a>
-    <ul class="nav-links" id="nav-links">
-      <li class="has-sub"><a href="/webs"{cur("webs")}>Páginas web</a><button class="sub-btn" type="button" aria-expanded="false" aria-controls="sub-webs" aria-label="Ver tipos de negocio">{CHEV}</button>
-        <ul class="nav-sub" id="sub-webs"><li><a href="/webs">Todas las páginas web</a></li><li><a href="/webs/clinicas"{cur("clinicas")}>Clínicas y consultorios</a></li>{soon}</ul></li>
-      <li><a href="/ia"{cur("ia")}>Inteligencia artificial</a></li>
-      <li><a href="/webs#precios">Precios</a></li>
-      <li class="nav-cta"><a href="{cta}">Propuesta gratis</a></li>
-    </ul>
-    <a class="btn btn-primary" href="{cta}">Propuesta gratis</a>
-    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav-links">Menú</button>
-  </div>
-</header>'''
+    """Encabezado nuevo (logo vivo) para páginas con contenido normal debajo: siempre sólido y con su espacio."""
+    href = {"webs": "/webs", "clinicas": "/webs", "ia": "/ia"}.get(active)
+    nav = n_nav(href, cta, "Pedir propuesta", "Pedir mi propuesta gratis").replace('<header class="n-nav" id="top">', '<header class="n-nav solid" id="top" data-solid>', 1)
+    return nav + '\n<div class="n-space" aria-hidden="true"></div>'
 
 import site_legal
 LEGAL_LINKS = ('<a href="/privacidad">Privacidad</a><a href="/terminos">Términos</a>' if site_legal.READY
                else '<a href="#" data-soon="Privacidad">Privacidad</a><a href="#" data-soon="Términos">Términos</a>')
-FOOTER = '''<footer class="band footer">
-  <div class="wrap">
-    <a href="/" aria-label="Ceiba Labs, inicio" style="color:inherit"><svg viewBox="0 0 353.37 54" fill="currentColor" role="img" aria-label="Ceiba Labs"><use href="#ceiba-logo"/></svg></a>
-    <nav aria-label="Pie de página"><a href="/webs">Páginas web</a><a href="/webs/clinicas">Clínicas</a><a href="/ia">Inteligencia artificial</a><a href="/webs#precios">Precios</a><a href="/p/clinica-arrayan">Propuesta de ejemplo</a><a href="/diagnostico">Propuesta gratis</a></nav>
-  </div>
-  <div class="wrap foot-legal"><span>© 2026 Ceiba Labs · Nombre comercial de GQG Holdings LLC</span><nav aria-label="Legal">{LEGAL_LINKS}</nav></div>
-</footer>'''.replace('{LEGAL_LINKS}', LEGAL_LINKS)
+FOOTER = (SRC / "partials/n-foot.html").read_text(encoding="utf-8").replace("{LEGAL_LINKS}", LEGAL_LINKS)
 
 # Menú móvil, submenú y enlaces «pronto» para las páginas que no traen el script de Inicio
 NAV_JS = """<script>
@@ -118,6 +108,8 @@ def site_chrome(html, active, cta="/diagnostico", own_menu=False):
     """own_menu=True: la página ya trae el script de Inicio, que maneja el menú; solo se agregan los «pronto»."""
     html = _re.sub(r'<header class="site-header"[\s\S]*?</header>', lambda m: header(active, cta), html, count=1)
     html = _re.sub(r'<footer class="band footer">[\s\S]*?</footer>', lambda m: FOOTER, html, count=1)
+    if "estudio.css" not in html:
+        html = html.replace("</head>", '<link rel="stylesheet" href="/assets/estudio.css">\n</head>', 1)
     js = ("<script>window.__ceibaMenu = true;</script>" if own_menu else "") + NAV_JS
     return html.replace("</body>", js + "\n</body>", 1) if "</body>" in html else html + js
 
@@ -130,16 +122,8 @@ def linkfix(html):
     return html
 
 head_tags = ('<link rel="icon" href="/favicon.svg" type="image/svg+xml">\n<link rel="icon" href="/favicon.ico" sizes="32x32">\n'
-             '<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n<meta name="theme-color" content="#0B1514">')
+             '<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n<meta name="theme-color" content="#081036">')
 common = {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBOLS}}"], "{{HEAD_TAGS}}": head_tags}
-
-# Encabezado del diseño nuevo (logo vivo, cristal al bajar): src/partials/n-nav.html
-def n_nav(active, cta_href, cta, cta_long):
-    html = (SRC / "partials/n-nav.html").read_text(encoding="utf-8")
-    html = html.replace("{{CTA_HREF}}", cta_href).replace("{{CTA}}", cta).replace("{{CTA_LONG}}", cta_long)
-    if active:
-        html = html.replace(f'<a href="{active}">', f'<a href="{active}" aria-current="page">')
-    return html
 
 # Muro 3D de /webs: columnas de capturas reales de la plantilla; cada columna va duplicada
 # para que la animación (subir o bajar 50%) dé la vuelta sin corte.
