@@ -1,0 +1,80 @@
+/* Diseño «Taberna» (lib/templates/taberna.js, raíz .cx.tb). Basado en Darwin & Wallace (Portobello):
+   crema, azul marino y dorado viejo, tarjetas de noticias y tarjeta por sucursal. */
+.cx.tb{--cream:#FAF6EE;--navy:#1E2B3C;--gold:var(--a);--ink:#1E2B3C;--mute:#5F6773;--line:#E6DECF;
+  --fh:'Fraunces',Georgia,serif;--fb:'Jost',ui-sans-serif,system-ui,sans-serif;--pad:max(1.25rem,6cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:400 clamp(14.5px,1.02cqi,16px)/1.6 var(--fb);background:var(--cream);color:var(--ink);position:relative;overflow:clip}
+.tb h1,.tb h2,.tb h3{font-family:var(--fh);font-weight:500;color:inherit;margin:0;line-height:1.15;text-wrap:balance}
+.tb :where(p){margin:0}.tb a{color:inherit}
+.tb-btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.5em;padding:0 1.2em;border-radius:.3em;background:var(--gold);color:#fff!important;font:500 .82em/1 var(--fb);text-decoration:none;white-space:nowrap;transition:background-color .2s}
+.tb-btn:hover{background:var(--navy)}
+.tb-btn--sm{min-height:2.2em;font-size:.74em}
+.tb-btn--line{background:transparent;color:var(--navy)!important;box-shadow:inset 0 0 0 1.5px var(--navy)}
+.tb-link{font-size:.8em;font-weight:500;text-decoration:underline;text-underline-offset:.2em}
+.tb a:focus-visible,.tb summary:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.tb-kick{font-size:.74em;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.tb-bar{background:var(--gold);color:#fff;text-align:center;font-size:.8em;padding:.4rem var(--pad)}
+.tb-top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:2rem;padding:.8rem var(--pad);background:#FAF6EEee;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.tb-logo{font:600 1.25rem/1 var(--fh)}
+.tb-top nav{display:flex;gap:1.4rem;margin-left:auto;font-size:.88em;font-weight:500}
+.tb-top nav a,.tb-top nav span{text-decoration:none}
+.tb-hero{padding:1rem var(--pad) 0}
+.tb-hero-img{aspect-ratio:21/8;background:center/cover no-repeat;border-radius:.4rem}
+@media (prefers-reduced-motion:no-preference){.tb:not(.tb-still) .tb-hero-img{animation:tb-in 1.2s var(--ease) both}}
+@keyframes tb-in{from{clip-path:inset(0 6% round .4rem);opacity:.4}}
+.tb-intro{text-align:center;padding:max(2.5rem,4cqi) var(--pad);display:grid;gap:1.2rem;justify-items:center}
+.tb-intro h1{font-size:clamp(1.5rem,2.6cqi,2.2rem);max-width:24em}
+/* noticias */
+.tb-news{padding:0 var(--pad) max(3rem,5cqi)}
+.tb-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:1rem}
+.tb-head h2{font-size:clamp(1.2rem,1.8cqi,1.5rem)}
+.tb-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.tb-cards article{display:grid;gap:.5rem;align-content:start}
+.tb-card-img{aspect-ratio:4/3;background:center/cover no-repeat;border-radius:.3rem}
+.tb-cards h3{font-size:1.05rem;color:var(--gold)}
+.tb-cards p{font-size:.86em;color:var(--mute)}
+.tb-cards article>div:not([class*="-img"]),.tb-locs article>div>div:last-child{display:flex;align-items:center;gap:.8rem;margin-top:.3rem}
+/* recompensas */
+.tb-perk{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;margin:0 var(--pad) max(3rem,5cqi);padding:max(2rem,3cqi);background:#fff;border:1px solid var(--line);border-radius:.6rem}
+.tb-perk>div:not([class*="-img"]){display:grid;gap:.8rem;justify-items:start}
+.tb-perk h2{font-size:clamp(1.5rem,2.4cqi,2.1rem)}
+.tb-perk p:not(.tb-kick){color:var(--mute)}
+.tb-perk-img{aspect-ratio:4/3;background:center/cover no-repeat;border-radius:.4rem}
+/* sucursales */
+.tb-locs{padding:0 var(--pad) max(3rem,5cqi)}
+.tb-locs>h2{font-size:clamp(1.6rem,2.6cqi,2.2rem);margin-bottom:1.2rem}
+.tb-locs>div:not([class*="-img"]){display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr));gap:1rem}
+.tb-locs article{display:grid;grid-template-columns:1fr 1.1fr;background:#fff;border:1px solid var(--line);border-radius:.5rem;overflow:hidden}
+.tb-loc-img{min-height:12rem;background:center/cover no-repeat}
+.tb-locs article>div:not([class*="-img"]){padding:1.2rem;display:grid;gap:.4rem;align-content:start}
+.tb-locs h3{font-size:1.25rem}
+.tb-small{font-size:.82em;color:var(--mute)}
+/* carta */
+.tb-menu{padding:max(3rem,5cqi) var(--pad);background:var(--navy);color:#fff}
+.tb-menu>h2{font-size:clamp(1.8rem,3cqi,2.6rem);text-align:center;margin-bottom:2rem}
+.tb-menu>div:not([class*="-img"]){display:grid;grid-template-columns:repeat(2,1fr);gap:2rem 3rem;max-width:60rem;margin:0 auto}
+.tb-menu h3{font-size:1.2rem;color:var(--gold);border-bottom:1px solid #ffffff2a;padding-bottom:.3rem;margin-bottom:.6rem}
+.tb-menu p{display:flex;justify-content:space-between;gap:1rem;font-size:.92em;padding:.25rem 0}
+/* opiniones, preguntas, pie */
+.tb-revs{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;padding:max(3rem,5cqi) var(--pad)}
+.tb-revs blockquote{margin:0;border-top:2px solid var(--gold);padding-top:1rem;display:grid;gap:.6rem}
+.tb-revs p{font:500 1.1rem/1.4 var(--fh)}.tb-revs cite{font-style:normal;font-size:.82em;color:var(--mute)}
+.tb-faq{max-width:46rem;margin:0 auto;padding:0 var(--pad) max(3rem,5cqi);box-sizing:content-box}
+.tb-faq h2{font-size:1.8rem;margin-bottom:1rem}
+.tb-faq details{border-top:1px solid var(--line)}
+.tb-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:.9rem 0;font-weight:500}
+.tb-faq summary::-webkit-details-marker{display:none}
+.tb-faq summary::after{content:"+";color:var(--gold)}
+.tb-faq details[open] summary::after{content:"−"}
+.tb-faq details p{color:var(--mute);padding-bottom:1rem}
+.tb-foot{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 2rem;padding:2rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom));background:var(--navy);color:#fff}
+.tb-foot a{text-decoration:none}
+.tb-foot>div:not([class*="-img"]){display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;font-size:.72rem;opacity:.7;width:100%}
+.tb-sticky{display:none}
+@container (max-width:980px){.tb-top nav{display:none}.tb-top .tb-btn{margin-left:auto}.tb-cards,.tb-revs{grid-template-columns:1fr 1fr}}
+@container (max-width:640px){
+  .tb-hero-img{aspect-ratio:4/3}
+  .tb-cards,.tb-revs,.tb-perk,.tb-menu>div,.tb-locs article{grid-template-columns:1fr}
+  .tb-top .tb-btn{display:none}
+  .tb-sticky{display:flex;gap:.5rem;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:var(--cream);border-top:1px solid var(--line)}
+  .tb-sticky>*{flex:1}
+}

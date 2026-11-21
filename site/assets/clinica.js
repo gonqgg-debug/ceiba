@@ -440,6 +440,10 @@
         }
       });
     });
+    document.querySelectorAll('[data-t-follow]:not([data-tb])').forEach(root => {
+      root.dataset.tb = 1; const dot = root.querySelector('.fs-follow'); if (!dot || reduce) return;
+      root.addEventListener('pointermove', e => { dot.style.setProperty('--mx', e.clientX + 12 + 'px'); dot.style.setProperty('--my', e.clientY + 12 + 'px'); }, { passive: true });
+    });
     document.querySelectorAll('[data-t-flip]:not([data-tb])').forEach(b => { b.dataset.tb = 1; b.addEventListener('click', () => b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true')); });
     document.querySelectorAll('[data-t-case] input:not([data-tb])').forEach(r => { r.dataset.tb = 1; r.addEventListener('input', () => r.parentElement.style.setProperty('--p', r.value + '%')); });
     document.querySelectorAll('[data-t-tabs]:not([data-tb])').forEach(box => {
