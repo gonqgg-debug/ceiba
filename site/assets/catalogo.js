@@ -43,6 +43,11 @@ export const CATALOGO = [
     ref: { name: "Downtown Dental", url: 'https://www.downtown-dental.com/' },
     idea: "Para una o varias sucursales: foto de la ciudad con capa azul, tarjeta por sucursal con horario y «abierto ahora», cupón de paciente nuevo y por qué elegirnos numerado.",
   },
+  {
+    id: 'nogal', name: "Nogal", kind: 'clinica', demo: 'clinica-arrayan', accent: '#A86B45',
+    ref: { name: "Bates Dental", url: 'https://batesdental.com/' },
+    idea: "Cálida en chocolate y cobre: monograma redondo, fotos encimadas sobre madera de nogal, carrusel de tratamientos y franja de contacto en cuatro columnas.",
+  },
 ];
 
 export const RUBROS = { clinica: 'Clínicas dentales', consultorio: 'Consultorios médicos', restaurante: 'Restaurantes', hotel: 'Hoteles', inmobiliaria: 'Inmobiliarias', despacho: 'Despachos legales' };

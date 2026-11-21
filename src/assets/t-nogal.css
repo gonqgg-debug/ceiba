@@ -1,0 +1,116 @@
+/* Diseño «Nogal» (lib/templates/nogal.js, raíz .cx.ng). Basado en Bates Dental:
+   chocolate, cobre, beige y bloques de madera de nogal (hechos con CSS, sin imágenes). */
+.cx.ng{--choco:#3B2B2D;--copper:var(--a);--rust:#8E3F31;--beige:#FAF5F0;--ink:#2F2526;--mute:#6A5F5F;--line:#EADFD6;
+  --wood:repeating-linear-gradient(176deg,#5a3a2b 0 6px,#6b4532 6px 9px,#4e3125 9px 15px,#76503b 15px 17px,#5d3c2c 17px 26px),radial-gradient(ellipse 30% 8% at 30% 40%,#3c2419 0,transparent 70%),radial-gradient(ellipse 22% 6% at 70% 75%,#3c2419 0,transparent 70%);
+  --fh:'Archivo',ui-sans-serif,system-ui,sans-serif;--fb:'Karla',ui-sans-serif,system-ui,sans-serif;--pad:max(1.25rem,5cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:400 clamp(15px,1.06cqi,16.5px)/1.7 var(--fb);background:#fff;color:var(--ink);position:relative;overflow:clip}
+.ng h1,.ng h2,.ng h3{font-family:var(--fh);font-weight:500;color:inherit;margin:0;line-height:1.12;letter-spacing:-.015em;text-wrap:balance}
+.ng :where(p){margin:0}.ng a{color:inherit}
+.ng svg{width:1em;height:1em;fill:currentColor}
+.ng-btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.7em;padding:0 1.3em;background:var(--copper);color:#fff!important;font:500 .86em/1 var(--fb);text-decoration:none;border:1.5px solid var(--copper);cursor:pointer;white-space:nowrap;transition:background-color .2s,transform .2s var(--ease)}
+.ng-btn:hover{background:var(--rust);border-color:var(--rust)}
+.ng-btn:active{transform:scale(.98)}
+.ng-btn--line{background:transparent;color:var(--copper)!important}
+.ng a:focus-visible,.ng summary:focus-visible,.ng-car:focus-visible{outline:2px solid var(--copper);outline-offset:3px}
+.ng-kick{font:500 .7em/1.4 var(--fb);letter-spacing:.24em;text-transform:uppercase;white-space:pre}
+.ng-kick--c{color:var(--copper)}
+.ng-note{font-size:.78em;color:var(--mute);text-align:center;margin-top:1.4rem}
+/* encabezado */
+.ng-top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:2rem;background:var(--choco);color:#fff;padding:.6rem var(--pad)}
+.ng-mono{display:flex;align-items:center;gap:.6rem;flex:none}
+.ng-mono img{height:2.6rem;filter:brightness(0) invert(1)}
+.ng-mono i{width:2.8rem;height:2.8rem;border-radius:50%;border:2px solid currentColor;display:grid;place-items:center;font:600 1.05rem/1 var(--fh);font-style:normal;box-shadow:inset 0 0 0 3px var(--choco),inset 0 0 0 4px #ffffff55}
+.ng-mono small{font:600 .62rem/1.2 var(--fh);letter-spacing:.16em;text-transform:uppercase;max-width:9em}
+.ng-top nav{display:flex;gap:1.6rem;margin-left:auto;font-weight:700;font-size:.86em}
+.ng-top nav a,.ng-top nav span{text-decoration:none}.ng-top nav a:hover{color:#E7C3A7}
+.ng-phone{background:var(--rust);padding:.85rem 1.2rem;font-weight:700;font-size:.9em;text-decoration:none;white-space:nowrap}
+/* hero */
+.ng-hero{position:relative;min-height:min(46cqi,40rem);display:grid;place-items:center;color:#fff;text-align:center;overflow:hidden}
+.ng-hero-img{position:absolute;inset:0;background:center 30%/cover no-repeat;filter:brightness(.62) saturate(.9)}
+.ng-hero-copy{position:relative;display:grid;justify-items:center;gap:1.4rem;padding:4rem var(--pad) 6rem}
+.ng-hero h1{font-size:clamp(2.4rem,4.4cqi,4.2rem);max-width:12em;font-weight:400}
+.ng-follow{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;padding:1rem var(--pad);border-top:1px solid #ffffff44;font:500 .7em/1 var(--fb);letter-spacing:.2em;text-transform:uppercase}
+.ng-soc{display:flex;gap:1rem}.ng-soc a{text-decoration:none;letter-spacing:.06em}
+@media (prefers-reduced-motion:no-preference){
+  .ng:not(.ng-still) .ng-hero-copy>*{animation:ng-up 1s var(--ease) both}
+  .ng:not(.ng-still) .ng-hero-copy>:nth-child(2){animation-delay:.1s}.ng:not(.ng-still) .ng-hero-copy>:nth-child(3){animation-delay:.2s}
+  .ng:not(.ng-still) .ng-stack-img{animation:ng-slide 1.1s var(--ease) .2s both}
+}
+@keyframes ng-up{from{opacity:0;transform:translateY(16px)}}
+@keyframes ng-slide{from{transform:translate(-1.5rem,-1.5rem);opacity:.4}}
+/* madera y fotos encimadas */
+.ng-wood{display:block;background:var(--wood)}
+.ng-welcome{display:grid;grid-template-columns:1fr 1fr;gap:max(2rem,5cqi);align-items:center;padding:max(3.5rem,6cqi) var(--pad)}
+.ng-stack{position:relative;aspect-ratio:1/1;max-width:30rem}
+.ng-stack .ng-wood{position:absolute;left:0;top:0;width:68%;height:72%}
+.ng-stack-img{position:absolute;right:6%;bottom:0;width:58%;height:62%;background:center/cover no-repeat;outline:12px solid #fff}
+.ng-copy{display:grid;gap:1rem;justify-items:start}
+.ng-copy h2,.ng-split h2,.ng-trat h2,.ng-revs h2,.ng-faq h2,.ng-help h2{font-size:clamp(1.8rem,3cqi,2.6rem)}
+.ng-copy>p:not(.ng-kick){color:var(--mute)}
+.ng-ctas{display:flex;flex-wrap:wrap;gap:.6rem}
+/* franja beige */
+.ng-split{display:grid;grid-template-columns:1fr 1fr}
+.ng-split-copy{background:var(--beige);padding:max(3rem,5cqi) var(--pad);display:grid;gap:1rem;align-content:center;justify-items:start}
+.ng-split-copy>p:not(.ng-kick){color:var(--mute)}
+.ng-split ul{margin:0;padding-left:1.1rem;display:grid;gap:.3rem;font-size:.92em;color:var(--mute)}
+.ng-split ul b{color:var(--ink)}
+.ng-split-img{min-height:24rem;background:center/cover no-repeat}
+/* carrusel de tratamientos */
+.ng-trat{padding:max(3.5rem,6cqi) 0 0}
+.ng-trat-head{display:flex;justify-content:space-between;align-items:end;gap:1rem;padding:0 var(--pad);margin-bottom:2rem}
+.ng-car{list-style:none;margin:0;padding:0 var(--pad) 1rem;display:grid;grid-auto-flow:column;grid-auto-columns:min(19rem,78%);gap:1.4rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 var(--pad);scrollbar-width:thin}
+.ng-car li{scroll-snap-align:start;display:grid;gap:.5rem;align-content:start}
+.ng-car-img{aspect-ratio:4/3;background:center/cover no-repeat;margin-bottom:.4rem}
+.ng-car h3{font-size:1.15rem}
+.ng-car p{font-size:.88em;color:var(--mute)}
+.ng-price{font-weight:700;color:var(--ink)!important}
+.ng-more{justify-self:start;font-size:.84em;font-weight:700;text-decoration:none;border-bottom:2px solid var(--copper);padding-bottom:.1rem}
+/* doctora */
+.ng-doc{display:grid;grid-template-columns:1.1fr .9fr;gap:max(2rem,5cqi);align-items:center;background:var(--beige);margin-top:max(3.5rem,6cqi);padding:max(3.5rem,6cqi) var(--pad)}
+.ng-role{font-weight:700;color:var(--copper)!important}
+.ng-others{font-size:.88em}
+.ng-doc-art{position:relative;aspect-ratio:1/1;max-width:26rem;width:100%;justify-self:center}
+.ng-doc-art .ng-wood{position:absolute;right:0;top:0;width:66%;height:80%}
+.ng-doc-img{position:absolute;left:4%;bottom:0;width:62%;height:78%;background:center top/cover no-repeat;outline:10px solid var(--beige)}
+/* opiniones */
+.ng-revs{padding:max(3.5rem,6cqi) var(--pad);display:grid;justify-items:center;gap:1rem;text-align:center}
+.ng-revs>div{display:grid;grid-template-columns:repeat(3,1fr);gap:2.4rem;margin-top:1.6rem;max-width:66rem}
+.ng-revs figure{margin:0;display:grid;gap:.7rem;justify-items:center}
+.ng-revs figure span{display:flex;color:var(--copper)}
+.ng-revs blockquote{margin:0;font-size:.9em;color:var(--mute)}
+.ng-revs figcaption{font:500 1.05rem/1 var(--fh)}
+/* preguntas */
+.ng-faq{display:grid;grid-template-columns:.9fr 1.1fr;background:var(--beige)}
+.ng-faq-img{height:100%;min-height:24rem;background:center/cover no-repeat}
+.ng-faq>div:last-child{padding:max(3rem,5cqi) var(--pad);display:grid;gap:.6rem;align-content:center}
+.ng-faq details{border-bottom:1px solid var(--line)}
+.ng-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:1rem;padding:.9rem 0;font-weight:700}
+.ng-faq summary::-webkit-details-marker{display:none}
+.ng-faq summary::after{content:"+";color:var(--copper);font-size:1.3rem;line-height:1;transition:transform .25s var(--ease)}
+.ng-faq details[open] summary::after{transform:rotate(45deg)}
+.ng-faq details p{color:var(--mute);padding-bottom:.9rem;font-size:.94em}
+/* contacto */
+.ng-help{padding:max(3.5rem,6cqi) var(--pad);text-align:center;display:grid;gap:.6rem;justify-items:center}
+.ng-help ul{list-style:none;margin:2rem 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;width:100%;max-width:70rem}
+.ng-help li{display:grid;gap:.3rem;align-content:start;justify-items:center;font-size:.86em}
+.ng-help li b{font:500 1.15rem/1.2 var(--fh);margin-bottom:.3rem}
+.ng-help li a,.ng-help li span{color:var(--copper);text-decoration:none;font-weight:700;letter-spacing:.02em}
+.ng-foot{background:var(--choco);color:#fff;padding:2rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom));display:grid;gap:1.2rem}
+.ng-foot>div{display:flex;flex-wrap:wrap;gap:.3rem 1.4rem;font-size:.76em;opacity:.75}
+.ng-sticky{display:none}
+@container (max-width:980px){
+  .ng-top nav{display:none}.ng-phone{margin-left:auto}
+  .ng-revs>div{grid-template-columns:1fr}
+  .ng-help ul{grid-template-columns:1fr 1fr}
+}
+@container (max-width:640px){
+  .ng-hero{min-height:30rem}
+  .ng-hero h1{font-size:2.3rem}
+  .ng-welcome,.ng-split,.ng-doc,.ng-faq{grid-template-columns:1fr}
+  .ng-split-img{min-height:16rem}
+  .ng-faq-l{display:none}
+  .ng-trat-head{flex-direction:column;align-items:flex-start}
+  .ng-help ul{grid-template-columns:1fr}
+  .ng-sticky{display:flex;gap:.5rem;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:#fffffff2;border-top:1px solid var(--line)}
+  .ng-sticky .ng-btn{flex:1}
+}
