@@ -28,6 +28,11 @@ export const CATALOGO = [
     ref: { name: "Wright Dental Center", url: 'https://www.wrightdentalcenter.com/' },
     idea: "Oscura y de cine: hero a pantalla completa con el título en cursiva, especialistas en franjas oscuras con luz de color, historias de pacientes y cuestionario.",
   },
+  {
+    id: 'estrellas', name: "Estrellas", kind: 'clinica', demo: 'clinica-arrayan', accent: '#A98BC4',
+    ref: { name: "The Little Royals", url: 'https://www.thelittleroyalsdentistry.com/' },
+    idea: "Para niños: cielo de noche con estrellas que titilan y un diente con corona ilustrado, letra manuscrita, franjas azul cielo y botones amarillos.",
+  },
 ];
 
 export const RUBROS = { clinica: 'Clínicas dentales', consultorio: 'Consultorios médicos', restaurante: 'Restaurantes', hotel: 'Hoteles', inmobiliaria: 'Inmobiliarias', despacho: 'Despachos legales' };

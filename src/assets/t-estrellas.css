@@ -1,0 +1,118 @@
+/* Diseño «Estrellas» para niños (lib/templates/estrellas.js, raíz .cx.es2). Basado en The
+   Little Royals: cielo nocturno con estrellas, manuscrita, azul cielo, lila y amarillo. */
+.cx.es2{--night:#22305A;--sky:#A9C9D6;--lilac:var(--a);--sun:#F4B860;--ink:#3B3B4F;--mute:#66667A;--paper:#fff;
+  --fh:'Playfair Display',Georgia,serif;--fb:'Nunito',ui-sans-serif,system-ui,sans-serif;--script:'Pacifico',cursive;--pad:max(1.25rem,6cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:400 clamp(15px,1.06cqi,16.5px)/1.65 var(--fb);background:var(--paper);color:var(--ink);position:relative;overflow:clip}
+.es2 h1,.es2 h2,.es2 h3{font-family:var(--fh);font-weight:500;color:inherit;margin:0;line-height:1.15;text-wrap:balance}
+.es2 :where(p){margin:0}.es2 a{color:inherit}
+.es2 svg:not(.es2-tooth){width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.es2-btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;min-height:2.7em;padding:0 1.5em;background:var(--sun);color:#3a2a08!important;font:600 .9em/1 var(--fh);letter-spacing:.04em;text-decoration:none;border:0;border-radius:.2em;cursor:pointer;white-space:nowrap;transition:transform .2s var(--ease),filter .2s}
+.es2-btn:hover{transform:translateY(-2px) rotate(-1deg);filter:brightness(1.05)}
+.es2-btn:active{transform:scale(.97)}
+.es2-btn--lilac{background:var(--lilac);color:#fff!important}
+.es2-btn--sm{min-height:2.3em;font-size:.8em;padding:0 1.1em}
+.es2-btn:focus-visible,.es2 a:focus-visible,.es2 summary:focus-visible,.es2 input:focus-visible,.es2 textarea:focus-visible{outline:2px solid var(--sun);outline-offset:3px}
+.es2-wa{fill:currentColor!important;stroke:none!important}
+.es2-script,.es2-script-h{font-family:var(--script)!important;font-weight:400!important}
+.es2-script-h{color:var(--lilac);text-align:center;font-size:clamp(1.8rem,3.2cqi,2.8rem)}
+.es2-note{font-size:.78em;color:var(--mute);text-align:center;margin-top:1.4rem}
+/* hero: cielo de noche */
+.es2-hero{position:relative;min-height:min(56cqi,46rem);color:#fff;background:radial-gradient(60% 50% at 25% 30%,#3A4E86 0%,transparent 70%),radial-gradient(50% 60% at 80% 70%,#2B3D70 0%,transparent 70%),radial-gradient(40% 40% at 60% 20%,#4A5F99aa 0%,transparent 70%),var(--night);overflow:hidden;display:grid;grid-template-rows:auto 1fr}
+.es2-sky{position:absolute;inset:0;pointer-events:none}
+.es2-sky i{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);background:#F7D27A;clip-path:polygon(50% 0,61% 38%,100% 50%,61% 62%,50% 100%,39% 62%,0 50%,39% 38%)}
+.es2-shoot{position:absolute;right:6%;top:-10%;width:2px;height:60%;background:linear-gradient(#fff0,#fffc);transform:rotate(28deg);opacity:.5;border-radius:2px}
+@media (prefers-reduced-motion:no-preference){
+  .es2:not(.es2-still) .es2-sky i{animation:es2-tw 3.2s ease-in-out var(--d) infinite}
+  .es2:not(.es2-still) .es2-tooth{animation:es2-float 5s ease-in-out infinite}
+  .es2:not(.es2-still) .es2-hero-copy>*{animation:es2-up .9s var(--ease) both}
+}
+@keyframes es2-tw{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+@keyframes es2-float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-8px) rotate(2deg)}}
+@keyframes es2-up{from{opacity:0;transform:translateY(14px)}}
+.es2-top{position:relative;z-index:2;display:flex;align-items:center;gap:2rem;padding:1rem var(--pad)}
+.es2-mini{font:400 1.3rem/1 var(--script)}
+.es2-top nav{display:flex;gap:1.6rem;margin-left:auto;font:500 .78em/1 var(--fh);letter-spacing:.12em;text-transform:uppercase}
+.es2-top nav a,.es2-top nav span{text-decoration:none;opacity:.85}.es2-top nav a:hover{opacity:1;color:var(--sun)}
+.es2-tel{display:flex;align-items:center;gap:.4rem;font-size:.85em;text-decoration:none;white-space:nowrap}
+.es2-hero-copy{position:relative;z-index:2;display:grid;justify-items:center;align-content:center;text-align:center;gap:.6rem;padding:1rem var(--pad) 4rem}
+.es2-tooth{width:clamp(7rem,12cqi,10rem);height:auto}
+.es2-hero h1{font:400 clamp(3rem,6.4cqi,5.6rem)/1.15 var(--script);text-shadow:0 2px 10px #0004}
+.es2-tag{font:500 clamp(1rem,1.9cqi,1.6rem)/1 var(--fh);letter-spacing:.18em;text-transform:uppercase}
+.es2-lede{max-width:34em;opacity:.9;margin-top:.4rem}
+.es2-ctas{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;margin-top:1rem}
+/* franjas azul cielo */
+.es2-band{display:flex;align-items:center;justify-content:space-between;gap:2rem;background:var(--sky);color:#fff;padding:max(2.2rem,3.5cqi) var(--pad)}
+.es2-band .es2-script{font-size:1.2rem}
+.es2-big{font:400 clamp(1.5rem,2.6cqi,2.3rem)/1.2 var(--fh)}
+.es2-band-t{opacity:.95;margin-top:.4rem;max-width:40em}
+.es2-out{flex:none;border:2px solid #fff;padding:.9rem 1.4rem;font:400 1.15rem/1 var(--fh);text-decoration:none;transition:background-color .2s,color .2s}
+.es2-out:hover{background:#fff;color:var(--night)}
+.es2-band--2{background:color-mix(in srgb,var(--sky) 80%,var(--lilac))}
+/* bienvenida */
+.es2-intro{display:grid;grid-template-columns:1fr 1fr;gap:max(2rem,4cqi);align-items:center;padding:max(3rem,5cqi) var(--pad)}
+.es2-intro>div{display:grid;gap:1rem;justify-items:center;text-align:center}
+.es2-intro h2{color:var(--lilac);font-size:clamp(1.8rem,3cqi,2.6rem)}
+.es2-intro p{color:var(--mute);text-align:left}
+.es2-intro-img{aspect-ratio:4/3;background:center/cover no-repeat;border-radius:.3rem}
+/* tratamientos */
+.es2-trat{padding:max(2rem,4cqi) var(--pad) max(3rem,5cqi)}
+.es2-sub{text-align:center;color:var(--mute);max-width:40em;margin:.6rem auto 0}
+.es2-trat ul{list-style:none;margin:2rem auto 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:2rem 3rem;max-width:62rem}
+.es2-trat li{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start}
+.es2-ico{width:3rem;height:3rem;border-radius:50%;display:grid;place-items:center;border:2px solid var(--lilac);color:var(--lilac);font-size:1.3rem;transition:transform .3s var(--ease)}
+.es2-trat li:hover .es2-ico{transform:rotate(-12deg) scale(1.08)}
+.es2-trat li>div{display:grid;gap:.4rem;justify-items:start}
+.es2-trat h3{font:400 1.35rem/1.2 var(--script);color:var(--lilac)}
+.es2-trat p{font-size:.9em;color:var(--mute)}
+.es2-price{font-weight:700;color:var(--ink)!important}
+/* doctores */
+.es2-docs{padding:max(3rem,5cqi) var(--pad);display:grid;gap:2.4rem}
+.es2-doc{display:grid;grid-template-columns:.9fr 1.1fr;gap:max(1.6rem,3cqi);align-items:center;max-width:64rem;margin:0 auto;width:100%}
+.es2-doc--r .es2-doc-img{order:2}
+.es2-doc-img{aspect-ratio:1/1;background:center top/cover no-repeat;border-radius:50% 50% .4rem .4rem}
+.es2-doc h3{font-size:clamp(1.6rem,2.6cqi,2.2rem)}
+.es2-role{color:var(--lilac);font-weight:700;margin-top:.3rem}.es2-ced{font-size:.85em;color:var(--mute)}
+/* opiniones */
+.es2-revs{padding:max(3rem,5cqi) var(--pad);background:radial-gradient(circle at 8% 20%,#F7D27A33 0 3px,transparent 4px) 0 0/60px 60px,#FBF9FD}
+.es2-rev-list{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin:2rem auto 0;max-width:68rem}
+.es2-rev-list figure{margin:0;display:grid;gap:.6rem;justify-items:center;text-align:center}
+.es2-rev-list blockquote{margin:0;font-size:.92em;color:var(--mute)}
+.es2-rev-list figcaption{font:400 1.2rem/1 var(--script);color:var(--lilac)}
+.es2-rev-list span{display:flex;color:var(--sun)}.es2-rev-list span svg{fill:currentColor;stroke:none}
+.es2-score{text-align:center;font-weight:700;margin-top:1.6rem}
+/* preguntas */
+.es2-faq{padding:max(3rem,5cqi) var(--pad);max-width:50rem;margin:0 auto;box-sizing:content-box}
+.es2-faq h2{margin-bottom:1.4rem}
+.es2-faq details{border-bottom:2px dotted color-mix(in srgb,var(--lilac) 50%,#fff)}
+.es2-faq summary{list-style:none;cursor:pointer;padding:1rem 0;font:500 1.1rem/1.3 var(--fh);display:flex;justify-content:space-between;gap:1rem}
+.es2-faq summary::-webkit-details-marker{display:none}
+.es2-faq summary::after{content:"★";color:var(--sun);transition:transform .3s var(--ease)}
+.es2-faq details[open] summary::after{transform:rotate(144deg)}
+.es2-faq details p{color:var(--mute);padding-bottom:1rem}
+/* contacto */
+.es2-contact{display:grid;grid-template-columns:1fr 1fr;gap:max(2rem,4cqi);padding:max(3rem,5cqi) var(--pad);align-items:start}
+.es2-info{display:grid;gap:1.2rem;justify-items:start}
+.es2-info .es2-script-h{text-align:left}
+.es2-info h3{font:400 1.15rem/1 var(--script);color:var(--lilac);margin-bottom:.3rem}
+.es2-info a{text-decoration:none}
+.es2-link{color:var(--lilac)!important;font-weight:700;font-size:.9em}
+.es2-form{display:grid;gap:.7rem}
+.es2-form h3{font:400 1.4rem/1 var(--script);color:var(--lilac)}
+.es2-form input,.es2-form textarea{font:inherit;color:inherit;border:1px solid #cfcfe0;border-radius:.3rem;min-height:2.8rem;padding:.5rem .8rem}
+.es2-form .es2-btn{justify-self:start}
+.es2-foot{display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem 1.4rem;background:var(--sun);color:#3a2a08;padding:1rem var(--pad) calc(1rem + env(safe-area-inset-bottom));font-size:.76em}
+.es2-sticky{display:none}
+@container (max-width:980px){
+  .es2-top nav{display:none}.es2-tel{margin-left:auto}
+  .es2-rev-list{grid-template-columns:1fr}
+}
+@container (max-width:640px){
+  .es2-hero{min-height:36rem}
+  .es2-hero h1{font-size:3rem}
+  .es2-band{flex-direction:column;align-items:flex-start}
+  .es2-intro,.es2-doc,.es2-contact,.es2-trat ul{grid-template-columns:1fr}
+  .es2-doc--r .es2-doc-img{order:0}
+  .es2-doc-img{max-width:16rem}
+  .es2-sticky{display:flex;gap:.5rem;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:#ffffffee;border-top:1px solid #e8e6f2}
+  .es2-sticky .es2-btn{flex:1}
+}
