@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>La Milpa · La carta (concepto A)</title><meta name="robots" content="noindex">
+<meta name="description" content="Concepto de Ceiba Labs: la página del restaurante es su carta, con pedido para llevar por WhatsApp. Negocio ficticio.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Concepto A — «La carta es la página». La gente que llega a la página de un restaurante quiere
+   saber dos cosas: si está abierto y qué hay de comer. Todo lo demás sobra. */
+:root{--paper:#F4ECDF;--card:#FBF6EE;--ink:#1B1410;--muted:#76655A;--line:#1B141022;--a:#C2410C;--sun:#E3A72F;
+  --serif:'Fraunces',Georgia,serif;--sans:'Inter',system-ui,sans-serif;--ease:cubic-bezier(.2,.8,.2,1);--spring:cubic-bezier(.34,1.4,.64,1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:5rem}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .1 0 0 0 0 .08 0 0 0 0 .06 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit}button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--a);outline-offset:3px}
+.wrap{display:grid;grid-template-columns:minmax(300px,30%) 1fr;min-height:100vh}
+
+/* columna fija: quién, si está abierto, cómo llegar y el índice */
+.side{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:2rem;padding:2.4rem max(1.6rem,env(safe-area-inset-left)) 2rem 2.6rem;border-right:1px solid var(--line)}
+.logo{font:italic 500 3.4rem/.9 var(--serif);letter-spacing:-.03em;margin:0}
+.logo small{display:block;font:500 .78rem/1 var(--sans);font-style:normal;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:.7rem}
+.status{display:inline-flex;align-items:center;gap:.55rem;font-weight:600;font-size:.95rem}
+.status i{width:.6rem;height:.6rem;border-radius:50%;background:#2F9E5B;box-shadow:0 0 0 0 #2F9E5B66;animation:pulse 2.4s infinite}
+.status.closed i{background:var(--a);animation:none}
+@keyframes pulse{70%{box-shadow:0 0 0 .5rem #2F9E5B00}100%{box-shadow:0 0 0 0 #2F9E5B00}}
+.facts{display:grid;gap:.35rem;color:var(--muted);font-size:.93rem}
+.facts a{text-decoration:none;border-bottom:1px solid var(--line)}
+.index{list-style:none;margin:0;padding:0;display:grid;gap:.15rem;margin-top:auto}
+.index a{display:flex;justify-content:space-between;align-items:baseline;text-decoration:none;font:italic 400 1.7rem/1.25 var(--serif);color:var(--muted);transition:color .2s var(--ease),transform .25s var(--ease)}
+.index a span{font:500 .78rem var(--sans);font-style:normal}
+.index a.on{color:var(--ink);transform:translateX(.4rem)}
+.index a.on::before{content:"✺";color:var(--a);font-style:normal;font-size:.9rem;margin-right:.5rem;position:absolute;transform:translateX(-1.3rem)}
+.cta{display:flex;gap:.6rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;height:2.9rem;padding:0 1.2rem;border-radius:999px;border:0;background:var(--ink);color:var(--paper);font-weight:600;text-decoration:none;transition:transform .25s var(--spring),background-color .15s}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(1px) scale(.98)}
+.btn.line{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+
+/* la carta */
+.carta{padding:3rem clamp(1.5rem,5vw,5rem) 8rem}
+.intro{max-width:36rem;font:italic 400 1.35rem/1.45 var(--serif);color:var(--muted);margin:0 0 4rem}
+.cat{margin-bottom:5rem}
+.cat h2{font:italic 400 clamp(3.2rem,7vw,6.4rem)/.95 var(--serif);letter-spacing:-.04em;margin:0 0 2rem;display:flex;align-items:baseline;gap:1rem}
+.cat h2 small{font:500 .8rem var(--sans);font-style:normal;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.dish{display:grid;grid-template-columns:1fr auto auto;align-items:baseline;gap:1rem;padding:1.15rem 0;border-top:1px solid var(--line);position:relative}
+.dish:last-child{border-bottom:1px solid var(--line)}
+.dish h3{font:600 1.45rem/1.2 var(--serif);margin:0;letter-spacing:-.01em}
+.dish h3 em{font:500 .66rem var(--sans);font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:var(--a);border:1px solid currentColor;border-radius:99px;padding:.15rem .5rem;margin-left:.6rem;vertical-align:.25rem}
+.dish p{grid-column:1/-1;margin:-.6rem 0 0;color:var(--muted);font:italic 400 1.02rem var(--serif)}
+.dish .p{font:600 1.25rem var(--serif);color:var(--a)}
+.add{width:2.3rem;height:2.3rem;border-radius:50%;border:1.5px solid var(--ink);background:transparent;display:grid;place-items:center;font-size:1.3rem;line-height:1;transition:transform .3s var(--spring),background-color .15s,color .15s}
+.add:hover{background:var(--ink);color:var(--paper);transform:rotate(90deg)}
+.add.in{background:var(--a);border-color:var(--a);color:#fff}
+.dish .ph{display:none}
+
+/* foto que sigue al cursor al pasar por un platillo (solo con mouse) */
+.peek{position:fixed;left:0;top:0;width:17rem;aspect-ratio:4/5;border-radius:10rem 10rem 1rem 1rem;background:center/cover no-repeat;pointer-events:none;z-index:20;opacity:0;transform:translate(-50%,-50%) scale(.8) rotate(-4deg);transition:opacity .25s var(--ease),transform .35s var(--spring);box-shadow:0 1.5rem 3rem -1.5rem #0008}
+.peek.on{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(-2deg)}
+
+/* tu pedido */
+.bag{position:fixed;right:max(1.2rem,env(safe-area-inset-right));bottom:max(1.2rem,env(safe-area-inset-bottom));z-index:30;display:flex;flex-direction:column;align-items:flex-end;gap:.8rem}
+.bag-btn{display:flex;align-items:center;gap:.8rem;height:3.4rem;padding:0 .6rem 0 1.4rem;border-radius:999px;border:0;background:var(--ink);color:var(--paper);font-weight:600;box-shadow:0 1rem 2rem -1rem #000a;transform:translateY(8rem);transition:transform .45s var(--spring)}
+.bag.has .bag-btn{transform:none}
+.bag-btn b{background:var(--sun);color:var(--ink);border-radius:999px;padding:.45rem .9rem}
+.bag-btn.bump{animation:bump .4s var(--spring)}
+@keyframes bump{40%{transform:scale(1.08)}}
+.panel{width:min(23rem,calc(100vw - 2.4rem));background:var(--card);border-radius:1.2rem;box-shadow:0 0 0 1px var(--line),0 2rem 4rem -2rem #0009;padding:1.4rem;display:none}
+.bag.open .panel{display:block;animation:up .3s var(--ease)}
+@keyframes up{from{opacity:0;transform:translateY(.8rem)}}
+.panel h4{font:italic 500 1.6rem var(--serif);margin:0 0 .8rem}
+.panel ul{list-style:none;margin:0 0 1rem;padding:0;display:grid;gap:.6rem;max-height:40vh;overflow:auto}
+.panel li{display:grid;grid-template-columns:1fr auto auto;gap:.6rem;align-items:center;font-size:.95rem}
+.qty{display:flex;align-items:center;gap:.4rem}
+.qty button{width:1.7rem;height:1.7rem;border-radius:50%;border:1px solid var(--line);background:var(--paper)}
+.panel label{display:grid;gap:.3rem;font-size:.85rem;color:var(--muted);margin-bottom:.8rem}
+.panel select,.panel input{height:2.6rem;border-radius:.6rem;border:1px solid var(--line);background:var(--paper);padding:0 .8rem;font:inherit;color:var(--ink)}
+.total{display:flex;justify-content:space-between;font:600 1.2rem var(--serif);padding-top:.8rem;border-top:1px dashed var(--line);margin-bottom:1rem}
+.send{width:100%;background:#1F8F4E}
+.foot{border-top:1px solid var(--line);padding:2rem clamp(1.5rem,5vw,5rem) 7rem;display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;color:var(--muted);font-size:.93rem}
+.foot b{display:block;color:var(--ink);font:italic 500 1.2rem var(--serif);margin-bottom:.4rem}
+.foot dl{display:grid;grid-template-columns:auto 1fr;gap:.2rem 1rem;margin:0}.foot dd{margin:0;color:var(--ink)}
+.demo{font-size:.78rem;color:var(--muted);grid-column:1/-1}
+
+@media (max-width:860px){
+  .wrap{display:block}
+  .side{position:sticky;top:0;z-index:10;height:auto;gap:.7rem;padding:.9rem max(1rem,env(safe-area-inset-left));background:var(--paper);border-right:0;border-bottom:1px solid var(--line)}
+  .logo{font-size:1.9rem;display:flex;align-items:baseline;gap:.7rem}.logo small{margin:0}
+  .facts,.cta.big{display:none}
+  .top-row{display:flex;justify-content:space-between;align-items:center}
+  .index{display:flex;gap:1.1rem;overflow-x:auto;margin:0;scrollbar-width:none;padding-bottom:.2rem}
+  .index a{font-size:1.15rem;white-space:nowrap}.index a span{display:none}
+  .index a.on{transform:none}.index a.on::before{display:none}
+  .index a.on{border-bottom:2px solid var(--a)}
+  .carta{padding:2rem 1rem 8rem}
+  .intro{font-size:1.15rem;margin-bottom:2.5rem}
+  .dish h3{font-size:1.25rem}
+  .dish .ph{display:block;grid-column:1/-1;height:0;overflow:hidden;border-radius:1rem;background:center/cover no-repeat;transition:height .35s var(--ease)}
+  .dish.show .ph{height:13rem}
+  .foot{grid-template-columns:1fr;padding:2rem 1rem 7rem}
+  .peek{display:none}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style></head>
+<body>
+<div class="wrap">
+  <aside class="side">
+    <div class="top-row"><h1 class="logo">La Milpa <small>Cocina de barrio · Americana</small></h1><span class="status" id="status"><i></i><span>Abierto</span></span></div>
+    <div class="facts">
+      <span>Calle Morelos 812, Col. Americana, Guadalajara</span>
+      <span>Martes a domingo · 13:00 a 23:00</span>
+      <a href="https://www.google.com/maps/search/?api=1&query=Calle%20Morelos%20812%20Americana%20Guadalajara" target="_blank" rel="noopener">Cómo llegar ↗</a>
+    </div>
+    <div class="cta big"><a class="btn" href="https://wa.me/523300000000?text=Hola%2C%20quiero%20reservar%20una%20mesa" target="_blank" rel="noopener">Reservar mesa</a><a class="btn line" href="tel:3300000000">Llamar</a></div>
+    <nav aria-label="Categorías de la carta"><ul class="index" id="index"></ul></nav>
+  </aside>
+  <main class="carta">
+    <p class="intro">Tortillas a mano, birria que se cuece desde la madrugada y salsas de molcajete. Elige, arma tu pedido y pasa por él en veinte minutos.</p>
+    <div id="menu"></div>
+  </main>
+</div>
+<footer class="foot">
+  <div><b>Horario</b><dl><dt>Martes a jueves</dt><dd>13:00 a 22:00</dd><dt>Viernes y sábado</dt><dd>13:00 a 23:30</dd><dt>Domingo</dt><dd>13:00 a 19:00</dd></dl></div>
+  <div><b>Dónde estamos</b>Calle Morelos 812, Col. Americana, Guadalajara. A dos cuadras de avenida Chapultepec.</div>
+  <div><b>Contacto</b>33 0000 0000 · WhatsApp<br>@lamilpagdl</div>
+  <p class="demo">Concepto de Ceiba Labs con un negocio ficticio.</p>
+</footer>
+<div class="peek" id="peek" aria-hidden="true"></div>
+<div class="bag" id="bag">
+  <div class="panel" id="panel" role="dialog" aria-label="Tu pedido">
+    <h4>Tu pedido</h4><ul id="items"></ul>
+    <label>¿Cuándo pasas por él?<select id="when"><option>En 20 minutos</option><option>En 40 minutos</option><option>En 1 hora</option></select></label>
+    <label>Tu nombre<input id="who" autocomplete="name"></label>
+    <div class="total"><span>Total</span><span id="total">$0</span></div>
+    <button class="btn send" id="send" type="button">Enviar pedido por WhatsApp</button>
+  </div>
+  <button class="bag-btn" id="bagBtn" type="button" aria-expanded="false">Tu pedido <b id="count">0 · $0</b></button>
+</div>
+<script>
+(() => {
+  // La carta (en una página real sale de los datos del cliente)
+  const MENU = [
+    { name: 'Para empezar', items: [
+      ['Guacamole de molcajete', 'Con chicharrón de la casa y totopos.', 145, 'Para compartir', 'rest-molcajete'],
+      ['Sopes de tinga', 'Tres sopes con crema, queso fresco y salsa roja.', 110, '', 'rest-comal'],
+      ['Queso fundido', 'Con chorizo de Toluca y tortillas de harina.', 135],
+      ['Tostada de aguachile', 'Camarón, pepino y cebolla morada.', 95, 'Picante', 'rest-platos'] ] },
+    { name: 'Platos fuertes', items: [
+      ['Tacos de birria con consomé', 'Tres tacos dorados de res con queso.', 165, 'El más pedido', 'rest-birria'],
+      ['Enchiladas verdes', 'De pollo, con crema y queso Cotija.', 150, '', 'rest-platos'],
+      ['Mole poblano', 'Pierna de pollo con arroz rojo y tortillas.', 185],
+      ['Tacos de hongos', 'Hongos al ajillo con epazote.', 140, 'Vegetariano'],
+      ['Chile en nogada', 'De temporada, de agosto a septiembre.', 245, 'Temporada'] ] },
+    { name: 'Bebidas', items: [
+      ['Agua de jamaica', 'Jarra de un litro.', 75, '', 'rest-platos'],
+      ['Horchata de la casa', 'Con canela.', 45], ['Café de olla', 'Con piloncillo.', 40],
+      ['Cerveza artesanal de Jalisco', 'Pregunta por la de temporada.', 85] ] },
+    { name: 'Postres', items: [['Flan napolitano', 'Receta de la abuela.', 70], ['Churros con chocolate', 'Cuatro piezas con chocolate de mesa.', 85]] },
+  ];
+  const WA = '523300000000', IMG = n => `../img/demo/${n}.jpg`;
+  const money = n => '$' + n.toLocaleString('es-MX');
+  const $ = s => document.querySelector(s);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Abierto ahora (horario de la casa)
+  const H = { 2: [13, 22], 3: [13, 22], 4: [13, 22], 5: [13, 23.5], 6: [13, 23.5], 0: [13, 19] };
+  const now = new Date(), d = now.getDay(), h = now.getHours() + now.getMinutes() / 60, st = $('#status');
+  const fmt = x => `${Math.floor(x)}:${x % 1 ? '30' : '00'}`;
+  if (H[d] && h >= H[d][0] && h < H[d][1]) st.lastChild.textContent = `Abierto · cierra a las ${fmt(H[d][1])}`;
+  else { st.classList.add('closed'); const next = H[d] && h < H[d][0] ? `hoy a las ${fmt(H[d][0])}` : 'mañana a las 13:00'; st.lastChild.textContent = `Cerrado · abrimos ${next}`; }
+
+  // Pintar la carta y el índice
+  $('#menu').innerHTML = MENU.map((c, ci) => `<section class="cat" id="c${ci}"><h2>${c.name}<small>${c.items.length} platillos</small></h2>${c.items.map(([n, ds, p, tag, ph], i) =>
+    `<div class="dish" data-i="${ci}-${i}"${ph ? ` data-ph="${IMG(ph)}"` : ''}><h3>${n}${tag ? `<em>${tag}</em>` : ''}</h3><span class="p">${money(p)}</span><button class="add" type="button" aria-label="Agregar ${n} a tu pedido">+</button><p>${ds}</p>${ph ? `<div class="ph" style="background-image:url('${IMG(ph)}')" role="img" aria-label="${n}"></div>` : ''}</div>`).join('')}</section>`).join('');
+  $('#index').innerHTML = MENU.map((c, ci) => `<li><a href="#c${ci}">${c.name}<span>${c.items.length}</span></a></li>`).join('');
+
+  // Índice que sigue la lectura
+  const links = [...document.querySelectorAll('#index a')];
+  const spy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(a => a.classList.toggle('on', a.hash === '#' + e.target.id)); }), { rootMargin: '-35% 0px -60% 0px' });
+  document.querySelectorAll('.cat').forEach(s => spy.observe(s));
+  links[0]?.classList.add('on');
+
+  // Foto que sigue al cursor (con mouse) o que se abre al tocar (en celular)
+  const peek = $('#peek'); let tx = 0, ty = 0, x = 0, y = 0, raf;
+  const loop = () => { x += (tx - x) * .18; y += (ty - y) * .18; peek.style.left = x + 'px'; peek.style.top = y + 'px'; raf = requestAnimationFrame(loop); };
+  if (matchMedia('(hover: hover) and (pointer: fine)').matches && !reduce) {
+    document.addEventListener('mousemove', e => { tx = e.clientX + 150; ty = e.clientY; });
+    document.querySelectorAll('.dish[data-ph]').forEach(el => {
+      el.addEventListener('mouseenter', () => { peek.style.backgroundImage = `url('${el.dataset.ph}')`; peek.classList.add('on'); if (!raf) loop(); });
+      el.addEventListener('mouseleave', () => peek.classList.remove('on'));
+    });
+  }
+  document.querySelectorAll('.dish[data-ph] h3').forEach(h => h.addEventListener('click', () => h.parentElement.classList.toggle('show')));
+
+  // Tu pedido
+  const bag = new Map(); const flat = MENU.flatMap((c, ci) => c.items.map((it, i) => [`${ci}-${i}`, it]));
+  const find = k => flat.find(f => f[0] === k)[1];
+  const paint = () => {
+    const n = [...bag.values()].reduce((a, b) => a + b, 0), t = [...bag].reduce((a, [k, q]) => a + find(k)[2] * q, 0);
+    $('#count').textContent = `${n} · ${money(t)}`; $('#total').textContent = money(t);
+    $('#bag').classList.toggle('has', n > 0); if (!n) { $('#bag').classList.remove('open'); $('#bagBtn').setAttribute('aria-expanded', 'false'); }
+    $('#items').innerHTML = [...bag].map(([k, q]) => `<li><span>${find(k)[0]}</span><span class="qty"><button type="button" data-q="${k}" data-d="-1" aria-label="Quitar uno">−</button>${q}<button type="button" data-q="${k}" data-d="1" aria-label="Agregar uno">+</button></span><span>${money(find(k)[2] * q)}</span></li>`).join('');
+    document.querySelectorAll('.dish').forEach(el => el.querySelector('.add').classList.toggle('in', bag.has(el.dataset.i)));
+  };
+  document.addEventListener('click', e => {
+    const add = e.target.closest('.add');
+    if (add) { const k = add.closest('.dish').dataset.i; bag.set(k, (bag.get(k) || 0) + 1); paint(); const b = $('#bagBtn'); b.classList.remove('bump'); void b.offsetWidth; b.classList.add('bump'); }
+    const q = e.target.closest('[data-q]');
+    if (q) { const k = q.dataset.q, v = (bag.get(k) || 0) + Number(q.dataset.d); v > 0 ? bag.set(k, v) : bag.delete(k); paint(); }
+  });
+  $('#bagBtn').addEventListener('click', () => { const o = $('#bag').classList.toggle('open'); $('#bagBtn').setAttribute('aria-expanded', o); });
+  $('#send').addEventListener('click', () => {
+    const lines = [...bag].map(([k, q]) => `• ${q} × ${find(k)[0]} (${money(find(k)[2] * q)})`);
+    const t = [...bag].reduce((a, [k, q]) => a + find(k)[2] * q, 0);
+    const msg = [`Hola, quiero hacer un pedido para llevar${$('#who').value ? `, soy ${$('#who').value}` : ''}:`, ...lines, `Total: ${money(t)}`, `Paso por él: ${$('#when').value.toLowerCase()}`].join('\n');
+    window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+  });
+})();
+</script>
+</body></html>
