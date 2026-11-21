@@ -72,6 +72,11 @@ textarea.inp{height:auto;min-height:5rem;padding:.75rem 1rem;resize:none;line-he
 .sty i em{width:1rem;height:1rem;border-radius:50%}
 .sty[aria-pressed="true"]{border-color:var(--lime);background:rgba(214,250,82,.1)}
 .sw{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+.fpick{display:grid;gap:.35rem}.fpick small{font-size:.78rem;color:var(--mist)}
+.fpick select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .8rem center;background-size:1rem;padding-right:2.4rem}
+.fpick select option{color:#0B1514}
+.fsample{font-size:1.9rem;line-height:1.1;margin:.2rem 0 .1rem;overflow-wrap:anywhere}
+.fup{cursor:pointer;justify-self:start}
 .sw small{font-size:.8rem;color:var(--mist);margin-right:.2rem}
 .sw button{width:1.9rem;height:1.9rem;border-radius:50%;border:2px solid transparent;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
 .sw button[aria-pressed="true"]{border-color:var(--white)}
@@ -154,7 +159,7 @@ textarea.inp{height:auto;min-height:5rem;padding:.75rem 1rem;resize:none;line-he
 </div>
 
 <script type="module">
-import { renderClinica, fontHref } from '/assets/tpl-clinica.js';
+import { renderClinica, fontHref, FONTS, THEME_OPTIONS } from '/assets/tpl-clinica.js';
 import clinica from '/assets/demos/clinica-arrayan.js';
 import restaurante from '/assets/demos/restaurante-la-milpa.js';
 import hotel from '/assets/demos/hotel-casa-azahar.js';
@@ -200,13 +205,14 @@ const STYLES = {
   expresiva: { b: 'Expresiva', t: 'Fotos grandes y movimiento', c: ['#0F766E', '#111827'] },
   cercana: { b: 'Cercana', t: 'Cálida y amigable', c: ['#E07A5F', '#FFF4E8'] },
   fonda: { b: 'Fonda', t: 'Con mucho carácter', c: ['#C2410C', '#FACC15'] },
+  estudio: { b: 'Estudio', t: 'Tranquila, como un spa', c: ['#2F5D50', '#F4F2EE'] },
 };
 const COLORS = ['#1F4FD1', '#0E9F8A', '#6D4BD8', '#C2410C', '#B08D3C', '#D9547A', '#1E2A28'];
 const STEPS = ['Tu negocio', 'Tu modelo', 'Tus servicios', 'Tu estilo', 'Listo'];
 
 /* ---------- estado (se guarda para retomar) ---------- */
 const KEY = 'ceiba-empezar';
-let S = { name: '', kind: '', presence: '', site: '', social: '', city: '', goals: [], about: '', services: '', style: '', color: '', step: 0 };
+let S = { name: '', kind: '', presence: '', site: '', social: '', city: '', goals: [], about: '', services: '', style: '', color: '', font: '', step: 0 };
 try { const saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved && saved.name) S = { ...S, ...saved }; } catch {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch {} };
 
@@ -235,7 +241,7 @@ function initFrame() {
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Red+Hat+Display:wght@500;600;700&family=Red+Hat+Text:wght@400;500;600&display=swap">
   <link id="ff" rel="stylesheet" href=""><link rel="stylesheet" href="/assets/clinica.css">
-  <style>body{margin:0;background:#fff;-webkit-font-smoothing:antialiased;overflow-x:clip}[hidden]{display:none!important}.vista{container-type:inline-size}a,button{pointer-events:none}.cx-fab,.fx-fab,.cx-teaser{display:none!important}</style>
+  <style>body{margin:0;background:#fff;-webkit-font-smoothing:antialiased;overflow-x:clip}[hidden]{display:none!important}.vista{container-type:inline-size}a,button{pointer-events:none}.cx-fab,.fx-fab,.es-fab,.cx-teaser{display:none!important}</style>
   </head><body>${sym}<main class="vista" id="v"></main><script src="/assets/clinica.js"><\/script></body></html>`;
   pv.addEventListener('load', () => { docReady = true; render(); }, { once: true });
 }
@@ -263,6 +269,7 @@ function buildPage() {
     if (p.shop) p.shop = null; // la tiendita es propia del ejemplo
   }
   if (S.color) p.brand = { ...(p.brand || {}), accent: S.color };
+  if (S.font && FONTS[S.font]) p.theme = { ...p.theme, font: S.font };
   if (S.about) { p.hero = { ...(p.hero || {}), sub: S.about.slice(0, 180) }; if (p.statement) p.statement = S.about.slice(0, 220); }
   if (city && p.contact) p.contact = { ...p.contact, address: city };
   if (S.kind === 'otro' && p.services) p.services = { ...p.services, title: 'Nuestros servicios', sub: 'Lo que hacemos por ti.' };
@@ -282,6 +289,7 @@ function render(focus = 'top') {
   const d = pv.contentDocument, p = buildPage();
   const font = fontHref(p); if (font !== lastFont) { d.getElementById('ff').href = font; lastFont = font; }
   d.getElementById('v').innerHTML = renderClinica(p, { mode: 'live' });
+  if (myFont) { d.fonts.add(myFont.face); d.querySelector('.cx')?.style.setProperty('--fh', "'Letra del cliente',ui-sans-serif,system-ui,sans-serif"); }
   $('#url').textContent = (slug(S.name) || 'tunegocio') + '.com';
   $('#empty').classList.add('off');
   sizeFrame();
@@ -330,13 +338,45 @@ function askChoice(opts, { multi = false, pre = [] } = {}) {
 }
 function askStyle() {
   return new Promise(res => {
-    const g = GIROS[S.kind] || GIROS.otro, keys = Object.keys(STYLES).filter(k => k !== 'fonda' || S.kind === 'restaurante');
+    const g = GIROS[S.kind] || GIROS.otro, keys = Object.keys(STYLES).filter(k => (k !== 'fonda' || S.kind === 'restaurante') && (k !== 'estudio' || S.kind === 'clinica'));
     S.style = S.style || g.style;
     show(`<div class="styles">${keys.map(k => `<button type="button" class="sty" data-v="${k}" aria-pressed="${S.style === k}"><i>${STYLES[k].c.map(c => `<em style="background:${c}"></em>`).join('')}</i><b>${STYLES[k].b}</b><span>${STYLES[k].t}</span></button>`).join('')}</div>
       <div class="sw"><small>Color principal</small>${COLORS.map(c => `<button type="button" style="background:${c}" data-c="${c}" aria-label="Color ${c}" aria-pressed="${S.color === c}"></button>`).join('')}</div>
       <button class="n-btn next" type="button" id="nx">Me gusta así</button>`);
     ask.querySelectorAll('.sty').forEach(b => b.addEventListener('click', () => { S.style = b.dataset.v; ask.querySelectorAll('.sty').forEach(x => x.setAttribute('aria-pressed', x === b)); save(); render(); }));
     ask.querySelectorAll('[data-c]').forEach(b => b.addEventListener('click', () => { const on = S.color !== b.dataset.c; S.color = on ? b.dataset.c : ''; ask.querySelectorAll('[data-c]').forEach(x => x.setAttribute('aria-pressed', on && x === b)); save(); render(); }));
+    $('#nx').addEventListener('click', () => { hide(); res(); });
+  });
+}
+
+// Letra: lista de pares de Google Fonts o su propia letra (se ve en la vista previa al momento)
+let myFont = null; // { file, face, name }
+const FONT_MAX = 3 * 1024 * 1024;
+function askFont() {
+  return new Promise(res => {
+    const keys = Object.keys(FONTS);
+    const href = `https://fonts.googleapis.com/css2?${keys.map(k => `family=${FONTS[k][2].split('&family=')[0]}`).join('&')}&display=swap`;
+    if (!document.getElementById('ff-all')) document.head.insertAdjacentHTML('beforeend', `<link id="ff-all" rel="stylesheet" href="${href}">`);
+    const sample = () => { const k = $('#fsel').value, f = k === 'mine' && myFont ? 'Letra del cliente' : FONTS[k]?.[0]; $('#fs').style.fontFamily = f ? `'${f}',serif` : ''; $('#fs').textContent = S.name || 'Tu negocio'; };
+    show(`<label class="fpick"><small>Letra de los títulos</small>
+        <select class="inp" id="fsel"><option value="">La del diseño (recomendada)</option>${keys.map(k => `<option value="${k}"${S.font === k ? ' selected' : ''}>${esc(THEME_OPTIONS.font[k])} · ${esc(FONTS[k][0])}</option>`).join('')}${myFont ? `<option value="mine" selected>Mi letra · ${esc(myFont.name)}</option>` : ''}</select></label>
+      <p class="fsample" id="fs"></p>
+      <label class="n-btn ghost fup"><input type="file" id="ffile" accept=".woff2,.woff,.ttf,.otf" hidden>Subir mi letra</label>
+      <p class="small">WOFF2, WOFF, TTF u OTF, hasta 3 MB. Si tu marca ya tiene letra, súbela y la usamos en tus títulos.</p>
+      <p class="err" id="fer" hidden></p>
+      <button class="n-btn next" type="button" id="nx">Me gusta así</button>`);
+    sample();
+    $('#fsel').addEventListener('change', e => { const v = e.target.value; if (v !== 'mine') { S.font = v; myFont = null; e.target.querySelector('[value="mine"]')?.remove(); } save(); sample(); render(); });
+    $('#ffile').addEventListener('change', async e => {
+      const file = e.target.files[0], er = $('#fer'); er.hidden = true; if (!file) return;
+      if (!/\.(woff2?|ttf|otf)$/i.test(file.name) || file.size > FONT_MAX) { er.textContent = 'Sube un archivo WOFF2, WOFF, TTF u OTF de hasta 3 MB.'; er.hidden = false; return; }
+      try {
+        const face = new FontFace('Letra del cliente', await file.arrayBuffer()); await face.load();
+        document.fonts.add(face); myFont = { file, face, name: file.name.replace(/\.[^.]+$/, '') }; S.font = '';
+        const sel = $('#fsel'); sel.querySelector('[value="mine"]')?.remove(); sel.insertAdjacentHTML('beforeend', `<option value="mine" selected>Mi letra · ${esc(myFont.name)}</option>`);
+        sample(); render();
+      } catch { er.textContent = 'No pudimos leer esa letra. Prueba con otro archivo.'; er.hidden = false; }
+    });
     $('#nx').addEventListener('click', () => { hide(); res(); });
   });
 }
@@ -401,6 +441,8 @@ async function run() {
   setStep(3);
   await bot(`Elige el estilo que va con <b>${esc(S.name)}</b>. Lo ves cambiar al momento.`);
   await askStyle(); me(`Estilo ${STYLES[S.style].b}${S.color ? ', con mi color' : ''}`);
+  await bot('¿Qué letra te gusta para tus títulos? Elige una de la lista o sube la de tu marca.');
+  await askFont(); me(myFont ? `Mi letra: ${myFont.name}` : S.font ? `Letra ${THEME_OPTIONS.font[S.font]}` : 'La letra del diseño');
 
   // 8. A dónde mandarla
   setStep(4);
@@ -422,17 +464,19 @@ async function contact() {
     if (cn.value.trim().length < 2) { ce.textContent = 'Escribe tu nombre.'; ce.hidden = false; cn.focus(); return; }
     if (!okContact(cc.value)) { ce.textContent = 'Déjanos un WhatsApp con lada (ej. 33 1234 5678) o un correo.'; ce.hidden = false; cc.focus(); return; }
     const btn = $('#cb'); btn.disabled = true; btn.firstChild.textContent = 'Enviando… ';
-    const styleMap = { sobria: 'moderno', expresiva: 'elegante', cercana: 'calido', fonda: 'calido' };
+    const styleMap = { sobria: 'moderno', expresiva: 'elegante', cercana: 'calido', fonda: 'calido', estudio: 'calido' };
     const body = {
       source: 'empezar', mode: S.presence === 'site' ? 'web' : 'noweb', site: S.site, industry: GIROS[S.kind].industry, city: S.city, social: S.social,
       name: cn.value.trim(), biz: S.name, contact: cc.value.trim(), company_url: '',
-      preferences: { kind: S.kind, pageStyle: S.style, style: styleMap[S.style], goals: S.goals, color: S.color || undefined, about: S.about, services: S.services },
+      preferences: { kind: S.kind, pageStyle: S.style, style: styleMap[S.style], goals: S.goals, color: S.color || undefined, font: S.font || undefined, about: S.about, services: S.services },
+      fontFile: myFont ? { name: myFont.file.name, size: myFont.file.size } : undefined,
       utm: Object.fromEntries([...params].filter(([k]) => k.startsWith('utm_'))),
     };
     try {
       const r = await fetch('/api/lead', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
       const d = await r.json().catch(() => ({}));
       if (!r.ok) throw new Error(d.error || Object.values(d.fields || {})[0] || 'No pudimos enviarla. Intenta de nuevo.');
+      if (d.fontUpload && myFont) { const ft = { woff2: 'font/woff2', woff: 'font/woff', ttf: 'font/ttf', otf: 'font/otf' }[myFont.file.name.split('.').pop().toLowerCase()]; await fetch(d.fontUpload, { method: 'PUT', headers: { 'content-type': ft, 'x-upsert': 'false' }, body: myFont.file }).catch(() => {}); }
       hide(); me(`${cn.value.trim()} · ${cc.value.trim()}`);
       const first = cn.value.trim().split(/\s+/)[0];
       await bot(`Listo, ${esc(first)}. ${d.dueDay ? `Te mandamos tu página <b>${esc(d.dueDay)}, ${esc(d.dueTime.replace(/\.$/, ''))}</b>` : 'Te mandamos tu página muy pronto'}, ${d.channel === 'email' ? 'a tu correo' : 'por WhatsApp'}.`);

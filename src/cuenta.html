@@ -157,7 +157,7 @@ body.cu-page{background:var(--c-bg);color:var(--c-text);font-family:var(--f-body
           <textarea id="text" rows="1" placeholder="Escribe un mensaje…" aria-label="Mensaje"></textarea>
           <button type="submit" class="ico send" id="send" aria-label="Enviar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
-        <input type="file" id="file" multiple accept="image/*,.pdf,.zip,.svg,.ai,.eps" hidden>
+        <input type="file" id="file" multiple accept="image/*,.pdf,.zip,.svg,.ai,.eps,.woff2,.woff,.ttf,.otf" hidden>
         <p class="hint">Puedes arrastrar aquí tus archivos. Imágenes, PDF o ZIP de hasta 25 MB.</p>
         <p class="cu-err" id="err" role="alert" hidden></p>
       </form>
@@ -273,7 +273,8 @@ body.cu-page{background:var(--c-bg);color:var(--c-text);font-family:var(--f-body
       const p = { file, state: 'up', preview: /^image\/(png|jpe?g|webp|gif)$/.test(file.type) ? URL.createObjectURL(file) : null };
       pending.push(p); renderPending();
       try {
-        const type = file.type || (/\.svg$/i.test(file.name) ? 'image/svg+xml' : /\.pdf$/i.test(file.name) ? 'application/pdf' : /\.zip$/i.test(file.name) ? 'application/zip' : /\.(ai|eps)$/i.test(file.name) ? 'application/postscript' : '');
+        const fext = (file.name.split('.').pop() || '').toLowerCase(), ftype = { woff2: 'font/woff2', woff: 'font/woff', ttf: 'font/ttf', otf: 'font/otf' }[fext];
+        const type = ftype || file.type || (/\.svg$/i.test(file.name) ? 'image/svg+xml' : /\.pdf$/i.test(file.name) ? 'application/pdf' : /\.zip$/i.test(file.name) ? 'application/zip' : /\.(ai|eps)$/i.test(file.name) ? 'application/postscript' : '');
         const r = await fetch('/api/chat', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ action: 'upload', slug, t, name: file.name, type, size: file.size }) });
         const d = await r.json();
         if (!r.ok) throw new Error(d.error || 'No se pudo subir.');

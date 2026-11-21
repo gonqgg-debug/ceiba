@@ -9,6 +9,10 @@ import { json, siteUrl } from '../lib/stripe.js';
 import { parseSite } from '../lib/url.js';
 import { readSite } from '../lib/site-reader.js';
 import { fireRoutine } from '../lib/routine.js';
+import { THEME_OPTIONS } from '../lib/templates/clinica.js';
+import { signUpload } from '../lib/client-chat.js';
+// Letra propia que sube el cliente en /empezar (se sube directo a Storage con un enlace firmado)
+const FONT_FILE = /\.(woff2?|ttf|otf)$/i, FONT_MAX = 3 * 1024 * 1024;
 
 const INDUSTRIES = ['Clínica o consultorio', 'Restaurante o café', 'Inmobiliaria', 'Hotel u hospedaje', 'Despacho contable o legal', 'Otro'];
 const SOURCES = ['home', 'diagnostico', 'clinicas', 'webs', 'ia', 'consultoria', 'empezar'];
@@ -19,18 +23,20 @@ const PREF = {
   style: ['moderno', 'elegante', 'calido', 'tecnologico'], mode: ['light', 'dark', 'any'], tone: ['tu', 'usted'],
   goals: ['citas', 'estetica', 'urgencias', 'google', 'zonas', 'confianza', 'reservas', 'pedidos', 'cotizaciones', 'visitas', 'whatsapp'],
   // Lo que se arma en /empezar: giro de la plantilla y estilo de la página
-  kind: ['clinica', 'restaurante', 'hotel', 'inmobiliaria', 'despacho', 'otro'], pageStyle: ['sobria', 'expresiva', 'cercana', 'fonda'],
+  kind: ['clinica', 'restaurante', 'hotel', 'inmobiliaria', 'despacho', 'otro'], pageStyle: ['sobria', 'expresiva', 'cercana', 'fonda', 'estudio'],
+  font: Object.keys(THEME_OPTIONS.font),
 };
 const PREF_LABEL = {
   style: { moderno: 'Moderno y limpio', elegante: 'Elegante y premium', calido: 'Cálido y familiar', tecnologico: 'Clínico y tecnológico' },
   mode: { light: 'Fondo claro', dark: 'Fondo oscuro', any: 'Que elija Ceiba' }, tone: { tu: 'De tú', usted: 'De usted' },
-  pageStyle: { sobria: 'Sobria', expresiva: 'Expresiva', cercana: 'Cercana', fonda: 'Fonda' },
+  pageStyle: { sobria: 'Sobria', expresiva: 'Expresiva', cercana: 'Cercana', fonda: 'Fonda', estudio: 'Estudio' },
+  font: THEME_OPTIONS.font,
   goals: { reservas: 'Recibir reservaciones', pedidos: 'Recibir pedidos', cotizaciones: 'Recibir cotizaciones', visitas: 'Agendar visitas', whatsapp: 'Más mensajes por WhatsApp', citas: 'Más citas de valoración', estetica: 'Vender tratamientos estéticos', urgencias: 'Atender urgencias', google: 'Que lo encuentren en Google', zonas: 'Pacientes de otras zonas', confianza: 'Transmitir más confianza' },
 };
 function cleanPrefs(p) {
   if (!p || typeof p !== 'object') return null;
   const out = {};
-  for (const k of ['style', 'mode', 'tone', 'kind', 'pageStyle']) if (PREF[k].includes(p[k])) out[k] = p[k];
+  for (const k of ['style', 'mode', 'tone', 'kind', 'pageStyle', 'font']) if (PREF[k].includes(p[k])) out[k] = p[k];
   // Texto libre de /empezar: a qué se dedica y sus servicios, platillos o habitaciones (datos del cliente, no instrucciones)
   const about = clean(p.about, 800); if (about) out.about = about;
   const services = clean(p.services, 800); if (services) out.services = services;
@@ -42,7 +48,7 @@ function cleanPrefs(p) {
 const prefsText = p => !p ? '' : [
   p.style && PREF_LABEL.style[p.style], p.mode && PREF_LABEL.mode[p.mode], p.color && (p.color === 'logo' ? 'Color de su logo' : `Color ${p.color}`),
   p.tone && PREF_LABEL.tone[p.tone], p.goals?.length && `Quiere: ${p.goals.map(g => PREF_LABEL.goals[g]).join(', ')}`, p.ref && `Le gusta: ${p.ref}`,
-  p.pageStyle && `Estilo de página: ${PREF_LABEL.pageStyle[p.pageStyle]}`, p.about && `Su negocio: ${p.about}`, p.services && `Servicios: ${p.services}`,
+  p.pageStyle && `Estilo de página: ${PREF_LABEL.pageStyle[p.pageStyle]}`, p.font && `Letra: ${PREF_LABEL.font[p.font]}`, p.customFont && `Subió su propia letra (Storage, materiales/${p.customFont})`, p.about && `Su negocio: ${p.about}`, p.services && `Servicios: ${p.services}`,
 ].filter(Boolean).join(' · ');
 const clean = (v, max = 200) => String(v ?? '').replace(/[\u0000-\u001f\u007f]/g, ' ').trim().slice(0, max);
 
@@ -151,13 +157,21 @@ export async function POST(request) {
       if (r.reachable) { snapshot = r.content; serverAudit = { reachable: true, title: r.review.title, seconds: +(r.page.total / 1000).toFixed(1), checks: r.review.checks.map(({ id, status, detail }) => ({ id, status, detail })) }; }
     } catch (err) { console.warn('lead: no se pudo leer la página', row.site_host, err.message); }
   }
+  // Letra propia (de /empezar): pedimos un enlace firmado y el navegador sube el archivo directo a Storage
+  const prefs = cleanPrefs(b.preferences);
+  let fontUpload = null;
+  const ff = b.fontFile;
+  if (ff && FONT_FILE.test(String(ff.name || '')) && Number(ff.size) > 0 && Number(ff.size) <= FONT_MAX) {
+    try { fontUpload = await signUpload('fuentes', String(ff.name)); } catch (err) { console.error('lead: no se pudo firmar la subida de la letra', err.message); }
+  }
+  const preferences = fontUpload ? { ...(prefs || {}), customFont: fontUpload.path } : prefs;
   const lead = {
     ...row,
     source: SOURCES.includes(b.source) ? b.source : 'home',
     // País por IP (encabezado de Vercel): define los precios de su propuesta
     country: request.headers.get('x-vercel-ip-country') ? countryInfo(request.headers.get('x-vercel-ip-country')).code : null,
     audit: serverAudit || auditSummary(b.audit),
-    preferences: cleanPrefs(b.preferences),
+    preferences,
     page_snapshot: snapshot,
     due_at: due.toISOString(),
     utm: b.utm && typeof b.utm === 'object' ? Object.fromEntries(Object.entries(b.utm).slice(0, 6).map(([k, v]) => [clean(k, 30), clean(v, 120)])) : null,
@@ -186,5 +200,5 @@ export async function POST(request) {
 
   // Si no quedó registro en ningún lado, el cliente debe saberlo y escribirnos.
   if (!saved && !notified) return json({ error: 'No pudimos registrar tu solicitud. Intenta de nuevo o escríbenos por WhatsApp.' }, 502);
-  return json({ ok: true, due: due.toISOString(), dueDay: label.day, dueTime: label.time, tz: label.tz, emailed, channel: lead.contact_type });
+  return json({ ok: true, due: due.toISOString(), dueDay: label.day, dueTime: label.time, tz: label.tz, emailed, channel: lead.contact_type, fontUpload: saved && fontUpload ? fontUpload.uploadUrl : undefined });
 }

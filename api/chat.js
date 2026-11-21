@@ -440,7 +440,7 @@ export async function POST(request) {
 
   try {
     if (b.action === 'upload') {
-      if (!ALLOWED_TYPES.test(b.type || '')) return json({ error: 'Ese tipo de archivo no se puede subir. Usa imágenes, PDF o ZIP.' }, 400);
+      if (!ALLOWED_TYPES.test(b.type || '')) return json({ error: 'Ese tipo de archivo no se puede subir. Usa imágenes, PDF, ZIP o tu letra (WOFF2, WOFF, TTF u OTF).' }, 400);
       if (!(b.size > 0 && b.size <= MAX_BYTES)) return json({ error: 'El archivo pesa más de 25 MB.' }, 400);
       if ((chat.files || []).length >= 80) return json({ error: 'Llegaste al límite de archivos. Escríbenos si necesitas mandar más.' }, 400);
       return json(await signUpload(chat.slug, b.name));

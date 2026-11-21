@@ -18,7 +18,7 @@ const STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6
 
 export const ESTUDIO_FONTS = 'https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600&display=swap';
 
-export function renderEstudio(c = {}, { mode = 'live', marks = {} } = {}) {
+export function renderEstudio(c = {}, { mode = 'live', marks = {}, fontVars = '' } = {}) {
   const live = mode === 'live';
   const brand = c.brand || {}, contact = c.contact || {}, hero = c.hero || {};
   const name = brand.fullName || brand.name || '';
@@ -66,7 +66,7 @@ export function renderEstudio(c = {}, { mode = 'live', marks = {} } = {}) {
     services: services.map(s => [s.name, s.price || '', s.desc || '']), more: list(c.services?.more), pay: [...pay, ...insurers], today: list(c.today?.bullets).map(b => b.t || b) };
 
   const out = [];
-  out.push(`<div class="cx es${live ? '' : ' es-still'}" style="--a:${hex(brand.accent)}" data-name="${esc(name)}" data-wa="${esc(waNum)}">`);
+  out.push(`<div class="cx es${live ? '' : ' es-still'}" style="--a:${hex(brand.accent)};${fontVars}" data-name="${esc(name)}" data-wa="${esc(waNum)}">`);
 
   // Encabezado
   const logo = url(brand.logo) ? `<img src="${url(brand.logo)}" alt="${esc(name)}">` : `<b>${esc(brand.name || name)}</b>`;

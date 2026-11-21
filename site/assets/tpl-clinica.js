@@ -56,7 +56,7 @@ const WA = '<svg class="cx-wa" viewBox="0 0 24 24" aria-hidden="true"><use href=
 export const THEME_OPTIONS = {
   mode: { light: 'Claro', dark: 'Oscuro' },
   hero: { organic: 'Orgánica', rounded: 'Redondeada', square: 'Rectangular' },
-  font: { moderna: 'Moderna', elegante: 'Elegante (con serif)', geometrica: 'Geométrica', clasica: 'Clásica', amable: 'Amable', sobria: 'Sobria' },
+  font: { moderna: 'Moderna', elegante: 'Elegante (con serif)', geometrica: 'Geométrica', clasica: 'Clásica', amable: 'Amable', sobria: 'Sobria', editorial: 'Editorial', calida: 'Cálida', lujo: 'De lujo', fuerte: 'Con carácter', retro: 'Retro', limpia: 'Limpia' },
   corners: { soft: 'Suaves', sharp: 'Rectas' },
   buttons: { pill: 'Redondos', square: 'Rectangulares', outline: 'Con contorno' },
   style: { sobria: 'Sobria', expresiva: 'Expresiva (más animación)', cercana: 'Cercana (colorida y amable)', fonda: 'Fonda (restaurantes)', estudio: 'Estudio (clínicas y consultorios)' },
@@ -68,7 +68,26 @@ export const FONTS = {
   clasica: ['Lora', 'Source Sans 3', 'Lora:wght@500;600;700&family=Source+Sans+3:wght@400;500;600'],
   amable: ['Nunito', 'Nunito', 'Nunito:wght@400;500;600;700;800'],
   sobria: ['Manrope', 'Manrope', 'Manrope:wght@400;500;600;700;800'],
+  editorial: ['Newsreader', 'Hanken Grotesk', 'Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600'],
+  calida: ['DM Serif Display', 'DM Sans', 'DM+Serif+Display&family=DM+Sans:wght@400;500;600'],
+  lujo: ['Cormorant Garamond', 'Jost', 'Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600'],
+  fuerte: ['Bricolage Grotesque', 'Bricolage Grotesque', 'Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800'],
+  retro: ['Playfair Display', 'Lora', 'Playfair+Display:wght@700;800&family=Lora:wght@400;500'],
+  limpia: ['Plus Jakarta Sans', 'Plus Jakarta Sans', 'Plus+Jakarta+Sans:wght@400;500;600;700'],
 };
+// La letra que eligió el cliente (theme.font) o la que subió (theme.customFont = { url, name }).
+// Manda sobre la letra propia de cada diseño (Estudio, Fonda…); sin elección, cada diseño usa la suya.
+const fontUrl = u => (typeof u === 'string' && /^https:\/\/[^\s"'()<>\\]+$/i.test(u) ? u : '');
+export function fontChoice(c) {
+  const t = c?.theme || {}, pair = FONTS[t.font] ? FONTS[t.font] : null, custom = fontUrl(t.customFont?.url);
+  if (!pair && !custom) return null;
+  const stack = f => `'${String(f).replace(/['";<>]/g, '')}',ui-sans-serif,system-ui,sans-serif`;
+  return {
+    href: pair ? `https://fonts.googleapis.com/css2?family=${pair[2]}&display=swap` : '',
+    vars: `--fh:${custom ? stack('Letra del cliente') : stack(pair[0])};${pair ? `--fb:${stack(pair[1])};` : ''}`,
+    face: custom ? `<style>@font-face{font-family:'Letra del cliente';src:url('${custom}');font-display:swap}</style>` : '',
+  };
+}
 export const themeOf = c => {
   const t = c?.theme || {}, pick = (k, d) => (THEME_OPTIONS[k][t[k]] ? t[k] : d);
   // Restaurantes: el diseño «Fonda» por defecto; «fonda» solo aplica a restaurantes
@@ -78,7 +97,8 @@ export const themeOf = c => {
   // Cercana usa la tipografía amable si no se eligió otra
   return { mode: pick('mode', 'light'), hero: pick('hero', 'organic'), font: pick('font', style === 'cercana' ? 'amable' : c?.kind === 'restaurante' ? 'elegante' : 'moderna'), corners: pick('corners', 'soft'), buttons: pick('buttons', 'pill'), style };
 };
-export const fontHref = c => (themeOf(c).style === 'fonda' ? FONDA_FONTS : themeOf(c).style === 'estudio' ? ESTUDIO_FONTS : `https://fonts.googleapis.com/css2?family=${FONTS[themeOf(c).font][2]}&display=swap`);
+const designFonts = c => (themeOf(c).style === 'fonda' ? FONDA_FONTS : themeOf(c).style === 'estudio' ? ESTUDIO_FONTS : `https://fonts.googleapis.com/css2?family=${FONTS[themeOf(c).font][2]}&display=swap`);
+export const fontHref = c => fontChoice(c)?.href || designFonts(c);
 
 // Vistas de un sitio con varias páginas (ver lib/site-pages.js):
 //   home: la portada completa · servicios · contacto · sub: página por servicio, zona o catálogo.
@@ -126,8 +146,9 @@ const FORMS = {
 
 export function renderClinica(c = {}, { mode = 'live', marks = {}, view = 'home', sub = null, pages = null, href = null } = {}) {
   // Estudio: portada propia; las páginas internas usan las secciones de siempre con su tipografía
-  if (themeOf(c).style === 'estudio' && view === 'home') return renderEstudio(c, { mode, marks }) + (mode === 'live' ? `\n<script type="application/ld+json">${JSON.stringify(schemaClinica(c)).replace(/</g, '\\u003c')}</script>` : '');
-  if (themeOf(c).style === 'fonda') return renderFonda(c, { mode, marks, view, pages, href }) + (mode === 'live' && view === 'home' ? `\n<script type="application/ld+json">${JSON.stringify(schemaClinica(c)).replace(/</g, '\\u003c')}</script>` : '');
+  const fc = fontChoice(c);
+  if (themeOf(c).style === 'estudio' && view === 'home') return (fc?.face || '') + renderEstudio(c, { mode, marks, fontVars: fc?.vars || '' }) + (mode === 'live' ? `\n<script type="application/ld+json">${JSON.stringify(schemaClinica(c)).replace(/</g, '\\u003c')}</script>` : '');
+  if (themeOf(c).style === 'fonda') return (fc?.face || '') + renderFonda(c, { mode, marks, view, pages, href, fontVars: fc?.vars || '' }) + (mode === 'live' && view === 'home' ? `\n<script type="application/ld+json">${JSON.stringify(schemaClinica(c)).replace(/</g, '\\u003c')}</script>` : '');
   const live = mode === 'live';
   if (view !== 'home') c = viewContent(c, view, sub);
   const show = key => view === 'home' || (VIEWS[view] || []).includes(key);
@@ -195,7 +216,7 @@ export function renderClinica(c = {}, { mode = 'live', marks = {}, view = 'home'
   // Palabras en máscaras (entrada del título y frase que se enciende): se arman aquí para que no parpadee
   const words = t => String(t || '').split(/\s+/).filter(Boolean).map((w, i) => `<span class="cx-w" style="--i:${i}"><span>${esc(w)}</span></span>`).join(' ');
   const fstack = f => `'${f}',ui-sans-serif,system-ui,sans-serif`;
-  out.push(`<div class="${cls}" style="--a:${hex(brand.accent)};--fh:${fstack(fh)};--fb:${fstack(fb)}" data-name="${esc(name)}" data-wa="${esc(waNum)}">`);
+  out.push(`${fc?.face || ''}<div class="${cls}" style="--a:${hex(brand.accent)};--fh:${fstack(fh)};--fb:${fstack(fb)};${fc?.vars || ''}" data-name="${esc(name)}" data-wa="${esc(waNum)}">`);
 
   // Barra superior
   if (c.util?.note || c.util?.hours || telNum) out.push(`<div class="cx-util">${c.util?.note ? `<span>${ico('bolt', 'cx-ico-s')}${esc(c.util.note)}</span>` : ''}${c.util?.hours ? `<span class="cx-util-h">${ico('clock', 'cx-ico-s')}${esc(c.util.hours)}</span>` : ''}${telNum ? act('cx-util-tel', `tel:${telNum}`, `${ico('phone', 'cx-ico-s')}${esc(contact.phone)}`) : ''}</div>`);
