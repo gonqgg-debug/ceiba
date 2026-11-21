@@ -1,0 +1,66 @@
+/* Diseño «Perfil» (lib/templates/perfil.js, raíz .cx.pf). Basado en Marc Hanslin: una página de marca
+   personal, blanco y negro, el nombre en grande y animaciones suaves. */
+.cx.pf{--gold:var(--a);--black:#0C0C0C;--paper:#F5F3EF;--fg:#F2EFE9;--mute:#8E8A83;--line:#2A2A2A;
+  --fh:'Bodoni Moda',Didot,Georgia,serif;--fb:'Inter Tight',ui-sans-serif,system-ui,sans-serif;--pad:max(1.25rem,7cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:300 clamp(15px,1.04cqi,16.5px)/1.7 var(--fb);background:var(--black);color:var(--fg);position:relative;overflow:clip}
+.pf h1,.pf h2,.pf h3{font-family:var(--fh);font-weight:400;color:inherit;margin:0;line-height:1.02;text-wrap:balance}
+.pf :where(p){margin:0}.pf a{color:inherit}
+.pf svg{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2}
+.pf-btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.5rem;padding:0 1.2rem;border:1px solid var(--fg);color:var(--fg)!important;font:400 .72rem/1 var(--fb);letter-spacing:.22em;text-transform:uppercase;text-decoration:none;white-space:nowrap;transition:background-color .25s,color .25s}
+.pf-btn:hover{background:var(--fg);color:var(--black)!important}
+.pf-num{font:italic 400 1rem var(--fh);color:var(--gold)}
+.pf a:focus-visible,.pf summary:focus-visible,.pf .t-case :focus-visible{outline:1px solid var(--gold);outline-offset:3px}
+.pf-top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:2rem;padding:1rem var(--pad);background:#0c0c0ce6}
+.pf-logo{display:grid;place-items:center;width:2.6rem;height:2.6rem;border:1px solid var(--fg);border-radius:50%;font:400 .9rem var(--fh);letter-spacing:.06em}
+.pf-top nav{display:flex;gap:1.8rem;margin-left:auto;font:400 .72rem/1 var(--fb);letter-spacing:.2em;text-transform:uppercase}
+.pf-top nav a,.pf-top nav span{text-decoration:none}
+.pf-hero{position:relative;display:grid;grid-template-columns:1fr 1fr;min-height:min(60cqi,48rem)}
+.pf-hero-img{background:center top/cover no-repeat;filter:grayscale(1) contrast(1.15)}
+.pf-hero>div:not([class*="-img"]){display:grid;gap:1.2rem;align-content:end;padding:3rem var(--pad)}
+.pf-hero h1{display:grid;font-size:clamp(3rem,7.4cqi,7rem)}
+.pf-hero h1 span:last-child{font-style:italic;margin-left:.6em}
+.pf-role{font:400 .74rem/1 var(--fb);letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.pf-hero p:not(.pf-role){color:var(--mute);max-width:26em}
+@media (prefers-reduced-motion:no-preference){.pf:not(.pf-still) .pf-hero h1 span{display:block;animation:pf-rise 1.2s var(--ease) both}.pf:not(.pf-still) .pf-hero h1 span:last-child{animation-delay:.2s}.pf:not(.pf-still) .pf-hero-img{animation:pf-fade 2s ease both}}
+@keyframes pf-rise{from{opacity:0;transform:translateY(40%)}}
+@keyframes pf-fade{from{opacity:0;filter:grayscale(1) contrast(1.15) brightness(.3)}}
+.pf-about,.pf-prac,.pf-revs{display:grid;grid-template-columns:8rem 1fr;gap:2rem;padding:max(4rem,7cqi) var(--pad);border-top:1px solid var(--line)}
+.pf-about h2,.pf-prac h2{font-size:clamp(2.2rem,4.4cqi,3.8rem);margin-bottom:1.4rem}
+.pf-lede{font:400 clamp(1.3rem,2.2cqi,1.9rem)/1.4 var(--fh);margin-bottom:1rem;max-width:30em}
+.pf-about p:not(.pf-lede):not(.pf-num){color:var(--mute);max-width:36em}
+.pf-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+.pf-stats div{display:grid;gap:.3rem;padding:2.4rem var(--pad)}
+.pf-stats div+div{border-left:1px solid var(--line)}
+.pf-stats b{font:400 clamp(2.6rem,5cqi,4.4rem)/1 var(--fh)}.pf-stats span{font-size:.8rem;color:var(--mute);letter-spacing:.06em}
+.pf-prac ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 3rem}
+.pf-prac li{padding:1.2rem 0;border-bottom:1px solid var(--line);display:grid;gap:.3rem}
+.pf-prac h3{font-size:1.5rem}.pf-prac li p{color:var(--mute);font-size:.94em}
+.pf-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.pf-s{aspect-ratio:4/5;background:center/cover no-repeat;filter:grayscale(1) contrast(1.1);transition:filter .6s}
+.pf-s:hover{filter:grayscale(0)}
+.pf-revs>div:not([class*="-img"]){display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.pf-revs blockquote{margin:0;display:grid;gap:.6rem}.pf-revs p{font:italic 400 1.3rem/1.4 var(--fh)}.pf-revs cite{font:400 .7rem/1 var(--fb);letter-spacing:.2em;text-transform:uppercase;font-style:normal;color:var(--gold)}
+.pf-faq{max-width:46rem;margin:0 auto;padding:max(3rem,5cqi) var(--pad);box-sizing:content-box}
+.pf-faq h2{font-size:2rem;margin-bottom:1rem}
+.pf-faq details{border-bottom:1px solid var(--line)}
+.pf-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:1rem 0;font:400 1.2rem var(--fh)}
+.pf-faq summary::-webkit-details-marker{display:none}
+.pf-faq summary::after{content:"+";color:var(--gold)}
+.pf-faq details[open] summary::after{content:"−"}
+.pf-faq details p{color:var(--mute);padding-bottom:1rem}
+.pf-cta{display:grid;gap:1rem;justify-items:center;text-align:center;padding:max(4.5rem,8cqi) var(--pad);background:var(--paper);color:var(--black)}
+.pf-cta h2{font-size:clamp(3rem,8cqi,7rem);font-style:italic}.pf-cta>p{color:#5a5650}
+.pf .t-case{max-width:36rem;text-align:left}.pf .t-case button{background:var(--black);letter-spacing:.2em;text-transform:uppercase;font-size:.74rem;font-weight:400}
+.pf-direct a{display:inline-flex;gap:.4rem;align-items:center;text-decoration:none;font-weight:500}
+.pf-foot{display:grid;gap:.4rem;justify-items:center;text-align:center;padding:2.4rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom));font-size:.88em;color:var(--mute)}
+.pf-foot>div:not([class*="-img"]){display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem 1.2rem;font-size:.7rem;margin-top:.6rem}
+.pf-sticky{display:none}
+@container (max-width:980px){.pf-top nav{display:none}.pf-top .pf-btn{margin-left:auto}.pf-revs>div:not([class*="-img"]){grid-template-columns:1fr}}
+@container (max-width:640px){
+  .pf-hero{grid-template-columns:1fr}.pf-hero-img{min-height:24rem}
+  .pf-about,.pf-prac,.pf-revs{grid-template-columns:1fr;gap:.6rem}
+  .pf-prac ul,.pf-stats{grid-template-columns:1fr}.pf-stats div+div{border-left:0;border-top:1px solid var(--line)}
+  .pf-top .pf-btn{display:none}
+  .pf-sticky{display:flex;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:var(--black);border-top:1px solid var(--line)}
+  .pf-sticky>*{flex:1}
+}

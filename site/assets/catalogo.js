@@ -328,6 +328,31 @@ export const CATALOGO = [
     ref: { name: "JGA Legal Advisor", url: 'https://jga.com.pl/' },
     idea: "Corporativo: blanco y dorado, frases del despacho que corren en horizontal, áreas numeradas y equipo sobrio.",
   },
+  {
+    id: 'recuperado', name: "Recuperado", kind: 'despacho', demo: 'despacho-ortega', accent: '#C6F05A',
+    ref: { name: "Young Law Group", url: 'https://young-lawgroup.com/' },
+    idea: "Defensa y recuperación: el monto recuperado enorme en la portada, medios como prueba social y resultados en tarjetas.",
+  },
+  {
+    id: 'glosario', name: "Glosario", kind: 'despacho', demo: 'despacho-ortega', accent: '#111111',
+    ref: { name: "Zachmann Lawyers", url: 'https://zachmann.law/' },
+    idea: "Explicar los términos: blanco y negro, el equipo rotando en la portada y un glosario legal de la A a la Z.",
+  },
+  {
+    id: 'familiar', name: "Familiar", kind: 'despacho', demo: 'despacho-ortega', accent: '#B5573B',
+    ref: { name: "Barbara Legate", url: 'https://www.legatelaw.ca/' },
+    idea: "Familia y personas: cálido y cercano, y un botón de llamada que muestra el teléfono y si están abiertos ahora.",
+  },
+  {
+    id: 'perfil', name: "Perfil", kind: 'despacho', demo: 'despacho-ortega', accent: '#9A7B4F',
+    ref: { name: "Marc Hanslin", url: 'https://www.marchanslin.com/' },
+    idea: "Marca personal: una página con fotos en blanco y negro, el nombre en grande y la trayectoria en pocas líneas.",
+  },
+  {
+    id: 'resenas', name: "Reseñas", kind: 'despacho', demo: 'despacho-ortega', accent: '#F5B70A',
+    ref: { name: "M&Y Personal Injury", url: 'https://mylawcompany.com/' },
+    idea: "Clientes satisfechos: calificación grande y muro de opiniones de 5 estrellas desde la portada, y casos destacados.",
+  },
 ];
 
 export const RUBROS = { clinica: 'Clínicas dentales', consultorio: 'Consultorios médicos', restaurante: 'Restaurantes', hotel: 'Hoteles', inmobiliaria: 'Inmobiliarias', despacho: 'Despachos legales' };

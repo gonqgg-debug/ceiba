@@ -1,0 +1,70 @@
+/* Diseño «Glosario» (lib/templates/glosario.js, raíz .cx.gl). Basado en Zachmann Lawyers: blanco y negro,
+   el equipo rotando en la portada y glosario de la A a la Z. */
+.cx.gl{--ink:var(--a);--paper:#FFFFFF;--gray:#F2F2F2;--mute:#666;--line:#DDD;
+  --fh:'Space Grotesk',ui-sans-serif,system-ui,sans-serif;--fb:'Spectral',Georgia,serif;--pad:max(1.25rem,6cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:400 clamp(15px,1.05cqi,17px)/1.6 var(--fb);background:var(--paper);color:var(--ink);position:relative;overflow:clip}
+.gl h1,.gl h2,.gl h3{font-family:var(--fh);font-weight:500;color:inherit;margin:0;line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+.gl :where(p){margin:0}.gl a{color:inherit}
+.gl svg{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2}
+.gl-btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.6rem;padding:0 1.2rem;background:var(--ink);color:#fff!important;font:500 .86rem/1 var(--fh);text-decoration:none;white-space:nowrap;justify-self:start}
+.gl-btn:hover{background:#444}
+.gl-link{display:inline-flex;align-items:center;gap:.35rem;font:500 .86rem var(--fh);text-decoration:none;border-bottom:1px solid currentColor}
+.gl a:focus-visible,.gl summary:focus-visible,.gl .t-case :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.gl-top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:2rem;padding:.8rem var(--pad);background:#fffffff2;border-bottom:1px solid var(--ink)}
+.gl-logo{font:700 1.2rem/1 var(--fh);letter-spacing:-.02em}
+.gl-top nav{display:flex;gap:1.4rem;margin-left:auto;font:500 .88rem var(--fh)}
+.gl-top nav a,.gl-top nav span{text-decoration:none}
+.gl-hero{display:grid;grid-template-columns:1.1fr .9fr;border-bottom:1px solid var(--ink)}
+.gl-copy{display:grid;gap:1.2rem;align-content:center;padding:max(3rem,5cqi) var(--pad)}
+.gl-copy h1{font-size:clamp(2.2rem,4.6cqi,4.2rem)}.gl-copy p{color:var(--mute);max-width:30em}
+.gl-rot{position:relative;min-height:28rem;background:var(--gray);border-left:1px solid var(--ink);overflow:hidden}
+.gl-rot figure{position:absolute;inset:0;margin:0;opacity:0}
+.gl-rot figure:first-child{opacity:1}
+.gl-rot-img{position:absolute;inset:0;background:center top/cover no-repeat;filter:grayscale(1) contrast(1.1)}
+.gl-rot figcaption{position:absolute;left:1rem;bottom:1rem;display:grid;padding:.6rem .9rem;background:#fff;font:400 .82rem var(--fh)}
+.gl-rot figcaption b{font-weight:700}
+@media (prefers-reduced-motion:no-preference){.gl:not(.gl-still) .gl-rot figure{animation:gl-rot calc(var(--n) * 4s) infinite;animation-delay:calc(var(--i) * 4s)}.gl:not(.gl-still) .gl-rot figure:first-child{opacity:0}}
+@keyframes gl-rot{0%{opacity:0}6%,44%{opacity:1}50%,100%{opacity:0}}
+.gl-areas{padding:max(3.5rem,6cqi) var(--pad)}
+.gl-areas>h2{font-size:clamp(1.8rem,3.2cqi,2.8rem);margin-bottom:1.6rem}
+.gl-areas>div:not([class*="-img"]){display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink);border-left:1px solid var(--ink)}
+.gl-areas article{display:grid;gap:.5rem;align-content:start;padding:1.4rem;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);transition:background .25s,color .25s}
+.gl-areas article:hover{background:var(--ink);color:#fff}
+.gl-areas span{font:500 .8rem var(--fh);color:var(--mute)}.gl-areas article:hover span{color:#aaa}
+.gl-areas h3{font-size:1.3rem}.gl-areas p{font-size:.94em}
+.gl-az{display:grid;grid-template-columns:.8fr 1.2fr;gap:max(2rem,5cqi);padding:max(3.5rem,6cqi) var(--pad);background:var(--gray)}
+.gl-az-head{position:sticky;top:5rem;align-self:start;display:grid;gap:1rem}
+.gl-az-head h2{font-size:clamp(2rem,4cqi,3.4rem)}.gl-az-head>p{color:var(--mute)}
+.gl-letters{display:flex;flex-wrap:wrap;gap:.25rem}
+.gl-letters>*{display:grid;place-items:center;width:2rem;height:2rem;font:500 .86rem var(--fh);text-decoration:none;border:1px solid var(--ink)}
+.gl-letters a:hover{background:var(--ink);color:#fff}
+.gl-letters span{border-color:var(--line);color:#BBB}
+.gl-az dl{margin:0}
+.gl-az dl>div{display:grid;grid-template-columns:3rem 1fr;gap:.2rem 1rem;padding:1rem 0;border-bottom:1px solid var(--line);scroll-margin-top:5rem}
+.gl-letter{grid-row:span 2;font:700 1.8rem/1 var(--fh)}
+.gl-az dt{font:700 1.15rem var(--fh)}.gl-az dd{margin:0;color:var(--mute)}
+.gl-revs{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding:max(3.5rem,6cqi) var(--pad)}
+.gl-revs blockquote{margin:0;display:grid;gap:.6rem}.gl-revs p{font-style:italic;font-size:1.1em}.gl-revs cite{font:500 .82rem var(--fh);font-style:normal}
+.gl-faq{max-width:46rem;margin:0 auto;padding:0 var(--pad) max(3.5rem,6cqi);box-sizing:content-box}
+.gl-faq h2{font-size:1.8rem;margin-bottom:.8rem}
+.gl-faq details{border-bottom:1px solid var(--ink)}
+.gl-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:.9rem 0;font:500 1rem var(--fh)}
+.gl-faq summary::-webkit-details-marker{display:none}
+.gl-faq summary::after{content:"+"}
+.gl-faq details[open] summary::after{content:"−"}
+.gl-faq details p{color:var(--mute);padding-bottom:1rem}
+.gl-cta{display:grid;grid-template-columns:1fr 1fr;gap:max(2rem,5cqi);align-items:center;padding:max(3.5rem,6cqi) var(--pad);background:var(--ink);color:#fff}
+.gl-cta h2{font-size:clamp(2rem,3.6cqi,3rem)}
+.gl .t-case{font-family:var(--fh)}.gl .t-case button{background:#fff;color:var(--ink)}
+.gl-foot{display:grid;gap:.4rem;padding:2.6rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom));font-size:.92em;color:var(--mute)}
+.gl-foot .gl-logo{color:var(--ink)}.gl-foot a{text-decoration:none}
+.gl-foot>div:not([class*="-img"]){display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;font-size:.72rem;margin-top:.6rem}
+.gl-sticky{display:none}
+@container (max-width:980px){.gl-top nav{display:none}.gl-top .gl-btn{margin-left:auto}.gl-areas>div:not([class*="-img"]){grid-template-columns:1fr 1fr}.gl-revs{grid-template-columns:1fr}}
+@container (max-width:640px){
+  .gl-hero,.gl-az,.gl-cta{grid-template-columns:1fr}.gl-rot{min-height:20rem;border-left:0;border-top:1px solid var(--ink);order:-1}
+  .gl-areas>div:not([class*="-img"]){grid-template-columns:1fr}.gl-az-head{position:static}
+  .gl-top .gl-btn{display:none}
+  .gl-sticky{display:flex;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--ink)}
+  .gl-sticky>*{flex:1}
+}
