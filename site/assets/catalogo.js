@@ -13,6 +13,11 @@ export const CATALOGO = [
     ref: { name: 'Grand Street Dental', url: 'https://www.grandstreetdental.com/' },
     idea: 'Como cartel de diseño: medios círculos de colores, serif negrita, opiniones en cuadrícula, la doctora a todo lo ancho y pestaña «Contáctanos».',
   },
+  {
+    id: 'fresca', name: 'Fresca', kind: 'clinica', demo: 'clinica-arrayan', accent: '#2BA59B',
+    ref: { name: 'Swish Dental', url: 'https://www.swishsmiles.com/' },
+    idea: 'Juguetona y moderna: fotos en arco con bloque de color, destellos, líneas de colores, marco rosa en tratamientos y opiniones en franja festoneada.',
+  },
 ];
 
 export const RUBROS = { clinica: 'Clínicas dentales', consultorio: 'Consultorios médicos', restaurante: 'Restaurantes', hotel: 'Hoteles', inmobiliaria: 'Inmobiliarias', despacho: 'Despachos legales' };
