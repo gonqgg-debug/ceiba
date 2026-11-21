@@ -42,6 +42,9 @@ import { renderRancho, RANCHO_FONTS } from './rancho.js';
 import { renderSafari, SAFARI_FONTS } from './safari.js';
 import { renderMotel, MOTEL_FONTS } from './motel.js';
 import { renderCalendario, CALENDARIO_FONTS } from './calendario.js';
+import { renderPelicula, PELICULA_FONTS } from './pelicula.js';
+import { renderReloj, RELOJ_FONTS } from './reloj.js';
+import { renderVerano, VERANO_FONTS } from './verano.js';
 export const DESIGNS = {
   estudio: { render: renderEstudio, fonts: ESTUDIO_FONTS, kinds: ['clinica'] },
   galeria: { render: renderGaleria, fonts: GALERIA_FONTS, kinds: ['clinica'] },
@@ -84,4 +87,7 @@ export const DESIGNS = {
   safari: { render: renderSafari, fonts: SAFARI_FONTS, kinds: ['hotel'] },
   motel: { render: renderMotel, fonts: MOTEL_FONTS, kinds: ['hotel'] },
   calendario: { render: renderCalendario, fonts: CALENDARIO_FONTS, kinds: ['hotel'] },
+  pelicula: { render: renderPelicula, fonts: PELICULA_FONTS, kinds: ['hotel'] },
+  reloj: { render: renderReloj, fonts: RELOJ_FONTS, kinds: ['hotel'] },
+  verano: { render: renderVerano, fonts: VERANO_FONTS, kinds: ['hotel'] },
 };

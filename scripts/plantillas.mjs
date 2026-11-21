@@ -15,7 +15,7 @@ const head = (title, extra = '') => `<!doctype html><html lang="es"><head><meta 
 
 for (const t of CATALOGO) {
   const demo = (await import(`../lib/demos/${t.demo}.js`)).default;
-  const page = { ...demo.page, ...(t.page || {}), theme: { ...(demo.page.theme || {}), style: t.id } };
+  const page = { ...demo.page, ...(t.page || {}), theme: { ...(demo.page.theme || {}), font: undefined, style: t.id } }; // cada diseño trae su propia letra
   if (t.accent) page.brand = { ...page.brand, accent: t.accent };
   writeFileSync(new URL(`${t.id}.html`, OUT), `${head(`${t.name} · Plantillas Ceiba`, `<link rel="stylesheet" href="${fontHref(page)}"><link rel="stylesheet" href="/assets/clinica.css">
 <style>body{margin:0;background:#fff;-webkit-font-smoothing:antialiased;overflow-x:clip}[hidden]{display:none!important}.vista{container-type:inline-size}

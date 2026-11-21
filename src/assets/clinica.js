@@ -425,6 +425,20 @@
       });
       paint();
     });
+    // «Reloj»: hora local en vivo y la actividad de la casa que mejor queda a esta hora
+    document.querySelectorAll('[data-t-clock]:not([data-tb])').forEach(el => {
+      el.dataset.tb = 1;
+      const t = el.querySelector('[data-clock-time]'), now = el.querySelector('[data-clock-now]'), items = [...el.querySelectorAll('[data-from]')];
+      const tick = () => {
+        const d = new Date(), h = d.getHours() + d.getMinutes() / 60;
+        if (t) t.textContent = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+        let cur = null;
+        items.forEach(x => { const on = h >= +x.dataset.from && h < +x.dataset.to; x.classList.toggle('is-now', on); if (on && !cur) cur = x; });
+        const next = cur || items.filter(x => +x.dataset.from > h).sort((a, b) => a.dataset.from - b.dataset.from)[0] || items[0];
+        if (now && next) now.textContent = cur ? `Ahora es buen momento para: ${next.dataset.name}` : `${+next.dataset.from > h ? 'A las' : 'Mañana a las'} ${next.dataset.from}:00: ${next.dataset.name}`;
+      };
+      tick(); setInterval(tick, 30000);
+    });
     // «Bowl»: filtros de la carta y panel del platillo elegido
     document.querySelectorAll('.bw-shop:not([data-tb])').forEach(sh => {
       sh.dataset.tb = 1;
