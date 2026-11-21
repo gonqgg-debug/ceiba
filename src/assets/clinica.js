@@ -485,6 +485,15 @@
       bt.dataset.tb = 1;
       bt.addEventListener('click', () => { const i = bt.closest('.cx')?.querySelector('[data-t-filt] [name=q]'); if (i) { i.value = bt.dataset.tQ; i.dispatchEvent(new Event('input', { bubbles: true })); i.focus(); } });
     });
+    // Fichas que se abren en ventana ([data-t-dlg] abre el <dialog> con ese id)
+    document.querySelectorAll('[data-t-dlg]:not([data-tb])').forEach(bt => {
+      bt.dataset.tb = 1;
+      bt.addEventListener('click', () => { const d = document.getElementById(bt.dataset.tDlg); if (d?.showModal) d.showModal(); });
+    });
+    document.querySelectorAll('dialog.t-dlg:not([data-tb])').forEach(d => {
+      d.dataset.tb = 1;
+      d.addEventListener('click', e => { if (e.target === d || e.target.closest('[data-t-close]')) d.close(); });
+    });
     // «Bowl»: filtros de la carta y panel del platillo elegido
     document.querySelectorAll('.bw-shop:not([data-tb])').forEach(sh => {
       sh.dataset.tb = 1;

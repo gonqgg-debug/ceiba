@@ -288,6 +288,21 @@ export const CATALOGO = [
     ref: { name: "Zorge 9", url: 'https://zorge9.estate/' },
     idea: "Desarrollos y edificios: el edificio dibujado piso por piso; cada piso se ilumina y lleva a la ficha de su unidad.",
   },
+  {
+    id: 'folleto', name: "Folleto", kind: 'inmobiliaria', demo: 'inmobiliaria-raiz', accent: '#7A6243',
+    ref: { name: "111 West 57th St", url: 'http://111w57.com' },
+    idea: "Desarrollos y preventas: folleto digital con capítulos en numeral romano, fotos a todo lo ancho, cifras técnicas y hoja de disponibilidad.",
+  },
+  {
+    id: 'ruleta', name: "Ruleta", kind: 'inmobiliaria', demo: 'inmobiliaria-raiz', accent: '#C0533F',
+    ref: { name: "LET US Ibiza", url: 'https://letusibiza.com/' },
+    idea: "Boutique de destino: frase con carácter, rosa empolvado, mapa de la zona en la portada y fichas que se abren en una ventana con foto o video.",
+  },
+  {
+    id: 'cabana', name: "Cabaña", kind: 'inmobiliaria', demo: 'inmobiliaria-raiz', accent: '#8B5E3C',
+    ref: { name: "Hutstuf", url: 'https://hutstuf.com' },
+    idea: "Cabañas y casas de arquitecto: madera y bosque, navegación mínima, título vertical junto a la fila de casas y la zona con título grande.",
+  },
 ];
 
 export const RUBROS = { clinica: 'Clínicas dentales', consultorio: 'Consultorios médicos', restaurante: 'Restaurantes', hotel: 'Hoteles', inmobiliaria: 'Inmobiliarias', despacho: 'Despachos legales' };

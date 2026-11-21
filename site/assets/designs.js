@@ -57,6 +57,9 @@ import { renderMapa, MAPA_FONTS } from './mapa.js';
 import { renderPregunta, PREGUNTA_FONTS } from './pregunta.js';
 import { renderAtardecer, ATARDECER_FONTS } from './atardecer.js';
 import { renderTorre, TORRE_FONTS } from './torre.js';
+import { renderFolleto, FOLLETO_FONTS } from './folleto.js';
+import { renderRuleta, RULETA_FONTS } from './ruleta.js';
+import { renderCabana, CABANA_FONTS } from './cabana.js';
 export const DESIGNS = {
   estudio: { render: renderEstudio, fonts: ESTUDIO_FONTS, kinds: ['clinica'] },
   galeria: { render: renderGaleria, fonts: GALERIA_FONTS, kinds: ['clinica'] },
@@ -114,4 +117,7 @@ export const DESIGNS = {
   pregunta: { render: renderPregunta, fonts: PREGUNTA_FONTS, kinds: ['inmobiliaria'] },
   atardecer: { render: renderAtardecer, fonts: ATARDECER_FONTS, kinds: ['inmobiliaria'] },
   torre: { render: renderTorre, fonts: TORRE_FONTS, kinds: ['inmobiliaria'] },
+  folleto: { render: renderFolleto, fonts: FOLLETO_FONTS, kinds: ['inmobiliaria'] },
+  ruleta: { render: renderRuleta, fonts: RULETA_FONTS, kinds: ['inmobiliaria'] },
+  cabana: { render: renderCabana, fonts: CABANA_FONTS, kinds: ['inmobiliaria'] },
 };
