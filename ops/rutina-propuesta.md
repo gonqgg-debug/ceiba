@@ -90,6 +90,12 @@ Reglas de contenido (son las que más importan):
    - `tone: usted` → todos los textos de la portada en usted (agende, escríbanos); `tu` o vacío → de tú.
    - `goals`: ordena el énfasis. citas → hero y CTA de valoración; estetica → servicios estéticos primero y `offers` si hay datos; urgencias → `today` con urgencias; google → `visit.zones` y títulos con colonia o ciudad; zonas → `visit.zones`; confianza → `team`, `stats`, `reviews`.
    - `ref`: una página que le gusta; anótala en `notes` para el equipo (no la copies).
+   - Si la solicitud viene de `/empezar` (`source = empezar`), el cliente armó un borrador conversando:
+     - `kind` → `page.kind` (si es `otro`, usa `clinica` con textos generales de su giro, y si es un servicio profesional usa el estilo de `despacho`). `pageStyle` → `theme.style` tal cual (sobria, expresiva, cercana o fonda; fonda solo en restaurantes).
+     - `about`: cómo describe su negocio con sus palabras; úsalo para `hero`, `statement` e `intro`, sin inventar datos que no diga.
+     - `services`: sus servicios, platillos, habitaciones o propiedades separados por comas o renglones; son la base de `services` (o `menu`, `rooms`, `listings` según el giro). Precios solo si los escribió.
+     - Ya vio un borrador con su nombre, giro y estilo: respeta esas tres cosas. Lo demás (fotos, textos completos, horarios) sale de su página o perfil si lo dejó; si no, anótalo en `notes` como «Falta confirmar».
+     - goals nuevos: reservas → CTA de reservar; pedidos → CTA de pedir por WhatsApp; cotizaciones → CTA de cotizar; visitas → CTA de agendar visita; whatsapp → botón de WhatsApp destacado.
    - `prefsSummary`: en minúsculas y en una línea, lo que eligió (ej. «estilo elegante, fondo oscuro, de usted y enfocada en tratamientos estéticos»). Si no dejó preferencias, omítelo.
 
 ## Guardar

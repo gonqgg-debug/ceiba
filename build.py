@@ -144,6 +144,7 @@ def wall():
 pages = {
     "index.html": site_chrome(fill("inicio.html", {**common, "{{N_NAV}}": n_nav(None, "#consultoria", "Agendar consultoría", "Agendar una consultoría")}), "inicio"),
     "webs.html": site_chrome(fill("webs.html", {**common, "{{WALL}}": wall(), "{{N_NAV}}": n_nav("/webs", "#diagnostico", "Pedir propuesta", "Pedir mi propuesta gratis")}), "webs"),
+    "empezar.html": fill("empezar.html", {"{{HEAD_TAGS}}": head_tags, "{{SYMBOLS}}": shared["{{SYMBOLS}}"]}),
     "ia.html": site_chrome(fill("ia.html", {**common, "{{N_NAV}}": n_nav("/ia", "#contacto", "Agendar diagnóstico", "Agendar un diagnóstico")}), "ia"),
     "webs-clinicas.html": site_chrome(fill("webs-clinicas.html", {**shared, **industry}), "clinicas", cta="#diagnostico", own_menu=True),
     "diagnostico.html": fill("diagnostico.html", {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBOLS}}"]}),
@@ -160,6 +161,10 @@ pages = {
 (SITE / "assets" / "prefs.js").write_text((SRC / "assets/prefs.js").read_text(encoding="utf-8"), encoding="utf-8")
 (SITE / "assets" / "tpl-clinica.js").write_text((ROOT / "lib/templates/clinica.js").read_text(encoding="utf-8"), encoding="utf-8")
 (SITE / "assets" / "fonda.js").write_text((ROOT / "lib/templates/fonda.js").read_text(encoding="utf-8"), encoding="utf-8")
+# Datos de las páginas de ejemplo por giro: /empezar arma la vista previa con ellos en el navegador
+(SITE / "assets" / "demos").mkdir(exist_ok=True)
+for _demo in (ROOT / "lib/demos").glob("*.js"):
+    (SITE / "assets" / "demos" / _demo.name).write_text(_demo.read_text(encoding="utf-8"), encoding="utf-8")
 for _lib in ("fluid.js", "rough.js", "estudio.css"):
     (SITE / "assets" / _lib).write_text((SRC / "assets" / _lib).read_text(encoding="utf-8"), encoding="utf-8")
 (SITE / "assets" / "vista.js").write_text((SRC / "assets/vista.js").read_text(encoding="utf-8"), encoding="utf-8")

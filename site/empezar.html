@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Arma tu página · Ceiba Labs</title>
+<meta name="description" content="Cuéntanos de tu negocio y mira cómo se arma tu página. Te mandamos la versión completa sin costo.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="/apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#081036">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300;400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/estudio.css">
+<style>
+/* ===================== EMPEZAR =====================
+   Una conversación corta a la izquierda y la página del cliente armándose a la derecha,
+   con la plantilla real de cada giro. Al final pedimos a dónde mandarle la versión completa. */
+html,body{height:100%}
+@media (min-width:901px){body{overflow:hidden}}
+body{margin:0;background:var(--night);color:var(--white);font:400 16px/1.55 var(--fb);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+.e{display:grid;grid-template-columns:minmax(22rem,28rem) minmax(0,1fr);height:100svh}
+/* columna de la conversación */
+.e-chat{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;min-height:0;overflow:hidden;border-right:1px solid var(--hair);background:var(--night)}
+.e-top{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.4rem}
+.e-top .n-brand{font-size:1.15rem}.e-top .n-orb{width:1.5rem;height:1.5rem}
+.e-top a.x{font-size:.85rem;color:var(--mist);text-decoration:none}
+.e-top a.x:hover{color:var(--white)}
+.e-prog{padding:0 1.4rem 1rem;display:grid;gap:.5rem}
+.e-prog ol{list-style:none;margin:0;padding:0;display:flex;gap:.3rem}
+.e-prog li{flex:1;height:3px;border-radius:2px;background:var(--hair);transition:background-color .4s}
+.e-prog li.on{background:var(--lime)}
+.e-prog span{font:500 .74rem var(--fm);color:var(--mist)}
+.e-log{min-height:0;overflow-y:auto;padding:.4rem 1.4rem 1rem;display:flex;flex-direction:column;gap:.7rem;scroll-behavior:smooth}
+.m{max-width:88%;padding:.7rem .95rem;border-radius:1.1rem;line-height:1.45;font-size:.95rem;animation:m-in .35s var(--enter) both}
+.m.bot{background:rgba(255,255,255,.06);border-top-left-radius:.35rem}
+.m.bot b{font-weight:600}
+.m.me{align-self:flex-end;background:var(--cobalt);border-top-right-radius:.35rem}
+.m.model{background:linear-gradient(160deg,rgba(214,250,82,.1),rgba(255,255,255,.04));box-shadow:inset 0 0 0 1px rgba(214,250,82,.25)}
+.m.model small{display:block;font:500 .72rem var(--fm);color:var(--lime);margin-bottom:.25rem}
+.typing{display:inline-flex;gap:.25rem;padding:.85rem 1rem}
+.typing i{width:.4rem;height:.4rem;border-radius:50%;background:var(--mist);animation:t-dot 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes t-dot{50%{opacity:.25;transform:translateY(-2px)}}
+@keyframes m-in{from{opacity:0;transform:translateY(8px)}}
+/* lo que contesta el cliente */
+.e-ask{padding:1rem 1.4rem 1.3rem;border-top:1px solid var(--hair);display:grid;gap:.7rem;background:color-mix(in srgb,var(--night) 94%,var(--cobalt))}
+.e-ask[hidden]{display:none}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem}
+.chip{display:inline-flex;align-items:center;gap:.45rem;padding:.55rem .9rem;border-radius:999px;border:1px solid var(--hair);background:rgba(255,255,255,.03);font-size:.9rem;transition:border-color .2s,background-color .2s}
+.chip:hover{border-color:rgba(255,255,255,.35)}
+.chip[aria-pressed="true"]{border-color:var(--lime);background:rgba(214,250,82,.12)}
+.chip svg{width:1rem;height:1rem;color:var(--lime)}
+.chip.ghost{border-style:dashed;color:var(--mist)}
+.row{display:flex;gap:.5rem}
+.inp{flex:1;min-width:0;height:3rem;padding:0 1rem;border-radius:.9rem;border:1px solid var(--hair);background:rgba(255,255,255,.05);color:var(--white);font:400 1rem var(--fb);outline:none}
+textarea.inp{height:auto;min-height:5rem;padding:.75rem 1rem;resize:none;line-height:1.45}
+.inp:focus{border-color:var(--lime)}
+.inp.bad{border-color:#FF9A8A}
+.go{flex:none;width:3rem;height:3rem;border-radius:.9rem;border:0;background:var(--lime);color:var(--night);display:grid;place-items:center}
+.go svg{width:1.2rem;height:1.2rem}
+.go:disabled{opacity:.5;cursor:default}
+.err{color:#FFB3A6;font-size:.85rem;margin:0}
+.styles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem}
+.sty{display:grid;gap:.2rem;text-align:left;padding:.75rem .85rem;border-radius:.9rem;border:1px solid var(--hair);background:rgba(255,255,255,.03);transition:border-color .2s,background-color .2s}
+.sty b{font:600 .98rem var(--fd)}
+.sty span{font-size:.8rem;color:var(--mist)}
+.sty i{display:flex;gap:.25rem;margin-bottom:.3rem}
+.sty i em{width:1rem;height:1rem;border-radius:50%}
+.sty[aria-pressed="true"]{border-color:var(--lime);background:rgba(214,250,82,.1)}
+.sw{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+.sw small{font-size:.8rem;color:var(--mist);margin-right:.2rem}
+.sw button{width:1.9rem;height:1.9rem;border-radius:50%;border:2px solid transparent;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}
+.sw button[aria-pressed="true"]{border-color:var(--white)}
+.next{justify-self:start}
+.small{font-size:.8rem;color:var(--mist);margin:0}
+/* la página armándose */
+.e-pv{position:relative;min-width:0;min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;padding:1.2rem 1.6rem 1rem;background:radial-gradient(70% 60% at 60% 0%,rgba(39,71,232,.25),transparent 70%),#060c2a}
+.e-pv-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.9rem}
+.e-pv-top b{font:600 1rem var(--fd)}
+.e-pv-top .live{display:inline-flex;align-items:center;gap:.45rem;font:500 .74rem var(--fm);color:var(--lime);opacity:0;transition:opacity .3s}
+.e-pv-top .live.on{opacity:1}
+.e-pv-top .live::before{content:"";width:.45rem;height:.45rem;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(214,250,82,.18)}
+.dev{display:inline-flex;gap:.25rem;padding:.25rem;border-radius:999px;background:rgba(255,255,255,.06)}
+.dev button{border:0;background:transparent;padding:.35rem .8rem;border-radius:999px;font-size:.82rem;color:var(--mist)}
+.dev button[aria-pressed="true"]{background:var(--white);color:var(--night)}
+.frame{position:relative;min-height:0;overflow:hidden}
+.win{position:absolute;left:50%;top:0;border-radius:.9rem;overflow:hidden;background:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.12),0 2.5rem 5rem -2rem rgba(0,0,0,.7);transform-origin:top center;transition:box-shadow .3s}
+.win.pulse{box-shadow:0 0 0 2px var(--lime),0 2.5rem 5rem -2rem rgba(0,0,0,.7)}
+.bar{display:flex;align-items:center;gap:.4rem;height:2.4rem;padding:0 .8rem;background:#EEF1F8}
+.bar i{width:.6rem;height:.6rem;border-radius:50%;background:#C9D0E3}
+.bar span{margin-left:.6rem;flex:1;max-width:28rem;background:#fff;border-radius:.4rem;font:400 .8rem var(--fm);color:#4B567E;padding:.3rem .7rem}
+.win iframe{display:block;border:0;background:#fff}
+.e-pv-note{margin:.8rem 0 0;font-size:.78rem;color:var(--mist);text-align:center}
+.e-pv-empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--mist);padding:2rem;pointer-events:none;transition:opacity .4s}
+.e-pv-empty b{display:block;font:600 1.4rem var(--fd);color:var(--white);margin-bottom:.4rem}
+.e-pv-empty.off{opacity:0}
+/* listo */
+.done{display:grid;gap:.8rem}
+.done ol{margin:0;padding-left:1.1rem;color:var(--mist);font-size:.9rem;display:grid;gap:.3rem}
+@media (max-width:900px){
+  .e{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);height:100svh}
+  .e-pv{order:-1;padding:.7rem .9rem .5rem;height:34svh;grid-template-rows:auto 1fr}
+  .e-pv-top{margin-bottom:.5rem}.e-pv-top>b,.e-pv-top .live{display:none}
+  .e-pv-note{display:none}
+  .e-pv-empty b{font-size:1.05rem}
+  .e-chat{border-right:0;border-top:1px solid var(--hair)}
+  .e-top{padding:.7rem 1rem}.e-prog{padding:0 1rem .6rem}.e-log{padding:.4rem 1rem .8rem}.e-ask{padding:.8rem 1rem 1rem}
+  .e.big .e-pv{position:fixed;inset:0;z-index:20;height:auto}
+  .e-pv .grow{display:inline-flex}
+}
+.grow{display:none;border:0;background:rgba(255,255,255,.08);border-radius:999px;padding:.35rem .8rem;font-size:.8rem}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ceiba-logo" viewBox="0 0 249.17 54"><defs>
+    <linearGradient id="clg-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6E8BFF"/><stop offset="1" stop-color="#2747E8"/></linearGradient>
+    <radialGradient id="clg-l" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#D6FA52"/><stop offset=".55" stop-color="#D6FA52" stop-opacity=".55"/><stop offset="1" stop-color="#D6FA52" stop-opacity="0"/></radialGradient>
+    <radialGradient id="clg-v" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#7B5CFF" stop-opacity=".95"/><stop offset="1" stop-color="#7B5CFF" stop-opacity="0"/></radialGradient>
+    <radialGradient id="clg-h" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="clg-s" cx=".5" cy=".5" r=".5"><stop offset=".6" stop-color="#081036" stop-opacity="0"/><stop offset="1" stop-color="#081036" stop-opacity=".3"/></radialGradient>
+    <clipPath id="clg-c"><circle cx="25.5" cy="27" r="25.0"/></clipPath>
+  </defs>
+  <g clip-path="url(#clg-c)">
+    <circle cx="25.5" cy="27" r="25.0" fill="url(#clg-g)"/>
+    <circle cx="15.0" cy="15.5" r="23.75" fill="url(#clg-l)"/>
+    <circle cx="35.0" cy="37.5" r="21.25" fill="url(#clg-v)"/>
+    <circle cx="25.5" cy="27" r="25.0" fill="url(#clg-s)"/>
+    <circle cx="17.0" cy="17.5" r="10.5" fill="url(#clg-h)"/>
+  </g><g fill="currentColor"><path transform="translate(64.00 41.98)" d="M14.090833333333334 0.4316666666666667Q10.298333333333334 0.4316666666666667 7.446250000000001 -1.15625Q4.594166666666667 -2.7441666666666666 3.0370833333333334 -5.6425Q1.48 -8.540833333333333 1.48 -12.456666666666667Q1.48 -16.3725 3.0370833333333334 -19.270833333333332Q4.594166666666667 -22.169166666666666 7.446250000000001 -23.757083333333334Q10.298333333333334 -25.345000000000002 14.090833333333334 -25.345000000000002Q17.143333333333334 -25.345000000000002 19.47125 -24.3275Q21.799166666666668 -23.310000000000002 23.310000000000002 -21.382916666666667Q24.820833333333333 -19.455833333333334 25.2525 -16.773333333333333H20.41166666666667Q19.98 -18.87 18.330416666666665 -20.041666666666668Q16.680833333333332 -21.213333333333335 14.090833333333334 -21.213333333333335Q10.390833333333333 -21.213333333333335 8.263333333333334 -18.885416666666668Q6.135833333333333 -16.5575 6.135833333333333 -12.456666666666667Q6.135833333333333 -8.355833333333333 8.263333333333334 -6.027916666666666Q10.390833333333333 -3.7 14.090833333333334 -3.7Q16.680833333333332 -3.7 18.330416666666665 -4.85625Q19.98 -6.0125 20.41166666666667 -8.14H25.2525Q24.820833333333333 -5.4575000000000005 23.310000000000002 -3.530416666666667Q21.799166666666668 -1.6033333333333333 19.47125 -0.5858333333333333Q17.143333333333334 0.4316666666666667 14.090833333333334 0.4316666666666667ZM35.55083333333334 0.37Q32.56 0.37 30.370833333333337 -0.8170833333333334Q28.18166666666667 -2.004166666666667 26.994583333333335 -4.1779166666666665Q25.8075 -6.351666666666667 25.8075 -9.311666666666667Q25.8075 -12.271666666666667 26.979166666666668 -14.414583333333333Q28.150833333333335 -16.5575 30.30916666666667 -17.71375Q32.4675 -18.87 35.365833333333335 -18.87Q38.2025 -18.87 40.2375 -17.775416666666665Q42.2725 -16.680833333333332 43.38250000000001 -14.630416666666665Q44.49250000000001 -12.58 44.49250000000001 -9.774166666666668V-8.170833333333334H30.247500000000002Q30.49416666666667 -5.827500000000001 31.86625 -4.57875Q33.23833333333334 -3.33 35.52 -3.33Q37.215833333333336 -3.33 38.279583333333335 -3.9620833333333336Q39.343333333333334 -4.594166666666667 39.775000000000006 -5.858333333333333H44.400000000000006Q43.7525 -2.9291666666666667 41.42458333333333 -1.2795833333333333Q39.096666666666664 0.37 35.55083333333334 0.37ZM30.340000000000003 -11.285H40.083333333333336Q39.80583333333333 -13.196666666666667 38.60333333333334 -14.19875Q37.40083333333334 -15.200833333333334 35.365833333333335 -15.200833333333334Q33.361666666666665 -15.200833333333334 32.06666666666666 -14.183333333333334Q30.77166666666667 -13.165833333333333 30.340000000000003 -11.285ZM46.83583333333334 0.0V-18.5H51.43000000000001V0.0ZM49.11750000000001 -20.535Q48.03833333333334 -20.535 47.28291666666667 -21.290416666666665Q46.5275 -22.045833333333334 46.5275 -23.125Q46.5275 -24.204166666666666 47.28291666666667 -24.959583333333335Q48.03833333333334 -25.715 49.11750000000001 -25.715Q50.19666666666667 -25.715 50.95208333333334 -24.959583333333335Q51.70750000000001 -24.204166666666666 51.70750000000001 -23.125Q51.70750000000001 -22.045833333333334 50.95208333333334 -21.290416666666665Q50.19666666666667 -20.535 49.11750000000001 -20.535ZM66.19916666666667 0.37Q63.88666666666667 0.37 62.252500000000005 -0.49333333333333335Q60.61833333333334 -1.3566666666666667 59.66250000000001 -2.96H58.36750000000001V0.0H53.650000000000006V-4.594166666666667H55.93166666666667V-25.900000000000002H60.52583333333334V-15.8175H60.64916666666667Q61.481666666666676 -17.2975 62.99250000000001 -18.083750000000002Q64.50333333333334 -18.87 66.60000000000001 -18.87Q69.25166666666668 -18.87 71.13250000000002 -17.682916666666667Q73.01333333333335 -16.495833333333334 74.01541666666668 -14.3375Q75.01750000000001 -12.179166666666667 75.01750000000001 -9.25Q75.01750000000001 -6.351666666666667 74.00000000000001 -4.1779166666666665Q72.98250000000002 -2.004166666666667 71.02458333333334 -0.8170833333333334Q69.06666666666668 0.37 66.19916666666667 0.37ZM65.36666666666667 -3.6075Q67.86416666666668 -3.6075 69.14375000000001 -5.102916666666667Q70.42333333333335 -6.598333333333334 70.42333333333335 -9.25Q70.42333333333335 -11.901666666666667 69.14375000000001 -13.397083333333335Q67.86416666666668 -14.8925 65.36666666666667 -14.8925Q63.17750000000001 -14.8925 61.851666666666674 -13.64375Q60.52583333333334 -12.395 60.52583333333334 -10.236666666666666V-8.263333333333334Q60.52583333333334 -6.105 61.851666666666674 -4.85625Q63.17750000000001 -3.6075 65.36666666666667 -3.6075ZM83.06500000000001 0.33916666666666667Q79.82750000000001 0.33916666666666667 77.99291666666667 -1.2333333333333334Q76.15833333333335 -2.8058333333333336 76.15833333333335 -5.395833333333333Q76.15833333333335 -8.109166666666667 78.02375 -9.589166666666667Q79.88916666666668 -11.069166666666668 83.40416666666668 -11.069166666666668H89.04666666666668V-11.809166666666666Q89.04666666666668 -15.200833333333334 85.10000000000001 -15.200833333333334Q81.77000000000001 -15.200833333333334 81.06083333333335 -12.795833333333334H76.46666666666668Q77.02166666666668 -15.755833333333333 79.25708333333334 -17.312916666666666Q81.4925 -18.87 85.10000000000001 -18.87Q89.17000000000002 -18.87 91.29750000000001 -17.035416666666666Q93.42500000000001 -15.200833333333334 93.42500000000001 -11.685833333333333V-4.594166666666667H95.61416666666668V0.0H90.89666666666668V-2.96H89.60166666666669Q88.64583333333334 -1.3875 87.02708333333334 -0.5241666666666667Q85.40833333333335 0.33916666666666667 83.06500000000001 0.33916666666666667ZM83.74333333333334 -3.2066666666666666Q85.25416666666668 -3.2066666666666666 86.45666666666668 -3.7770833333333336Q87.65916666666668 -4.3475 88.35291666666669 -5.31875Q89.04666666666668 -6.29 89.04666666666668 -7.492500000000001V-7.924166666666667H83.65083333333335Q80.53666666666668 -7.924166666666667 80.53666666666668 -5.611666666666667Q80.53666666666668 -4.470833333333333 81.38458333333335 -3.83875Q82.23250000000002 -3.2066666666666666 83.74333333333334 -3.2066666666666666Z"/><path transform="translate(168.06 41.98)" d="M3.2066666666666666 0.0V-24.975H6.166666666666667V-2.5283333333333333H20.041666666666668V0.0ZM27.873333333333335 0.33916666666666667Q24.790000000000003 0.33916666666666667 23.001666666666672 -1.2179166666666665Q21.21333333333334 -2.775 21.21333333333334 -5.241666666666667Q21.21333333333334 -7.8933333333333335 22.95541666666667 -9.3425Q24.697500000000005 -10.791666666666666 27.99666666666667 -10.791666666666666H34.656666666666666V-11.655000000000001Q34.656666666666666 -16.403333333333332 29.569166666666668 -16.403333333333332Q25.437500000000004 -16.403333333333332 24.605000000000004 -13.258333333333333H21.645000000000003Q22.076666666666668 -15.91 24.219583333333336 -17.39Q26.362500000000004 -18.87 29.66166666666667 -18.87Q33.42333333333334 -18.87 35.42750000000001 -17.06625Q37.43166666666667 -15.262500000000001 37.43166666666667 -11.870833333333334V-3.0833333333333335H38.85000000000001V0.0H35.64333333333334V-2.775H34.348333333333336Q33.392500000000005 -1.3566666666666667 31.696666666666673 -0.50875Q30.000833333333336 0.33916666666666667 27.873333333333335 0.33916666666666667ZM28.24333333333334 -2.0658333333333334Q30.000833333333336 -2.0658333333333334 31.46541666666667 -2.805833333333333Q32.93000000000001 -3.5458333333333334 33.79333333333334 -4.794583333333334Q34.656666666666666 -6.043333333333334 34.656666666666666 -7.554166666666667V-8.571666666666667H28.212500000000006Q23.92666666666667 -8.571666666666667 23.92666666666667 -5.365Q23.92666666666667 -3.854166666666667 25.08291666666667 -2.96Q26.23916666666667 -2.0658333333333334 28.24333333333334 -2.0658333333333334ZM52.355000000000004 0.37Q50.135000000000005 0.37 48.56250000000001 -0.4316666666666667Q46.99000000000001 -1.2333333333333334 46.065000000000005 -2.775H44.77000000000001V0.0H41.56333333333334V-3.0833333333333335H43.105000000000004V-25.900000000000002H46.00333333333334V-15.355H46.12666666666667Q46.99000000000001 -17.081666666666667 48.670416666666675 -17.975833333333334Q50.35083333333334 -18.87 52.601666666666674 -18.87Q55.22250000000001 -18.87 57.118750000000006 -17.71375Q59.01500000000001 -16.5575 60.03250000000001 -14.399166666666666Q61.05000000000001 -12.240833333333333 61.05000000000001 -9.25Q61.05000000000001 -6.259166666666667 60.017083333333346 -4.100833333333334Q58.984166666666674 -1.9425000000000001 57.04166666666667 -0.7862500000000001Q55.099166666666676 0.37 52.355000000000004 0.37ZM51.95416666666667 -2.0966666666666667Q54.88333333333334 -2.0966666666666667 56.517500000000005 -3.9775Q58.15166666666667 -5.858333333333333 58.15166666666667 -9.25Q58.15166666666667 -12.641666666666667 56.517500000000005 -14.5225Q54.88333333333334 -16.403333333333332 51.95416666666667 -16.403333333333332Q49.271666666666675 -16.403333333333332 47.6375 -14.861666666666666Q46.00333333333334 -13.32 46.00333333333334 -10.760833333333334V-7.739166666666667Q46.00333333333334 -5.18 47.6375 -3.638333333333333Q49.271666666666675 -2.0966666666666667 51.95416666666667 -2.0966666666666667ZM71.44083333333334 0.37Q67.67916666666667 0.37 65.49000000000001 -1.1870833333333333Q63.300833333333344 -2.7441666666666666 63.08500000000001 -5.55H65.98333333333335Q66.19916666666667 -3.7616666666666667 67.55583333333334 -2.8983333333333334Q68.91250000000001 -2.035 71.53333333333335 -2.035Q76.25083333333335 -2.035 76.25083333333335 -5.056666666666667Q76.25083333333335 -6.29 75.52625 -6.952916666666667Q74.80166666666668 -7.615833333333334 73.075 -7.924166666666667L69.03583333333334 -8.664166666666667Q64.01 -9.589166666666667 64.01 -13.474166666666667Q64.01 -15.971666666666668 65.89083333333335 -17.420833333333334Q67.77166666666668 -18.87 71.04 -18.87Q74.40083333333334 -18.87 76.42041666666668 -17.39Q78.44000000000001 -15.91 78.74833333333333 -13.258333333333333H75.91166666666668Q75.5725 -14.8925 74.37 -15.67875Q73.1675 -16.465 71.00916666666667 -16.465Q68.94333333333334 -16.465 67.83333333333334 -15.740416666666667Q66.72333333333334 -15.015833333333333 66.72333333333334 -13.628333333333334Q66.72333333333334 -12.58 67.44791666666669 -11.97875Q68.17250000000001 -11.3775 69.80666666666667 -11.069166666666668L73.81500000000001 -10.329166666666667Q76.46666666666667 -9.835833333333333 77.7 -8.6025Q78.93333333333334 -7.369166666666667 78.93333333333334 -5.2725Q78.93333333333334 -2.59 76.99083333333334 -1.1099999999999999Q75.04833333333335 0.37 71.44083333333334 0.37Z" opacity=".72"/></g></symbol>
+  <symbol id="wa" viewBox="0 0 24 24"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.9L2.3 21.8l4.8-1.3A9.8 9.8 0 1 0 12 2.2Z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M8.7 7.2c.2-.4.4-.4.7-.4h.6c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .6l-.5.7c-.1.2-.2.4 0 .6.6 1.1 1.5 2 2.6 2.6.2.1.4.1.6-.1l.7-.8c.2-.2.4-.2.6-.1l1.8.9c.2.1.4.2.4.4 0 .5-.1 1.2-.6 1.6-.6.5-1.4.8-2.2.6-1.2-.3-2.6-.9-4-2.3s-2.1-2.9-2.3-4c-.2-.9.1-1.7.6-2.1Z" fill="currentColor"/></symbol>
+  <symbol id="lock" viewBox="0 0 12 12"><rect x="2" y="5" width="8" height="6" rx="1.5" fill="currentColor"/><path d="M4 5V3.6a2 2 0 0 1 4 0V5" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
+</svg>
+<div class="e" id="e">
+  <section class="e-chat" aria-label="Arma tu página">
+    <div class="e-top"><a class="n-brand" href="/" aria-label="Ceiba Labs, inicio"><span class="n-orb" aria-hidden="true"></span><span>Ceiba<em>Labs</em></span></a><a class="x" href="/webs">Salir</a></div>
+    <div class="e-prog"><ol id="prog"><li></li><li></li><li></li><li></li><li></li></ol><span id="prog-t">Tu negocio</span></div>
+    <div class="e-log" id="log" aria-live="polite"></div>
+    <div class="e-ask" id="ask" hidden></div>
+  </section>
+  <section class="e-pv" aria-label="Tu página">
+    <div class="e-pv-top"><b>Tu página</b><span class="live" id="live">Actualizada</span><div style="display:flex;gap:.5rem;align-items:center"><div class="dev" role="group" aria-label="Ver en"><button type="button" data-d="desk" aria-pressed="true">Computadora</button><button type="button" data-d="mob" aria-pressed="false">Celular</button></div><button class="grow" type="button" id="grow">Ver en grande</button></div></div>
+    <div class="frame" id="frame">
+      <div class="win" id="win"><div class="bar"><i></i><i></i><i></i><span id="url">tunegocio.com</span></div><iframe id="pv" title="Vista previa de tu página" tabindex="-1"></iframe></div>
+      <div class="e-pv-empty" id="empty"><div><b>Aquí aparece tu página</b>Se arma con cada respuesta.</div></div>
+    </div>
+    <p class="e-pv-note">Borrador al momento: los textos y las fotos son de ejemplo hasta que armemos tu versión completa.</p>
+  </section>
+</div>
+
+<script type="module">
+import { renderClinica, fontHref } from '/assets/tpl-clinica.js';
+import clinica from '/assets/demos/clinica-arrayan.js';
+import restaurante from '/assets/demos/restaurante-la-milpa.js';
+import hotel from '/assets/demos/hotel-casa-azahar.js';
+import inmobiliaria from '/assets/demos/inmobiliaria-raiz.js';
+import despacho from '/assets/demos/despacho-ortega.js';
+
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const wait = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const ICON = { send: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>' };
+
+/* ---------- giros: modelo, textos y metas ---------- */
+const DEMOS = { clinica, restaurante, hotel, inmobiliaria, despacho, otro: despacho };
+const GIROS = {
+  restaurante: { label: 'Restaurante o café', short: 'restaurante', industry: 'Restaurante o café', items: 'platillos', style: 'fonda',
+    model: 'Para restaurantes usamos un modelo con tu carta, reservaciones y cómo llegar: lo que busca quien quiere comer fuera.',
+    goals: [['reservas', 'Que reserven mesa'], ['pedidos', 'Que pidan para llevar'], ['google', 'Que me encuentren en Google'], ['whatsapp', 'Que me escriban por WhatsApp']],
+    hero: (n, c) => c ? `Reserva tu mesa en ${n}, en ${c}` : `Reserva tu mesa en ${n}` },
+  clinica: { label: 'Clínica o consultorio', short: 'clínica', industry: 'Clínica o consultorio', items: 'servicios o tratamientos', style: 'sobria',
+    model: 'Para clínicas y consultorios: servicios con precio, agenda en línea y quién te atiende. Es lo que da confianza para agendar.',
+    goals: [['citas', 'Que agenden citas'], ['confianza', 'Transmitir confianza'], ['google', 'Que me encuentren en Google'], ['whatsapp', 'Que me escriban por WhatsApp']],
+    hero: (n, c) => c ? `Agenda tu cita en ${c}` : `Agenda tu cita en ${n}` },
+  hotel: { label: 'Hotel u hospedaje', short: 'hotel', industry: 'Hotel u hospedaje', items: 'habitaciones', style: 'expresiva',
+    model: 'Para hoteles: habitaciones con tarifa, disponibilidad y lo que hay cerca. Así reservan directo contigo y no en una plataforma.',
+    goals: [['reservas', 'Que reserven directo'], ['google', 'Que me encuentren en Google'], ['whatsapp', 'Que me escriban por WhatsApp']],
+    hero: (n, c) => c ? `Tu estancia en ${c} empieza en ${n}` : `Tu estancia empieza en ${n}` },
+  inmobiliaria: { label: 'Inmobiliaria', short: 'inmobiliaria', industry: 'Inmobiliaria', items: 'propiedades', style: 'sobria',
+    model: 'Para inmobiliarias: propiedades con filtro de venta o renta y una asesora a un mensaje de distancia.',
+    goals: [['visitas', 'Que agenden visitas'], ['google', 'Que me encuentren en Google'], ['whatsapp', 'Que me escriban por WhatsApp'], ['confianza', 'Transmitir confianza']],
+    hero: (n, c) => c ? `Encuentra tu próxima casa en ${c}` : `Encuentra tu próxima casa con ${n}` },
+  despacho: { label: 'Despacho contable o legal', short: 'despacho', industry: 'Despacho contable o legal', items: 'servicios o áreas', style: 'sobria',
+    model: 'Para despachos: áreas de práctica claras y una primera consulta fácil de agendar.',
+    goals: [['citas', 'Que agenden una consulta'], ['cotizaciones', 'Que pidan cotización'], ['confianza', 'Transmitir confianza'], ['google', 'Que me encuentren en Google']],
+    hero: (n, c) => c ? `Asesoría clara en ${c}, con ${n}` : `Asesoría clara, con ${n}` },
+  otro: { label: 'Otro', short: 'negocio', industry: 'Otro', items: 'servicios o productos', style: 'sobria',
+    model: 'Te armamos un modelo con tus servicios, cómo contactarte y dónde estás. Con lo que me cuentes lo ajustamos a tu giro.',
+    goals: [['cotizaciones', 'Que pidan cotización'], ['citas', 'Que agenden'], ['pedidos', 'Que hagan pedidos'], ['google', 'Que me encuentren en Google'], ['whatsapp', 'Que me escriban por WhatsApp']],
+    hero: (n, c) => c ? `${n}, en ${c}` : n },
+};
+const STYLES = {
+  sobria: { b: 'Sobria', t: 'Clara y profesional', c: ['#1F4FD1', '#EEF1F8'] },
+  expresiva: { b: 'Expresiva', t: 'Fotos grandes y movimiento', c: ['#0F766E', '#111827'] },
+  cercana: { b: 'Cercana', t: 'Cálida y amigable', c: ['#E07A5F', '#FFF4E8'] },
+  fonda: { b: 'Fonda', t: 'Con mucho carácter', c: ['#C2410C', '#FACC15'] },
+};
+const COLORS = ['#1F4FD1', '#0E9F8A', '#6D4BD8', '#C2410C', '#B08D3C', '#D9547A', '#1E2A28'];
+const STEPS = ['Tu negocio', 'Tu modelo', 'Tus servicios', 'Tu estilo', 'Listo'];
+
+/* ---------- estado (se guarda para retomar) ---------- */
+const KEY = 'ceiba-empezar';
+let S = { name: '', kind: '', presence: '', site: '', social: '', city: '', goals: [], about: '', services: '', style: '', color: '', step: 0 };
+try { const saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved && saved.name) S = { ...S, ...saved }; } catch {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch {} };
+
+/* ---------- lo que escribió en la caja de /webs: ?q=… y ?giro=… ---------- */
+const params = new URLSearchParams(location.search);
+const KW = [['restaurante', /restaur|taquer|tacos|caf[eé]|cocina|fonda|comida|bar\b|pizz|sushi|panader|marisc|antojit/i], ['clinica', /cl[ií]nica|dental|dentist|consultorio|doctor|m[eé]dic|nutri|psic|fisio|veterin|est[eé]tica|spa\b|derma|pediatr|oftalm/i],
+  ['hotel', /hotel|hostal|hospedaje|caba[ñn]a|posada|airbnb|glamping/i], ['inmobiliaria', /inmobiliar|bienes ra[ií]ces|propiedades|casas en venta|departamentos/i], ['despacho', /despacho|contador|contable|abogad|legal|fiscal|notar|jur[ií]dic/i]];
+const detectKind = t => (KW.find(([, re]) => re.test(t)) || [])[0] || '';
+function detectPresence(t) {
+  const s = t.trim();
+  const ig = s.match(/(?:instagram\.com\/|^|\s)@([a-z0-9._]{2,30})/i);
+  if (/google\.[a-z.]+\/maps|maps\.app\.goo\.gl|goo\.gl\/maps/i.test(s)) return { presence: 'social', social: s.match(/https?:\/\/\S+/)?.[0] || s };
+  if (/instagram\.com\//i.test(s) || ig) return { presence: 'social', social: ig ? '@' + ig[1] : s };
+  const url = s.match(/(?:https?:\/\/)?(?:www\.)?([a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-z]{2,})(?:\/\S*)?/i);
+  if (url && !/instagram|facebook|google|maps|tiktok/i.test(url[1])) return { presence: 'site', site: url[1].toLowerCase() };
+  return null;
+}
+const slug = s => (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '').slice(0, 24);
+
+/* ---------- vista previa: la plantilla real en un iframe ---------- */
+const pv = $('#pv'), win = $('#win'), frame = $('#frame');
+let dev = 'desk', docReady = false, lastFont = '';
+function initFrame() {
+  const sym = document.querySelector('svg[width="0"]')?.outerHTML || '';
+  pv.srcdoc = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Red+Hat+Display:wght@500;600;700&family=Red+Hat+Text:wght@400;500;600&display=swap">
+  <link id="ff" rel="stylesheet" href=""><link rel="stylesheet" href="/assets/clinica.css">
+  <style>body{margin:0;background:#fff;-webkit-font-smoothing:antialiased;overflow-x:clip}[hidden]{display:none!important}.vista{container-type:inline-size}a,button{pointer-events:none}.cx-fab,.fx-fab,.cx-teaser{display:none!important}</style>
+  </head><body>${sym}<main class="vista" id="v"></main><script src="/assets/clinica.js"><\/script></body></html>`;
+  pv.addEventListener('load', () => { docReady = true; render(); }, { once: true });
+}
+function sizeFrame() {
+  const W = dev === 'desk' ? 1280 : 390, fw = frame.clientWidth, fh = frame.clientHeight;
+  const k = Math.min(1, fw / W, dev === 'mob' ? (fh - 2) / 844 : 1);
+  pv.style.width = W + 'px'; pv.style.height = Math.max(400, (fh / k) - 40) + 'px';
+  win.style.width = W + 'px'; win.style.transform = `translateX(-50%) scale(${k})`;
+  if (dev === 'mob') pv.style.height = 844 + 'px';
+}
+function buildPage() {
+  const g = GIROS[S.kind] || GIROS.otro, demo = DEMOS[S.kind] || DEMOS.otro;
+  const p = structuredClone(demo.page);
+  const name = S.name.trim() || demo.page.brand?.name || 'Tu negocio', city = S.city.trim();
+  p.kind = S.kind === 'otro' ? 'despacho' : (S.kind || p.kind);
+  const style = S.style || g.style;
+  p.theme = { ...(p.theme || {}), style: style === 'fonda' && S.kind !== 'restaurante' ? 'sobria' : style };
+  if (S.name) {
+    p.brand = { ...(p.brand || {}), name, fullName: name, tagline: city ? `${g.label.split(' o ')[0]} en ${city}` : g.label.split(' o ')[0] };
+    delete p.brand.logo; delete p.brand.logoWide;
+    p.hero = { ...(p.hero || {}), title: g.hero(name, city) };
+    p.footer = { note: `© 2026 ${name}` };
+    p.rating = null; p.reviews = null;
+    if (p.intro) p.intro = { ...p.intro, title: S.about || p.intro.title, marks: [] };
+    if (p.shop) p.shop = null; // la tiendita es propia del ejemplo
+  }
+  if (S.color) p.brand = { ...(p.brand || {}), accent: S.color };
+  if (S.about) { p.hero = { ...(p.hero || {}), sub: S.about.slice(0, 180) }; if (p.statement) p.statement = S.about.slice(0, 220); }
+  if (city && p.contact) p.contact = { ...p.contact, address: city };
+  if (S.kind === 'otro' && p.services) p.services = { ...p.services, title: 'Nuestros servicios', sub: 'Lo que hacemos por ti.' };
+  const list = S.services.split(/[,\n;]+/).map(x => x.trim()).filter(Boolean).slice(0, 8);
+  if (list.length) {
+    if (S.kind === 'restaurante' && p.menu) p.menu = { ...p.menu, note: '', categories: [{ name: 'Lo que más piden', items: list.map(n => ({ name: n, desc: '', price: '' })) }] };
+    else if (S.kind === 'hotel' && p.rooms) { const base = p.rooms.items; p.rooms = { ...p.rooms, note: '', items: list.map((n, i) => ({ ...base[i % base.length], name: n, desc: '', price: '' })) }; }
+    else if (S.kind === 'inmobiliaria' && p.listings) { const base = p.listings.items; p.listings = { ...p.listings, note: '', items: list.map((n, i) => ({ ...base[i % base.length], title: n, price: '' })) }; }
+    else if (p.services) p.services = { ...p.services, more: null, note: '', items: list.map(n => ({ name: n, desc: '' })) };
+  }
+  return p;
+}
+let pulseT;
+const FOCUS = { items: '.fx-board,.cx-menu,.cx-rooms,.cx-listings,.cx-services', top: null };
+function render(focus = 'top') {
+  if (!docReady || !S.kind) return;
+  const d = pv.contentDocument, p = buildPage();
+  const font = fontHref(p); if (font !== lastFont) { d.getElementById('ff').href = font; lastFont = font; }
+  d.getElementById('v').innerHTML = renderClinica(p, { mode: 'live' });
+  $('#url').textContent = (slug(S.name) || 'tunegocio') + '.com';
+  $('#empty').classList.add('off');
+  sizeFrame();
+  const w = d.defaultView;
+  setTimeout(() => { const el = FOCUS[focus] && [...d.querySelectorAll(FOCUS[focus])].find(x => x.offsetHeight > 0); w.scrollTo({ top: el ? Math.max(0, el.getBoundingClientRect().top + w.scrollY - 16) : 0, behavior: reduce ? 'auto' : 'smooth' }); }, 250);
+  win.classList.add('pulse'); $('#live').classList.add('on'); clearTimeout(pulseT); pulseT = setTimeout(() => { win.classList.remove('pulse'); $('#live').classList.remove('on'); }, 1200);
+}
+$$('.dev button').forEach(b => b.addEventListener('click', () => { dev = b.dataset.d; $$('.dev button').forEach(x => x.setAttribute('aria-pressed', x === b)); sizeFrame(); }));
+$('#grow').addEventListener('click', () => { const big = $('#e').classList.toggle('big'); $('#grow').textContent = big ? 'Cerrar' : 'Ver en grande'; requestAnimationFrame(sizeFrame); });
+addEventListener('resize', sizeFrame);
+
+/* ---------- conversación ---------- */
+const log = $('#log'), ask = $('#ask');
+const scroll = () => { log.scrollTop = log.scrollHeight; };
+async function bot(html, cls = '') {
+  const t = document.createElement('div'); t.className = 'm bot typing'; t.innerHTML = '<i></i><i></i><i></i>'; log.appendChild(t); scroll();
+  await wait(Math.min(1100, 380 + html.length * 6)); t.remove();
+  const m = document.createElement('div'); m.className = 'm bot ' + cls; m.innerHTML = html; log.appendChild(m); scroll();
+}
+function me(text) { const m = document.createElement('div'); m.className = 'm me'; m.textContent = text; log.appendChild(m); scroll(); }
+function setStep(i) { S.step = i; save(); $$('#prog li').forEach((l, k) => l.classList.toggle('on', k <= i)); $('#prog-t').textContent = `Paso ${Math.min(i + 1, 5)} de 5 · ${STEPS[i]}`; }
+const show = html => { ask.innerHTML = html; ask.hidden = false; const f = ask.querySelector('input,textarea'); if (f && matchMedia('(pointer:fine)').matches) f.focus(); };
+const hide = () => { ask.hidden = true; ask.innerHTML = ''; };
+
+// Un campo de texto con botón de enviar. Devuelve lo que escribió (o el valor de un atajo).
+function askText({ ph = '', area = false, value = '', chips = [], validate = v => v.trim().length >= 2 || 'Escribe un poco más.', type = 'text' } = {}) {
+  return new Promise(res => {
+    show(`${chips.length ? `<div class="chips">${chips.map(([v, l, cls]) => `<button type="button" class="chip ${cls || ''}" data-v="${esc(v)}">${esc(l)}</button>`).join('')}</div>` : ''}
+      <form class="row" id="f">${area ? `<textarea class="inp" id="t" rows="3" placeholder="${esc(ph)}">${esc(value)}</textarea>` : `<input class="inp" id="t" type="${type}" autocomplete="off" placeholder="${esc(ph)}" value="${esc(value)}">`}<button class="go" aria-label="Enviar">${ICON.send}</button></form><p class="err" id="er" hidden></p>`);
+    const t = $('#t'), er = $('#er');
+    if (area) t.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); $('#f').requestSubmit(); } });
+    t.addEventListener('input', () => { t.classList.remove('bad'); er.hidden = true; });
+    $('#f').addEventListener('submit', e => { e.preventDefault(); const r = validate(t.value); if (r !== true) { t.classList.add('bad'); er.textContent = r; er.hidden = false; t.focus(); return; } hide(); res({ text: t.value.trim() }); });
+    ask.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => { hide(); res({ chip: b.dataset.v, label: b.textContent }); }));
+  });
+}
+function askChoice(opts, { multi = false, pre = [] } = {}) {
+  return new Promise(res => {
+    show(`<div class="chips">${opts.map(([v, l]) => `<button type="button" class="chip" data-v="${esc(v)}" aria-pressed="${pre.includes(v)}">${esc(l)}</button>`).join('')}</div>${multi ? '<button class="n-btn next" type="button" id="nx">Siguiente</button>' : ''}`);
+    ask.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => {
+      if (!multi) { hide(); return res([b.dataset.v, b.textContent]); }
+      b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true');
+    }));
+    $('#nx')?.addEventListener('click', () => { const v = [...ask.querySelectorAll('.chip[aria-pressed="true"]')]; hide(); res([v.map(b => b.dataset.v), v.map(b => b.textContent)]); });
+  });
+}
+function askStyle() {
+  return new Promise(res => {
+    const g = GIROS[S.kind] || GIROS.otro, keys = Object.keys(STYLES).filter(k => k !== 'fonda' || S.kind === 'restaurante');
+    S.style = S.style || g.style;
+    show(`<div class="styles">${keys.map(k => `<button type="button" class="sty" data-v="${k}" aria-pressed="${S.style === k}"><i>${STYLES[k].c.map(c => `<em style="background:${c}"></em>`).join('')}</i><b>${STYLES[k].b}</b><span>${STYLES[k].t}</span></button>`).join('')}</div>
+      <div class="sw"><small>Color principal</small>${COLORS.map(c => `<button type="button" style="background:${c}" data-c="${c}" aria-label="Color ${c}" aria-pressed="${S.color === c}"></button>`).join('')}</div>
+      <button class="n-btn next" type="button" id="nx">Me gusta así</button>`);
+    ask.querySelectorAll('.sty').forEach(b => b.addEventListener('click', () => { S.style = b.dataset.v; ask.querySelectorAll('.sty').forEach(x => x.setAttribute('aria-pressed', x === b)); save(); render(); }));
+    ask.querySelectorAll('[data-c]').forEach(b => b.addEventListener('click', () => { const on = S.color !== b.dataset.c; S.color = on ? b.dataset.c : ''; ask.querySelectorAll('[data-c]').forEach(x => x.setAttribute('aria-pressed', on && x === b)); save(); render(); }));
+    $('#nx').addEventListener('click', () => { hide(); res(); });
+  });
+}
+
+/* ---------- el guion ---------- */
+async function run() {
+  const q = (params.get('q') || '').trim(), giro = params.get('giro');
+  if (q || giro) { S = { ...S, step: 0 }; }
+  if (giro && GIROS[giro]) S.kind = giro;
+  if (q) {
+    const pres = detectPresence(q); if (pres) Object.assign(S, pres);
+    S.kind = S.kind || detectKind(q);
+    const rest = q.replace(/https?:\/\/\S+/g, '').replace(/@[a-z0-9._]+/gi, '').trim();
+    if (rest.length > 12 && !pres?.site) S.about = rest.slice(0, 800);
+  }
+  setStep(0);
+  if (q) me(q);
+  await bot('Hola. Vamos a armar la base de tu página: te hago unas preguntas cortas y la ves armarse aquí al lado.');
+  if (S.name && !q && !giro) { await bot(`¿Seguimos con <b>${esc(S.name)}</b>?`); const [v] = await askChoice([['si', 'Sí, seguir'], ['no', 'Empezar de nuevo']]); if (v === 'no') { S = { ...S, name: '', kind: '', presence: '', site: '', social: '', city: '', goals: [], about: '', services: '', style: '', color: '' }; } }
+
+  // 1. Nombre
+  if (!S.name) { await bot('¿Cómo se llama tu negocio?'); const r = await askText({ ph: 'Ej.: Taquería La Esquina' }); S.name = r.text; me(r.text); save(); render(); }
+
+  // 2. Giro y su modelo
+  setStep(1);
+  if (!S.kind) {
+    await bot(`¿A qué se dedica <b>${esc(S.name)}</b>?`);
+    const [k, label] = await askChoice(Object.entries(GIROS).map(([v, g]) => [v, g.label])); S.kind = k; me(label);
+  }
+  save(); render();
+  await bot(`<small>Tu modelo</small>${GIROS[S.kind].model}`, 'model');
+
+  // 3. Página, Instagram o nada
+  if (!S.presence) {
+    await bot('¿Ya tienes página web, Instagram o perfil de Google? Si tienes, partimos de ahí.');
+    const r = await askText({ ph: 'tunegocio.com, @tunegocio o enlace de Maps', chips: [['none', 'No tengo nada todavía', 'ghost']], validate: v => !!detectPresence(v) || 'Escribe tu página (tunegocio.com), tu Instagram (@tunegocio) o un enlace de Google Maps.' });
+    if (r.chip) { S.presence = 'none'; me(r.label); } else { Object.assign(S, detectPresence(r.text)); me(r.text); }
+  }
+  await bot(S.presence === 'site' ? `Perfecto, usamos <b>${esc(S.site)}</b> como punto de partida: de ahí tomamos tus textos, fotos y datos para la versión completa.` : S.presence === 'social' ? 'Muy bien, de ahí tomamos tus fotos y datos.' : 'Sin problema, la armamos de cero contigo.');
+
+  // 4. Ciudad
+  if (!S.city) { await bot('¿En qué ciudad estás?'); const r = await askText({ ph: 'Ej.: Zapopan' }); S.city = r.text; me(r.text); save(); render(); }
+
+  // 5. Metas
+  setStep(2);
+  await bot(`¿Qué quieres que pase cuando alguien entre a tu página? Puedes elegir varias.`);
+  const [goals, gl] = await askChoice(GIROS[S.kind].goals, { multi: true, pre: S.goals }); S.goals = goals; if (gl.length) me(gl.join(', ')); save();
+
+  // 6. Cómo lo describe y sus servicios
+  if (!S.about) {
+    await bot(`En una o dos frases, ¿qué hace especial a <b>${esc(S.name)}</b>?`);
+    const r = await askText({ area: true, ph: 'Ej.: Tacos al pastor desde 1998, con tortillas hechas a mano.', chips: [['skip', 'Lo vemos después', 'ghost']], validate: v => v.trim().length >= 8 || 'Cuéntanos un poco más, o elige «Lo vemos después».' });
+    if (!r.chip) { S.about = r.text; me(r.text); } else me(r.label);
+    save(); render();
+  }
+  await bot(`¿Cuáles son tus ${GIROS[S.kind].items} principales? Sepáralos con comas.`);
+  const rs = await askText({ area: true, value: S.services, ph: 'Ej.: Pastor, suadero, gringas, aguas frescas', chips: [['skip', 'Lo vemos después', 'ghost']], validate: v => v.trim().length >= 3 || 'Escribe al menos uno, o elige «Lo vemos después».' });
+  if (!rs.chip) { S.services = rs.text; me(rs.text); } else me(rs.label);
+  save(); render(rs.chip ? 'top' : 'items');
+
+  // 7. Estilo
+  setStep(3);
+  await bot(`Elige el estilo que va con <b>${esc(S.name)}</b>. Lo ves cambiar al momento.`);
+  await askStyle(); me(`Estilo ${STYLES[S.style].b}${S.color ? ', con mi color' : ''}`);
+
+  // 8. A dónde mandarla
+  setStep(4);
+  await bot(`Así va tu página. Ahora la terminamos con calma: textos completos, tus fotos y todo revisado por una persona. <b>¿A dónde te mandamos la versión completa?</b>`);
+  await contact();
+}
+
+async function contact() {
+  show(`<form id="cf" style="display:grid;gap:.6rem" novalidate>
+      <input class="inp" id="cn" autocomplete="name" placeholder="Tu nombre">
+      <input class="inp" id="cc" autocomplete="email" placeholder="Tu WhatsApp o correo">
+      <p class="err" id="ce" hidden></p>
+      <button class="n-btn" id="cb" type="submit">Mándame mi página ${ICON.send.replace('<svg ', '<svg style="width:1.1rem;height:1.1rem" ')}</button>
+      <p class="small">Es gratis y sin compromiso. Solo pagas si decides publicarla.</p></form>`);
+  const cn = $('#cn'), cc = $('#cc'), ce = $('#ce');
+  const okContact = v => { const s = v.trim(); if (s.includes('@')) return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(s); const d = s.replace(/\D/g, ''); return /^[+\d\s().-]+$/.test(s) && d.length >= 8 && d.length <= 15; };
+  $('#cf').addEventListener('submit', async e => {
+    e.preventDefault(); ce.hidden = true;
+    if (cn.value.trim().length < 2) { ce.textContent = 'Escribe tu nombre.'; ce.hidden = false; cn.focus(); return; }
+    if (!okContact(cc.value)) { ce.textContent = 'Déjanos un WhatsApp con lada (ej. 33 1234 5678) o un correo.'; ce.hidden = false; cc.focus(); return; }
+    const btn = $('#cb'); btn.disabled = true; btn.firstChild.textContent = 'Enviando… ';
+    const styleMap = { sobria: 'moderno', expresiva: 'elegante', cercana: 'calido', fonda: 'calido' };
+    const body = {
+      source: 'empezar', mode: S.presence === 'site' ? 'web' : 'noweb', site: S.site, industry: GIROS[S.kind].industry, city: S.city, social: S.social,
+      name: cn.value.trim(), biz: S.name, contact: cc.value.trim(), company_url: '',
+      preferences: { kind: S.kind, pageStyle: S.style, style: styleMap[S.style], goals: S.goals, color: S.color || undefined, about: S.about, services: S.services },
+      utm: Object.fromEntries([...params].filter(([k]) => k.startsWith('utm_'))),
+    };
+    try {
+      const r = await fetch('/api/lead', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(d.error || Object.values(d.fields || {})[0] || 'No pudimos enviarla. Intenta de nuevo.');
+      hide(); me(`${cn.value.trim()} · ${cc.value.trim()}`);
+      const first = cn.value.trim().split(/\s+/)[0];
+      await bot(`Listo, ${esc(first)}. ${d.dueDay ? `Te mandamos tu página <b>${esc(d.dueDay)}, ${esc(d.dueTime.replace(/\.$/, ''))}</b>` : 'Te mandamos tu página muy pronto'}, ${d.channel === 'email' ? 'a tu correo' : 'por WhatsApp'}.`);
+      await bot(`<div class="done"><b>Lo que sigue</b><ol><li>Terminamos tu página con tus datos reales.</li><li>Te llega un enlace privado para verla y pedir cambios.</li><li>Si te gusta, la publicamos y la cuidamos cada mes.</li></ol><span>Cuando esté publicada, el siguiente paso puede ser un asistente que conteste tu WhatsApp. <a href="/ia" style="color:var(--lime)">Conoce cómo</a>.</span></div>`);
+      try { localStorage.removeItem(KEY); } catch {}
+    } catch (x) { ce.textContent = x.message; ce.hidden = false; btn.disabled = false; btn.firstChild.textContent = 'Mándame mi página '; }
+  });
+}
+
+initFrame(); requestAnimationFrame(sizeFrame); new ResizeObserver(sizeFrame).observe(frame); run();
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+// Propuesta de ejemplo: hotel boutique (negocio ficticio).
+export default {
+  slug: 'demo-hotel', business: 'Casa Azahar, hotel boutique', contactName: 'Daniel', siteHost: 'casaazahar.mx', demo: true,
+  recommendedPlan: 'avanzado', whatsappRecommended: true, createdAt: '2026-11-20', validUntil: '2026-12-04', template: 'clinica', vertical: 'hoteles boutique',
+  lede: 'La hicimos con las fotos y tarifas que ya publicas en Booking y tu Instagram.', cmpLede: 'Tus habitaciones con precio, reservación directa y todo lo que incluye tu estancia.',
+  planTitle: 'Plan Avanzado + Asistente de WhatsApp', planLede: 'Con reservaciones directas te ahorras la comisión de las plataformas; el asistente contesta disponibilidad y precios a cualquier hora.',
+  changes: [
+    { section: 'cta', title: 'Reservación directa', before: 'Todo se reserva por plataformas que cobran hasta 18% de comisión.', after: 'Botón «Reserva tu estancia» con fechas y huéspedes que te llega por WhatsApp, sin comisión.' },
+    { section: 'services', title: 'Habitaciones con precio', before: 'No hay información de las habitaciones fuera de Booking.', after: 'Cada habitación con fotos, capacidad, camas, amenidades y precio por noche.' },
+    { section: 'trust', title: 'Lo que incluye', before: 'El desayuno y la alberca no se mencionan.', after: 'Amenidades claras: desayuno, alberca, wifi y estacionamiento.' },
+  ],
+  page: {
+    kind: 'hotel', theme: { style: 'expresiva', font: 'elegante' },
+    brand: { name: 'Casa Azahar', tagline: 'Hotel boutique', fullName: 'Casa Azahar, hotel boutique', accent: '#0F766E' },
+    contact: { phone: '415 000 0000', whatsapp: '524150000000', email: 'reservas@casaazahar.mx', address: 'Calle Aldama 34, Centro, San Miguel de Allende, Gto.' },
+    util: { note: 'Reserva directo y obtén el mejor precio', hours: 'Recepción las 24 horas' },
+    hero: { title: 'Una casa colonial para descansar en el centro de San Miguel', sub: 'Ocho habitaciones alrededor de un patio con alberca, desayuno incluido y a tres cuadras del Jardín.', ctaTop: 'Reservar', cta: 'Reserva tu estancia', ctaWhatsapp: 'Preguntar disponibilidad', callLabel: 'O llámanos', photo: '/img/demo/hotel-patio.jpg', photoAlt: 'Patio con alberca de Casa Azahar' },
+    rating: { value: '9.4', count: 286, source: 'huéspedes' },
+    trust: [
+      { icon: 'heart', b: 'Desayuno incluido', t: 'hecho en casa, todos los días' },
+      { icon: 'map', b: 'A 3 cuadras del Jardín', t: 'todo a pie' },
+      { icon: 'shield', b: 'Mejor precio directo', t: 'sin comisiones de plataformas' },
+      { icon: 'car', b: 'Estacionamiento', t: 'privado, sin costo' },
+    ],
+    stats: [{ value: '8', label: 'habitaciones' }, { value: '9.4', label: 'calificación de huéspedes' }, { value: '12', label: 'años recibiendo viajeros' }],
+    rooms: {
+      title: 'Habitaciones', sub: 'Todas con baño privado, aire acondicionado y desayuno incluido.', note: 'Tarifas por noche para dos personas, impuestos incluidos. Pueden cambiar en temporada alta.',
+      items: [
+        { name: 'Suite Jardín', desc: 'Nuestra habitación más grande, con ventana arqueada al patio y tina.', price: '$3,200', unit: 'noche', guests: 2, beds: '1 cama king', size: 38, img: '/img/demo/hotel-hero.jpg', amenities: ['Tina', 'Vista al patio', 'Cafetera', 'Smart TV'] },
+        { name: 'Doble con balcón', desc: 'Dos camas queen y balcón con vista a la sierra. Ideal para familias.', price: '$2,600', unit: 'noche', guests: 4, beds: '2 camas queen', size: 30, img: '/img/demo/hotel-doble.jpg', amenities: ['Balcón', 'Vista a la sierra', 'Escritorio', 'Smart TV'] },
+      ],
+    },
+    amenities: { title: 'Todo lo que incluye tu estancia', items: [
+      { icon: 'heart', b: 'Desayuno', t: 'de 8 a 11 h en la terraza' },
+      { icon: 'sparkle', b: 'Alberca', t: 'en el patio central' },
+      { icon: 'globe', b: 'Wifi rápido', t: 'en todo el hotel' },
+      { icon: 'car', b: 'Estacionamiento', t: 'privado y sin costo' },
+      { icon: 'clock', b: 'Recepción 24 h', t: 'te esperamos a cualquier hora' },
+      { icon: 'map', b: 'Tours', t: 'te ayudamos a reservarlos' },
+      { icon: 'child', b: 'Niños bienvenidos', t: 'cuna sin costo' },
+      { icon: 'shield', b: 'Caja de seguridad', t: 'en cada habitación' },
+    ] },
+    gallery: { title: 'Conoce la casa', text: 'Patio, terraza y desayunos al sol.', images: [
+      { img: '/img/demo/hotel-patio.jpg', alt: 'Patio con alberca' },
+      { img: '/img/demo/hotel-desayuno.jpg', alt: 'Desayuno en la terraza' },
+      { img: '/img/demo/hotel-hero.jpg', alt: 'Suite Jardín' },
+      { img: '/img/demo/hotel-doble.jpg', alt: 'Habitación doble con balcón' },
+    ] },
+    reviews: { title: 'Lo que dicen nuestros huéspedes', items: [
+      { name: 'Carmen G.', meta: 'Viajó en pareja', text: 'El desayuno en la terraza y el silencio del patio. Volveremos.', stars: 5 },
+      { name: 'Jorge L.', meta: 'Viajó en familia', text: 'La doble con balcón fue perfecta para los niños y está a pasos del centro.', stars: 5 },
+      { name: 'Paula V.', meta: 'Viajó sola', text: 'Reservé directo por WhatsApp y me dieron mejor precio que en la plataforma.', stars: 5 },
+    ], note: 'Reseñas de ejemplo para el concepto.' },
+    faq: [
+      { q: '¿A qué hora es el check-in?', a: 'Desde las 15 h; el check-out es a las 12 h. Si llegas antes, guardamos tu equipaje.' },
+      { q: '¿El desayuno está incluido?', a: 'Sí, en todas las tarifas, de 8 a 11 h.' },
+      { q: '¿Aceptan mascotas?', a: 'Perros pequeños en la Doble con balcón, con aviso previo.' },
+      { q: '¿Cómo pago?', a: 'Con un anticipo del 30% por transferencia o tarjeta, y el resto al llegar.' },
+    ],
+    visit: { title: 'En el centro de San Miguel', photo: '/img/demo/hotel-patio.jpg', photoAlt: 'Patio del hotel', zones: 'A tres cuadras del Jardín Principal y la Parroquia.', rows: [{ dt: 'Check-in', dd: 'desde las 15:00' }, { dt: 'Check-out', dd: 'hasta las 12:00' }, { dt: 'Recepción', dd: '24 horas' }] },
+    assistant: { title: 'Disponibilidad y precios al momento', sub: 'El asistente responde fechas, tarifas y qué incluye cada habitación, y aparta tu reservación.' },
+    chat: { title: 'Casa Azahar', subtitle: 'Reservaciones directas', greeting: 'Hola 👋 ¿Para qué fechas buscas habitación?', button: '¿Tienen disponibilidad?', faq: [
+      { q: '¿Tienen disponibilidad este fin?', a: 'Dime tus fechas y cuántos son y te confirmo al momento.', action: 'book' },
+      { q: '¿Incluye desayuno?', a: 'Sí, todas las tarifas incluyen desayuno de 8 a 11 h.', action: 'wa' },
+      { q: '¿Tienen estacionamiento?', a: 'Sí, privado y sin costo.', action: 'wa' },
+    ] },
+    process: null, team: null, tech: null, prices: null, offers: null, services: null, today: null, payments: null,
+    footer: { note: 'Demo de Ceiba Labs (negocio ficticio)' },
+  },
+};

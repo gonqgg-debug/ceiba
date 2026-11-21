@@ -25,6 +25,10 @@
       "destination": "/api/p?slug=:slug"
     },
     {
+      "source": "/empezar",
+      "destination": "/empezar.html"
+    },
+    {
       "source": "/webs",
       "destination": "/webs.html"
     },

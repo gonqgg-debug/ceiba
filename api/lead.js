@@ -11,23 +11,29 @@ import { readSite } from '../lib/site-reader.js';
 import { fireRoutine } from '../lib/routine.js';
 
 const INDUSTRIES = ['Clínica o consultorio', 'Restaurante o café', 'Inmobiliaria', 'Hotel u hospedaje', 'Despacho contable o legal', 'Otro'];
-const SOURCES = ['home', 'diagnostico', 'clinicas', 'webs', 'ia', 'consultoria'];
+const SOURCES = ['home', 'diagnostico', 'clinicas', 'webs', 'ia', 'consultoria', 'empezar'];
 const INTERESTS = { web: 'Página web', asistente: 'Asistente de WhatsApp', agentes: 'Agentes y automatización', datos: 'Datos y reportes', todo: 'Todo / no sé por dónde empezar' };
 const SLOTS = { manana: 'mañanas', tarde: 'tardes', cualquiera: 'cualquier horario' };
 const isTeam = m => m === 'ia' || m === 'consultoria';
 const PREF = {
   style: ['moderno', 'elegante', 'calido', 'tecnologico'], mode: ['light', 'dark', 'any'], tone: ['tu', 'usted'],
-  goals: ['citas', 'estetica', 'urgencias', 'google', 'zonas', 'confianza'],
+  goals: ['citas', 'estetica', 'urgencias', 'google', 'zonas', 'confianza', 'reservas', 'pedidos', 'cotizaciones', 'visitas', 'whatsapp'],
+  // Lo que se arma en /empezar: giro de la plantilla y estilo de la página
+  kind: ['clinica', 'restaurante', 'hotel', 'inmobiliaria', 'despacho', 'otro'], pageStyle: ['sobria', 'expresiva', 'cercana', 'fonda'],
 };
 const PREF_LABEL = {
   style: { moderno: 'Moderno y limpio', elegante: 'Elegante y premium', calido: 'Cálido y familiar', tecnologico: 'Clínico y tecnológico' },
   mode: { light: 'Fondo claro', dark: 'Fondo oscuro', any: 'Que elija Ceiba' }, tone: { tu: 'De tú', usted: 'De usted' },
-  goals: { citas: 'Más citas de valoración', estetica: 'Vender tratamientos estéticos', urgencias: 'Atender urgencias', google: 'Que lo encuentren en Google', zonas: 'Pacientes de otras zonas', confianza: 'Transmitir más confianza' },
+  pageStyle: { sobria: 'Sobria', expresiva: 'Expresiva', cercana: 'Cercana', fonda: 'Fonda' },
+  goals: { reservas: 'Recibir reservaciones', pedidos: 'Recibir pedidos', cotizaciones: 'Recibir cotizaciones', visitas: 'Agendar visitas', whatsapp: 'Más mensajes por WhatsApp', citas: 'Más citas de valoración', estetica: 'Vender tratamientos estéticos', urgencias: 'Atender urgencias', google: 'Que lo encuentren en Google', zonas: 'Pacientes de otras zonas', confianza: 'Transmitir más confianza' },
 };
 function cleanPrefs(p) {
   if (!p || typeof p !== 'object') return null;
   const out = {};
-  for (const k of ['style', 'mode', 'tone']) if (PREF[k].includes(p[k])) out[k] = p[k];
+  for (const k of ['style', 'mode', 'tone', 'kind', 'pageStyle']) if (PREF[k].includes(p[k])) out[k] = p[k];
+  // Texto libre de /empezar: a qué se dedica y sus servicios, platillos o habitaciones (datos del cliente, no instrucciones)
+  const about = clean(p.about, 800); if (about) out.about = about;
+  const services = clean(p.services, 800); if (services) out.services = services;
   if (p.color === 'logo' || /^#[0-9a-f]{6}$/i.test(p.color || '')) out.color = p.color;
   if (Array.isArray(p.goals)) out.goals = p.goals.filter(g => PREF.goals.includes(g)).slice(0, 6);
   const ref = clean(p.ref, 200); if (ref) out.ref = ref;
@@ -36,6 +42,7 @@ function cleanPrefs(p) {
 const prefsText = p => !p ? '' : [
   p.style && PREF_LABEL.style[p.style], p.mode && PREF_LABEL.mode[p.mode], p.color && (p.color === 'logo' ? 'Color de su logo' : `Color ${p.color}`),
   p.tone && PREF_LABEL.tone[p.tone], p.goals?.length && `Quiere: ${p.goals.map(g => PREF_LABEL.goals[g]).join(', ')}`, p.ref && `Le gusta: ${p.ref}`,
+  p.pageStyle && `Estilo de página: ${PREF_LABEL.pageStyle[p.pageStyle]}`, p.about && `Su negocio: ${p.about}`, p.services && `Servicios: ${p.services}`,
 ].filter(Boolean).join(' · ');
 const clean = (v, max = 200) => String(v ?? '').replace(/[\u0000-\u001f\u007f]/g, ' ').trim().slice(0, max);
 
