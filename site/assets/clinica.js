@@ -359,6 +359,22 @@
       calc.querySelector('.es-seg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; calc.querySelectorAll('.es-seg button').forEach(x => x.setAttribute('aria-pressed', x === b)); run(); });
     }
   });
-  bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop(); bindTabs(); bindFonda(); bindEstudio();
-  new MutationObserver(() => { bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop(); bindTabs(); bindFonda(); bindEstudio(); }).observe(document.documentElement, { childList: true, subtree: true });
+
+  // Diseño «Galería» (.ga): pestaña «Contáctanos», formulario a WhatsApp y antes/después
+  const bindGaleria = () => document.querySelectorAll('.ga:not([data-ga])').forEach(root => {
+    root.dataset.ga = 1;
+    let kb = {}; try { kb = JSON.parse(root.querySelector('.ga-kb')?.textContent || '{}'); } catch {}
+    const tab = root.querySelector('[data-ga-tab]'), btn = tab?.querySelector('.ga-tab-btn');
+    const open = o => { tab.classList.toggle('open', o); btn.setAttribute('aria-expanded', o); if (o) tab.querySelector('input')?.focus({ preventScroll: true }); };
+    btn?.addEventListener('click', () => open(!tab.classList.contains('open')));
+    tab?.addEventListener('keydown', e => { if (e.key === 'Escape') { open(false); btn.focus(); } });
+    root.querySelector('[data-ga-form]')?.addEventListener('submit', e => {
+      e.preventDefault(); const f = new FormData(e.target);
+      const msg = [`Hola, quiero agendar una cita en ${kb.name || root.dataset.name}.`, f.get('n') && `Soy ${f.get('n')}.`, f.get('s') && `Me interesa: ${f.get('s')}.`, f.get('m'), f.get('t') && `Mi teléfono: ${f.get('t')}`].filter(Boolean).join('\n');
+      if (kb.wa) window.open(`https://wa.me/${kb.wa}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+    });
+    root.querySelectorAll('[data-ga-case] input').forEach(r => r.addEventListener('input', () => r.parentElement.style.setProperty('--p', r.value + '%')));
+  });
+  bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop(); bindTabs(); bindFonda(); bindEstudio(); bindGaleria();
+  new MutationObserver(() => { bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop(); bindTabs(); bindFonda(); bindEstudio(); bindGaleria(); }).observe(document.documentElement, { childList: true, subtree: true });
 })();

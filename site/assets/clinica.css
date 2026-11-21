@@ -1221,7 +1221,7 @@
   --pad:max(1.25rem,5cqi);--ease:cubic-bezier(.22,1,.36,1);
   font:400 clamp(15px,1.12cqi,17px)/1.6 var(--fb);background:var(--paper);color:var(--ink);position:relative;overflow:clip}
 .es h1,.es h2,.es h3{font-family:var(--fh);font-weight:400;letter-spacing:-.015em;margin:0;color:inherit;text-wrap:balance}
-.es p{margin:0}
+.es :where(p){margin:0}
 .es a{color:inherit}
 .es .es-u{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
 .es-noimg{background:var(--tint)}
