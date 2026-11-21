@@ -17,36 +17,67 @@
 
 <main class="n g">
 <header class="g-hero"><div class="n-wrap">
-  <nav class="g-crumbs" aria-label="Migas"><a href="/">Inicio</a><span aria-hidden="true">/</span><a href="/webs">Páginas web</a><span aria-hidden="true">/</span><span>Aparecer en la IA</span></nav>
-  <h1>Cómo hacer que ChatGPT y Google recomienden tu negocio</h1>
-  <p class="g-sum">Los asistentes de IA y Google recomiendan negocios que pueden verificar: un perfil de Google completo y con reseñas, presencia en Bing, menciones en directorios y medios locales, y una página que dice claro dónde estás, qué ofreces, cuánto cuesta y cuándo abres. Nadie puede comprar un lugar en sus respuestas, pero sí ponerte en la mejor posición.</p>
-  <p class="g-meta">Guía de Ceiba Labs · actualizada en noviembre de 2026</p>
+  <div>
+    <nav class="g-crumbs" aria-label="Migas"><a href="/">Inicio</a><span aria-hidden="true">/</span><a href="/webs">Páginas web</a><span aria-hidden="true">/</span><span>Aparecer en la IA</span></nav>
+    <h1>Cómo hacer que ChatGPT y Google recomienden tu negocio</h1>
+    <p class="g-sum">Los asistentes de IA y Google recomiendan negocios que pueden verificar: un perfil de Google completo y con reseñas, presencia en Bing, menciones en directorios y medios locales, y una página que dice claro dónde estás, qué ofreces, cuánto cuesta y cuándo abres. Nadie puede comprar un lugar en sus respuestas, pero sí ponerte en la mejor posición.</p>
+    <ul class="g-short" aria-label="En corto"><li>La IA recomienda lo que puede verificar</li><li>El perfil de Google pesa mucho</li><li>8 pasos, en orden</li></ul>
+    <p class="g-meta">Guía de Ceiba Labs · actualizada en noviembre de 2026 · 7 minutos de lectura</p>
+  </div>
+  <div class="g-chat" id="g-chat" aria-label="Ejemplo de respuesta de un asistente de IA">
+    <div class="ask" id="g-ask"></div>
+    <div class="ans">
+      <div class="biz"><i>1</i><span><b>Clínica Dental Arrayán</b><br><small>perfil completo, precios en su página</small></span><em>4.9 ★</em></div>
+      <div class="biz"><i>2</i><span><b>Dental Centro</b><br><small>horarios y reseñas</small></span><em>4.6 ★</em></div>
+      <div class="biz"><i>3</i><span><b>Sonrisa Colomos</b><br><small>atiende urgencias</small></span><em>4.5 ★</em></div>
+      <div class="biz you"><i>?</i><span><b>¿Y tu negocio?</b><br><small>no aparece: la IA no encontró sus datos</small></span></div>
+    </div>
+    <small style="color:var(--mist);font-size:.75rem">Ejemplo ilustrativo con negocios ficticios.</small>
+  </div>
 </div></header>
 
+<div class="g-layout">
+<nav class="g-toc" id="g-toc" aria-label="En esta guía"></nav>
 <article class="g-body">
   <p>Cada vez más personas le preguntan a ChatGPT, Gemini o Perplexity «¿qué dentista me recomiendas cerca?» o «¿dónde como bien en la Roma?», y reciben dos o tres nombres. Si tu negocio no está ahí, la recomendación es para otro. Esta guía explica de dónde sacan esos nombres y qué puedes hacer esta semana.</p>
 
   <h2>¿Cómo eligen la IA y Google a qué negocio recomendar?</h2>
-  <p>Para preguntas locales, los asistentes de IA buscan en la web y se apoyan en las mismas fuentes que la gente: el perfil de Google con su calificación y sus reseñas, el índice de Bing, directorios, listas de «los mejores» en medios locales y la página del negocio. Según Search Engine Land, ChatGPT suele citar revistas locales, listas y directorios de cámaras de comercio.</p>
-  <p>Es una lista corta y exigente: un análisis citado por eClincher encontró que ChatGPT recomendó cerca del 1.2% de 350,000 ubicaciones revisadas, y que esas tenían en promedio 4.3 estrellas.</p>
+  <p>Para preguntas locales, los asistentes de IA buscan en la web y se apoyan en las mismas fuentes que la gente. Según Search Engine Land, ChatGPT suele citar revistas locales, listas y directorios de cámaras de comercio.</p>
+  <div class="g-hub g-rv" id="g-hub" aria-label="Fuentes que usan los asistentes de IA">
+    <div class="col"><span class="src"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>Perfil de Google y reseñas</span><span class="src"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>Índice de Bing</span><span class="src"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>Directorios del giro</span></div>
+    <div class="core" id="g-core">La IA<br>decide</div>
+    <div class="col"><span class="src"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>Medios y listas locales</span><span class="src"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>La página del negocio</span><span class="src"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg>Datos estructurados</span></div>
+  </div>
+  <p>Es una lista corta y exigente. Un análisis citado por eClincher revisó 350,000 ubicaciones:</p>
+  <div class="g-stats">
+    <div class="g-stat g-rv"><b data-count="1.2" data-dec="1" data-suf="%">1.2%</b><span>de las ubicaciones fueron recomendadas por ChatGPT</span></div>
+    <div class="g-stat g-rv"><b data-count="4.3" data-dec="1" data-suf=" ★">4.3 ★</b><span>calificación promedio de las que sí recomendó</span></div>
+  </div>
 
   <h2>¿Qué hago primero?</h2>
-  <ol>
-    <li><strong>Completa tu perfil de Google.</strong> Categoría principal correcta, horario, fotos reales, servicios con precio y el enlace a tu página. Es la fuente que más pesa en recomendaciones locales.</li>
-    <li><strong>Pide reseñas y contéstalas.</strong> Mándale a cada cliente el enlace por WhatsApp después de atenderlo. Responde todas, también las malas, con calma.</li>
-    <li><strong>Da de alta tu negocio en Bing Places.</strong> El índice de Bing alimenta a ChatGPT y a Copilot, y casi nadie lo hace.</li>
-    <li><strong>Usa los mismos datos en todos lados.</strong> Nombre, dirección y teléfono idénticos en tu página, Google, Bing, Facebook y directorios. Si cambian, la IA duda de cuál es el bueno.</li>
-    <li><strong>Pon en tu página lo que la gente pregunta, en texto.</strong> Dónde estás, horario, servicios con precio o un «desde», y preguntas frecuentes con respuestas cortas. Si tu menú o tus precios están solo en una foto, la IA no los lee.</li>
-    <li><strong>Agrega datos estructurados.</strong> Es un código invisible que le dice a Google y a la IA qué tipo de negocio eres, tu horario, tu dirección y tus servicios, en el formato schema.org.</li>
-    <li><strong>No bloquees a los buscadores de IA.</strong> Revisa que el archivo robots.txt de tu página deje pasar a GPTBot, ClaudeBot, PerplexityBot, Google y Bing.</li>
-    <li><strong>Aparece donde te buscan por giro.</strong> Doctoralia si eres clínica, TripAdvisor u OpenTable si eres restaurante, Booking si eres hotel, Inmuebles24 o Lamudi si eres inmobiliaria. Y busca que te mencionen en listas y medios de tu ciudad.</li>
+  <p>En este orden: primero que te puedan encontrar y verificar, después que te prefieran.</p>
+  <ol class="g-steps">
+    <li><div><b>Completa tu perfil de Google</b><p>Categoría principal correcta, horario, fotos reales, servicios con precio y el enlace a tu página. Es la fuente que más pesa en recomendaciones locales.</p></div></li>
+    <li><div><b>Pide reseñas y contéstalas</b><p>Mándale a cada cliente el enlace por WhatsApp después de atenderlo. Responde todas, también las malas, con calma.</p></div></li>
+    <li><div><b>Da de alta tu negocio en Bing Places</b><p>El índice de Bing alimenta a ChatGPT y a Copilot, y casi nadie lo hace.</p></div></li>
+    <li><div><b>Usa los mismos datos en todos lados</b><p>Nombre, dirección y teléfono idénticos en tu página, Google, Bing, Facebook y directorios. Si cambian, la IA duda de cuál es el bueno.</p></div></li>
+    <li><div><b>Pon en tu página lo que la gente pregunta, en texto</b><p>Dónde estás, horario, servicios con precio o un «desde», y preguntas frecuentes con respuestas cortas. Si tu menú o tus precios están solo en una foto, la IA no los lee.</p></div></li>
+    <li><div><b>Agrega datos estructurados</b><p>Un código invisible que le dice a Google y a la IA qué tipo de negocio eres, tu horario, tu dirección y tus servicios, en el formato schema.org.</p></div></li>
+    <li><div><b>No bloquees a los buscadores de IA</b><p>Revisa que el archivo robots.txt de tu página deje pasar a GPTBot, ClaudeBot, PerplexityBot, Google y Bing.</p></div></li>
+    <li><div><b>Aparece donde te buscan por giro</b><p>Doctoralia si eres clínica, TripAdvisor u OpenTable si eres restaurante, Booking si eres hotel, Inmuebles24 o Lamudi si eres inmobiliaria. Y busca que te mencionen en listas y medios de tu ciudad.</p></div></li>
   </ol>
 
-  <div class="g-box"><b>¿Tu página está lista para la IA?</b><p>Te decimos en segundos qué le falta: datos estructurados, si bloquea a los buscadores de IA, preguntas frecuentes, horarios y precios en texto. Es gratis.</p><a class="n-btn" href="/diagnostico">Analizar mi página</a></div>
+  <div class="g-box g-rv"><b>¿Tu página está lista para la IA?</b><p>Te decimos en segundos qué le falta: datos estructurados, si bloquea a los buscadores de IA, preguntas frecuentes, horarios y precios en texto. Es gratis.</p><a class="n-btn" href="/diagnostico">Analizar mi página</a></div>
 
   <h2>¿Cómo sé si la IA ya recomienda mi negocio?</h2>
-  <p>Pregúntale tú mismo, como lo haría un cliente y sin decir tu nombre: «¿qué [tu giro] me recomiendas en [tu colonia o ciudad]?». Hazlo en ChatGPT, Gemini y Perplexity, y anota si apareces, a quién recomiendan en tu lugar y qué páginas citan. Esas páginas son los lugares donde te conviene aparecer.</p>
-  <p>Repite las mismas preguntas cada mes para ver si avanzas. En los planes Negocio y Avanzado de Ceiba hacemos esta prueba por ti y te mandamos el resultado.</p>
+  <p>Pregúntale tú mismo, como lo haría un cliente y sin decir tu nombre. Anota si apareces, a quién recomiendan en tu lugar y qué páginas citan: esas son los lugares donde te conviene aparecer. Repite las mismas preguntas cada mes para ver si avanzas.</p>
+  <div class="g-try" id="g-try">
+    <b>Pruébalo tú</b>
+    <div class="row"><label class="sr" for="t-giro">Tu giro</label><input id="t-giro" placeholder="Tu giro, ej. dentista" autocomplete="off"><label class="sr" for="t-city">Tu colonia o ciudad</label><input id="t-city" placeholder="Tu colonia o ciudad, ej. Providencia" autocomplete="off"></div>
+    <div class="prompt" id="t-q">¿Qué dentista me recomiendas en Providencia? Dame tres opciones con su calificación.</div>
+    <div class="acts"><a class="p" id="t-gpt" href="#" target="_blank" rel="noopener">Preguntar en ChatGPT</a><a class="s" id="t-ppx" href="#" target="_blank" rel="noopener">En Perplexity</a><button class="s" type="button" id="t-copy">Copiar pregunta</button></div>
+    <small>En los planes Negocio y Avanzado de Ceiba hacemos esta prueba por ti en ChatGPT, Gemini y Perplexity, y te mandamos el resultado.</small>
+  </div>
 
   <h2>¿Cuánto tarda en notarse?</h2>
   <p>Depende de cuánto le falte a tu perfil y a tu página, y de cuánta competencia hay en tu giro y tu ciudad. Lo que sí sabemos es el orden: primero que te puedan encontrar y verificar (perfil, datos iguales, página clara), después que te prefieran (reseñas, menciones). Desconfía de quien te garantice un lugar en las respuestas de la IA.</p>
@@ -67,13 +98,49 @@
     </ol>
   </div>
 
-  <div class="g-box"><b>Tu página lista para Google y la IA desde el primer día</b><p>Cada página de Ceiba sale con datos estructurados, preguntas frecuentes, precios y horarios en texto, y abierta a los buscadores de IA. Cuéntanos de tu negocio y mírala armarse.</p><a class="n-btn" href="/empezar">Armar mi página</a></div>
+  <div class="g-box g-rv"><b>Tu página lista para Google y la IA desde el primer día</b><p>Cada página de Ceiba sale con datos estructurados, preguntas frecuentes, precios y horarios en texto, y abierta a los buscadores de IA. Cuéntanos de tu negocio y mírala armarse.</p><a class="n-btn" href="/empezar">Armar mi página</a></div>
 
   <h2>Sigue leyendo</h2>
   <div class="g-more"><a href="/guias/cuanto-cuesta-una-pagina-web">¿Cuánto cuesta una página web en México?<span>Los tres caminos y lo que cuesta cada uno</span></a><a href="/webs#optimizada-ia">Páginas web hechas para la IA<span>Qué incluye cada página de Ceiba</span></a></div>
 </article>
+</div>
 </main>
 
 <footer class="band footer"></footer>
+<script src="/assets/guias.js"></script>
+<script>
+(() => {
+  const $ = s => document.querySelector(s), reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const wait = ms => new Promise(r => setTimeout(r, reduce ? 0 : ms));
+
+  /* el chat del hero: se escribe la pregunta y aparecen las recomendaciones */
+  (async () => {
+    const ask = $('#g-ask'), bizs = [...document.querySelectorAll('.g-chat .biz')], q = '¿Qué dentista me recomiendas cerca de Providencia?';
+    await wait(500);
+    for (const ch of q) { ask.textContent += ch; await wait(30); }
+    for (const b of bizs) { await wait(b.classList.contains('you') ? 900 : 450); b.classList.add('on'); }
+  })();
+
+  /* las fuentes se encienden una por una hacia «La IA decide» */
+  const hub = $('#g-hub');
+  new IntersectionObserver(async ([e], o) => {
+    if (!e.isIntersecting) return; o.disconnect();
+    for (const s of hub.querySelectorAll('.src')) { await wait(260); s.classList.add('on'); }
+    $('#g-core').classList.add('pulse');
+  }, { threshold: .5 }).observe(hub);
+
+  /* pruébalo tú: arma la pregunta con su giro y su ciudad */
+  const giro = $('#t-giro'), city = $('#t-city'), out = $('#t-q');
+  const build = () => {
+    const g = giro.value.trim() || 'dentista', c = city.value.trim() || 'Providencia';
+    const text = `¿Qué ${g} me recomiendas en ${c}? Dame tres opciones con su calificación.`;
+    out.textContent = text;
+    $('#t-gpt').href = 'https://chatgpt.com/?q=' + encodeURIComponent(text);
+    $('#t-ppx').href = 'https://www.perplexity.ai/search?q=' + encodeURIComponent(text);
+  };
+  [giro, city].forEach(i => i.addEventListener('input', build)); build();
+  $('#t-copy').addEventListener('click', async e => { try { await navigator.clipboard.writeText(out.textContent); e.target.textContent = 'Copiada'; setTimeout(() => e.target.textContent = 'Copiar pregunta', 1600); } catch {} });
+})();
+</script>
 </body>
 </html>

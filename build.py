@@ -168,7 +168,7 @@ pages = {
 (SITE / "assets" / "demos").mkdir(exist_ok=True)
 for _demo in (ROOT / "lib/demos").glob("*.js"):
     (SITE / "assets" / "demos" / _demo.name).write_text(_demo.read_text(encoding="utf-8"), encoding="utf-8")
-for _lib in ("fluid.js", "rough.js", "estudio.css"):
+for _lib in ("fluid.js", "rough.js", "estudio.css", "guias.js"):
     (SITE / "assets" / _lib).write_text((SRC / "assets" / _lib).read_text(encoding="utf-8"), encoding="utf-8")
 (SITE / "assets" / "vista.js").write_text((SRC / "assets/vista.js").read_text(encoding="utf-8"), encoding="utf-8")
 # Precios por moneda: el catálogo sale de lib/catalog.js (única fuente) y precios.js los pinta
