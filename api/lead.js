@@ -43,12 +43,13 @@ function cleanPrefs(p) {
   if (p.color === 'logo' || /^#[0-9a-f]{6}$/i.test(p.color || '')) out.color = p.color;
   if (Array.isArray(p.goals)) out.goals = p.goals.filter(g => PREF.goals.includes(g)).slice(0, 6);
   const ref = clean(p.ref, 200); if (ref) out.ref = ref;
+  if (/^[A-Za-z][A-Za-z0-9 ]{1,38}$/.test(p.googleFont || '')) out.googleFont = p.googleFont.trim();
   return Object.keys(out).length ? out : null;
 }
 const prefsText = p => !p ? '' : [
   p.style && PREF_LABEL.style[p.style], p.mode && PREF_LABEL.mode[p.mode], p.color && (p.color === 'logo' ? 'Color de su logo' : `Color ${p.color}`),
   p.tone && PREF_LABEL.tone[p.tone], p.goals?.length && `Quiere: ${p.goals.map(g => PREF_LABEL.goals[g]).join(', ')}`, p.ref && `Le gusta: ${p.ref}`,
-  p.pageStyle && `Estilo de página: ${PREF_LABEL.pageStyle[p.pageStyle]}`, p.font && `Letra: ${PREF_LABEL.font[p.font]}`, p.customFont && `Subió su propia letra (Storage, materiales/${p.customFont})`, p.about && `Su negocio: ${p.about}`, p.services && `Servicios: ${p.services}`,
+  p.pageStyle && `Estilo de página: ${PREF_LABEL.pageStyle[p.pageStyle]}`, p.font && `Letra: ${PREF_LABEL.font[p.font]}`, p.googleFont && `Letra de su página (Google Fonts): ${p.googleFont}`, p.customFont && `Subió su propia letra (Storage, materiales/${p.customFont})`, p.about && `Su negocio: ${p.about}`, p.services && `Servicios: ${p.services}`,
 ].filter(Boolean).join(' · ');
 const clean = (v, max = 200) => String(v ?? '').replace(/[\u0000-\u001f\u007f]/g, ' ').trim().slice(0, max);
 

@@ -212,7 +212,7 @@ const STEPS = ['Tu negocio', 'Tu modelo', 'Tus servicios', 'Tu estilo', 'Listo']
 
 /* ---------- estado (se guarda para retomar) ---------- */
 const KEY = 'ceiba-empezar';
-let S = { name: '', kind: '', presence: '', site: '', social: '', city: '', goals: [], about: '', services: '', style: '', color: '', font: '', step: 0 };
+let S = { name: '', kind: '', presence: '', site: '', social: '', city: '', goals: [], about: '', services: '', style: '', color: '', font: '', googleFont: '', brand: null, logoColors: [], step: 0 };
 try { const saved = JSON.parse(localStorage.getItem(KEY) || 'null'); if (saved && saved.name) S = { ...S, ...saved }; } catch {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch {} };
 
@@ -270,6 +270,7 @@ function buildPage() {
   }
   if (S.color) p.brand = { ...(p.brand || {}), accent: S.color };
   if (S.font && FONTS[S.font]) p.theme = { ...p.theme, font: S.font };
+  if (S.googleFont) p.theme = { ...p.theme, googleFont: S.googleFont };
   if (S.about) { p.hero = { ...(p.hero || {}), sub: S.about.slice(0, 180) }; if (p.statement) p.statement = S.about.slice(0, 220); }
   if (city && p.contact) p.contact = { ...p.contact, address: city };
   if (S.kind === 'otro' && p.services) p.services = { ...p.services, title: 'Nuestros servicios', sub: 'Lo que hacemos por ti.' };
@@ -336,37 +337,85 @@ function askChoice(opts, { multi = false, pre = [] } = {}) {
     $('#nx')?.addEventListener('click', () => { const v = [...ask.querySelectorAll('.chip[aria-pressed="true"]')]; hide(); res([v.map(b => b.dataset.v), v.map(b => b.textContent)]); });
   });
 }
+// Marca: colores y letras de su página (servidor) o colores de su logo (aquí mismo, sin subirlo)
+let brandP = null;
+function loadBrand() {
+  if (brandP || S.presence !== 'site' || !S.site) return brandP;
+  brandP = fetch('/api/analyze', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ url: S.site, brand: true, kind: S.kind }) })
+    .then(r => r.json()).then(d => { S.brand = { colors: (d.colors || []).slice(0, 4), fonts: (d.fonts || []).slice(0, 2), recommended: d.recommended || [] }; save(); return S.brand; }).catch(() => null);
+  return brandP;
+}
+async function logoColors(file) {
+  const img = new Image(); img.src = URL.createObjectURL(file); await img.decode();
+  const c = document.createElement('canvas'); c.width = c.height = 64; const x = c.getContext('2d', { willReadFrequently: true });
+  x.drawImage(img, 0, 0, 64, 64); const d = x.getImageData(0, 0, 64, 64).data, buckets = new Map();
+  for (let i = 0; i < d.length; i += 4) {
+    const [r, g, b, a] = [d[i], d[i + 1], d[i + 2], d[i + 3]]; if (a < 200) continue;
+    const mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 510, sat = mx === mn ? 0 : (mx - mn) / (255 - Math.abs(mx + mn - 255));
+    if (sat < 0.25 || l < 0.1 || l > 0.92) continue;
+    const k = (r >> 4) << 8 | (g >> 4) << 4 | (b >> 4); const e = buckets.get(k) || { n: 0, r: 0, g: 0, b: 0 }; e.n++; e.r += r; e.g += g; e.b += b; buckets.set(k, e);
+  }
+  const hex = e => '#' + [e.r / e.n, e.g / e.n, e.b / e.n].map(v => Math.round(v).toString(16).padStart(2, '0')).join('');
+  const out = [];
+  for (const e of [...buckets.values()].sort((p, q) => q.n - p.n)) { const h = hex(e); if (out.every(o => Math.abs(parseInt(o.slice(1), 16) - parseInt(h.slice(1), 16)) > 0x202020)) out.push(h); if (out.length === 3) break; }
+  URL.revokeObjectURL(img.src); return out;
+}
+
 function askStyle() {
   return new Promise(res => {
     const g = GIROS[S.kind] || GIROS.otro, keys = Object.keys(STYLES).filter(k => (k !== 'fonda' || S.kind === 'restaurante') && (k !== 'estudio' || S.kind === 'clinica'));
     S.style = S.style || g.style;
+    const mine = [...new Set([...(S.logoColors || []), ...(S.brand?.colors || [])])].slice(0, 5);
+    if (!S.color && mine[0]) { S.color = mine[0]; save(); render(); }
     show(`<div class="styles">${keys.map(k => `<button type="button" class="sty" data-v="${k}" aria-pressed="${S.style === k}"><i>${STYLES[k].c.map(c => `<em style="background:${c}"></em>`).join('')}</i><b>${STYLES[k].b}</b><span>${STYLES[k].t}</span></button>`).join('')}</div>
-      <div class="sw"><small>Color principal</small>${COLORS.map(c => `<button type="button" style="background:${c}" data-c="${c}" aria-label="Color ${c}" aria-pressed="${S.color === c}"></button>`).join('')}</div>
+      ${mine.length ? `<div class="sw"><small>De tu marca</small>${mine.map(c => `<button type="button" style="background:${c}" data-c="${c}" aria-label="Color de tu marca ${c}" aria-pressed="${S.color === c}"></button>`).join('')}</div>` : ''}
+      <div class="sw"><small>${mine.length ? 'Otros' : 'Color principal'}</small>${COLORS.map(c => `<button type="button" style="background:${c}" data-c="${c}" aria-label="Color ${c}" aria-pressed="${S.color === c}"></button>`).join('')}</div>
+      <label class="n-btn ghost fup"><input type="file" id="lfile" accept="image/png,image/jpeg,image/webp,image/svg+xml" hidden>Sacar colores de mi logo</label><p class="err" id="ler" hidden></p>
       <button class="n-btn next" type="button" id="nx">Me gusta así</button>`);
     ask.querySelectorAll('.sty').forEach(b => b.addEventListener('click', () => { S.style = b.dataset.v; ask.querySelectorAll('.sty').forEach(x => x.setAttribute('aria-pressed', x === b)); save(); render(); }));
     ask.querySelectorAll('[data-c]').forEach(b => b.addEventListener('click', () => { const on = S.color !== b.dataset.c; S.color = on ? b.dataset.c : ''; ask.querySelectorAll('[data-c]').forEach(x => x.setAttribute('aria-pressed', on && x === b)); save(); render(); }));
+    $('#lfile').addEventListener('change', async e => {
+      const f = e.target.files[0], er = $('#ler'); er.hidden = true; if (!f) return;
+      try { const cs = await logoColors(f); if (!cs.length) throw 0; S.logoColors = cs; S.color = cs[0]; save(); render(); hide(); askStyle().then(res); }
+      catch { er.textContent = 'No encontramos colores en esa imagen. Prueba con tu logo a color (PNG o JPG).'; er.hidden = false; }
+    });
     $('#nx').addEventListener('click', () => { hide(); res(); });
   });
 }
 
 // Letra: lista de pares de Google Fonts o su propia letra (se ve en la vista previa al momento)
 let myFont = null; // { file, face, name }
+const REC_KIND = { clinica: ['moderna', 'limpia', 'editorial'], restaurante: ['calida', 'retro', 'fuerte'], hotel: ['lujo', 'editorial', 'elegante'], inmobiliaria: ['lujo', 'sobria', 'limpia'], despacho: ['clasica', 'editorial', 'sobria'], otro: ['moderna', 'calida', 'sobria'] };
+let ownFont = '';
+// La letra de su página, solo si existe en Google Fonts (si no, no la podemos usar tal cual)
+async function findOwnFont() {
+  const f = (S.brand?.fonts || []).find(x => /^[A-Za-z][A-Za-z0-9 ]{1,38}$/.test(x) && !Object.values(FONTS).some(p => p[0] === x));
+  if (!f) return '';
+  try { const r = await fetch(`https://fonts.googleapis.com/css2?family=${f.replace(/ /g, '+')}&display=swap`); if (!r.ok) return ''; document.head.insertAdjacentHTML('beforeend', `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=${f.replace(/ /g, '+')}:wght@400;600&display=swap">`); return f; } catch { return ''; }
+}
 const FONT_MAX = 3 * 1024 * 1024;
 function askFont() {
   return new Promise(res => {
     const keys = Object.keys(FONTS);
     const href = `https://fonts.googleapis.com/css2?${keys.map(k => `family=${FONTS[k][2].split('&family=')[0]}`).join('&')}&display=swap`;
     if (!document.getElementById('ff-all')) document.head.insertAdjacentHTML('beforeend', `<link id="ff-all" rel="stylesheet" href="${href}">`);
-    const sample = () => { const k = $('#fsel').value, f = k === 'mine' && myFont ? 'Letra del cliente' : FONTS[k]?.[0]; $('#fs').style.fontFamily = f ? `'${f}',serif` : ''; $('#fs').textContent = S.name || 'Tu negocio'; };
+    const sample = () => { const k = $('#fsel').value, f = k === 'mine' && myFont ? 'Letra del cliente' : k.startsWith('g:') ? k.slice(2) : FONTS[k]?.[0]; $('#fs').style.fontFamily = f ? `'${f}',serif` : ''; $('#fs').textContent = S.name || 'Tu negocio'; };
+    const recs = (S.brand?.recommended?.length ? S.brand.recommended : REC_KIND[S.kind] || REC_KIND.otro).filter(k => FONTS[k]);
+    const theirs = ownFont;
+    const opt = k => `<option value="${k}"${S.font === k && !S.googleFont ? ' selected' : ''}>${esc(THEME_OPTIONS.font[k])} · ${esc(FONTS[k][0])}</option>`;
     show(`<label class="fpick"><small>Letra de los títulos</small>
-        <select class="inp" id="fsel"><option value="">La del diseño (recomendada)</option>${keys.map(k => `<option value="${k}"${S.font === k ? ' selected' : ''}>${esc(THEME_OPTIONS.font[k])} · ${esc(FONTS[k][0])}</option>`).join('')}${myFont ? `<option value="mine" selected>Mi letra · ${esc(myFont.name)}</option>` : ''}</select></label>
+        <select class="inp" id="fsel"><option value="">La del diseño</option>
+        ${theirs ? `<optgroup label="La de tu página"><option value="g:${esc(theirs)}"${S.googleFont === theirs ? ' selected' : ''}>${esc(theirs)}</option></optgroup>` : ''}
+        <optgroup label="Recomendadas para ti">${recs.map(opt).join('')}</optgroup>
+        <optgroup label="Todas">${keys.filter(k => !recs.includes(k)).map(opt).join('')}</optgroup>
+        ${myFont ? `<option value="mine" selected>Mi letra · ${esc(myFont.name)}</option>` : ''}</select></label>
       <p class="fsample" id="fs"></p>
       <label class="n-btn ghost fup"><input type="file" id="ffile" accept=".woff2,.woff,.ttf,.otf" hidden>Subir mi letra</label>
       <p class="small">WOFF2, WOFF, TTF u OTF, hasta 3 MB. Si tu marca ya tiene letra, súbela y la usamos en tus títulos.</p>
       <p class="err" id="fer" hidden></p>
       <button class="n-btn next" type="button" id="nx">Me gusta así</button>`);
     sample();
-    $('#fsel').addEventListener('change', e => { const v = e.target.value; if (v !== 'mine') { S.font = v; myFont = null; e.target.querySelector('[value="mine"]')?.remove(); } save(); sample(); render(); });
+    $('#fsel').addEventListener('change', e => { const v = e.target.value; if (v !== 'mine') { if (v.startsWith('g:')) { S.googleFont = v.slice(2); S.font = ''; } else { S.font = v; S.googleFont = ''; } myFont = null; e.target.querySelector('[value="mine"]')?.remove(); } save(); sample(); render(); });
     $('#ffile').addEventListener('change', async e => {
       const file = e.target.files[0], er = $('#fer'); er.hidden = true; if (!file) return;
       if (!/\.(woff2?|ttf|otf)$/i.test(file.name) || file.size > FONT_MAX) { er.textContent = 'Sube un archivo WOFF2, WOFF, TTF u OTF de hasta 3 MB.'; er.hidden = false; return; }
@@ -417,6 +466,7 @@ async function run() {
   }
   await bot(S.presence === 'site' ? `Perfecto, usamos <b>${esc(S.site)}</b> como punto de partida: de ahí tomamos tus textos, fotos y datos para la versión completa.` : S.presence === 'social' ? 'Muy bien, de ahí tomamos tus fotos y datos.' : 'Sin problema, la armamos de cero contigo.');
 
+  loadBrand();
   // 4. Ciudad
   if (!S.city) { await bot('¿En qué ciudad estás?'); const r = await askText({ ph: 'Ej.: Zapopan' }); S.city = r.text; me(r.text); save(); render(); }
 
@@ -439,10 +489,13 @@ async function run() {
 
   // 7. Estilo
   setStep(3);
+  const br = await Promise.race([loadBrand(), new Promise(r => setTimeout(() => r(null), 4000))]);
+  if (br?.colors?.length) await bot(`Tomé los colores de <b>${esc(S.site)}</b> y los dejé primero. Si tienes tu logo a mano, también puedo sacar los colores de ahí.`);
   await bot(`Elige el estilo que va con <b>${esc(S.name)}</b>. Lo ves cambiar al momento.`);
   await askStyle(); me(`Estilo ${STYLES[S.style].b}${S.color ? ', con mi color' : ''}`);
-  await bot('¿Qué letra te gusta para tus títulos? Elige una de la lista o sube la de tu marca.');
-  await askFont(); me(myFont ? `Mi letra: ${myFont.name}` : S.font ? `Letra ${THEME_OPTIONS.font[S.font]}` : 'La letra del diseño');
+  ownFont = await findOwnFont();
+  await bot(ownFont ? `Tu página usa la letra <b>${esc(ownFont)}</b>; la puse primero en la lista. También te dejo las que mejor van con tu marca, o sube la tuya.` : '¿Qué letra te gusta para tus títulos? Te puse primero las que mejor van con tu marca. También puedes subir la tuya.');
+  await askFont(); me(myFont ? `Mi letra: ${myFont.name}` : S.googleFont ? `La letra de mi página: ${S.googleFont}` : S.font ? `Letra ${THEME_OPTIONS.font[S.font]}` : 'La letra del diseño');
 
   // 8. A dónde mandarla
   setStep(4);
@@ -468,7 +521,7 @@ async function contact() {
     const body = {
       source: 'empezar', mode: S.presence === 'site' ? 'web' : 'noweb', site: S.site, industry: GIROS[S.kind].industry, city: S.city, social: S.social,
       name: cn.value.trim(), biz: S.name, contact: cc.value.trim(), company_url: '',
-      preferences: { kind: S.kind, pageStyle: S.style, style: styleMap[S.style], goals: S.goals, color: S.color || undefined, font: S.font || undefined, about: S.about, services: S.services },
+      preferences: { kind: S.kind, pageStyle: S.style, style: styleMap[S.style], goals: S.goals, color: S.color || undefined, font: S.font || undefined, googleFont: S.googleFont || undefined, about: S.about, services: S.services },
       fontFile: myFont ? { name: myFont.file.name, size: myFont.file.size } : undefined,
       utm: Object.fromEntries([...params].filter(([k]) => k.startsWith('utm_'))),
     };

@@ -1,14 +1,21 @@
-// POST /api/analyze   { "url": "clinica.com" }
+// POST /api/analyze   { "url": "clinica.com" }   ·   { "url": "…", "brand": true, "kind": "clinica" } para su marca
 // Revisión automática y rápida de la página de un negocio. No guarda nada.
 // Devuelve una lista de puntos en lenguaje simple: bien / mejorable / falta.
 import { json } from '../lib/stripe.js';
 import { parseSite } from '../lib/url.js';
 import { readSite } from '../lib/site-reader.js';
+import { readBrand } from '../lib/brand.js';
 
 export async function POST(request) {
   let body; try { body = await request.json(); } catch { return json({ error: 'Solicitud inválida.' }, 400); }
   const site = parseSite(body?.url);
   if (!site) return json({ error: 'Esa dirección no parece válida. Debe verse como tunegocio.com' }, 400);
+
+  // { "url": "…", "brand": true, "kind": "clinica" } → colores y letras de su página, y letras recomendadas (/empezar)
+  if (body.brand) {
+    try { return json({ host: site.host, ...(await readBrand(site.href, String(body.kind || 'otro'))) }); }
+    catch (err) { console.warn('analyze/brand:', site.host, err.code || err.name, err.message); return json({ host: site.host, colors: [], fonts: [], recommended: [] }); }
+  }
 
   let page, result;
   try {
