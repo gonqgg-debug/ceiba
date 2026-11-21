@@ -285,6 +285,40 @@
     l.classList.add('is-pre'); pio.observe(l);
   });
 
-  bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop(); bindTabs();
-  new MutationObserver(() => { bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop(); bindTabs(); }).observe(document.documentElement, { childList: true, subtree: true });
+  // ---------- Diseño «Fonda» (restaurantes) ----------
+  const fio = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; fio.unobserve(e.target); e.target.classList.add('in'); e.target.querySelectorAll('.mk').forEach(m => m.classList.add('in')); }), { threshold: .35 });
+  const FD = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'], FM = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+  const bindFonda = () => document.querySelectorAll('.fx:not([data-fx])').forEach(root => {
+    root.dataset.fx = 1; root.classList.add('fx-js');
+    root.querySelectorAll('.rv, .mk').forEach(el => fio.observe(el));
+    let kb = {}; try { kb = JSON.parse(root.querySelector('.fx-kb')?.textContent || '{}'); } catch {}
+    const q = s => root.querySelector(s);
+    const toggle = o => { root.classList.toggle('nav-open', o); const b = q('.fx-burger'); b?.setAttribute('aria-expanded', o); b?.setAttribute('aria-label', o ? 'Cerrar menú' : 'Abrir menú'); };
+    q('.fx-burger')?.addEventListener('click', () => toggle(!root.classList.contains('nav-open')));
+    q('.fx-nav')?.addEventListener('click', e => { if (e.target.closest('a')) toggle(false); });
+    root.querySelectorAll('[data-fx-carta]').forEach(a => a.addEventListener('click', () => q('.fx-carta')?.classList.add('show')));
+    // boleto: próximos días abiertos, horarios de la casa y personas
+    const days = []; for (let i = 0; days.length < 6 && i < 12; i++) { const d = new Date(Date.now() + i * 864e5); if (!(kb.closed || []).includes(d.getDay())) days.push(d); }
+    let day = null, hour = null, ppl = 2;
+    const sum = () => { const s = q('[data-fx-sum]'); if (s) s.textContent = day && hour ? `${FD[day.getDay()]} ${day.getDate()} ${FM[day.getMonth()]} · ${hour} · ${ppl} ${ppl === 1 ? 'persona' : 'personas'}` : 'Elige día y hora'; };
+    const pick = (box, b) => box.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    const dBox = q('[data-fx-days]'), hBox = q('[data-fx-hours]');
+    if (!dBox) return;
+    dBox.innerHTML = days.map((d, i) => `<button type="button" aria-pressed="false" data-d="${i}">${d.toDateString() === new Date().toDateString() ? 'Hoy' : FD[d.getDay()]}<small>${d.getDate()} ${FM[d.getMonth()]}</small></button>`).join('');
+    dBox.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; day = days[b.dataset.d]; hour = null; pick(dBox, b);
+      const today = day.toDateString() === new Date().toDateString(), now = new Date().getHours() * 60 + new Date().getMinutes() + 45;
+      const hs = (kb.slots || []).filter(h => !today || +h.split(':')[0] * 60 + +h.split(':')[1] > now);
+      hBox.innerHTML = hs.length ? hs.map(h => `<button type="button" aria-pressed="false">${h}</button>`).join('') : '<span>Hoy ya no hay horarios; elige otro día</span>'; sum(); });
+    hBox.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; hour = b.textContent; pick(hBox, b); sum(); });
+    root.querySelectorAll('[data-fx-ppl]').forEach(b => b.addEventListener('click', () => { ppl = Math.min(20, Math.max(1, ppl + Number(b.dataset.fxPpl))); q('[data-fx-n]').textContent = ppl; sum(); }));
+    q('[data-fx-go]')?.addEventListener('click', () => {
+      if (!day || !hour) { q('[data-fx-sum]').textContent = 'Elige día y hora para reservar'; return; }
+      const who = q('[data-fx-who]')?.value.trim();
+      const msg = `Hola, quiero reservar en ${kb.name || root.dataset.name}${who ? ` a nombre de ${who}` : ''}:\n• ${FD[day.getDay()]} ${day.getDate()} de ${FM[day.getMonth()]}\n• ${hour}\n• ${ppl} ${ppl === 1 ? 'persona' : 'personas'}`;
+      if (kb.wa) window.open(`https://wa.me/${kb.wa}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+    });
+  });
+
+  bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop(); bindTabs(); bindFonda();
+  new MutationObserver(() => { bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop(); bindTabs(); bindFonda(); }).observe(document.documentElement, { childList: true, subtree: true });
 })();
