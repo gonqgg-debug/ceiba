@@ -9,7 +9,7 @@ description: >-
 
 # Páginas de Ceiba: qué skill usar y qué cambia para nosotros
 
-Estos skills vienen de repos públicos con licencia MIT (cada carpeta trae su LICENSE). Se guardaron solo los
+Estos skills vienen de repos públicos con licencia MIT o Apache 2.0 (cada carpeta trae su LICENSE; impeccable también su NOTICE). Se guardaron solo los
 textos y los recursos de animación; sus scripts de verificación, hooks y fotos de muestra no se copiaron.
 
 | Para | Usa | Lo que más sirve |
@@ -19,6 +19,11 @@ textos y los recursos de animación; sus scripts de verificación, hooks y fotos
 | Que no parezca hecho por IA | `avoid-ai-design` (catálogo de señales), `no-slop-ui` (patrones prohibidos y paletas), `antislop-ui` | Lista de «tells» para auditar: gradientes, glassmorphism, tarjetas iguales, íconos genéricos… |
 | Textos | `antislop-copywriting`, `design-taste-frontend` → `references/copy*.md` | Frases concretas, sin muletillas de agencia |
 | Celular y accesibilidad | `antislop-layoutmobile`, `antislop-human` (WCAG, contraste; trae un `contrast-check.py` local) | Áreas táctiles, contraste, foco visible |
+| Diseñar o animar un componente paso a paso (si animar, qué curva, cuánto dura, cómo se interrumpe) | `emil-animate`, `emil-choreograph` (varias cosas que se mueven juntas: entrada del hero, listas), `emil-design-eng` (hover, press, detalles) | Decisiones de animación de Emil Kowalski: curvas, duraciones, nada de rebote en UI, interrupciones |
+| Revisar o quitar animaciones | `emil-review-animations`, `emil-improve-animations`, `emil-find-animation-opportunities`, `emil-remove-animations`, `emil-animation-performance`, `meng-optimize-web-animations` | Qué sobra, qué falta y cómo no perder cuadros (pausar lo que no se ve) |
+| Nombrar un efecto | `emil-animation-vocabulary` | El nombre exacto de cada efecto para pedirlo bien |
+| Romper la interfaz con datos extremos | `emil-break-ui` | Nombres largos, correos sin espacios, cero servicios, emojis: clave para la plantilla, que recibe datos de cualquier cliente |
+| Criticar, auditar y pulir | `impeccable` (sin su lanzador: sigue su modo «Launcher unavailable» y lee `reference/craft-floor.md` antes de editar), `meng-audit-ai-design-slop`, `meng-no-ai-design-slop` | Auditoría con rúbrica, prohibiciones absolutas, comandos como polish, quieter, typeset, layout |
 | Proceso de diseño completo | `design-guide` | Elegir una dirección, fijar un contrato de diseño, construir y revisar (sus scripts de vista previa no se copiaron: presenta el resultado como hagas normalmente) |
 
 ## Reglas de Ceiba que mandan sobre los skills
