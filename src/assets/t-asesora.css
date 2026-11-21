@@ -1,0 +1,78 @@
+/* Diseño «Asesora» (lib/templates/asesora.js, raíz .cx.as). Basado en Tracy Tutor: marca personal,
+   retrato grande, nombre en serif, cifras sobre foto y una nota firmada. */
+.cx.as{--gold:var(--a);--paper:#FBF9F6;--stone:#EEE9E2;--ink:#1D1A17;--mute:#6E675F;--line:#E1DAD0;
+  --fh:'Playfair Display',Georgia,serif;--fs:'Mrs Saint Delafield',cursive;--fb:'Inter',ui-sans-serif,system-ui,sans-serif;--pad:max(1.25rem,6cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:300 clamp(15px,1.04cqi,16.5px)/1.7 var(--fb);background:var(--paper);color:var(--ink);position:relative;overflow:clip}
+.as h1,.as h2,.as h3{font-family:var(--fh);font-weight:400;color:inherit;margin:0;line-height:1.1;text-wrap:balance}
+.as :where(p){margin:0}.as a{color:inherit}
+.as svg{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8}
+.as-btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.6rem;padding:0 1.3rem;border:1px solid var(--ink);color:var(--ink)!important;font:500 .72rem/1 var(--fb);letter-spacing:.18em;text-transform:uppercase;text-decoration:none;white-space:nowrap;justify-self:start;transition:background-color .2s,color .2s}
+.as-btn:hover{background:var(--ink);color:#fff!important}
+.as-link{display:inline-flex;gap:.4rem;align-items:center;font:500 .72rem/1 var(--fb);letter-spacing:.16em;text-transform:uppercase;color:var(--gold)!important;text-decoration:none}
+.as-kick{font:500 .68rem/1.4 var(--fb);letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.as a:focus-visible,.as summary:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
+.as-top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:2rem;padding:.9rem var(--pad);background:#FBF9F6f0;border-bottom:1px solid var(--line)}
+.as-logo{font:400 1.05rem/1 var(--fh);letter-spacing:.3em}
+.as-top nav{display:flex;gap:1.6rem;margin-left:auto;font:500 .7rem/1 var(--fb);letter-spacing:.16em;text-transform:uppercase}
+.as-top nav a,.as-top nav span{text-decoration:none}
+/* hero: retrato */
+.as-hero{display:grid;grid-template-columns:1fr .8fr;gap:max(2rem,5cqi);align-items:end;padding:max(3rem,5cqi) var(--pad) 0}
+.as-copy{display:grid;gap:1.2rem;padding-bottom:max(3rem,5cqi)}
+.as-copy h1{font-size:clamp(2.6rem,6cqi,5.4rem);letter-spacing:-.01em}
+.as-copy p:not(.as-kick){color:var(--mute);max-width:30em}
+.as-portrait{aspect-ratio:4/5;background:center/cover no-repeat;filter:grayscale(.15)}
+@media (prefers-reduced-motion:no-preference){.as:not(.as-still) .as-copy h1{animation:as-in 1.2s var(--ease) both}.as:not(.as-still) .as-portrait{animation:as-up 1.2s .1s var(--ease) both}}
+@keyframes as-in{from{opacity:0;transform:translateY(14px)}}
+@keyframes as-up{from{clip-path:inset(100% 0 0 0)}}
+/* cifras sobre foto */
+.as-nums{position:relative;overflow:hidden}
+.as-nums-img{position:absolute;inset:0;background:center/cover no-repeat;filter:brightness(.42) grayscale(.4)}
+.as-nums>div:not([class*="-img"]){position:relative;display:grid;grid-template-columns:repeat(3,1fr);padding:max(3rem,5cqi) var(--pad);color:#fff;text-align:center}
+.as-nums>div>div{display:grid;gap:.3rem}
+.as-nums b{font:400 clamp(2.6rem,5.4cqi,4.6rem)/1 var(--fh)}.as-nums span{font:500 .68rem/1.4 var(--fb);letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+/* propiedades */
+.as-props{padding:max(3.5rem,6cqi) var(--pad)}
+.as-props>h2{font-size:clamp(1.8rem,3cqi,2.6rem);text-align:center;margin-bottom:2rem}
+.as-props>div:not([class*="-img"]){display:grid;grid-template-columns:repeat(3,1fr);gap:2rem 1.4rem}
+.as-props article{display:grid;gap:.8rem;align-content:start}
+.as-props article>div:not([class*="-img"]){display:grid;gap:.3rem}
+.as-feat{grid-column:1/-1;grid-template-columns:1.5fr 1fr;align-items:center;gap:2rem!important}
+.as-img{aspect-ratio:4/3;background:center/cover no-repeat}
+.as-feat .as-img{aspect-ratio:16/9}
+.as-props h3{font-size:1.4rem}.as-feat h3{font-size:clamp(1.8rem,3cqi,2.4rem)}
+.as-props article p:not(.as-kick):not(.as-price){color:var(--mute);font-size:.9em}
+.as-price{font:400 1.3rem var(--fh);margin:.2rem 0 .4rem}
+/* forma de trabajar */
+.as-way{padding:max(3.5rem,6cqi) var(--pad);background:var(--ink);color:#F3EEE6}
+.as-way>h2{font-size:clamp(1.8rem,3cqi,2.6rem);margin-bottom:2rem}
+.as-way ol{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr));gap:1.6rem}
+.as-way li{display:grid;gap:.5rem;align-content:start;border-top:1px solid #ffffff33;padding-top:1rem}
+.as-way span{font:italic 400 1.6rem/1 var(--fh);color:var(--gold)}.as-way h3{font-size:1.3rem}.as-way p{opacity:.75;font-size:.92em}
+.as-revs{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding:max(3.5rem,6cqi) var(--pad)}
+.as-revs blockquote{margin:0;display:grid;gap:.6rem}.as-revs p{font:italic 400 1.2rem/1.45 var(--fh)}.as-revs cite{font:500 .68rem/1 var(--fb);letter-spacing:.18em;text-transform:uppercase;font-style:normal;color:var(--gold)}
+/* nota firmada */
+.as-note{display:grid;gap:1rem;justify-items:center;text-align:center;padding:max(3.5rem,6cqi) var(--pad);background:var(--stone)}
+.as-note>p:first-child{font:400 clamp(1.3rem,2.2cqi,1.8rem)/1.45 var(--fh);max-width:30em}
+.as-note ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem 1.6rem;font-size:.86em;color:var(--mute)}
+.as-sign{font:400 clamp(3rem,6cqi,4.6rem)/1 var(--fs);color:var(--gold)}
+.as-faq{max-width:46rem;margin:0 auto;padding:max(3rem,5cqi) var(--pad);box-sizing:content-box}
+.as-faq h2{font-size:2rem;margin-bottom:1rem}
+.as-faq details{border-bottom:1px solid var(--line)}
+.as-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:.9rem 0;font-weight:500}
+.as-faq summary::-webkit-details-marker{display:none}
+.as-faq summary::after{content:"+";color:var(--gold)}
+.as-faq details[open] summary::after{content:"−"}
+.as-faq details p{color:var(--mute);padding-bottom:1rem}
+.as-foot{display:grid;grid-template-columns:1fr auto;gap:1.4rem 2rem;align-items:end;padding:3rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom));border-top:1px solid var(--line)}
+.as-foot>div{display:grid;gap:.5rem}.as-foot h2{font-size:clamp(2rem,4cqi,3.2rem)}.as-foot p{color:var(--mute);font-size:.92em}.as-foot a{text-decoration:none}
+.as-legal{grid-column:1/-1;display:flex!important;flex-wrap:wrap;gap:.3rem 1.2rem;font-size:.7rem;color:var(--mute)}
+.as-sticky{display:none}
+@container (max-width:980px){.as-top nav{display:none}.as-top .as-btn{margin-left:auto}.as-revs{grid-template-columns:1fr}.as-props>div:not([class*="-img"]){grid-template-columns:1fr 1fr}}
+@container (max-width:640px){
+  .as-hero{grid-template-columns:1fr;padding-top:1.4rem}.as-portrait{order:-1}.as-copy{padding-bottom:2rem}
+  .as-nums>div:not([class*="-img"]){grid-template-columns:1fr;gap:1.6rem}
+  .as-props>div:not([class*="-img"]),.as-feat,.as-foot{grid-template-columns:1fr}
+  .as-top .as-btn{display:none}
+  .as-sticky{display:flex;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:var(--paper);border-top:1px solid var(--line)}
+  .as-sticky>*{flex:1}
+}

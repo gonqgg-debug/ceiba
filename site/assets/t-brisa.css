@@ -49,7 +49,7 @@
 .bz-zones{padding:max(3rem,5cqi) var(--pad);background:#fff}
 .bz-zones>h2{font-size:clamp(1.4rem,2.6cqi,2.2rem);color:var(--green);text-align:right;margin-bottom:1.4rem}
 .bz-zones>div:not([class*="-img"]){display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem}
-.bz-zone{position:relative;display:grid;place-items:center;min-height:12rem;color:#fff;text-decoration:none;overflow:hidden}
+.bz .bz-zone{position:relative;display:grid;place-items:center;min-height:12rem;color:#fff;text-decoration:none;overflow:hidden}
 .bz-zone-img{position:absolute;inset:0;background:center/cover no-repeat;filter:grayscale(1) brightness(.55);transition:filter .5s,transform .8s var(--ease)}
 .bz-zone:hover .bz-zone-img{filter:grayscale(0) brightness(.6);transform:scale(1.05)}
 .bz-zone span{position:relative;font:500 1.1rem/1.2 var(--fb);letter-spacing:.2em;text-align:center;padding:0 1rem}

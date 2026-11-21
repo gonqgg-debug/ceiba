@@ -1,0 +1,92 @@
+/* Diseño «Valúa» (lib/templates/valua.js, raíz .cx.va). Basado en Joyce Rey: valuación de tu casa en
+   todas partes, gris y negro, Bodoni, tarjetas altas con degradado y estilos de vida por zona. */
+.cx.va{--ink:var(--a);--gray:#8C8C8C;--stone:#EFEDEA;--paper:#FAFAF8;--mute:#6C6A66;--line:#DEDAD3;--gold:#9C8455;
+  --fh:'Bodoni Moda',Didot,Georgia,serif;--fb:'Jost',ui-sans-serif,system-ui,sans-serif;--pad:max(1.25rem,6cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:300 clamp(15px,1.04cqi,16.5px)/1.7 var(--fb);background:var(--paper);color:#1C1B19;position:relative;overflow:clip}
+.va h1,.va h2,.va h3{font-family:var(--fh);font-weight:400;color:inherit;margin:0;line-height:1.1;text-wrap:balance}
+.va h2 i{font-style:italic;color:var(--gold)}
+.va :where(p){margin:0}.va a{color:inherit}
+.va-btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.5rem;padding:0 1.2rem;background:var(--ink);color:#fff!important;font:500 .72rem/1 var(--fb);letter-spacing:.18em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.va-btn--line{background:transparent;color:var(--ink)!important;box-shadow:inset 0 0 0 1px var(--ink)}
+.va-kick{font:500 .7rem/1 var(--fb);letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.va a:focus-visible,.va summary:focus-visible,.va .t-val :focus-visible{outline:1px solid var(--gold);outline-offset:3px}
+.va-top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:2rem;padding:.9rem var(--pad);background:#FAFAF8f0;border-bottom:1px solid var(--line)}
+.va-logo{font:400 1.3rem/1 var(--fh);letter-spacing:.24em}
+.va-top nav{display:flex;gap:1.6rem;margin-left:auto;font:500 .72rem/1 var(--fb);letter-spacing:.16em;text-transform:uppercase}
+.va-top nav a,.va-top nav span{text-decoration:none}
+/* hero con valuación */
+.va-hero{position:relative;display:grid;grid-template-columns:1fr minmax(0,24rem);gap:2rem;align-items:end;min-height:min(50cqi,40rem);padding:3rem var(--pad);overflow:hidden}
+.va-hero-img{position:absolute;inset:0;background:center/cover no-repeat;filter:grayscale(.55) brightness(.62)}
+.va-hero-in{position:relative;color:#fff;display:grid;gap:1rem;max-width:36rem}
+.va-hero h1{font-size:clamp(2rem,4cqi,3.6rem)}.va-hero-in p{opacity:.85}
+.va-card{position:relative;display:grid;gap:.6rem;padding:1.6rem;background:var(--paper)}
+.va-card h2{font-size:1.6rem}.va-card>p{font-size:.88em;color:var(--mute)}
+.va .t-val{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:.4rem}
+.va .t-val label{display:grid;gap:.25rem;font:500 .62rem/1 var(--fb);letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.va .t-val label:first-child{grid-column:1/-1}
+.va .t-val input,.va .t-val select{font:400 .98rem var(--fb);color:#1C1B19;border:0;border-bottom:1px solid #1C1B19;background:transparent;padding:.4rem 0;width:100%;min-width:0}
+.va .t-val button{grid-column:1/-1;min-height:2.8rem;border:0;background:var(--ink);color:#fff;font:500 .72rem/1 var(--fb);letter-spacing:.18em;text-transform:uppercase;cursor:pointer;margin-top:.3rem}
+/* propiedades altas */
+.va-props{padding:max(3.5rem,6cqi) var(--pad)}
+.va-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:1.6rem}
+.va-head h2{font-size:clamp(2rem,3.6cqi,3rem)}.va-head p{color:var(--mute);max-width:28em;font-size:.92em}
+.va-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.va .va-tile{position:relative;display:block;aspect-ratio:3/4;border-radius:1rem;overflow:hidden;text-decoration:none;color:#fff;background:var(--stone)}
+.va-tile-img{position:absolute;inset:0;background:center/cover no-repeat;transition:transform 1s var(--ease)}
+.va-tile:hover .va-tile-img{transform:scale(1.05)}
+.va-tile::after{content:"";position:absolute;inset:0;background:linear-gradient(#0000 40%,#2a2215e6)}
+.va-tile-in{position:absolute;z-index:1;left:1.1rem;right:1.1rem;bottom:1rem;display:grid;gap:.15rem}
+.va-tile-in small{font:500 .62rem/1 var(--fb);letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+.va-tile-in b{font:400 1.3rem/1.2 var(--fh)}.va-tile-in span{font-size:.84rem;opacity:.85}
+.va-price{font:400 1.05rem var(--fh)!important;opacity:1!important;margin-top:.3rem}
+/* franja de valuación */
+.va-band{display:grid;grid-template-columns:1fr 1fr;gap:max(2rem,5cqi);align-items:center;padding:max(3.5rem,6cqi) var(--pad);background:var(--stone)}
+.va-band>div:not([class*="-img"]){display:grid;gap:1rem}
+.va-band h2{font-size:clamp(2rem,3.6cqi,3rem)}.va-band p{color:var(--mute)}
+.va-band ol{list-style:none;margin:0;padding:0;display:grid;gap:.6rem;counter-reset:s}
+.va-band li{display:grid;grid-template-columns:2rem 1fr;gap:0 .6rem;counter-increment:s}
+.va-band li::before{content:counter(s);grid-row:span 2;font:400 1.4rem/1 var(--fh);color:var(--gold)}
+.va-band li span{color:var(--mute);font-size:.9em}
+.va-val--band{padding:1.8rem;background:var(--paper)}
+/* reconocimientos */
+.va-acc{padding:max(3.5rem,6cqi) var(--pad);background:#5E5C59}
+.va-acc>div:not([class*="-img"]){display:grid;gap:1rem;justify-items:center;text-align:center;max-width:46rem;margin:0 auto;padding:2.4rem;border-radius:1.4rem;background:#00000033;color:#fff}
+.va-acc h2{font-size:clamp(1.8rem,3cqi,2.6rem)}
+.va-acc dl{margin:.6rem 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;width:100%}
+.va-acc dd{margin:0;font:400 2.4rem/1 var(--fh)}.va-acc dt{font-size:.78rem;opacity:.75;letter-spacing:.06em}
+.va-acc blockquote{margin:0;font:italic 400 1.15rem/1.5 var(--fh);opacity:.92}.va-acc cite{display:block;font:500 .68rem/2 var(--fb);letter-spacing:.2em;text-transform:uppercase;font-style:normal}
+/* zonas */
+.va-zones{padding:max(3.5rem,6cqi) var(--pad)}
+.va-zones>h2{font-size:clamp(1.8rem,3.2cqi,2.8rem);margin-bottom:1.6rem}
+.va-zones>div:not([class*="-img"]){display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem}
+.va .va-z{position:relative;display:grid;align-items:end;aspect-ratio:1;border-radius:.8rem;overflow:hidden;color:#fff;text-decoration:none;background:#222}
+.va-z-img{position:absolute;inset:0;background:center/cover no-repeat;filter:brightness(.55);transition:filter .4s}
+.va-z:hover .va-z-img{filter:brightness(.75)}
+.va-z span{position:relative;padding:1rem;font:500 .74rem/1.3 var(--fb);letter-spacing:.18em}
+.va-team{display:grid;grid-template-columns:1fr 1fr;gap:max(2rem,5cqi);align-items:center;padding:0 var(--pad) max(3.5rem,6cqi)}
+.va-team>div:not([class*="-img"]){display:grid;gap:1rem}
+.va-team h2{font-size:clamp(1.8rem,3cqi,2.6rem)}.va-team p{color:var(--mute)}
+.va-team ul{margin:0;padding-left:1.1rem;display:grid;gap:.4rem}
+.va-team-img{aspect-ratio:4/3;background:center/cover no-repeat;border-radius:1rem;filter:grayscale(.3)}
+.va-faq{max-width:46rem;margin:0 auto;padding:0 var(--pad) max(3.5rem,6cqi);box-sizing:content-box}
+.va-faq h2{font-size:2rem;margin-bottom:1rem}
+.va-faq details{border-bottom:1px solid var(--line)}
+.va-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:.9rem 0;font-weight:500}
+.va-faq summary::-webkit-details-marker{display:none}
+.va-faq summary::after{content:"+";color:var(--gold)}
+.va-faq details[open] summary::after{content:"−"}
+.va-faq details p{color:var(--mute);padding-bottom:1rem}
+.va-foot{display:grid;grid-template-columns:1fr auto;gap:1.4rem 2rem;align-items:end;padding:3rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom));border-top:1px solid var(--line)}
+.va-foot>div:first-child{display:grid;gap:.5rem}.va-foot h2{font-size:1.8rem}.va-foot p:not(.va-sign){color:var(--mute);font-size:.92em}.va-foot a{text-decoration:none}
+.va-sign{font:italic 400 clamp(2rem,4cqi,3.4rem)/1 var(--fh);color:var(--gold)}
+.va-legal{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;font-size:.7rem;color:var(--mute)}
+.va-sticky{display:none}
+@container (max-width:980px){.va-top nav{display:none}.va-top .va-btn{margin-left:auto}.va-grid{grid-template-columns:1fr 1fr}.va-zones>div:not([class*="-img"]){grid-template-columns:repeat(2,1fr)}}
+@container (max-width:640px){
+  .va-hero,.va-band,.va-team,.va-foot{grid-template-columns:1fr}.va-hero{padding:8rem 1rem 1rem}
+  .va-grid{grid-template-columns:1fr}.va-tile{aspect-ratio:4/3}
+  .va-acc dl{grid-template-columns:1fr}
+  .va-top .va-btn{display:none}
+  .va-sticky{display:flex;gap:.5rem;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:var(--paper);border-top:1px solid var(--line)}
+  .va-sticky>*{flex:1}
+}
