@@ -7,6 +7,7 @@ import { renderFresca, FRESCA_FONTS } from './fresca.js';
 import { renderCapsula, CAPSULA_FONTS } from './capsula.js';
 import { renderCine, CINE_FONTS } from './cine.js';
 import { renderEstrellas, ESTRELLAS_FONTS } from './estrellas.js';
+import { renderGlam, GLAM_FONTS } from './glam.js';
 export const DESIGNS = {
   estudio: { render: renderEstudio, fonts: ESTUDIO_FONTS, kinds: ['clinica'] },
   galeria: { render: renderGaleria, fonts: GALERIA_FONTS, kinds: ['clinica'] },
@@ -14,4 +15,5 @@ export const DESIGNS = {
   capsula: { render: renderCapsula, fonts: CAPSULA_FONTS, kinds: ['clinica'] },
   cine: { render: renderCine, fonts: CINE_FONTS, kinds: ['clinica'] },
   estrellas: { render: renderEstrellas, fonts: ESTRELLAS_FONTS, kinds: ['clinica'] },
+  glam: { render: renderGlam, fonts: GLAM_FONTS, kinds: ['clinica'] },
 };

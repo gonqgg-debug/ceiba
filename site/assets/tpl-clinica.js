@@ -59,7 +59,7 @@ export const THEME_OPTIONS = {
   font: { moderna: 'Moderna', elegante: 'Elegante (con serif)', geometrica: 'Geométrica', clasica: 'Clásica', amable: 'Amable', sobria: 'Sobria', editorial: 'Editorial', calida: 'Cálida', lujo: 'De lujo', fuerte: 'Con carácter', retro: 'Retro', limpia: 'Limpia' },
   corners: { soft: 'Suaves', sharp: 'Rectas' },
   buttons: { pill: 'Redondos', square: 'Rectangulares', outline: 'Con contorno' },
-  style: { sobria: 'Sobria', expresiva: 'Expresiva (más animación)', cercana: 'Cercana (colorida y amable)', fonda: 'Fonda (restaurantes)', estudio: 'Estudio (clínicas)', galeria: 'Galería (clínicas)', fresca: 'Fresca (clínicas)' , capsula: 'Cápsula (clínicas)' , cine: 'Cine (clínicas)' , estrellas: 'Estrellas (clínicas)' },
+  style: { sobria: 'Sobria', expresiva: 'Expresiva (más animación)', cercana: 'Cercana (colorida y amable)', fonda: 'Fonda (restaurantes)', estudio: 'Estudio (clínicas)', galeria: 'Galería (clínicas)', fresca: 'Fresca (clínicas)' , capsula: 'Cápsula (clínicas)' , cine: 'Cine (clínicas)' , estrellas: 'Estrellas (clínicas)' , glam: 'Glam (clínicas)' },
 };
 export const FONTS = {
   moderna: ['Red Hat Display', 'Red Hat Text', 'Red+Hat+Display:wght@500;600;700&family=Red+Hat+Text:wght@400;500;600'],

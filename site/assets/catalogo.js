@@ -33,6 +33,11 @@ export const CATALOGO = [
     ref: { name: "The Little Royals", url: 'https://www.thelittleroyalsdentistry.com/' },
     idea: "Para niños: cielo de noche con estrellas que titilan y un diente con corona ilustrado, letra manuscrita, franjas azul cielo y botones amarillos.",
   },
+  {
+    id: 'glam', name: "Glam", kind: 'clinica', demo: 'clinica-arrayan', accent: '#3CB4AC',
+    ref: { name: "TruGLO Modern Dental (antes Glo Modern Dental)", url: 'https://truglobeverlyhillsdentistry.com/' },
+    idea: "Lujo de estética dental: barra negra con amarillo, foto del consultorio a todo lo ancho, credenciales como sellos y tratamientos en caja negra sobre collage.",
+  },
 ];
 
 export const RUBROS = { clinica: 'Clínicas dentales', consultorio: 'Consultorios médicos', restaurante: 'Restaurantes', hotel: 'Hoteles', inmobiliaria: 'Inmobiliarias', despacho: 'Despachos legales' };
