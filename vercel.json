@@ -29,6 +29,14 @@
       "destination": "/empezar.html"
     },
     {
+      "source": "/guias/aparecer-en-chatgpt-y-google",
+      "destination": "/guia-aparecer-ia.html"
+    },
+    {
+      "source": "/guias/cuanto-cuesta-una-pagina-web",
+      "destination": "/guia-cuanto-cuesta.html"
+    },
+    {
       "source": "/webs",
       "destination": "/webs.html"
     },

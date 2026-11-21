@@ -145,6 +145,8 @@ def wall():
 pages = {
     "index.html": site_chrome(fill("inicio.html", {**common, "{{N_NAV}}": n_nav(None, "#consultoria", "Agendar consultoría", "Agendar una consultoría")}), "inicio"),
     "webs.html": site_chrome(fill("webs.html", {**common, "{{WALL}}": wall(), "{{N_NAV}}": n_nav("/webs", "/empezar", "Armar mi página", "Armar mi página gratis")}), "webs"),
+    "guia-cuanto-cuesta.html": site_chrome(fill("guia-cuanto-cuesta.html", {"{{HEAD_TAGS}}": head_tags, "{{SYMBOLS}}": shared["{{SYMBOLS}}"], "{{N_NAV}}": n_nav(None, "/empezar", "Armar mi página", "Armar mi página gratis")}), "guias"),
+    "guia-aparecer-ia.html": site_chrome(fill("guia-aparecer-ia.html", {"{{HEAD_TAGS}}": head_tags, "{{SYMBOLS}}": shared["{{SYMBOLS}}"], "{{N_NAV}}": n_nav(None, "/empezar", "Armar mi página", "Armar mi página gratis")}), "guias"),
     "empezar.html": fill("empezar.html", {"{{HEAD_TAGS}}": head_tags, "{{SYMBOLS}}": shared["{{SYMBOLS}}"]}),
     "ia.html": site_chrome(fill("ia.html", {**common, "{{N_NAV}}": n_nav("/ia", "#contacto", "Agendar diagnóstico", "Agendar un diagnóstico")}), "ia"),
     "webs-clinicas.html": site_chrome(fill("webs-clinicas.html", {**shared, **industry}), "clinicas", cta="#diagnostico", own_menu=True),
@@ -175,7 +177,7 @@ catalog_json = subprocess.run(["node", "--input-type=module", "-e",
     capture_output=True, text=True, cwd=ROOT, check=True).stdout
 (SITE / "assets" / "precios.js").write_text("window.CEIBA_CATALOG = " + catalog_json + ";\n" + (SRC / "assets/precios.js").read_text(encoding="utf-8"), encoding="utf-8")
 PRICES_TAG = '<script src="/assets/precios.js" defer></script>\n'
-for name in ("webs.html", "ia.html", "webs-clinicas.html"):
+for name in ("webs.html", "ia.html", "webs-clinicas.html", "guia-cuanto-cuesta.html"):
     pages[name] = pages[name].replace("</body>", PRICES_TAG + "</body>", 1) if "</body>" in pages[name] else pages[name] + "\n" + PRICES_TAG
 (ROOT / "lib" / "generated").mkdir(exist_ok=True)
 import json

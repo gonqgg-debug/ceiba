@@ -36,6 +36,18 @@ PAGES = {
         "description": "Páginas web para clínicas dentales, consultorios y especialistas: más citas desde Google, WhatsApp y la IA, con precios claros y datos listos para buscadores.",
         "crumbs": [("Páginas web", "/webs"), ("Clínicas y consultorios", "/webs/clinicas")],
     },
+    "guia-cuanto-cuesta.html": {
+        "path": "/guias/cuanto-cuesta-una-pagina-web", "og": "webs", "article": True,
+        "title": "¿Cuánto cuesta una página web en México? Guía 2026 · Ceiba Labs",
+        "description": "Cuánto cuesta una página web para un negocio en México: hacerla tú, pagarle a un freelance o agencia, o una suscripción todo incluido. Costos reales y qué debe incluir.",
+        "crumbs": [("Páginas web", "/webs"), ("Cuánto cuesta una página web", "/guias/cuanto-cuesta-una-pagina-web")],
+    },
+    "guia-aparecer-ia.html": {
+        "path": "/guias/aparecer-en-chatgpt-y-google", "og": "ia", "article": True,
+        "title": "Cómo hacer que ChatGPT y Google recomienden tu negocio · Ceiba Labs",
+        "description": "Qué hace que ChatGPT, Gemini, Perplexity y Google recomienden un negocio local: perfil de Google, reseñas, Bing, directorios y una página clara. Los pasos, en orden.",
+        "crumbs": [("Páginas web", "/webs"), ("Aparecer en ChatGPT y Google", "/guias/aparecer-en-chatgpt-y-google")],
+    },
     "ia.html": {
         "path": "/ia", "og": "ia",
         "title": "IA y automatización para negocios · Ceiba Labs",
@@ -152,6 +164,12 @@ def graph(key, page_html, cat):
         nodes.append(clin); webpage["mainEntity"] = {"@id": clin["@id"]}
     elif key == "ia.html":
         nodes += [whatsapp, diagnostico, piloto]
+    if cfg.get("article"):
+        h1 = re.search(r"<h1[^>]*>([\s\S]*?)</h1>", page_html)
+        nodes.append({"@type": "Article", "@id": f"{url}#articulo", "headline": _strip(h1.group(1)) if h1 else cfg["title"],
+                      "description": cfg["description"], "inLanguage": "es", "image": og, "mainEntityOfPage": {"@id": f"{url}#webpage"},
+                      "author": {"@id": ORG}, "publisher": {"@id": ORG}, "datePublished": "2026-11-21", "dateModified": date.today().isoformat()})
+        webpage["mainEntity"] = {"@id": f"{url}#articulo"}
     q = faqs(page_html)
     if q:
         nodes.append({"@type": "FAQPage", "@id": f"{url}#faq", "url": url, "inLanguage": "es", "isPartOf": {"@id": WEBSITE}, "mainEntity": q})
@@ -212,7 +230,7 @@ def sitemap_xml():
     today = date.today().isoformat()
     pri = {"/": "1.0", "/webs": "0.9", "/webs/clinicas": "0.8", "/ia": "0.8"}
     urls = "".join(
-        f"  <url><loc>{SITE}{c['path']}</loc><lastmod>{today}</lastmod><priority>{pri[c['path']]}</priority>"
+        f"  <url><loc>{SITE}{c['path']}</loc><lastmod>{today}</lastmod><priority>{pri.get(c['path'], '0.7')}</priority>"
         f"<image:image><image:loc>{SITE}/img/og/{c['og']}.jpg</image:loc></image:image></url>\n"
         for c in PAGES.values())
     urls += "".join(f"  <url><loc>{SITE}/{k}</loc><lastmod>{today}</lastmod><priority>0.3</priority></url>\n" for k in ("terminos", "privacidad"))
@@ -257,6 +275,10 @@ Precios de México en pesos mexicanos. También hay precios en moneda local o en
 - {diag['name']}: {diag['description']}
 - Agentes, tableros y procesos a medida: {pilot['description']}
 - {cat['operacion']['name']}: {cat['operacion']['description']}
+
+## Guías
+- [¿Cuánto cuesta una página web en México?]({SITE}/guias/cuanto-cuesta-una-pagina-web): los tres caminos (hacerla tú, freelance o agencia, suscripción), lo que cuesta cada uno y qué debe incluir el precio.
+- [Cómo hacer que ChatGPT y Google recomienden tu negocio]({SITE}/guias/aparecer-en-chatgpt-y-google): de dónde sacan las recomendaciones los asistentes de IA y los pasos para un negocio local.
 
 ## Empezar
 - [Arma tu página]({SITE}/empezar): una conversación corta donde el negocio cuenta qué hace (o deja su página o Instagram), elige el modelo de su giro y su estilo, ve su página armarse al momento y recibe la versión completa gratis.

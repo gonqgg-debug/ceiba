@@ -28,6 +28,10 @@ Precios de México en pesos mexicanos. También hay precios en moneda local o en
 - Agentes, tableros y procesos a medida: Una automatización o agente: asistente de WhatsApp avanzado, reporte diario o conciliación simple.
 - Operación mensual: Monitoreo, ajustes y uso de IA incluido para una automatización.
 
+## Guías
+- [¿Cuánto cuesta una página web en México?](https://www.ceibalabs.io/guias/cuanto-cuesta-una-pagina-web): los tres caminos (hacerla tú, freelance o agencia, suscripción), lo que cuesta cada uno y qué debe incluir el precio.
+- [Cómo hacer que ChatGPT y Google recomienden tu negocio](https://www.ceibalabs.io/guias/aparecer-en-chatgpt-y-google): de dónde sacan las recomendaciones los asistentes de IA y los pasos para un negocio local.
+
 ## Empezar
 - [Arma tu página](https://www.ceibalabs.io/empezar): una conversación corta donde el negocio cuenta qué hace (o deja su página o Instagram), elige el modelo de su giro y su estilo, ve su página armarse al momento y recibe la versión completa gratis.
 - [Consultoría](https://www.ceibalabs.io/#consultoria): para proyectos de procesos e IA a la medida.
@@ -41,7 +45,7 @@ Precios de México en pesos mexicanos. También hay precios en moneda local o en
 - **¿Cómo empezamos si no sé qué necesito?** Escríbenos cómo funciona hoy tu negocio y qué te quita más tiempo. Te decimos si conviene empezar por la página, por un asistente o por revisar un proceso.
 
 ### Páginas web
-- **¿Cuánto cuesta una página web con Ceiba?** Desde $1,490 al mes con el Plan Esencial, sin pago inicial. Los planes Negocio y Avanzado tienen un pago inicial y más páginas, agenda en línea y reportes. Incluye diseño, hosting, dominio, mantenimiento, SEO y cambios cada mes. Ves los precios en la moneda de tu país.
+- **¿Cuánto cuesta una página web con Ceiba?** Desde $1,490 al mes con el Plan Esencial, sin pago inicial. Los planes Negocio y Avanzado tienen un pago inicial y más páginas, agenda en línea y reportes. Incluye diseño, hosting, dominio, mantenimiento, SEO y cambios cada mes. Ves los precios en la moneda de tu país. Compara con los otros caminos.
 - **¿Necesito tener página web para empezar?** No. Cuéntanos de tu negocio y armamos tu página desde cero con el modelo de tu giro. Si tienes Instagram o perfil de Google, de ahí tomamos tus fotos y datos; si ya tienes página, partimos de ella para mejorarla.
 - **¿En cuánto tiempo recibo mi página?** El borrador lo ves al momento mientras nos cuentas de tu negocio. La versión completa, con tus datos y revisada por una persona, te llega en un enlace privado en un día hábil.
 - **¿Tengo que pagar por la propuesta?** No, es gratis. Solo pagas el monto inicial y la mensualidad si decides activar tu página.
