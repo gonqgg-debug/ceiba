@@ -228,6 +228,26 @@ export const CATALOGO = [
     ref: { name: "The Drifter (según las notas; la página no cargó)", url: 'https://www.thedrifterhotel.com/' },
     idea: "Motel con alberca u hostal juguetón: letra gorda, rosa, verde agua y amarillo, cinta de palabras, cuartos en tarjetas de colores y calcomanías.",
   },
+  {
+    id: 'arco', name: "Arco", kind: 'inmobiliaria', demo: 'inmobiliaria-raiz', accent: '#B4583A',
+    ref: { name: "Village Properties", url: 'https://villagesite.com/' },
+    idea: "Ciudad con carácter: fotos recortadas en arco con los colores de la arquitectura local, cifras en tarjetas, filtros y botón de letra grande.",
+  },
+  {
+    id: 'local', name: "Local", kind: 'inmobiliaria', demo: 'inmobiliaria-raiz', accent: '#25483A',
+    ref: { name: "Dwelling in Maine", url: 'https://dwellinginmaine.com/' },
+    idea: "Independiente y de su ciudad: verde bosque, sello «de aquí», comparación con una franquicia y valuación gratis para vendedores.",
+  },
+  {
+    id: 'brisa', name: "Brisa", kind: 'inmobiliaria', demo: 'inmobiliaria-raiz', accent: '#2E6B4A',
+    ref: { name: "The Malibu Life", url: 'https://themalibulife.com/' },
+    idea: "Costa o zona residencial: mayúsculas grandes, precio primero, colonias en mosaico y botones para agrandar la letra y escuchar la página.",
+  },
+  {
+    id: 'cartelera', name: "Cartelera", kind: 'inmobiliaria', demo: 'inmobiliaria-raiz', accent: '#3B82F6',
+    ref: { name: "eXp Realty", url: 'https://www.exprealty.com/' },
+    idea: "Mucho inventario: frases que cambian en lugar del buscador y propiedades en filas que se deslizan, como en una plataforma de video.",
+  },
 ];
 
 export const RUBROS = { clinica: 'Clínicas dentales', consultorio: 'Consultorios médicos', restaurante: 'Restaurantes', hotel: 'Hoteles', inmobiliaria: 'Inmobiliarias', despacho: 'Despachos legales' };

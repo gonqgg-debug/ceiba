@@ -73,6 +73,19 @@ export function base(c = {}, { mode = 'live', marks = {} } = {}, fallbackAccent 
       <label><span>Huéspedes</span><select name="g" data-l="Huéspedes">${['1', '2', '3', '4', '5', '6 o más'].map(x => `<option${x === '2' ? ' selected' : ''}>${x}</option>`).join('')}</select></label>
       ${list(c.rooms?.items).length ? `<label><span>Habitación</span><select name="r" data-l="Habitación"><option value="">La que esté disponible</option>${list(c.rooms.items).map(r => `<option>${esc(r.name)}</option>`).join('')}</select></label>` : ''}
       <button type="submit">Consultar disponibilidad</button></form>` : ''),
+    // Inmobiliarias: datos para filtrar, enlace «Me interesa» y la ficha corta de cada propiedad
+    lstAttrs: l => ` data-op="${esc(String(l.op || '').toLowerCase())}" data-beds="${+l.beds || 0}" data-price="${+digits(String(l.price || '').split('/')[0]) || 0}" data-zone="${esc(String(l.zone || '').toLowerCase())}" data-t="${esc(String(l.title || '').toLowerCase())}"`,
+    lstHref: l => (waNum ? waMsg(`Hola, me interesa: ${l.title}${l.price ? ` (${l.price})` : ''}${l.zone ? `, ${l.zone}` : ''}. ¿Sigue disponible?`) : bookHref),
+    lstFacts: l => [l.beds && `${l.beds} rec.`, l.baths && `${l.baths} baños`, l.m2 && `${l.m2} m²`, l.parking && `${l.parking} est.`].filter(Boolean),
+    // «¿Cuánto vale tu casa?»: arma el mensaje para WhatsApp (vendedores)
+    valueForm: (cls = '') => (waNum ? `<form class="t-val ${cls}" data-t-form data-intro="Hola, quiero saber cuánto vale mi propiedad"${live ? '' : ' inert'}>
+      <label><span>Colonia</span><input name="z" data-l="Colonia" placeholder="¿Dónde está?"></label><label><span>Tipo</span><select name="k" data-l="Tipo"><option>Casa</option><option>Departamento</option><option>Terreno</option><option>Local</option></select></label>
+      <label><span>Recámaras</span><select name="b" data-l="Recámaras">${['1', '2', '3', '4', '5 o más'].map(x => `<option${x === '3' ? ' selected' : ''}>${x}</option>`).join('')}</select></label>
+      <button type="submit">Pedir valuación gratis</button></form>` : ''),
+    // Filtros de propiedades (los lee bindT en clinica.js): operación, recámaras, precio máximo y búsqueda escrita
+    lstFilters: (cls = '', { q = false } = {}) => `<form class="t-filt ${cls}" data-t-filt role="search" onsubmit="return false">${q ? `<label class="t-filt-q"><span>Qué buscas</span><input name="q" type="search" placeholder="Ej. casa de 3 recámaras en Zapopan hasta 5 millones"></label>` : ''}
+      <label><span>Operación</span><select name="op"><option value="">Venta y renta</option><option value="venta">Venta</option><option value="renta">Renta</option></select></label>
+      <label><span>Recámaras</span><select name="beds"><option value="">Cualquiera</option>${[1, 2, 3, 4].map(n => `<option value="${n}">${n}+</option>`).join('')}</select></label></form>`,
     roomHref: r => (waNum ? waMsg(`Hola, quiero reservar la habitación ${r.name}. ¿Tienen disponibilidad?`) : bookHref),
     navLink: ([id, label]) => (live ? `<a href="#${id}">${esc(label)}</a>` : `<span>${esc(label)}</span>`),
   };

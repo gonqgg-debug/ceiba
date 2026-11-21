@@ -439,6 +439,46 @@
       };
       tick(); setInterval(tick, 30000);
     });
+    // Inmobiliarias: filtros y búsqueda escrita sobre la lista de propiedades ([data-t-list] > [data-op])
+    document.querySelectorAll('[data-t-filt]:not([data-tb])').forEach(f => {
+      f.dataset.tb = 1;
+      const root = f.closest('.cx'), out = root && root.querySelector('[data-t-count]');
+      const items = root ? [...root.querySelectorAll('[data-t-list] [data-op]')] : [];
+      const num = s => { const m = s.match(/(\d+(?:[.,]\d+)?)\s*(millones|millón|mdp|m\b|mil|k\b)?/); if (!m) return 0; const n = parseFloat(m[1].replace(',', '.')); return /^m/.test(m[2] || '') ? n * 1e6 : /^(mil|k)/.test(m[2] || '') ? n * 1e3 : n; };
+      const run = () => {
+        const v = Object.fromEntries(new FormData(f)), q = String(v.q || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        let op = v.op || '', beds = +v.beds || 0, max = 0, words = [];
+        if (q) {
+          if (/rent/.test(q)) op = 'renta'; else if (/compr|venta|vend/.test(q)) op = 'venta';
+          const b = q.match(/(\d+)\s*(rec|cuart|hab)/); if (b) beds = +b[1];
+          const p = q.match(/(?:hasta|menos de|maximo|max\.?|por)\s*\$?\s*([\d.,]+\s*(?:millones|millon|mdp|mil|k|m)?)/); if (p) max = num(p[1]);
+          words = q.replace(/(\d+)\s*(rec\w*|cuart\w*|hab\w*)|(hasta|menos de|maximo|max\.?|por)\s*\$?\s*[\d.,]+\s*(millones|millon|mdp|mil|k|m)?|\b(busco|quiero|una?|casa|depa\w*|en|de|con|para|comprar|rentar|renta|venta|y|el|la|los|las)\b/g, ' ').split(/\s+/).filter(w => w.length > 3);
+        }
+        let shown = 0;
+        items.forEach(x => {
+          const d = x.dataset, hay = `${d.zone} ${d.t}`.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+          const ok = (!op || d.op === op) && (!beds || +d.beds >= beds) && (!max || !+d.price || +d.price <= max) && words.every(w => hay.includes(w));
+          x.hidden = !ok; if (ok) shown++;
+        });
+        if (out) out.textContent = shown ? `${shown} ${shown === 1 ? 'propiedad' : 'propiedades'}` : 'Nada con eso por ahora: escríbenos y te buscamos opciones';
+      };
+      f.addEventListener('input', run); f.addEventListener('change', run); run();
+    });
+    // Accesibilidad de la página: agrandar letra y leer en voz alta ([data-t-zoom], [data-t-read])
+    document.querySelectorAll('[data-t-zoom]:not([data-tb])').forEach(bt => {
+      bt.dataset.tb = 1; const root = bt.closest('.cx');
+      bt.addEventListener('click', () => { const on = root.classList.toggle('t-big'); bt.setAttribute('aria-pressed', on); });
+    });
+    document.querySelectorAll('[data-t-read]:not([data-tb])').forEach(bt => {
+      bt.dataset.tb = 1; const root = bt.closest('.cx');
+      if (!('speechSynthesis' in window)) { bt.hidden = true; return; }
+      bt.addEventListener('click', () => {
+        if (speechSynthesis.speaking) { speechSynthesis.cancel(); bt.setAttribute('aria-pressed', false); return; }
+        const txt = [...root.querySelectorAll('h1, h2, h3, p')].filter(e => e.offsetParent).map(e => e.textContent.trim()).filter(Boolean).slice(0, 40).join('. ');
+        const u = new SpeechSynthesisUtterance(txt); u.lang = 'es-MX'; u.onend = () => bt.setAttribute('aria-pressed', false);
+        speechSynthesis.speak(u); bt.setAttribute('aria-pressed', true);
+      });
+    });
     // «Bowl»: filtros de la carta y panel del platillo elegido
     document.querySelectorAll('.bw-shop:not([data-tb])').forEach(sh => {
       sh.dataset.tb = 1;

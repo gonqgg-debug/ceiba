@@ -29,6 +29,9 @@ export default {
         { title: 'Casa en Puerta de Hierro', op: 'venta', price: '$8,900,000', zone: 'Puerta de Hierro, Zapopan', beds: 4, baths: 3.5, m2: 320, parking: 2, img: '/img/demo/inmo-casa.jpg' },
         { title: 'Departamento con vista', op: 'renta', price: '$24,000 / mes', zone: 'Providencia, Guadalajara', beds: 2, baths: 2, m2: 110, parking: 1, img: '/img/demo/inmo-depa.jpg' },
         { title: 'Casa en coto privado', op: 'venta', price: '$4,350,000', zone: 'Valle Real, Zapopan', beds: 3, baths: 2.5, m2: 180, parking: 2, img: '/img/demo/inmo-townhouse.jpg' },
+        { title: 'Departamento amueblado', op: 'renta', price: '$16,500 / mes', zone: 'Chapultepec, Guadalajara', beds: 1, baths: 1, m2: 68, parking: 1, img: '/img/demo/inmo-depa.jpg' },
+        { title: 'Casa con jardín', op: 'venta', price: '$6,200,000', zone: 'Ciudad Granja, Zapopan', beds: 4, baths: 3, m2: 260, parking: 3, img: '/img/demo/inmo-casa.jpg' },
+        { title: 'Townhouse nuevo', op: 'renta', price: '$32,000 / mes', zone: 'Andares, Zapopan', beds: 3, baths: 2.5, m2: 195, parking: 2, img: '/img/demo/inmo-townhouse.jpg' },
       ],
     },
     services: { title: 'Cómo te ayudamos', sub: 'Si vas a comprar, vender o rentar, te acompañamos en todo el proceso.', items: [
@@ -49,7 +52,15 @@ export default {
       { q: '¿Rentan departamentos?', a: 'Sí, en Providencia, Chapultepec y Andares. ¿Para cuándo lo necesitas?', action: 'wa' },
       { q: 'Quiero vender mi casa', a: 'Con gusto la valuamos sin costo. ¿En qué colonia está?', action: 'wa' },
     ] },
-    reviews: null, gallery: null, tech: null, prices: null, offers: null, today: null, payments: null,
+    reviews: { title: 'Lo que dicen nuestros clientes', items: [
+      { name: 'Mariana G.', text: 'Nos encontraron casa en Valle Real en tres semanas y nos acompañaron hasta el notario.' },
+      { name: 'Jorge L.', text: 'Vendieron mi departamento al precio que acordamos y me explicaron cada paso.' },
+      { name: 'Ana P.', text: 'Siempre me atendió la misma asesora y me respondía rápido por WhatsApp.' },
+    ] },
+    gallery: { images: [
+      { img: '/img/demo/inmo-casa.jpg', alt: 'Casa en Puerta de Hierro' }, { img: '/img/demo/inmo-depa.jpg', alt: 'Departamento en Providencia' },
+      { img: '/img/demo/inmo-townhouse.jpg', alt: 'Casa en Valle Real' }, { img: '/img/demo/inmo-asesora.jpg', alt: 'Asesora con clientes' },
+    ] }, tech: null, prices: null, offers: null, today: null, payments: null,
     footer: { note: 'Demo de Ceiba Labs (negocio ficticio)' },
   },
 };

@@ -1,0 +1,95 @@
+/* Diseño «Brisa» (lib/templates/brisa.js, raíz .cx.bz). Basado en The Malibu Life: mayúsculas grandes
+   y espaciadas, verde y crema, precio primero, colonias en mosaico, letra grande y lectura en voz alta. */
+.cx.bz{--green:var(--a);--lime:#D9D96B;--cream:#FCF6EC;--ink:#1F2B24;--mute:#66706A;--line:#E3DCCD;
+  --fh:'Italiana',Georgia,serif;--fb:'Archivo',ui-sans-serif,system-ui,sans-serif;--pad:max(1.25rem,6cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:400 clamp(15px,1.06cqi,17px)/1.65 var(--fb);background:var(--cream);color:var(--ink);position:relative;overflow:clip}
+.cx.bz.t-big{font-size:clamp(18px,1.32cqi,21px)}
+.bz h1,.bz h2,.bz h3{font-family:var(--fb);font-weight:500;color:inherit;margin:0;line-height:1.15;text-transform:uppercase;letter-spacing:.08em;text-wrap:balance}
+.bz :where(p){margin:0}.bz a{color:inherit}
+.bz svg{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2}
+.bz-btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.6rem;padding:0 1.3rem;background:var(--green);color:#fff!important;font:600 .76rem/1 var(--fb);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;white-space:nowrap;justify-self:start}
+.bz-btn:hover{background:var(--ink)}
+.bz-link{display:inline-flex;align-items:center;gap:.4rem;font:600 .74rem/1 var(--fb);letter-spacing:.14em;text-transform:uppercase;color:var(--green)!important;text-decoration:none}
+.bz a:focus-visible,.bz button:focus-visible,.bz summary:focus-visible,.bz select:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.bz-top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:1.2rem;padding:.8rem var(--pad);background:var(--cream);border-bottom:1px solid var(--line)}
+.bz-top nav{display:flex;gap:1.6rem;font:600 .74rem/1 var(--fb);letter-spacing:.16em;text-transform:uppercase}
+.bz-top nav a,.bz-top nav span{text-decoration:none}
+.bz-a11y{display:flex;gap:.4rem;margin-left:auto}
+.bz-a11y button{appearance:none;display:grid;place-items:center;width:2.4rem;height:2.4rem;border:1px solid var(--line);border-radius:50%;background:#fff;color:var(--ink);font:700 .8rem var(--fb);cursor:pointer}
+.bz-a11y button svg{fill:currentColor;stroke:none}
+.bz-a11y button[aria-pressed="true"]{background:var(--green);color:#fff;border-color:var(--green)}
+/* hero */
+.bz-hero{display:grid;gap:1.6rem;justify-items:center;text-align:center;padding:max(2.5rem,4cqi) var(--pad) max(3rem,5cqi)}
+.bz-logo{display:grid;justify-items:center;font:400 clamp(2.4rem,5cqi,4.4rem)/.95 var(--fh);color:var(--lime);letter-spacing:.06em;-webkit-text-stroke:.5px #8a8a2a}
+.bz-logo i{font:italic 400 .4em/1 var(--fh);-webkit-text-stroke:0}
+.bz-logo span{font:600 .62rem/1.6 var(--fb);letter-spacing:.3em;color:var(--mute);-webkit-text-stroke:0}
+.bz-hero-img{width:100%;aspect-ratio:21/9;background:center/cover no-repeat}
+.bz-hero h1{font-size:clamp(1.4rem,2.6cqi,2.4rem);max-width:28em;color:var(--green)}
+.bz-sub{color:var(--mute);max-width:40em}
+@media (prefers-reduced-motion:no-preference){.bz:not(.bz-still) .bz-hero-img{animation:bz-open 1.4s var(--ease) both}}
+@keyframes bz-open{from{clip-path:inset(0 30% 0 30%)}}
+/* propiedades */
+.bz-props{padding:max(3rem,5cqi) var(--pad);border-left:.6rem solid var(--green)}
+.bz-props>h2{font-size:clamp(1.4rem,2.6cqi,2.2rem);color:var(--green)}
+.bz-bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1rem;margin:1.2rem 0 1.8rem}
+.bz-bar [data-t-count]{font-size:.84rem;color:var(--mute)}
+.bz .t-filt{display:flex;gap:.6rem;flex-wrap:wrap}
+.bz .t-filt label{display:grid;gap:.2rem;font:600 .64rem/1 var(--fb);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.bz .t-filt select{font:inherit;font-size:.92rem;color:var(--ink);border:0;border-bottom:1px solid var(--ink);background:transparent;min-height:2.4rem;padding:0 .2rem}
+.bz-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,17rem),1fr));gap:2.4rem 1.4rem}
+.bz-list article{position:relative;display:grid;gap:.3rem;align-content:start}
+.bz-list article[hidden]{display:none}
+.bz-img{aspect-ratio:4/3;background:center/cover no-repeat;margin-bottom:.6rem;filter:saturate(.9)}
+.bz-flag{position:absolute;top:.6rem;right:.6rem;padding:.3rem .6rem;background:var(--ink);color:#fff;font:600 .62rem/1 var(--fb);letter-spacing:.14em;text-transform:uppercase}
+.bz-price{font:500 1.4rem/1 var(--fb);letter-spacing:.02em}
+.bz-list h3{font-size:.8rem;letter-spacing:.14em;color:var(--mute)}
+.bz-list article>p:not(.bz-price){font-size:.88em;color:var(--mute)}
+.bz-facts{margin-bottom:.4rem}
+/* colonias */
+.bz-zones{padding:max(3rem,5cqi) var(--pad);background:#fff}
+.bz-zones>h2{font-size:clamp(1.4rem,2.6cqi,2.2rem);color:var(--green);text-align:right;margin-bottom:1.4rem}
+.bz-zones>div:not([class*="-img"]){display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem}
+.bz-zone{position:relative;display:grid;place-items:center;min-height:12rem;color:#fff;text-decoration:none;overflow:hidden}
+.bz-zone-img{position:absolute;inset:0;background:center/cover no-repeat;filter:grayscale(1) brightness(.55);transition:filter .5s,transform .8s var(--ease)}
+.bz-zone:hover .bz-zone-img{filter:grayscale(0) brightness(.6);transform:scale(1.05)}
+.bz-zone span{position:relative;font:500 1.1rem/1.2 var(--fb);letter-spacing:.2em;text-align:center;padding:0 1rem}
+/* nosotros */
+.bz-about{display:grid;grid-template-columns:1.2fr .8fr;gap:max(2rem,5cqi);padding:max(3.5rem,6cqi) var(--pad)}
+.bz-about>div:not([class*="-img"]){display:grid;gap:1rem}
+.bz-about h2{font-size:clamp(1.4rem,2.6cqi,2.2rem);color:var(--green)}
+.bz-about p{color:var(--mute)}.bz-about ul{margin:0;padding-left:1.1rem;display:grid;gap:.4rem}
+.bz-about dl{margin:0;display:grid;gap:1rem;align-content:center}
+.bz-about dl div{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;border-bottom:1px solid var(--line);padding-bottom:.6rem}
+.bz-about dt{font:600 .7rem/1 var(--fb);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.bz-about dd{margin:0;font:400 2.4rem/1 var(--fh);color:var(--green)}
+.bz-revs{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding:0 var(--pad) max(3.5rem,6cqi)}
+.bz-revs blockquote{margin:0;display:grid;gap:.6rem;border-top:2px solid var(--green);padding-top:1rem}
+.bz-revs p{font:400 1.3rem/1.4 var(--fh)}.bz-revs cite{font:600 .7rem/1 var(--fb);letter-spacing:.14em;text-transform:uppercase;font-style:normal;color:var(--mute)}
+.bz-ask{background:var(--ink);padding:max(3rem,5cqi) var(--pad)}
+.bz-ask>div:not([class*="-img"]){display:grid;gap:1rem;justify-items:center;text-align:center;max-width:34rem;margin:0 auto;padding:2.4rem;background:#fff}
+.bz-ask h2{font-size:1.4rem}.bz-ask p{color:var(--mute)}.bz-ask .bz-btn{justify-self:center}
+.bz-faq{max-width:46rem;margin:0 auto;padding:max(3rem,5cqi) var(--pad);box-sizing:content-box}
+.bz-faq h2{font-size:1.4rem;color:var(--green);margin-bottom:1rem}
+.bz-faq details{border-bottom:1px solid var(--line)}
+.bz-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:.9rem 0;font-weight:600}
+.bz-faq summary::-webkit-details-marker{display:none}
+.bz-faq summary::after{content:"+";color:var(--green)}
+.bz-faq details[open] summary::after{content:"−"}
+.bz-faq details p{color:var(--mute);padding-bottom:1rem}
+.bz-foot{display:grid;gap:1.6rem;justify-items:center;padding:3rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom));background:#EDE6D8}
+.bz-foot .bz-logo{font-size:2.4rem}
+.bz-foot>div:not([class*="-img"]){display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;width:100%;font-size:.88em;color:var(--mute)}
+.bz-foot b{color:var(--ink);font:600 .7rem/2 var(--fb);letter-spacing:.14em;text-transform:uppercase}
+.bz-foot a{text-decoration:none}
+.bz-legal{display:flex!important;flex-wrap:wrap;justify-content:center;gap:.3rem 1.2rem;font-size:.7rem!important}
+.bz-sticky{display:none}
+@container (max-width:980px){.bz-top nav{display:none}.bz-revs{grid-template-columns:1fr}}
+@container (max-width:640px){
+  .bz-hero-img{aspect-ratio:4/3}
+  .bz-zones>div:not([class*="-img"]){grid-template-columns:1fr 1fr}.bz-zone{min-height:8rem}
+  .bz-about,.bz-foot>div:not([class*="-img"]){grid-template-columns:1fr}
+  .bz-props{border-left-width:.3rem}
+  .bz-top .bz-btn{display:none}
+  .bz-sticky{display:flex;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:var(--cream);border-top:1px solid var(--line)}
+  .bz-sticky>*{flex:1}
+}

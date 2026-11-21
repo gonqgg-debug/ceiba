@@ -45,6 +45,10 @@ import { renderCalendario, CALENDARIO_FONTS } from './calendario.js';
 import { renderPelicula, PELICULA_FONTS } from './pelicula.js';
 import { renderReloj, RELOJ_FONTS } from './reloj.js';
 import { renderVerano, VERANO_FONTS } from './verano.js';
+import { renderArco, ARCO_FONTS } from './arco.js';
+import { renderLocal, LOCAL_FONTS } from './local.js';
+import { renderBrisa, BRISA_FONTS } from './brisa.js';
+import { renderCartelera, CARTELERA_FONTS } from './cartelera.js';
 export const DESIGNS = {
   estudio: { render: renderEstudio, fonts: ESTUDIO_FONTS, kinds: ['clinica'] },
   galeria: { render: renderGaleria, fonts: GALERIA_FONTS, kinds: ['clinica'] },
@@ -90,4 +94,8 @@ export const DESIGNS = {
   pelicula: { render: renderPelicula, fonts: PELICULA_FONTS, kinds: ['hotel'] },
   reloj: { render: renderReloj, fonts: RELOJ_FONTS, kinds: ['hotel'] },
   verano: { render: renderVerano, fonts: VERANO_FONTS, kinds: ['hotel'] },
+  arco: { render: renderArco, fonts: ARCO_FONTS, kinds: ['inmobiliaria'] },
+  local: { render: renderLocal, fonts: LOCAL_FONTS, kinds: ['inmobiliaria'] },
+  brisa: { render: renderBrisa, fonts: BRISA_FONTS, kinds: ['inmobiliaria'] },
+  cartelera: { render: renderCartelera, fonts: CARTELERA_FONTS, kinds: ['inmobiliaria'] },
 };
