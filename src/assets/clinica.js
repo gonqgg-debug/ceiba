@@ -255,6 +255,13 @@
     });
   };
 
-  bindCars(); bindDemos(); bindMoments(); bindExpresiva();
-  new MutationObserver(() => { bindCars(); bindDemos(); bindMoments(); bindExpresiva(); }).observe(document.documentElement, { childList: true, subtree: true });
+  // Cercana: las tarjetas de servicios aparecen con un pequeño salto, una tras otra (una vez)
+  const pio = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; pio.unobserve(e.target); requestAnimationFrame(() => { e.target.classList.add('is-in'); e.target.classList.remove('is-pre'); }); }), { threshold: .2 });
+  const bindPop = () => document.querySelectorAll('[data-cx-pop]:not([data-io])').forEach(l => {
+    l.dataset.io = 1; if (reduce || l.getBoundingClientRect().top < innerHeight) return;
+    l.classList.add('is-pre'); pio.observe(l);
+  });
+
+  bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop();
+  new MutationObserver(() => { bindCars(); bindDemos(); bindMoments(); bindExpresiva(); bindPop(); }).observe(document.documentElement, { childList: true, subtree: true });
 })();

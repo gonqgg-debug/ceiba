@@ -756,3 +756,130 @@
 .cx > section.cx-sec{padding-top:5.5em;padding-bottom:5.5em}
 .cx-benefits{margin-bottom:0}
 @container (max-width:640px){.cx > section.cx-sec{padding-top:3.6em;padding-bottom:3.6em}}
+
+/* =====================================================================
+   Variante «Cercana» (page.theme.style = 'cercana'): colorida y amable, para
+   negocios familiares (pediatría, veterinarias, cafés, escuelas). Tonos
+   pastel del color de la marca + un amarillo cálido; formas redondeadas;
+   movimientos con un poco de rebote. Todo quieto con movimiento reducido.
+   ===================================================================== */
+.cx--cercana{
+  --r:1.6em;--sun:#FFD166;--sun-soft:color-mix(in srgb,#FFD166 22%,var(--bg));
+  --p1:color-mix(in srgb,var(--a) 12%,var(--bg));--p2:var(--sun-soft);--p3:color-mix(in srgb,var(--a) 20%,var(--bg));--p4:color-mix(in srgb,#7FD1AE 22%,var(--bg));
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --band:var(--p1);
+}
+.cx--cercana h1,.cx--cercana h2,.cx--cercana h3{letter-spacing:-.02em}
+.cx--cercana .cx-stars{color:#F5A700}
+
+/* botones: rebote suave al pasar y se aplastan un poco al presionar */
+.cx--cercana .cx-btn{transition:transform 260ms var(--spring),background-color 150ms var(--ease);box-shadow:0 .35em 0 color-mix(in srgb,var(--a) 55%,var(--ink))}
+.cx--cercana .cx-btn--ghost,.cx--cercana .cx-btn--line{box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--fg) 18%,var(--bg))}
+@media (hover:hover) and (pointer:fine){.cx--cercana .cx-btn:hover{transform:translateY(-3px)}}
+.cx--cercana .cx-btn:active{transform:translateY(2px) scale(.97);transition-duration:90ms}
+
+/* hero en un panel de color redondeado, foto en forma orgánica y etiqueta que gira */
+.cx--cercana .cx-hero{background:var(--p1);border-radius:2.6em;margin:1.4em auto 0;max-width:calc(84em - 2 * var(--pad));padding:4.5em 4em;align-items:center}
+.cx--cercana .cx-hero h1{font-weight:800;font-size:4.2em;line-height:1.02;letter-spacing:-.03em}
+.cx--cercana .cx-rating{background:var(--bg);padding:.45em .9em;border-radius:999px}
+.cx--cercana .cx-hero-media{overflow:visible;border-radius:0!important;position:relative}
+.cx--cercana .cx-hero-img{border-radius:58% 42% 48% 52% / 46% 54% 46% 54%!important;aspect-ratio:1/1.02!important;box-shadow:1.2em 1.2em 0 var(--sun)!important}
+.cx--cercana .cx-next-slot{background:var(--bg);box-shadow:none;border-radius:999px;padding:.45em .9em}
+.cx-sticker{position:absolute;left:-1.4em;bottom:-.6em;width:9em;height:9em;border-radius:50%;background:var(--sun);color:var(--ink);display:grid;place-items:center;box-shadow:0 .8em 1.6em -.8em rgba(0,0,0,.35)}
+.cx-sticker > svg{position:absolute;inset:0;width:100%;height:100%;font:700 9.5px/1 var(--fb);letter-spacing:.12em;text-transform:uppercase;fill:currentColor}
+.cx-sticker > span{width:3.2em;height:3.2em;border-radius:50%;background:var(--bg);display:grid;place-items:center;color:var(--a)}
+@keyframes cx-spin{to{transform:rotate(360deg)}}
+@keyframes cx-pop-in{from{opacity:0;transform:scale(.92) translateY(14px)}}
+@media (prefers-reduced-motion:no-preference){
+  .cx-sticker > svg{animation:cx-spin 18s linear infinite}
+  .cx--cercana .cx-hero[data-enter] .cx-hero-media{animation:cx-pop-in 900ms var(--spring) both}
+  .cx--cercana .cx-hero[data-enter] .cx-hero-img{animation:none}
+}
+
+/* beneficios en tarjetas de colores; el ícono salta al pasar el mouse */
+.cx--cercana .cx-benefits{border:0;gap:1em;margin-top:1.6em}
+.cx--cercana .cx-benefit{border:0!important;padding:1.5em!important;border-radius:var(--r);background:var(--p1)}
+.cx--cercana .cx-benefit:nth-child(4n+2){background:var(--p2)}
+.cx--cercana .cx-benefit:nth-child(4n+3){background:var(--p4)}
+.cx--cercana .cx-benefit:nth-child(4n+4){background:var(--p3)}
+.cx-bico{display:grid;place-items:center;width:3em;height:3em;border-radius:50%;background:var(--bg);color:var(--a);margin-bottom:.7em;transition:transform 300ms var(--spring)}
+.cx-bico .cx-ico{width:1.5em;height:1.5em}
+@media (hover:hover) and (pointer:fine){.cx--cercana .cx-benefit:hover .cx-bico{transform:translateY(-4px) rotate(-8deg)}}
+
+/* cifras como globos de color */
+.cx--cercana .cx-stats{gap:1em}
+.cx--cercana .cx-stats div{border:0;padding:1.4em 1.6em!important;border-radius:var(--r);background:var(--p2)}
+.cx--cercana .cx-stats b{color:var(--fg);font-weight:800}
+
+/* secciones: bandas que alternan dos colores suaves */
+.cx--cercana > section.cx-sec:nth-of-type(4n){--band:var(--p2)}
+.cx--cercana .cx-head h2,.cx--cercana .cx-today h2,.cx--cercana .cx-book h2,.cx--cercana .cx-visit h2,.cx--cercana .cx-ai h2,.cx--cercana .cx-tech-copy h2,.cx--cercana .cx-prices-in h2{font-weight:800}
+.cx--cercana .cx-ico-c{color:var(--a);background:var(--bg);border-radius:50%;padding:.35em;box-sizing:content-box}
+.cx--cercana .cx-checks li{border:0;padding-bottom:.2em}
+
+/* servicios: tarjetas de color con la foto redondeada dentro; aparecen con un salto (el momento de la página) */
+.cx--cercana .cx-card{background:var(--bg);border-radius:var(--r);padding:.7em .7em 1.2em;box-shadow:0 0 0 2px color-mix(in srgb,var(--a) 10%,var(--bg))}
+.cx--cercana > section.cx-sec:nth-of-type(odd) .cx-card{background:var(--p1);box-shadow:none}
+.cx--cercana .cx-card-frame{border-radius:calc(var(--r) - .5em)}
+.cx--cercana .cx-card-body{padding:1em .5em 0}
+.cx--cercana .cx-card-t i{background:var(--sun);color:var(--ink);padding:.2em .6em;border-radius:999px;font-size:.85em}
+@media (hover:hover) and (pointer:fine){.cx--cercana .cx-card:hover{transform:translateY(-5px) rotate(-.6deg);transition:transform 320ms var(--spring)}}
+@media (prefers-reduced-motion:no-preference){
+  .cx--cercana [data-cx-pop].is-pre .cx-card{opacity:0;transform:scale(.9) translateY(24px)}
+  .cx--cercana [data-cx-pop].is-in .cx-card{transition:opacity 500ms var(--ease),transform 700ms var(--spring)}
+  .cx--cercana [data-cx-pop].is-in .cx-card:nth-child(2){transition-delay:80ms}
+  .cx--cercana [data-cx-pop].is-in .cx-card:nth-child(3){transition-delay:160ms}
+  .cx--cercana [data-cx-pop].is-in .cx-card:nth-child(4){transition-delay:240ms}
+  .cx--cercana [data-cx-pop].is-in .cx-card:nth-child(5){transition-delay:320ms}
+  .cx--cercana [data-cx-pop].is-in .cx-card:nth-child(n+6){transition-delay:400ms}
+}
+.cx--cercana .cx-pills em{background:var(--bg);box-shadow:none;border-radius:999px}
+
+/* proceso: círculos de color unidos por una línea punteada */
+.cx--cercana .cx-process ol{border:0;gap:1.4em;position:relative}
+.cx--cercana .cx-process li{padding:0}
+.cx--cercana .cx-num{width:3em;height:3em;border-radius:50%;display:grid;place-items:center;background:var(--a);color:#fff;font:800 1.15em/1 var(--fh);margin-bottom:1em;box-shadow:0 0 0 .4em var(--p1)}
+.cx--cercana .cx-process li:nth-child(even) .cx-num{background:var(--sun);color:var(--ink);box-shadow:0 0 0 .4em var(--p2)}
+
+/* reseñas como notas de colores, un poco inclinadas */
+.cx--cercana .cx-rev-list{border:0;gap:1.4em}
+.cx--cercana .cx-rev,.cx--cercana .cx-rev + .cx-rev{padding:1.6em!important;border:0!important;border-radius:1.2em;background:var(--p2);transform:rotate(-1deg);box-shadow:0 1em 1.6em -1.4em rgba(0,0,0,.35);transition:transform 300ms var(--spring)}
+.cx--cercana .cx-rev:nth-child(2){background:var(--p4);transform:rotate(1deg)}
+.cx--cercana .cx-rev:nth-child(3){background:var(--p3);transform:rotate(-.5deg)}
+@media (hover:hover) and (pointer:fine){.cx--cercana .cx-rev:hover{transform:rotate(0) translateY(-4px)}}
+.cx--cercana .cx-rev blockquote{font-weight:600}
+.cx--cercana .cx-avatar{background:var(--bg)}
+
+/* galería tipo foto instantánea */
+.cx--cercana .cx-tile{border:.5em solid var(--bg);border-radius:1em;box-shadow:0 1em 1.8em -1.2em rgba(0,0,0,.4);transition:transform 300ms var(--spring)}
+.cx--cercana .cx-tile:nth-child(odd){transform:rotate(-1.2deg)}
+.cx--cercana .cx-tile:nth-child(even){transform:rotate(1deg)}
+@media (hover:hover) and (pointer:fine){.cx--cercana .cx-tile:hover{transform:rotate(0) scale(1.03);z-index:1}}
+
+/* preguntas como burbujas de chat */
+.cx--cercana .cx-faq-list{gap:1em 1.4em}
+.cx--cercana .cx-qa{border:0;padding:1.3em 1.5em;background:var(--bg);border-radius:1.4em 1.4em 1.4em .4em}
+.cx--cercana > section.cx-sec:nth-of-type(odd) .cx-qa{background:var(--p1)}
+
+/* asistente, ubicación y precios redondeados */
+.cx--cercana .cx-ai-in,.cx--cercana .cx-visit-card,.cx--cercana .cx-phone,.cx--cercana .cx-map,.cx--cercana .cx-tech-img{border-radius:2em}
+.cx--cercana .cx-chips span{background:var(--bg);box-shadow:none;border-radius:999px}
+.cx--cercana .cx-prices li b{color:var(--sun)}
+
+@container (max-width:980px){
+  .cx--cercana .cx-hero{padding:3.4em 2.4em}
+  .cx--cercana .cx-hero h1{font-size:3.3em}
+}
+@container (max-width:640px){
+  .cx--cercana .cx-hero{margin:.8em var(--pad) 0;max-width:none;padding:1.6em 1.3em 2.4em;border-radius:1.8em}
+  .cx--cercana .cx-hero h1{font-size:2.35em}
+  .cx--cercana .cx-hero-media{padding:0 .4em .8em}
+  .cx--cercana .cx-hero-img{box-shadow:.6em .6em 0 var(--sun)!important}
+  .cx-sticker{width:6.4em;height:6.4em;left:-.4em;bottom:-.4em}
+  .cx-sticker > svg{font-size:9px}
+  .cx--cercana .cx-benefits{gap:.7em;margin:1em var(--pad) 0}
+  .cx--cercana .cx-benefit{padding:1.1em!important}
+  .cx--cercana .cx-stats{gap:.7em}
+  .cx--cercana .cx-rev,.cx--cercana .cx-rev + .cx-rev{transform:none}
+}
+.cx-sticker > span .cx-ico{width:1.6em;height:1.6em;fill:none}
