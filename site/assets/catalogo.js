@@ -353,6 +353,31 @@ export const CATALOGO = [
     ref: { name: "M&Y Personal Injury", url: 'https://mylawcompany.com/' },
     idea: "Clientes satisfechos: calificación grande y muro de opiniones de 5 estrellas desde la portada, y casos destacados.",
   },
+  {
+    id: 'consulta', name: "Consulta", kind: 'despacho', demo: 'despacho-ortega', accent: '#3156D3',
+    ref: { name: "Stanley Tate", url: 'https://www.tateesq.com/' },
+    idea: "Sentirse escuchado: la portada simula una primera consulta (tema, urgencia y enviar por WhatsApp) y testimonios en video.",
+  },
+  {
+    id: 'fundadores', name: "Fundadores", kind: 'despacho', demo: 'despacho-ortega', accent: '#B3122E',
+    ref: { name: "Roman Austin", url: 'https://romanaustin.com/' },
+    idea: "Historia familiar: clásico con acentos rojos, atención en español e inglés y el video de los fundadores.",
+  },
+  {
+    id: 'resultados', name: "Resultados", kind: 'despacho', demo: 'despacho-ortega', accent: '#E0782F',
+    ref: { name: "Richard Hollawell", url: 'https://www.richardhollawell.com/' },
+    idea: "Litigio con números: menú grande con todas las áreas, resultados en cifras y la consulta gratis en una ventana.",
+  },
+  {
+    id: 'atencion', name: "Atención", kind: 'despacho', demo: 'despacho-ortega', accent: '#0F8B8D',
+    ref: { name: "Mission Legal Center", url: 'https://missionlegalcenter.com/' },
+    idea: "Mucha gente que atender: video en la portada, el formulario de consulta visible desde el inicio y botón de chat siempre a la mano.",
+  },
+  {
+    id: 'blanco', name: "Blanco", kind: 'despacho', demo: 'despacho-ortega', accent: '#2B5CE6',
+    ref: { name: "Bick Law LLP", url: 'https://www.bicklawllp.com/' },
+    idea: "Impecable y premiado: minimalista, mucho espacio en blanco, fotografía grande y un solo color de marca.",
+  },
 ];
 
 export const RUBROS = { clinica: 'Clínicas dentales', consultorio: 'Consultorios médicos', restaurante: 'Restaurantes', hotel: 'Hoteles', inmobiliaria: 'Inmobiliarias', despacho: 'Despachos legales' };

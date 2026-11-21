@@ -384,7 +384,7 @@
       f.addEventListener('submit', e => {
         e.preventDefault();
         const root = f.closest('.cx'); let kb = {}; try { kb = JSON.parse(root?.querySelector('.t-kb')?.textContent || '{}'); } catch {}
-        const parts = [...f.querySelectorAll('[name]')].filter(x => x.value.trim()).map(x => `• ${x.dataset.l || x.name}: ${x.value.trim()}`);
+        const parts = [...f.querySelectorAll('[name]')].filter(x => x.value.trim() && (!/^(radio|checkbox)$/.test(x.type) || x.checked)).map(x => `• ${x.dataset.l || x.name}: ${x.value.trim()}`);
         const msg = `${f.dataset.intro || 'Hola, quiero agendar una cita en'} ${kb.name || root?.dataset.name || ''}.\n${parts.join('\n')}`;
         if (kb.wa) window.open(`https://wa.me/${kb.wa}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
       });

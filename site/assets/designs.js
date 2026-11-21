@@ -70,6 +70,11 @@ import { renderGlosario, GLOSARIO_FONTS } from './glosario.js';
 import { renderFamiliar, FAMILIAR_FONTS } from './familiar.js';
 import { renderPerfil, PERFIL_FONTS } from './perfil.js';
 import { renderResenas, RESENAS_FONTS } from './resenas.js';
+import { renderConsulta, CONSULTA_FONTS } from './consulta.js';
+import { renderFundadores, FUNDADORES_FONTS } from './fundadores.js';
+import { renderResultados, RESULTADOS_FONTS } from './resultados.js';
+import { renderAtencion, ATENCION_FONTS } from './atencion.js';
+import { renderBlanco, BLANCO_FONTS } from './blanco.js';
 export const DESIGNS = {
   estudio: { render: renderEstudio, fonts: ESTUDIO_FONTS, kinds: ['clinica'] },
   galeria: { render: renderGaleria, fonts: GALERIA_FONTS, kinds: ['clinica'] },
@@ -140,4 +145,9 @@ export const DESIGNS = {
   familiar: { render: renderFamiliar, fonts: FAMILIAR_FONTS, kinds: ['despacho'] },
   perfil: { render: renderPerfil, fonts: PERFIL_FONTS, kinds: ['despacho'] },
   resenas: { render: renderResenas, fonts: RESENAS_FONTS, kinds: ['despacho'] },
+  consulta: { render: renderConsulta, fonts: CONSULTA_FONTS, kinds: ['despacho'] },
+  fundadores: { render: renderFundadores, fonts: FUNDADORES_FONTS, kinds: ['despacho'] },
+  resultados: { render: renderResultados, fonts: RESULTADOS_FONTS, kinds: ['despacho'] },
+  atencion: { render: renderAtencion, fonts: ATENCION_FONTS, kinds: ['despacho'] },
+  blanco: { render: renderBlanco, fonts: BLANCO_FONTS, kinds: ['despacho'] },
 };

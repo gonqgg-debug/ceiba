@@ -1,0 +1,53 @@
+/* Diseño «Blanco» (lib/templates/blanco.js, raíz .cx.bl). Basado en Bick Law LLP: minimalista, espacio en
+   blanco, fotografía grande, una sola tipografía y un solo color de marca. */
+.cx.bl{--blue:var(--a);--paper:#FFFFFF;--ink:#111214;--mute:#6E7178;--line:#E8E8EA;
+  --fb:'Albert Sans',ui-sans-serif,system-ui,sans-serif;--pad:max(1.25rem,8cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:300 clamp(15px,1.05cqi,17px)/1.7 var(--fb);background:var(--paper);color:var(--ink);position:relative;overflow:clip}
+.bl h1,.bl h2,.bl h3{font-family:var(--fb);font-weight:400;color:inherit;margin:0;line-height:1.1;letter-spacing:-.025em;text-wrap:balance}
+.bl :where(p){margin:0}.bl a{color:inherit}
+.bl svg{width:1.1em;height:1.1em;fill:none;stroke:currentColor;stroke-width:1.6}
+.bl-btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.8rem;padding:0 1.4rem;background:var(--ink);color:#fff!important;font:500 .9rem/1 var(--fb);text-decoration:none}
+.bl-link{display:inline-flex;align-items:center;gap:.5rem;font-weight:500;color:var(--blue)!important;text-decoration:none;transition:gap .3s var(--ease)}
+.bl-link:hover{gap:.8rem}
+.bl-label{font:500 .74rem/1 var(--fb);letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.bl a:focus-visible,.bl summary:focus-visible,.bl .t-case :focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.bl-top{display:flex;align-items:center;gap:2rem;padding:2rem var(--pad)}
+.bl-logo{font:600 1.3rem/1 var(--fb);letter-spacing:-.02em}.bl-logo i{color:var(--blue);font-style:normal}
+.bl-top nav{display:flex;gap:2rem;margin-left:auto;font-size:.95em}
+.bl-top nav a,.bl-top nav span{text-decoration:none}
+.bl-hero{display:grid;gap:2.4rem;padding:max(3rem,6cqi) var(--pad) 0}
+.bl-hero h1{font-size:clamp(2.6rem,6cqi,5.6rem);max-width:13em}
+.bl-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1.6rem}.bl-row p{max-width:30em;color:var(--mute);font-size:1.1em}
+.bl-hero-img{aspect-ratio:21/9;background:center/cover no-repeat;margin-top:1rem}
+@media (prefers-reduced-motion:no-preference){.bl:not(.bl-still) .bl-hero h1{animation:bl-in 1.2s var(--ease) both}.bl:not(.bl-still) .bl-hero-img{animation:bl-wipe 1.4s .2s var(--ease) both}}
+@keyframes bl-in{from{opacity:0;transform:translateY(16px)}}
+@keyframes bl-wipe{from{clip-path:inset(0 0 100% 0)}}
+.bl-prac,.bl-nums,.bl-team,.bl-quote,.bl-faq,.bl-cta{display:grid;grid-template-columns:12rem 1fr;gap:2rem;padding:max(5rem,9cqi) var(--pad);border-bottom:1px solid var(--line)}
+.bl-prac ul{list-style:none;margin:0;padding:0}
+.bl-prac li{display:grid;grid-template-columns:1fr 1.3fr auto;gap:2rem;align-items:baseline;padding:1.6rem 0;border-top:1px solid var(--line)}
+.bl-prac li:first-child{border-top:0;padding-top:0}
+.bl-prac h2{font-size:clamp(1.4rem,2.4cqi,2rem)}.bl-prac li p{color:var(--mute)}
+.bl-nums>div{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.bl-nums div div{display:grid;gap:.4rem}.bl-nums b{font:300 clamp(3rem,6cqi,5rem)/1 var(--fb);letter-spacing:-.04em}.bl-nums span{color:var(--mute)}
+.bl-team>div{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,16rem),1fr));gap:2.4rem}
+.bl-team article{display:grid;gap:.3rem}.bl-face{aspect-ratio:4/5;background:center top/cover no-repeat;margin-bottom:.8rem}
+.bl-team h3{font-size:1.2rem;font-weight:500}.bl-team p{color:var(--mute);font-size:.94em}
+.bl-quote blockquote{margin:0;display:grid;gap:1.2rem}.bl-quote p{font:300 clamp(1.6rem,3cqi,2.6rem)/1.3 var(--fb);letter-spacing:-.02em}.bl-quote cite{font-style:normal;color:var(--mute)}
+.bl-faq details{border-top:1px solid var(--line)}.bl-faq details:first-child{border-top:0}
+.bl-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:1rem 0;font-weight:500;font-size:1.05rem}
+.bl-faq summary::-webkit-details-marker{display:none}
+.bl-faq summary::after{content:"+";color:var(--blue)}
+.bl-faq details[open] summary::after{content:"−"}
+.bl-faq details p{color:var(--mute);padding-bottom:1rem;max-width:40em}
+.bl-cta>div{display:grid;gap:2rem}.bl-cta h2{font-size:clamp(2rem,4cqi,3.4rem)}
+.bl .t-case{max-width:40rem}.bl .t-case button{background:var(--ink);font-weight:500}
+.bl-foot{display:grid;gap:.4rem;padding:3rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom));font-size:.9em;color:var(--mute)}
+.bl-foot .bl-logo{color:var(--ink)}.bl-foot a{text-decoration:none}
+.bl-foot>div:not([class*="-img"]){display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;font-size:.72rem;margin-top:.6rem}
+.bl-sticky{display:none}
+@container (max-width:900px){.bl-prac,.bl-nums,.bl-team,.bl-quote,.bl-faq,.bl-cta{grid-template-columns:1fr;gap:1.2rem}.bl-prac li{grid-template-columns:1fr auto;gap:.4rem 1rem}.bl-prac li p{grid-column:1}}
+@container (max-width:640px){
+  .bl-top nav{display:none}.bl-hero-img{aspect-ratio:4/3}.bl-nums>div{grid-template-columns:1fr}
+  .bl-sticky{display:flex;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line)}
+  .bl-sticky>*{flex:1}
+}
