@@ -56,6 +56,10 @@ export function base(c = {}, { mode = 'live', marks = {} } = {}, fallbackAccent 
     reviews: list(c.reviews?.items), members: list(c.team?.members), gallery: list(c.gallery?.images).filter(g => url(g.img)),
     pay: list(c.payments?.methods), insurers: list(c.payments?.insurers), offers: list(c.offers?.items), steps: list(c.process?.steps), trust: list(c.trust),
     ctaTop: hero.ctaTop || 'Agenda tu cita',
+    menu: list(c.menu?.categories).filter(m => list(m.items).length),
+    dishes: list(c.menu?.categories).flatMap(m => list(m.items).map(i => ({ ...i, cat: m.name }))),
+    slots: list(c.booking?.slots).length ? list(c.booking.slots) : list(hero.slots),
+    rooms: list(c.rooms?.items), amenities: list(c.amenities?.items), listings: list(c.listings?.items),
     mk: sec => (marks[sec] ? ` data-mark="${marks[sec]}"` : '') + ` data-sec="${sec}"`,
     // enlace real en vivo; en la miniatura de la propuesta, texto sin navegar
     a: (cls, href, inner, extra = '') => (live && href ? `<a class="${cls}" href="${esc(href)}"${ext(href)}${extra}>${inner}</a>` : `<span class="${cls}"${extra}>${inner}</span>`),

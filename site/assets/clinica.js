@@ -401,6 +401,11 @@
         if (next) { el.dataset.state = 'closed'; el.textContent = `Cerrado · abre ${k === 0 ? 'hoy' : k === 1 ? 'mañana' : `el ${D[dd]}`} a las ${hm(next.from)}`; return; }
       }
     });
+    document.querySelectorAll('[data-t-shrink]:not([data-tb])').forEach(root => {
+      root.dataset.tb = 1; let on = false;
+      const tick = () => { const s = scrollY > 80; if (s !== on) { on = s; root.classList.toggle('t-scrolled', s); } };
+      addEventListener('scroll', tick, { passive: true }); tick();
+    });
     document.querySelectorAll('[data-t-flip]:not([data-tb])').forEach(b => { b.dataset.tb = 1; b.addEventListener('click', () => b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true')); });
     document.querySelectorAll('[data-t-case] input:not([data-tb])').forEach(r => { r.dataset.tb = 1; r.addEventListener('input', () => r.parentElement.style.setProperty('--p', r.value + '%')); });
     document.querySelectorAll('[data-t-tabs]:not([data-tb])').forEach(box => {

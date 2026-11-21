@@ -16,6 +16,7 @@ import { renderHogar, HOGAR_FONTS } from './hogar.js';
 import { renderMenta, MENTA_FONTS } from './menta.js';
 import { renderClara, CLARA_FONTS } from './clara.js';
 import { renderRevista, REVISTA_FONTS } from './revista.js';
+import { renderAhumado, AHUMADO_FONTS } from './ahumado.js';
 export const DESIGNS = {
   estudio: { render: renderEstudio, fonts: ESTUDIO_FONTS, kinds: ['clinica'] },
   galeria: { render: renderGaleria, fonts: GALERIA_FONTS, kinds: ['clinica'] },
@@ -32,4 +33,5 @@ export const DESIGNS = {
   menta: { render: renderMenta, fonts: MENTA_FONTS, kinds: ['clinica'] },
   clara: { render: renderClara, fonts: CLARA_FONTS, kinds: ['clinica'] },
   revista: { render: renderRevista, fonts: REVISTA_FONTS, kinds: ['clinica'] },
+  ahumado: { render: renderAhumado, fonts: AHUMADO_FONTS, kinds: ['restaurante'] },
 };
