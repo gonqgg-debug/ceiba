@@ -985,3 +985,90 @@
   .cx-tabs button{flex:none}
   .cx-amen-mini{grid-template-columns:1fr}
 }
+
+/* =====================================================================
+   Restaurante (page.kind = 'restaurante'): tratamiento gastronómico.
+   Papel cálido con grano, serif expresiva con itálicas, cinta de platillos,
+   carta impresa con línea punteada, foto del platillo junto a la carta y
+   una banda de reservación en el color de la casa. Se suma al estilo elegido.
+   ===================================================================== */
+.cx--resto{
+  --bg:#FBF5EC;--card:#FFFBF5;--fg:#1F1712;--ink:#1F1712;--muted:#6E5D50;
+  --line:color-mix(in srgb,#1F1712 14%,#FBF5EC);--band:#F3E6D3;--soft:#F6EBDC;
+  --mustard:#E0A526;
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .12 0 0 0 0 .09 0 0 0 0 .07 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image:var(--grain);
+}
+.cx--resto > section.cx-sec:nth-of-type(even){background-image:var(--grain)}
+.cx--resto h2,.cx--resto .cx-head h2,.cx--resto .cx-today h2,.cx--resto .cx-visit h2,.cx--resto .cx-ai h2,.cx--resto .cx-ch-head h2{font-weight:500;font-style:italic;letter-spacing:-.02em;font-size:3.1em;line-height:1}
+.cx--resto .cx-hero h1{font-weight:500;letter-spacing:-.035em;font-variation-settings:"opsz" 144}
+.cx--resto .cx-util{background:var(--ink);color:#EADCC8;border:0}
+.cx--resto .cx-util .cx-ico-s{color:var(--mustard)}
+.cx--resto .cx-util-tel{color:#fff}
+.cx--resto .cx-top{background:var(--bg);background-image:var(--grain)}
+.cx--resto .cx-stars{color:var(--mustard)}
+
+/* cinta de platillos a todo lo ancho, en el color de la casa */
+.cx-marquee--band{margin:0;border:0;padding:1.15em 0;background:var(--a);color:#FFF4E6;-webkit-mask-image:none;mask-image:none}
+.cx-marquee--band .cx-mq-track em{font:italic 500 2em/1 var(--fh);letter-spacing:-.01em}
+.cx-marquee--band .cx-mq-track i{color:var(--mustard);font-size:1.3em}
+.cx-marquee--band .cx-mq-track > span{gap:1em;padding-right:1em}
+@media (prefers-reduced-motion:no-preference){.cx-marquee--band .cx-mq-track{animation-duration:46s}}
+
+/* beneficios: títulos en itálica, sin cajas */
+.cx--resto .cx-benefits{border-color:var(--line)}
+.cx--resto .cx-benefit b{font:italic 500 1.25em/1.2 var(--fh)}
+
+/* la carta: foto del platillo a un lado (fija al bajar) y la carta impresa al otro */
+.cx--resto .cx-menu .cx-head{flex-direction:column;align-items:flex-start}
+.cx-menu-wrap--photo{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:3.5em;align-items:start}
+.cx-menu-photo{margin:0;position:sticky;top:6em}
+.cx-menu-img{aspect-ratio:4/5;border-radius:14em 14em 1em 1em;background:center/cover no-repeat}
+.cx-menu-photo figcaption{margin-top:.8em;font:italic 1em var(--fh);color:var(--muted)}
+.cx--resto .cx-menu-cats{background:var(--card);border-radius:.4em;padding:3em 3.2em;box-shadow:0 0 0 1px var(--line),0 1.6em 3em -2.4em rgba(60,30,10,.35);position:relative}
+.cx--resto .cx-menu-cats::before{content:"";position:absolute;inset:.7em;border:1px solid var(--line);border-radius:.2em;pointer-events:none}
+.cx--resto .cx-menu-cat ul{grid-template-columns:1fr;gap:0}
+.cx--resto .cx-menu--tabs .cx-menu-cat h3,.cx--resto .cx-menu-cat h3{display:block;text-align:center;font:italic 500 1.9em/1 var(--fh);margin-bottom:.9em}
+.cx--resto .cx-menu-cat h3::after{content:"✺";display:block;font-size:.45em;color:var(--a);margin-top:.5em;font-style:normal}
+.cx--resto .cx-menu-cat li{border-bottom:0;padding:.85em 0}
+.cx--resto .cx-dish b{font:600 1.2em/1.25 var(--fh)}
+.cx--resto .cx-dish p{font-style:italic;font-family:var(--fh);font-size:.98em}
+.cx--resto .cx-dish-p{color:var(--a);font:600 1.15em var(--fh);background:none!important;padding:0!important}
+.cx--resto .cx-menu-cat li > i{border-bottom:1.5px dotted color-mix(in srgb,var(--fg) 35%,transparent)}
+.cx--resto .cx-tags em{background:none;box-shadow:inset 0 0 0 1px currentColor;color:var(--a);text-transform:uppercase;letter-spacing:.06em;font-size:.62em}
+/* pestañas como palabras de la carta */
+.cx--resto .cx-tabs{gap:.2em 1.6em;margin-bottom:1.6em}
+.cx--resto .cx-tabs button{background:none!important;box-shadow:none!important;color:var(--muted)!important;padding:.3em 0;border-radius:0;font:italic 500 1.35em var(--fh);border-bottom:2px solid transparent}
+.cx--resto .cx-tabs button[aria-selected="true"]{color:var(--fg)!important;border-bottom-color:var(--a)}
+
+/* frase que se enciende y reseñas en serif */
+.cx--resto .cx-statement p{font-style:italic;font-weight:500;font-size:3.8em;line-height:1.08}
+.cx--resto .cx-rev blockquote{font:italic 500 1.3em/1.4 var(--fh)}
+.cx--resto .cx-rev blockquote::before{content:"“";display:block;font:500 3em/0.6 var(--fh);color:var(--a);margin-bottom:.15em}
+.cx--resto .cx-qa h3{font:italic 500 1.25em/1.3 var(--fh)}
+
+/* reservación: banda en el color de la casa */
+.cx--resto > section.cx-sec.cx-book:nth-of-type(n){background:var(--a);box-shadow:0 0 0 100vmax var(--a);background-image:var(--grain)}
+.cx--resto .cx-book h2{font-size:3.6em;color:#FFF4E6}
+.cx--resto .cx-book-copy p{color:#FFF4E6;opacity:.85}
+.cx--resto .cx-form input,.cx--resto .cx-form select{background:rgba(255,248,238,.14);border-color:rgba(255,248,238,.35)}
+.cx--resto .cx-book .cx-btn{background:var(--ink);box-shadow:none}
+.cx--resto .cx-foot{background:var(--ink)}
+
+/* botones con un toque de carta */
+.cx--resto .cx-btn:not(.cx-btn--ghost):not(.cx-btn--line){background:var(--a)}
+.cx--resto .cx-hero .cx-btn:not(.cx-btn--ghost){background:var(--mustard);color:var(--ink)!important}
+
+@container (max-width:980px){
+  .cx-menu-wrap--photo{grid-template-columns:1fr;gap:2em}
+  .cx-menu-photo{position:static}
+  .cx-menu-img{aspect-ratio:16/10;border-radius:10em 10em 1em 1em}
+}
+@container (max-width:640px){
+  .cx--resto h2,.cx--resto .cx-head h2,.cx--resto .cx-today h2,.cx--resto .cx-visit h2,.cx--resto .cx-ai h2,.cx--resto .cx-ch-head h2{font-size:2.2em}
+  .cx--resto .cx-menu-cats{padding:2em 1.4em}
+  .cx--resto .cx-statement p{font-size:2.3em}
+  .cx--resto .cx-book h2{font-size:2.4em}
+  .cx-marquee--band .cx-mq-track em{font-size:1.5em}
+}
+.cx--resto .cx-book .cx-btn:not(.cx-btn--ghost):not(.cx-btn--line){background:var(--ink);color:#FFF4E6!important}
