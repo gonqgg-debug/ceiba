@@ -406,6 +406,16 @@
       const tick = () => { const s = scrollY > 80; if (s !== on) { on = s; root.classList.toggle('t-scrolled', s); } };
       addEventListener('scroll', tick, { passive: true }); tick();
     });
+    // «Bowl»: filtros de la carta y panel del platillo elegido
+    document.querySelectorAll('.bw-shop:not([data-tb])').forEach(sh => {
+      sh.dataset.tb = 1;
+      sh.addEventListener('click', e => {
+        const f = e.target.closest('[data-bw-cat]');
+        if (f) { sh.querySelectorAll('[data-bw-cat]').forEach(x => x.setAttribute('aria-selected', x === f)); sh.querySelectorAll('.bw-grid li').forEach(li => { li.hidden = !!f.dataset.bwCat && li.dataset.cat !== f.dataset.bwCat; }); return; }
+        const p = e.target.closest('[data-bw-pick]');
+        if (p) { sh.querySelectorAll('[data-bw-pick]').forEach(x => x.setAttribute('aria-pressed', x === p)); sh.querySelectorAll('[data-bw-det]').forEach(d => { d.hidden = d.dataset.bwDet !== p.dataset.bwPick; }); }
+      });
+    });
     document.querySelectorAll('[data-t-flip]:not([data-tb])').forEach(b => { b.dataset.tb = 1; b.addEventListener('click', () => b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') !== 'true')); });
     document.querySelectorAll('[data-t-case] input:not([data-tb])').forEach(r => { r.dataset.tb = 1; r.addEventListener('input', () => r.parentElement.style.setProperty('--p', r.value + '%')); });
     document.querySelectorAll('[data-t-tabs]:not([data-tb])').forEach(box => {
