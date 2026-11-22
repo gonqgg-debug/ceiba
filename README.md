@@ -157,3 +157,7 @@ La cuenta de prueba es de **Estados Unidos**:
 - Permite OXXO, pero solo para pagos únicos (por ejemplo, el diagnóstico de IA por factura).
 - No permite transferencias SPEI, que requieren una cuenta mexicana.
 - Stripe no emite CFDI. Si los clientes mexicanos necesitan CFDI, hace falta un proveedor de facturación electrónica (PAC) y, en general, una entidad en México.
+
+## Créditos
+
+- El chat de `/empezar` adapta ideas del bloque Chat Onboarding de **ShitUI** (antes RareUI): editar cualquier respuesta, metas como lista con palomita y el resumen antes de enviar. ShitUI: https://shitui.in · licencia MIT + Commons Clause + Attribution.
