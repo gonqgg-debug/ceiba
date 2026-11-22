@@ -130,16 +130,31 @@ common = {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBO
 # Muro 3D de /webs: columnas con capturas de las plantillas nuevas (site/plantillas/img/s y /m);
 # cada columna va duplicada para que la animación (subir o bajar 50%) dé la vuelta sin corte.
 def wall():
-    desk = sorted(p.stem for p in (SITE / "plantillas/img/s").glob("*.jpg"))
-    mob = sorted(p.stem for p in (SITE / "plantillas/img/m").glob("*.jpg"))
-    import random; rnd = random.Random(7); rnd.shuffle(desk); rnd.shuffle(mob)
-    cols, di, mi = [], 0, 0
-    for c, (kind, dur) in enumerate([("d", 70), ("m", 55), ("d", 85), ("d", 62), ("m", 74), ("d", 90)]):
-        if kind == "d":
-            imgs = desk[di:di + 6]; di += 6; src = "s"
-        else:
-            imgs = mob[mi:mi + 5]; mi += 5; src = "m"
-        tags = "".join(f'<img src="/plantillas/img/{src}/{i}.jpg" alt="" width="{640 if kind == "d" else 300}" height="{400 if kind == "d" else 600}" loading="{"eager" if c < 4 else "lazy"}" decoding="async">' for i in imgs)
+    # Cada columna rota entre giros para que no se junte el mismo giro (ni la misma foto de su demo).
+    # Clínicas y consultorios comparten foto de doctora, así que entra solo uno de cada uno en todo el muro.
+    rub = {t["id"]: t.get("rubro") or t["kind"] for t in CATALOGO["c"]}
+    import random
+    def pools(folder, seed):
+        ids = sorted(p.stem for p in (SITE / f"plantillas/img/{folder}").glob("*.jpg") if p.stem in rub)
+        random.Random(seed).shuffle(ids)
+        g = {}
+        for i in ids: g.setdefault(rub[i], []).append(i)
+        return g
+    P = {"s": pools("s", 7), "m": pools("m", 11)}
+    extra = {"clinica": 1, "consultorio": 1}  # cupo total en el muro
+    main = ["restaurante", "hotel", "despacho", "inmobiliaria"]
+    plan = [("d", 80), ("m", 64), ("d", 95), ("d", 72), ("m", 84), ("d", 100)]
+    cols = []
+    for c, (kind, dur) in enumerate(plan):
+        src = "s" if kind == "d" else "m"; pool = P[src]; rows = 10 if kind == "d" else 8; imgs = []
+        for n in range(rows):
+            k = main[(n + c * 3) % 4]
+            if n == 4 and c in (1, 3):  # un consultorio y una clínica, lejos de la orilla
+                k = "consultorio" if c == 1 else "clinica"
+                if extra[k] <= 0: k = main[(n + c * 3) % 4]
+                else: extra[k] -= 1
+            if pool.get(k): imgs.append(pool[k].pop())
+        tags = "".join(f'<img src="/plantillas/img/{src}/{i}.jpg" alt="" width="{640 if kind == "d" else 300}" height="{400 if kind == "d" else 600}" loading="{"eager" if c < 4 and n < 3 else "lazy"}" decoding="async">' for n, i in enumerate(imgs))
         cols.append(f'<div class="w-col{" thin" if kind == "m" else ""}" style="--d:{dur}s">{tags}{tags}</div>')
     return "".join(cols)
 
