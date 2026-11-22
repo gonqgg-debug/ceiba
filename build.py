@@ -57,9 +57,9 @@ def fill(template, values):
 # que agrega su propio esqueleto. Para el sitio estático se lo ponemos aquí.
 index = ('<!doctype html>\n<html lang="es">\n<meta charset="utf-8">\n'
          '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">\n'
-         '<link rel="icon" href="favicon.svg" type="image/svg+xml">\n'
-         '<link rel="icon" href="favicon.ico" sizes="32x32">\n'
-         '<link rel="apple-touch-icon" href="apple-touch-icon.png">\n'
+         '<link rel="icon" href="favicon.svg?v=3" type="image/svg+xml">\n'
+         '<link rel="icon" href="favicon.ico?v=3" sizes="32x32">\n'
+         '<link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">\n'
          '<meta name="theme-color" content="#081036">\n' + home)
 
 
@@ -123,8 +123,8 @@ def linkfix(html):
         html = html.replace(a, b)
     return html
 
-head_tags = ('<link rel="icon" href="/favicon.svg" type="image/svg+xml">\n<link rel="icon" href="/favicon.ico" sizes="32x32">\n'
-             '<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n<meta name="theme-color" content="#081036">')
+head_tags = ('<link rel="icon" href="/favicon.svg?v=3" type="image/svg+xml">\n<link rel="icon" href="/favicon.ico?v=3" sizes="32x32">\n'
+             '<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">\n<meta name="theme-color" content="#081036">')
 common = {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBOLS}}"], "{{HEAD_TAGS}}": head_tags}
 
 # Muro 3D de /webs: columnas con capturas de las plantillas nuevas (site/plantillas/img/s y /m);

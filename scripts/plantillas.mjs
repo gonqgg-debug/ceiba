@@ -10,7 +10,7 @@ const OUT = new URL('../site/plantillas/', import.meta.url);
 mkdirSync(new URL('img/', OUT), { recursive: true });
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const head = (title, extra = '') => `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="robots" content="noindex,nofollow"><title>${esc(title)}</title><link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="robots" content="noindex,nofollow"><title>${esc(title)}</title><link rel="icon" href="/favicon.svg?v=3" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>${extra}</head>`;
 
 for (const t of CATALOGO) {

@@ -84,7 +84,7 @@ def main():
         (marca / name).write_text(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {VB_W} {VB_H}" role="img" aria-label="Ceiba Labs">{o.replace("clg-", "m-")}<g fill="{color}">{text}</g></svg>\n', encoding="utf-8")
     icon = f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Ceiba Labs"><rect width="100" height="100" rx="24" fill="#081036"/>{orb("i-", 50, 50, 31)}</svg>\n'
     (marca / "ceiba-icono.svg").write_text(icon, encoding="utf-8")
-    (ROOT / "site/favicon.svg").write_text(icon, encoding="utf-8")
+    (ROOT / "site/favicon.svg?v=3").write_text(icon, encoding="utf-8")
     # Todas las páginas que usan el símbolo declaran el mismo lienzo en su <svg>: se actualiza
     for f in [*(ROOT / "src").glob("*.html"), ROOT / "build.py", ROOT / "scripts/og-images.py"]:
         if not f.exists(): continue
