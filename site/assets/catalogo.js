@@ -378,6 +378,31 @@ export const CATALOGO = [
     ref: { name: "Bick Law LLP", url: 'https://www.bicklawllp.com/' },
     idea: "Impecable y premiado: minimalista, mucho espacio en blanco, fotografía grande y un solo color de marca.",
   },
+  {
+    id: 'accesos', name: "Accesos", kind: 'clinica', rubro: 'consultorio', demo: 'consultorio-salvia', accent: '#2F7A6B',
+    ref: { name: "Anna Family Healthcare", url: 'https://annafamilyhealthcare.com/' },
+    idea: "Muchos pacientes recurrentes: accesos rápidos arriba (agendar, resultados, recetas, formularios) y formularios descargables.",
+  },
+  {
+    id: 'portal', name: "Portal", kind: 'clinica', rubro: 'consultorio', demo: 'consultorio-salvia', accent: '#1F5AA6',
+    ref: { name: "Goodall-Witcher Healthcare", url: 'https://www.gwhealthcare.org/' },
+    idea: "Varias especialidades: portal del paciente y agenda en el encabezado, estructura simple y azul institucional.",
+  },
+  {
+    id: 'velo', name: "Velo", kind: 'clinica', rubro: 'consultorio', demo: 'consultorio-salvia', accent: '#5B6FB5',
+    ref: { name: "Lanham Neuro Psychology", url: 'https://lanhamneuro.com/' },
+    idea: "Especialidades difíciles de explicar: imágenes translúcidas en capas y textos narrativos y calmados.",
+  },
+  {
+    id: 'cirugia', name: "Cirugía", kind: 'clinica', rubro: 'consultorio', demo: 'consultorio-salvia', page: { casesDemo: true }, accent: '#B08D6A',
+    ref: { name: "Weber Facial Plastic Surgery", url: 'https://www.weberfacialplasticsurgery.com/' },
+    idea: "Cirugía estética y dermatología: antes y después con deslizador (fotos reales con consentimiento) y blog del médico.",
+  },
+  {
+    id: 'paisaje', name: "Paisaje", kind: 'clinica', rubro: 'consultorio', demo: 'consultorio-salvia', accent: '#E86A4E',
+    ref: { name: "Nudge Psychology", url: 'https://nudgepsychology.com.au/' },
+    idea: "Psicología y bienestar: textos cercanos con humor sobre paisajes que cambian del amanecer a la noche.",
+  },
 ];
 
 export const RUBROS = { clinica: 'Clínicas dentales', consultorio: 'Consultorios médicos', restaurante: 'Restaurantes', hotel: 'Hoteles', inmobiliaria: 'Inmobiliarias', despacho: 'Despachos legales' };

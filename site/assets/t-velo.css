@@ -1,0 +1,68 @@
+/* Diseño «Velo» (lib/templates/velo.js, raíz .cx.ve). Basado en Lanham Neuro Psychology: imágenes
+   translúcidas en capas y textos narrativos y calmados. */
+.cx.ve{--lav:var(--a);--mist:#EEF0F8;--paper:#FAFAFD;--ink:#262A3D;--mute:#676C82;--line:#E0E2EE;
+  --fh:'Lora',Georgia,serif;--fb:'DM Sans',ui-sans-serif,system-ui,sans-serif;--pad:max(1.25rem,7cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:400 clamp(15px,1.05cqi,17px)/1.75 var(--fb);background:var(--paper);color:var(--ink);position:relative;overflow:clip}
+.ve h1,.ve h2,.ve h3{font-family:var(--fh);font-weight:500;color:inherit;margin:0;line-height:1.2;text-wrap:balance}
+.ve :where(p){margin:0}.ve a{color:inherit}
+.ve svg{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2}
+.ve-btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.7rem;padding:0 1.4rem;border-radius:999px;background:var(--lav);color:#fff!important;font:500 .9rem/1 var(--fb);text-decoration:none;white-space:nowrap;justify-self:start}
+.ve-link{display:inline-flex;align-items:center;gap:.35rem;font-weight:500;color:var(--lav)!important;text-decoration:none}
+.ve a:focus-visible,.ve summary:focus-visible,.ve .t-case :focus-visible{outline:2px solid var(--lav);outline-offset:3px}
+.ve-top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:2rem;padding:.9rem var(--pad);background:#FAFAFDe6;backdrop-filter:blur(8px)}
+.ve-logo{font:500 1.4rem/1 var(--fh)}
+.ve-top nav{display:flex;gap:1.4rem;margin-left:auto;font-size:.92em}
+.ve-top nav a,.ve-top nav span{text-decoration:none}
+.ve-hero{display:grid;grid-template-columns:1fr 1fr;gap:max(2rem,5cqi);align-items:center;padding:max(3rem,5cqi) var(--pad) max(4rem,7cqi)}
+.ve-layers{position:relative;aspect-ratio:1;max-height:34rem}
+.ve-layers>div{position:absolute;background:center/cover no-repeat;border-radius:50% 50% 1.4rem 1.4rem}
+.ve-l1{inset:0 22% 18% 0;opacity:.95}
+.ve-l2{inset:30% 0 0 34%;opacity:.55;mix-blend-mode:multiply;filter:saturate(.6) hue-rotate(200deg)}
+.ve-l3{inset:12% 12% 40% 46%;opacity:.4;border-radius:50%!important;filter:blur(1px) saturate(.4)}
+@media (prefers-reduced-motion:no-preference){.ve:not(.ve-still) .ve-l2{animation:ve-drift 9s ease-in-out infinite alternate}.ve:not(.ve-still) .ve-l3{animation:ve-drift 12s ease-in-out infinite alternate-reverse}}
+@keyframes ve-drift{to{transform:translate(-4%,3%) scale(1.04)}}
+.ve-copy{display:grid;gap:1.2rem}.ve-copy h1{font-size:clamp(2rem,4cqi,3.4rem)}.ve-copy p{color:var(--mute);font-size:1.08em;max-width:30em}
+.ve-story{display:grid;gap:max(3rem,6cqi);padding:max(3rem,5cqi) var(--pad);background:var(--mist)}
+.ve-ch{display:grid;grid-template-columns:.8fr 1.2fr;gap:max(2rem,5cqi);align-items:center}
+.ve-ch--r .ve-ch-img{order:2}
+.ve-ch-img{aspect-ratio:4/3;background:center/cover no-repeat;border-radius:1.4rem;opacity:.8;mask:linear-gradient(#000 60%,#0000)}
+.ve-ch>div:not([class*="-img"]){display:grid;gap:.8rem;max-width:34rem}
+.ve-n{font:italic 400 1rem var(--fh);color:var(--lav)}
+.ve-ch h2{font-size:clamp(1.6rem,2.8cqi,2.4rem)}.ve-ch p:not(.ve-n){color:var(--mute);font-size:1.05em}
+.ve-steps{padding:max(4rem,7cqi) var(--pad)}
+.ve-steps>h2{font-size:clamp(1.8rem,3cqi,2.6rem)}.ve-sub{color:var(--mute);margin:.4rem 0 2rem}
+.ve-steps ol{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr));gap:1.4rem;counter-reset:s}
+.ve-steps li{display:grid;gap:.4rem;padding:1.4rem;border-radius:1.2rem;background:#fff;box-shadow:0 0 0 1px var(--line);counter-increment:s}
+.ve-steps li::before{content:counter(s);font:italic 400 2rem/1 var(--fh);color:var(--lav)}
+.ve-steps h3{font-size:1.2rem}.ve-steps p{color:var(--mute);font-size:.94em}
+.ve-team{padding:0 var(--pad) max(4rem,7cqi)}
+.ve-team>h2{font-size:clamp(1.8rem,3cqi,2.6rem);margin-bottom:1.6rem}
+.ve-team>div:not([class*="-img"]){display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,16rem),1fr));gap:2rem}
+.ve-team article{display:grid;gap:.3rem;align-content:start}.ve-face{aspect-ratio:1;background:center top/cover no-repeat;border-radius:50%;margin-bottom:.6rem;max-width:12rem}
+.ve-team h3{font-size:1.25rem}.ve-role{color:var(--lav);font-size:.9em}.ve-team p:not(.ve-role){color:var(--mute);font-size:.92em}
+.ve-revs{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;padding:max(3rem,5cqi) var(--pad);background:var(--mist)}
+.ve-revs blockquote{margin:0;display:grid;gap:.6rem}.ve-revs p{font:italic 400 1.15rem/1.5 var(--fh)}.ve-revs cite{font-style:normal;font-size:.86rem;color:var(--lav)}
+.ve-faq{max-width:46rem;margin:0 auto;padding:max(3rem,5cqi) var(--pad);box-sizing:content-box}
+.ve-faq h2{font-size:1.9rem;margin-bottom:1rem}
+.ve-faq details{border-bottom:1px solid var(--line)}
+.ve-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:.9rem 0;font:500 1.1rem var(--fh)}
+.ve-faq summary::-webkit-details-marker{display:none}
+.ve-faq summary::after{content:"+";color:var(--lav)}
+.ve-faq details[open] summary::after{content:"−"}
+.ve-faq details p{color:var(--mute);padding-bottom:1rem}
+.ve-cta{display:grid;grid-template-columns:.9fr 1.1fr;background:var(--ink);color:#EDEEF6}
+.ve-cta-img{min-height:24rem;background:center/cover no-repeat;opacity:.55}
+.ve-cta>div:not([class*="-img"]){display:grid;gap:1rem;align-content:center;padding:max(3rem,5cqi) var(--pad)}
+.ve-cta h2{font-size:clamp(2rem,3.6cqi,3rem)}.ve-cta p{opacity:.8}
+.ve .t-case button{background:var(--lav);border-radius:999px;font-weight:500}
+.ve-foot{display:grid;gap:.4rem;padding:2.6rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom));font-size:.9em;color:var(--mute)}
+.ve-foot .ve-logo{color:var(--ink)}.ve-foot a{text-decoration:none}
+.ve-foot>div:not([class*="-img"]){display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;font-size:.72rem;margin-top:.6rem}
+.ve-sticky{display:none}
+@container (max-width:980px){.ve-top nav{display:none}.ve-top .ve-btn{margin-left:auto}.ve-revs{grid-template-columns:1fr}}
+@container (max-width:640px){
+  .ve-hero,.ve-ch,.ve-cta{grid-template-columns:1fr}.ve-ch--r .ve-ch-img{order:0}.ve-layers{max-height:22rem}.ve-cta-img{min-height:12rem}
+  .ve-top .ve-btn{display:none}
+  .ve-sticky{display:flex;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:var(--paper);border-top:1px solid var(--line)}
+  .ve-sticky>*{flex:1}
+}

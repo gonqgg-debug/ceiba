@@ -1,0 +1,61 @@
+/* Diseño «Paisaje» (lib/templates/paisaje.js, raíz .cx.pj). Basado en Nudge Psychology: textos cercanos con
+   humor sobre paisajes que cambian del amanecer a la noche. */
+.cx.pj{--coral:var(--a);--paper:#FFFAF5;--ink:#2B2238;--mute:#6C6378;--line:#EFE3D6;
+  --fh:'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;--fb:'Nunito',ui-sans-serif,system-ui,sans-serif;--pad:max(1.25rem,6cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:400 clamp(15px,1.05cqi,17px)/1.65 var(--fb);background:var(--paper);color:var(--ink);position:relative;overflow:clip}
+.pj h1,.pj h2,.pj h3{font-family:var(--fh);font-weight:800;color:inherit;margin:0;line-height:1.05;letter-spacing:-.02em;text-wrap:balance}
+.pj :where(p){margin:0}.pj a{color:inherit}
+.pj svg:not(.pj-scene){width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2}
+.pj-btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.8rem;padding:0 1.4rem;border-radius:999px;background:var(--ink);color:#fff!important;font:700 .92rem/1 var(--fh);text-decoration:none;white-space:nowrap;justify-self:start}
+.pj-link{display:inline-flex;align-items:center;gap:.35rem;font-weight:700;color:var(--coral)!important;text-decoration:none}
+.pj a:focus-visible,.pj summary:focus-visible,.pj .t-case :focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+.pj-top{position:absolute;left:0;right:0;top:0;z-index:20;display:flex;align-items:center;gap:2rem;padding:1rem var(--pad)}
+.pj-logo{font:800 1.5rem/1 var(--fh)}
+.pj-top nav{display:flex;gap:1.4rem;margin-left:auto;font-weight:600;font-size:.94em}
+.pj-top nav a,.pj-top nav span{text-decoration:none}
+.pj-scene{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.pj-hero,.pj-help,.pj-revs,.pj-cta{position:relative;overflow:hidden}
+.pj-hero{min-height:min(56cqi,44rem);display:grid;align-items:center;padding:6rem var(--pad) 8rem}
+.pj-hero>div:not([class*="-img"]),.pj-in{position:relative;z-index:1}
+.pj-hero>div:not([class*="-img"]){display:grid;gap:1.2rem;max-width:40rem}
+.pj-hero h1{font-size:clamp(2.4rem,5.4cqi,4.8rem)}.pj-hero p{font-size:1.1em;color:#5A4A5E}
+@media (prefers-reduced-motion:no-preference){.pj:not(.pj-still) .pj-scene circle{animation:pj-sun 8s ease-in-out infinite alternate}}
+@keyframes pj-sun{to{transform:translateY(-14px)}}
+.pj-help{padding:max(4rem,7cqi) var(--pad) 10rem}
+.pj-in{display:grid;gap:1.6rem}
+.pj-help h2,.pj-revs h2{font-size:clamp(2rem,4cqi,3.4rem);max-width:16em}
+.pj-help .pj-in>div{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.pj-help article{display:grid;gap:.5rem;align-content:start;padding:1.4rem;background:#ffffffd9;border-radius:1.4rem;backdrop-filter:blur(4px)}
+.pj-help h3{font-size:1.25rem}.pj-help p{color:var(--mute);font-size:.94em}
+.pj-team{padding:max(4rem,7cqi) var(--pad)}
+.pj-team>h2{font-size:clamp(2rem,3.6cqi,3rem);margin-bottom:1.6rem}
+.pj-team>div:not([class*="-img"]){display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr));gap:1.6rem}
+.pj-team article{display:grid;gap:.3rem;align-content:start}.pj-face{aspect-ratio:1;background:center top/cover no-repeat;border-radius:40% 60% 55% 45%/50% 45% 55% 50%;margin-bottom:.6rem}
+.pj-team h3{font-size:1.2rem}.pj-role{color:var(--coral);font-weight:600;font-size:.9em}.pj-team p:not(.pj-role){color:var(--mute);font-size:.92em}
+.pj-revs{padding:max(4rem,7cqi) var(--pad) 10rem;color:#fff}
+.pj-revs .pj-in>div{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.pj-revs blockquote{margin:0;display:grid;gap:.6rem;padding:1.4rem;background:#2b223880;border-radius:1.4rem;backdrop-filter:blur(4px)}
+.pj-revs p{font-size:1.02rem}.pj-revs cite{font-style:normal;font-weight:700;font-size:.86rem}
+.pj-faq{max-width:46rem;margin:0 auto;padding:max(3.5rem,6cqi) var(--pad);box-sizing:content-box}
+.pj-faq h2{font-size:2rem;margin-bottom:1rem}
+.pj-faq details{background:#fff;border-radius:1rem;margin-bottom:.5rem;box-shadow:0 0 0 1px var(--line)}
+.pj-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:1rem 1.2rem;font-weight:700}
+.pj-faq summary::-webkit-details-marker{display:none}
+.pj-faq summary::after{content:"+";color:var(--coral)}
+.pj-faq details[open] summary::after{content:"−"}
+.pj-faq details p{color:var(--mute);padding:0 1.2rem 1rem}
+.pj-cta{padding:max(4rem,7cqi) var(--pad) 8rem;color:#fff}
+.pj-cta .pj-in{max-width:36rem;margin:0 auto;text-align:center;justify-items:center}
+.pj-cta h2{font-size:clamp(2.4rem,5cqi,4rem)}.pj-cta p{opacity:.85}
+.pj .t-case{padding:1.6rem;background:#ffffff14;border-radius:1.4rem;text-align:left}.pj .t-case button{background:var(--coral);border-radius:999px;font-family:var(--fh)}
+.pj-foot{display:grid;gap:.4rem;padding:2.6rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom));background:#1A1D44;color:#C9CAE6;font-size:.9em}
+.pj-foot .pj-logo{color:#fff}.pj-foot a{text-decoration:none}
+.pj-crisis{margin-top:.6rem;padding:.6rem .8rem;border-radius:.6rem;background:#ffffff14;color:#fff}
+.pj-foot>div:not([class*="-img"]){display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;font-size:.72rem;opacity:.7;margin-top:.6rem}
+.pj-sticky{display:none}
+@container (max-width:980px){.pj-top nav{display:none}.pj-top .pj-btn{margin-left:auto}.pj-help .pj-in>div,.pj-revs .pj-in>div{grid-template-columns:1fr}}
+@container (max-width:640px){
+  .pj-top .pj-btn{display:none}
+  .pj-sticky{display:flex;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:var(--paper);border-top:1px solid var(--line)}
+  .pj-sticky>*{flex:1}
+}

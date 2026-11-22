@@ -75,6 +75,11 @@ import { renderFundadores, FUNDADORES_FONTS } from './fundadores.js';
 import { renderResultados, RESULTADOS_FONTS } from './resultados.js';
 import { renderAtencion, ATENCION_FONTS } from './atencion.js';
 import { renderBlanco, BLANCO_FONTS } from './blanco.js';
+import { renderAccesos, ACCESOS_FONTS } from './accesos.js';
+import { renderPortal, PORTAL_FONTS } from './portal.js';
+import { renderVelo, VELO_FONTS } from './velo.js';
+import { renderCirugia, CIRUGIA_FONTS } from './cirugia.js';
+import { renderPaisaje, PAISAJE_FONTS } from './paisaje.js';
 export const DESIGNS = {
   estudio: { render: renderEstudio, fonts: ESTUDIO_FONTS, kinds: ['clinica'] },
   galeria: { render: renderGaleria, fonts: GALERIA_FONTS, kinds: ['clinica'] },
@@ -150,4 +155,9 @@ export const DESIGNS = {
   resultados: { render: renderResultados, fonts: RESULTADOS_FONTS, kinds: ['despacho'] },
   atencion: { render: renderAtencion, fonts: ATENCION_FONTS, kinds: ['despacho'] },
   blanco: { render: renderBlanco, fonts: BLANCO_FONTS, kinds: ['despacho'] },
+  accesos: { render: renderAccesos, fonts: ACCESOS_FONTS, kinds: ['clinica'] },
+  portal: { render: renderPortal, fonts: PORTAL_FONTS, kinds: ['clinica'] },
+  velo: { render: renderVelo, fonts: VELO_FONTS, kinds: ['clinica'] },
+  cirugia: { render: renderCirugia, fonts: CIRUGIA_FONTS, kinds: ['clinica'] },
+  paisaje: { render: renderPaisaje, fonts: PAISAJE_FONTS, kinds: ['clinica'] },
 };
