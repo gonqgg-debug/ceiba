@@ -9,6 +9,7 @@ Uso:  python3 build.py
 """
 from pathlib import Path
 import subprocess
+import json
 
 ROOT = Path(__file__).resolve().parent
 SRC, SITE = ROOT / "src", ROOT / "site"
@@ -126,25 +127,44 @@ head_tags = ('<link rel="icon" href="/favicon.svg" type="image/svg+xml">\n<link 
              '<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n<meta name="theme-color" content="#081036">')
 common = {"{{BASE_CSS}}": shared["{{BASE_CSS}}"], "{{SYMBOLS}}": shared["{{SYMBOLS}}"], "{{HEAD_TAGS}}": head_tags}
 
-# Muro 3D de /webs: columnas de capturas reales de la plantilla; cada columna va duplicada
-# para que la animación (subir o bajar 50%) dé la vuelta sin corte.
+# Muro 3D de /webs: columnas con capturas de las plantillas nuevas (site/plantillas/img/s y /m);
+# cada columna va duplicada para que la animación (subir o bajar 50%) dé la vuelta sin corte.
 def wall():
-    names = ["clinica", "restaurante", "hotel", "inmobiliaria", "despacho", "cercana", "expresiva"]
-    desk = [f"{n}-{k}" for k in range(3) for n in names]
-    mob = [f"{n}-m" for n in names]
+    desk = sorted(p.stem for p in (SITE / "plantillas/img/s").glob("*.jpg"))
+    mob = sorted(p.stem for p in (SITE / "plantillas/img/m").glob("*.jpg"))
+    import random; rnd = random.Random(7); rnd.shuffle(desk); rnd.shuffle(mob)
     cols, di, mi = [], 0, 0
     for c, (kind, dur) in enumerate([("d", 70), ("m", 55), ("d", 85), ("d", 62), ("m", 74), ("d", 90)]):
         if kind == "d":
-            imgs = [desk[(di + k * 5) % len(desk)] for k in range(5)]; di += 2
+            imgs = desk[di:di + 6]; di += 6; src = "s"
         else:
-            imgs = [mob[(mi + k) % len(mob)] for k in range(4)]; mi += 3
-        tags = "".join(f'<img src="/img/webs/{i}.jpg" alt="" width="{640 if kind == "d" else 300}" height="{400 if kind == "d" else 600}" loading="{"eager" if c < 4 else "lazy"}" decoding="async">' for i in imgs)
+            imgs = mob[mi:mi + 5]; mi += 5; src = "m"
+        tags = "".join(f'<img src="/plantillas/img/{src}/{i}.jpg" alt="" width="{640 if kind == "d" else 300}" height="{400 if kind == "d" else 600}" loading="{"eager" if c < 4 else "lazy"}" decoding="async">' for i in imgs)
         cols.append(f'<div class="w-col{" thin" if kind == "m" else ""}" style="--d:{dur}s">{tags}{tags}</div>')
     return "".join(cols)
+
+# Catálogo de estilos (lib/templates/catalogo.js) para /estilos, /webs y /empezar
+import subprocess as _sp
+CATALOGO = json.loads(_sp.run(["node", "-e", "import('./lib/templates/catalogo.js').then(m=>process.stdout.write(JSON.stringify({c:m.CATALOGO,r:m.RUBROS})))"], cwd=ROOT, capture_output=True, text=True, check=True).stdout)
+def short_idea(t):
+    i = t["idea"]; i = i.split(":", 1)[1].strip() if ":" in i else i
+    return i[:1].upper() + i[1:]
+def esc(s): return str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+def estilos_html():
+    out = []
+    for k, label in CATALOGO["r"].items():
+        items = [t for t in CATALOGO["c"] if (t.get("rubro") or t["kind"]) == k]
+        if not items: continue
+        cards = "".join(f'<a class="es-card" href="/plantillas/{t["id"]}.html"><img src="/plantillas/img/s/{t["id"]}.jpg" alt="Estilo {esc(t["name"])} para {esc(label.lower())}" width="640" height="400" loading="lazy" decoding="async"><b>{esc(t["name"])}</b><span>{esc(short_idea(t))}</span></a>' for t in items)
+        out.append(f'<section class="es-rubro" id="{k}" aria-labelledby="es-{k}"><div class="n-wrap"><div class="es-head"><h2 class="n-h2" id="es-{k}">{esc(label)}</h2><a class="n-btn" href="/empezar?giro={"clinica" if k == "consultorio" else k}">Empezar con mi página</a></div><div class="es-grid">{cards}</div></div></section>')
+    return "".join(out)
+def estilos_nav():
+    return "".join(f'<a href="#{k}">{esc(l)}</a>' for k, l in CATALOGO["r"].items())
 
 pages = {
     "index.html": site_chrome(fill("inicio.html", {**common, "{{N_NAV}}": n_nav(None, "#consultoria", "Agendar consultoría", "Agendar una consultoría")}), "inicio"),
     "webs.html": site_chrome(fill("webs.html", {**common, "{{WALL}}": wall(), "{{N_NAV}}": n_nav("/webs", "/empezar", "Armar mi página", "Armar mi página gratis")}), "webs"),
+    "estilos.html": site_chrome(fill("estilos.html", {"{{HEAD_TAGS}}": head_tags, "{{SYMBOLS}}": shared["{{SYMBOLS}}"], "{{ESTILOS}}": estilos_html(), "{{ESTILOS_NAV}}": estilos_nav(), "{{N_NAV}}": n_nav("/webs", "/empezar", "Armar mi página", "Armar mi página gratis")}), "webs"),
     "guia-cuanto-cuesta.html": site_chrome(fill("guia-cuanto-cuesta.html", {"{{HEAD_TAGS}}": head_tags, "{{SYMBOLS}}": shared["{{SYMBOLS}}"], "{{N_NAV}}": n_nav(None, "/empezar", "Armar mi página", "Armar mi página gratis")}), "guias"),
     "guia-aparecer-ia.html": site_chrome(fill("guia-aparecer-ia.html", {"{{HEAD_TAGS}}": head_tags, "{{SYMBOLS}}": shared["{{SYMBOLS}}"], "{{N_NAV}}": n_nav(None, "/empezar", "Armar mi página", "Armar mi página gratis")}), "guias"),
     "empezar.html": fill("empezar.html", {"{{HEAD_TAGS}}": head_tags, "{{SYMBOLS}}": shared["{{SYMBOLS}}"]}),
@@ -199,6 +219,7 @@ absolute = lambda t: re.sub(r'(["\'(])(img/|favicon|apple-touch-icon)', r'\1/\2'
 
 # Copia estática de la propuesta de ejemplo (la misma que sirve /p/clinica-arrayan)
 import subprocess
+import json
 subprocess.run(["node", str(ROOT / "scripts/render-static.mjs")], check=True)
 
 # ---------- SEO y visibilidad en IA (site_seo.py) ----------
@@ -220,4 +241,5 @@ for name, html in pages.items():
 
 # ---------- Galería de plantillas (/plantillas, sin indexar) ----------
 import subprocess
+import json
 subprocess.run(["node", str(ROOT / "scripts/plantillas.mjs")], check=True)

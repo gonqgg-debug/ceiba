@@ -17,10 +17,12 @@ for (const t of CATALOGO) {
   const demo = (await import(`../lib/demos/${t.demo}.js`)).default;
   const page = { ...demo.page, ...(t.page || {}), theme: { ...(demo.page.theme || {}), font: undefined, style: t.id } }; // cada diseño trae su propia letra
   if (t.accent) page.brand = { ...page.brand, accent: t.accent };
-  writeFileSync(new URL(`${t.id}.html`, OUT), `${head(`${t.name} · Plantillas Ceiba`, `<link rel="stylesheet" href="${fontHref(page)}"><link rel="stylesheet" href="/assets/clinica.css">
+  writeFileSync(new URL(`${t.id}.html`, OUT), `${head(`Estilo ${t.name} · Ceiba Labs`, `<link rel="stylesheet" href="${fontHref(page)}"><link rel="stylesheet" href="/assets/clinica.css">
 <style>body{margin:0;background:#fff;-webkit-font-smoothing:antialiased;overflow-x:clip}[hidden]{display:none!important}.vista{container-type:inline-size}
-.pl-back{position:fixed;left:12px;bottom:12px;z-index:50;display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px;border-radius:999px;background:#0B1514;color:#F7F4EB;font:600 13px system-ui,sans-serif;text-decoration:none;box-shadow:0 6px 16px -6px #0008}</style>`)}
-<body>${SYMBOLS}<main class="vista">${renderClinica(page, { mode: 'live' })}</main><a class="pl-back" href="/plantillas/">← Todas las plantillas</a><script src="/assets/clinica.js" defer></script></body></html>`);
+.pl-back{position:fixed;left:12px;bottom:12px;z-index:50;display:inline-flex;gap:4px;padding:4px;border-radius:999px;background:#0B1514;box-shadow:0 6px 16px -6px #0008}
+.pl-back a{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;color:#F7F4EB;font:600 13px system-ui,sans-serif;text-decoration:none;white-space:nowrap}
+.pl-back a+a{background:#D6FA52;color:#0B1514}.pl-back a:focus-visible{outline:2px solid #D6FA52;outline-offset:2px}</style>`)}
+<body>${SYMBOLS}<main class="vista">${renderClinica(page, { mode: 'live' })}</main><nav class="pl-back" aria-label="Estilos"><a href="/estilos#${t.rubro || t.kind}">← Todos los estilos</a><a href="/empezar?giro=${t.kind}&amp;estilo=${t.id}">Quiero este estilo</a></nav><script src="/assets/clinica.js" defer></script></body></html>`);
 }
 
 const card = t => `<a class="pl-card" href="/plantillas/${t.id}.html">

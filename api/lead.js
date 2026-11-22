@@ -23,13 +23,13 @@ const PREF = {
   style: ['moderno', 'elegante', 'calido', 'tecnologico'], mode: ['light', 'dark', 'any'], tone: ['tu', 'usted'],
   goals: ['citas', 'estetica', 'urgencias', 'google', 'zonas', 'confianza', 'reservas', 'pedidos', 'cotizaciones', 'visitas', 'whatsapp'],
   // Lo que se arma en /empezar: giro de la plantilla y estilo de la página
-  kind: ['clinica', 'restaurante', 'hotel', 'inmobiliaria', 'despacho', 'otro'], pageStyle: ['sobria', 'expresiva', 'cercana', 'fonda', 'estudio'],
+  kind: ['clinica', 'restaurante', 'hotel', 'inmobiliaria', 'despacho', 'otro'], pageStyle: Object.keys(THEME_OPTIONS.style),
   font: Object.keys(THEME_OPTIONS.font),
 };
 const PREF_LABEL = {
   style: { moderno: 'Moderno y limpio', elegante: 'Elegante y premium', calido: 'Cálido y familiar', tecnologico: 'Clínico y tecnológico' },
   mode: { light: 'Fondo claro', dark: 'Fondo oscuro', any: 'Que elija Ceiba' }, tone: { tu: 'De tú', usted: 'De usted' },
-  pageStyle: { sobria: 'Sobria', expresiva: 'Expresiva', cercana: 'Cercana', fonda: 'Fonda', estudio: 'Estudio' },
+  pageStyle: THEME_OPTIONS.style,
   font: THEME_OPTIONS.font,
   goals: { reservas: 'Recibir reservaciones', pedidos: 'Recibir pedidos', cotizaciones: 'Recibir cotizaciones', visitas: 'Agendar visitas', whatsapp: 'Más mensajes por WhatsApp', citas: 'Más citas de valoración', estetica: 'Vender tratamientos estéticos', urgencias: 'Atender urgencias', google: 'Que lo encuentren en Google', zonas: 'Pacientes de otras zonas', confianza: 'Transmitir más confianza' },
 };

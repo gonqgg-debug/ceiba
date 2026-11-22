@@ -5,6 +5,10 @@
   "cleanUrls": false,
   "rewrites": [
     {
+      "source": "/estilos",
+      "destination": "/estilos.html"
+    },
+    {
       "source": "/api/geo",
       "destination": "/api/lead?geo=1"
     },
@@ -78,6 +82,11 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/estilos.html",
+      "destination": "/estilos",
+      "permanent": true
+    },
     {
       "source": "/webs-clinicas.html",
       "destination": "/webs/clinicas",

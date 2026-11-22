@@ -36,6 +36,12 @@ PAGES = {
         "description": "Páginas web para clínicas dentales, consultorios y especialistas: más citas desde Google, WhatsApp y la IA, con precios claros y datos listos para buscadores.",
         "crumbs": [("Páginas web", "/webs"), ("Clínicas y consultorios", "/webs/clinicas")],
     },
+    "estilos.html": {
+        "path": "/estilos", "og": "webs",
+        "title": "Estilos de página web por giro · Ceiba Labs",
+        "description": "90 estilos de página web, 15 por giro: clínicas dentales, consultorios, restaurantes, hoteles, inmobiliarias y despachos. Elige el tuyo y lo armamos con tus datos.",
+        "crumbs": [("Páginas web", "/webs"), ("Estilos", "/estilos")],
+    },
     "guia-cuanto-cuesta.html": {
         "path": "/guias/cuanto-cuesta-una-pagina-web", "og": "webs", "article": True,
         "title": "¿Cuánto cuesta una página web en México? Guía 2026 · Ceiba Labs",

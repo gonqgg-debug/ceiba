@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Estilos de página web por giro · Ceiba Labs</title>
+<meta name="description" content="90 estilos de página web: 15 para cada giro. Clínicas dentales, consultorios, restaurantes, hoteles, inmobiliarias y despachos. Elige el tuyo y lo armamos con tus datos.">
+{{HEAD_TAGS}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300;400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/estudio.css">
+<style>
+.es-hero{padding:9rem 0 3rem;background:var(--night);color:var(--white)}
+.es-hero h1{font:600 clamp(2.4rem,5vw,4.6rem)/1 var(--fd,'Funnel Display'),sans-serif;letter-spacing:-.04em;max-width:14ch;margin:0}
+.es-hero p{max-width:36rem;color:var(--mist);font-size:1.1rem;margin:1.2rem 0 1.6rem}
+.es-jump{position:sticky;top:4.2rem;z-index:5;display:flex;gap:.4rem;overflow-x:auto;padding:.8rem 0;background:var(--night);scrollbar-width:none}
+.es-jump a{flex:none;padding:.45rem .9rem;border-radius:999px;border:1px solid rgba(255,255,255,.18);color:var(--white);text-decoration:none;font-size:.88rem}
+.es-jump a:hover{border-color:var(--lime);color:var(--lime)}
+.es-rubro{padding:4rem 0;background:var(--night);color:var(--white);border-top:1px solid rgba(255,255,255,.08)}
+.es-rubro:nth-of-type(even){background:#0B1440}
+.es-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:1.6rem}
+.es-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,16rem),1fr));gap:1.6rem 1.2rem}
+.es-card{display:grid;gap:.35rem;align-content:start;color:var(--white);text-decoration:none}
+.es-card img{width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top;border-radius:.8rem;border:1px solid rgba(255,255,255,.1);margin-bottom:.4rem;transition:transform .4s cubic-bezier(.22,1,.36,1),border-color .3s}
+.es-card:hover img{transform:translateY(-4px);border-color:var(--lime)}
+.es-card b{font:600 1.15rem var(--fd,'Funnel Display'),sans-serif}
+.es-card span{font-size:.86rem;color:var(--mist)}
+.es-card:focus-visible{outline:2px solid var(--lime);outline-offset:4px;border-radius:.8rem}
+.es-close{padding:4.5rem 0;background:var(--night);color:var(--white);text-align:center;border-top:1px solid rgba(255,255,255,.08)}
+.es-close h2{margin:0 auto 1rem;max-width:20ch}.es-close p{color:var(--mist);margin:0 auto 1.6rem;max-width:34rem}
+</style>
+</head>
+<body>
+{{SYMBOLS}}
+{{N_NAV}}
+<main class="n">
+<header class="es-hero"><div class="n-wrap">
+  <h1>Elige el estilo de tu página.</h1>
+  <p>Quince estilos para cada giro, hechos a partir de las mejores páginas de su tipo. Abre el que te guste para verlo completo; al empezar lo eliges y lo armamos con tus datos.</p>
+  <a class="n-btn" href="/empezar">Empezar mi página <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+  <nav class="es-jump" aria-label="Giros">{{ESTILOS_NAV}}</nav>
+</div></header>
+{{ESTILOS}}
+<section class="es-close"><div class="n-wrap">
+  <h2 class="n-h2">¿Ya viste el tuyo?</h2>
+  <p>Cuéntanos de tu negocio, elige el estilo y ve tu página armarse al momento. Es gratis y la ves antes de pagar.</p>
+  <a class="n-btn" href="/empezar">Armar mi página</a>
+</div></section>
+</main>
+<footer class="band footer"></footer>
+</body>
+</html>
