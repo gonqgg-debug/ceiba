@@ -1,0 +1,66 @@
+/* Diseño «Aire» (lib/templates/aire.js, raíz .cx.ai). Basado en Hope Therapy Center: aireado, colores
+   suaves y un blog sobre enfoques de terapia. */
+.cx.ai{--sage:var(--a);--linen:#F7F4EF;--blush:#EEDFD7;--paper:#FCFBF8;--ink:#2F3431;--mute:#6E746F;--line:#E6E2DA;
+  --fh:'Fraunces',Georgia,serif;--fb:'Karla',ui-sans-serif,system-ui,sans-serif;--pad:max(1.25rem,8cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:400 clamp(15px,1.05cqi,17px)/1.75 var(--fb);background:var(--paper);color:var(--ink);position:relative;overflow:clip}
+.ai h1,.ai h2,.ai h3{font-family:var(--fh);font-weight:300;color:inherit;margin:0;line-height:1.15;text-wrap:balance}
+.ai :where(p){margin:0}.ai a{color:inherit}
+.ai svg{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6}
+.ai-btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.7rem;padding:0 1.5rem;border-radius:999px;background:var(--sage);color:#fff!important;font:500 .9rem/1 var(--fb);text-decoration:none;white-space:nowrap;justify-self:start}
+.ai-link{display:inline-flex;align-items:center;gap:.35rem;font-weight:500;color:var(--sage)!important;text-decoration:none}
+.ai a:focus-visible,.ai summary:focus-visible,.ai .t-case :focus-visible{outline:2px solid var(--sage);outline-offset:3px}
+.ai-top{display:flex;align-items:center;gap:2rem;padding:1.6rem var(--pad)}
+.ai-logo{font:400 1.5rem/1 var(--fh)}
+.ai-top nav{display:flex;gap:1.6rem;margin-left:auto;font-size:.94em}
+.ai-top nav a,.ai-top nav span{text-decoration:none}
+.ai-hero{display:grid;gap:2rem;padding:max(3rem,6cqi) var(--pad) 0}
+.ai-hero h1{font-size:clamp(2.4rem,5.4cqi,5rem);max-width:14em}
+.ai-hrow{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1.6rem}.ai-hrow p{max-width:32em;color:var(--mute);font-size:1.1em}
+.ai-hero-img{aspect-ratio:21/8;background:center 25%/cover no-repeat;border-radius:999px 999px 2rem 2rem;margin-top:1rem}
+@media (prefers-reduced-motion:no-preference){.ai:not(.ai-still) .ai-hero-img{animation:ai-breathe 8s ease-in-out infinite alternate}}
+@keyframes ai-breathe{to{border-radius:2rem 2rem 999px 999px}}
+.ai-ways{padding:max(5rem,9cqi) var(--pad)}
+.ai-ways>h2,.ai-team>h2{font-size:clamp(2rem,3.6cqi,3rem);margin-bottom:2rem}
+.ai-ways>div:not([class*="-img"]){display:grid;grid-template-columns:repeat(3,1fr);gap:3rem 2.4rem}
+.ai-ways article{display:grid;gap:.5rem;align-content:start}
+.ai-dot{width:2.4rem;height:2.4rem;border-radius:50%;background:radial-gradient(circle at 30% 30%,var(--blush),var(--sage));margin-bottom:.4rem}
+.ai-ways h3{font-size:1.5rem}.ai-ways p{color:var(--mute)}
+.ai-blog{padding:max(4rem,7cqi) var(--pad);background:var(--linen)}
+.ai-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:2rem}.ai-head h2{font-size:clamp(2rem,3.6cqi,3rem)}.ai-head p{color:var(--mute)}
+.ai-blog>div:last-child{display:grid;grid-template-columns:1.4fr 1fr;grid-template-rows:auto auto;gap:1.6rem}
+.ai-blog article{display:grid;grid-template-columns:9rem 1fr;gap:1rem;align-items:start}
+.ai-feat{grid-row:span 2;grid-template-columns:1fr!important}
+.ai-blog-img{aspect-ratio:1;background:center/cover no-repeat;border-radius:1.4rem;filter:saturate(.75)}
+.ai-feat .ai-blog-img{aspect-ratio:16/10}
+.ai-blog article>div:not([class*="-img"]){display:grid;gap:.4rem}
+.ai-tag{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sage)}
+.ai-blog h3{font-size:1.3rem}.ai-feat h3{font-size:2rem}.ai-blog p:not(.ai-tag){color:var(--mute);font-size:.94em}
+.ai-team{padding:max(5rem,9cqi) var(--pad)}
+.ai-sub{color:var(--mute);margin:-1.2rem 0 2rem}
+.ai-team>div:not([class*="-img"]){display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr));gap:2.4rem}
+.ai-team article{display:grid;gap:.3rem;justify-items:center;text-align:center}.ai-face{width:min(100%,12rem);aspect-ratio:1;background:center top/cover no-repeat;border-radius:50%;margin-bottom:.6rem}
+.ai-team h3{font-size:1.3rem}.ai-team p{color:var(--mute);font-size:.92em}
+.ai-revs{display:grid;grid-template-columns:repeat(3,1fr);gap:2.4rem;padding:max(4rem,7cqi) var(--pad);background:var(--blush)}
+.ai-revs blockquote{margin:0;display:grid;gap:.8rem}.ai-revs p{font:italic 300 1.3rem/1.45 var(--fh)}.ai-revs cite{font-style:normal;font-size:.86rem;color:var(--mute)}
+.ai-faq{max-width:46rem;margin:0 auto;padding:max(4rem,7cqi) var(--pad);box-sizing:content-box}
+.ai-faq h2{font-size:2rem;margin-bottom:1rem}
+.ai-faq details{border-bottom:1px solid var(--line)}
+.ai-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:1rem 0;font:400 1.15rem var(--fh)}
+.ai-faq summary::-webkit-details-marker{display:none}
+.ai-faq summary::after{content:"+";color:var(--sage)}
+.ai-faq details[open] summary::after{content:"−"}
+.ai-faq details p{color:var(--mute);padding-bottom:1rem}
+.ai-cta{display:grid;gap:1.2rem;justify-items:center;text-align:center;padding:max(5rem,9cqi) var(--pad);background:var(--linen)}
+.ai-cta h2{font-size:clamp(2.2rem,4.6cqi,4rem);max-width:14em}.ai-cta>p{color:var(--mute)}
+.ai .t-case{max-width:36rem;text-align:left}.ai .t-case button{background:var(--sage);border-radius:999px;font-weight:500}
+.ai-foot{display:grid;gap:.4rem;padding:3rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom));font-size:.9em;color:var(--mute)}
+.ai-foot .ai-logo{color:var(--ink)}.ai-foot a{text-decoration:none}
+.ai-foot>div:not([class*="-img"]){display:flex;flex-wrap:wrap;gap:.3rem 1.2rem;font-size:.72rem;margin-top:.6rem}
+.ai-sticky{display:none}
+@container (max-width:980px){.ai-top nav{display:none}.ai-top .ai-btn{margin-left:auto}.ai-ways>div:not([class*="-img"]){grid-template-columns:1fr 1fr}.ai-revs{grid-template-columns:1fr}.ai-blog>div:last-child{grid-template-columns:1fr}.ai-feat{grid-row:auto}}
+@container (max-width:640px){
+  .ai-ways>div:not([class*="-img"]){grid-template-columns:1fr}.ai-hero-img{aspect-ratio:4/3}.ai-blog article{grid-template-columns:6rem 1fr}
+  .ai-top .ai-btn{display:none}
+  .ai-sticky{display:flex;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:var(--paper);border-top:1px solid var(--line)}
+  .ai-sticky>*{flex:1}
+}

@@ -403,6 +403,31 @@ export const CATALOGO = [
     ref: { name: "Nudge Psychology", url: 'https://nudgepsychology.com.au/' },
     idea: "Psicología y bienestar: textos cercanos con humor sobre paisajes que cambian del amanecer a la noche.",
   },
+  {
+    id: 'aire', name: "Aire", kind: 'clinica', rubro: 'consultorio', demo: 'consultorio-salvia', accent: '#7C9A92',
+    ref: { name: "Hope Therapy Center", url: 'https://www.hope-therapy-center.com/' },
+    idea: "Terapia y salud mental: diseño aireado, colores suaves y blog sobre enfoques de terapia.",
+  },
+  {
+    id: 'paso', name: "Paso", kind: 'clinica', rubro: 'consultorio', demo: 'consultorio-salvia', accent: '#D9652B',
+    ref: { name: "Integrated Podiatry Clinic", url: 'http://integratedpodiatry.com.au/' },
+    idea: "Especialidad con trato cálido: tipografía grande, historia en primera persona y servicios organizados en acordeón.",
+  },
+  {
+    id: 'miel', name: "Miel", kind: 'clinica', rubro: 'consultorio', demo: 'consultorio-salvia', accent: '#F2B230',
+    ref: { name: "TheraHive", url: 'https://www.therahive.com/' },
+    idea: "Terapia amigable: amarillo miel, letra redondeada, dibujos de línea (panal y abeja) y navegación fija.",
+  },
+  {
+    id: 'equipo', name: "Equipo", kind: 'clinica', rubro: 'consultorio', demo: 'consultorio-salvia', accent: '#C2533A',
+    ref: { name: "Deia Health", url: 'https://www.deiahealth.co.uk/' },
+    idea: "Varios especialistas: llamados a agendar dentro del texto y biografías del equipo con foto y «agendar con…».",
+  },
+  {
+    id: 'seda', name: "Seda", kind: 'clinica', rubro: 'consultorio', demo: 'consultorio-salvia', accent: '#6E3B5C',
+    ref: { name: "Heva Health", url: 'https://www.hevahealth.com/' },
+    idea: "Consultorio premium: serif refinada, perla y ciruela, y animaciones sutiles.",
+  },
 ];
 
 export const RUBROS = { clinica: 'Clínicas dentales', consultorio: 'Consultorios médicos', restaurante: 'Restaurantes', hotel: 'Hoteles', inmobiliaria: 'Inmobiliarias', despacho: 'Despachos legales' };

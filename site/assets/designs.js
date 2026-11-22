@@ -80,6 +80,11 @@ import { renderPortal, PORTAL_FONTS } from './portal.js';
 import { renderVelo, VELO_FONTS } from './velo.js';
 import { renderCirugia, CIRUGIA_FONTS } from './cirugia.js';
 import { renderPaisaje, PAISAJE_FONTS } from './paisaje.js';
+import { renderAire, AIRE_FONTS } from './aire.js';
+import { renderPaso, PASO_FONTS } from './paso.js';
+import { renderMiel, MIEL_FONTS } from './miel.js';
+import { renderEquipo, EQUIPO_FONTS } from './equipo.js';
+import { renderSeda, SEDA_FONTS } from './seda.js';
 export const DESIGNS = {
   estudio: { render: renderEstudio, fonts: ESTUDIO_FONTS, kinds: ['clinica'] },
   galeria: { render: renderGaleria, fonts: GALERIA_FONTS, kinds: ['clinica'] },
@@ -160,4 +165,9 @@ export const DESIGNS = {
   velo: { render: renderVelo, fonts: VELO_FONTS, kinds: ['clinica'] },
   cirugia: { render: renderCirugia, fonts: CIRUGIA_FONTS, kinds: ['clinica'] },
   paisaje: { render: renderPaisaje, fonts: PAISAJE_FONTS, kinds: ['clinica'] },
+  aire: { render: renderAire, fonts: AIRE_FONTS, kinds: ['clinica'] },
+  paso: { render: renderPaso, fonts: PASO_FONTS, kinds: ['clinica'] },
+  miel: { render: renderMiel, fonts: MIEL_FONTS, kinds: ['clinica'] },
+  equipo: { render: renderEquipo, fonts: EQUIPO_FONTS, kinds: ['clinica'] },
+  seda: { render: renderSeda, fonts: SEDA_FONTS, kinds: ['clinica'] },
 };
