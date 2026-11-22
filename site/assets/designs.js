@@ -85,6 +85,11 @@ import { renderPaso, PASO_FONTS } from './paso.js';
 import { renderMiel, MIEL_FONTS } from './miel.js';
 import { renderEquipo, EQUIPO_FONTS } from './equipo.js';
 import { renderSeda, SEDA_FONTS } from './seda.js';
+import { renderMirada, MIRADA_FONTS } from './mirada.js';
+import { renderCuna, CUNA_FONTS } from './cuna.js';
+import { renderVirtual, VIRTUAL_FONTS } from './virtual.js';
+import { renderAnalisis, ANALISIS_FONTS } from './analisis.js';
+import { renderGuia, GUIA_FONTS } from './guia.js';
 export const DESIGNS = {
   estudio: { render: renderEstudio, fonts: ESTUDIO_FONTS, kinds: ['clinica'] },
   galeria: { render: renderGaleria, fonts: GALERIA_FONTS, kinds: ['clinica'] },
@@ -170,4 +175,9 @@ export const DESIGNS = {
   miel: { render: renderMiel, fonts: MIEL_FONTS, kinds: ['clinica'] },
   equipo: { render: renderEquipo, fonts: EQUIPO_FONTS, kinds: ['clinica'] },
   seda: { render: renderSeda, fonts: SEDA_FONTS, kinds: ['clinica'] },
+  mirada: { render: renderMirada, fonts: MIRADA_FONTS, kinds: ['clinica'] },
+  cuna: { render: renderCuna, fonts: CUNA_FONTS, kinds: ['clinica'] },
+  virtual: { render: renderVirtual, fonts: VIRTUAL_FONTS, kinds: ['clinica'] },
+  analisis: { render: renderAnalisis, fonts: ANALISIS_FONTS, kinds: ['clinica'] },
+  guia: { render: renderGuia, fonts: GUIA_FONTS, kinds: ['clinica'] },
 };

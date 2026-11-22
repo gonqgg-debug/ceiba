@@ -1,0 +1,64 @@
+/* Diseño «Guía» (lib/templates/guia.js, raíz .cx.gu). Basado en Mayo Clinic: contenido educativo, colores
+   calmados, navegación fácil y temas de la A a la Z. */
+.cx.gu{--blue:var(--a);--sky:#EEF4FB;--paper:#FFFFFF;--ink:#1D2633;--mute:#566273;--line:#DDE4EC;
+  --fh:'Noto Serif',Georgia,serif;--fb:'Noto Sans',ui-sans-serif,system-ui,sans-serif;--pad:max(1.25rem,6cqi);--ease:cubic-bezier(.22,1,.36,1);
+  font:400 clamp(15px,1.05cqi,17px)/1.65 var(--fb);background:var(--paper);color:var(--ink);position:relative;overflow:clip}
+.gu h1,.gu h2,.gu h3{font-family:var(--fh);font-weight:600;color:inherit;margin:0;line-height:1.18;text-wrap:balance}
+.gu :where(p){margin:0}.gu a{color:inherit}
+.gu svg{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2}
+.gu-btn{display:inline-flex;align-items:center;justify-content:center;min-height:2.8rem;padding:0 1.3rem;border-radius:.3rem;background:var(--blue);color:#fff!important;font:600 .92rem/1 var(--fb);text-decoration:none}
+.gu-link{display:inline-flex;align-items:center;gap:.35rem;font-weight:600;font-size:.9rem;color:var(--blue)!important}
+.gu a:focus-visible,.gu summary:focus-visible,.gu .t-case :focus-visible{outline:3px solid #F2B705;outline-offset:2px}
+.gu-top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:2rem;padding:.9rem var(--pad);background:#fff;border-bottom:1px solid var(--line)}
+.gu-logo{font:600 1.2rem/1.2 var(--fh);color:var(--blue)}
+.gu-top nav{display:flex;gap:1.4rem;margin-left:auto;font-weight:500;font-size:.92em}
+.gu-top nav a,.gu-top nav span{text-decoration:none}
+.gu-hero{display:grid;grid-template-columns:1fr 1fr;gap:max(2rem,5cqi);align-items:center;padding:max(3rem,5cqi) var(--pad);background:var(--sky)}
+.gu-hero>div:first-child{display:grid;gap:1rem}.gu-hero h1{font-size:clamp(2rem,4cqi,3.2rem)}.gu-hero p{color:var(--mute);font-size:1.06em}
+.gu-cards{display:grid;gap:.6rem}
+.gu-card{display:grid;gap:.15rem;padding:1.2rem 1.4rem;background:#fff;border-radius:.4rem;border-left:4px solid var(--line);text-decoration:none;transition:border-color .2s,transform .2s var(--ease)}
+.gu-card:hover{border-left-color:var(--blue);transform:translateX(4px)}
+.gu-card b{font:600 1.15rem var(--fh)}.gu-card span{display:flex;align-items:center;gap:.4rem;color:var(--mute);font-size:.9em}
+.gu-card--main{background:var(--blue);color:#fff;border-left-color:#F2B705}.gu-card--main span{color:#D6E4F5}
+.gu-topics{padding:max(3.5rem,6cqi) var(--pad)}
+.gu-head{display:grid;gap:1rem;margin-bottom:1.6rem}.gu-head h2{font-size:clamp(1.8rem,3cqi,2.6rem)}
+.gu-az{display:flex;flex-wrap:wrap;gap:.25rem}
+.gu-az>*{display:grid;place-items:center;width:2rem;height:2rem;border-radius:.3rem;font-weight:600;font-size:.86rem;text-decoration:none}
+.gu-az a{background:var(--sky);color:var(--blue)}.gu-az a:hover{background:var(--blue);color:#fff}.gu-az span{color:#B4BDC8}
+.gu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.gu-grid article{display:grid;gap:.4rem;align-content:start;padding:1.3rem;border:1px solid var(--line);border-radius:.4rem;scroll-margin-top:5rem}
+.gu-grid h3{font-size:1.2rem;color:var(--blue)}.gu-grid p{color:var(--mute);font-size:.92em}
+.gu-arts{padding:0 var(--pad) max(3.5rem,6cqi)}
+.gu-arts>h2,.gu-spec>h2,.gu-team>h2{font-size:clamp(1.8rem,3cqi,2.6rem);margin-bottom:1.4rem}
+.gu-arts>div:not([class*="-img"]){display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.gu-arts article{display:grid;gap:.4rem;align-content:start}.gu-art-img{aspect-ratio:16/9;background:center/cover no-repeat;border-radius:.4rem;margin-bottom:.4rem}
+.gu-arts h3{font-size:1.15rem}.gu-arts p{color:var(--mute);font-size:.92em}
+.gu-spec{padding:max(3.5rem,6cqi) var(--pad);background:var(--sky)}
+.gu-spec ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 2.4rem}
+.gu-spec li{display:grid;gap:.25rem;padding:1rem 0;border-bottom:1px solid var(--line)}.gu-spec h3{font-size:1.15rem}.gu-spec p{color:var(--mute);font-size:.92em}
+.gu-team{padding:max(3.5rem,6cqi) var(--pad)}
+.gu-team>div:not([class*="-img"]){display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,19rem),1fr));gap:1rem}
+.gu-team article{display:grid;grid-template-columns:5.6rem 1fr;gap:1rem;align-items:center}
+.gu-face{aspect-ratio:1;background:center top/cover no-repeat;border-radius:50%}.gu-team h3{font-size:1.1rem}.gu-team p{color:var(--mute);font-size:.9em}.gu-team small{font-size:.76rem;color:var(--mute)}
+.gu-faq{max-width:48rem;margin:0 auto;padding:0 var(--pad) max(3.5rem,6cqi);box-sizing:content-box}
+.gu-faq h2{font-size:1.8rem;margin-bottom:.8rem}
+.gu-faq details{border-bottom:1px solid var(--line)}
+.gu-faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;padding:.9rem 0;font-weight:600}
+.gu-faq summary::-webkit-details-marker{display:none}
+.gu-faq summary::after{content:"+";color:var(--blue)}
+.gu-faq details[open] summary::after{content:"−"}
+.gu-faq details p{color:var(--mute);padding-bottom:1rem}
+.gu-cta{display:grid;grid-template-columns:1fr 1fr;gap:max(2rem,5cqi);align-items:center;padding:max(3.5rem,6cqi) var(--pad);background:var(--blue);color:#fff}
+.gu-cta>div:not([class*="-img"]){display:grid;gap:.8rem}.gu-cta h2{font-size:clamp(2rem,3.6cqi,3rem)}.gu-cta p{opacity:.9}.gu-cta a{color:#fff;font-weight:600}
+.gu .t-case{padding:1.6rem;background:#fff;color:var(--ink);border-radius:.4rem}.gu .t-case button{background:var(--blue);border-radius:.3rem}
+.gu-foot{display:grid;grid-template-columns:1fr 1fr;gap:1rem 2rem;padding:2.6rem var(--pad) calc(1.6rem + env(safe-area-inset-bottom));background:var(--ink);color:#C6D0DC;font-size:.9em}
+.gu-foot .gu-logo{color:#fff}.gu-foot a{text-decoration:none}.gu-foot>div{display:grid;gap:.3rem;align-content:start}
+.gu-disc{grid-column:1/-1;padding:.7rem .9rem;border-radius:.3rem;background:#ffffff12;font-size:.84em}
+.gu-legal{grid-column:1/-1;display:flex!important;flex-wrap:wrap;gap:.3rem 1.2rem!important;font-size:.72rem;opacity:.6}
+.gu-sticky{display:none}
+@container (max-width:980px){.gu-top nav{display:none}.gu-grid,.gu-arts>div:not([class*="-img"]){grid-template-columns:1fr 1fr}}
+@container (max-width:640px){
+  .gu-hero,.gu-cta,.gu-grid,.gu-arts>div:not([class*="-img"]),.gu-spec ul,.gu-foot{grid-template-columns:1fr}
+  .gu-sticky{display:flex;position:sticky;bottom:0;z-index:16;padding:.6rem var(--pad) calc(.6rem + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line)}
+  .gu-sticky>*{flex:1}
+}
