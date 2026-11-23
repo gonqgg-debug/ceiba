@@ -13,11 +13,11 @@ Datos clave:
 - [Páginas web para clínicas y consultorios](https://www.ceibalabs.io/webs/clinicas): versión para clínicas dentales, consultorios y especialistas.
 
 ### Planes
-- Plan Esencial: sin pago inicial y $1,490 MXN al mes. Hasta 3 páginas pensadas para el celular, con hosting, mantenimiento, SEO base y optimización para IA, formulario y botón de WhatsApp. Sin pago inicial. Hasta 30 minutos de cambios al mes.
-- Plan Negocio: $2,990 MXN de pago inicial y $2,490 MXN al mes. Hasta 7 páginas, conectadas con la agenda del negocio, con reporte de cuántas personas te contactan, análisis avanzado de SEO y prueba de visibilidad en IA cada 3 meses. Hasta 60 minutos de cambios al mes.
-- Plan Avanzado: $5,990 MXN de pago inicial y $3,990 MXN al mes. Hasta 12 páginas con catálogo de propiedades, habitaciones o servicios que tú actualizas, reporte mensual de visibilidad en IA y Google y una mejora de SEO aplicada al mes. Hasta 120 minutos de cambios al mes.
+- Plan Esencial: sin pago inicial y $990 MXN al mes. Hasta 3 páginas pensadas para el celular, con hosting, mantenimiento, SEO base y optimización para IA, formulario y botón de WhatsApp. Sin pago inicial. Hasta 30 minutos de cambios al mes.
+- Plan Negocio: sin pago inicial y $1,990 MXN al mes. Hasta 7 páginas, conectadas con la agenda del negocio, con reporte de cuántas personas te contactan, análisis avanzado de SEO y prueba de visibilidad en IA cada 3 meses. Hasta 60 minutos de cambios al mes.
+- Plan Avanzado: sin pago inicial y $2,990 MXN al mes. Hasta 12 páginas con catálogo de propiedades, habitaciones o servicios que tú actualizas, reporte mensual de visibilidad en IA y Google y una mejora de SEO aplicada al mes. Hasta 120 minutos de cambios al mes.
 - Complemento Asistente de WhatsApp: $2,990 MXN de pago inicial y $1,490 MXN al mes. Contesta en WhatsApp y en tu página con las respuestas que apruebas, anota los datos para la cita o cotización y te pasa lo que necesita una persona. Un número y una sucursal. Piloto con hasta 300 conversaciones al mes.
-- Paquete Plan Negocio + Asistente de WhatsApp: $4,990 MXN de pago inicial y $3,490 MXN al mes.
+- Paquete Plan Negocio + Asistente de WhatsApp: $2,990 MXN de pago inicial y $3,190 MXN al mes.
 
 Precios de México en pesos mexicanos. También hay precios en moneda local o en dólares para México, Chile, Panamá, Costa Rica, Uruguay, Puerto Rico, Colombia, Perú, República Dominicana, Ecuador, Guatemala, El Salvador, Argentina, Bolivia, Paraguay, Honduras, Nicaragua y el resto del mundo. Cada visitante ve los precios de su país, detectado por su ubicación.
 
@@ -45,7 +45,7 @@ Precios de México en pesos mexicanos. También hay precios en moneda local o en
 - **¿Cómo empezamos si no sé qué necesito?** Escríbenos cómo funciona hoy tu negocio y qué te quita más tiempo. Te decimos si conviene empezar por la página, por un asistente o por revisar un proceso.
 
 ### Páginas web
-- **¿Cuánto cuesta una página web con Ceiba?** Desde $1,490 al mes con el Plan Esencial, sin pago inicial. Los planes Negocio y Avanzado tienen un pago inicial y más páginas, agenda en línea y reportes. Incluye diseño, hosting, dominio, mantenimiento, SEO y cambios cada mes. Ves los precios en la moneda de tu país. Compara con los otros caminos.
+- **¿Cuánto cuesta una página web con Ceiba?** Desde $990 al mes con el Plan Esencial. Ningún plan de página tiene pago inicial; Negocio y Avanzado suman más páginas, agenda en línea y reportes. Incluye diseño, hosting, dominio, mantenimiento, SEO y cambios cada mes. Ves los precios en la moneda de tu país. Compara con los otros caminos.
 - **¿Necesito tener página web para empezar?** No. Cuéntanos de tu negocio y armamos tu página desde cero con el modelo de tu giro. Si tienes Instagram o perfil de Google, de ahí tomamos tus fotos y datos; si ya tienes página, partimos de ella para mejorarla.
 - **¿En cuánto tiempo recibo mi página?** El borrador lo ves al momento mientras nos cuentas de tu negocio. La versión completa, con tus datos y revisada por una persona, te llega en un enlace privado en un día hábil.
 - **¿Tengo que pagar por la propuesta?** No, es gratis. Solo pagas el monto inicial y la mensualidad si decides activar tu página.

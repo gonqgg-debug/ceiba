@@ -27,7 +27,7 @@ PAGES = {
     "webs.html": {
         "path": "/webs", "og": "webs",
         "title": "Páginas web optimizadas para Google y la IA · Ceiba Labs",
-        "description": "Tu página web lista para Google y ChatGPT, por suscripción desde $1,490 al mes: diseño, hosting, SEO y cambios incluidos. Te la mostramos antes de pagar.",
+        "description": "Tu página web lista para Google y ChatGPT, por suscripción desde $990 al mes: diseño, hosting, SEO y cambios incluidos. Te la mostramos antes de pagar.",
         "crumbs": [("Páginas web", "/webs")],
     },
     "webs-clinicas.html": {

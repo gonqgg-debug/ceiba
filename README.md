@@ -54,10 +54,10 @@ Son precios de lanzamiento para probar en México, en MXN. Son el precio final: 
 
 | | Pago inicial | Mensualidad |
 |---|---|---|
-| Plan Esencial | $3,490 | $1,490 |
-| Plan Negocio | $5,490 | $2,490 |
-| Plan Avanzado | $8,490 | $3,990 |
-| Asistente de WhatsApp | $3,990 | $1,490 |
+| Plan Esencial | $0 | $990 |
+| Plan Negocio | $0 | $1,990 |
+| Plan Avanzado | $0 | $2,990 |
+| Asistente de WhatsApp | $2,990 | $1,490 |
 | Automatización a medida | Diagnóstico $3,900, acreditable | Piloto desde $19,900 |
 
 ## Qué es prototipo y qué no
